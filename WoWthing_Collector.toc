@@ -1,0 +1,8 @@
+## Interface: 60000
+## Title: WoWthing Collector
+## Notes: Collects data to sync with WoWthing.
+## Version: 0.0.1
+## Author: Freddie
+## SavedVariables: WWTCSaved
+
+Collector.lua
