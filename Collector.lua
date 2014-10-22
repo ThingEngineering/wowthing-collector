@@ -173,6 +173,7 @@ function wwtc:Initialise()
     charData.lastSeen = 0
     charData.playedLevel = 0
     charData.playedTotal = 0
+    charData.restedPercent = 0
 
     charData.currencies = {}
     charData.items = charData.items or {}
@@ -206,6 +207,10 @@ function wwtc:UpdateCharacterData()
     if playedTotal then
         charData.playedTotal = playedTotal + (now - playedTotalUpdated)
     end
+
+    -- Rested XP
+    local rested = GetXPExhaustion() or 0
+    charData.restedPercent = rested / UnitXPMax("player") * 100
 
     -- Currencies
     for i, currencyID in ipairs(currencies) do
