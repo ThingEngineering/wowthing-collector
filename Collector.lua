@@ -93,6 +93,10 @@ end
 function events:UPDATE_INSTANCE_INFO()
     wwtc:UpdateLockouts()
 end
+-- Fires when player money changes
+function events:PLAYER_MONEY()
+    charData.copper = GetMoney()
+end
 -- Fires when the contents of a bag changes
 function events:BAG_UPDATE(bagID)
     dirtyBags[bagID] = true
