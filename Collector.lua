@@ -75,8 +75,12 @@ function events:TIME_PLAYED_MSG(total, level)
     frame:UnregisterEvent("TIME_PLAYED_MSG")
 end
 -- Fires when the player gains a character level
-function events:PLAYER_LEVEL_UP(...)
+function events:PLAYER_LEVEL_UP()
     playedLevel, playedLevelUpdated = 0, time()
+end
+-- Fires when the player gains XP
+function events:PLAYER_XP_UPDATE()
+    wwtc:UpdateRestedXP()
 end
 -- Fires when guild stats changes
 function events:PLAYER_GUILD_UPDATE(unitID)
@@ -86,7 +90,8 @@ function events:PLAYER_GUILD_UPDATE(unitID)
 end
 -- Fires when the player changes the LFG bonus faction
 function events:LFG_BONUS_FACTION_ID_UPDATED()
-    charData.bonusFaction = GetLFGBonusFactionID()
+    local bonusFaction, _ = GetLFGBonusFactionID()
+    charData.bonusFaction = bonusFaction
 end
 
 -- Fires when RequestRaidInfo() completes
@@ -208,10 +213,6 @@ function wwtc:UpdateCharacterData()
         charData.playedTotal = playedTotal + (now - playedTotalUpdated)
     end
 
-    -- Rested XP
-    local rested = GetXPExhaustion() or 0
-    charData.restedPercent = rested / UnitXPMax("player") * 100
-
     -- Currencies
     for i, currencyID in ipairs(currencies) do
         local _, amount, _, earnedThisWeek, weeklyMax, totalMax, _ = GetCurrencyInfo(currencyID)
@@ -250,6 +251,8 @@ function wwtc:UpdateCharacterData()
     if not loggingOut then
         charData.copper = GetMoney()
 
+        wwtc:UpdateRestedXP()
+
         RequestRaidInfo()
     end
 end
@@ -266,6 +269,15 @@ function wwtc:UpdateGuildData()
         WWTCSaved.guilds[guildName].tabs = WWTCSaved.guilds[guildName].tabs or {}
     else
         guildName = nil
+    end
+end
+
+function wwtc:UpdateRestedXP()
+    local rested = GetXPExhaustion() or 0
+    if rested > 0 then
+        charData.restedPercent = rested / UnitXPMax("player") * 100
+    else
+        charData.restedPercent = 0
     end
 end
 
