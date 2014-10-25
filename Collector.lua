@@ -1,7 +1,7 @@
 -- Things
 local wwtc = {}
 local charData, charName, guildName, playedLevelUpdated, playedTotal, playedTotalUpdated
-local bankOpen, loggingOut = false, false
+local bankOpen, loggingOut, toyBoxHooked = false, false, false
 local dirtyBags = {}
 
 -- Default SavedVariables
@@ -9,6 +9,7 @@ local defaultWWTCSaved = {
     version = 9,
     chars = {},
     guilds = {},
+    toys = {},
 }
 
 -- Currencies
@@ -51,6 +52,9 @@ function events:ADDON_LOADED()
     if not WWTCSaved.version or WWTCSaved.version < defaultWWTCSaved.version then
         WWTCSaved = defaultWWTCSaved
     end
+
+    -- Backwards compat hack
+    WWTCSaved.toys = WWTCSaved.toys or {}
 end
 
 -- Fires when the player logs in, surprisingly
@@ -67,6 +71,15 @@ function events:PLAYER_ENTERING_WORLD()
     wwtc:Initialise()
 
     wwtc:UpdateCharacterData()
+
+    -- Hook ToyBox OnShow
+    if not toyBoxHooked then
+        local tbframe = _G["ToyBox"]
+        tbframe:HookScript("OnShow", function(self)
+            wwtc:ScanToys()
+        end)
+        toyBoxHooked = true
+    end
 end
 -- Fires when /played information is available
 function events:TIME_PLAYED_MSG(total, level)
@@ -385,6 +398,16 @@ function wwtc:UpdateLockouts()
             defeatedBosses = 1,
             maxBosses = 1,
         }
+    end
+end
+
+-- Scan toys, obviously
+function wwtc:ScanToys()
+    for i = 1, C_ToyBox.GetNumToys() do
+        itemID = C_ToyBox.GetToyFromIndex(i)
+        if itemID > 0 and PlayerHasToy(itemID) then
+            WWTCSaved.toys[itemID] = true
+        end
     end
 end
 
