@@ -1,7 +1,7 @@
 -- Things
 local wwtc = {}
 local charData, charName, guildName, playedLevelUpdated, playedTotal, playedTotalUpdated
-local bankOpen, loggingOut, toyBoxHooked = false, false, false
+local bankOpen, guildBankOpen, loggingOut, toyBoxHooked = false, false, false, false
 local dirtyBags = {}
 
 -- Default SavedVariables
@@ -134,7 +134,12 @@ function events:BANKFRAME_CLOSED()
 end
 -- Fires when the guild bank opens
 function events:GUILDBANKFRAME_OPENED()
+    guildBankOpen = true
     wwtc:UpdateGuildBank()
+end
+-- Fires when the guild bank closes
+function events:GUILDBANKFRAME_CLOSED()
+    guildBankOpen = false
 end
 -- Fires when something changes in a guild bank tab, including when it is first filled
 function events:GUILDBANKBAGSLOTS_CHANGED()
@@ -332,6 +337,11 @@ end
 
 -- Scan the current guild bank tab
 function wwtc:ScanGuildBankTab()
+    -- Short circuit if guild bank isn't open
+    if not guildBankOpen then
+        return
+    end
+
     local tabID = GetCurrentGuildBankTab()
 
     charData.scanTimes["tab "..tabID] = time()
