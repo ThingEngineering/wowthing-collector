@@ -75,10 +75,12 @@ function events:PLAYER_ENTERING_WORLD()
     -- Hook ToyBox OnShow
     if not toyBoxHooked then
         local tbframe = _G["ToyBox"]
-        tbframe:HookScript("OnShow", function(self)
-            wwtc:ScanToys()
-        end)
-        toyBoxHooked = true
+        if tbframe then
+            tbframe:HookScript("OnShow", function(self)
+                wwtc:ScanToys()
+            end)
+            toyBoxHooked = true
+        end
     end
 end
 -- Fires when /played information is available
