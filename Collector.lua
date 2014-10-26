@@ -393,9 +393,20 @@ function wwtc:UpdateLockouts()
             instanceReset = now + instanceReset
         end
 
+        -- Get saved boss names
+        local bosses, j = {}, 1
+        local name, _, dead = GetSavedInstanceEncounterInfo(i, j)
+        while name do
+            bosses[#bosses + 1] = { name, dead }
+
+            j = j + 1
+            name, _, dead = GetSavedInstanceEncounterInfo(i, j)
+        end
+
         charData.lockouts[#charData.lockouts+1] = {
             name = instanceName,
             resetTime = instanceReset,
+            bosses = bosses,
             difficulty = instanceDifficulty,
             defeatedBosses = defeatedBosses,
             locked = locked,

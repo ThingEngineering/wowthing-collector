@@ -1,6 +1,7 @@
 v0.0.2
 ------
 - Added ToyBox scanning whenever the frame is shown.
+- Added boss scanning to lockouts.
 - Changed lockout scanner to also save 'locked' state.
 - Fixed lockout scanner saving random times for expired lockouts.
 - Fixed an occasional guild bank scan error.
