@@ -1,0 +1,4 @@
+v0.0.2
+------
+- Added ToyBox scanning whenever the frame is shown.
+- Fixed an occasional guild bank scan error.
