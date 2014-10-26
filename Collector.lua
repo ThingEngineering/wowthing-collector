@@ -389,15 +389,18 @@ function wwtc:UpdateLockouts()
         local instanceName, instanceID, instanceReset, instanceDifficulty, locked, extended, instanceIDMostSig,
             isRaid, maxPlayers, difficultyName, maxBosses, defeatedBosses = GetSavedInstanceInfo(i)
 
-        if locked then
-            charData.lockouts[#charData.lockouts+1] = {
-                name = instanceName,
-                resetTime = now + instanceReset,
-                difficulty = instanceDifficulty,
-                defeatedBosses = defeatedBosses,
-                maxBosses = maxBosses,
-            }
+        if instanceReset > 0 then
+            instanceReset = now + instanceReset
         end
+
+        charData.lockouts[#charData.lockouts+1] = {
+            name = instanceName,
+            resetTime = instanceReset,
+            difficulty = instanceDifficulty,
+            defeatedBosses = defeatedBosses,
+            locked = locked,
+            maxBosses = maxBosses,
+        }
     end
 
     -- World bosses
