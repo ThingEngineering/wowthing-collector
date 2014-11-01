@@ -1,3 +1,7 @@
+v0.0.3
+------
+- Fixed toy scanning not working - force load the "Blizzard_PetJournal" addon if it isn't already.
+
 v0.0.2
 ------
 - Added ToyBox scanning whenever the frame is shown.

@@ -46,15 +46,26 @@ local regionNames = {
 local frame, events = CreateFrame("FRAME"), {}
 
 -- Fires when the addon has finished loading
-function events:ADDON_LOADED()
-    WWTCSaved = WWTCSaved or defaultWWTCSaved
-    -- Overwrite with default if out of date
-    if not WWTCSaved.version or WWTCSaved.version < defaultWWTCSaved.version then
-        WWTCSaved = defaultWWTCSaved
-    end
+function events:ADDON_LOADED(name)
+    -- Us!
+    if name == "WoWthing_Collector" then
+        WWTCSaved = WWTCSaved or defaultWWTCSaved
+        -- Overwrite with default if out of date
+        if not WWTCSaved.version or WWTCSaved.version < defaultWWTCSaved.version then
+            WWTCSaved = defaultWWTCSaved
+        end
 
-    -- Backwards compat hack
-    WWTCSaved.toys = WWTCSaved.toys or {}
+        -- Backwards compat hack
+        WWTCSaved.toys = WWTCSaved.toys or {}
+
+        -- Try to hook the ToyBox
+        wwtc:HookToyBox()
+
+    -- Damn Pet Journal!
+    elseif name == "Blizzard_PetJournal" then
+        wwtc:HookToyBox()
+
+    end
 end
 
 -- Fires when the player logs in, surprisingly
@@ -73,15 +84,8 @@ function events:PLAYER_ENTERING_WORLD()
     wwtc:UpdateCharacterData()
 
     -- Hook ToyBox OnShow
-    if not toyBoxHooked then
-        local tbframe = _G["ToyBox"]
-        if tbframe then
-            tbframe:HookScript("OnShow", function(self)
-                wwtc:ScanToys()
-            end)
-            toyBoxHooked = true
-        end
-    end
+    wwtc:ScanToys()
+    -- wwtc:HookToyBox()
 end
 -- Fires when /played information is available
 function events:TIME_PLAYED_MSG(total, level)
@@ -427,6 +431,23 @@ function wwtc:UpdateLockouts()
     end
 end
 
+-- Hook ToyBox.OnShow
+function wwtc:HookToyBox()
+    if not IsAddOnLoaded("Blizzard_PetJournal") then
+        LoadAddOn("Blizzard_PetJournal")
+    else
+        if not toyBoxHooked then
+            local tbframe = _G["ToyBox"]
+            if tbframe then
+                tbframe:HookScript("OnShow", function(self)
+                    wwtc:ScanToys()
+                end)
+                toyBoxHooked = true
+            end
+        end
+    end
+end
+
 -- Scan toys, obviously
 function wwtc:ScanToys()
     for i = 1, C_ToyBox.GetNumToys() do
@@ -436,7 +457,6 @@ function wwtc:ScanToys()
         end
     end
 end
-
 
 -- Returns the daily quest reset time in the local timezone
 function wwtc:GetDailyResetTime()
