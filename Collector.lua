@@ -6,7 +6,7 @@ local dirtyBags = {}
 
 -- Default SavedVariables
 local defaultWWTCSaved = {
-    version = 9,
+    version = 10,
     chars = {},
     guilds = {},
     toys = {},
@@ -50,6 +50,8 @@ function events:ADDON_LOADED(name)
     -- Us!
     if name == "WoWthing_Collector" then
         WWTCSaved = WWTCSaved or defaultWWTCSaved
+        -- WWTCSaved = defaultWWTCSaved -- DEBUG
+
         -- Overwrite with default if out of date
         if not WWTCSaved.version or WWTCSaved.version < defaultWWTCSaved.version then
             WWTCSaved = defaultWWTCSaved
@@ -321,12 +323,18 @@ function wwtc:ScanBag(bagID)
     charData.items["bag "..bagID] = {}
     local bag = charData.items["bag "..bagID]
 
+    -- Update bag ID
+    if bagID >= 1 then
+        local bagItemID, _ = GetInventoryItemID('player', ContainerIDToInventoryID(bagID))
+        bag['bagItemID'] = bagItemID
+    end
+
     local numSlots = GetContainerNumSlots(bagID)
     if numSlots > 0 then
-        for i = 0, numSlots do
+        for i = 1, numSlots do
             local texture, count, locked, quality, readable, lootable, link, isFiltered = GetContainerItemInfo(bagID, i)
             if count ~= nil and link ~= nil then
-                bag[#bag + 1] = { count, wwtc:GetItemID(link) }
+                bag["s"..i] = { count, wwtc:GetItemID(link) }
             end
         end
     end
@@ -359,7 +367,7 @@ function wwtc:ScanGuildBankTab()
         local link = GetGuildBankItemLink(tabID, i)
         if link ~= nil then
             local texture, count, locked = GetGuildBankItemInfo(tabID, i)
-            tab[#tab + 1] = { count, wwtc:GetItemID(link) }
+            tab["s"..i] = { count, wwtc:GetItemID(link) }
         end
     end
 end
@@ -368,15 +376,15 @@ end
 function wwtc:ScanVoidStorage()
     charData.scanTimes["void"] = time()
 
-    charData.items.voidStorage = {}
-    local void = charData.items.voidStorage
-
-    -- FIXME: where is the constant for this?
+    -- NOTE: constants appear to not be global, woo
     for i = 1, 2 do
+        charData.items["void "..i] = {}
+        local void = charData.items["void "..i]
+
         for j = 1, 80 do
             local itemID, texture, locked, recentDeposit, isFiltered = GetVoidItemInfo(i, j)
             if itemID ~= nil then
-                void[#void + 1] = { itemID }
+                void["s"..j] = { 1, itemID }
             end
         end
     end
