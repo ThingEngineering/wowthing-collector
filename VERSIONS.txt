@@ -1,3 +1,11 @@
+v0.1.0
+------
+- STORAGE VERSION CHANGED. Yep, that means revisit everything again.
+- Added bag slot storage to bag scanning code.
+- Added bag information to bag scanning code (itemIDs of your bags).
+- Fixed bag scanning code randomly adding one of your bags.
+- Fixed void storage scanning code not running when an item is deposited/withdrawn.
+
 v0.0.3
 ------
 - Fixed toy scanning not working - force load the "Blizzard_PetJournal" addon if it isn't already.
