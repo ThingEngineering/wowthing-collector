@@ -159,11 +159,16 @@ function events:VOID_STORAGE_OPEN()
         dirtyVoid = true
     end
 end
+-- Fires when void storage data is available?
 function events:VOID_STORAGE_UPDATE()
     dirtyVoid = true
 end
 -- Fires when something changes in void storage
 function events:VOID_STORAGE_CONTENTS_UPDATE()
+    dirtyVoid = true
+end
+-- Fires when a void storage transfer completes
+function events:VOID_TRANSFER_DONE()
     dirtyVoid = true
 end
 
