@@ -132,6 +132,7 @@ function events:BANKFRAME_OPENED()
     -- Force a bag scan of the bank now that it's open
     bankOpen = true
     dirtyBags[-1] = true
+    dirtyBags[-3] = true
     for i = 5, 11 do
         dirtyBags[i] = true
     end
@@ -139,6 +140,10 @@ end
 -- Fires when the bank is closed
 function events:BANKFRAME_CLOSED()
     bankOpen = false
+end
+-- Fires when something changes in the reagent bank
+function events:PLAYERREAGENTBANKSLOTS_CHANGED()
+    dirtyBags[-3] = true
 end
 -- Fires when the guild bank opens
 function events:GUILDBANKFRAME_OPENED()
