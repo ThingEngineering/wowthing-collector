@@ -103,6 +103,10 @@ end
 function events:PLAYER_XP_UPDATE()
     wwtc:UpdateRestedXP()
 end
+-- Fires when the player's rest state or amount of rested XP changes
+function events:UPDATE_EXHAUSTION()
+    wwtc:UpdateRestedXP()
+end
 -- Fires when guild stats changes
 function events:PLAYER_GUILD_UPDATE(unitID)
     if unitID == "player" then
@@ -214,7 +218,8 @@ function wwtc:Initialise()
     charData.lastSeen = 0
     charData.playedLevel = 0
     charData.playedTotal = 0
-    charData.restedPercent = 0
+    charData.levelXP = 0
+    charData.restedXP = 0
 
     charData.currencies = {}
     charData.items = charData.items or {}
@@ -309,11 +314,13 @@ function wwtc:UpdateGuildData()
 end
 
 function wwtc:UpdateRestedXP()
+    charData.levelXP = UnitXPMax("player")
+
     local rested = GetXPExhaustion() or 0
-    if rested > 0 then
-        charData.restedPercent = rested / UnitXPMax("player") * 100
+    if rested then
+        charData.restedXP = rested
     else
-        charData.restedPercent = 0
+        charData.restedXP = 0
     end
 end
 

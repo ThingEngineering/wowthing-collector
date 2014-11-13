@@ -1,3 +1,8 @@
+v0.1.2
+------
+- Changed how rested XP is stored for easier calculations.
+- Fixed rested XP not being updated unless you earn normal XP.
+
 v0.1.1
 ------
 - Added reagent bank scanning.
