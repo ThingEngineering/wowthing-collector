@@ -328,7 +328,7 @@ end
 
 function wwtc:ScanBag(bagID)
     -- Short circuit if bank isn't open
-    if (bagID == -1 or (bagID >= 5 and bagID <= 11)) and not bankOpen then
+    if (bagID == -3 or bagID == -1 or (bagID >= 5 and bagID <= 11)) and not bankOpen then
         return
     end
 
