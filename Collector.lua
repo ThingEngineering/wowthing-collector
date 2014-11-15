@@ -32,6 +32,16 @@ local currencies = {
     777, -- Timeless Coin
     391, -- Tol Barad Commendation
     776, -- Warforged Seal
+    -- WoD
+    823, -- Apexis Crystal
+    824, -- Garrison Resources
+    910, -- Secret of Draenor Alchemy
+    980, -- Dingy Iron Coins
+    994, -- Seal of Tempered Fate
+    999, -- Secret of Draenor Tailoring
+   1008, -- Secret of Draenor Jewelcrafting
+   1017, -- Secret of Draenor Leatherworking
+   1020, -- Secret of Draenor Blacksmithing
 }
 
 -- Region names
