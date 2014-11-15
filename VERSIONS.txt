@@ -1,7 +1,7 @@
 v0.1.3
 ------
-- Added current XP storage so WoWthing can know you are 90.2 or whatever you got to before the realms exploded again.
-- Added rested state tracking
+- Added current XP storage.
+- Added rested state storage.
 
 v0.1.2
 ------
