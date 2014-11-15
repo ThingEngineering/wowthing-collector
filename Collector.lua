@@ -317,9 +317,10 @@ end
 function wwtc:UpdateXP()
     charData.currentXP = UnitXP("player")
     charData.levelXP = UnitXPMax("player")
+    charData.resting = IsResting()
 
-    local rested = GetXPExhaustion() or 0
-    if rested then
+    local rested = GetXPExhaustion()
+    if rested and rested > 0 then
         charData.restedXP = rested
     else
         charData.restedXP = 0
