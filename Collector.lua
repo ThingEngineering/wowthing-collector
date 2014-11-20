@@ -2,7 +2,7 @@
 local wwtc = {}
 local charData, charName, guildName, playedLevelUpdated, playedTotal, playedTotalUpdated
 local bankOpen, guildBankOpen, loggingOut, toyBoxHooked = false, false, false, false
-local dirtyBags = {}
+local dirtyBags, dirtyBuildings, dirtyVoid = {}, false, false
 
 -- Default SavedVariables
 local defaultWWTCSaved = {
@@ -190,28 +190,68 @@ end
 function events:VOID_TRANSFER_DONE()
     dirtyVoid = true
 end
+-- Fires when the garrison shipment information has arrived
+function events:GARRISON_LANDINGPAGE_SHIPMENTS()
+    wwtc:ScanShipments()
+end
+-- ??
+function events:GARRISON_UPDATE()
+    dirtyBuildings = true
+end
+-- ??
+function events:GARRISON_BUILDING_UPDATE()
+    dirtyBuildings = true
+end
+-- ?? Fires when a garrison building is placed
+function events:GARRISON_BUILDING_PLACED()
+    dirtyBuildings = true
+end
+-- ?? Fires when a garrison building is removed
+function events:GARRISON_BUILDING_REMOVED()
+    dirtyBuildings = true
+end
+-- ?? Fires when a garrison building is updated
+function events:GARRISON_BUILDING_ACTIVATED()
+    dirtyBuildings = true
+end
 
+-------------------------------------------------------------------------------
 -- Call functions in the events table for events
 frame:SetScript("OnEvent", function(self, event, ...)
     events[event](self, ...)
-end)
-frame:SetScript("OnUpdate", function(self)
-    -- Scan dirty bags
-    for bagID, dirty in pairs(dirtyBags) do
-        dirtyBags[bagID] = nil
-        wwtc:ScanBag(bagID)
-    end
-    -- Scan dirty void storage
-    if dirtyVoid then
-        dirtyVoid = false
-        wwtc:ScanVoidStorage()
-    end
 end)
 
 -- Register every event in the events table
 for k, v in pairs(events) do
     frame:RegisterEvent(k)
 end
+
+-------------------------------------------------------------------------------
+-- Timer to do spammy things
+function wwtc:Timer()
+    -- Scan dirty bags
+    for bagID, dirty in pairs(dirtyBags) do
+        dirtyBags[bagID] = nil
+        print('ScanBag '..bagID)
+        wwtc:ScanBag(bagID)
+    end
+    -- Scan dirty buildings
+    if dirtyBuildings then
+        dirtyBuildings = false
+        print('ScanBuildings')
+        wwtc:ScanBuildings()
+    end
+    -- Scan dirty void storage
+    if dirtyVoid then
+        dirtyVoid = false
+        print('ScanVoidStorage')
+        wwtc:ScanVoidStorage()
+    end
+end
+
+_ = C_Timer.NewTicker(1, function() wwtc:Timer() end, nil)
+
+-------------------------------------------------------------------------------
 
 function wwtc:Initialise()
     -- Build a unique ID for this character
@@ -232,10 +272,13 @@ function wwtc:Initialise()
     charData.levelXP = 0
     charData.restedXP = 0
 
+    charData.buildings = {}
     charData.currencies = {}
+    charData.followers = {}
     charData.items = charData.items or {}
     charData.lockouts = {}
     charData.scanTimes = charData.scanTimes or {}
+    charData.workOrders = {}
 
     charData.dailyResetTime = wwtc:GetDailyResetTime()
     --charData.weeklyResetTime = addon:GetWeeklyResetTime()
@@ -245,6 +288,7 @@ end
 
 function wwtc:Login()
     RequestTimePlayed()
+    C_Garrison.RequestLandingPageShipmentInfo()
 end
 
 function wwtc:Logout()
@@ -299,6 +343,9 @@ function wwtc:UpdateCharacterData()
     -- LFG bonus faction
     local bonusFaction, _ = GetLFGBonusFactionID()
     charData.bonusFaction = bonusFaction
+
+    -- Followers?
+    wwtc:ScanFollowers()
 
     if not loggingOut then
         charData.copper = GetMoney()
@@ -492,6 +539,89 @@ function wwtc:ScanToys()
         itemID = C_ToyBox.GetToyFromIndex(i)
         if itemID > 0 and PlayerHasToy(itemID) then
             WWTCSaved.toys[itemID] = true
+        end
+    end
+end
+
+-- Scan garrison buildings
+function wwtc:ScanBuildings()
+    charData.buildings = {}
+
+    local buildings = C_Garrison.GetBuildings()
+    for i = 1, #buildings do
+        charData.buildings[#charData.buildings+1] = buildings[i].buildingID
+    end
+end
+
+-- Scan garrison followers
+function wwtc:ScanFollowers()
+    local followers = C_Garrison.GetFollowers()
+    for i = 1, #followers do
+        local follower = followers[i]
+        if follower.isCollected then
+            charData.followers[#charData.followers+1] = {
+                tonumber(follower.garrFollowerID, 16),
+                follower.quality,
+                follower.level,
+                follower.xp,
+                follower.levelXP,
+            }
+        end
+    end
+end
+
+-- Scan garrison shipments
+function wwtc:ScanShipments()
+    charData.workOrders = {}
+
+    local buildings = C_Garrison.GetBuildings()
+    for i = 1, #buildings do
+        local buildingID = buildings[i].buildingID
+        if buildingID then
+            -- local name, texture, shipmentCapacity, shipmentsReady, shipmentsTotal, creationTime, duration, timeleftString, itemName, itemIcon, itemQuality, itemID = C_Garrison.GetLandingPageShipmentInfo(buildingID)
+            local _, _, shipmentCapacity, shipmentsReady, shipmentsTotal, creationTime, duration, timeleftString = C_Garrison.GetLandingPageShipmentInfo(buildingID)
+            if shipmentCapacity and shipmentCapacity > 0 then
+                charData.workOrders[#charData.workOrders+1] = {
+                    buildingID,
+                    shipmentCapacity,
+                    shipmentsReady,
+                    shipmentsTotal,
+                    creationTime,
+                    duration,
+                }
+            end
+            -- print(buildingID, shipmentCapacity, shipmentsReady, shipmentsTotal, creationTime, duration, timeleftString)
+
+            -- local shipment = self.Shipments[shipmentIndex];
+            -- if ( not shipment ) then
+            --     return;
+            -- end
+            -- if ( name ) then
+            --     SetPortraitToTexture(shipment.Icon, texture);
+            --     shipment.Icon:SetDesaturated(true);
+            --     shipment.Name:SetText(name);
+            --     shipment.Done:Hide();
+            --     shipment.Border:Show();
+            --     shipment.BG:Hide();
+            --     shipment.Count:SetText(nil);
+            --     shipment.buildingID = buildingID;
+            --     shipment.plotID = buildings[i].plotID;
+            --     if (shipmentsTotal) then
+            --         shipment.Count:SetFormattedText(GARRISON_LANDING_SHIPMENT_COUNT, shipmentsReady, shipmentsTotal);
+            --         if ( shipmentsReady == shipmentsTotal ) then
+            --             shipment.Swipe:SetCooldownUNIX(0, 0);
+            --             shipment.Done:Show();
+            --             shipment.Border:Hide();
+            --         else
+            --             shipment.BG:Show();
+            --             shipment.Swipe:SetCooldownUNIX(creationTime, duration);
+            --         end
+            --     end
+            --     shipment:Show();
+            --     shipmentIndex = shipmentIndex + 1;
+            -- else
+            --     shipment:Hide();
+            -- end
         end
     end
 end
