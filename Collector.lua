@@ -1,8 +1,8 @@
 -- Things
 local wwtc = {}
 local charData, charName, guildName, playedLevelUpdated, playedTotal, playedTotalUpdated
-local bankOpen, guildBankOpen, loggingOut, toyBoxHooked = false, false, false, false
-local dirtyBags, dirtyBuildings, dirtyVoid = {}, false, false
+local bankOpen, crafterOpen, guildBankOpen, loggingOut, toyBoxHooked = false, false, false, false, false
+local dirtyBags, dirtyBuildings, dirtyShipments, dirtyVoid = {}, false, false, false
 
 -- Default SavedVariables
 local defaultWWTCSaved = {
@@ -190,10 +190,6 @@ end
 function events:VOID_TRANSFER_DONE()
     dirtyVoid = true
 end
--- Fires when the garrison shipment information has arrived
-function events:GARRISON_LANDINGPAGE_SHIPMENTS()
-    wwtc:ScanShipments()
-end
 -- ??
 function events:GARRISON_UPDATE()
     dirtyBuildings = true
@@ -214,6 +210,24 @@ end
 function events:GARRISON_BUILDING_ACTIVATED()
     dirtyBuildings = true
 end
+-- Fires when the garrison shipment information has arrived
+function events:GARRISON_LANDINGPAGE_SHIPMENTS()
+    wwtc:ScanShipments()
+end
+-- Fires when a work order crafter frame is opened
+function events:SHIPMENT_CRAFTER_OPENED()
+    crafterOpen = true
+end
+-- Fires when a work order crafter frame is closed
+function events:SHIPMENT_CRAFTER_CLOSED()
+    crafterOpen = false
+end
+-- ?? Fires ALL THE DAMN TIME
+function events:SHIPMENT_UPDATE()
+    if not crafterOpen then
+        dirtyShipments = true
+    end
+end
 
 -------------------------------------------------------------------------------
 -- Call functions in the events table for events
@@ -232,20 +246,23 @@ function wwtc:Timer()
     -- Scan dirty bags
     for bagID, dirty in pairs(dirtyBags) do
         dirtyBags[bagID] = nil
-        print('ScanBag '..bagID)
         wwtc:ScanBag(bagID)
-    end
-    -- Scan dirty buildings
-    if dirtyBuildings then
-        dirtyBuildings = false
-        print('ScanBuildings')
-        wwtc:ScanBuildings()
     end
     -- Scan dirty void storage
     if dirtyVoid then
         dirtyVoid = false
-        print('ScanVoidStorage')
         wwtc:ScanVoidStorage()
+    end
+    -- Scan dirty buildings
+    if dirtyBuildings then
+        dirtyBuildings = false
+        wwtc:ScanBuildings()
+    end
+    -- Scan dirty shipments
+    if dirtyShipments then
+        dirtyShipments = false
+        C_Garrison.RequestLandingPageShipmentInfo()
+        --wwtc:ScanShipments()
     end
 end
 
@@ -545,6 +562,7 @@ end
 
 -- Scan garrison buildings
 function wwtc:ScanBuildings()
+    charData.scanTimes['buildings'] = time()
     charData.buildings = {}
 
     local buildings = C_Garrison.GetBuildings()
@@ -555,6 +573,9 @@ end
 
 -- Scan garrison followers
 function wwtc:ScanFollowers()
+    charData.scanTimes['followers'] = time()
+    charData.followers = {}
+
     local followers = C_Garrison.GetFollowers()
     for i = 1, #followers do
         local follower = followers[i]
@@ -572,56 +593,22 @@ end
 
 -- Scan garrison shipments
 function wwtc:ScanShipments()
+    charData.scanTimes['shipments'] = time()
     charData.workOrders = {}
 
-    local buildings = C_Garrison.GetBuildings()
-    for i = 1, #buildings do
-        local buildingID = buildings[i].buildingID
-        if buildingID then
-            -- local name, texture, shipmentCapacity, shipmentsReady, shipmentsTotal, creationTime, duration, timeleftString, itemName, itemIcon, itemQuality, itemID = C_Garrison.GetLandingPageShipmentInfo(buildingID)
-            local _, _, shipmentCapacity, shipmentsReady, shipmentsTotal, creationTime, duration, timeleftString = C_Garrison.GetLandingPageShipmentInfo(buildingID)
-            if shipmentCapacity and shipmentCapacity > 0 then
-                charData.workOrders[#charData.workOrders+1] = {
-                    buildingID,
-                    shipmentCapacity,
-                    shipmentsReady,
-                    shipmentsTotal,
-                    creationTime,
-                    duration,
-                }
-            end
-            -- print(buildingID, shipmentCapacity, shipmentsReady, shipmentsTotal, creationTime, duration, timeleftString)
-
-            -- local shipment = self.Shipments[shipmentIndex];
-            -- if ( not shipment ) then
-            --     return;
-            -- end
-            -- if ( name ) then
-            --     SetPortraitToTexture(shipment.Icon, texture);
-            --     shipment.Icon:SetDesaturated(true);
-            --     shipment.Name:SetText(name);
-            --     shipment.Done:Hide();
-            --     shipment.Border:Show();
-            --     shipment.BG:Hide();
-            --     shipment.Count:SetText(nil);
-            --     shipment.buildingID = buildingID;
-            --     shipment.plotID = buildings[i].plotID;
-            --     if (shipmentsTotal) then
-            --         shipment.Count:SetFormattedText(GARRISON_LANDING_SHIPMENT_COUNT, shipmentsReady, shipmentsTotal);
-            --         if ( shipmentsReady == shipmentsTotal ) then
-            --             shipment.Swipe:SetCooldownUNIX(0, 0);
-            --             shipment.Done:Show();
-            --             shipment.Border:Hide();
-            --         else
-            --             shipment.BG:Show();
-            --             shipment.Swipe:SetCooldownUNIX(creationTime, duration);
-            --         end
-            --     end
-            --     shipment:Show();
-            --     shipmentIndex = shipmentIndex + 1;
-            -- else
-            --     shipment:Hide();
-            -- end
+    for i = 1, #charData.buildings do
+        local buildingID = charData.buildings[i]
+        -- local name, texture, shipmentCapacity, shipmentsReady, shipmentsTotal, creationTime, duration, timeleftString, itemName, itemIcon, itemQuality, itemID = C_Garrison.GetLandingPageShipmentInfo(buildingID)
+        local _, _, shipmentCapacity, shipmentsReady, shipmentsTotal, creationTime, duration = C_Garrison.GetLandingPageShipmentInfo(buildingID)
+        if shipmentCapacity and shipmentCapacity > 0 then
+            charData.workOrders[#charData.workOrders+1] = {
+                buildingID,
+                shipmentCapacity,
+                shipmentsReady,
+                shipmentsTotal,
+                creationTime,
+                duration,
+            }
         end
     end
 end
