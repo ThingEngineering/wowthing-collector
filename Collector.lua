@@ -224,9 +224,7 @@ function events:SHIPMENT_CRAFTER_CLOSED()
 end
 -- ?? Fires ALL THE DAMN TIME
 function events:SHIPMENT_UPDATE()
-    if not crafterOpen then
-        dirtyShipments = true
-    end
+    dirtyShipments = true
 end
 
 -------------------------------------------------------------------------------
@@ -259,7 +257,7 @@ function wwtc:Timer()
         wwtc:ScanBuildings()
     end
     -- Scan dirty shipments
-    if dirtyShipments then
+    if dirtyShipments and not crafterOpen then
         dirtyShipments = false
         C_Garrison.RequestLandingPageShipmentInfo()
         --wwtc:ScanShipments()
@@ -596,19 +594,22 @@ function wwtc:ScanShipments()
     charData.scanTimes['shipments'] = time()
     charData.workOrders = {}
 
-    for i = 1, #charData.buildings do
-        local buildingID = charData.buildings[i]
-        -- local name, texture, shipmentCapacity, shipmentsReady, shipmentsTotal, creationTime, duration, timeleftString, itemName, itemIcon, itemQuality, itemID = C_Garrison.GetLandingPageShipmentInfo(buildingID)
-        local _, _, shipmentCapacity, shipmentsReady, shipmentsTotal, creationTime, duration = C_Garrison.GetLandingPageShipmentInfo(buildingID)
-        if shipmentCapacity and shipmentCapacity > 0 then
-            charData.workOrders[#charData.workOrders+1] = {
-                buildingID,
-                shipmentCapacity,
-                shipmentsReady,
-                shipmentsTotal,
-                creationTime,
-                duration,
-            }
+    local buildings = C_Garrison.GetBuildings()
+    for i = 1, #buildings do
+        local buildingID = buildings[i].buildingID
+        if buildingID then
+            -- local name, texture, shipmentCapacity, shipmentsReady, shipmentsTotal, creationTime, duration, timeleftString, itemName, itemIcon, itemQuality, itemID = C_Garrison.GetLandingPageShipmentInfo(buildingID)
+            local _, _, shipmentCapacity, shipmentsReady, shipmentsTotal, creationTime, duration = C_Garrison.GetLandingPageShipmentInfo(buildingID)
+            if shipmentCapacity and shipmentCapacity > 0 then
+                charData.workOrders[#charData.workOrders+1] = {
+                    buildingID,
+                    shipmentCapacity,
+                    shipmentsReady,
+                    shipmentsTotal,
+                    creationTime,
+                    duration,
+                }
+            end
         end
     end
 end
