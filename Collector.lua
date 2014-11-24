@@ -238,6 +238,19 @@ end
 function events:SHIPMENT_UPDATE()
     dirtyShipments = true
 end
+-- ??
+function events:GARRISON_FOLLOWER_ADDED()
+    print('GARRISON_FOLLOWER_ADDED')
+    wwtc:ScanFollowers()
+end
+function events:GARRISON_FOLLOWER_LIST_UPDATE()
+    print('GARRISON_FOLLOWER_LIST_UPDATE')
+    wwtc:ScanFollowers()
+end
+function events:GARRISON_FOLLOWER_XP_CHANGED()
+    print('GARRISON_FOLLOWER_XP_CHANGED')
+    wwtc:ScanFollowers()
+end
 
 -------------------------------------------------------------------------------
 -- Call functions in the events table for events
@@ -367,12 +380,11 @@ function wwtc:UpdateCharacterData()
         charData.groundSpeed = 60
     end
 
+    wwtc:ScanFollowers()
+
     -- LFG bonus faction
     local bonusFaction, _ = GetLFGBonusFactionID()
     charData.bonusFaction = bonusFaction
-
-    -- Followers?
-    wwtc:ScanFollowers()
 
     if not loggingOut then
         charData.copper = GetMoney()
@@ -596,12 +608,26 @@ function wwtc:ScanFollowers()
     for i = 1, #followers do
         local follower = followers[i]
         if follower.isCollected then
+            -- Fetch gear
+            local _, weaponItemLevel, _, armorItemLevel = C_Garrison.GetFollowerItems(follower.followerID)
+
+            -- Fetch abilities
+            local abilityList = {}
+            local abilities = C_Garrison.GetFollowerAbilities(follower.followerID)
+            for j = 1, #abilities do
+                -- description, counters, id, name, icon, isTrait
+                abilityList[#abilityList+1] = abilities[j].id
+            end
+
             charData.followers[#charData.followers+1] = {
-                tonumber(follower.garrFollowerID, 16),
-                follower.quality,
-                follower.level,
-                follower.xp,
-                follower.levelXP,
+                id = tonumber(follower.garrFollowerID, 16),
+                quality = follower.quality,
+                level = follower.level,
+                currentXP = follower.xp,
+                levelXP = follower.levelXP,
+                weaponLevel = weaponItemLevel,
+                armorLevel = armorItemLevel,
+                abilities = abilityList,
             }
         end
     end
