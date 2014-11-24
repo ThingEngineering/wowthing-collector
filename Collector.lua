@@ -115,7 +115,7 @@ function events:PLAYER_XP_UPDATE()
 end
 -- Fires when the player's rest state or amount of rested XP changes
 function events:UPDATE_EXHAUSTION()
-    wwtc:UpdateXP()
+    wwtc:UpdateExhausted()
 end
 -- Fires when guild stats changes
 function events:PLAYER_GUILD_UPDATE(unitID)
@@ -366,6 +366,7 @@ function wwtc:UpdateCharacterData()
         charData.copper = GetMoney()
 
         wwtc:UpdateXP()
+        wwtc:UpdateExhausted()
 
         RequestRaidInfo()
     end
@@ -386,9 +387,14 @@ function wwtc:UpdateGuildData()
     end
 end
 
+-- Update current/level XP
 function wwtc:UpdateXP()
     charData.currentXP = UnitXP("player")
     charData.levelXP = UnitXPMax("player")
+end
+
+-- Update resting status and rested XP
+function wwtc:UpdateExhausted()
     charData.resting = IsResting()
 
     local rested = GetXPExhaustion()
