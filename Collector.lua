@@ -44,6 +44,8 @@ local currencies = {
    1020, -- Secret of Draenor Blacksmithing
 }
 
+local CURRENCY_GARRISON = 824
+
 -- Region names
 local regionNames = {
     [1] = "US",
@@ -116,6 +118,16 @@ end
 -- Fires when the player's rest state or amount of rested XP changes
 function events:UPDATE_EXHAUSTION()
     wwtc:UpdateExhausted()
+end
+-- Fires when stuff is looted
+function events:SHOW_LOOT_TOAST(...)
+    local typeIdentifier, itemLink, quantity = ...
+    if typeIdentifier == "currency" and itemLink then
+        local currencyID = string.match(itemLink, "currency:(%d+)")
+        if currencyID == tostring(CURRENCY_GARRISON) then
+            charData.scanTimes["garrisonCache"] = time()
+        end
+    end
 end
 -- Fires when guild stats changes
 function events:PLAYER_GUILD_UPDATE(unitID)
