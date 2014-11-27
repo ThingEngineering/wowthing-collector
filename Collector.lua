@@ -81,6 +81,9 @@ function events:ADDON_LOADED(name)
         -- Backwards compat hack
         WWTCSaved.toys = WWTCSaved.toys or {}
 
+        -- Perform any cleanup
+        wwtc:Cleanup()
+
         -- Try to hook the ToyBox
         wwtc:HookToyBox()
 
@@ -344,6 +347,17 @@ end
 function wwtc:Logout()
     loggingOut = true
     wwtc:UpdateCharacterData()
+end
+
+function wwtc:Cleanup()
+    local old = time() - (3 * 24 * 60 * 60)
+
+    for cName, cData in pairs(WWTCSaved.chars) do
+        if not cData.lastSeen or cData.lastSeen < old then
+            --print('WWTC: expired data for "', cName, '"')
+            WWTCSaved.chars[cName] = nil
+        end
+    end
 end
 
 -- Update various character data
