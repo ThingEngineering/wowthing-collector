@@ -54,6 +54,15 @@ local regionNames = {
     [4] = "TW",
 }
 
+-- Blizzard_GarrisonUI/Blizzard_GarrisonSharedTemplates.lua::477
+local statusPriority = {
+    [GARRISON_FOLLOWER_IN_PARTY] = 1,
+    [GARRISON_FOLLOWER_WORKING] = 2,
+    [GARRISON_FOLLOWER_ON_MISSION] = 3,
+    [GARRISON_FOLLOWER_EXHAUSTED] = 4,
+    [GARRISON_FOLLOWER_INACTIVE] = 5,
+}
+
 -- Need a frame for events
 local frame, events = CreateFrame("FRAME"), {}
 
@@ -623,6 +632,7 @@ function wwtc:ScanFollowers()
             charData.followers[#charData.followers+1] = {
                 id = tonumber(follower.garrFollowerID, 16),
                 quality = follower.quality,
+                status = statusPriority[follower.status],
                 level = follower.level,
                 currentXP = follower.xp,
                 levelXP = follower.levelXP,
