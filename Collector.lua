@@ -238,17 +238,16 @@ end
 function events:SHIPMENT_UPDATE()
     dirtyShipments = true
 end
--- ??
+-- Fires when a new follower is added
 function events:GARRISON_FOLLOWER_ADDED()
-    print('GARRISON_FOLLOWER_ADDED')
     wwtc:ScanFollowers()
 end
-function events:GARRISON_FOLLOWER_LIST_UPDATE()
-    print('GARRISON_FOLLOWER_LIST_UPDATE')
-    wwtc:ScanFollowers()
-end
+-- Fires when a follower gains XP
 function events:GARRISON_FOLLOWER_XP_CHANGED()
-    print('GARRISON_FOLLOWER_XP_CHANGED')
+    wwtc:ScanFollowers()
+end
+-- Fires whenever the available follower list changes
+function events:GARRISON_FOLLOWER_LIST_UPDATE()
     wwtc:ScanFollowers()
 end
 
