@@ -93,7 +93,7 @@ end
 -- Fires any time the player sees a loading screen
 function events:PLAYER_ENTERING_WORLD()
     -- FIXME: goes in PLAYER_LOGIN when not dev?
-    wwtc:Initialise()
+    --wwtc:Initialise()
 
     wwtc:UpdateCharacterData()
 
@@ -326,6 +326,8 @@ function wwtc:Initialise()
 end
 
 function wwtc:Login()
+    wwtc:Initialise()
+
     RequestTimePlayed()
     C_Garrison.RequestLandingPageShipmentInfo()
 end
