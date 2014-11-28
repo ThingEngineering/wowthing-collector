@@ -406,8 +406,6 @@ function wwtc:UpdateCharacterData()
         charData.groundSpeed = 60
     end
 
-    wwtc:ScanFollowers()
-
     -- LFG bonus faction
     local bonusFaction, _ = GetLFGBonusFactionID()
     charData.bonusFaction = bonusFaction
@@ -417,6 +415,8 @@ function wwtc:UpdateCharacterData()
 
         wwtc:UpdateXP()
         wwtc:UpdateExhausted()
+
+        wwtc:ScanFollowers()
 
         RequestRaidInfo()
     end
