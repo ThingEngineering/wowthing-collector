@@ -45,6 +45,8 @@ local currencies = {
 }
 
 local CURRENCY_GARRISON = 824
+local SLOTS_PER_GUILD_BANK_TAB = 98
+local SLOTS_PER_VOID_STORAGE_TAB = 80
 
 -- Region names
 local regionNames = {
@@ -509,7 +511,8 @@ function wwtc:ScanGuildBankTab()
     WWTCSaved.guilds[guildName].items["tab "..tabID] = {}
     local tab = WWTCSaved.guilds[guildName].items["tab "..tabID]
 
-    for i = 1, MAX_GUILDBANK_SLOTS_PER_TAB do
+    -- SIGH constants
+    for i = 1, SLOTS_PER_GUILD_BANK_TAB do
         local link = GetGuildBankItemLink(tabID, i)
         if link ~= nil then
             local texture, count, locked = GetGuildBankItemInfo(tabID, i)
@@ -527,7 +530,7 @@ function wwtc:ScanVoidStorage()
         charData.items["void "..i] = {}
         local void = charData.items["void "..i]
 
-        for j = 1, 80 do
+        for j = 1, SLOTS_PER_VOID_STORAGE_TAB do
             local itemID, texture, locked, recentDeposit, isFiltered = GetVoidItemInfo(i, j)
             if itemID ~= nil then
                 void["s"..j] = { 1, itemID }
