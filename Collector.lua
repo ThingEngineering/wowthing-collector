@@ -653,7 +653,7 @@ function wwtc:ScanFollowers()
             charData.followers[#charData.followers+1] = {
                 id = tonumber(follower.garrFollowerID, 16),
                 quality = follower.quality,
-                status = statusPriority[follower.status],
+                status = statusPriority[follower.status] or -1,
                 level = follower.level,
                 currentXP = follower.xp,
                 levelXP = follower.levelXP,
