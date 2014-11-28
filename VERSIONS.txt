@@ -1,3 +1,13 @@
+v0.2.1
+------
+- Added garrison cache check timer.
+- Added garrison level scanning.
+- Added complete garrison follower scanning.
+- Added character data expiry (3 days since login) to reduce upload times.
+- Fixed a possible bank scan error when constants aren't defined.
+- Fixed garrison follower list being emptied when logging out.
+- Split current/level XP updating and resting/rested XP updating into separate functions, slight optimisation.
+
 v0.2.0
 ------
 - Added garrison building scanning
