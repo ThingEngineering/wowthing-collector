@@ -608,10 +608,12 @@ end
 
 -- Scan toys, obviously
 function wwtc:ScanToys()
+    WWTCSaved.toys = {}
+
     for i = 1, C_ToyBox.GetNumToys() do
         itemID = C_ToyBox.GetToyFromIndex(i)
         if itemID > 0 and PlayerHasToy(itemID) then
-            WWTCSaved.toys[itemID] = true
+            WWTCSaved.toys[#WWTCSaved.toys+1] = itemID
         end
     end
 end
