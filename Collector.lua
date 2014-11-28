@@ -324,6 +324,7 @@ function wwtc:Initialise()
     charData.currentXP = 0
     charData.levelXP = 0
     charData.restedXP = 0
+    charData.garrisonLevel = 0
 
     charData.buildings = {}
     charData.currencies = {}
@@ -619,6 +620,9 @@ end
 function wwtc:ScanBuildings()
     charData.scanTimes['buildings'] = time()
     charData.buildings = {}
+
+    local level, _, _, _ = C_Garrison.GetGarrisonInfo()
+    charData.garrisonLevel = level or 0
 
     local buildings = C_Garrison.GetBuildings()
     for i = 1, #buildings do
