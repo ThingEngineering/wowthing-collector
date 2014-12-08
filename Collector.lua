@@ -39,6 +39,14 @@ local currencies = {
     994, -- Seal of Tempered Fate
 }
 
+-- World boss quests
+local worldBossQuests = {
+    [37460] = "Gorgrond Bosses", -- Drov the Ruinator
+    [37462] = "Gorgrond Bosses", -- Tarlna
+    [37474] = "Rukhmar",
+}
+
+
 local CURRENCY_GARRISON = 824
 local SLOTS_PER_GUILD_BANK_TAB = 98
 local SLOTS_PER_VOID_STORAGE_TAB = 80
@@ -581,6 +589,19 @@ function wwtc:UpdateLockouts()
             defeatedBosses = 1,
             maxBosses = 1,
         }
+    end
+
+    -- Other world bosses
+    for questID, instanceName in pairs(worldBossQuests) do
+        if IsQuestFlaggedCompleted(questID) then
+            charData.lockouts[#charData.lockouts+1] = {
+            name = instanceName,
+            resetTime = 0,
+            difficulty = 0,
+            defeatedBosses = 1,
+            maxBosses = 1,
+        }
+        end
     end
 end
 
