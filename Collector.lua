@@ -1,8 +1,11 @@
 -- Things
 local wwtc = {}
-local charData, charName, guildName, playedLevelUpdated, playedTotal, playedTotalUpdated
+local charData, charName, guildName, playedLevelUpdated, playedTotal, playedTotalUpdated, regionName
 local bankOpen, crafterOpen, guildBankOpen, loggingOut, toyBoxHooked = false, false, false, false, false
 local dirtyBags, dirtyBuildings, dirtyShipments, dirtyVoid = {}, false, false, false
+
+-- Libs
+local LibRealmInfo = LibStub('LibRealmInfo')
 
 -- Default SavedVariables
 local defaultWWTCSaved = {
@@ -50,14 +53,6 @@ local worldBossQuests = {
 local CURRENCY_GARRISON = 824
 local SLOTS_PER_GUILD_BANK_TAB = 98
 local SLOTS_PER_VOID_STORAGE_TAB = 80
-
--- Region names
-local regionNames = {
-    [1] = "US",
-    [2] = "KR",
-    [3] = "EU",
-    [4] = "TW",
-}
 
 -- Blizzard_GarrisonUI/Blizzard_GarrisonSharedTemplates.lua::477
 local statusPriority = {
@@ -311,7 +306,10 @@ _ = C_Timer.NewTicker(1, function() wwtc:Timer() end, nil)
 
 function wwtc:Initialise()
     -- Build a unique ID for this character
-    charName = regionNames[GetCurrentRegion()] .. " - " .. GetRealmName() .. " - " .. UnitName("player")
+    local _, _, _, _, _, _, region = LibRealmInfo:GetRealmInfoByUnit("player")
+    regionName = region
+    charName = regionName .. " - " .. GetRealmName() .. " - " .. UnitName("player")
+    print(charName)
 
     -- Set up character data table
     charData = WWTCSaved.chars[charName] or {}
@@ -430,7 +428,7 @@ function wwtc:UpdateGuildData()
     -- Build a unique ID for this character's guild
     local gName, gRankName, gRankIndex = GetGuildInfo("player")
     if gName then
-        guildName = regionNames[GetCurrentRegion()] .. " - " .. GetRealmName() .. " - " .. gName
+        guildName = regionName .. " - " .. GetRealmName() .. " - " .. gName
 
         WWTCSaved.guilds[guildName] = WWTCSaved.guilds[guildName] or {}
         WWTCSaved.guilds[guildName].copper = WWTCSaved.guilds[guildName].copper or 0

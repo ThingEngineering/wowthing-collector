@@ -5,4 +5,7 @@
 ## Author: Freddie
 ## SavedVariables: WWTCSaved
 
+libs\LibStub\LibStub.lua
+libs\LibRealmInfo\LibRealmInfo.lua
+
 Collector.lua
