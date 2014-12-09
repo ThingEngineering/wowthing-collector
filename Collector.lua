@@ -335,7 +335,6 @@ function wwtc:Initialise()
     charData.workOrders = {}
 
     charData.dailyResetTime = wwtc:GetDailyResetTime()
-    --charData.weeklyResetTime = addon:GetWeeklyResetTime()
 
     wwtc:UpdateGuildData()
 end
@@ -593,7 +592,7 @@ function wwtc:UpdateLockouts()
         if IsQuestFlaggedCompleted(questID) then
             charData.lockouts[#charData.lockouts+1] = {
             name = instanceName,
-            resetTime = 0,
+            weeklyQuest = true,
             difficulty = 0,
             defeatedBosses = 1,
             maxBosses = 1,
@@ -705,16 +704,16 @@ function wwtc:ScanShipments()
     end
 end
 
--- Returns the daily quest reset time in the local timezone
-function wwtc:GetDailyResetTime()
-  local resetTime = GetQuestResetTime()
-  if not resetTime or resetTime <= 0 or resetTime > (24 * 60 * 60) + 30 then
-    return nil
-  end
-  return time() + resetTime
-end
-
 -- Get a numeric itemID from an item link
 function wwtc:GetItemID(link)
     return tonumber(link:match("item:(%d+)"))
+end
+
+-- Returns the daily quest reset time in the local timezone
+function wwtc:GetDailyResetTime()
+    local resetTime = GetQuestResetTime()
+    if not resetTime or resetTime <= 0 or resetTime > (24 * 60 * 60) + 30 then
+        return nil
+    end
+    return time() + resetTime
 end
