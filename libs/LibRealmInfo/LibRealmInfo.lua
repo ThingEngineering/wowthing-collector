@@ -99,12 +99,12 @@ end
 ------------------------------------------------------------------------
 
 function lib:GetRealmInfoByGUID(guid)
-	--assert(type(guid) == "string", "Usage: GetRealmInfoByGUID(guid)")
+	assert(type(guid) == "string", "Usage: GetRealmInfoByGUID(guid)")
 	if not strmatch(guid, "^Player%-") then
 		return debug("Unsupported GUID type", (strsplit("-", guid)))
 	end
 	local _, _, _, _, _, _, realm = GetPlayerInfoByGUID(guid)
-	if realm == "" then
+	if realm == "" or realm == nil then
 		realm = GetRealmName()
 	end
 	return self:GetRealmInfo(realm)
@@ -113,7 +113,7 @@ end
 ------------------------------------------------------------------------
 
 function lib:GetRealmInfoByUnit(unit)
-	--assert(type(unit) == "string", "Usage: GetRealmInfoByUnit(unit)")
+	assert(type(unit) == "string", "Usage: GetRealmInfoByUnit(unit)")
 	local guid = UnitGUID(unit)
 	if not guid then
 		return debug("No GUID available for unit", unit)
