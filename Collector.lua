@@ -306,10 +306,9 @@ _ = C_Timer.NewTicker(1, function() wwtc:Timer() end, nil)
 
 function wwtc:Initialise()
     -- Build a unique ID for this character
-    local _, _, _, _, _, _, region = LibRealmInfo:GetRealmInfoByUnit("player")
-    regionName = region
-    charName = regionName .. " - " .. GetRealmName() .. " - " .. UnitName("player")
-    print(charName)
+    local _, realm, _, _, _, _, region = LibRealmInfo:GetRealmInfoByUnit("player")
+    regionName = region or GetCurrentRegion()
+    charName = regionName .. " - " .. realm .. " - " .. UnitName("player")
 
     -- Set up character data table
     charData = WWTCSaved.chars[charName] or {}
