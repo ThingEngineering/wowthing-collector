@@ -455,6 +455,11 @@ function wwtc:UpdateCharacterData()
 end
 
 function wwtc:UpdateGuildData()
+    -- Sometimes this fires before region is checked? Weird
+    if not regionName then
+        return
+    end
+
     -- Build a unique ID for this character's guild
     local gName, gRankName, gRankIndex = GetGuildInfo("player")
     if gName then
