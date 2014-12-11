@@ -42,6 +42,33 @@ local currencies = {
     994, -- Seal of Tempered Fate
 }
 
+-- Trade skill cooldowns
+local tradeSkills = {
+    [156587] = true, -- Alchemical Catalyst
+    [175880] = true, -- Secrets of Draenor Alchemy
+
+    [171690] = true, -- Truesteel Ingot
+    [176090] = true, -- Secrets of Draenor Blacksmithing
+
+    [169092] = true, -- Temporal Crystal
+    [177043] = true, -- Secrets of Draenor Enchanting
+
+    [169080] = true, -- Gearspring Parts
+    [177054] = true, -- Secrets of Draenor Engineering
+
+    [169081] = true, -- War Paints
+    [177045] = true, -- Secrets of Draenor Inscription
+
+    [170700] = true, -- Taladite Crystal
+    [176087] = true, -- Secrets of Draenor Jewelcrafting
+
+    [171391] = true, -- Burnished Leather
+    [176089] = true, -- Secrets of Draenor Leatherworking
+
+    [168835] = true, -- Hexweave Cloth
+    [176058] = true, -- Secrets of Draenor Tailoring
+}
+
 -- World boss quests
 local worldBossQuests = {
     [37460] = "Gorgrond Bosses", -- Drov the Ruinator
@@ -160,6 +187,10 @@ end
 -- Fires when player money changes
 function events:PLAYER_MONEY()
     charData.copper = GetMoney()
+end
+-- Fires when information about the contents of a trade skill recipe list changes or becomes available
+function events:TRADE_SKILL_UPDATE()
+    wwtc:ScanTradeSkills()
 end
 -- Fires when the contents of a bag changes
 function events:BAG_UPDATE(bagID)
@@ -332,6 +363,7 @@ function wwtc:Initialise()
     charData.items = charData.items or {}
     charData.lockouts = {}
     charData.scanTimes = charData.scanTimes or {}
+    charData.tradeSkills = {}
     charData.workOrders = {}
 
     charData.dailyResetTime = wwtc:GetDailyResetTime()
@@ -597,6 +629,26 @@ function wwtc:UpdateLockouts()
             defeatedBosses = 1,
             maxBosses = 1,
         }
+        end
+    end
+end
+
+-- Scan trade skills for cooldowns
+function wwtc:ScanTradeSkills()
+    -- Don't care about tradeskills that aren't our own
+    if IsTradeSkillGuild() or IsTradeSkillLinked() then
+        return
+    end
+
+    local now = time()
+    for i = 1, GetNumTradeSkills() do
+        local link = GetTradeSkillRecipeLink(i)
+        if link then
+            local spellID = tonumber(link:match("\|Henchant:(%d+)\|h"))
+            if spellID and tradeSkills[spellID] == true then
+                local cooldown = GetTradeSkillCooldown(i)
+                charData.tradeSkills[spellID] = now + cooldown
+            end
         end
     end
 end
