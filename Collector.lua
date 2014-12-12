@@ -652,7 +652,11 @@ function wwtc:ScanTradeSkills()
             local spellID = tonumber(link:match("\|Henchant:(%d+)\|h"))
             if spellID and tradeSkills[spellID] == true then
                 local cooldown = GetTradeSkillCooldown(i)
-                charData.tradeSkills[spellID] = now + cooldown
+                if cooldown then
+                    charData.tradeSkills[spellID] = now + cooldown
+                else
+                    charData.tradeSkills[spellID] = nil
+                end
             end
         end
     end
