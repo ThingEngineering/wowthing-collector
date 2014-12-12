@@ -1,3 +1,10 @@
+v0.2.2
+------
+- Added WoD world boss lockout support.
+- Added profession cooldown scanning support.
+- Changed character region check to use LibRealmInfo, hopefully that's more accurate than GetCurrentRegion().
+- Removed some defunct currencies.
+
 v0.2.1
 ------
 - Added garrison cache check timer.
