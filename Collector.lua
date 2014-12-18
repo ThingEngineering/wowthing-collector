@@ -1,8 +1,8 @@
 -- Things
 local wwtc = {}
-local charData, charName, guildName, playedLevelUpdated, playedTotal, playedTotalUpdated, regionName
+local charData, charName, followerMap, guildName, playedLevelUpdated, playedTotal, playedTotalUpdated, regionName
 local bankOpen, crafterOpen, guildBankOpen, loggingOut, toyBoxHooked = false, false, false, false, false
-local dirtyBags, dirtyBuildings, dirtyShipments, dirtyVoid = {}, false, false, false
+local dirtyBags, dirtyBuildings, dirtyMissions, dirtyShipments, dirtyVoid = {}, false, false, false, false
 
 -- Libs
 local LibRealmInfo = LibStub('LibRealmInfo')
@@ -276,6 +276,10 @@ end
 function events:GARRISON_LANDINGPAGE_SHIPMENTS()
     wwtc:ScanShipments()
 end
+-- Fires when the garrison mission list updates?
+function events:GARRISON_MISSION_LIST_UPDATE()
+    dirtyMissions = true
+end
 -- Fires when a work order crafter frame is opened
 function events:SHIPMENT_CRAFTER_OPENED()
     crafterOpen = true
@@ -330,6 +334,11 @@ function wwtc:Timer()
         dirtyBuildings = false
         wwtc:ScanBuildings()
     end
+    -- Scan dirty missions
+    if dirtyMissions then
+        dirtyMissions = false
+        wwtc:ScanMissions()
+    end
     -- Scan dirty shipments
     if dirtyShipments and not crafterOpen then
         dirtyShipments = false
@@ -369,6 +378,7 @@ function wwtc:Initialise()
     charData.followers = {}
     charData.items = charData.items or {}
     charData.lockouts = {}
+    charData.missions = {}
     charData.scanTimes = charData.scanTimes or {}
     charData.tradeSkills = {}
     charData.workOrders = {}
@@ -605,7 +615,7 @@ function wwtc:UpdateLockouts()
             bosses[#bosses + 1] = { name, dead }
 
             j = j + 1
-            name, _, dead = GetSavedInstanceEncounterInfo(i, j)
+            local name, _, dead = GetSavedInstanceEncounterInfo(i, j)
         end
 
         charData.lockouts[#charData.lockouts+1] = {
@@ -717,6 +727,7 @@ function wwtc:ScanFollowers()
     charData.scanTimes['followers'] = time()
     charData.followers = {}
 
+    followerMap = {}
     local followers = C_Garrison.GetFollowers()
     for i = 1, #followers do
         local follower = followers[i]
@@ -732,8 +743,9 @@ function wwtc:ScanFollowers()
                 abilityList[#abilityList+1] = abilities[j].id
             end
 
+            local followerID = tonumber(follower.garrFollowerID, 16)
             charData.followers[#charData.followers+1] = {
-                id = tonumber(follower.garrFollowerID, 16),
+                id = followerID,
                 quality = follower.quality,
                 status = statusPriority[follower.status] or -1,
                 level = follower.level,
@@ -743,7 +755,69 @@ function wwtc:ScanFollowers()
                 armorLevel = armorItemLevel,
                 abilities = abilityList,
             }
+
+            followerMap[follower.followerID] = followerID
         end
+    end
+end
+
+-- Scan garrison missions
+function wwtc:ScanMissions()
+    charData.scanTimes['missions'] = time()
+    charData.missions = {}
+
+    local inProgressMissions = {}
+    C_Garrison.GetInProgressMissions(inProgressMissions)
+
+    -- description = "blah blah blah"
+    -- cost = 15
+    -- duration = "4 hr"
+    -- durationSeconds = 14400
+    -- level = 100
+    -- timeLeft = "4 hr 48 min", "59 min", "46 sec"
+    -- type = "Combat"
+    -- inProgress = true
+    -- locPrefix = "blah"
+    -- rewards = {}
+    -- numRewards = 1
+    -- numFollowers = 2
+    -- state = -1 ??
+    -- iLevel = 0
+    -- name = "Hefty Metal"
+    -- followers = {}
+    -- location = "Gorgrond"
+    -- isRare = false
+    -- typeAtlas = "blah"
+    -- missionID = 385
+    local now = time()
+    for i = 1, #inProgressMissions do
+        local mission = inProgressMissions[i]
+
+        local followerIDs = {}
+        for j = 1, mission.numFollowers do
+            followerIDs[j] = followerMap[mission.followers[j]]
+        end
+
+        local timeLeft = wwtc:ParseMissionTime(mission.timeLeft)
+        -- Pad minute resolution times by 60s as we have no idea when they'll actually finish
+        if timeLeft >= 60 then
+            timeLeft = timeLeft + 60
+        end
+
+        charData.missions[#charData.missions+1] = {
+            id = mission.missionID,
+            followers = followerIDs,
+            finishes = now + timeLeft,
+        }
+    end
+
+    local availableMissions = {}
+    C_Garrison.GetAvailableMissions(availableMissions)
+
+    for _, mission in pairs(availableMissions) do
+        charData.missions[#charData.missions+1] = {
+            id = mission.missionID,
+        }
     end
 end
 
@@ -784,4 +858,12 @@ function wwtc:GetDailyResetTime()
         return nil
     end
     return time() + resetTime
+end
+
+-- Parses annoying mission remaining times
+function wwtc:ParseMissionTime(t)
+    local hours = tonumber(t:match("(%d+) hr")) or 0
+    local minutes = tonumber(t:match("(%d+) min")) or 0
+    local seconds = tonumber(t:match("(%d+) sec")) or 0
+    return (hours * 3600) + (minutes * 60) + seconds
 end
