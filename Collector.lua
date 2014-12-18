@@ -192,6 +192,13 @@ end
 function events:TRADE_SKILL_UPDATE()
     wwtc:ScanTradeSkills()
 end
+-- Fires when a unit casts a spell - used for trade skill updating
+function events:UNIT_SPELLCAST_SUCCEEDED(evt, unit, spellName, rank, lineID, spellID)
+    -- We only care about the player's trade skills
+    if unit == "player" and tradeSkills[spellID] == true then
+        C_Timer.NewTimer(0.5, function() wwtc:ScanTradeSkills() end)
+    end
+end
 -- Fires when the contents of a bag changes
 function events:BAG_UPDATE(bagID)
     dirtyBags[bagID] = true
