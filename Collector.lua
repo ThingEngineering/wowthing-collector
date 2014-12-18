@@ -331,7 +331,7 @@ function wwtc:Timer()
     end
 end
 
-_ = C_Timer.NewTicker(1, function() wwtc:Timer() end, nil)
+local _ = C_Timer.NewTicker(1, function() wwtc:Timer() end, nil)
 
 -------------------------------------------------------------------------------
 
