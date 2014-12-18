@@ -1,3 +1,10 @@
+v0.3.0
+------
+- Added garrison mission scanning.
+- Fixed tradeskill cooldowns not updating sometimes.
+- Fixed two taint issues, oops. Apparently I missed the memo about Blizzard using the global '_' variable and
+  never actually fixing it :(
+
 v0.2.2
 ------
 - Added WoD world boss lockout support.
