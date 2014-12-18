@@ -9,7 +9,7 @@ local LibRealmInfo = LibStub('LibRealmInfo')
 
 -- Default SavedVariables
 local defaultWWTCSaved = {
-    version = 10,
+    version = 11,
     chars = {},
     guilds = {},
     toys = {},
@@ -610,12 +610,12 @@ function wwtc:UpdateLockouts()
 
         -- Get saved boss names
         local bosses, j = {}, 1
-        local name, _, dead = GetSavedInstanceEncounterInfo(i, j)
+        local name, something, dead = GetSavedInstanceEncounterInfo(i, j)
         while name do
             bosses[#bosses + 1] = { name, dead }
 
             j = j + 1
-            local name, _, dead = GetSavedInstanceEncounterInfo(i, j)
+            name, something, dead = GetSavedInstanceEncounterInfo(i, j)
         end
 
         charData.lockouts[#charData.lockouts+1] = {
