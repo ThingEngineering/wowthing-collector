@@ -2,7 +2,7 @@
 local wwtc = {}
 local charData, charName, followerMap, guildName, playedLevelUpdated, playedTotal, playedTotalUpdated, regionName
 local bankOpen, crafterOpen, guildBankOpen, loggingOut, toyBoxHooked = false, false, false, false, false
-local dirtyBags, dirtyBuildings, dirtyMissions, dirtyShipments, dirtyVoid = {}, false, false, false, false
+local dirtyBags, dirtyBuildings, dirtyLockouts, dirtyMissions, dirtyShipments, dirtyVoid = {}, false, false, false, false, false
 
 -- Libs
 local LibRealmInfo = LibStub('LibRealmInfo')
@@ -194,7 +194,7 @@ end
 
 -- Fires when RequestRaidInfo() completes
 function events:UPDATE_INSTANCE_INFO()
-    wwtc:UpdateLockouts()
+    dirtyLockouts = true
 end
 -- Fires when player money changes
 function events:PLAYER_MONEY()
@@ -345,6 +345,11 @@ function wwtc:Timer()
     if dirtyBuildings then
         dirtyBuildings = false
         wwtc:ScanBuildings()
+    end
+    -- Scan dirty lockouts
+    if dirtyLockouts then
+        dirtyLockouts = false
+        wwtc:ScanLockouts()
     end
     -- Scan dirty missions
     if dirtyMissions then
@@ -605,8 +610,8 @@ function wwtc:ScanVoidStorage()
     end
 end
 
-
-function wwtc:UpdateLockouts()
+-- Scan instance/LFR/world boss lockouts
+function wwtc:ScanLockouts()
     charData.lockouts = {}
 
     local now = time()
