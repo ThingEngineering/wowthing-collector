@@ -69,6 +69,18 @@ local tradeSkills = {
     [176058] = true, -- Secrets of Draenor Tailoring
 }
 
+-- LFR instances
+local LFRInstances = {
+    {
+        name = 'Highmaul',
+        instances = {
+            { 849, 3 },
+            { 850, 3 },
+            { 851, 1 },
+        },
+    }
+}
+
 -- World boss quests
 local worldBossQuests = {
     [37460] = "Gorgrond Bosses", -- Drov the Ruinator
@@ -626,6 +638,35 @@ function wwtc:UpdateLockouts()
             defeatedBosses = defeatedBosses,
             locked = locked,
             maxBosses = maxBosses,
+        }
+    end
+
+    -- LFR
+    for i = 1, #LFRInstances do
+        local instanceData = LFRInstances[i]
+
+        local bosses, count, defeated = {}, 0, 0
+        for j = 1, #instanceData.instances do
+            local instanceID, numBosses = unpack(instanceData.instances[j])
+            for k = 1 + count, numBosses + count do
+                local bossName, _, isKilled = GetLFGDungeonEncounterInfo(instanceID, k)
+                bosses[#bosses + 1] = { bossName, isKilled }
+                if isKilled then
+                    defeated = defeated + 1
+                end
+            end
+
+            count = count + numBosses
+        end
+
+        charData.lockouts[#charData.lockouts+1] = {
+            name = instanceData.name,
+            bosses = bosses,
+            weeklyQuest = true,
+            difficulty = 17, -- LFR
+            defeatedBosses = defeated,
+            locked = defeated > 0,
+            maxBosses = count,
         }
     end
 

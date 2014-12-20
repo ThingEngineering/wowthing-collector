@@ -1,3 +1,13 @@
+v0.3.1
+------
+- Fixed various saved data being overwritten on login even if it was scanned correctly previously. This affected:
+  = Buildings
+  = Currencies
+  = Lockouts
+  = Missions
+  = Trade skill cooldowns
+  = Work orders
+
 v0.3.0
 ------
 - Added garrison mission scanning.
