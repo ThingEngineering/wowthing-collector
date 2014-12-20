@@ -373,15 +373,15 @@ function wwtc:Initialise()
     charData.restedXP = 0
     charData.garrisonLevel = 0
 
-    charData.buildings = {}
-    charData.currencies = {}
-    charData.followers = {}
+    charData.buildings = charData.buildings or {}
+    charData.currencies = charData.currencies or {}
+    charData.followers = charData.followers or {}
     charData.items = charData.items or {}
-    charData.lockouts = {}
-    charData.missions = {}
+    charData.lockouts = charData.lockouts or {}
+    charData.missions = charData.missions or {}
     charData.scanTimes = charData.scanTimes or {}
-    charData.tradeSkills = {}
-    charData.workOrders = {}
+    charData.tradeSkills = charData.tradeSkills or {}
+    charData.workOrders = charData.workOrders or {}
 
     charData.dailyResetTime = wwtc:GetDailyResetTime()
 
