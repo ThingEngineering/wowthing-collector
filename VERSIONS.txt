@@ -1,5 +1,7 @@
 v0.3.1
 ------
+- Added LFR instance scanning.
+- Fixed instance lockout scan triggering multiple times in a row during login.
 - Fixed various saved data being overwritten on login even if it was scanned correctly previously. This affected:
   = Buildings
   = Currencies
