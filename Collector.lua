@@ -1,6 +1,6 @@
 -- Things
 local wwtc = {}
-local charData, charName, followerMap, guildName, playedLevelUpdated, playedTotal, playedTotalUpdated, regionName
+local charData, charName, followerMap, guildName, playedLevel, playedLevelUpdated, playedTotal, playedTotalUpdated, regionName
 local bankOpen, crafterOpen, guildBankOpen, loggingOut, toyBoxHooked = false, false, false, false, false
 local dirtyBags, dirtyBuildings, dirtyLockouts, dirtyMissions, dirtyShipments, dirtyVoid = {}, false, false, false, false, false
 
@@ -747,7 +747,7 @@ function wwtc:ScanToys()
     WWTCSaved.toys = {}
 
     for i = 1, C_ToyBox.GetNumToys() do
-        itemID = C_ToyBox.GetToyFromIndex(i)
+        local itemID = C_ToyBox.GetToyFromIndex(i)
         if itemID > 0 and PlayerHasToy(itemID) then
             WWTCSaved.toys[#WWTCSaved.toys+1] = itemID
         end
