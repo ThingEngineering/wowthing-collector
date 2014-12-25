@@ -1,6 +1,6 @@
 -- Things
 local wwtc = {}
-local charData, charName, followerMap, guildName, playedLevel, playedLevelUpdated, playedTotal, playedTotalUpdated, regionName
+local charData, charName, guildName, playedLevel, playedLevelUpdated, playedTotal, playedTotalUpdated, regionName
 local bankOpen, crafterOpen, guildBankOpen, loggingOut, toyBoxHooked = false, false, false, false, false
 local dirtyBags, dirtyBuildings, dirtyLockouts, dirtyMissions, dirtyShipments, dirtyVoid = {}, false, false, false, false, false
 
@@ -773,7 +773,6 @@ function wwtc:ScanFollowers()
     charData.scanTimes['followers'] = time()
     charData.followers = {}
 
-    followerMap = {}
     local followers = C_Garrison.GetFollowers()
     for i = 1, #followers do
         local follower = followers[i]
@@ -801,8 +800,6 @@ function wwtc:ScanFollowers()
                 armorLevel = armorItemLevel,
                 abilities = abilityList,
             }
-
-            followerMap[follower.followerID] = followerID
         end
     end
 end
@@ -811,6 +808,17 @@ end
 function wwtc:ScanMissions()
     charData.scanTimes['missions'] = time()
     charData.missions = {}
+
+    -- Scan followers first
+    local followerMap = {}
+    local followers = C_Garrison.GetFollowers()
+    for i = 1, #followers do
+        local follower = followers[i]
+        if follower.isCollected then
+            local followerID = tonumber(follower.garrFollowerID, 16)
+            followerMap[follower.followerID] = followerID
+        end
+    end
 
     local inProgressMissions = {}
     C_Garrison.GetInProgressMissions(inProgressMissions)
@@ -842,6 +850,9 @@ function wwtc:ScanMissions()
         local followerIDs = {}
         for j = 1, mission.numFollowers do
             followerIDs[j] = followerMap[mission.followers[j]]
+            if not followerIDs[j] then
+                print("missing follower?", mission.followers[j])
+            end
         end
 
         local timeLeft = wwtc:ParseMissionTime(mission.timeLeft)
