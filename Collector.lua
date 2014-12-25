@@ -147,10 +147,6 @@ function events:PLAYER_ENTERING_WORLD()
     --wwtc:Initialise()
 
     wwtc:UpdateCharacterData()
-
-    -- Hook ToyBox OnShow
-    wwtc:ScanToys()
-    -- wwtc:HookToyBox()
 end
 -- Fires when /played information is available
 function events:TIME_PLAYED_MSG(total, level)
