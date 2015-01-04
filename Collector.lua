@@ -479,6 +479,7 @@ function wwtc:UpdateCharacterData()
         wwtc:UpdateExhausted()
 
         wwtc:ScanFollowers()
+        wwtc:ScanMissions()
 
         RequestRaidInfo()
     end
