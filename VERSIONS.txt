@@ -1,3 +1,8 @@
+v0.3.4
+------
+- Changed follower scanning to be rate limited like the other scans.
+- Fixed the follower/mission scanning issues, probably for real this time.
+
 v0.3.3
 ------
 - Added mission scanning when character data is updated (whenever you zone, basically). This should hopefully fix
