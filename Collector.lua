@@ -2,7 +2,7 @@
 local wwtc = {}
 local charData, charName, guildName, playedLevel, playedLevelUpdated, playedTotal, playedTotalUpdated, regionName
 local bankOpen, crafterOpen, guildBankOpen, loggingOut, toyBoxHooked = false, false, false, false, false
-local dirtyBags, dirtyBuildings, dirtyLockouts, dirtyMissions, dirtyShipments, dirtyVoid = {}, false, false, false, false, false
+local dirtyBags, dirtyBuildings, dirtyFollowers, dirtyLockouts, dirtyMissions, dirtyShipments, dirtyVoid = {}, false, false, false, false, false, false
 
 -- Libs
 local LibRealmInfo = LibStub('LibRealmInfo')
@@ -263,6 +263,7 @@ end
 -- ??
 function events:GARRISON_UPDATE()
     dirtyBuildings = true
+    dirtyFollowers = true
 end
 -- ??
 function events:GARRISON_BUILDING_UPDATE()
@@ -302,15 +303,15 @@ function events:SHIPMENT_UPDATE()
 end
 -- Fires when a new follower is added
 function events:GARRISON_FOLLOWER_ADDED()
-    wwtc:ScanFollowers()
+    dirtyFollowers = true
 end
 -- Fires when a follower gains XP
 function events:GARRISON_FOLLOWER_XP_CHANGED()
-    wwtc:ScanFollowers()
+    dirtyFollowers = true
 end
 -- Fires whenever the available follower list changes
 function events:GARRISON_FOLLOWER_LIST_UPDATE()
-    wwtc:ScanFollowers()
+    dirtyFollowers = true
 end
 
 -------------------------------------------------------------------------------
@@ -341,6 +342,11 @@ function wwtc:Timer()
     if dirtyBuildings then
         dirtyBuildings = false
         wwtc:ScanBuildings()
+    end
+    -- Scan dirty followers
+    if dirtyFollowers then
+        dirtyFollowers = false
+        wwtc:ScanFollowers()
     end
     -- Scan dirty lockouts
     if dirtyLockouts then
@@ -418,7 +424,6 @@ function wwtc:Cleanup()
 
     for cName, cData in pairs(WWTCSaved.chars) do
         if not cData.lastSeen or cData.lastSeen < old then
-            --print('WWTC: expired data for "', cName, '"')
             WWTCSaved.chars[cName] = nil
         end
     end
@@ -477,9 +482,6 @@ function wwtc:UpdateCharacterData()
 
         wwtc:UpdateXP()
         wwtc:UpdateExhausted()
-
-        wwtc:ScanFollowers()
-        wwtc:ScanMissions()
 
         RequestRaidInfo()
     end
