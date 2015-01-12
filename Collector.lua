@@ -74,11 +74,21 @@ local LFRInstances = {
     {
         name = 'Highmaul',
         instances = {
-            { 849, 3 },
-            { 850, 3 },
-            { 851, 1 },
+            { 849, 3 }, -- Walled City
+            { 850, 3 }, -- Arcane Sanctum
+            { 851, 1 }, -- Imperator's Rise
+        },
+    },
+    {
+        name = 'Blackrock Foundry',
+        instances = {
+            { 847, 3 }, -- Slagworks
+            { 846, 3 }, -- The Black Forge
+            { 848, 3 }, -- Iron Assembly
+            { 823, 1 }, -- Blackhand's Crucible
         },
     }
+    },
 }
 
 -- World boss quests
