@@ -87,7 +87,6 @@ local LFRInstances = {
             { 848, 3 }, -- Iron Assembly
             { 823, 1 }, -- Blackhand's Crucible
         },
-    }
     },
 }
 
