@@ -96,8 +96,15 @@ local worldBossQuests = {
     [37462] = "Gorgrond Bosses", -- Tarlna
     [37474] = "Rukhmar",
 }
+-- Weekly quests
+local weeklyQuests = {
+    [37638] = "Bronze Invasion",
+    [37639] = "Silver Invasion",
+    [37640] = "Gold Invasion",
+}
 
 
+-- Misc constants
 local CURRENCY_GARRISON = 824
 local SLOTS_PER_GUILD_BANK_TAB = 98
 local SLOTS_PER_VOID_STORAGE_TAB = 80
@@ -409,6 +416,7 @@ function wwtc:Initialise()
     charData.missions = charData.missions or {}
     charData.scanTimes = charData.scanTimes or {}
     charData.tradeSkills = charData.tradeSkills or {}
+    charData.weeklyQuests = charData.weeklyQuests or {}
     charData.workOrders = charData.workOrders or {}
 
     charData.dailyResetTime = wwtc:GetDailyResetTime()
@@ -491,6 +499,8 @@ function wwtc:UpdateCharacterData()
 
         wwtc:UpdateXP()
         wwtc:UpdateExhausted()
+
+        wwtc:ScanWeeklyQuests()
 
         RequestRaidInfo()
     end
@@ -706,6 +716,15 @@ function wwtc:ScanLockouts()
             maxBosses = 1,
         }
         end
+    end
+end
+
+-- Scan weekly quests
+function wwtc:ScanWeeklyQuests()
+    charData.weeklyQuests = {}
+
+    for questID, _ in pairs(weeklyQuests) do
+        charData.weeklyQuests[questID] = IsQuestFlaggedCompleted(questID)
     end
 end
 
