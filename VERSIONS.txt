@@ -1,3 +1,8 @@
+v0.3.5
+------
+- Added generic weekly quest scanning (garrison invasion tracking!).
+- Added Blackrock Foundry LFR lockout scanning.
+
 v0.3.4
 ------
 - Changed follower scanning to be rate limited like the other scans.
