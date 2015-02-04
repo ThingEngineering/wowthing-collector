@@ -1,3 +1,7 @@
+v0.3.6
+------
+- Fixed Rukhmar quest ID, oops.
+
 v0.3.5
 ------
 - Added generic weekly quest scanning (garrison invasion tracking!).
