@@ -94,7 +94,7 @@ local LFRInstances = {
 local worldBossQuests = {
     [37460] = "Gorgrond Bosses", -- Drov the Ruinator
     [37462] = "Gorgrond Bosses", -- Tarlna
-    [37474] = "Rukhmar",
+    [37464] = "Rukhmar",
 }
 -- Weekly quests
 local weeklyQuests = {
