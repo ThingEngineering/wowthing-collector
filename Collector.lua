@@ -12,6 +12,7 @@ local defaultWWTCSaved = {
     version = 11,
     chars = {},
     guilds = {},
+    heirlooms = {},
     toys = {},
 }
 
@@ -133,7 +134,8 @@ function events:ADDON_LOADED(name)
             WWTCSaved = defaultWWTCSaved
         end
 
-        -- Backwards compat hack
+        -- Backwards compat hacks
+        WWTCSaved.heirlooms = WWTCSaved.heirlooms or {}
         WWTCSaved.toys = WWTCSaved.toys or {}
 
         -- Perform any cleanup
@@ -752,24 +754,52 @@ function wwtc:ScanTradeSkills()
     end
 end
 
--- Hook ToyBox.OnShow
+-- Hook various Blizzard_Collections things for scanning
 function wwtc:HookCollections()
     if not IsAddOnLoaded("Blizzard_Collections") then
         LoadAddOn("Blizzard_Collections")
     else
         if not collectionsHooked then
+            -- Hook heirlooms
+            local hlframe = _G["HeirloomsJournal"]
+            if hlframe then
+                hlframe:HookScript("OnShow", function(self)
+                    wwtc:ScanHeirlooms()
+                end)
+            else
+                print("WoWthing_Collector: unable to hook 'HeirloomsJournal' frame!")
+            end
+
+            -- Hook toys
             local tbframe = _G["ToyBox"]
             if tbframe then
                 tbframe:HookScript("OnShow", function(self)
                     wwtc:ScanToys()
                 end)
-                collectionsHooked = true
+            else
+                print("WoWthing_Collector: unable to hook 'ToyBox' frame!")
             end
+
+            collectionsHooked = true
         end
     end
 end
 
--- Scan toys, obviously
+-- Scan heirlooms
+function wwtc:ScanHeirlooms()
+    WWTCSaved.heirlooms = {}
+
+    for i = 1, C_Heirloom.GetNumHeirlooms() do
+        local itemID = C_Heirloom.GetHeirloomItemIDFromIndex(i)
+        -- name, itemEquipLoc, isPvP, itemTexture, upgradeLevel, source, searchFiltered, effectiveLevel, minLevel, maxLevel
+        if C_Heirloom.PlayerHasHeirloom(itemID) then
+            local _, _, _, _, upgradeLevel = C_Heirloom.GetHeirloomInfo(itemID)
+            WWTCSaved.heirlooms[itemID] = upgradeLevel
+        end
+    end
+end
+
+-- Scan toys
 function wwtc:ScanToys()
     WWTCSaved.toys = {}
 
