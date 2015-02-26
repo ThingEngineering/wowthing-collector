@@ -1,7 +1,7 @@
 -- Things
 local wwtc = {}
 local charData, charName, guildName, playedLevel, playedLevelUpdated, playedTotal, playedTotalUpdated, regionName
-local bankOpen, crafterOpen, guildBankOpen, loggingOut, toyBoxHooked = false, false, false, false, false
+local bankOpen, collectionsHooked, crafterOpen, guildBankOpen, loggingOut = false, false, false, false, false
 local dirtyBags, dirtyBuildings, dirtyFollowers, dirtyLockouts, dirtyMissions, dirtyShipments, dirtyVoid = {}, false, false, false, false, false, false
 
 -- Libs
@@ -139,12 +139,12 @@ function events:ADDON_LOADED(name)
         -- Perform any cleanup
         wwtc:Cleanup()
 
-        -- Try to hook the ToyBox
-        wwtc:HookToyBox()
+        -- Try to hook the Collections addon thing
+        wwtc:HookCollections()
 
     -- Damn Pet Journal!
-    elseif name == "Blizzard_PetJournal" then
-        wwtc:HookToyBox()
+    elseif name == "Blizzard_Collections" then
+        wwtc:HookCollections()
 
     end
 end
@@ -753,17 +753,17 @@ function wwtc:ScanTradeSkills()
 end
 
 -- Hook ToyBox.OnShow
-function wwtc:HookToyBox()
-    if not IsAddOnLoaded("Blizzard_PetJournal") then
-        LoadAddOn("Blizzard_PetJournal")
+function wwtc:HookCollections()
+    if not IsAddOnLoaded("Blizzard_Collections") then
+        LoadAddOn("Blizzard_Collections")
     else
-        if not toyBoxHooked then
+        if not collectionsHooked then
             local tbframe = _G["ToyBox"]
             if tbframe then
                 tbframe:HookScript("OnShow", function(self)
                     wwtc:ScanToys()
                 end)
-                toyBoxHooked = true
+                collectionsHooked = true
             end
         end
     end
