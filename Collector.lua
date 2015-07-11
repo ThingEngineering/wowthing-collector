@@ -91,6 +91,16 @@ local LFRInstances = {
             { 823, 1 }, -- Blackhand's Crucible
         },
     },
+    {
+        name = 'Hellfire Citadel',
+        instances = {
+            { 982, 3 }, -- Hellbreach
+            { 983, 3 }, -- Halls of Blood
+            { 984, 3 }, -- Bastion of Shadows
+            { 985, 3 }, -- Destructor's Rise
+            { 986, 1 }, -- The Black Gate
+        },
+    },
 }
 
 -- World boss quests
