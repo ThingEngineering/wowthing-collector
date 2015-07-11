@@ -18,29 +18,31 @@ local defaultWWTCSaved = {
 
 -- Currencies
 local currencies = {
-    789, -- Bloody Coin
-    241, -- Champion's Seal
-    390, -- Conquest Points
-     61, -- Dalarn Jewelcrafter's Token
-    515, -- Darkmoon Prize Ticket
-    697, -- Elder Charm of Good Fortune
-     81, -- Epicurean's Award
-    615, -- Essence of Corrupted Deathwing
-    392, -- Honor Points
-    361, -- Illustrious Jewelcrafter's Token
-    402, -- Ironpaw Token
-    738, -- Lesser Charm of Good Fortune
-    416, -- Mark of the World Tree
-    752, -- Mogu Rune of Fate
-    614, -- Mote of Darkness
-    777, -- Timeless Coin
-    391, -- Tol Barad Commendation
-    776, -- Warforged Seal
+     789, -- Bloody Coin
+     241, -- Champion's Seal
+     390, -- Conquest Points
+      61, -- Dalarn Jewelcrafter's Token
+     515, -- Darkmoon Prize Ticket
+     697, -- Elder Charm of Good Fortune
+      81, -- Epicurean's Award
+     615, -- Essence of Corrupted Deathwing
+     392, -- Honor Points
+     361, -- Illustrious Jewelcrafter's Token
+     402, -- Ironpaw Token
+     738, -- Lesser Charm of Good Fortune
+     416, -- Mark of the World Tree
+     752, -- Mogu Rune of Fate
+     614, -- Mote of Darkness
+     777, -- Timeless Coin
+     391, -- Tol Barad Commendation
+     776, -- Warforged Seal
     -- WoD
-    823, -- Apexis Crystal
-    824, -- Garrison Resources
-    980, -- Dingy Iron Coins
-    994, -- Seal of Tempered Fate
+     823, -- Apexis Crystal
+     980, -- Dingy Iron Coins
+     824, -- Garrison Resources
+    1101, -- Oil
+    1129, -- Seal of Inevitable Fate
+     994, -- Seal of Tempered Fate
 }
 
 -- Trade skill cooldowns
