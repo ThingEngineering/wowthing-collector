@@ -108,6 +108,7 @@ local worldBossQuests = {
     [37460] = "Gorgrond Bosses", -- Drov the Ruinator
     [37462] = "Gorgrond Bosses", -- Tarlna
     [37464] = "Rukhmar",
+    [94015] = "Supreme Lord Kazzak",
 }
 -- Weekly quests
 local weeklyQuests = {
