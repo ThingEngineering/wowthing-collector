@@ -115,6 +115,7 @@ local weeklyQuests = {
     [37638] = "Bronze Invasion",
     [37639] = "Silver Invasion",
     [37640] = "Gold Invasion",
+    [38482] = "Platinum Invasion",
 }
 
 
