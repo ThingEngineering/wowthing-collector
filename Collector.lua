@@ -787,6 +787,7 @@ end
 
 -- Scan heirlooms
 function wwtc:ScanHeirlooms()
+    charData.scanTimes['heirlooms'] = time()
     WWTCSaved.heirlooms = {}
 
     for i = 1, C_Heirloom.GetNumHeirlooms() do
@@ -801,6 +802,7 @@ end
 
 -- Scan toys
 function wwtc:ScanToys()
+    charData.scanTimes['toys'] = time()
     WWTCSaved.toys = {}
 
     for i = 1, C_ToyBox.GetNumToys() do

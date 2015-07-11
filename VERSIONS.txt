@@ -1,3 +1,9 @@
+v0.4.0
+------
+- Added Heirloom scanning.
+- Fixed ToyBox scanning.
+- Updated TOC for 6.1 compatibility.
+
 v0.3.6
 ------
 - Fixed Rukhmar quest ID, oops.
