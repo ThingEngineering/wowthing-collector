@@ -431,6 +431,7 @@ function wwtc:Initialise()
     charData.lockouts = charData.lockouts or {}
     charData.missions = charData.missions or {}
     charData.scanTimes = charData.scanTimes or {}
+    charData.ships = charData.ships or {}
     charData.tradeSkills = charData.tradeSkills or {}
     charData.weeklyQuests = charData.weeklyQuests or {}
     charData.workOrders = charData.workOrders or {}
@@ -845,8 +846,10 @@ end
 function wwtc:ScanFollowers()
     charData.scanTimes['followers'] = time()
     charData.followers = {}
+    charData.ships = {}
 
-    local followers = C_Garrison.GetFollowers()
+    -- Followers
+    local followers = C_Garrison.GetFollowers(1)
     for i = 1, #followers do
         local follower = followers[i]
         if follower.isCollected then
@@ -871,6 +874,30 @@ function wwtc:ScanFollowers()
                 levelXP = follower.levelXP,
                 weaponLevel = weaponItemLevel,
                 armorLevel = armorItemLevel,
+                abilities = abilityList,
+            }
+        end
+    end
+
+    -- Ships
+    local ships = C_Garrison.GetFollowers(2)
+    for i = 1, #ships do
+        local ship = ships[i]
+        if ship.isCollected then
+            -- Fetch abilities
+            local abilityList = {}
+            local abilities = C_Garrison.GetFollowerAbilities(ship.followerID)
+            for j = 1, #abilities do
+                abilityList[#abilityList+1] = abilities[j].id
+            end
+
+            local followerID = tonumber(ship.garrFollowerID, 16)
+            charData.ships[#charData.ships+1] = {
+                id = followerID,
+                quality = ship.quality,
+                status = statusPriority[ship.status] or -1,
+                currentXP = ship.xp,
+                levelXP = ship.levelXP,
                 abilities = abilityList,
             }
         end

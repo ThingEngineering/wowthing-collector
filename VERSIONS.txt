@@ -4,6 +4,7 @@ v0.5.0
 - Added Hellfire Citadel LFR lockout scanning.
 - Added Supreme Lord Kazzak lockout scanning.
 - Added Platinum Invasion lockout scanning.
+- Added Garrison Ship scanning.
 
 v0.4.0
 ------
