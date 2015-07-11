@@ -1,7 +1,7 @@
-## Interface: 61000
+## Interface: 62000
 ## Title: WoWthing Collector
 ## Notes: Collects data to sync with WoWthing.
-## Version: 0.4.0
+## Version: 0.5.0
 ## Author: Freddie
 ## SavedVariables: WWTCSaved
 

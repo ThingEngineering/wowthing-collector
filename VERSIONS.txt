@@ -1,3 +1,10 @@
+v0.5.0
+------
+- Added Oil/Seal of Inevitable Fate currency scanning.
+- Added Hellfire Citadel LFR lockout scanning.
+- Added Supreme Lord Kazzak lockout scanning.
+- Added Platinum Invasion lockout scanning.
+
 v0.4.0
 ------
 - Added Heirloom scanning.
