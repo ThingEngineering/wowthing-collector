@@ -921,7 +921,7 @@ function wwtc:ScanPets()
             local _, customName, level, _, _, _, isFavorite, petName = C_PetJournal.GetPetInfoByPetID(petID)
             local _, _, _, _, rarity = C_PetJournal.GetPetStats(petID)
             charData.pets[#charData.pets+1] = {
-                petID = speciesID,
+                petID = checkPets[speciesID],
                 favourite = isFavorite,
                 guid = petID,
                 level = level,
