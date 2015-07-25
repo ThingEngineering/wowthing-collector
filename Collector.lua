@@ -125,6 +125,8 @@ local checkMounts = {
 }
 local checkPets = {
     [216] = 33239, -- Argent Gruntling
+    [1350] = 73809, -- Sky Lantern
+
 }
 local checkReputations = {
     [1492] = "Emperor Shaohao",
