@@ -2,7 +2,8 @@
 local wwtc = {}
 local charData, charName, guildName, playedLevel, playedLevelUpdated, playedTotal, playedTotalUpdated, regionName
 local bankOpen, collectionsHooked, crafterOpen, guildBankOpen, loggingOut = false, false, false, false, false
-local dirtyBags, dirtyBuildings, dirtyFollowers, dirtyLockouts, dirtyMissions, dirtyShipments, dirtyVoid = {}, false, false, false, false, false, false
+local dirtyBags, dirtyBuildings, dirtyFollowers, dirtyLockouts, dirtyMissions, dirtyMounts, dirtyPets, dirtyReputations, dirtyShipments, dirtyVoid =
+    {}, false, false, false, false, false, false, false, false, false
 
 -- Libs
 local LibRealmInfo = LibStub('LibRealmInfo')
@@ -116,6 +117,17 @@ local weeklyQuests = {
     [37639] = "Silver Invasion",
     [37640] = "Gold Invasion",
     [38482] = "Platinum Invasion",
+}
+
+-- Check things the Battle.net API is bugged for
+local checkMounts = {
+    [458] = 5656, -- Brown Horse
+}
+local checkPets = {
+    [216] = 33239, -- Argent Gruntling
+}
+local checkReputations = {
+    [1492] = "Emperor Shaohao",
 }
 
 
@@ -346,6 +358,29 @@ function events:GARRISON_FOLLOWER_LIST_UPDATE()
     dirtyFollowers = true
 end
 
+-- Fires ??
+function events:COMPANION_UPDATE()
+    dirtyMounts = true
+    dirtyPets = true
+end
+-- Fires when a new companion is learned
+function events:COMPANION_LEARNED()
+    dirtyMounts = true
+    dirtyPets = true
+end
+-- Fires when the mount journal usability list changes (move between inside/outside/water/etc)
+function events:MOUNT_JOURNAL_USABILITY_CHANGED()
+    dirtyMounts = true
+end
+-- Fires when the pet journal list updates
+function events:PET_JOURNAL_LIST_UPDATE()
+    dirtyPets = true
+end
+-- Fires when the contents of the reputation listing change or become available
+function events:UPDATE_FACTION()
+    dirtyReputations = true
+end
+
 -------------------------------------------------------------------------------
 -- Call functions in the events table for events
 frame:SetScript("OnEvent", function(self, event, ...)
@@ -390,6 +425,21 @@ function wwtc:Timer()
         dirtyMissions = false
         wwtc:ScanMissions()
     end
+    -- Scan dirty mounts
+    if dirtyMounts then
+        dirtyMounts = false
+        wwtc:ScanMounts()
+    end
+    -- Scan dirty pets
+    if dirtyPets then
+        dirtyPets = false
+        wwtc:ScanPets()
+    end
+    -- Scan dirty reputations
+    if dirtyReputations then
+        dirtyReputations = false
+        wwtc:ScanReputations()
+    end
     -- Scan dirty shipments
     if dirtyShipments and not crafterOpen then
         dirtyShipments = false
@@ -430,6 +480,9 @@ function wwtc:Initialise()
     charData.items = charData.items or {}
     charData.lockouts = charData.lockouts or {}
     charData.missions = charData.missions or {}
+    charData.mounts = charData.mounts or {}
+    charData.pets = charData.pets or {}
+    charData.reputations = charData.reputations or {}
     charData.scanTimes = charData.scanTimes or {}
     charData.ships = charData.ships or {}
     charData.tradeSkills = charData.tradeSkills or {}
@@ -446,6 +499,7 @@ function wwtc:Login()
 
     RequestTimePlayed()
     C_Garrison.RequestLandingPageShipmentInfo()
+    wwtc:ScanMounts()
 end
 
 function wwtc:Logout()
@@ -465,6 +519,8 @@ end
 
 -- Update various character data
 function wwtc:UpdateCharacterData()
+    if charData == nil then return end
+
     local now = time()
     charData.lastSeen = now
 
@@ -524,6 +580,8 @@ function wwtc:UpdateCharacterData()
 end
 
 function wwtc:UpdateGuildData()
+    if charData == nil then return end
+
     -- Sometimes this fires before region is checked? Weird
     if not regionName then
         return
@@ -545,12 +603,16 @@ end
 
 -- Update current/level XP
 function wwtc:UpdateXP()
+    if charData == nil then return end
+
     charData.currentXP = UnitXP("player")
     charData.levelXP = UnitXPMax("player")
 end
 
 -- Update resting status and rested XP
 function wwtc:UpdateExhausted()
+    if charData == nil then return end
+
     charData.resting = IsResting()
 
     local rested = GetXPExhaustion()
@@ -562,6 +624,8 @@ function wwtc:UpdateExhausted()
 end
 
 function wwtc:ScanBag(bagID)
+    if charData == nil then return end
+
     -- Short circuit if bank isn't open
     if (bagID == -3 or bagID == -1 or (bagID >= 5 and bagID <= 11)) and not bankOpen then
         return
@@ -605,6 +669,8 @@ end
 
 -- Scan the current guild bank tab
 function wwtc:ScanGuildBankTab()
+    if charData == nil then return end
+
     -- Short circuit if guild bank isn't open
     if not guildBankOpen then
         return
@@ -629,6 +695,8 @@ end
 
 -- Scan void storage
 function wwtc:ScanVoidStorage()
+    if charData == nil then return end
+
     charData.scanTimes["void"] = time()
 
     -- NOTE: constants appear to not be global, woo
@@ -647,6 +715,8 @@ end
 
 -- Scan instance/LFR/world boss lockouts
 function wwtc:ScanLockouts()
+    if charData == nil then return end
+
     charData.lockouts = {}
 
     local now = time()
@@ -738,6 +808,8 @@ end
 
 -- Scan weekly quests
 function wwtc:ScanWeeklyQuests()
+    if charData == nil then return end
+
     charData.weeklyQuests = {}
 
     for questID, _ in pairs(weeklyQuests) do
@@ -747,6 +819,8 @@ end
 
 -- Scan trade skills for cooldowns
 function wwtc:ScanTradeSkills()
+    if charData == nil then return end
+
     -- Don't care about tradeskills that aren't our own
     if IsTradeSkillGuild() or IsTradeSkillLinked() then
         return
@@ -802,6 +876,8 @@ end
 
 -- Scan heirlooms
 function wwtc:ScanHeirlooms()
+    if charData == nil then return end
+
     charData.scanTimes['heirlooms'] = time()
     WWTCSaved.heirlooms = {}
 
@@ -815,8 +891,66 @@ function wwtc:ScanHeirlooms()
     end
 end
 
+-- Scan mounts
+function wwtc:ScanMounts()
+    if charData == nil then return end
+
+    charData.scanTimes['mounts'] = time()
+    charData.mounts = {}
+
+    for i = 1, C_MountJournal.GetNumMounts() do
+        local _, spellID, _, _, _, _, _, _, _, _, isCollected = C_MountJournal.GetMountInfo(i)
+        if isCollected and checkMounts[spellID] then
+            charData.mounts[checkMounts[spellID]] = true
+        end
+    end
+end
+
+-- Scan pets
+function wwtc:ScanPets()
+    if charData == nil then return end
+
+    charData.scanTimes['pets'] = time()
+    charData.pets = {}
+
+    for i = 1, C_PetJournal.GetNumPets() do
+        local petID, speciesID, owned = C_PetJournal.GetPetInfoByIndex(i)
+        if owned and checkPets[speciesID] then
+            local _, customName, level, _, _, _, isFavorite, petName = C_PetJournal.GetPetInfoByPetID(petID)
+            local _, _, _, _, rarity = C_PetJournal.GetPetStats(petID)
+            charData.pets[#charData.pets+1] = {
+                petID = speciesID,
+                favourite = isFavorite,
+                guid = petID,
+                level = level,
+                name = customName or petName,
+                quality = rarity,
+            }
+        end
+    end
+end
+
+-- Scan reputations
+function wwtc:ScanReputations()
+    if charData == nil then return end
+
+    charData.scanTimes['reputations'] = time()
+    charData.reputations = {}
+
+    for factionID, _ in pairs(checkReputations) do
+        local _, _, standingID, _, barMax, barValue = GetFactionInfoByID(factionID)
+        charData.reputations[factionID] = {
+            level = standingID,
+            current = barValue,
+            max_value = barMax,
+        }
+    end
+end
+
 -- Scan toys
 function wwtc:ScanToys()
+    if charData == nil then return end
+
     charData.scanTimes['toys'] = time()
     WWTCSaved.toys = {}
 
@@ -830,6 +964,8 @@ end
 
 -- Scan garrison buildings
 function wwtc:ScanBuildings()
+    if charData == nil then return end
+
     charData.scanTimes['buildings'] = time()
     charData.buildings = {}
 
@@ -844,6 +980,8 @@ end
 
 -- Scan garrison followers
 function wwtc:ScanFollowers()
+    if charData == nil then return end
+
     charData.scanTimes['followers'] = time()
     charData.followers = {}
     charData.ships = {}
@@ -906,6 +1044,8 @@ end
 
 -- Scan garrison missions
 function wwtc:ScanMissions()
+    if charData == nil then return end
+
     charData.scanTimes['missions'] = time()
     charData.missions = {}
 
@@ -980,6 +1120,8 @@ end
 
 -- Scan garrison shipments
 function wwtc:ScanShipments()
+    if charData == nil then return end
+
     charData.scanTimes['shipments'] = time()
     charData.workOrders = {}
 
