@@ -1,3 +1,10 @@
+v0.6.0
+------
+- Added Mount scanning to work around Battle.net API bugs.
+- Added Pet scanning to work around Battle.net API bugs.
+- Added Reputation scanning to work around Battle.net API bugs.
+- Fixed (hopefully) the occasional charData Lua errors, it should now just fail silently instead of annoying you.
+
 v0.5.0
 ------
 - Added Oil/Seal of Inevitable Fate currency scanning.
