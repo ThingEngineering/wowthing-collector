@@ -903,7 +903,7 @@ function wwtc:ScanMounts()
     for i = 1, C_MountJournal.GetNumMounts() do
         local _, spellID, _, _, _, _, _, _, _, _, isCollected = C_MountJournal.GetMountInfo(i)
         if isCollected and checkMounts[spellID] then
-            charData.mounts[checkMounts[spellID]] = true
+            charData.mounts[#charData.mounts+1] = checkMounts[spellID]
         end
     end
 end
