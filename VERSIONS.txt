@@ -1,3 +1,7 @@
+v0.6.1
+------
+- Added Felfire Hawk and Violet Raptor to mount scanning, yay broken API.
+
 v0.6.0
 ------
 - Added Mount scanning to work around Battle.net API bugs.
