@@ -122,6 +122,8 @@ local weeklyQuests = {
 -- Check things the Battle.net API is bugged for
 local checkMounts = {
     [458] = 5656, -- Brown Horse
+    [10799] = 8592, -- Violet Raptor
+    [97501] = 69226, -- Felfire Hawk
 }
 local checkPets = {
     [216] = 33239, -- Argent Gruntling
