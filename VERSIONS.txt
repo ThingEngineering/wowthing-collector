@@ -1,3 +1,8 @@
+v0.6.2
+------
+- Added Artifact Fragment and Timewarped Badge to currency scanning.
+- Added Swift Warstrider to mount scanning.
+
 v0.6.1
 ------
 - Added Felfire Hawk and Violet Raptor to mount scanning, yay broken API.
