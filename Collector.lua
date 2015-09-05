@@ -19,26 +19,33 @@ local defaultWWTCSaved = {
 
 -- Currencies
 local currencies = {
-     789, -- Bloody Coin
-     241, -- Champion's Seal
+    -- Player vs Player
      390, -- Conquest Points
-      61, -- Dalarn Jewelcrafter's Token
-     515, -- Darkmoon Prize Ticket
-     697, -- Elder Charm of Good Fortune
-      81, -- Epicurean's Award
-     615, -- Essence of Corrupted Deathwing
      392, -- Honor Points
-     361, -- Illustrious Jewelcrafter's Token
-     402, -- Ironpaw Token
-     738, -- Lesser Charm of Good Fortune
-     416, -- Mark of the World Tree
-     752, -- Mogu Rune of Fate
-     614, -- Mote of Darkness
-     777, -- Timeless Coin
      391, -- Tol Barad Commendation
+    -- Dungeon and Raid
+     615, -- Essence of Corrupted Deathwing
+     614, -- Mote of Darkness
+    1166, -- Timewarped Badge
+    -- Miscellaneous
+     241, -- Champion's Seal
+      61, -- Dalaran Jewelcrafter's Token
+     515, -- Darkmoon Prize Ticket
+      81, -- Epicurean's Award
+     402, -- Ironpaw Token
+     416, -- Mark of the World Tree
+    -- Cataclysm
+     361, -- Illustrious Jewelcrafter's Token
+    -- Mists of Pandaria
+     789, -- Bloody Coin
+     697, -- Elder Charm of Good Fortune
+     738, -- Lesser Charm of Good Fortune
+     752, -- Mogu Rune of Fate
+     777, -- Timeless Coin
      776, -- Warforged Seal
     -- WoD
      823, -- Apexis Crystal
+     944, -- Artifact Fragment
      980, -- Dingy Iron Coins
      824, -- Garrison Resources
     1101, -- Oil
@@ -123,6 +130,7 @@ local weeklyQuests = {
 local checkMounts = {
     [458] = 5656, -- Brown Horse
     [10799] = 8592, -- Violet Raptor
+    [35028] = 34129, -- Swift Warstrider
     [97501] = 69226, -- Felfire Hawk
 }
 local checkPets = {
