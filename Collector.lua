@@ -6,7 +6,7 @@ local dirtyBags, dirtyBuildings, dirtyFollowers, dirtyLockouts, dirtyMissions, d
     {}, false, false, false, false, false, false, false, false, false
 
 -- Libs
-local LibRealmInfo = LibStub('LibRealmInfo')
+local LibRealmInfo = LibStub('LibRealmInfo10Fixed')
 
 -- Default SavedVariables
 local defaultWWTCSaved = {

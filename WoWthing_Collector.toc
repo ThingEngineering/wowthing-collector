@@ -6,6 +6,6 @@
 ## SavedVariables: WWTCSaved
 
 libs\LibStub\LibStub.lua
-libs\LibRealmInfo\LibRealmInfo.lua
+libs\LibRealmInfo10Fixed\LibRealmInfo.lua
 
 Collector.lua

@@ -9,7 +9,7 @@
 	http://www.wowinterface.com/downloads/info22987-LibRealmInfo
 ----------------------------------------------------------------------]]
 
-local MAJOR, MINOR = "LibRealmInfo", 9
+local MAJOR, MINOR = "LibRealmInfo10Fixed", 10
 assert(LibStub, MAJOR.." requires LibStub")
 local lib, oldminor = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
@@ -52,6 +52,8 @@ end
 
 ------------------------------------------------------------------------
 
+local validRegions = { US = true, EU = true, CN = true, TW = true } -- missing KR data :(
+
 function lib:GetRealmInfo(name, region)
 	debug("GetRealmInfo", name, region)
 	if type(name) == "number" or strmatch(name, "^%d+$") then
@@ -60,7 +62,7 @@ function lib:GetRealmInfo(name, region)
 	name = type(name) == "string" and strtrim(name) or ""
 	assert(strlen(name) > 0, "Usage: GetRealmInfo(name[, region])")
 
-	if not region then
+	if not region or not validRegions[region] then
 		region = self:GetCurrentRegion()
 	end
 
