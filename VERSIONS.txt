@@ -1,3 +1,14 @@
+v0.6.4
+------
+- Derp central, fix typo.
+
+v0.6.3
+------
+- Updated to LibRealmInfo 10.
+- Fixed a LibRealmInfo bug.
+- Hacked up LibRealmInfo to be LibRealmInfo10Fixed - addon DLL hell is annoying and other addons will still use
+  the broken one until it's fixed upstream :(
+
 v0.6.2
 ------
 - Added Artifact Fragment and Timewarped Badge to currency scanning.

@@ -1,11 +1,11 @@
 ## Interface: 60200
 ## Title: WoWthing Collector
 ## Notes: Collects data to sync with WoWthing.
-## Version: 0.6.2
+## Version: 0.6.4
 ## Author: Freddie
 ## SavedVariables: WWTCSaved
 
 libs\LibStub\LibStub.lua
-libs\LibRealmInfo10Fixed\LibRealmInfo.lua
+libs\LibRealmInfo10Fixed\LibRealmInfo10Fixed.lua
 
 Collector.lua
