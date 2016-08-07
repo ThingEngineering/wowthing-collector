@@ -981,10 +981,10 @@ function wwtc:ScanBuildings()
     charData.scanTimes['buildings'] = time()
     charData.buildings = {}
 
-    local level, _, _, _ = C_Garrison.GetGarrisonInfo()
+    local level, _, _, _ = C_Garrison.GetGarrisonInfo(2)
     charData.garrisonLevel = level or 0
 
-    local buildings = C_Garrison.GetBuildings()
+    local buildings = C_Garrison.GetBuildings(2)
     for i = 1, #buildings do
         charData.buildings[#charData.buildings+1] = buildings[i].buildingID
     end
@@ -1063,7 +1063,7 @@ function wwtc:ScanMissions()
 
     -- Scan followers first
     local followerMap = {}
-    local followers = C_Garrison.GetFollowers()
+    local followers = C_Garrison.GetFollowers(1)
     for i = 1, #followers do
         local follower = followers[i]
         if follower.isCollected then
@@ -1072,8 +1072,7 @@ function wwtc:ScanMissions()
         end
     end
 
-    local inProgressMissions = {}
-    C_Garrison.GetInProgressMissions(inProgressMissions)
+    local inProgressMissions = C_Garrison.GetInProgressMissions(2)
 
     -- description = "blah blah blah"
     -- cost = 15
@@ -1120,8 +1119,7 @@ function wwtc:ScanMissions()
         }
     end
 
-    local availableMissions = {}
-    C_Garrison.GetAvailableMissions(availableMissions)
+    local availableMissions = C_Garrison.GetAvailableMissions(2)
 
     for _, mission in pairs(availableMissions) do
         charData.missions[#charData.missions+1] = {
@@ -1137,7 +1135,7 @@ function wwtc:ScanShipments()
     charData.scanTimes['shipments'] = time()
     charData.workOrders = {}
 
-    local buildings = C_Garrison.GetBuildings()
+    local buildings = C_Garrison.GetBuildings(2)
     for i = 1, #buildings do
         local buildingID = buildings[i].buildingID
         if buildingID then
