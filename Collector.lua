@@ -179,13 +179,9 @@ function events:ADDON_LOADED(name)
         -- Perform any cleanup
         wwtc:Cleanup()
 
-        -- Try to hook the Collections addon thing
-        wwtc:HookCollections()
-
     -- Damn Pet Journal!
     elseif name == "Blizzard_Collections" then
         wwtc:HookCollections()
-
     end
 end
 
@@ -508,6 +504,9 @@ end
 
 function wwtc:Login()
     wwtc:Initialise()
+
+    -- Try to hook the Collections addon thing
+    wwtc:HookCollections()
 
     RequestTimePlayed()
     C_Garrison.RequestLandingPageShipmentInfo()
@@ -858,7 +857,7 @@ end
 -- Hook various Blizzard_Collections things for scanning
 function wwtc:HookCollections()
     if not IsAddOnLoaded("Blizzard_Collections") then
-        LoadAddOn("Blizzard_Collections")
+        UIParentLoadAddOn("Blizzard_Collections")
     else
         if not collectionsHooked then
             -- Hook heirlooms
