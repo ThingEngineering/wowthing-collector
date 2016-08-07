@@ -909,8 +909,9 @@ function wwtc:ScanMounts()
     charData.scanTimes['mounts'] = time()
     charData.mounts = {}
 
-    for i = 1, C_MountJournal.GetNumMounts() do
-        local _, spellID, _, _, _, _, _, _, _, _, isCollected = C_MountJournal.GetMountInfo(i)
+    local mountIDs = C_MountJournal.GetMountIDs()
+    for _, mountID in ipairs(mountIDs) do
+        local _, spellID, _, _, _, _, _, _, _, _, isCollected = C_MountJournal.GetMountInfoByID(mountID)
         if isCollected and checkMounts[spellID] then
             charData.mounts[#charData.mounts+1] = checkMounts[spellID]
         end
