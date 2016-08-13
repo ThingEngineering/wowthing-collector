@@ -1,3 +1,13 @@
+v0.7.1
+------
+- Fixed various errors when loading on a character without garrison/shipyard [GH-3].
+- Fixed Heirloom scanning error [GH-4].
+
+v0.7.0
+------
+- Fixed various errors due to 7.0 addon API changes [GH-2].
+- Updated TOC for 7.0 compatibility.
+
 v0.6.4
 ------
 - Derp central, fix typo.
