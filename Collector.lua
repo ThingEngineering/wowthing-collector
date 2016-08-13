@@ -892,8 +892,8 @@ function wwtc:ScanHeirlooms()
     charData.scanTimes['heirlooms'] = time()
     WWTCSaved.heirlooms = {}
 
-    for i = 1, C_Heirloom.GetNumHeirlooms() do
-        local itemID = C_Heirloom.GetHeirloomItemIDFromIndex(i)
+    for i = 1, C_Heirloom.GetNumDisplayedHeirlooms() do
+        local itemID = C_Heirloom.GetHeirloomItemIDFromDisplayedIndex(i)
         -- name, itemEquipLoc, isPvP, itemTexture, upgradeLevel, source, searchFiltered, effectiveLevel, minLevel, maxLevel
         if C_Heirloom.PlayerHasHeirloom(itemID) then
             local _, _, _, _, upgradeLevel = C_Heirloom.GetHeirloomInfo(itemID)
