@@ -1000,6 +1000,8 @@ function wwtc:ScanFollowers()
 
     -- Followers
     local followers = C_Garrison.GetFollowers(1)
+    if followers == nil then return end
+
     for i = 1, #followers do
         local follower = followers[i]
         if follower.isCollected then
@@ -1031,6 +1033,8 @@ function wwtc:ScanFollowers()
 
     -- Ships
     local ships = C_Garrison.GetFollowers(2)
+    if ships == nil then return end
+
     for i = 1, #ships do
         local ship = ships[i]
         if ship.isCollected then
@@ -1064,6 +1068,8 @@ function wwtc:ScanMissions()
     -- Scan followers first
     local followerMap = {}
     local followers = C_Garrison.GetFollowers(1)
+    if followers ~= nil then return end
+
     for i = 1, #followers do
         local follower = followers[i]
         if follower.isCollected then
@@ -1071,8 +1077,6 @@ function wwtc:ScanMissions()
             followerMap[follower.followerID] = followerID
         end
     end
-
-    local inProgressMissions = C_Garrison.GetInProgressMissions(2)
 
     -- description = "blah blah blah"
     -- cost = 15
@@ -1094,7 +1098,10 @@ function wwtc:ScanMissions()
     -- isRare = false
     -- typeAtlas = "blah"
     -- missionID = 385
+    local inProgressMissions = C_Garrison.GetInProgressMissions(2)
     local now = time()
+    if inProgressMissions == nil then return end
+
     for i = 1, #inProgressMissions do
         local mission = inProgressMissions[i]
 
@@ -1120,6 +1127,7 @@ function wwtc:ScanMissions()
     end
 
     local availableMissions = C_Garrison.GetAvailableMissions(2)
+    if availableMissions == nil then return end
 
     for _, mission in pairs(availableMissions) do
         charData.missions[#charData.missions+1] = {
