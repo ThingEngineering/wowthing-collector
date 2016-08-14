@@ -1,3 +1,8 @@
+v0.7.2
+------
+- Added a message when toys are scanned, it seems flaky sometimes.
+- Fixed various garrison-related errors, again [GH-5].
+
 v0.7.1
 ------
 - Fixed various errors when loading on a character without garrison/shipyard [GH-3].
