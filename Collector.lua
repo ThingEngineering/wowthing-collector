@@ -981,10 +981,12 @@ function wwtc:ScanBuildings()
     charData.scanTimes['buildings'] = time()
     charData.buildings = {}
 
-    local level, _, _, _ = C_Garrison.GetGarrisonInfo(2)
+    local level, _, _, _ = C_Garrison.GetGarrisonInfo(LE_GARRISON_TYPE_6_0)
     charData.garrisonLevel = level or 0
 
-    local buildings = C_Garrison.GetBuildings(2)
+    local buildings = C_Garrison.GetBuildings(LE_GARRISON_TYPE_6_0)
+    if buildings == nil then return end
+
     for i = 1, #buildings do
         charData.buildings[#charData.buildings+1] = buildings[i].buildingID
     end
@@ -999,7 +1001,7 @@ function wwtc:ScanFollowers()
     charData.ships = {}
 
     -- Followers
-    local followers = C_Garrison.GetFollowers(1)
+    local followers = C_Garrison.GetFollowers(LE_GARRISON_TYPE_6_0)
     if followers == nil then return end
 
     for i = 1, #followers do
@@ -1032,7 +1034,7 @@ function wwtc:ScanFollowers()
     end
 
     -- Ships
-    local ships = C_Garrison.GetFollowers(2)
+    local ships = C_Garrison.GetFollowers(LE_GARRISON_TYPE_6_0)
     if ships == nil then return end
 
     for i = 1, #ships do
@@ -1067,8 +1069,8 @@ function wwtc:ScanMissions()
 
     -- Scan followers first
     local followerMap = {}
-    local followers = C_Garrison.GetFollowers(1)
-    if followers ~= nil then return end
+    local followers = C_Garrison.GetFollowers(LE_GARRISON_TYPE_6_0)
+    if followers == nil then return end
 
     for i = 1, #followers do
         local follower = followers[i]
@@ -1098,41 +1100,42 @@ function wwtc:ScanMissions()
     -- isRare = false
     -- typeAtlas = "blah"
     -- missionID = 385
-    local inProgressMissions = C_Garrison.GetInProgressMissions(2)
+    local inProgressMissions = C_Garrison.GetInProgressMissions(LE_GARRISON_TYPE_6_0)
     local now = time()
-    if inProgressMissions == nil then return end
+    
+    if inProgressMissions then
+        for i = 1, #inProgressMissions do
+            local mission = inProgressMissions[i]
 
-    for i = 1, #inProgressMissions do
-        local mission = inProgressMissions[i]
-
-        local followerIDs = {}
-        for j = 1, mission.numFollowers do
-            followerIDs[j] = followerMap[mission.followers[j]]
-            if not followerIDs[j] then
-                print("missing follower?", mission.followers[j])
+            local followerIDs = {}
+            for j = 1, mission.numFollowers do
+                followerIDs[j] = followerMap[mission.followers[j]]
+                if not followerIDs[j] then
+                    print("missing follower?", mission.followers[j])
+                end
             end
-        end
 
-        local timeLeft = wwtc:ParseMissionTime(mission.timeLeft)
-        -- Pad minute resolution times by 60s as we have no idea when they'll actually finish
-        if timeLeft >= 60 then
-            timeLeft = timeLeft + 60
-        end
+            local timeLeft = wwtc:ParseMissionTime(mission.timeLeft)
+            -- Pad minute resolution times by 60s as we have no idea when they'll actually finish
+            if timeLeft >= 60 then
+                timeLeft = timeLeft + 60
+            end
 
-        charData.missions[#charData.missions+1] = {
-            id = mission.missionID,
-            followers = followerIDs,
-            finishes = now + timeLeft,
-        }
+            charData.missions[#charData.missions+1] = {
+                id = mission.missionID,
+                followers = followerIDs,
+                finishes = now + timeLeft,
+            }
+        end
     end
 
-    local availableMissions = C_Garrison.GetAvailableMissions(2)
-    if availableMissions == nil then return end
-
-    for _, mission in pairs(availableMissions) do
-        charData.missions[#charData.missions+1] = {
-            id = mission.missionID,
-        }
+    local availableMissions = C_Garrison.GetAvailableMissions(LE_GARRISON_TYPE_6_0)
+    if availableMissions then
+        for _, mission in pairs(availableMissions) do
+            charData.missions[#charData.missions+1] = {
+                id = mission.missionID,
+            }
+        end
     end
 end
 
@@ -1143,7 +1146,9 @@ function wwtc:ScanShipments()
     charData.scanTimes['shipments'] = time()
     charData.workOrders = {}
 
-    local buildings = C_Garrison.GetBuildings(2)
+    local buildings = C_Garrison.GetBuildings(LE_GARRISON_TYPE_6_0)
+    if buildings == nil then return end
+
     for i = 1, #buildings do
         local buildingID = buildings[i].buildingID
         if buildingID then
