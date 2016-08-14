@@ -972,6 +972,8 @@ function wwtc:ScanToys()
             WWTCSaved.toys[#WWTCSaved.toys+1] = itemID
         end
     end
+
+    print("WoWthing_Collector: scanned", #WWTCSaved.toys, "toys")
 end
 
 -- Scan garrison buildings
