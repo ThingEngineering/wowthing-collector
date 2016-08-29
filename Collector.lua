@@ -51,6 +51,15 @@ local currencies = {
     1101, -- Oil
     1129, -- Seal of Inevitable Fate
      994, -- Seal of Tempered Fate
+    -- Legion
+    1155, -- Ancient Mana
+    1275, -- Curious Coin
+    1226, -- Nethershard
+    1220, -- Order Resources
+    1273, -- Seal of Broken Fate
+    1154, -- Shadowy Coins
+    1149, -- Sightless Eye
+    1268, -- Timeworn Artifact
 }
 
 -- Trade skill cooldowns
@@ -136,7 +145,6 @@ local checkMounts = {
 local checkPets = {
     [216] = 33239, -- Argent Gruntling
     [1350] = 73809, -- Sky Lantern
-
 }
 local checkReputations = {
     [1492] = "Emperor Shaohao",
