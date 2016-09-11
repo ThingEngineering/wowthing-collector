@@ -1,7 +1,7 @@
 v0.8.0
 ------
-- Added artifact weapon scanning: relics for equipped/bags, XP status for equipped.
-- Added artifact knowledge scanning.
+- Added artifact knowledge (hidden currency) scanning.
+- Added artifact weapon scanning: XP status for equipped, relics for all, item level for all.
 
 v0.7.3
 ------

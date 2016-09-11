@@ -773,13 +773,15 @@ function wwtc:ParseArtifactLink(link)
     itemId = tonumber(itemId)
     if artifactWeapons[itemId] ~= true then return end
 
-    artifact = charData.artifacts[itemId] or {}
+    local artifact = charData.artifacts[itemId] or {}
     artifact.relics = { {}, {}, {} }
 
     local bonusCountIndex = 16
     if itemBonusCount ~= '' then
         bonusCountIndex = bonusCountIndex + tonumber(itemBonusCount)
     end
+
+    artifact.itemLevel = wwtc:GetItemLevel(link)
 
     if relic1Id ~= '' then
         local relic = { relic1Id }
@@ -1347,3 +1349,47 @@ function wwtc:ParseMissionTime(t)
     local seconds = tonumber(t:match("(%d+) sec")) or 0
     return (hours * 3600) + (minutes * 60) + seconds
 end
+
+
+-------------------------------------------------------------------------------
+-- Copied from ElvUI\Modules\bags\bags.lua
+-------------------------------------------------------------------------------
+local itemLevelCache = {}
+local itemLevelPattern = gsub(ITEM_LEVEL, "%%d", "(%%d+)")
+local tooltipLines = { --These are the lines we wish to scan
+    "WWTC_ItemScanningTooltipTextLeft2",
+    "WWTC_ItemScanningTooltipTextLeft3",
+    "WWTC_ItemScanningTooltipTextLeft4",
+}
+local scanTooltip = CreateFrame("GameTooltip", "WWTC_ItemScanningTooltip", UIParent, "GameTooltipTemplate")
+scanTooltip:SetOwner(UIParent, "ANCHOR_NONE")
+
+--Scan tooltip for item level information and cache the value
+function wwtc:GetItemLevel(itemLink)
+    if not itemLink or not GetItemInfo(itemLink) then
+        return
+    end
+
+    if not itemLevelCache[itemLink] then
+        scanTooltip:ClearLines()
+        scanTooltip:SetHyperlink(itemLink)
+
+        local text, itemLevel
+        for index = 1, #tooltipLines do
+            text = _G[tooltipLines[index]]:GetText()
+
+            if text then
+                itemLevel = tonumber(string.match(text, itemLevelPattern))
+
+                if itemLevel then
+                    itemLevelCache[itemLink] = itemLevel
+                    return itemLevel
+                end
+            end
+        end
+        itemLevelCache[itemLink] = 0 --Cache items that don't have an item level so we don't loop over them again and again
+    end
+
+    return itemLevelCache[itemLink]
+end
+-------------------------------------------------------------------------------
