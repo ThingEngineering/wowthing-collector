@@ -1,3 +1,7 @@
+v0.8.1
+------
+- Added artifact bonusID scanning for 3rd socket info.
+
 v0.8.0
 ------
 - Added artifact knowledge (hidden currency) scanning.
