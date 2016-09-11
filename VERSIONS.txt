@@ -1,3 +1,8 @@
+v0.8.0
+------
+- Added artifact weapon scanning: relics for equipped/bags, XP status for equipped.
+- Added artifact knowledge scanning.
+
 v0.7.3
 ------
 - Added Legion currencies to the scan list.
