@@ -775,9 +775,11 @@ function wwtc:ParseArtifactLink(link)
 
     local artifact = charData.artifacts[itemId] or {}
     artifact.relics = { {}, {}, {} }
+    artifact.bonusId = 0
 
     local bonusCountIndex = 16
     if itemBonusCount ~= '' then
+        artifact.bonusId = tonumber(itemParts[15]) -- might need to check for multiple in future
         bonusCountIndex = bonusCountIndex + tonumber(itemBonusCount)
     end
 
