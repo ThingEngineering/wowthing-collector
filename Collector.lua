@@ -2,8 +2,8 @@
 local wwtc = {}
 local charData, charName, guildName, playedLevel, playedLevelUpdated, playedTotal, playedTotalUpdated, regionName
 local bankOpen, collectionsHooked, crafterOpen, guildBankOpen, loggingOut = false, false, false, false, false
-local dirtyBags, dirtyBuildings, dirtyFollowers, dirtyLockouts, dirtyMissions, dirtyMounts, dirtyPets, dirtyReputations, dirtyShipments, dirtyVoid =
-    {}, false, false, false, false, false, false, false, false, false
+local dirtyArtifacts, dirtyBags, dirtyBuildings, dirtyFollowers, dirtyLockouts, dirtyMissions, dirtyMounts, dirtyPets, dirtyReputations, dirtyShipments, dirtyVoid =
+    false, {}, false, false, false, false, false, false, false, false, false
 
 -- Libs
 local LibRealmInfo = LibStub('LibRealmInfo10Fixed')
@@ -53,6 +53,7 @@ local currencies = {
      994, -- Seal of Tempered Fate
     -- Legion
     1155, -- Ancient Mana
+    1171, -- Artifact Knowledge
     1275, -- Curious Coin
     1226, -- Nethershard
     1220, -- Order Resources
@@ -150,6 +151,52 @@ local checkReputations = {
     [1492] = "Emperor Shaohao",
 }
 
+local artifactWeapons = {
+    [128832] = true, -- Aldrachi Warblades
+    [127857] = true, -- Aluneth
+    [139275] = true, -- Aluneth
+    [139891] = true, -- Aluneth
+    [128403] = true, -- Apocalypse
+    [120978] = true, -- Ashbringer
+    [137582] = true, -- Ashbringer
+    [128292] = true, -- Blades of the Fallen Prince
+    [128821] = true, -- Claws of Ursoc
+    [128819] = true, -- Doomhammer
+    [128862] = true, -- Ebonchill
+    [128860] = true, -- Fangs of Ashamane
+    [128476] = true, -- Fangs of the Devourer
+    [128820] = true, -- Felo'melorn
+    [128940] = true, -- Fists of the Heavens
+    [128938] = true, -- Fu Zan, the Wanderer's Companion
+    [128306] = true, -- G'Hanir, the Mother Tree
+    [128868] = true, -- Light's Wrath
+    [128402] = true, -- Maw of the Damned
+    [134562] = true, -- Odyn's Fury
+    [128289] = true, -- Scale of the Earth-Warder
+    [128941] = true, -- Scepter of Sargeras
+    [128858] = true, -- Scythe of Elune
+    [128911] = true, -- Sharas'dal, Scepter of Tides
+    [128937] = true, -- Sheilun, Staff of the Mists
+    [128943] = true, -- Skull of the Man'ari
+    [128910] = true, -- Strom'kar, the Warbreaker
+    [128808] = true, -- Talonclaw
+    [128826] = true, -- Thas'dorah, Legacy of the Windrunners
+    [128872] = true, -- The Dreadblades
+    [128935] = true, -- The Fist of Ra-den
+    [128870] = true, -- The Kingslayers
+    [128823] = true, -- The Silver Hand
+    [137660] = true, -- The Silver Hand
+    [128861] = true, -- Titanstrike
+    [128866] = true, -- Truthguard
+    [137661] = true, -- Truthguard
+    [128825] = true, -- T'uure, Beacon of the Naaru
+    [127829] = true, -- Twinblades of the Deceiver
+    [128942] = true, -- Ulthalesh, the Deadwind Harvester
+    [129738] = true, -- Verus
+    [128908] = true, -- Warswords of the Valarjar
+    [128827] = true, -- Xal'atath, Blade of the Black Empire
+}
+
 
 -- Misc constants
 local CURRENCY_GARRISON = 824
@@ -207,6 +254,7 @@ function events:PLAYER_ENTERING_WORLD()
     --wwtc:Initialise()
 
     wwtc:UpdateCharacterData()
+    dirtyArtifacts = true
 end
 -- Fires when /played information is available
 function events:TIME_PLAYED_MSG(total, level)
@@ -396,6 +444,16 @@ end
 function events:UPDATE_FACTION()
     dirtyReputations = true
 end
+-- Fires when artifact.. updates?
+function events:ARTIFACT_UPDATE()
+    dirtyArtifacts = true
+end
+-- Fires when the player (or inspected unit) equips or unequips items
+function events:UNIT_INVENTORY_CHANGED(unit)
+    if unit == 'player' then
+        dirtyArtifacts = true
+    end
+end
 
 -------------------------------------------------------------------------------
 -- Call functions in the events table for events
@@ -420,6 +478,11 @@ function wwtc:Timer()
     if dirtyVoid then
         dirtyVoid = false
         wwtc:ScanVoidStorage()
+    end
+    -- Scan dirty artifacts
+    if dirtyArtifacts then
+        dirtyArtifacts = false
+        wwtc:ScanEquippedArtifact()
     end
     -- Scan dirty buildings
     if dirtyBuildings then
@@ -490,6 +553,7 @@ function wwtc:Initialise()
     charData.restedXP = 0
     charData.garrisonLevel = 0
 
+    charData.artifacts = charData.artifacts or {}
     charData.buildings = charData.buildings or {}
     charData.currencies = charData.currencies or {}
     charData.followers = charData.followers or {}
@@ -642,6 +706,19 @@ function wwtc:UpdateExhausted()
     end
 end
 
+-- Update information on the equipped artifact
+function wwtc:ScanEquippedArtifact()
+    wwtc:CheckEquippedArtifact(16) -- Main hand
+    wwtc:CheckEquippedArtifact(17) -- Off hand
+
+    local itemId, _, _, _, powerAvailable, traitsPurchased = C_ArtifactUI.GetEquippedArtifactInfo()
+    if itemId ~= nil then
+        charData.artifacts[itemId].numTraits = traitsPurchased
+        charData.artifacts[itemId].xp = powerAvailable
+    end
+end
+
+-- Scan a specific bag
 function wwtc:ScanBag(bagID)
     if charData == nil then return end
 
@@ -672,9 +749,80 @@ function wwtc:ScanBag(bagID)
             local texture, count, locked, quality, readable, lootable, link, isFiltered = GetContainerItemInfo(bagID, i)
             if count ~= nil and link ~= nil then
                 bag["s"..i] = { count, wwtc:GetItemID(link) }
+
+                if quality == 6 then
+                    wwtc:ParseArtifactLink(link)
+                end
             end
         end
     end
+end
+
+function wwtc:CheckEquippedArtifact(slot)
+    local quality = GetInventoryItemQuality('player', slot)
+    if quality ~= nil and tonumber(quality) == 6 then
+        wwtc:ParseArtifactLink(GetInventoryItemLink('player', slot))
+    end
+end
+
+function wwtc:ParseArtifactLink(link)
+    local itemString = string.match(link, 'item[%-?%d:]+')
+    local itemParts = { strsplit(':', itemString) }
+    local itemId, relic1Id, relic2Id, relic3Id, itemBonusCount = itemParts[2], itemParts[4], itemParts[5], itemParts[6], itemParts[14]
+
+    itemId = tonumber(itemId)
+    if artifactWeapons[itemId] ~= true then return end
+
+    artifact = charData.artifacts[itemId] or {}
+    artifact.relics = { {}, {}, {} }
+
+    local bonusCountIndex = 16
+    if itemBonusCount ~= '' then
+        bonusCountIndex = bonusCountIndex + tonumber(itemBonusCount)
+    end
+
+    if relic1Id ~= '' then
+        local relic = { relic1Id }
+        local bonusCount = itemParts[bonusCountIndex]
+        if bonusCount ~= '' then
+            bonusCount = tonumber(bonusCount)
+            for j = bonusCountIndex + 1, bonusCountIndex + bonusCount do
+                relic[#relic + 1] = itemParts[j]
+            end
+            bonusCountIndex = bonusCountIndex + bonusCount
+        end
+        artifact.relics[1] = relic
+    end
+    bonusCountIndex = bonusCountIndex + 1
+
+    if relic2Id ~= '' then
+        local relic = { relic2Id }
+        local bonusCount = itemParts[bonusCountIndex]
+        if bonusCount ~= '' then
+            bonusCount = tonumber(bonusCount)
+            for j = bonusCountIndex + 1, bonusCountIndex + bonusCount do
+                relic[#relic + 1] = itemParts[j]
+            end
+            bonusCountIndex = bonusCountIndex + bonusCount
+        end
+        artifact.relics[2] = relic
+    end
+    bonusCountIndex = bonusCountIndex + 1
+
+    if relic3Id ~= '' then
+        local relic = { relic3Id }
+        local bonusCount = itemParts[bonusCountIndex]
+        if bonusCount ~= '' then
+            bonusCount = tonumber(bonusCount)
+            for j = bonusCountIndex + 1, bonusCountIndex + bonusCount do
+                relic[#relic + 1] = itemParts[j]
+            end
+            bonusCountIndex = bonusCountIndex + bonusCount
+        end
+        artifact.relics[3] = relic
+    end
+
+    charData.artifacts[itemId] = artifact
 end
 
 function wwtc:UpdateGuildBank()
