@@ -1,7 +1,8 @@
 -- Things
 local wwtc = {}
 local charData, charName, guildName, playedLevel, playedLevelUpdated, playedTotal, playedTotalUpdated, regionName
-local bankOpen, collectionsHooked, crafterOpen, guildBankOpen, loggingOut = false, false, false, false, false
+local artifactsHooked, collectionsHooked, loggingOut = false, false, false
+local artifactOpen, bankOpen, crafterOpen, guildBankOpen = false, false, false, false
 local dirtyArtifacts, dirtyBags, dirtyBuildings, dirtyFollowers, dirtyLockouts, dirtyMissions, dirtyMounts, dirtyPets, dirtyReputations, dirtyShipments, dirtyVoid =
     false, {}, false, false, false, false, false, false, false, false, false
 
@@ -233,6 +234,10 @@ function events:ADDON_LOADED(name)
 
         -- Perform any cleanup
         wwtc:Cleanup()
+
+    -- Damn Artifacts!
+    elseif name == "Blizzard_ArtifactUI" then
+        wwtc:HookArtifacts()
 
     -- Damn Pet Journal!
     elseif name == "Blizzard_Collections" then
@@ -577,7 +582,8 @@ end
 function wwtc:Login()
     wwtc:Initialise()
 
-    -- Try to hook the Collections addon thing
+    -- Try to hook things
+    wwtc:HookArtifacts()
     wwtc:HookCollections()
 
     RequestTimePlayed()
@@ -715,6 +721,10 @@ function wwtc:ScanEquippedArtifact()
     if itemId ~= nil then
         charData.artifacts[itemId].numTraits = traitsPurchased
         charData.artifacts[itemId].xp = powerAvailable
+    end
+
+    if artifactOpen then
+        wwtc:ScanArtifactTraits()
     end
 end
 
@@ -1012,6 +1022,47 @@ function wwtc:ScanTradeSkills()
             end
         end
     end
+end
+
+-- Hook Blizzard_ArtifactUI for scanning
+function wwtc:HookArtifacts()
+    if not IsAddOnLoaded("Blizzard_ArtifactUI") then
+        UIParentLoadAddOn("Blizzard_ArtifactUI")
+    else
+        if not artifactsHooked then
+            -- Hook artifacts
+            local aframe = _G["ArtifactFrame"]
+            if aframe then
+                aframe:HookScript("OnShow", function(self)
+                    wwtc:ScanArtifactTraits()
+                    artifactOpen = true
+                end)
+                aframe:HookScript("OnHide", function(self)
+                    artifactOpen = false
+                end)
+            else
+                print("WoWthing_Collector: unable to hook 'ArtifactFrame' frame!")
+            end
+
+            artifactsHooked = true
+        end
+    end
+end
+
+function wwtc:ScanArtifactTraits()
+    local itemId, _ = C_ArtifactUI.GetArtifactInfo()
+    local artifact = charData.artifacts[itemId] or {}
+    artifact.traits = {}
+
+    local powers = C_ArtifactUI.GetPowers()
+    if powers == nil then return end
+
+    for _, powerId in ipairs(powers) do
+        local _, _, currentRank, _, bonusRanks = C_ArtifactUI.GetPowerInfo(powerId)
+        artifact.traits[powerId] = currentRank - bonusRanks
+    end
+
+    charData.artifacts[itemId] = artifact
 end
 
 -- Hook various Blizzard_Collections things for scanning
