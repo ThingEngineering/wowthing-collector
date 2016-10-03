@@ -3,8 +3,8 @@ local wwtc = {}
 local charData, charName, guildName, playedLevel, playedLevelUpdated, playedTotal, playedTotalUpdated, regionName
 local artifactsHooked, collectionsHooked, loggingOut = false, false, false
 local artifactOpen, bankOpen, crafterOpen, guildBankOpen = false, false, false, false
-local dirtyArtifacts, dirtyBags, dirtyBuildings, dirtyFollowers, dirtyLockouts, dirtyMissions, dirtyMounts, dirtyPets, dirtyReputations, dirtyShipments, dirtyVoid =
-    false, {}, false, false, false, false, false, false, false, false, false
+local dirtyArtifacts, dirtyBags, dirtyBuildings, dirtyFollowers, dirtyHonor, dirtyLockouts, dirtyMissions, dirtyMounts, dirtyPets, dirtyReputations, dirtyShipments, dirtyVoid =
+    false, {}, false, false, false, false, false, false, false, false, false, false
 
 -- Libs
 local LibRealmInfo = LibStub('LibRealmInfo10Fixed')
@@ -150,6 +150,7 @@ local checkPets = {
 }
 local checkReputations = {
     [1492] = "Emperor Shaohao",
+    [1859] = "The Nightfallen",
 }
 
 local artifactWeapons = {
@@ -260,6 +261,7 @@ function events:PLAYER_ENTERING_WORLD()
 
     wwtc:UpdateCharacterData()
     dirtyArtifacts = true
+    dirtyHonor = true
 end
 -- Fires when /played information is available
 function events:TIME_PLAYED_MSG(total, level)
@@ -459,6 +461,18 @@ function events:UNIT_INVENTORY_CHANGED(unit)
         dirtyArtifacts = true
     end
 end
+-- Fires when Honor XP updates
+function events:HONOR_XP_UPDATE()
+    dirtyHonor = true
+end
+-- Fires when Honor level updates
+function events:HONOR_LEVEL_UPDATE()
+    dirtyHonor = true
+end
+-- Fires when Prestige level updates
+function events:HONOR_PRESTIGE_UPDATE()
+    dirtyHonor = true
+end
 
 -------------------------------------------------------------------------------
 -- Call functions in the events table for events
@@ -498,6 +512,11 @@ function wwtc:Timer()
     if dirtyFollowers then
         dirtyFollowers = false
         wwtc:ScanFollowers()
+    end
+    -- Scan dirty honor
+    if dirtyHonor then
+        dirtyHonor = false
+        wwtc:ScanHonor()
     end
     -- Scan dirty lockouts
     if dirtyLockouts then
@@ -562,6 +581,7 @@ function wwtc:Initialise()
     charData.buildings = charData.buildings or {}
     charData.currencies = charData.currencies or {}
     charData.followers = charData.followers or {}
+    charData.honor = charData.honor or {}
     charData.items = charData.items or {}
     charData.lockouts = charData.lockouts or {}
     charData.missions = charData.missions or {}
@@ -1381,6 +1401,21 @@ function wwtc:ScanShipments()
     end
 end
 
+-- Scan honor stuff
+function wwtc:ScanHonor()
+    if charData == nil then return end
+
+    charData.honor = {
+        level = UnitHonorLevel("player"),
+        current = UnitHonor("player"),
+        max = UnitHonorMax("player"),
+        prestige = UnitPrestige("player"),
+   }
+end
+
+-------------------------------------------------------------------------------
+-- Util functions
+-------------------------------------------------------------------------------
 -- Get a numeric itemID from an item link
 function wwtc:GetItemID(link)
     return tonumber(link:match("item:(%d+)"))
@@ -1402,7 +1437,6 @@ function wwtc:ParseMissionTime(t)
     local seconds = tonumber(t:match("(%d+) sec")) or 0
     return (hours * 3600) + (minutes * 60) + seconds
 end
-
 
 -------------------------------------------------------------------------------
 -- Copied from ElvUI\Modules\bags\bags.lua
