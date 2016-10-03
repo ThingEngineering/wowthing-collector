@@ -1,3 +1,8 @@
+v0.8.3
+------
+- Added honor/prestige scanning.
+- Added The Nightfallen to the reputation scan list, the API lies.
+
 v0.8.2
 ------
 - Added artifact trait scanning when the artifact UI is shown.
