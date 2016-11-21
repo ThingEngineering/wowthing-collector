@@ -1,3 +1,9 @@
+v0.8.4
+------
+- Added mythic keystone scanning.
+- Added mythic dungeon maximum map completed scanning.
+- Changed toy scan to only print the message for a new maximum toy count.
+
 v0.8.3
 ------
 - Added honor/prestige scanning.
