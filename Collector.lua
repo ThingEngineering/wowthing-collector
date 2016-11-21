@@ -3,6 +3,7 @@ local wwtc = {}
 local charData, charName, guildName, playedLevel, playedLevelUpdated, playedTotal, playedTotalUpdated, regionName
 local artifactsHooked, collectionsHooked, loggingOut = false, false, false
 local artifactOpen, bankOpen, crafterOpen, guildBankOpen = false, false, false, false
+local maxScannedToys = 0
 local dirtyArtifacts, dirtyBags, dirtyBuildings, dirtyFollowers, dirtyHonor, dirtyLockouts, dirtyMissions, dirtyMounts, dirtyPets, dirtyReputations, dirtyShipments, dirtyVoid =
     false, {}, false, false, false, false, false, false, false, false, false, false
 
@@ -1238,7 +1239,10 @@ function wwtc:ScanToys()
         end
     end
 
-    print("WoWthing_Collector: scanned", #WWTCSaved.toys, "toys")
+    if #WWTCSaved.toys > maxScannedToys then
+        maxScannedToys = #WWTCSaved.toys
+        print("WoWthing_Collector: scanned", maxScannedToys, "toys")
+    end
 end
 
 -- Scan garrison buildings
