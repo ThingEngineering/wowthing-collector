@@ -1,3 +1,7 @@
+v0.8.5
+------
+- Updated TOC for 7.1.
+
 v0.8.4
 ------
 - Added mythic keystone scanning.
