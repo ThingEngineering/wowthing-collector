@@ -204,6 +204,7 @@ local artifactWeapons = {
 local CURRENCY_GARRISON = 824
 local SLOTS_PER_GUILD_BANK_TAB = 98
 local SLOTS_PER_VOID_STORAGE_TAB = 80
+local ITEM_KEYSTONE = 138019
 
 -- Blizzard_GarrisonUI/Blizzard_GarrisonSharedTemplates.lua::477
 local statusPriority = {
@@ -473,6 +474,10 @@ end
 function events:HONOR_PRESTIGE_UPDATE()
     dirtyHonor = true
 end
+-- Fires when Mythic dungeon map information updates
+function events:CHALLENGE_MODE_MAPS_UPDATE()
+    wwtc:ScanMythicDungeons()
+end
 
 -------------------------------------------------------------------------------
 -- Call functions in the events table for events
@@ -576,6 +581,9 @@ function wwtc:Initialise()
     charData.levelXP = 0
     charData.restedXP = 0
     charData.garrisonLevel = 0
+    charData.keystoneInstance = 0
+    charData.keystoneLevel = 0
+    charData.keystoneMax = 0
 
     charData.artifacts = charData.artifacts or {}
     charData.buildings = charData.buildings or {}
@@ -685,6 +693,7 @@ function wwtc:UpdateCharacterData()
         wwtc:ScanWeeklyQuests()
 
         RequestRaidInfo()
+        C_ChallengeMode.RequestMapInfo()
     end
 end
 
@@ -778,10 +787,13 @@ function wwtc:ScanBag(bagID)
         for i = 1, numSlots do
             local texture, count, locked, quality, readable, lootable, link, isFiltered = GetContainerItemInfo(bagID, i)
             if count ~= nil and link ~= nil then
-                bag["s"..i] = { count, wwtc:GetItemID(link) }
+                local itemID = wwtc:GetItemID(link)
+                bag["s"..i] = { count, itemID }
 
                 if quality == 6 then
                     wwtc:ParseArtifactLink(link)
+                elseif itemID == ITEM_KEYSTONE then
+                    wwtc:ParseKeystoneLink(link)
                 end
             end
         end
@@ -857,6 +869,12 @@ function wwtc:ParseArtifactLink(link)
     end
 
     charData.artifacts[itemId] = artifact
+end
+
+function wwtc:ParseKeystoneLink(link)
+    local linkParts = { strsplit(':', link) }
+    charData.keystoneInstance = linkParts[15]
+    charData.keystoneLevel = linkParts[16]
 end
 
 function wwtc:UpdateGuildBank()
@@ -1003,6 +1021,22 @@ function wwtc:ScanLockouts()
             defeatedBosses = 1,
             maxBosses = 1,
         }
+        end
+    end
+end
+
+-- Scan mythic dungeon completion
+function wwtc:ScanMythicDungeons()
+    if charData == nil then return end
+
+    charData.keystoneMax = 0
+
+    local maps = {}
+    C_ChallengeMode.GetMapTable(maps)
+    for i = 1, #maps do
+        local _, _, level = C_ChallengeMode.GetMapPlayerStats(maps[i]);
+        if level and level > charData.keystoneMax then
+            charData.keystoneMax = level
         end
     end
 end
