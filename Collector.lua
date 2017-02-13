@@ -776,6 +776,15 @@ function wwtc:ScanEquippedArtifact()
     end
 end
 
+-- Update information on the open artifact
+function wwtc:ScanOpenArtifact()
+    local itemId, _, _, _, powerAvailable, traitsPurchased = C_ArtifactUI.GetArtifactInfo()
+    if itemId ~= nil then
+        charData.artifacts[itemId].numTraits = traitsPurchased
+        charData.artifacts[itemId].xp = powerAvailable
+    end
+end
+
 -- Scan a specific bag
 function wwtc:ScanBag(bagID)
     if charData == nil then return end
@@ -1108,6 +1117,7 @@ function wwtc:HookArtifacts()
             if aframe then
                 aframe:HookScript("OnShow", function(self)
                     wwtc:ScanArtifactTraits()
+                    wwtc:ScanOpenArtifact()
                     artifactOpen = true
                 end)
                 aframe:HookScript("OnHide", function(self)
