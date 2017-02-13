@@ -135,6 +135,18 @@ local worldBossQuests = {
     [37462] = "Gorgrond Bosses", -- Tarlna
     [37464] = "Rukhmar",
     [94015] = "Supreme Lord Kazzak",
+
+    [42269] = "Legion Bosses", -- The Soultakers
+    [42270] = "Legion Bosses", -- Nithogg
+    [42779] = "Legion Bosses", -- Shar'thos
+    [42819] = "Legion Bosses", -- Humongris
+    [43192] = "Legion Bosses", -- Levantus
+    [43193] = "Legion Bosses", -- Calamir
+    [43448] = "Legion Bosses", -- Drugon the Frostblood
+    [43512] = "Legion Bosses", -- Ana-Mouz
+    [43513] = "Legion Bosses", -- Na'zak the Fiend
+    [43985] = "Legion Bosses", -- Flotsam
+    [44287] = "Legion Bosses", -- Withered Jim
 }
 -- Weekly quests
 local weeklyQuests = {
