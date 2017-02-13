@@ -56,6 +56,7 @@ local currencies = {
     -- Legion
     1155, -- Ancient Mana
     1171, -- Artifact Knowledge
+    1299, -- Brawler's Gold
     1275, -- Curious Coin
     1226, -- Nethershard
     1220, -- Order Resources
