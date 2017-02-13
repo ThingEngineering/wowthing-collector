@@ -96,32 +96,37 @@ local tradeSkills = {
 -- LFR instances
 local LFRInstances = {
     {
-        name = 'Highmaul',
+        name = 'The Emerald Nightmare',
         instances = {
-            { 849, 3 }, -- Walled City
-            { 850, 3 }, -- Arcane Sanctum
-            { 851, 1 }, -- Imperator's Rise
+            {1287, 3}, -- Darkbough
+            {1288, 3}, -- Tormented Guardians
+            {1289, 1}, -- Rift of Aln
         },
     },
     {
-        name = 'Blackrock Foundry',
-        instances = {
-            { 847, 3 }, -- Slagworks
-            { 846, 3 }, -- The Black Forge
-            { 848, 3 }, -- Iron Assembly
-            { 823, 1 }, -- Blackhand's Crucible
+        name = 'Trial of Valor'
+        instances ={
+            {1411, 3}, -- Trial of Valor
         },
     },
     {
-        name = 'Hellfire Citadel',
+        name = 'The Nighthold',
         instances = {
-            { 982, 3 }, -- Hellbreach
-            { 983, 3 }, -- Halls of Blood
-            { 984, 3 }, -- Bastion of Shadows
-            { 985, 3 }, -- Destructor's Rise
-            { 986, 1 }, -- The Black Gate
+            {1290, 3}, -- Arcing Aqueducts
+            {1291, 3}, -- Royal Athenaeum
+            {1292, 3}, -- Nightspire
+            {1293, 1}, -- Betrayer's Rise
         },
     },
+    --{
+    --    name = 'Tomb of Sargeras',
+    --    instances = {
+    --        {1494, 0}, -- The Tidestone's Rest
+    --        {1495, 0}, -- Wailing Halls
+    --        {1496, 0}, -- Chamber of the Avatar
+    --        {1497, 0}, -- Deceiver's Fall
+    --    },
+    --},
 }
 
 -- World boss quests
