@@ -104,7 +104,7 @@ local LFRInstances = {
         },
     },
     {
-        name = 'Trial of Valor'
+        name = 'Trial of Valor',
         instances ={
             {1411, 3}, -- Trial of Valor
         },
