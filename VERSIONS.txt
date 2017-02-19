@@ -1,3 +1,11 @@
+v0.8.6
+------
+- Added Brawler's Gold to currency scanning.
+- Added Legion instances to LFR lockout scanning.
+- Added Legion world boss lockout support.
+- Fixed artifact scan not actually checking trait count/available XP for non-equipped (opened from bags) artifacts.
+- Fixed TOC value for 7.1.
+
 v0.8.5
 ------
 - Updated TOC for 7.1.
