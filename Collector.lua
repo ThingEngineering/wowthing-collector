@@ -1141,8 +1141,8 @@ function wwtc:ScanArtifactTraits()
     if powers == nil then return end
 
     for _, powerId in ipairs(powers) do
-        local _, _, currentRank, _, bonusRanks = C_ArtifactUI.GetPowerInfo(powerId)
-        artifact.traits[powerId] = currentRank - bonusRanks
+        local powerData = C_ArtifactUI.GetPowerInfo(powerId)
+        artifact.traits[powerId] = powerData.currentRank - powerData.bonusRanks
     end
 
     charData.artifacts[itemId] = artifact
