@@ -58,6 +58,9 @@ local currencies = {
     1171, -- Artifact Knowledge
     1299, -- Brawler's Gold
     1275, -- Curious Coin
+    1356, -- Echoes of Battle
+    1357, -- Echoes of Domination
+    1342, -- Legionfall War Supplies
     1226, -- Nethershard
     1220, -- Order Resources
     1273, -- Seal of Broken Fate
