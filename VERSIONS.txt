@@ -1,3 +1,11 @@
+v0.9.0
+------
+- Added Echoes of Battle, Echoes of Domination, and Legionfall War Supplies to currency scanning.
+- Removed The Nightfallen from reputation scanning, the API no longer lies.
+- Fixed artifact scan error when viewing an artifact.
+- Fixed occasional artifact scan error when logging in.
+- Updated TOC for 7.2.
+
 v0.8.6
 ------
 - Added Brawler's Gold to currency scanning.
