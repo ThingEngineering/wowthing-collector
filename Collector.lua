@@ -858,7 +858,7 @@ function wwtc:ParseArtifactLink(link)
     if relic1Id ~= '' then
         local relic = { relic1Id }
         local bonusCount = itemParts[bonusCountIndex]
-        if bonusCount ~= '' then
+        if tonumber(bonusCount) then
             bonusCount = tonumber(bonusCount)
             for j = bonusCountIndex + 1, bonusCountIndex + bonusCount do
                 relic[#relic + 1] = itemParts[j]
@@ -872,7 +872,7 @@ function wwtc:ParseArtifactLink(link)
     if relic2Id ~= '' then
         local relic = { relic2Id }
         local bonusCount = itemParts[bonusCountIndex]
-        if bonusCount ~= '' then
+        if tonumber(bonusCount) then
             bonusCount = tonumber(bonusCount)
             for j = bonusCountIndex + 1, bonusCountIndex + bonusCount do
                 relic[#relic + 1] = itemParts[j]
@@ -886,7 +886,7 @@ function wwtc:ParseArtifactLink(link)
     if relic3Id ~= '' then
         local relic = { relic3Id }
         local bonusCount = itemParts[bonusCountIndex]
-        if bonusCount ~= '' then
+        if tonumber(bonusCount) then
             bonusCount = tonumber(bonusCount)
             for j = bonusCountIndex + 1, bonusCountIndex + bonusCount do
                 relic[#relic + 1] = itemParts[j]
