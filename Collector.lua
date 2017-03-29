@@ -172,7 +172,6 @@ local checkPets = {
 }
 local checkReputations = {
     [1492] = "Emperor Shaohao",
-    [1859] = "The Nightfallen",
 }
 
 local artifactWeapons = {
