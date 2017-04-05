@@ -840,6 +840,12 @@ function wwtc:CheckEquippedArtifact(slot)
 end
 
 function wwtc:ParseArtifactLink(link)
+    -- |cffe6cc80|Hitem:128826::143704:143682:143821::::110:253:256:9:1:727:114:3:3473:1512:3336:3:3474:1512:3336:3:3462:1647:1813|h[Thas'dorah, Legacy of the Windrunners]|h|r"
+    --                 2      34      5      6      7890   1   2   3 4 5   6   7 8    9    0    1 2    3    4    5 6    7    8
+    -- |cffe6cc80|Hitem:128808::143688:143705:143798::::110:253:256:9:1:728:125:3:3474:1507:1674:3:3473:1522:3337:3:3462:1647:1813|h[Talonclaw]|h|r"
+    --                 2      34      5      6      7890   1   2   3 4 5   6   7 8    9    0    1 2    3    4    5 6    7    8
+    -- |cffe6cc80|Hitem:128861::137008:140810:137543::::110:253:16777472:9:1:726:918:1:3:1805:1492:3336:3:3516:1492:3336:3:3412:1512:3336|h[Titanstrike]|h|r
+    --                 2      34      5      6      7890   1   2        3 4 5   6   7 8 9    0    1    2 3    4    5    6 7    8    9
     local itemString = string.match(link, 'item[%-?%d:]+')
     local itemParts = { strsplit(':', itemString) }
     local itemId, relic1Id, relic2Id, relic3Id, itemBonusCount = itemParts[2], itemParts[4], itemParts[5], itemParts[6], itemParts[14]
@@ -855,6 +861,11 @@ function wwtc:ParseArtifactLink(link)
     if itemBonusCount ~= '' then
         artifact.bonusId = tonumber(itemParts[15]) -- might need to check for multiple in future
         bonusCountIndex = bonusCountIndex + tonumber(itemBonusCount)
+    end
+
+    -- Tier 2 artifacts have a 1 randomly, fun times
+    if tonumber(itemParts[17]) == 1 and tonumber(itemParts[18]) <= 3 then
+        bonusCountIndex = bonusCountIndex + 1
     end
 
     artifact.itemLevel = wwtc:GetItemLevel(link)
