@@ -225,7 +225,6 @@ local artifactWeapons = {
 local CURRENCY_GARRISON = 824
 local SLOTS_PER_GUILD_BANK_TAB = 98
 local SLOTS_PER_VOID_STORAGE_TAB = 80
-local ITEM_KEYSTONE = 138019
 
 -- Blizzard_GarrisonUI/Blizzard_GarrisonSharedTemplates.lua::477
 local statusPriority = {
@@ -820,10 +819,13 @@ function wwtc:ScanBag(bagID)
                 local itemID = wwtc:GetItemID(link)
                 bag["s"..i] = { count, itemID }
 
-                if quality == 6 then
-                    wwtc:ParseArtifactLink(link)
-                elseif itemID == ITEM_KEYSTONE then
-                    wwtc:ParseKeystoneLink(link)
+                -- Bags
+                if bagID >= 0 and bagID <= 4 then
+                    if quality == 6 then
+                        wwtc:ParseArtifactLink(link)
+                    else
+                        wwtc:ParseKeystoneLink(link)
+                    end
                 end
             end
         end
@@ -902,9 +904,11 @@ function wwtc:ParseArtifactLink(link)
 end
 
 function wwtc:ParseKeystoneLink(link)
-    local linkParts = { strsplit(':', link) }
-    charData.keystoneInstance = linkParts[15]
-    charData.keystoneLevel = linkParts[16]
+    local instance, difficulty = link:match("keystone:(%d+):(%d+):")
+    if tonumber(instance) and tonumber(difficulty) then
+        charData.keystoneInstance = instance
+        charData.keystoneLevel = difficulty
+    end
 end
 
 function wwtc:UpdateGuildBank()
