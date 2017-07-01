@@ -121,15 +121,15 @@ local LFRInstances = {
             {1293, 1}, -- Betrayer's Rise
         },
     },
-    --{
-    --    name = 'Tomb of Sargeras',
-    --    instances = {
-    --        {1494, 0}, -- The Tidestone's Rest
-    --        {1495, 0}, -- Wailing Halls
-    --        {1496, 0}, -- Chamber of the Avatar
-    --        {1497, 0}, -- Deceiver's Fall
-    --    },
-    --},
+    {
+        name = 'Tomb of Sargeras',
+        instances = {
+            {1494, 3}, -- The Gates of Hell
+            {1495, 3}, -- Wailing Halls
+            {1496, 2}, -- Chamber of the Avatar
+            {1497, 1}, -- Deceiver's Fall
+        },
+    },
 }
 
 -- World boss quests
