@@ -1076,8 +1076,7 @@ function wwtc:ScanMythicDungeons()
 
     charData.keystoneMax = 0
 
-    local maps = {}
-    C_ChallengeMode.GetMapTable(maps)
+    local maps = C_ChallengeMode.GetMapTable()
     for i = 1, #maps do
         local _, _, level = C_ChallengeMode.GetMapPlayerStats(maps[i]);
         if level and level > charData.keystoneMax then
