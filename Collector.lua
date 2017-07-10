@@ -846,6 +846,10 @@ function wwtc:ParseArtifactLink(link)
     --                 2      34      5      6      7890   1   2   3 4 5   6   7 8    9    0    1 2    3    4    5 6    7    8
     -- |cffe6cc80|Hitem:128861::137008:140810:137543::::110:253:16777472:9:1:726:918:1:3:1805:1492:3336:3:3516:1492:3336:3:3412:1512:3336|h[Titanstrike]|h|r
     --                 2      34      5      6      7890   1   2        3 4 5   6   7 8 9    0    1    2 3    4    5    6 7    8    9
+    -- |cffe6cc80|Hitem:128860::::::::110:103:256:9:1:723:430:::|h[Fangs of Ashamane]|h|r" (T1 cat)
+    --                 2      34567890   1   2   3 4 5   6   789
+    -- |cffe6cc80|Hitem:128821::147090:136718:137327::::110:103:16777472:9:1:724:274:1:3:3562:1507:3336:3:1727:1532:3337:3:1727:1522:3336|h[Claws of Ursoc]|h|r" (T2 bear)
+    --                 2      34      5      6      7890   1   2        3 4 5   6   7 8 9    0    1    2 3    4    5    6 7    8    9
     local itemString = string.match(link, 'item[%-?%d:]+')
     local itemParts = { strsplit(':', itemString) }
     local itemId, relic1Id, relic2Id, relic3Id, itemBonusCount = itemParts[2], itemParts[4], itemParts[5], itemParts[6], itemParts[14]
@@ -856,6 +860,7 @@ function wwtc:ParseArtifactLink(link)
     local artifact = charData.artifacts[itemId] or {}
     artifact.relics = { {}, {}, {} }
     artifact.bonusId = 0
+    artifact.tier = 1
 
     local bonusCountIndex = 16
     if itemBonusCount ~= '' then
@@ -866,6 +871,7 @@ function wwtc:ParseArtifactLink(link)
     -- Tier 2 artifacts have a 1 randomly, fun times
     if tonumber(itemParts[17]) == 1 and tonumber(itemParts[18]) <= 3 then
         bonusCountIndex = bonusCountIndex + 1
+        artifact.tier = 2
     end
 
     artifact.itemLevel = wwtc:GetItemLevel(link)
