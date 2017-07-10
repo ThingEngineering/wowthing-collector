@@ -1,3 +1,9 @@
+v0.9.2
+------
+- Added artifact tier (upgraded with new traits) to artifact scanning.
+- Added Tomb of Sargeras to LFR lockout scanning.
+- Fixed completed Mythic dungeon scanning.
+
 v0.9.1
 ------
 - Fixed keystone scanning.
