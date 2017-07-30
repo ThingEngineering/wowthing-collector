@@ -1,3 +1,7 @@
+v0.9.3
+------
+- Fixed artifact tier scanning when the artifact is upgraded but doesn't have a 3rd relic slot.
+
 v0.9.2
 ------
 - Added artifact tier (upgraded with new traits) to artifact scanning.
