@@ -850,6 +850,8 @@ function wwtc:ParseArtifactLink(link)
     --                 2      34567890   1   2   3 4 5   6   789
     -- |cffe6cc80|Hitem:128821::147090:136718:137327::::110:103:16777472:9:1:724:274:1:3:3562:1507:3336:3:1727:1532:3337:3:1727:1522:3336|h[Claws of Ursoc]|h|r" (T2 bear)
     --                 2      34      5      6      7890   1   2        3 4 5   6   7 8 9    0    1    2 3    4    5    6 7    8    9
+    -- |cffe6cc80|Hitem:128941::141277:143701:::::110:64:16777472:::188:1:3:3394:1487:3338:3:1824:1482:3338:|h[Scepter of Sargeras]|h|r (T2 destro)
+    --                 2      34      5      67890   1  2        345   6 7 8    9    0    1 2    3    4
     local itemString = string.match(link, 'item[%-?%d:]+')
     local itemParts = { strsplit(':', itemString) }
     local itemId, relic1Id, relic2Id, relic3Id, itemBonusCount = itemParts[2], itemParts[4], itemParts[5], itemParts[6], itemParts[14]
@@ -869,7 +871,7 @@ function wwtc:ParseArtifactLink(link)
     end
 
     -- Tier 2 artifacts have a 1 randomly, fun times
-    if tonumber(itemParts[17]) == 1 and tonumber(itemParts[18]) <= 3 then
+    if tonumber(itemParts[bonusCountIndex]) == 1 and tonumber(itemParts[bonusCountIndex+1]) <= 3 then
         bonusCountIndex = bonusCountIndex + 1
         artifact.tier = 2
     end
