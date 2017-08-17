@@ -594,6 +594,9 @@ function wwtc:Initialise()
     charData.copper = 0
     charData.flightSpeed = 0
     charData.groundSpeed = 0
+    charData.hiddenDungeons = 0
+    charData.hiddenKills = 0
+    charData.hiddenWorldQuests = 0
     charData.lastSeen = 0
     charData.playedLevel = 0
     charData.playedTotal = 0
@@ -711,6 +714,7 @@ function wwtc:UpdateCharacterData()
         wwtc:UpdateExhausted()
 
         wwtc:ScanWeeklyQuests()
+        wwtc:ScanCriteria()
 
         RequestRaidInfo()
         C_ChallengeMode.RequestMapInfo()
@@ -983,6 +987,24 @@ function wwtc:ScanVoidStorage()
             end
         end
     end
+end
+
+-- Scan achievement criteria
+function wwtc:ScanCriteria()
+    if charData == nil then return end
+
+    charData.hiddenDungeons = 0
+    local numCriteria = GetAchievementNumCriteria(11152)
+    for i = 1, numCriteria do
+        local _, _, _, have = GetAchievementCriteriaInfo(11152, i)
+        charData.hiddenDungeons = charData.hiddenDungeons + have
+    end
+
+    local _, _, _, have = GetAchievementCriteriaInfo(11153, 1)
+    charData.hiddenWorldQuests = have
+
+    local _, _, _, have = GetAchievementCriteriaInfo(11154, 1)
+    charData.hiddenKills = have
 end
 
 -- Scan instance/LFR/world boss lockouts
