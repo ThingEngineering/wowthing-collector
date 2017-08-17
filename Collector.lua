@@ -55,18 +55,20 @@ local currencies = {
      994, -- Seal of Tempered Fate
     -- Legion
     1155, -- Ancient Mana
-    1171, -- Artifact Knowledge
     1299, -- Brawler's Gold
+    1416, -- Coins of Air
     1275, -- Curious Coin
     1356, -- Echoes of Battle
     1357, -- Echoes of Domination
     1342, -- Legionfall War Supplies
+    1314, -- Lingering Soul Fragment
     1226, -- Nethershard
     1220, -- Order Resources
     1273, -- Seal of Broken Fate
     1154, -- Shadowy Coins
     1149, -- Sightless Eye
     1268, -- Timeworn Artifact
+    1501, -- Writhing Essence
 }
 
 -- Trade skill cooldowns
