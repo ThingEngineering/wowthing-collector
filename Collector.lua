@@ -914,7 +914,7 @@ function wwtc:ParseArtifactLink(link)
     end
 
     -- Tier 2 artifacts have a 1 randomly, fun times
-    if tonumber(itemParts[bonusCountIndex]) == 1 and tonumber(itemParts[bonusCountIndex+1]) <= 3 then
+    if tonumber(itemParts[bonusCountIndex]) == 1 and (tonumber(itemParts[bonusCountIndex+1]) <= 3 or itemParts[bonusCountIndex+1] == '') then
         bonusCountIndex = bonusCountIndex + 1
         artifact.tier = 2
     end
