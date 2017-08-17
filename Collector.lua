@@ -170,6 +170,44 @@ local checkPets = {
     [216] = 33239, -- Argent Gruntling
     [1350] = 73809, -- Sky Lantern
 }
+local checkQuests = {
+    43646,
+    43647,
+    43648,
+    43649,
+    43650,
+    43651,
+    43652,
+    43653,
+    43654,
+    43655,
+    43656,
+    43657,
+    43658,
+    43659,
+    43660,
+    43661,
+    43662,
+    43663,
+    43664,
+    43665,
+    43666,
+    43667,
+    43668,
+    43669,
+    43670,
+    43671,
+    43672,
+    43673,
+    43674,
+    43675,
+    43676,
+    43677,
+    43678,
+    43679,
+    43680,
+    43681,
+}
 local checkReputations = {
     [1492] = "Emperor Shaohao",
 }
@@ -618,6 +656,7 @@ function wwtc:Initialise()
     charData.missions = charData.missions or {}
     charData.mounts = charData.mounts or {}
     charData.pets = charData.pets or {}
+    charData.quests = charData.quests or {}
     charData.reputations = charData.reputations or {}
     charData.scanTimes = charData.scanTimes or {}
     charData.ships = charData.ships or {}
@@ -713,8 +752,8 @@ function wwtc:UpdateCharacterData()
         wwtc:UpdateXP()
         wwtc:UpdateExhausted()
 
-        wwtc:ScanWeeklyQuests()
         wwtc:ScanCriteria()
+        wwtc:ScanQuests()
 
         RequestRaidInfo()
         C_ChallengeMode.RequestMapInfo()
@@ -1115,13 +1154,18 @@ function wwtc:ScanMythicDungeons()
     end
 end
 
--- Scan weekly quests
-function wwtc:ScanWeeklyQuests()
+-- Scan quests
+function wwtc:ScanQuests()
     if charData == nil then return end
 
+    charData.quests = {}
     charData.weeklyQuests = {}
 
-    for questID, _ in pairs(weeklyQuests) do
+    for _, questID in ipairs(checkQuests) do
+        charData.quests[questID] = IsQuestFlaggedCompleted(questID)
+    end
+
+    for questID, _ in ipairs(weeklyQuests) do
         charData.weeklyQuests[questID] = IsQuestFlaggedCompleted(questID)
     end
 end
