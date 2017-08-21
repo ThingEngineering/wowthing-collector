@@ -1,3 +1,7 @@
+v0.9.5
+------
+- Fixed artifact scanning FOR REAL THIS TIME.
+
 v0.9.4
 ------
 - Added achievement criteria scanning for things the API neglects to tell us about.
