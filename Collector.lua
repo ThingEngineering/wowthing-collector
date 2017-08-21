@@ -897,6 +897,8 @@ function wwtc:ParseArtifactLink(link)
     --                 2      34      5      6      7890   1   2        3 4 5   6   7 8 9    0    1    2 3    4    5    6 7    8    9
     -- |cffe6cc80|Hitem:128941::141277:143701:::::110:64:16777472:::188:1:3:3394:1487:3338:3:1824:1482:3338:|h[Scepter of Sargeras]|h|r (T2 destro)
     --                 2      34      5      67890   1  2        345   6 7 8    9    0    1 2    3    4
+    -- |cffe6cc80|Hitem:128937::142060:143698:141270::::110:64:16777472:9:1:733:123:1::3:3394:1522:3528:3:3394:1512:3336|h[Sheilun, Staff of the Mists]|h|r
+    --                 2      34      5      6      7890   1  2        3 4 5   6   7 89 0    1    2    3 4    5    6
     local itemString = string.match(link, 'item[%-?%d:]+')
     local itemParts = { strsplit(':', itemString) }
     local itemId, relic1Id, relic2Id, relic3Id, itemBonusCount = itemParts[2], itemParts[4], itemParts[5], itemParts[6], itemParts[14]
@@ -916,7 +918,7 @@ function wwtc:ParseArtifactLink(link)
     end
 
     -- Tier 2 artifacts have a 1 randomly, fun times
-    if tonumber(itemParts[bonusCountIndex]) == 1 and (tonumber(itemParts[bonusCountIndex+1]) <= 3 or itemParts[bonusCountIndex+1] == '') then
+    if tonumber(itemParts[bonusCountIndex]) == 1 and (itemParts[bonusCountIndex+1] == '' or tonumber(itemParts[bonusCountIndex+1]) <= 3) then
         bonusCountIndex = bonusCountIndex + 1
         artifact.tier = 2
     end
@@ -1602,3 +1604,9 @@ function wwtc:GetItemLevel(itemLink)
 end
 
 -------------------------------------------------------------------------------
+
+SLASH_WWTC1 = "/wwtc"
+SlashCmdList["WWTC"] = function(msg)
+    print('sigh')
+    wwtc:ParseArtifactLink(msg)
+end
