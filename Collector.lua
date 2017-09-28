@@ -213,9 +213,19 @@ local checkQuests = {
     43681,
 }
 local checkReputations = {
-    [1492] = "Emperor Shaohao",
+    1492, -- Emperor Shaohao
 }
-
+local paragonReputations = {
+    1828, -- Highmountain Tribe
+    1859, -- The Nightfallen
+    1883, -- Dreamweavers
+    1894, -- The Wardens
+    1900, -- Court of Farondis
+    1948, -- Valarjar
+    2045, -- Armies of Legionfall
+    2165, -- Army of the Light
+    2170, -- Argussian Reach
+}
 local artifactWeapons = {
     [128832] = true, -- Aldrachi Warblades
     [127857] = true, -- Aluneth
@@ -1338,14 +1348,26 @@ function wwtc:ScanReputations()
 
     charData.scanTimes['reputations'] = time()
     charData.reputations = {}
+    charData.paragons = {}
 
-    for factionID, _ in pairs(checkReputations) do
+    for i, factionID in ipairs(checkReputations) do
         local _, _, standingID, _, barMax, barValue = GetFactionInfoByID(factionID)
         charData.reputations[factionID] = {
             level = standingID,
             current = barValue,
             max_value = barMax,
         }
+    end
+
+    for i, factionID in ipairs(paragonReputations) do
+        if C_Reputation.IsFactionParagon(factionID) then
+            local currentValue, threshold, _, hasRewardPending = C_Reputation.GetFactionParagonInfo(factionID)
+            charData.paragons[factionID] = {
+                value = mod(currentValue, threshold),
+                maxValue = threshold,
+                hasReward = hasRewardPending,
+            }
+        end
     end
 end
 
