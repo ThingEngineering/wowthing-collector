@@ -163,16 +163,18 @@ local weeklyQuests = {
 
 -- Check things the Battle.net API is bugged for
 local checkMounts = {
-    [458] = 5656, -- Brown Horse
-    [10799] = 8592, -- Violet Raptor
-    [35028] = 34129, -- Swift Warstrider
-    [97501] = 69226, -- Felfire Hawk
+    --[458] = true, -- Brown Horse
+    [229376] = true, -- Archmage's Prismatic Disc (Mage Order Hall)
+    [229377] = true, -- Gift of the Holy Keepers (Priest Order Hall)
+    [229417] = true, -- Slayer's Felbroken Shrieker (Demon Hunter Order Hall)
+    [232412] = true, -- Netherlord's Chaotic Wrathsteed (Warlock Order Hall)
 }
 local checkPets = {
     [216] = 33239, -- Argent Gruntling
     [1350] = 73809, -- Sky Lantern
 }
 local checkQuests = {
+    -- Artifact Hidden Appearances
     43646,
     43647,
     43648,
@@ -1301,7 +1303,7 @@ function wwtc:ScanMounts()
     for _, mountID in ipairs(mountIDs) do
         local _, spellID, _, _, _, _, _, _, _, _, isCollected = C_MountJournal.GetMountInfoByID(mountID)
         if isCollected and checkMounts[spellID] then
-            charData.mounts[#charData.mounts+1] = checkMounts[spellID]
+            charData.mounts[#charData.mounts+1] = spellID
         end
     end
 end
