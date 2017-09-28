@@ -1,3 +1,11 @@
+v7.3.0.1
+--------
+- Added paragon reputation scanning.
+- Added the DH/Mage/Priest/Warlock Order Hall mounts to mount scanning.
+- Changed mount scanning to store spellIDs instead of itemIDs.
+- Removed The Nightfallen from reputation scanning, the API works properly now.
+- Arbitrarily changed the version scheme to be patch.version.
+
 v0.9.5
 ------
 - Fixed artifact scanning FOR REAL THIS TIME.
