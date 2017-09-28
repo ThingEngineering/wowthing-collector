@@ -267,6 +267,7 @@ local artifactWeapons = {
     [128825] = true, -- T'uure, Beacon of the Naaru
     [127829] = true, -- Twinblades of the Deceiver
     [128942] = true, -- Ulthalesh, the Deadwind Harvester
+    [133755] = true, -- Underlight Angler
     [129738] = true, -- Verus
     [128908] = true, -- Warswords of the Valarjar
     [128827] = true, -- Xal'atath, Blade of the Black Empire
