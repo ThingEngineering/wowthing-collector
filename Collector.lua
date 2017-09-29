@@ -68,6 +68,7 @@ local currencies = {
     1154, -- Shadowy Coins
     1149, -- Sightless Eye
     1268, -- Timeworn Artifact
+    1508, -- Veiled Argunite
     1501, -- Writhing Essence
 }
 
