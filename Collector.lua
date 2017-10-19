@@ -133,6 +133,15 @@ local LFRInstances = {
             {1497, 1}, -- Deceiver's Fall
         },
     },
+    {
+        name = 'Antorus',
+        instances = {
+            {1610, 3}, -- Light's Breach
+            {1611, 3}, -- Forbidden Descent
+            {1612, 3}, -- Hope's End
+            {1613, 2}, -- Seat of the Pantheon
+        },
+    },
 }
 
 -- World boss quests
