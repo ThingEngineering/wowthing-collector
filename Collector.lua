@@ -4,7 +4,7 @@ local charData, charName, guildName, playedLevel, playedLevelUpdated, playedTota
 local artifactsHooked, collectionsHooked, loggingOut = false, false, false
 local artifactOpen, bankOpen, crafterOpen, guildBankOpen = false, false, false, false
 local maxScannedToys = 0
-local dirtyArtifacts, dirtyBags, dirtyBuildings, dirtyFollowers, dirtyHonor, dirtyLockouts, dirtyMissions, dirtyMounts, dirtyPets, dirtyReputations, dirtyShipments, dirtyVoid =
+local dirtyArtifacts, dirtyBags, dirtyFollowers, dirtyHonor, dirtyLockouts, dirtyMissions, dirtyMounts, dirtyPets, dirtyReputations, dirtyVoid =
     false, {}, false, false, false, false, false, false, false, false, false, false
 
 -- Libs
@@ -468,56 +468,33 @@ function events:VOID_TRANSFER_DONE()
 end
 -- ??
 function events:GARRISON_UPDATE()
-    dirtyBuildings = true
     dirtyFollowers = true
 end
--- ??
-function events:GARRISON_BUILDING_UPDATE()
-    dirtyBuildings = true
+-- Fires whenever the available follower list changes
+function events:GARRISON_FOLLOWER_LIST_UPDATE()
+    dirtyFollowers = true
 end
--- ?? Fires when a garrison building is placed
-function events:GARRISON_BUILDING_PLACED()
-    dirtyBuildings = true
-end
--- ?? Fires when a garrison building is removed
-function events:GARRISON_BUILDING_REMOVED()
-    dirtyBuildings = true
-end
--- ?? Fires when a garrison building is updated
-function events:GARRISON_BUILDING_ACTIVATED()
-    dirtyBuildings = true
-end
--- Fires when the garrison shipment information has arrived
-function events:GARRISON_LANDINGPAGE_SHIPMENTS()
-    wwtc:ScanShipments()
-end
--- Fires when the garrison mission list updates?
-function events:GARRISON_MISSION_LIST_UPDATE()
-    dirtyMissions = true
-end
--- Fires when a work order crafter frame is opened
-function events:SHIPMENT_CRAFTER_OPENED()
-    crafterOpen = true
-end
--- Fires when a work order crafter frame is closed
-function events:SHIPMENT_CRAFTER_CLOSED()
-    crafterOpen = false
-end
--- ?? Fires ALL THE DAMN TIME
-function events:SHIPMENT_UPDATE()
-    dirtyShipments = true
-end
--- Fires when a new follower is added
+-- Fires when a follower is added
 function events:GARRISON_FOLLOWER_ADDED()
+    dirtyFollowers = true
+end
+-- Fires when a follower is removed
+function events:GARRISON_FOLLOWER_REMOVED()
     dirtyFollowers = true
 end
 -- Fires when a follower gains XP
 function events:GARRISON_FOLLOWER_XP_CHANGED()
     dirtyFollowers = true
 end
--- Fires whenever the available follower list changes
-function events:GARRISON_FOLLOWER_LIST_UPDATE()
+-- Fires when the garrison mission list updates?
+function events:GARRISON_MISSION_LIST_UPDATE()
     dirtyFollowers = true
+    dirtyMissions = true
+end
+--
+function events:GARRISON_MISSION_NPC_OPENED()
+    dirtyFollowers = true
+    dirtyMissions = true
 end
 
 -- Fires ??
@@ -598,11 +575,6 @@ function wwtc:Timer()
         dirtyArtifacts = false
         wwtc:ScanEquippedArtifact()
     end
-    -- Scan dirty buildings
-    if dirtyBuildings then
-        dirtyBuildings = false
-        wwtc:ScanBuildings()
-    end
     -- Scan dirty followers
     if dirtyFollowers then
         dirtyFollowers = false
@@ -637,12 +609,6 @@ function wwtc:Timer()
     if dirtyReputations then
         dirtyReputations = false
         wwtc:ScanReputations()
-    end
-    -- Scan dirty shipments
-    if dirtyShipments and not crafterOpen then
-        dirtyShipments = false
-        C_Garrison.RequestLandingPageShipmentInfo()
-        --wwtc:ScanShipments()
     end
 end
 
@@ -679,7 +645,6 @@ function wwtc:Initialise()
     charData.keystoneMax = 0
 
     charData.artifacts = charData.artifacts or {}
-    charData.buildings = charData.buildings or {}
     charData.currencies = charData.currencies or {}
     charData.followers = charData.followers or {}
     charData.honor = charData.honor or {}
@@ -691,7 +656,6 @@ function wwtc:Initialise()
     charData.quests = charData.quests or {}
     charData.reputations = charData.reputations or {}
     charData.scanTimes = charData.scanTimes or {}
-    charData.ships = charData.ships or {}
     charData.tradeSkills = charData.tradeSkills or {}
     charData.weeklyQuests = charData.weeklyQuests or {}
     charData.workOrders = charData.workOrders or {}
@@ -1409,87 +1373,50 @@ function wwtc:ScanToys()
     end
 end
 
--- Scan garrison buildings
-function wwtc:ScanBuildings()
-    if charData == nil then return end
-
-    charData.scanTimes['buildings'] = time()
-    charData.buildings = {}
-
-    local level, _, _, _ = C_Garrison.GetGarrisonInfo(LE_GARRISON_TYPE_6_0)
-    charData.garrisonLevel = level or 0
-
-    local buildings = C_Garrison.GetBuildings(LE_GARRISON_TYPE_6_0)
-    if buildings == nil then return end
-
-    for i = 1, #buildings do
-        charData.buildings[#charData.buildings+1] = buildings[i].buildingID
-    end
-end
-
--- Scan garrison followers
+-- Scan order hall followers
 function wwtc:ScanFollowers()
     if charData == nil then return end
 
     charData.scanTimes['followers'] = time()
     charData.followers = {}
-    charData.ships = {}
 
     -- Followers
-    local followers = C_Garrison.GetFollowers(LE_GARRISON_TYPE_6_0)
+    local followers = C_Garrison.GetFollowers(LE_FOLLOWER_TYPE_GARRISON_7_0)
     if followers == nil then return end
 
     for i = 1, #followers do
         local follower = followers[i]
         if follower.isCollected then
-            -- Fetch gear
-            local _, weaponItemLevel, _, armorItemLevel = C_Garrison.GetFollowerItems(follower.followerID)
-
             -- Fetch abilities
-            local abilityList = {}
+            local abilityList, equipmentList = {}, {}
+
             local abilities = C_Garrison.GetFollowerAbilities(follower.followerID)
             for j = 1, #abilities do
-                -- description, counters, id, name, icon, isTrait
-                abilityList[#abilityList+1] = abilities[j].id
+                local ability = abilities[j]
+                if ability.isTrait then
+                    equipmentList[#equipmentList+1] = ability.id
+                else
+                    abilityList[#abilityList+1] = ability.id
+                end
             end
 
-            local followerID = tonumber(follower.garrFollowerID, 16)
+            active = true
+            if follower.status == "Inactive" then active = false end
+
             charData.followers[#charData.followers+1] = {
-                id = followerID,
+                id = follower.garrFollowerID,
                 quality = follower.quality,
-                status = statusPriority[follower.status] or -1,
                 level = follower.level,
+                itemLevel = follower.iLevel,
                 currentXP = follower.xp,
                 levelXP = follower.levelXP,
-                weaponLevel = weaponItemLevel,
-                armorLevel = armorItemLevel,
+                isTroop = follower.isTroop,
+                isActive = follower.status ~= "Inactive",
+                spec = follower.classSpec,
                 abilities = abilityList,
-            }
-        end
-    end
-
-    -- Ships
-    local ships = C_Garrison.GetFollowers(LE_GARRISON_TYPE_6_0)
-    if ships == nil then return end
-
-    for i = 1, #ships do
-        local ship = ships[i]
-        if ship.isCollected then
-            -- Fetch abilities
-            local abilityList = {}
-            local abilities = C_Garrison.GetFollowerAbilities(ship.followerID)
-            for j = 1, #abilities do
-                abilityList[#abilityList+1] = abilities[j].id
-            end
-
-            local followerID = tonumber(ship.garrFollowerID, 16)
-            charData.ships[#charData.ships+1] = {
-                id = followerID,
-                quality = ship.quality,
-                status = statusPriority[ship.status] or -1,
-                currentXP = ship.xp,
-                levelXP = ship.levelXP,
-                abilities = abilityList,
+                equipment = equipmentList,
+                vitality = follower.durability,
+                maxVitality = follower.maxDurability,
             }
         end
     end
@@ -1570,35 +1497,6 @@ function wwtc:ScanMissions()
             charData.missions[#charData.missions+1] = {
                 id = mission.missionID,
             }
-        end
-    end
-end
-
--- Scan garrison shipments
-function wwtc:ScanShipments()
-    if charData == nil then return end
-
-    charData.scanTimes['shipments'] = time()
-    charData.workOrders = {}
-
-    local buildings = C_Garrison.GetBuildings(LE_GARRISON_TYPE_6_0)
-    if buildings == nil then return end
-
-    for i = 1, #buildings do
-        local buildingID = buildings[i].buildingID
-        if buildingID then
-            -- local name, texture, shipmentCapacity, shipmentsReady, shipmentsTotal, creationTime, duration, timeleftString, itemName, itemIcon, itemQuality, itemID = C_Garrison.GetLandingPageShipmentInfo(buildingID)
-            local _, _, shipmentCapacity, shipmentsReady, shipmentsTotal, creationTime, duration = C_Garrison.GetLandingPageShipmentInfo(buildingID)
-            if shipmentCapacity and shipmentCapacity > 0 then
-                charData.workOrders[#charData.workOrders+1] = {
-                    buildingID,
-                    shipmentCapacity,
-                    shipmentsReady,
-                    shipmentsTotal,
-                    creationTime,
-                    duration,
-                }
-            end
         end
     end
 end
