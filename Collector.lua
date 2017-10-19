@@ -163,11 +163,11 @@ local worldBossQuests = {
     [43985] = "Legion Bosses", -- Flotsam
     [44287] = "Legion Bosses", -- Withered Jim
 
-    [49165] = "Greater Invasions", -- Occularus
     [49166] = "Greater Invasions", -- Inquisitor Meto
     [49167] = "Greater Invasions", -- Mistress Alluradel
     [49168] = "Greater Invasions", -- Pit Lord Vilemus
     [49169] = "Greater Invasions", -- Matron Folnuna
+    [49170] = "Greater Invasions", -- Occularus
     [49171] = "Greater Invasions", -- Sotanathor
 }
 -- Weekly quests
