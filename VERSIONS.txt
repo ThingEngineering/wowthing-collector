@@ -1,3 +1,10 @@
+v7.3.0.3
+--------
+- Added Antorus to LFR lockout scanning.
+- Changed garrison follower scanning to order hall scanning.
+- Fixed Occularus weekly quest ID.
+- Removed garrison building scanning.
+
 v7.3.0.2
 --------
 - Added Greater Invasions to quest scanning.
