@@ -1,3 +1,8 @@
+v7.3.5.0
+--------
+- Added Wakening Essence to currency scanning.
+- Fixed "Antorus, the Burning Throne" LFR instance name.
+
 v7.3.0.3
 --------
 - Added Antorus to LFR lockout scanning.
