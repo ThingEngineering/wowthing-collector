@@ -69,6 +69,7 @@ local currencies = {
     1149, -- Sightless Eye
     1268, -- Timeworn Artifact
     1508, -- Veiled Argunite
+    1533, -- Wakening Essence
     1501, -- Writhing Essence
 }
 
