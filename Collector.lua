@@ -135,7 +135,7 @@ local LFRInstances = {
         },
     },
     {
-        name = 'Antorus',
+        name = 'Antorus, the Burning Throne',
         instances = {
             {1610, 3}, -- Light's Breach
             {1611, 3}, -- Forbidden Descent
