@@ -524,6 +524,10 @@ end
 function events:ARTIFACT_UPDATE()
     dirtyArtifacts = true
 end
+-- Fires when Netherlight Crucible updates?
+function events:ARTIFACT_RELIC_FORGE_UPDATE()
+    dirtyArtifacts = true
+end
 -- Fires when the player (or inspected unit) equips or unequips items
 function events:UNIT_INVENTORY_CHANGED(unit)
     if unit == 'player' then
@@ -1202,18 +1206,33 @@ function wwtc:HookArtifacts()
     else
         if not artifactsHooked then
             -- Hook artifacts
-            local aframe = _G["ArtifactFrame"]
-            if aframe then
-                aframe:HookScript("OnShow", function(self)
+            local aFrame = _G["ArtifactFrame"]
+            if aFrame then
+                aFrame:HookScript("OnShow", function(self)
                     wwtc:ScanArtifactTraits()
                     wwtc:ScanOpenArtifact()
                     artifactOpen = true
                 end)
-                aframe:HookScript("OnHide", function(self)
+                aFrame:HookScript("OnHide", function(self)
                     artifactOpen = false
                 end)
             else
                 print("WoWthing_Collector: unable to hook 'ArtifactFrame' frame!")
+            end
+
+            -- Hook Netherlight Crucible
+            local nfFrame = _G["ArtifactRelicForgeFrame"]
+            if nfFrame then
+                nfFrame:HookScript("OnShow", function(self)
+                    wwtc:ScanArtifactTraits()
+                    wwtc:ScanOpenArtifact()
+                    artifactOpen = true
+                end)
+                nfFrame:HookScript("OnHide", function(self)
+                    artifactOpen = false
+                end)
+            else
+                print("WoWthing_Collector: unable to hook 'ArtifactRelicForgeFrame' frame!")
             end
 
             artifactsHooked = true
@@ -1224,14 +1243,31 @@ end
 function wwtc:ScanArtifactTraits()
     local itemId, _ = C_ArtifactUI.GetArtifactInfo()
     local artifact = charData.artifacts[itemId] or {}
-    artifact.traits = {}
 
     local powers = C_ArtifactUI.GetPowers()
-    if powers == nil then return end
+    if powers ~= nil then
+        artifact.traits = {}
+        for _, powerId in ipairs(powers) do
+            local powerData = C_ArtifactUI.GetPowerInfo(powerId)
+            artifact.traits[powerId] = powerData.currentRank - powerData.bonusRanks
+        end
+    end
 
-    for _, powerId in ipairs(powers) do
-        local powerData = C_ArtifactUI.GetPowerInfo(powerId)
-        artifact.traits[powerId] = powerData.currentRank - powerData.bonusRanks
+    -- Scan Netherlight Crucible traits too
+    if C_ArtifactRelicForgeUI.IsAtForge() then
+        artifact.crucible = { {}, {}, {} }
+        for i = 1, 3 do
+            local relicTalents = C_ArtifactRelicForgeUI.GetSocketedRelicTalents(i)
+            if relicTalents ~= nil then
+                local relic = {}
+                for _, relicTalent in ipairs(relicTalents) do
+                    if relicTalent.isChosen then
+                        relic[#relic+1] = relicTalent.powerID
+                    end
+                end
+                artifact.crucible[i] = relic
+            end
+        end
     end
 
     charData.artifacts[itemId] = artifact
