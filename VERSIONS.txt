@@ -1,3 +1,8 @@
+v7.3.5.2
+--------
+- Added Order Hall research scanning.
+- Added "Fuel of a Doomed World" quest as a fake "Pristine Argunite" world boss.
+
 v7.3.5.1
 --------
 - Added Netherlight Crucible scanning.
