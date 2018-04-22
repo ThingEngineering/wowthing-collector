@@ -1,6 +1,6 @@
 -- Things
 local wwtc = {}
-local charData, charName, guildName, playedLevel, playedLevelUpdated, playedTotal, playedTotalUpdated, regionName
+local charClassID, charData, charName, guildName, playedLevel, playedLevelUpdated, playedTotal, playedTotalUpdated, regionName
 local artifactsHooked, collectionsHooked, loggingOut = false, false, false
 local artifactOpen, bankOpen, crafterOpen, guildBankOpen = false, false, false, false
 local maxScannedToys = 0
@@ -485,6 +485,10 @@ end
 function events:GARRISON_FOLLOWER_REMOVED()
     dirtyFollowers = true
 end
+-- ?? Probably when shipments show up
+function events:GARRISON_LANDINGPAGE_SHIPMENTS()
+    wwtc:ScanOrderHallResearch()
+end
 -- Fires when a follower gains XP
 function events:GARRISON_FOLLOWER_XP_CHANGED()
     dirtyFollowers = true
@@ -628,6 +632,7 @@ function wwtc:Initialise()
     local _, realm, _, _, _, _, region = LibRealmInfo:GetRealmInfoByUnit("player")
     regionName = region or GetCurrentRegion()
     charName = regionName .. " - " .. realm .. " - " .. UnitName("player")
+    charClassID = select(3, UnitClass("player"))
 
     -- Set up character data table
     charData = WWTCSaved.chars[charName] or {}
@@ -659,6 +664,7 @@ function wwtc:Initialise()
     charData.lockouts = charData.lockouts or {}
     charData.missions = charData.missions or {}
     charData.mounts = charData.mounts or {}
+    charData.orderHallResearch = charData.orderHallResearch or {}
     charData.pets = charData.pets or {}
     charData.quests = charData.quests or {}
     charData.reputations = charData.reputations or {}
@@ -1538,6 +1544,48 @@ function wwtc:ScanMissions()
             }
         end
     end
+end
+
+function wwtc:ScanOrderHallResearch()
+    if charData == nil then return end
+
+    local talentTreeIDs = C_Garrison.GetTalentTreeIDsByClassID(LE_GARRISON_TYPE_7_0, charClassID)
+    if talentTreeIDs and talentTreeIDs[1] then
+        charData.orderHallResearch = {}
+
+        local talentTree = select(3, C_Garrison.GetTalentTreeInfoForID(talentTreeIDs[1]))
+        for _, talent in ipairs(talentTree) do
+            if talent.selected then
+                local finishes = 0
+                if talent.isBeingResearched then
+                    finishes = talent.researchStartTime + talent.researchDuration
+                end
+                charData.orderHallResearch[talent.tier+1] = {
+                    id = talent.id,
+                    finishes = finishes,
+                }
+            end
+        end
+    end
+    -- {
+    --     ["isBeingResearched"] = true,
+    --     ["description"] = "Increase the number of Legendary items you can equip by 1.",
+    --     ["perkSpellID"] = 0,
+    --     ["researchCost"] = 5000,
+    --     ["researchDuration"] = 86400,
+    --     ["tier"] = 5,
+    --     ["selected"] = true,
+    --     ["icon"] = 1247265,
+    --     ["researched"] = false,
+    --     ["talentAvailability"] = 8,
+    --     ["id"] = 423,
+    --     ["researchCurrency"] = 1220,
+    --     ["name"] = "Demonic Fate",
+    --     ["researchTimeRemaining"] = 35918,
+    --     ["uiOrder"] = 0,
+    --     ["researchGoldCost"] = 0,
+    --     ["researchStartTime"] = 1524344516,
+    -- }, -- [14]
 end
 
 -- Scan honor stuff
