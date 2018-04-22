@@ -170,6 +170,8 @@ local worldBossQuests = {
     [49169] = "Greater Invasions", -- Matron Folnuna
     [49170] = "Greater Invasions", -- Occularus
     [49171] = "Greater Invasions", -- Sotanathor
+
+    [48799] = "Pristine Argunite", -- Fuel of a Doomed World weekly
 }
 -- Weekly quests
 local weeklyQuests = {
