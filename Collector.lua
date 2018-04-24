@@ -1,6 +1,6 @@
 -- Things
 local wwtc = {}
-local charClassID, charData, charName, guildName, playedLevel, playedLevelUpdated, playedTotal, playedTotalUpdated, regionName
+local charClassID, charData, charName, guildName, playedLevel, playedLevelUpdated, playedTotal, playedTotalUpdated, regionName, zoneDiff
 local artifactsHooked, collectionsHooked, loggingOut = false, false, false
 local artifactOpen, bankOpen, crafterOpen, guildBankOpen = false, false, false, false
 local maxScannedToys = 0
@@ -326,6 +326,9 @@ function events:ADDON_LOADED(name)
         -- Backwards compat hacks
         WWTCSaved.heirlooms = WWTCSaved.heirlooms or {}
         WWTCSaved.toys = WWTCSaved.toys or {}
+
+        -- Timezones suck
+        wwtc:CalculateTimeZoneDiff()
 
         -- Perform any cleanup
         wwtc:Cleanup()
@@ -671,6 +674,7 @@ function wwtc:Initialise()
     charData.scanTimes = charData.scanTimes or {}
     charData.tradeSkills = charData.tradeSkills or {}
     charData.weeklyQuests = charData.weeklyQuests or {}
+    charData.worldQuests = charData.worldQuests or {}
     charData.workOrders = charData.workOrders or {}
 
     charData.dailyResetTime = wwtc:GetDailyResetTime()
@@ -693,6 +697,14 @@ end
 function wwtc:Logout()
     loggingOut = true
     wwtc:UpdateCharacterData()
+end
+
+function wwtc:CalculateTimeZoneDiff()
+    local now = time()
+    local d1 = date("*t", now)
+    local d2 = date("!*t", now)
+    d1.isdst = false
+    zoneDiff = difftime(time(d1), time(d2))
 end
 
 function wwtc:Cleanup()
@@ -763,6 +775,7 @@ function wwtc:UpdateCharacterData()
 
         wwtc:ScanCriteria()
         wwtc:ScanQuests()
+        wwtc:ScanWorldQuests()
 
         RequestRaidInfo()
         C_ChallengeMode.RequestMapInfo()
@@ -1140,12 +1153,12 @@ function wwtc:ScanLockouts()
     for questID, instanceName in pairs(worldBossQuests) do
         if IsQuestFlaggedCompleted(questID) then
             charData.lockouts[#charData.lockouts+1] = {
-            name = instanceName,
-            weeklyQuest = true,
-            difficulty = 0,
-            defeatedBosses = 1,
-            maxBosses = 1,
-        }
+                name = instanceName,
+                weeklyQuest = true,
+                difficulty = 0,
+                defeatedBosses = 1,
+                maxBosses = 1,
+            }
         end
     end
 end
@@ -1178,6 +1191,73 @@ function wwtc:ScanQuests()
 
     for questID, _ in ipairs(weeklyQuests) do
         charData.weeklyQuests[questID] = IsQuestFlaggedCompleted(questID)
+    end
+end
+
+-- Scan world quests
+function wwtc:ScanWorldQuests()
+    if charData == nil then return end
+
+    local now = time()
+    charData.scanTimes["worldQuests"] = now
+    charData.worldQuests = {}
+
+    local bountyQuests = GetQuestBountyInfoForMapID(1014) -- Dalaran City
+    for _, bountyInfo in ipairs(bountyQuests) do
+        -- factionID => 1883
+        -- icon => 1394953
+        -- numObjectives => 1
+        -- questID => 42170
+
+        local timeLeft = C_TaskQuest.GetQuestTimeLeftMinutes(bountyInfo.questID)
+        local _, _, finished, numFulfilled, numRequired = GetQuestObjectiveInfo(bountyInfo.questID, 1, false)
+
+        local index = 3
+        if timeLeft < 1440 then
+            index = 1
+        elseif timeLeft < 2880 then
+            index = 2
+        end
+        
+        charData.worldQuests['day ' .. index] = {
+            faction = bountyInfo.factionID,
+            expires = now + (timeLeft * 60),
+            finished = finished,
+            numCompleted = numFulfilled,
+            numRequired = numRequired,
+        }
+    end
+
+    -- World Quest unlock quest
+    if IsQuestFlaggedCompleted(43341) then
+        local resetDates = {}
+
+        local nowDate = date("!*t", now) -- reset is 15:00:00 UTC, 08:00:00 PST?
+        local addDay = (nowDate.hour >= 15)
+        
+        nowDate.sec = zoneDiff -- we need UTC times, add the stupid timezone difference
+        nowDate.min = 0
+        nowDate.hour = 15
+
+        resetDates[1] = time(nowDate)
+        if addDay then
+            resetDates[1] = resetDates[1] + 86400
+        end
+        resetDates[2] = resetDates[1] + 86400
+        resetDates[3] = resetDates[2] + 86400
+
+        for i = 1, 3 do
+            local key = 'day ' .. i
+            if charData.worldQuests[key] == nil then
+                charData.worldQuests['day ' .. i] = {
+                    faction = 0,
+                    expires = resetDates[i],
+                    finished = true,
+                    numCompleted = 1,
+                    numRequired = 1,
+                }                
+            end
+        end
     end
 end
 
@@ -1635,5 +1715,10 @@ end
 SLASH_WWTC1 = "/wwtc"
 SlashCmdList["WWTC"] = function(msg)
     print('sigh')
-    wwtc:ParseArtifactLink(msg)
+    wwtc:ScanWorldQuests()
+end
+
+SLASH_RL1 = "/rl"
+SlashCmdList["RL"] = function(msg)
+    ReloadUI()
 end
