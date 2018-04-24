@@ -4,8 +4,8 @@ local charClassID, charData, charName, guildName, playedLevel, playedLevelUpdate
 local artifactsHooked, collectionsHooked, loggingOut = false, false, false
 local artifactOpen, bankOpen, crafterOpen, guildBankOpen = false, false, false, false
 local maxScannedToys = 0
-local dirtyArtifacts, dirtyBags, dirtyFollowers, dirtyHonor, dirtyLockouts, dirtyMissions, dirtyMounts, dirtyPets, dirtyReputations, dirtyVoid =
-    false, {}, false, false, false, false, false, false, false, false, false, false
+local dirtyArtifacts, dirtyBags, dirtyFollowers, dirtyHonor, dirtyLockouts, dirtyMissions, dirtyMounts, dirtyPets, dirtyReputations, dirtyVoid, dirtyWorldQuests =
+    false, {}, false, false, false, false, false, false, false, false, false, false, false
 
 -- Libs
 local LibRealmInfo = LibStub('LibRealmInfo10Fixed')
@@ -399,7 +399,6 @@ function events:LFG_BONUS_FACTION_ID_UPDATED()
     local bonusFaction, _ = GetLFGBonusFactionID()
     charData.bonusFaction = bonusFaction
 end
-
 -- Fires when RequestRaidInfo() completes
 function events:UPDATE_INSTANCE_INFO()
     dirtyLockouts = true
@@ -506,7 +505,6 @@ function events:GARRISON_MISSION_NPC_OPENED()
     dirtyFollowers = true
     dirtyMissions = true
 end
-
 -- Fires ??
 function events:COMPANION_UPDATE()
     dirtyMounts = true
@@ -559,6 +557,10 @@ end
 function events:CHALLENGE_MODE_MAPS_UPDATE()
     wwtc:ScanMythicDungeons()
 end
+-- Fires A LOT, whenever just about anything happens with quests
+function events:QUEST_LOG_UPDATE()
+    dirtyWorldQuests = true
+end
 
 -------------------------------------------------------------------------------
 -- Call functions in the events table for events
@@ -584,6 +586,7 @@ function wwtc:Timer()
         dirtyVoid = false
         wwtc:ScanVoidStorage()
     end
+
     -- Scan dirty artifacts
     if dirtyArtifacts then
         dirtyArtifacts = false
@@ -624,8 +627,13 @@ function wwtc:Timer()
         dirtyReputations = false
         wwtc:ScanReputations()
     end
+    -- Scan dirty world quests
+    if dirtyWorldQuests then
+        dirtyWorldQuests = false
+        wwtc:ScanWorldQuests()
+    end
 end
-
+-- Run the timer once per second to do chunky things
 local _ = C_Timer.NewTicker(1, function() wwtc:Timer() end, nil)
 
 -------------------------------------------------------------------------------
@@ -1229,7 +1237,7 @@ function wwtc:ScanWorldQuests()
     end
 
     -- World Quest unlock quest
-    if IsQuestFlaggedCompleted(43341) then
+    if #charData.worldQuests < 3 and IsQuestFlaggedCompleted(43341) then
         local resetDates = {}
 
         local nowDate = date("!*t", now) -- reset is 15:00:00 UTC, 08:00:00 PST?
@@ -1249,7 +1257,7 @@ function wwtc:ScanWorldQuests()
         for i = 1, 3 do
             local key = 'day ' .. i
             if charData.worldQuests[key] == nil then
-                charData.worldQuests['day ' .. i] = {
+                charData.worldQuests[key] = {
                     faction = 0,
                     expires = resetDates[i],
                     finished = true,
