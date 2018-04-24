@@ -1,3 +1,7 @@
+v7.3.5.5
+--------
+- Changed World Quest scanning to hook the quest log update event and scan more regularly, fixes the 3rd day not always detecting properly.
+
 v7.3.5.4
 --------
 - Added World Quest emissary cache scanning.
