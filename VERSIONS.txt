@@ -1,3 +1,7 @@
+v7.3.5.3
+--------
+- Fixed Reagent Bank not updating properly when consuming items from outside the bank.
+
 v7.3.5.2
 --------
 - Added Order Hall research scanning.
