@@ -653,9 +653,6 @@ function wwtc:Initialise()
     charData.copper = 0
     charData.flightSpeed = 0
     charData.groundSpeed = 0
-    charData.hiddenDungeons = 0
-    charData.hiddenKills = 0
-    charData.hiddenWorldQuests = 0
     charData.lastSeen = 0
     charData.playedLevel = 0
     charData.playedTotal = 0
@@ -666,6 +663,13 @@ function wwtc:Initialise()
     charData.keystoneInstance = 0
     charData.keystoneLevel = 0
     charData.keystoneMax = 0
+
+    charData.biggerFishToFry = {}
+    charData.hiddenDungeons = 0
+    charData.hiddenKills = 0
+    charData.hiddenWorldQuests = 0
+    charData.balanceUnleashedMonstrosities = {}
+    charData.balanceMythic15 = false
 
     charData.artifacts = charData.artifacts or {}
     charData.currencies = charData.currencies or {}
@@ -1063,6 +1067,16 @@ end
 -- Scan achievement criteria
 function wwtc:ScanCriteria()
     if charData == nil then return end
+
+    -- Legion rare fish
+    charData.biggerFishToFry = {}
+    local numCriteria = GetAchievementNumCriteria(10596)
+    for i = 1, numCriteria do
+        local _, _, completed = GetAchievementCriteriaInfo(10596, i)
+        if completed then
+            charData.biggerFishToFry[#charData.biggerFishToFry + 1] = i
+        end
+    end
 
     -- Hidden variations
     charData.hiddenDungeons = 0
