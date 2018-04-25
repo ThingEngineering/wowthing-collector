@@ -1064,18 +1064,32 @@ end
 function wwtc:ScanCriteria()
     if charData == nil then return end
 
+    -- Hidden variations
     charData.hiddenDungeons = 0
     local numCriteria = GetAchievementNumCriteria(11152)
     for i = 1, numCriteria do
-        local _, _, _, have = GetAchievementCriteriaInfo(11152, i)
-        charData.hiddenDungeons = charData.hiddenDungeons + have
+        local _, _, _, quantity = GetAchievementCriteriaInfo(11152, i)
+        charData.hiddenDungeons = charData.hiddenDungeons + quantity
     end
 
-    local _, _, _, have = GetAchievementCriteriaInfo(11153, 1)
-    charData.hiddenWorldQuests = have
+    local _, _, _, quantity = GetAchievementCriteriaInfo(11153, 1)
+    charData.hiddenWorldQuests = quantity
 
-    local _, _, _, have = GetAchievementCriteriaInfo(11154, 1)
-    charData.hiddenKills = have
+    local _, _, _, quantity = GetAchievementCriteriaInfo(11154, 1)
+    charData.hiddenKills = quantity
+
+    -- Balance of Power variations
+    charData.balanceUnleashedMonstrosities = {}
+    local numCriteria = GetAchievementNumCriteria(11160)
+    for i = 1, numCriteria do
+        local _, _, completed = GetAchievementCriteriaInfo(11160, i)
+        if completed then
+            charData.balanceUnleashedMonstrosities[#charData.balanceUnleashedMonstrosities + 1] = i
+        end
+    end
+
+    local wasEarnedByMe = select(13, GetAchievementInfo(11162))
+    charData.balanceMythic15 = wasEarnedByMe
 end
 
 -- Scan instance/LFR/world boss lockouts
@@ -1216,7 +1230,6 @@ function wwtc:ScanWorldQuests()
         -- icon => 1394953
         -- numObjectives => 1
         -- questID => 42170
-
         local timeLeft = C_TaskQuest.GetQuestTimeLeftMinutes(bountyInfo.questID)
         local _, _, finished, numFulfilled, numRequired = GetQuestObjectiveInfo(bountyInfo.questID, 1, false)
 
@@ -1723,7 +1736,7 @@ end
 SLASH_WWTC1 = "/wwtc"
 SlashCmdList["WWTC"] = function(msg)
     print('sigh')
-    wwtc:ScanWorldQuests()
+    wwtc:ScanCriteria()
 end
 
 SLASH_RL1 = "/rl"
