@@ -1,3 +1,8 @@
+v7.3.5.6
+--------
+- Added Bigger Fish to Fry to achievement scanning.
+- Added Balance of Power artifact appearance variations to achievement scanning.
+
 v7.3.5.5
 --------
 - Changed World Quest scanning to hook the quest log update event and scan more regularly, fixes the 3rd day not always detecting properly.
