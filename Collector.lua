@@ -1253,9 +1253,17 @@ function wwtc:ScanWorldQuests()
         elseif timeLeft < 2880 then
             index = 2
         end
+
+        -- Not sure why factionID is 0 for these, zzz
+        local factionID = bountyInfo.factionID
+        if bountyInfo.questID == 48639 then
+            factionID = 2165 -- Army of the Light
+        elseif bountyInfo.questID == 48642 then
+            factionID = 2170
+        end
         
         charData.worldQuests['day ' .. index] = {
-            faction = bountyInfo.factionID,
+            faction = factionID,
             expires = now + (timeLeft * 60),
             finished = finished,
             numCompleted = numFulfilled,
@@ -1750,7 +1758,7 @@ end
 SLASH_WWTC1 = "/wwtc"
 SlashCmdList["WWTC"] = function(msg)
     print('sigh')
-    wwtc:ScanCriteria()
+    wwtc:ScanWorldQuests()
 end
 
 SLASH_RL1 = "/rl"
