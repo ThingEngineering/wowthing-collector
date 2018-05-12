@@ -1069,11 +1069,12 @@ function wwtc:ScanCriteria()
     if charData == nil then return end
 
     -- Legion rare fish
+    local fishEarnedByMe = select(13, GetAchievementInfo(10596))
     charData.biggerFishToFry = {}
     local numCriteria = GetAchievementNumCriteria(10596)
     for i = 1, numCriteria do
         local _, _, completed = GetAchievementCriteriaInfo(10596, i)
-        if completed then
+        if fishEarnedByMe or completed then
             charData.biggerFishToFry[#charData.biggerFishToFry + 1] = i
         end
     end
@@ -1510,14 +1511,12 @@ function wwtc:ScanReputations()
     end
 
     for i, factionID in ipairs(paragonReputations) do
-        if C_Reputation.IsFactionParagon(factionID) then
-            local currentValue, threshold, _, hasRewardPending = C_Reputation.GetFactionParagonInfo(factionID)
-            charData.paragons[factionID] = {
-                value = mod(currentValue, threshold),
-                maxValue = threshold,
-                hasReward = hasRewardPending,
-            }
-        end
+        local currentValue, threshold, _, hasRewardPending = C_Reputation.GetFactionParagonInfo(factionID)
+        charData.paragons[factionID] = {
+            value = mod(currentValue, threshold),
+            maxValue = threshold,
+            hasReward = hasRewardPending,
+        }
     end
 end
 
