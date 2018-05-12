@@ -1,3 +1,8 @@
+v7.3.5.7
+--------
+- Fixed Bigger Fish to Fry achievement scanning when you have already completed it.
+- Fixed World Quest emissary cache scanning having an invalid faction ID for Argus factions.
+
 v7.3.5.6
 --------
 - Added Bigger Fish to Fry to achievement scanning.
