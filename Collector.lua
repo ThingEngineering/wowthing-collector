@@ -1510,12 +1510,14 @@ function wwtc:ScanReputations()
     end
 
     for i, factionID in ipairs(paragonReputations) do
-        local currentValue, threshold, _, hasRewardPending = C_Reputation.GetFactionParagonInfo(factionID)
-        charData.paragons[factionID] = {
-            value = mod(currentValue, threshold),
-            maxValue = threshold,
-            hasReward = hasRewardPending,
-        }
+        if C_Reputation.IsFactionParagon(factionID) then 
+            local currentValue, threshold, _, hasRewardPending = C_Reputation.GetFactionParagonInfo(factionID) 
+            charData.paragons[factionID] = { 
+                value = mod(currentValue, threshold), 
+                maxValue = threshold, 
+                hasReward = hasRewardPending, 
+            } 
+        end 
     end
 end
 
