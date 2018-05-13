@@ -715,7 +715,6 @@ function wwtc:CalculateTimeZoneDiff()
     local now = time()
     local d1 = date("*t", now)
     local d2 = date("!*t", now)
-    d1.isdst = false
     zoneDiff = difftime(time(d1), time(d2))
 end
 
