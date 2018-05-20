@@ -1,3 +1,8 @@
+v7.3.5.8
+--------
+- Fixed the paragon faction check, oops.
+- Fixed timezone calculation ignoring DST, oops.
+
 v7.3.5.7
 --------
 - Fixed Bigger Fish to Fry achievement scanning when you have already completed it.
