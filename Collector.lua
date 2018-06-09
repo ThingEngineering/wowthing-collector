@@ -867,7 +867,7 @@ function wwtc:ScanBag(bagID)
     if charData == nil then return end
 
     -- Short circuit if bank isn't open
-    if (bagID == -1 or (bagID >= 5 and bagID <= 11)) and not bankOpen then
+    if (bagID == -1 or bagID == -3 or (bagID >= 5 and bagID <= 11)) and not bankOpen then
         return
     end
 
