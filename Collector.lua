@@ -1258,8 +1258,10 @@ function wwtc:ScanWorldQuests()
         local factionID = bountyInfo.factionID
         if bountyInfo.questID == 48639 then
             factionID = 2165 -- Army of the Light
+        elseif bountyInfo.questID == 48641 then
+            factionID = 2045 -- Armies of Legionfall
         elseif bountyInfo.questID == 48642 then
-            factionID = 2170
+            factionID = 2170 -- Argussian Reach
         end
         
         charData.worldQuests['day ' .. index] = {
