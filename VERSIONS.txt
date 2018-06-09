@@ -1,3 +1,8 @@
+v7.3.5.9
+--------
+- Fixed World Quest emissary cache scanning having an invalid faction ID for Armies of Legionfall.
+- Fixed reagent bank scanning being able to trigger when the bank frame isn't open.
+
 v7.3.5.8
 --------
 - Fixed the paragon faction check, oops.
