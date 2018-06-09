@@ -2,7 +2,7 @@
 local wwtc = {}
 local charClassID, charData, charName, guildName, playedLevel, playedLevelUpdated, playedTotal, playedTotalUpdated, regionName, zoneDiff
 local artifactsHooked, collectionsHooked, loggingOut = false, false, false
-local artifactOpen, bankOpen, crafterOpen, guildBankOpen = false, false, false, false
+local artifactOpen, bankOpen, crafterOpen, guildBankOpen, reagentBankUpdated = false, false, false, false, false
 local maxScannedToys = 0
 local dirtyArtifacts, dirtyBags, dirtyFollowers, dirtyHonor, dirtyLockouts, dirtyMissions, dirtyMounts, dirtyPets, dirtyReputations, dirtyVoid, dirtyWorldQuests =
     false, {}, false, false, false, false, false, false, false, false, false, false, false
@@ -439,6 +439,7 @@ end
 -- Fires when something changes in the reagent bank
 function events:PLAYERREAGENTBANKSLOTS_CHANGED()
     dirtyBags[-3] = true
+    reagentBankUpdated = true
 end
 -- Fires when the guild bank opens
 function events:GUILDBANKFRAME_OPENED()
@@ -867,8 +868,15 @@ function wwtc:ScanBag(bagID)
     if charData == nil then return end
 
     -- Short circuit if bank isn't open
-    if (bagID == -1 or bagID == -3 or (bagID >= 5 and bagID <= 11)) and not bankOpen then
+    if (bagID == -1 or (bagID >= 5 and bagID <= 11)) and not bankOpen then
         return
+    end
+    -- Reagent bank is weird, make sure that the bank is open or it was actually updated
+    if bagID == -3 then
+        if not (bankOpen or reagentBankUpdated) then
+            return
+        end
+        reagentBankUpdated = false
     end
 
     local now = time()
