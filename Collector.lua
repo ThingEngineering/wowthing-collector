@@ -2,7 +2,7 @@
 local wwtc = {}
 local charClassID, charData, charName, guildName, playedLevel, playedLevelUpdated, playedTotal, playedTotalUpdated, regionName, zoneDiff
 local collectionsHooked, loggingOut = false, false
-local bankOpen, crafterOpen, guildBankOpen = false, false, false
+local bankOpen, crafterOpen, guildBankOpen, reagentBankUpdated = false, false, false, false
 local maxScannedToys = 0
 local dirtyBags, dirtyFollowers, dirtyHonor, dirtyLockouts, dirtyMissions, dirtyMounts, dirtyPets, dirtyReputations, dirtyVoid, dirtyWorldQuests =
     {}, false, false, false, false, false, false, false, false, false, false, false
@@ -434,6 +434,7 @@ end
 -- Fires when something changes in the reagent bank
 function events:PLAYERREAGENTBANKSLOTS_CHANGED()
     dirtyBags[-3] = true
+    reagentBankUpdated = true
 end
 -- Fires when the guild bank opens
 function events:GUILDBANKFRAME_OPENED()
@@ -815,6 +816,13 @@ function wwtc:ScanBag(bagID)
     if (bagID == -1 or (bagID >= 5 and bagID <= 11)) and not bankOpen then
         return
     end
+    -- Reagent bank is weird, make sure that the bank is open or it was actually updated
+    if bagID == -3 then
+        if not (bankOpen or reagentBankUpdated) then
+            return
+        end
+        reagentBankUpdated = false
+    end
 
     local now = time()
     if bagID >= 0 and bagID <= 4 then
@@ -1109,8 +1117,10 @@ function wwtc:ScanWorldQuests()
         local factionID = bountyInfo.factionID
         if bountyInfo.questID == 48639 then
             factionID = 2165 -- Army of the Light
+        elseif bountyInfo.questID == 48641 then
+            factionID = 2045 -- Armies of Legionfall
         elseif bountyInfo.questID == 48642 then
-            factionID = 2170
+            factionID = 2170 -- Argussian Reach
         end
         
         charData.worldQuests['day ' .. index] = {
