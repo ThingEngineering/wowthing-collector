@@ -1,3 +1,11 @@
+v8.0.1.1
+--------
+- Fixed Mythic+ scanning.
+- Disabled trade skill scanning until I can work out where the event went.
+- Removed artifact scanning.
+- Removed netherlight crucible scanning.
+- Removed prestige scanning.
+
 v7.3.5.8
 --------
 - Fixed the paragon faction check, oops.
