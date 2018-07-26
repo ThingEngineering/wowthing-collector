@@ -1,18 +1,18 @@
 -- Things
 local wwtc = {}
 local charClassID, charData, charName, guildName, playedLevel, playedLevelUpdated, playedTotal, playedTotalUpdated, regionName, zoneDiff
-local artifactsHooked, collectionsHooked, loggingOut = false, false, false
-local artifactOpen, bankOpen, crafterOpen, guildBankOpen = false, false, false, false
+local collectionsHooked, loggingOut = false, false
+local bankOpen, crafterOpen, guildBankOpen = false, false, false
 local maxScannedToys = 0
-local dirtyArtifacts, dirtyBags, dirtyFollowers, dirtyHonor, dirtyLockouts, dirtyMissions, dirtyMounts, dirtyPets, dirtyReputations, dirtyVoid, dirtyWorldQuests =
-    false, {}, false, false, false, false, false, false, false, false, false, false, false
+local dirtyBags, dirtyFollowers, dirtyHonor, dirtyLockouts, dirtyMissions, dirtyMounts, dirtyPets, dirtyReputations, dirtyVoid, dirtyWorldQuests =
+    {}, false, false, false, false, false, false, false, false, false, false, false
 
 -- Libs
 local LibRealmInfo = LibStub('LibRealmInfo10Fixed')
 
 -- Default SavedVariables
 local defaultWWTCSaved = {
-    version = 11,
+    version = 12,
     chars = {},
     guilds = {},
     heirlooms = {},
@@ -333,10 +333,6 @@ function events:ADDON_LOADED(name)
         -- Perform any cleanup
         wwtc:Cleanup()
 
-    -- Damn Artifacts!
-    elseif name == "Blizzard_ArtifactUI" then
-        wwtc:HookArtifacts()
-
     -- Damn Pet Journal!
     elseif name == "Blizzard_Collections" then
         wwtc:HookCollections()
@@ -357,7 +353,6 @@ function events:PLAYER_ENTERING_WORLD()
     --wwtc:Initialise()
 
     wwtc:UpdateCharacterData()
-    dirtyArtifacts = true
     dirtyHonor = true
 end
 -- Fires when /played information is available
@@ -408,9 +403,9 @@ function events:PLAYER_MONEY()
     charData.copper = GetMoney()
 end
 -- Fires when information about the contents of a trade skill recipe list changes or becomes available
-function events:TRADE_SKILL_UPDATE()
-    wwtc:ScanTradeSkills()
-end
+--function events:TRADE_SKILL_UPDATE()
+--    wwtc:ScanTradeSkills()
+--end
 -- Fires when a unit casts a spell - used for trade skill updating
 function events:UNIT_SPELLCAST_SUCCEEDED(evt, unit, spellName, rank, lineID, spellID)
     -- We only care about the player's trade skills
@@ -527,30 +522,12 @@ end
 function events:UPDATE_FACTION()
     dirtyReputations = true
 end
--- Fires when artifact.. updates?
-function events:ARTIFACT_UPDATE()
-    dirtyArtifacts = true
-end
--- Fires when Netherlight Crucible updates?
-function events:ARTIFACT_RELIC_FORGE_UPDATE()
-    dirtyArtifacts = true
-end
--- Fires when the player (or inspected unit) equips or unequips items
-function events:UNIT_INVENTORY_CHANGED(unit)
-    if unit == 'player' then
-        dirtyArtifacts = true
-    end
-end
 -- Fires when Honor XP updates
 function events:HONOR_XP_UPDATE()
     dirtyHonor = true
 end
 -- Fires when Honor level updates
 function events:HONOR_LEVEL_UPDATE()
-    dirtyHonor = true
-end
--- Fires when Prestige level updates
-function events:HONOR_PRESTIGE_UPDATE()
     dirtyHonor = true
 end
 -- Fires when Mythic dungeon map information updates
@@ -587,11 +564,6 @@ function wwtc:Timer()
         wwtc:ScanVoidStorage()
     end
 
-    -- Scan dirty artifacts
-    if dirtyArtifacts then
-        dirtyArtifacts = false
-        wwtc:ScanEquippedArtifact()
-    end
     -- Scan dirty followers
     if dirtyFollowers then
         dirtyFollowers = false
@@ -671,7 +643,6 @@ function wwtc:Initialise()
     charData.balanceUnleashedMonstrosities = {}
     charData.balanceMythic15 = false
 
-    charData.artifacts = charData.artifacts or {}
     charData.currencies = charData.currencies or {}
     charData.followers = charData.followers or {}
     charData.honor = charData.honor or {}
@@ -698,7 +669,6 @@ function wwtc:Login()
     wwtc:Initialise()
 
     -- Try to hook things
-    wwtc:HookArtifacts()
     wwtc:HookCollections()
 
     RequestTimePlayed()
@@ -789,7 +759,7 @@ function wwtc:UpdateCharacterData()
         wwtc:ScanWorldQuests()
 
         RequestRaidInfo()
-        C_ChallengeMode.RequestMapInfo()
+        C_MythicPlus.RequestMapInfo()
     end
 end
 
@@ -837,31 +807,6 @@ function wwtc:UpdateExhausted()
     end
 end
 
--- Update information on the equipped artifact
-function wwtc:ScanEquippedArtifact()
-    wwtc:CheckEquippedArtifact(16) -- Main hand
-    wwtc:CheckEquippedArtifact(17) -- Off hand
-
-    local itemId, _, _, _, powerAvailable, traitsPurchased = C_ArtifactUI.GetEquippedArtifactInfo()
-    if itemId ~= nil then
-        charData.artifacts[itemId].numTraits = traitsPurchased
-        charData.artifacts[itemId].xp = powerAvailable
-    end
-
-    if artifactOpen then
-        wwtc:ScanArtifactTraits()
-    end
-end
-
--- Update information on the open artifact
-function wwtc:ScanOpenArtifact()
-    local itemId, _, _, _, powerAvailable, traitsPurchased = C_ArtifactUI.GetArtifactInfo()
-    if itemId ~= nil then
-        charData.artifacts[itemId].numTraits = traitsPurchased
-        charData.artifacts[itemId].xp = powerAvailable
-    end
-end
-
 -- Scan a specific bag
 function wwtc:ScanBag(bagID)
     if charData == nil then return end
@@ -897,107 +842,13 @@ function wwtc:ScanBag(bagID)
 
                 -- Bags
                 if bagID >= 0 and bagID <= 4 then
-                    if quality == 6 then
-                        wwtc:ParseArtifactLink(link)
-                    else
+                    if quality == 4 then
                         wwtc:ParseKeystoneLink(link)
                     end
                 end
             end
         end
     end
-end
-
-function wwtc:CheckEquippedArtifact(slot)
-    local quality = GetInventoryItemQuality('player', slot)
-    if quality ~= nil and tonumber(quality) == 6 then
-        wwtc:ParseArtifactLink(GetInventoryItemLink('player', slot))
-    end
-end
-
-function wwtc:ParseArtifactLink(link)
-    -- |cffe6cc80|Hitem:128826::143704:143682:143821::::110:253:256:9:1:727:114:3:3473:1512:3336:3:3474:1512:3336:3:3462:1647:1813|h[Thas'dorah, Legacy of the Windrunners]|h|r"
-    --                 2      34      5      6      7890   1   2   3 4 5   6   7 8    9    0    1 2    3    4    5 6    7    8
-    -- |cffe6cc80|Hitem:128808::143688:143705:143798::::110:253:256:9:1:728:125:3:3474:1507:1674:3:3473:1522:3337:3:3462:1647:1813|h[Talonclaw]|h|r"
-    --                 2      34      5      6      7890   1   2   3 4 5   6   7 8    9    0    1 2    3    4    5 6    7    8
-    -- |cffe6cc80|Hitem:128861::137008:140810:137543::::110:253:16777472:9:1:726:918:1:3:1805:1492:3336:3:3516:1492:3336:3:3412:1512:3336|h[Titanstrike]|h|r
-    --                 2      34      5      6      7890   1   2        3 4 5   6   7 8 9    0    1    2 3    4    5    6 7    8    9
-    -- |cffe6cc80|Hitem:128860::::::::110:103:256:9:1:723:430:::|h[Fangs of Ashamane]|h|r" (T1 cat)
-    --                 2      34567890   1   2   3 4 5   6   789
-    -- |cffe6cc80|Hitem:128821::147090:136718:137327::::110:103:16777472:9:1:724:274:1:3:3562:1507:3336:3:1727:1532:3337:3:1727:1522:3336|h[Claws of Ursoc]|h|r" (T2 bear)
-    --                 2      34      5      6      7890   1   2        3 4 5   6   7 8 9    0    1    2 3    4    5    6 7    8    9
-    -- |cffe6cc80|Hitem:128941::141277:143701:::::110:64:16777472:::188:1:3:3394:1487:3338:3:1824:1482:3338:|h[Scepter of Sargeras]|h|r (T2 destro)
-    --                 2      34      5      67890   1  2        345   6 7 8    9    0    1 2    3    4
-    -- |cffe6cc80|Hitem:128937::142060:143698:141270::::110:64:16777472:9:1:733:123:1::3:3394:1522:3528:3:3394:1512:3336|h[Sheilun, Staff of the Mists]|h|r
-    --                 2      34      5      6      7890   1  2        3 4 5   6   7 89 0    1    2    3 4    5    6
-    local itemString = string.match(link, 'item[%-?%d:]+')
-    local itemParts = { strsplit(':', itemString) }
-    local itemId, relic1Id, relic2Id, relic3Id, itemBonusCount = itemParts[2], itemParts[4], itemParts[5], itemParts[6], itemParts[14]
-
-    itemId = tonumber(itemId)
-    if artifactWeapons[itemId] ~= true then return end
-
-    local artifact = charData.artifacts[itemId] or {}
-    artifact.relics = { {}, {}, {} }
-    artifact.bonusId = 0
-    artifact.tier = 1
-
-    local bonusCountIndex = 16
-    if itemBonusCount ~= '' then
-        artifact.bonusId = tonumber(itemParts[15]) -- might need to check for multiple in future
-        bonusCountIndex = bonusCountIndex + tonumber(itemBonusCount)
-    end
-
-    -- Tier 2 artifacts have a 1 randomly, fun times
-    if tonumber(itemParts[bonusCountIndex]) == 1 and (itemParts[bonusCountIndex+1] == '' or tonumber(itemParts[bonusCountIndex+1]) <= 3) then
-        bonusCountIndex = bonusCountIndex + 1
-        artifact.tier = 2
-    end
-
-    artifact.itemLevel = wwtc:GetItemLevel(link)
-
-    if relic1Id ~= '' then
-        local relic = { relic1Id }
-        local bonusCount = itemParts[bonusCountIndex]
-        if tonumber(bonusCount) then
-            bonusCount = tonumber(bonusCount)
-            for j = bonusCountIndex + 1, bonusCountIndex + bonusCount do
-                relic[#relic + 1] = itemParts[j]
-            end
-            bonusCountIndex = bonusCountIndex + bonusCount
-        end
-        artifact.relics[1] = relic
-    end
-    bonusCountIndex = bonusCountIndex + 1
-
-    if relic2Id ~= '' then
-        local relic = { relic2Id }
-        local bonusCount = itemParts[bonusCountIndex]
-        if tonumber(bonusCount) then
-            bonusCount = tonumber(bonusCount)
-            for j = bonusCountIndex + 1, bonusCountIndex + bonusCount do
-                relic[#relic + 1] = itemParts[j]
-            end
-            bonusCountIndex = bonusCountIndex + bonusCount
-        end
-        artifact.relics[2] = relic
-    end
-    bonusCountIndex = bonusCountIndex + 1
-
-    if relic3Id ~= '' then
-        local relic = { relic3Id }
-        local bonusCount = itemParts[bonusCountIndex]
-        if tonumber(bonusCount) then
-            bonusCount = tonumber(bonusCount)
-            for j = bonusCountIndex + 1, bonusCountIndex + bonusCount do
-                relic[#relic + 1] = itemParts[j]
-            end
-            bonusCountIndex = bonusCountIndex + bonusCount
-        end
-        artifact.relics[3] = relic
-    end
-
-    charData.artifacts[itemId] = artifact
 end
 
 function wwtc:ParseKeystoneLink(link)
@@ -1207,8 +1058,8 @@ function wwtc:ScanMythicDungeons()
 
     local maps = C_ChallengeMode.GetMapTable()
     for i = 1, #maps do
-        local _, _, level = C_ChallengeMode.GetMapPlayerStats(maps[i]);
-        if level and level > charData.keystoneMax then
+	local _, weeklyLevel = C_MythicPlus.GetWeeklyBestForMap(maps[i])
+		if weeklyLevel and weeklyLevel > charData.keystoneMax then
             charData.keystoneMax = level
         end
     end
@@ -1328,80 +1179,6 @@ function wwtc:ScanTradeSkills()
             end
         end
     end
-end
-
--- Hook Blizzard_ArtifactUI for scanning
-function wwtc:HookArtifacts()
-    if not IsAddOnLoaded("Blizzard_ArtifactUI") then
-        UIParentLoadAddOn("Blizzard_ArtifactUI")
-    else
-        if not artifactsHooked then
-            -- Hook artifacts
-            local aFrame = _G["ArtifactFrame"]
-            if aFrame then
-                aFrame:HookScript("OnShow", function(self)
-                    wwtc:ScanArtifactTraits()
-                    wwtc:ScanOpenArtifact()
-                    artifactOpen = true
-                end)
-                aFrame:HookScript("OnHide", function(self)
-                    artifactOpen = false
-                end)
-            else
-                print("WoWthing_Collector: unable to hook 'ArtifactFrame' frame!")
-            end
-
-            -- Hook Netherlight Crucible
-            local nfFrame = _G["ArtifactRelicForgeFrame"]
-            if nfFrame then
-                nfFrame:HookScript("OnShow", function(self)
-                    wwtc:ScanArtifactTraits()
-                    wwtc:ScanOpenArtifact()
-                    artifactOpen = true
-                end)
-                nfFrame:HookScript("OnHide", function(self)
-                    artifactOpen = false
-                end)
-            else
-                print("WoWthing_Collector: unable to hook 'ArtifactRelicForgeFrame' frame!")
-            end
-
-            artifactsHooked = true
-        end
-    end
-end
-
-function wwtc:ScanArtifactTraits()
-    local itemId, _ = C_ArtifactUI.GetArtifactInfo()
-    local artifact = charData.artifacts[itemId] or {}
-
-    local powers = C_ArtifactUI.GetPowers()
-    if powers ~= nil then
-        artifact.traits = {}
-        for _, powerId in ipairs(powers) do
-            local powerData = C_ArtifactUI.GetPowerInfo(powerId)
-            artifact.traits[powerId] = powerData.currentRank - powerData.bonusRanks
-        end
-    end
-
-    -- Scan Netherlight Crucible traits too
-    if C_ArtifactRelicForgeUI.IsAtForge() then
-        artifact.crucible = { {}, {}, {} }
-        for i = 1, 3 do
-            local relicTalents = C_ArtifactRelicForgeUI.GetSocketedRelicTalents(i)
-            if relicTalents ~= nil then
-                local relic = {}
-                for _, relicTalent in ipairs(relicTalents) do
-                    if relicTalent.isChosen then
-                        relic[#relic+1] = relicTalent.powerID
-                    end
-                end
-                artifact.crucible[i] = relic
-            end
-        end
-    end
-
-    charData.artifacts[itemId] = artifact
 end
 
 -- Hook various Blizzard_Collections things for scanning
@@ -1719,7 +1496,6 @@ function wwtc:ScanHonor()
         level = UnitHonorLevel("player"),
         current = UnitHonor("player"),
         max = UnitHonorMax("player"),
-        prestige = UnitPrestige("player"),
    }
 end
 
