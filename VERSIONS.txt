@@ -1,3 +1,8 @@
+v8.0.1.2
+--------
+- Fixed Mythic+ scanning again, oops.
+- Fixed Mythic+ keystone scanning.
+
 v8.0.1.1
 --------
 - Fixed Mythic+ scanning.
