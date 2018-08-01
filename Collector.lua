@@ -1068,7 +1068,7 @@ function wwtc:ScanMythicDungeons()
     for i = 1, #maps do
 	local _, weeklyLevel = C_MythicPlus.GetWeeklyBestForMap(maps[i])
 		if weeklyLevel and weeklyLevel > charData.keystoneMax then
-            charData.keystoneMax = level
+            charData.keystoneMax = weeklyLevel
         end
     end
 end
