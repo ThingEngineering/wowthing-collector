@@ -860,8 +860,9 @@ function wwtc:ScanBag(bagID)
 end
 
 function wwtc:ParseKeystoneLink(link)
-    local instance, difficulty = link:match("keystone:(%d+):(%d+):")
-    if tonumber(instance) and tonumber(difficulty) then
+    local itemID< instance, difficulty = link:match("keystone:(%d+):(%d+):(%d+):")
+    if tonumber(itemID) and tonumber(instance) and tonumber(difficulty) then
+		-- TODO: handle old (138019) and new (158923) keystones properly
         charData.keystoneInstance = instance
         charData.keystoneLevel = difficulty
     end
