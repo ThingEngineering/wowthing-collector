@@ -296,6 +296,7 @@ local artifactWeapons = {
 
 -- Misc constants
 local CURRENCY_GARRISON = 824
+local MAP_DALARAN = 627
 local SLOTS_PER_GUILD_BANK_TAB = 98
 local SLOTS_PER_VOID_STORAGE_TAB = 80
 
@@ -1098,7 +1099,7 @@ function wwtc:ScanWorldQuests()
     charData.scanTimes["worldQuests"] = now
     charData.worldQuests = {}
 
-    local bountyQuests = GetQuestBountyInfoForMapID(1014) -- Dalaran City
+    local bountyQuests = GetQuestBountyInfoForMapID(MAP_DALARAN)
     for _, bountyInfo in ipairs(bountyQuests) do
         -- factionID => 1883
         -- icon => 1394953
