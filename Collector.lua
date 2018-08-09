@@ -846,8 +846,8 @@ function wwtc:ScanBag(bagID)
         for i = 1, numSlots do
             local texture, count, locked, quality, readable, lootable, link, isFiltered = GetContainerItemInfo(bagID, i)
             if count ~= nil and link ~= nil then
-                local itemID = wwtc:GetItemID(link)
-                bag["s"..i] = { count, itemID }
+                local itemID, extra = wwtc:ParseItemLink(link)
+                bag["s"..i] = { count, itemID, quality, extra }
 
                 -- Bags
                 if bagID >= 0 and bagID <= 4 then
@@ -899,7 +899,7 @@ function wwtc:ScanGuildBankTab()
         local link = GetGuildBankItemLink(tabID, i)
         if link ~= nil then
             local texture, count, locked = GetGuildBankItemInfo(tabID, i)
-            tab["s"..i] = { count, wwtc:GetItemID(link) }
+            tab["s"..i] = { count, wwtc:ParseItemLink(link).itemID }
         end
     end
 end
@@ -1514,9 +1514,28 @@ end
 -------------------------------------------------------------------------------
 -- Util functions
 -------------------------------------------------------------------------------
--- Get a numeric itemID from an item link
-function wwtc:GetItemID(link)
-    return tonumber(link:match("item:(%d+)"))
+-- Parse an item link and return useful information
+function wwtc:ParseItemLink(link)
+    local parts = { strsplit(":", link) }
+    local itemID = tonumber(parts[2])
+    local extra = {
+        enchant = tonumber(parts[3]),
+        gem1 = tonumber(parts[4]),
+        gem2 = tonumber(parts[5]),
+        gem3 = tonumber(parts[6]),
+        gem4 = tonumber(parts[7]),
+        suffix = tonumber(parts[8]),
+        difficulty = tonumber(parts[13]),
+    }
+
+    local numBonusIDs = tonumber(parts[14])
+    if numBonusIDs ~= nil then
+        for i = 1, numBonusIDs do
+            extra["bonus"..i] = tonumber(parts[14 + i])
+        end
+    end
+
+    return itemID, extra
 end
 
 -- Returns the daily quest reset time in the local timezone
@@ -1546,7 +1565,8 @@ end
 SLASH_WWTC1 = "/wwtc"
 SlashCmdList["WWTC"] = function(msg)
     print('sigh')
-    wwtc:ScanWorldQuests()
+    --wwtc:ScanWorldQuests()
+    wwtc:ParseItemLink(msg)
 end
 
 SLASH_RL1 = "/rl"
