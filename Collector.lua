@@ -1109,32 +1109,34 @@ function wwtc:ScanWorldQuests()
         -- numObjectives => 1
         -- questID => 42170
         local timeLeft = C_TaskQuest.GetQuestTimeLeftMinutes(bountyInfo.questID)
-        local _, _, finished, numFulfilled, numRequired = GetQuestObjectiveInfo(bountyInfo.questID, 1, false)
+        if timeLeft ~= nil then
+            local _, _, finished, numFulfilled, numRequired = GetQuestObjectiveInfo(bountyInfo.questID, 1, false)
 
-        local index = 3
-        if timeLeft < 1440 then
-            index = 1
-        elseif timeLeft < 2880 then
-            index = 2
-        end
+            local index = 3
+            if timeLeft < 1440 then
+                index = 1
+            elseif timeLeft < 2880 then
+                index = 2
+            end
 
-        -- Not sure why factionID is 0 for these, zzz
-        local factionID = bountyInfo.factionID
-        if bountyInfo.questID == 48639 then
-            factionID = 2165 -- Army of the Light
-        elseif bountyInfo.questID == 48641 then
-            factionID = 2045 -- Armies of Legionfall
-        elseif bountyInfo.questID == 48642 then
-            factionID = 2170 -- Argussian Reach
+            -- Not sure why factionID is 0 for these, zzz
+            local factionID = bountyInfo.factionID
+            if bountyInfo.questID == 48639 then
+                factionID = 2165 -- Army of the Light
+            elseif bountyInfo.questID == 48641 then
+                factionID = 2045 -- Armies of Legionfall
+            elseif bountyInfo.questID == 48642 then
+                factionID = 2170 -- Argussian Reach
+            end
+            
+            charData.worldQuests['day ' .. index] = {
+                faction = factionID,
+                expires = now + (timeLeft * 60),
+                finished = finished,
+                numCompleted = numFulfilled,
+                numRequired = numRequired,
+            }
         end
-        
-        charData.worldQuests['day ' .. index] = {
-            faction = factionID,
-            expires = now + (timeLeft * 60),
-            finished = finished,
-            numCompleted = numFulfilled,
-            numRequired = numRequired,
-        }
     end
 
     -- World Quest unlock quest
