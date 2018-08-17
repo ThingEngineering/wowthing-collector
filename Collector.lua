@@ -898,8 +898,11 @@ function wwtc:ScanGuildBankTab()
     for i = 1, SLOTS_PER_GUILD_BANK_TAB do
         local link = GetGuildBankItemLink(tabID, i)
         if link ~= nil then
-            local texture, count, locked = GetGuildBankItemInfo(tabID, i)
-            tab["s"..i] = { count, wwtc:ParseItemLink(link).itemID }
+            local _, count = GetGuildBankItemInfo(tabID, i)
+            local link = GetGuildBankItemLink(tabID, i)
+            local itemID, extra = wwtc:ParseItemLink(link)
+            local _, _, quality = GetItemInfo(link)
+            tab["s"..i] = { count, itemID, quality, extra }
         end
     end
 end
