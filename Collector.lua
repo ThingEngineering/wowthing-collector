@@ -252,52 +252,6 @@ local paragonReputations = {
     2165, -- Army of the Light
     2170, -- Argussian Reach
 }
-local artifactWeapons = {
-    [128832] = true, -- Aldrachi Warblades
-    [127857] = true, -- Aluneth
-    [139275] = true, -- Aluneth
-    [139891] = true, -- Aluneth
-    [128403] = true, -- Apocalypse
-    [120978] = true, -- Ashbringer
-    [137582] = true, -- Ashbringer
-    [128292] = true, -- Blades of the Fallen Prince
-    [128821] = true, -- Claws of Ursoc
-    [128819] = true, -- Doomhammer
-    [128862] = true, -- Ebonchill
-    [128860] = true, -- Fangs of Ashamane
-    [128476] = true, -- Fangs of the Devourer
-    [128820] = true, -- Felo'melorn
-    [128940] = true, -- Fists of the Heavens
-    [128938] = true, -- Fu Zan, the Wanderer's Companion
-    [128306] = true, -- G'Hanir, the Mother Tree
-    [128868] = true, -- Light's Wrath
-    [128402] = true, -- Maw of the Damned
-    [134562] = true, -- Odyn's Fury
-    [128289] = true, -- Scale of the Earth-Warder
-    [128941] = true, -- Scepter of Sargeras
-    [128858] = true, -- Scythe of Elune
-    [128911] = true, -- Sharas'dal, Scepter of Tides
-    [128937] = true, -- Sheilun, Staff of the Mists
-    [128943] = true, -- Skull of the Man'ari
-    [128910] = true, -- Strom'kar, the Warbreaker
-    [128808] = true, -- Talonclaw
-    [128826] = true, -- Thas'dorah, Legacy of the Windrunners
-    [128872] = true, -- The Dreadblades
-    [128935] = true, -- The Fist of Ra-den
-    [128870] = true, -- The Kingslayers
-    [128823] = true, -- The Silver Hand
-    [137660] = true, -- The Silver Hand
-    [128861] = true, -- Titanstrike
-    [128866] = true, -- Truthguard
-    [137661] = true, -- Truthguard
-    [128825] = true, -- T'uure, Beacon of the Naaru
-    [127829] = true, -- Twinblades of the Deceiver
-    [128942] = true, -- Ulthalesh, the Deadwind Harvester
-    [133755] = true, -- Underlight Angler
-    [129738] = true, -- Verus
-    [128908] = true, -- Warswords of the Valarjar
-    [128827] = true, -- Xal'atath, Blade of the Black Empire
-}
 
 
 -- Misc constants
