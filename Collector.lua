@@ -256,7 +256,7 @@ local paragonReputations = {
 
 -- Misc constants
 local CURRENCY_GARRISON = 824
-local MAP_DALARAN = 627
+local MAP_KULTIRAS = 876
 local SLOTS_PER_GUILD_BANK_TAB = 98
 local SLOTS_PER_VOID_STORAGE_TAB = 80
 
@@ -1062,8 +1062,12 @@ function wwtc:ScanWorldQuests()
     charData.scanTimes["worldQuests"] = now
     charData.worldQuests = {}
 
-    local bountyQuests = GetQuestBountyInfoForMapID(MAP_DALARAN)
+    local bountyQuests = GetQuestBountyInfoForMapID(MAP_KULTIRAS)
     for _, bountyInfo in ipairs(bountyQuests) do
+        -- for k, v in pairs(bountyInfo) do
+        --     print(k, "=>", v)
+        -- end
+
         -- factionID => 1883
         -- icon => 1394953
         -- numObjectives => 1
@@ -1079,17 +1083,18 @@ function wwtc:ScanWorldQuests()
                 index = 2
             end
 
-            -- Not sure why factionID is 0 for these, zzz
             local factionID = bountyInfo.factionID
-            if bountyInfo.questID == 48639 then
-                factionID = 2165 -- Army of the Light
-            elseif bountyInfo.questID == 48641 then
-                factionID = 2045 -- Armies of Legionfall
-            elseif bountyInfo.questID == 48642 then
-                factionID = 2170 -- Argussian Reach
-            end
+            -- Not sure why factionID is 0 for these, zzz
+            -- if bountyInfo.questID == 48639 then
+            --     factionID = 2165 -- Army of the Light
+            -- elseif bountyInfo.questID == 48641 then
+            --     factionID = 2045 -- Armies of Legionfall
+            -- elseif bountyInfo.questID == 48642 then
+            --     factionID = 2170 -- Argussian Reach
+            -- end
             
             charData.worldQuests['day ' .. index] = {
+                quest = bountyInfo.questID,
                 faction = factionID,
                 expires = now + (timeLeft * 60),
                 finished = finished,
@@ -1099,8 +1104,8 @@ function wwtc:ScanWorldQuests()
         end
     end
 
-    -- World Quest unlock quest
-    if #charData.worldQuests < 3 and IsQuestFlaggedCompleted(43341) then
+    -- World Quest unlock quest. 51916=Horde, 51918=Alliance, both return true?
+    if #charData.worldQuests < 3 and IsQuestFlaggedCompleted(51916) then
         local resetDates = {}
 
         local nowDate = date("!*t", now) -- reset is 15:00:00 UTC, 08:00:00 PST?
@@ -1530,8 +1535,8 @@ end
 SLASH_WWTC1 = "/wwtc"
 SlashCmdList["WWTC"] = function(msg)
     print('sigh')
-    --wwtc:ScanWorldQuests()
-    wwtc:ParseItemLink(msg)
+    wwtc:ScanWorldQuests()
+    --wwtc:ParseItemLink(msg)
 end
 
 SLASH_RL1 = "/rl"
