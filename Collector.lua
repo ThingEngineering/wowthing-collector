@@ -255,7 +255,6 @@ local paragonReputations = {
 
 
 -- Misc constants
-local CURRENCY_GARRISON = 824
 local MAP_KULTIRAS = 876
 local SLOTS_PER_GUILD_BANK_TAB = 98
 local SLOTS_PER_VOID_STORAGE_TAB = 80
@@ -333,16 +332,6 @@ end
 -- Fires when the player's rest state or amount of rested XP changes
 function events:UPDATE_EXHAUSTION()
     wwtc:UpdateExhausted()
-end
--- Fires when stuff is looted
-function events:SHOW_LOOT_TOAST(...)
-    local typeIdentifier, itemLink, quantity = ...
-    if typeIdentifier == "currency" and itemLink then
-        local currencyID = string.match(itemLink, "currency:(%d+)")
-        if currencyID == tostring(CURRENCY_GARRISON) then
-            charData.scanTimes["garrisonCache"] = time()
-        end
-    end
 end
 -- Fires when guild stats changes
 function events:PLAYER_GUILD_UPDATE(unitID)
@@ -593,7 +582,6 @@ function wwtc:Initialise()
     charData.currentXP = 0
     charData.levelXP = 0
     charData.restedXP = 0
-    charData.garrisonLevel = 0
     charData.keystoneInstance = 0
     charData.keystoneLevel = 0
     charData.keystoneMax = 0
