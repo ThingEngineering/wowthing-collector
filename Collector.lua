@@ -4,8 +4,8 @@ local charClassID, charData, charName, guildName, playedLevel, playedLevelUpdate
 local collectionsHooked, loggingOut = false, false
 local bankOpen, crafterOpen, guildBankOpen, reagentBankUpdated = false, false, false, false
 local maxScannedToys = 0
-local dirtyBags, dirtyFollowers, dirtyHonor, dirtyLockouts, dirtyMissions, dirtyMounts, dirtyPets, dirtyReputations, dirtyVoid, dirtyWorldQuests =
-    {}, false, false, false, false, false, false, false, false, false, false, false
+local dirtyBags, dirtyAzerite, dirtyFollowers, dirtyHonor, dirtyLockouts, dirtyMissions, dirtyMounts, dirtyPets, dirtyReputations, dirtyVoid, dirtyWorldQuests =
+    {}, false, false, false, false, false, false, false, false, false, false, false, false
 
 -- Libs
 local LibRealmInfo = LibStub('LibRealmInfo10Fixed')
@@ -504,6 +504,14 @@ end
 function events:QUEST_LOG_UPDATE()
     dirtyWorldQuests = true
 end
+-- Azerite thing XP gains
+function events:AZERITE_ITEM_EXPERIENCE_CHANGED()
+    dirtyAzerite = true
+end
+-- Azerite thing level up
+function events:AZERITE_ITEM_POWER_LEVEL_CHANGED()
+    dirtyAzerite = true
+end
 
 -------------------------------------------------------------------------------
 -- Call functions in the events table for events
@@ -530,6 +538,10 @@ function wwtc:Timer()
         wwtc:ScanVoidStorage()
     end
 
+    if dirtyAzerite then
+        dirtyAzerite = false
+        wwtc:ScanAzerite()
+    end
     -- Scan dirty followers
     if dirtyFollowers then
         dirtyFollowers = false
@@ -607,6 +619,10 @@ function wwtc:Initialise()
     charData.hiddenWorldQuests = 0
     charData.balanceUnleashedMonstrosities = {}
     charData.balanceMythic15 = false
+
+    charData.azeriteLevel = 0
+    charData.azeriteCurrentXP = 0
+    charData.azeriteLevelXP = 0
 
     charData.currencies = charData.currencies or {}
     charData.followers = charData.followers or {}
@@ -719,6 +735,7 @@ function wwtc:UpdateCharacterData()
         wwtc:UpdateXP()
         wwtc:UpdateExhausted()
 
+        wwtc:ScanAzerite()
         wwtc:ScanCriteria()
         wwtc:ScanQuests()
         wwtc:ScanWorldQuests()
@@ -1297,6 +1314,20 @@ function wwtc:ScanToys()
     if #WWTCSaved.toys > maxScannedToys then
         maxScannedToys = #WWTCSaved.toys
         print("WoWthing_Collector: scanned", maxScannedToys, "toys")
+    end
+end
+
+-- Scan Azerite
+function wwtc:ScanAzerite()
+    if charData == nil then return end
+
+    local location = C_AzeriteItem.FindActiveAzeriteItem()
+    if location ~= nil then
+        charData.azeriteLevel = C_AzeriteItem.GetPowerLevel(location)
+        
+        local xp, totalLevelXP = C_AzeriteItem.GetAzeriteItemXPInfo(location)
+        charData.azeriteCurrentXP = xp
+        charData.azeriteLevelXP = totalLevelXP
     end
 end
 
