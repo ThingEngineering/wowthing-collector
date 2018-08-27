@@ -252,6 +252,21 @@ local paragonReputations = {
     2165, -- Army of the Light
     2170, -- Argussian Reach
 }
+local worldQuestFactions = {
+    -- Both
+    [50562] = 2164, -- Champions of Azeroth
+    [50604] = 2163, -- Tortollan Seekers
+    -- Alliance
+    [50605] = 2157, -- 7th Legion => The Honorbound
+    [50600] = 2158, -- Order of Embers => Voldunai
+    [50599] = 2103, -- Proudmoore Admiralty => Zandalari Empire
+    [50601] = 2156, -- Storm's Wake => Talanji's Expedition
+    -- Horde
+    [50602] = 2156, -- Talanji's Expedition
+    [50606] = 2157, -- The Honorbound
+    [50603] = 2158, -- Voldunai
+    [50598] = 2103, -- Zandalari Empire
+}
 
 
 -- Misc constants
@@ -1055,11 +1070,12 @@ function wwtc:ScanWorldQuests()
         -- for k, v in pairs(bountyInfo) do
         --     print(k, "=>", v)
         -- end
-
+        
         -- factionID => 1883
         -- icon => 1394953
         -- numObjectives => 1
         -- questID => 42170
+
         local timeLeft = C_TaskQuest.GetQuestTimeLeftMinutes(bountyInfo.questID)
         if timeLeft ~= nil then
             local _, _, finished, numFulfilled, numRequired = GetQuestObjectiveInfo(bountyInfo.questID, 1, false)
@@ -1071,15 +1087,11 @@ function wwtc:ScanWorldQuests()
                 index = 2
             end
 
-            local factionID = bountyInfo.factionID
-            -- Not sure why factionID is 0 for these, zzz
-            -- if bountyInfo.questID == 48639 then
-            --     factionID = 2165 -- Army of the Light
-            -- elseif bountyInfo.questID == 48641 then
-            --     factionID = 2045 -- Armies of Legionfall
-            -- elseif bountyInfo.questID == 48642 then
-            --     factionID = 2170 -- Argussian Reach
-            -- end
+            -- This seems to be 0 all the time now, cool
+            local factionID = 0 --bountyInfo.factionID
+            if worldQuestFactions[bountyInfo.questID] then
+                factionID = worldQuestFactions[bountyInfo.questID]
+            end
             
             charData.worldQuests['day ' .. index] = {
                 quest = bountyInfo.questID,
