@@ -72,9 +72,13 @@ local currencies = {
     1533, -- Wakening Essence
     1501, -- Writhing Essence
     -- Battle for Azeroth
+    1717, -- 7th Legion Service Medal
+    1716, -- Honorbound Service Medal
+    1721, -- Prismatic Manapearl
     1565, -- Rich Azerite Fragment
     1710, -- Seafarer's Dubloon
     1580, -- Seal of Wartorn Fate
+    1718, -- Titan Residuum
     1560, -- War Resources
     1587, -- War Supplies
 }
