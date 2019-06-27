@@ -12,7 +12,8 @@ local LibRealmInfo = LibStub('LibRealmInfo10Fixed')
 
 -- Default SavedVariables
 local defaultWWTCSaved = {
-    version = 13,
+    version = 14,
+    battleTag = '',
     chars = {},
     guilds = {},
     heirlooms = {},
@@ -605,6 +606,10 @@ local _ = C_Timer.NewTicker(1, function() wwtc:Timer() end, nil)
 -------------------------------------------------------------------------------
 
 function wwtc:Initialise()
+    -- BattleTag
+    local _, battleTag = BNGetInfo()
+    WWTCSaved.battleTag = battleTag
+
     -- Build a unique ID for this character
     local _, realm, _, _, _, _, region = LibRealmInfo:GetRealmInfoByUnit("player")
     regionName = region or GetCurrentRegion()
