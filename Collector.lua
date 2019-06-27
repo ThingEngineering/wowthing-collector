@@ -647,6 +647,7 @@ function wwtc:Initialise()
     charData.lockouts = charData.lockouts or {}
     charData.missions = charData.missions or {}
     charData.mounts = charData.mounts or {}
+    charData.mythicPlus = charData.mythicPlus or {}
     charData.orderHallResearch = charData.orderHallResearch or {}
     charData.pets = charData.pets or {}
     charData.quests = charData.quests or {}
@@ -655,7 +656,6 @@ function wwtc:Initialise()
     charData.tradeSkills = charData.tradeSkills or {}
     charData.weeklyQuests = charData.weeklyQuests or {}
     charData.worldQuests = charData.worldQuests or {}
-    charData.workOrders = charData.workOrders or {}
 
     charData.dailyResetTime = wwtc:GetDailyResetTime()
 
@@ -859,7 +859,7 @@ end
 function wwtc:ParseKeystoneLink(link)
     local itemID, instance, difficulty = link:match("keystone:(%d+):(%d+):(%d+):")
     if tonumber(itemID) and tonumber(instance) and tonumber(difficulty) then
-		-- TODO: handle old (138019) and new (158923) keystones properly
+        -- TODO: handle old (138019) and new (158923) keystones properly
         charData.keystoneInstance = instance
         charData.keystoneLevel = difficulty
     end
@@ -1063,14 +1063,21 @@ end
 function wwtc:ScanMythicDungeons()
     if charData == nil then return end
 
-    charData.keystoneMax = 0
+    local currentWeekBestLevel, _, _ = C_MythicPlus.GetWeeklyChestRewardLevel()
+    charData.keystoneMax = currentWeekBestLevel
+
+    charData.mythicPlus = {}
 
     local maps = C_ChallengeMode.GetMapTable()
     for i = 1, #maps do
-	local _, weeklyLevel = C_MythicPlus.GetWeeklyBestForMap(maps[i])
-		if weeklyLevel and weeklyLevel > charData.keystoneMax then
-            charData.keystoneMax = weeklyLevel
-        end
+        local durationSec, level, completionDate, affixIDs, members = C_MythicPlus.GetSeasonBestForMap(maps[i])
+        charData.mythicPlus[maps[i]] = {
+            duration = durationSec,
+            level = level,
+            date = completionDate,
+            affixes = affixIDs,
+            members = members,
+        }
     end
 end
 
@@ -1119,6 +1126,8 @@ function wwtc:ScanWorldQuests()
             elseif timeLeft < 2880 then
                 index = 2
             end
+
+            -- print(timeLeft, index, finished, numFulfilled, numRequired)
 
             -- This seems to be 0 all the time now, cool
             local factionID = 0 --bountyInfo.factionID
