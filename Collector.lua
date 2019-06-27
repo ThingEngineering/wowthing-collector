@@ -246,6 +246,7 @@ local checkReputations = {
     1492, -- Emperor Shaohao
 }
 local paragonReputations = {
+    -- Legion
     1828, -- Highmountain Tribe
     1859, -- The Nightfallen
     1883, -- Dreamweavers
@@ -255,6 +256,17 @@ local paragonReputations = {
     2045, -- Armies of Legionfall
     2165, -- Army of the Light
     2170, -- Argussian Reach
+    -- Battle for Azeroth
+    2157, -- 7th Legion
+    2164, -- Champions of Azeroth
+    2158, -- Order of Embers
+    2103, -- Proudmoore Admiralty
+    2156, -- Storm's Wake
+    2156, -- Talanji's Expedition
+    2157, -- The Honorbound
+    2163, -- Tortollan Seekers
+    2158, -- Voldunai
+    2103, -- Zandalari Empire
 }
 local worldQuestFactions = {
     -- Both
