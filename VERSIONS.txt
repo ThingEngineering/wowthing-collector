@@ -1,3 +1,10 @@
+v8.2.0.1
+--------
+- Add battle tag to data, makes it easier to match accounts on the server.
+- Updated reputation scan list.
+- Updated paragon reputation scan list.
+- Updated addon data version.
+
 v8.0.1.6
 --------
 - Added BfA emissary scanning.
