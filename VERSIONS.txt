@@ -1,3 +1,9 @@
+v9.0.2.0
+--------
+- Fix various issues due to 9.0 API changes.
+- Update LibRealmInfo to janekjl's forked v17.
+- Update TOC for 9.0.2.
+
 v8.2.0.1
 --------
 - Add battle tag to data, makes it easier to match accounts on the server.

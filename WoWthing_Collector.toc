@@ -1,11 +1,11 @@
-## Interface: 80200
+## Interface: 90002
 ## Title: WoWthing Collector
 ## Notes: Collects data to sync with WoWthing.
-## Version: 8.2.0.1
+## Version: 9.0.2.0
 ## Author: Freddie
 ## SavedVariables: WWTCSaved
 
 libs\LibStub\LibStub.lua
-libs\LibRealmInfo10Fixed\LibRealmInfo10Fixed.lua
+libs\LibRealmInfo17janekjl\LibRealmInfo17janekjl.lua
 
 Collector.lua

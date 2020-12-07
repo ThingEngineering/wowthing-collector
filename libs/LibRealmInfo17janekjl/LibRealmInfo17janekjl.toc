@@ -1,9 +1,5 @@
-## Interface: 60000
-## Version: 10
-## X-Curse-Packaged-Version: 10
-## X-Curse-Project-Name: LibRealmInfo
-## X-Curse-Project-ID: librealminfo
-## X-Curse-Repository-ID: wow/librealminfo/mainline
+## Interface: 90002
+## Version: 17-janekjl
 
 ## Title: Lib: Realm Info (Fixed)
 ## Notes: Library to provide information about realms.
@@ -19,4 +15,4 @@
 ## OptionalDeps: LibStub
 LibStub\LibStub.lua
 
-LibRealmInfo10Fixed.lua
+LibRealmInfo17janekjl.lua

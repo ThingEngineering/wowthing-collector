@@ -8,11 +8,11 @@ local dirtyBags, dirtyAzerite, dirtyFollowers, dirtyHonor, dirtyLockouts, dirtyM
     {}, false, false, false, false, false, false, false, false, false, false, false, false
 
 -- Libs
-local LibRealmInfo = LibStub('LibRealmInfo10Fixed')
+local LibRealmInfo = LibStub('LibRealmInfo17janekjl')
 
 -- Default SavedVariables
 local defaultWWTCSaved = {
-    version = 14,
+    version = 15,
     battleTag = '',
     chars = {},
     guilds = {},
@@ -23,8 +23,8 @@ local defaultWWTCSaved = {
 -- Currencies
 local currencies = {
     -- Player vs Player
-     390, -- Conquest Points
-     392, -- Honor Points
+     --390, -- Conquest Points
+     --392, -- Honor Points
      391, -- Tol Barad Commendation
     -- Dungeon and Raid
      615, -- Essence of Corrupted Deathwing
@@ -195,10 +195,10 @@ local weeklyQuests = {
 -- Check things the Battle.net API is bugged for
 local checkMounts = {
     --[458] = true, -- Brown Horse
-    [229376] = true, -- Archmage's Prismatic Disc (Mage Order Hall)
-    [229377] = true, -- Gift of the Holy Keepers (Priest Order Hall)
-    [229417] = true, -- Slayer's Felbroken Shrieker (Demon Hunter Order Hall)
-    [232412] = true, -- Netherlord's Chaotic Wrathsteed (Warlock Order Hall)
+    --[229376] = true, -- Archmage's Prismatic Disc (Mage Order Hall)
+    --[229377] = true, -- Gift of the Holy Keepers (Priest Order Hall)
+    --[229417] = true, -- Slayer's Felbroken Shrieker (Demon Hunter Order Hall)
+    --[232412] = true, -- Netherlord's Chaotic Wrathsteed (Warlock Order Hall)
 }
 local checkPets = {
     [216] = 33239, -- Argent Gruntling
@@ -244,7 +244,7 @@ local checkQuests = {
     43681,
 }
 local checkReputations = {
-    1492, -- Emperor Shaohao
+    --1492, -- Emperor Shaohao
 }
 local paragonReputations = {
     -- Legion
@@ -357,10 +357,6 @@ end
 function events:PLAYER_LEVEL_UP()
     playedLevel, playedLevelUpdated = 0, time()
 end
--- Fires when the player gains XP
-function events:PLAYER_XP_UPDATE()
-    wwtc:UpdateXP()
-end
 -- Fires when the player's rest state or amount of rested XP changes
 function events:UPDATE_EXHAUSTION()
     wwtc:UpdateExhausted()
@@ -370,11 +366,6 @@ function events:PLAYER_GUILD_UPDATE(unitID)
     if unitID == "player" then
         wwtc:UpdateGuildData()
     end
-end
--- Fires when the player changes the LFG bonus faction
-function events:LFG_BONUS_FACTION_ID_UPDATED()
-    local bonusFaction, _ = GetLFGBonusFactionID()
-    charData.bonusFaction = bonusFaction
 end
 -- Fires when RequestRaidInfo() completes
 function events:UPDATE_INSTANCE_INFO()
@@ -620,15 +611,12 @@ function wwtc:Initialise()
     charData = WWTCSaved.chars[charName] or {}
     WWTCSaved.chars[charName] = charData
 
-    charData.bonusFaction = 0
     charData.copper = 0
     charData.flightSpeed = 0
     charData.groundSpeed = 0
     charData.lastSeen = 0
     charData.playedLevel = 0
     charData.playedTotal = 0
-    charData.currentXP = 0
-    charData.levelXP = 0
     charData.restedXP = 0
     charData.keystoneInstance = 0
     charData.keystoneLevel = 0
@@ -717,13 +705,9 @@ function wwtc:UpdateCharacterData()
 
     -- Currencies
     for i, currencyID in ipairs(currencies) do
-        local _, amount, _, earnedThisWeek, weeklyMax, totalMax, _ = GetCurrencyInfo(currencyID)
-        -- Hack to work around buggy GetCurrencyInfo
-        if currencyID == 392 or currencyID == 395 or currencyID == 396 then
-            weeklyMax = math.floor(weeklyMax / 100)
-            totalMax = math.floor(totalMax / 100)
-        end
-        charData.currencies[currencyID] = { amount, totalMax, earnedThisWeek, weeklyMax }
+        print(currencyID)
+        local currencyInfo = C_CurrencyInfo.GetCurrencyInfo(currencyID)
+        charData.currencies[currencyID] = { currencyInfo.quantity, currencyInfo.maxQuantity, currencyInfo.quantityEarnedThisWeek, currencyInfo.maxWeeklyQuantity }
     end
 
     -- Master Riding
@@ -746,14 +730,9 @@ function wwtc:UpdateCharacterData()
         charData.groundSpeed = 60
     end
 
-    -- LFG bonus faction
-    local bonusFaction, _ = GetLFGBonusFactionID()
-    charData.bonusFaction = bonusFaction
-
     if not loggingOut then
         charData.copper = GetMoney()
 
-        wwtc:UpdateXP()
         wwtc:UpdateExhausted()
 
         wwtc:ScanAzerite()
@@ -786,14 +765,6 @@ function wwtc:UpdateGuildData()
     else
         guildName = nil
     end
-end
-
--- Update current/level XP
-function wwtc:UpdateXP()
-    if charData == nil then return end
-
-    charData.currentXP = UnitXP("player")
-    charData.levelXP = UnitXPMax("player")
 end
 
 -- Update resting status and rested XP
@@ -981,8 +952,8 @@ function wwtc:ScanLockouts()
 
     -- Instances
     for i = 1, GetNumSavedInstances() do
-        local instanceName, instanceID, instanceReset, instanceDifficulty, locked, extended, instanceIDMostSig,
-            isRaid, maxPlayers, difficultyName, maxBosses, defeatedBosses = GetSavedInstanceInfo(i)
+        local instanceName, instanceID, instanceReset, instanceDifficulty, locked, extended, _,
+            _, _, _, maxBosses, defeatedBosses = GetSavedInstanceInfo(i)
 
         if instanceReset > 0 then
             instanceReset = now + instanceReset
@@ -990,12 +961,12 @@ function wwtc:ScanLockouts()
 
         -- Get saved boss names
         local bosses, j = {}, 1
-        local name, something, dead = GetSavedInstanceEncounterInfo(i, j)
+        local name, _, dead = GetSavedInstanceEncounterInfo(i, j)
         while name do
             bosses[#bosses + 1] = { name, dead }
 
             j = j + 1
-            name, something, dead = GetSavedInstanceEncounterInfo(i, j)
+            name, _, dead = GetSavedInstanceEncounterInfo(i, j)
         end
 
         charData.lockouts[#charData.lockouts+1] = {
@@ -1052,7 +1023,7 @@ function wwtc:ScanLockouts()
 
     -- Other world bosses
     for questID, instanceName in pairs(worldBossQuests) do
-        if IsQuestFlaggedCompleted(questID) then
+        if C_QuestLog.IsQuestFlaggedCompleted(questID) then
             charData.lockouts[#charData.lockouts+1] = {
                 name = instanceName,
                 weeklyQuest = true,
@@ -1094,16 +1065,18 @@ function wwtc:ScanQuests()
     charData.weeklyQuests = {}
 
     for _, questID in ipairs(checkQuests) do
-        charData.quests[questID] = IsQuestFlaggedCompleted(questID)
+        charData.quests[questID] = C_QuestLog.IsQuestFlaggedCompleted(questID)
     end
 
     for questID, _ in ipairs(weeklyQuests) do
-        charData.weeklyQuests[questID] = IsQuestFlaggedCompleted(questID)
+        charData.weeklyQuests[questID] = C_QuestLog.IsQuestFlaggedCompleted(questID)
     end
 end
 
 -- Scan world quests
 function wwtc:ScanWorldQuests()
+    if nil == nil then return end -- FIXME scan callings
+
     if charData == nil then return end
 
     local now = time()
@@ -1152,7 +1125,7 @@ function wwtc:ScanWorldQuests()
     end
 
     -- World Quest unlock quest. 51916=Horde, 51918=Alliance, both return true?
-    if #charData.worldQuests < 3 and IsQuestFlaggedCompleted(51916) then
+    if #charData.worldQuests < 3 and C_QuestLog.IsQuestFlaggedCompleted(51916) then
         local resetDates = {}
 
         local nowDate = date("!*t", now) -- reset is 15:00:00 UTC, 08:00:00 PST?
@@ -1363,6 +1336,7 @@ end
 
 -- Scan order hall followers
 function wwtc:ScanFollowers()
+    if nil == nil then return end -- FIXME missions v17
     if charData == nil then return end
 
     charData.scanTimes['followers'] = time()
@@ -1412,6 +1386,8 @@ end
 
 -- Scan garrison missions
 function wwtc:ScanMissions()
+    if nil == nil then return end -- FIXME missions v17
+
     if charData == nil then return end
 
     charData.scanTimes['missions'] = time()
@@ -1492,12 +1468,13 @@ end
 function wwtc:ScanOrderHallResearch()
     if charData == nil then return end
 
-    local talentTreeIDs = C_Garrison.GetTalentTreeIDsByClassID(LE_GARRISON_TYPE_7_0, charClassID)
+    local talentTreeIDs = C_Garrison.GetTalentTreeIDsByClassID(Enum.GarrisonType.Type_7_0, charClassID)
     if talentTreeIDs and talentTreeIDs[1] then
+        print(talentTreeIDs[1])
         charData.orderHallResearch = {}
 
-        local talentTree = select(3, C_Garrison.GetTalentTreeInfoForID(talentTreeIDs[1]))
-        for _, talent in ipairs(talentTree) do
+        local talentTree = C_Garrison.GetTalentTreeInfo(talentTreeIDs[1])
+        for _, talent in ipairs(talentTree.talents) do
             if talent.selected then
                 local finishes = 0
                 if talent.isBeingResearched then
