@@ -829,21 +829,12 @@ function wwtc:ScanBag(bagID)
 
                 -- Bags
                 if bagID >= 0 and bagID <= 4 then
-                    if quality == 4 then
-                        wwtc:ParseKeystoneLink(link)
-                    end
+                    --if quality == 4 then
+                    --    wwtc:ParseKeystoneLink(link)
+                    --end
                 end
             end
         end
-    end
-end
-
-function wwtc:ParseKeystoneLink(link)
-    local itemID, instance, difficulty = link:match("keystone:(%d+):(%d+):(%d+):")
-    if tonumber(itemID) and tonumber(instance) and tonumber(difficulty) then
-        -- TODO: handle old (138019) and new (158923) keystones properly
-        charData.keystoneInstance = instance
-        charData.keystoneLevel = difficulty
     end
 end
 
@@ -1045,20 +1036,17 @@ end
 function wwtc:ScanMythicDungeons()
     if charData == nil then return end
 
-    local currentWeekBestLevel, _, _ = C_MythicPlus.GetWeeklyChestRewardLevel()
-    charData.keystoneMax = currentWeekBestLevel
+    charData.keystoneInstance = C_MythicPlus.GetOwnedKeystoneChallengeMapID()
+    charData.keystoneLevel = C_MythicPlus.GetOwnedKeystoneLevel()
 
     charData.mythicPlus = {}
 
     local maps = C_ChallengeMode.GetMapTable()
     for i = 1, #maps do
-        local durationSec, level, completionDate, affixIDs, members = C_MythicPlus.GetSeasonBestForMap(maps[i])
+        local inTime, overTime = C_MythicPlus.GetSeasonBestForMap(maps[i])
         charData.mythicPlus[maps[i]] = {
-            duration = durationSec,
-            level = level,
-            date = completionDate,
-            affixes = affixIDs,
-            members = members,
+            inTime = inTime,
+            overTime = overTime,
         }
     end
 end
@@ -1462,7 +1450,6 @@ function wwtc:ScanOrderHallResearch()
 
     local talentTreeIDs = C_Garrison.GetTalentTreeIDsByClassID(Enum.GarrisonType.Type_7_0, charClassID)
     if talentTreeIDs and talentTreeIDs[1] then
-        print(talentTreeIDs[1])
         charData.orderHallResearch = {}
 
         local talentTree = C_Garrison.GetTalentTreeInfo(talentTreeIDs[1])
