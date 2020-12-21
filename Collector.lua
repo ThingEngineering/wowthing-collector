@@ -4,8 +4,8 @@ local charClassID, charData, charName, guildName, playedLevel, playedLevelUpdate
 local collectionsHooked, loggingOut = false, false
 local bankOpen, crafterOpen, guildBankOpen, reagentBankUpdated = false, false, false, false
 local maxScannedToys = 0
-local dirtyBags, dirtyAzerite, dirtyFollowers, dirtyHonor, dirtyLockouts, dirtyMissions, dirtyMounts, dirtyPets, dirtyReputations, dirtyVoid, dirtyWorldQuests =
-    {}, false, false, false, false, false, false, false, false, false, false, false, false
+local dirtyBags, dirtyFollowers, dirtyHonor, dirtyLockouts, dirtyMissions, dirtyMounts, dirtyPets, dirtyReputations, dirtyVoid, dirtyWorldQuests =
+    {}, false, false, false, false, false, false, false, false, false, false, false
 
 -- Libs
 local LibRealmInfo = LibStub('LibRealmInfo17janekjl')
@@ -30,6 +30,7 @@ local currencies = {
      615, -- Essence of Corrupted Deathwing
      614, -- Mote of Darkness
     1166, -- Timewarped Badge
+
     -- Miscellaneous
      241, -- Champion's Seal
       61, -- Dalaran Jewelcrafter's Token
@@ -37,8 +38,10 @@ local currencies = {
       81, -- Epicurean's Award
      402, -- Ironpaw Token
      416, -- Mark of the World Tree
+
     -- Cataclysm
      361, -- Illustrious Jewelcrafter's Token
+
     -- Mists of Pandaria
      789, -- Bloody Coin
      697, -- Elder Charm of Good Fortune
@@ -46,7 +49,8 @@ local currencies = {
      752, -- Mogu Rune of Fate
      777, -- Timeless Coin
      776, -- Warforged Seal
-    -- WoD
+
+    -- Warlords of Draenor
      823, -- Apexis Crystal
      944, -- Artifact Fragment
      980, -- Dingy Iron Coins
@@ -54,6 +58,7 @@ local currencies = {
     1101, -- Oil
     1129, -- Seal of Inevitable Fate
      994, -- Seal of Tempered Fate
+
     -- Legion
     1155, -- Ancient Mana
     1299, -- Brawler's Gold
@@ -72,6 +77,7 @@ local currencies = {
     1508, -- Veiled Argunite
     1533, -- Wakening Essence
     1501, -- Writhing Essence
+
     -- Battle for Azeroth
     1717, -- 7th Legion Service Medal
     1716, -- Honorbound Service Medal
@@ -82,6 +88,17 @@ local currencies = {
     1718, -- Titan Residuum
     1560, -- War Resources
     1587, -- War Supplies
+
+    -- Shadowlands
+    1754, -- Argent Commendation
+    1885, -- Grateful Offering
+    1820, -- Infused Ruby
+    1810, -- Redeemed Soul
+    1822, -- Renown
+    1813, -- Reservoir Anima
+    1816, -- Sinstone Fragments
+    1828, -- Soul Ash
+    1767, -- Stygia
 }
 
 -- Trade skill cooldowns
@@ -689,9 +706,15 @@ function wwtc:UpdateCharacterData()
 
     -- Currencies
     for i, currencyID in ipairs(currencies) do
-        print(currencyID)
         local currencyInfo = C_CurrencyInfo.GetCurrencyInfo(currencyID)
-        charData.currencies[currencyID] = { currencyInfo.quantity, currencyInfo.maxQuantity, currencyInfo.quantityEarnedThisWeek, currencyInfo.maxWeeklyQuantity }
+        if currencyInfo ~= nil then
+            charData.currencies[currencyID] = {
+                currencyInfo.quantity,
+                currencyInfo.maxQuantity,
+                currencyInfo.quantityEarnedThisWeek,
+                currencyInfo.maxWeeklyQuantity
+            }
+        end
     end
 
     -- Master Riding
