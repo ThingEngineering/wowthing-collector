@@ -12,7 +12,7 @@ local LibRealmInfo = LibStub('LibRealmInfo17janekjl')
 
 -- Default SavedVariables
 local defaultWWTCSaved = {
-    version = 9051,
+    version = 9052,
     chars = {},
     guilds = {},
     heirlooms = {},
