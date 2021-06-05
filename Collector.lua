@@ -4,7 +4,7 @@ local charClassID, charData, charName, guildName, playedLevel, playedLevelUpdate
 local collectionsHooked, loggingOut = false, false
 local bankOpen, crafterOpen, guildBankOpen, reagentBankUpdated = false, false, false, false
 local maxScannedToys = 0
-local dirtyBags, dirtyFollowers, dirtyHonor, dirtyLockouts, dirtyMissions, dirtyMounts, dirtyPets, dirtyReputations, dirtyVoid, dirtyWorldQuests =
+local dirtyBags, dirtyFollowers, dirtyHonor, dirtyLockouts, dirtyMissions, dirtyMounts, dirtyPets, dirtyReputations, dirtyVault, dirtyWorldQuests =
     {}, false, false, false, false, false, false, false, false, false, false, false
 
 -- Libs
@@ -12,8 +12,7 @@ local LibRealmInfo = LibStub('LibRealmInfo17janekjl')
 
 -- Default SavedVariables
 local defaultWWTCSaved = {
-    version = 15,
-    battleTag = '',
+    version = 9050,
     chars = {},
     guilds = {},
     heirlooms = {},
@@ -274,6 +273,7 @@ local paragonReputations = {
     2045, -- Armies of Legionfall
     2165, -- Army of the Light
     2170, -- Argussian Reach
+
     -- Battle for Azeroth
     2157, -- 7th Legion
     2164, -- Champions of Azeroth
@@ -290,11 +290,13 @@ local worldQuestFactions = {
     -- Both
     [50562] = 2164, -- Champions of Azeroth
     [50604] = 2163, -- Tortollan Seekers
+
     -- Alliance
     [50605] = 2157, -- 7th Legion => The Honorbound
     [50600] = 2158, -- Order of Embers => Voldunai
     [50599] = 2103, -- Proudmoore Admiralty => Zandalari Empire
     [50601] = 2156, -- Storm's Wake => Talanji's Expedition
+
     -- Horde
     [50602] = 2156, -- Talanji's Expedition
     [50606] = 2157, -- The Honorbound
@@ -306,7 +308,6 @@ local worldQuestFactions = {
 -- Misc constants
 local MAP_KULTIRAS = 876
 local SLOTS_PER_GUILD_BANK_TAB = 98
-local SLOTS_PER_VOID_STORAGE_TAB = 80
 
 -- Blizzard_GarrisonUI/Blizzard_GarrisonSharedTemplates.lua::477
 local statusPriority = {
@@ -324,17 +325,9 @@ local frame, events = CreateFrame("FRAME"), {}
 function events:ADDON_LOADED(name)
     -- Us!
     if name == "WoWthing_Collector" then
-        WWTCSaved = WWTCSaved or defaultWWTCSaved
-        -- WWTCSaved = defaultWWTCSaved -- DEBUG
-
-        -- Overwrite with default if out of date
-        if not WWTCSaved.version or WWTCSaved.version < defaultWWTCSaved.version then
+        if WWTCSaved == nil or WWTCSaved.version < defaultWWTCSaved.version then
             WWTCSaved = defaultWWTCSaved
         end
-
-        -- Backwards compat hacks
-        WWTCSaved.heirlooms = WWTCSaved.heirlooms or {}
-        WWTCSaved.toys = WWTCSaved.toys or {}
 
         -- Timezones suck
         wwtc:CalculateTimeZoneDiff()
@@ -363,6 +356,7 @@ function events:PLAYER_ENTERING_WORLD()
 
     wwtc:UpdateCharacterData()
     dirtyHonor = true
+    dirtyVault = true
 end
 -- Fires when /played information is available
 function events:TIME_PLAYED_MSG(total, level)
@@ -397,12 +391,12 @@ end
 --    wwtc:ScanTradeSkills()
 --end
 -- Fires when a unit casts a spell - used for trade skill updating
-function events:UNIT_SPELLCAST_SUCCEEDED(evt, unit, spellName, rank, lineID, spellID)
-    -- We only care about the player's trade skills
-    if unit == "player" and tradeSkills[spellID] == true then
-        C_Timer.NewTimer(0.5, function() wwtc:ScanTradeSkills() end)
-    end
-end
+--function events:UNIT_SPELLCAST_SUCCEEDED(evt, unit, spellName, rank, lineID, spellID)
+--    -- We only care about the player's trade skills
+--    if unit == "player" and tradeSkills[spellID] == true then
+--        C_Timer.NewTimer(0.5, function() wwtc:ScanTradeSkills() end)
+--    end
+--end
 -- Fires when the contents of a bag changes
 function events:BAG_UPDATE(bagID)
     dirtyBags[bagID] = true
@@ -439,58 +433,40 @@ end
 function events:GUILDBANKBAGSLOTS_CHANGED()
     wwtc:ScanGuildBankTab()
 end
--- Fires when void storage opens
-function events:VOID_STORAGE_OPEN()
-    if IsVoidStorageReady() then
-        dirtyVoid = true
-    end
-end
--- Fires when void storage data is available?
-function events:VOID_STORAGE_UPDATE()
-    dirtyVoid = true
-end
--- Fires when something changes in void storage
-function events:VOID_STORAGE_CONTENTS_UPDATE()
-    dirtyVoid = true
-end
--- Fires when a void storage transfer completes
-function events:VOID_TRANSFER_DONE()
-    dirtyVoid = true
-end
 -- ??
-function events:GARRISON_UPDATE()
-    dirtyFollowers = true
-end
+--function events:GARRISON_UPDATE()
+--    dirtyFollowers = true
+--end
 -- Fires whenever the available follower list changes
-function events:GARRISON_FOLLOWER_LIST_UPDATE()
-    dirtyFollowers = true
-end
+--function events:GARRISON_FOLLOWER_LIST_UPDATE()
+--    dirtyFollowers = true
+--end
 -- Fires when a follower is added
-function events:GARRISON_FOLLOWER_ADDED()
-    dirtyFollowers = true
-end
+--function events:GARRISON_FOLLOWER_ADDED()
+--    dirtyFollowers = true
+--end
 -- Fires when a follower is removed
-function events:GARRISON_FOLLOWER_REMOVED()
-    dirtyFollowers = true
-end
+--function events:GARRISON_FOLLOWER_REMOVED()
+--    dirtyFollowers = true
+--end
 -- ?? Probably when shipments show up
-function events:GARRISON_LANDINGPAGE_SHIPMENTS()
-    wwtc:ScanOrderHallResearch()
-end
+--function events:GARRISON_LANDINGPAGE_SHIPMENTS()
+--    wwtc:ScanOrderHallResearch()
+--end
 -- Fires when a follower gains XP
-function events:GARRISON_FOLLOWER_XP_CHANGED()
-    dirtyFollowers = true
-end
+--function events:GARRISON_FOLLOWER_XP_CHANGED()
+--    dirtyFollowers = true
+--end
 -- Fires when the garrison mission list updates?
-function events:GARRISON_MISSION_LIST_UPDATE()
-    dirtyFollowers = true
-    dirtyMissions = true
-end
+--function events:GARRISON_MISSION_LIST_UPDATE()
+--    dirtyFollowers = true
+--    dirtyMissions = true
+--end
 --
-function events:GARRISON_MISSION_NPC_OPENED()
-    dirtyFollowers = true
-    dirtyMissions = true
-end
+--function events:GARRISON_MISSION_NPC_OPENED()
+--    dirtyFollowers = true
+--    dirtyMissions = true
+--end
 -- Fires ??
 function events:COMPANION_UPDATE()
     dirtyMounts = true
@@ -514,20 +490,45 @@ function events:UPDATE_FACTION()
     dirtyReputations = true
 end
 -- Fires when Honor XP updates
-function events:HONOR_XP_UPDATE()
-    dirtyHonor = true
-end
+--function events:HONOR_XP_UPDATE()
+--    dirtyHonor = true
+--end
 -- Fires when Honor level updates
-function events:HONOR_LEVEL_UPDATE()
-    dirtyHonor = true
+--function events:HONOR_LEVEL_UPDATE()
+--    dirtyHonor = true
+--end
+-- Fires when Mythic dungeon ends
+function events:CHALLENGE_MODE_COMPLETED()
+    C_MythicPlus.RequestMapInfo()
 end
 -- Fires when Mythic dungeon map information updates
 function events:CHALLENGE_MODE_MAPS_UPDATE()
-    wwtc:ScanMythicDungeons()
+    dirtyVault = true
+end
+-- ?
+function events:WEEKLY_REWARDS_HIDE()
+    dirtyVault = true
+end
+function events:WEEKLY_REWARDS_SHOW()
+    dirtyVault = true
+end
+function events:WEEKLY_REWARDS_UPDATE()
+    dirtyVault = true
 end
 -- Fires A LOT, whenever just about anything happens with quests
 function events:QUEST_LOG_UPDATE()
     dirtyWorldQuests = true
+end
+-- War mode status updates
+function events:WAR_MODE_STATUS_UPDATE()
+    wwtc:UpdateWarMode()
+end
+-- Chromie time
+function events:CHROMIE_TIME_CLOSE()
+    wwtc:UpdateChromieTime()
+end
+function events:CHROMIE_TIME_OPEN()
+    wwtc:UpdateChromieTime()
 end
 
 -------------------------------------------------------------------------------
@@ -544,53 +545,56 @@ end
 -------------------------------------------------------------------------------
 -- Timer to do spammy things
 function wwtc:Timer()
-    -- Scan dirty bags
     for bagID, dirty in pairs(dirtyBags) do
         dirtyBags[bagID] = nil
         wwtc:ScanBag(bagID)
     end
-    -- Scan dirty void storage
-    if dirtyVoid then
-        dirtyVoid = false
-        wwtc:ScanVoidStorage()
-    end
 
-    -- Scan dirty followers
     if dirtyFollowers then
         dirtyFollowers = false
         wwtc:ScanFollowers()
     end
-    -- Scan dirty honor
+
     if dirtyHonor then
         dirtyHonor = false
         wwtc:ScanHonor()
     end
-    -- Scan dirty lockouts
+
     if dirtyLockouts then
         dirtyLockouts = false
         wwtc:ScanLockouts()
     end
-    -- Scan dirty missions
+
     if dirtyMissions then
         dirtyMissions = false
         wwtc:ScanMissions()
     end
-    -- Scan dirty mounts
+
     if dirtyMounts then
         dirtyMounts = false
         wwtc:ScanMounts()
     end
-    -- Scan dirty pets
+
     if dirtyPets then
         dirtyPets = false
         wwtc:ScanPets()
     end
-    -- Scan dirty reputations
+
     if dirtyReputations then
         dirtyReputations = false
         wwtc:ScanReputations()
     end
-    -- Scan dirty world quests
+
+    if dirtyVault then
+        dirtyVault = false
+        wwtc:ScanVault()
+    end
+
+    if dirtyWarMode then
+        dirtyWarMode = false
+        wwtc:UpdateWarMode()
+    end
+
     if dirtyWorldQuests then
         dirtyWorldQuests = false
         wwtc:ScanWorldQuests()
@@ -602,14 +606,10 @@ local _ = C_Timer.NewTicker(1, function() wwtc:Timer() end, nil)
 -------------------------------------------------------------------------------
 
 function wwtc:Initialise()
-    -- BattleTag
-    local _, battleTag = BNGetInfo()
-    WWTCSaved.battleTag = battleTag
-
     -- Build a unique ID for this character
     local _, realm, _, _, _, _, region = LibRealmInfo:GetRealmInfoByUnit("player")
     regionName = region or GetCurrentRegion()
-    charName = regionName .. " - " .. realm .. " - " .. UnitName("player")
+    charName = regionName .. "/" .. realm .. "/" .. UnitName("player")
     charClassID = select(3, UnitClass("player"))
 
     -- Set up character data table
@@ -617,15 +617,16 @@ function wwtc:Initialise()
     WWTCSaved.chars[charName] = charData
 
     charData.copper = 0
-    charData.flightSpeed = 0
-    charData.groundSpeed = 0
+    charData.isChromieTime = false
+    charData.isResting = false
+    charData.isWarMode = false
+    charData.keystoneInstance = 0
+    charData.keystoneLevel = 0
     charData.lastSeen = 0
+    charData.mountSkill = 0
     charData.playedLevel = 0
     charData.playedTotal = 0
     charData.restedXP = 0
-    charData.keystoneInstance = 0
-    charData.keystoneLevel = 0
-    charData.keystoneMax = 0
 
     charData.biggerFishToFry = {}
     charData.hiddenDungeons = 0
@@ -641,13 +642,14 @@ function wwtc:Initialise()
     charData.lockouts = charData.lockouts or {}
     charData.missions = charData.missions or {}
     charData.mounts = charData.mounts or {}
-    charData.mythicPlus = charData.mythicPlus or {}
+    charData.mythicDungeons = charData.mythicDungeons or {}
     charData.orderHallResearch = charData.orderHallResearch or {}
     charData.pets = charData.pets or {}
     charData.quests = charData.quests or {}
     charData.reputations = charData.reputations or {}
     charData.scanTimes = charData.scanTimes or {}
     charData.tradeSkills = charData.tradeSkills or {}
+    charData.vault = charData.vault or {}
     charData.weeklyQuests = charData.weeklyQuests or {}
     charData.worldQuests = charData.worldQuests or {}
 
@@ -719,28 +721,24 @@ function wwtc:UpdateCharacterData()
 
     -- Master Riding
     if IsSpellKnown(90265) then
-        charData.flightSpeed = 310
-        charData.groundSpeed = 100
+        charData.mountSkill = 4
     -- Artisan Riding
     elseif IsSpellKnown(34091) then
-        charData.flightSpeed = 280
-        charData.groundSpeed = 100
+        charData.mountSkill = 3
     -- Expert Riding
     elseif IsSpellKnown(34090) then
-        charData.flightSpeed = 150
-        charData.groundSpeed = 100
+        charData.mountSkill = 2
     -- Journeyman Riding
     elseif IsSpellKnown(33391) then
-        charData.groundSpeed = 100
-    -- Apprentice Riding
-    elseif IsSpellKnown(33388) then
-        charData.groundSpeed = 60
+        charData.mountSkill = 1
     end
 
     if not loggingOut then
         charData.copper = GetMoney()
 
+        wwtc:UpdateChromieTime()
         wwtc:UpdateExhausted()
+        wwtc:UpdateWarMode()
 
         wwtc:ScanCriteria()
         wwtc:ScanQuests()
@@ -762,7 +760,7 @@ function wwtc:UpdateGuildData()
     -- Build a unique ID for this character's guild
     local gName, gRankName, gRankIndex = GetGuildInfo("player")
     if gName then
-        guildName = regionName .. " - " .. GetRealmName() .. " - " .. gName
+        guildName = regionName .. "/" .. GetRealmName() .. "/" .. gName
 
         WWTCSaved.guilds[guildName] = WWTCSaved.guilds[guildName] or {}
         WWTCSaved.guilds[guildName].copper = WWTCSaved.guilds[guildName].copper or 0
@@ -773,11 +771,17 @@ function wwtc:UpdateGuildData()
     end
 end
 
+function wwtc:UpdateChromieTime()
+    if charData == nil then return end
+
+    charData.isChromieTime = C_PlayerInfo.IsPlayerInChromieTime()
+end
+
 -- Update resting status and rested XP
 function wwtc:UpdateExhausted()
     if charData == nil then return end
 
-    charData.resting = IsResting()
+    charData.isResting = IsResting()
 
     local rested = GetXPExhaustion()
     if rested and rested > 0 then
@@ -785,6 +789,12 @@ function wwtc:UpdateExhausted()
     else
         charData.restedXP = 0
     end
+end
+
+function wwtc:UpdateWarMode()
+    if charData == nil then return end
+
+    charData.isWarMode = C_PvP.IsWarModeActive()
 end
 
 -- Scan a specific bag
@@ -806,6 +816,10 @@ function wwtc:ScanBag(bagID)
     local now = time()
     if bagID >= 0 and bagID <= 4 then
         charData.scanTimes["bags"] = now
+
+        -- Update mythic plus keystone since bags changed
+        charData.keystoneInstance = C_MythicPlus.GetOwnedKeystoneChallengeMapID()
+        charData.keystoneLevel = C_MythicPlus.GetOwnedKeystoneLevel()
     else
         charData.scanTimes["bank"] = now
     end
@@ -826,13 +840,6 @@ function wwtc:ScanBag(bagID)
             if count ~= nil and link ~= nil then
                 local itemID, extra = wwtc:ParseItemLink(link)
                 bag["s"..i] = { count, itemID, quality, extra }
-
-                -- Bags
-                if bagID >= 0 and bagID <= 4 then
-                    --if quality == 4 then
-                    --    wwtc:ParseKeystoneLink(link)
-                    --end
-                end
             end
         end
     end
@@ -872,26 +879,6 @@ function wwtc:ScanGuildBankTab()
             local itemID, extra = wwtc:ParseItemLink(link)
             local _, _, quality = GetItemInfo(link)
             tab["s"..i] = { count, itemID, quality, extra }
-        end
-    end
-end
-
--- Scan void storage
-function wwtc:ScanVoidStorage()
-    if charData == nil then return end
-
-    charData.scanTimes["void"] = time()
-
-    -- NOTE: constants appear to not be global, woo
-    for i = 1, 2 do
-        charData.items["void "..i] = {}
-        local void = charData.items["void "..i]
-
-        for j = 1, SLOTS_PER_VOID_STORAGE_TAB do
-            local itemID, texture, locked, recentDeposit, isFiltered = GetVoidItemInfo(i, j)
-            if itemID ~= nil then
-                void["s"..j] = { 1, itemID }
-            end
         end
     end
 end
@@ -1032,25 +1019,6 @@ function wwtc:ScanLockouts()
     end
 end
 
--- Scan mythic dungeon completion
-function wwtc:ScanMythicDungeons()
-    if charData == nil then return end
-
-    charData.keystoneInstance = C_MythicPlus.GetOwnedKeystoneChallengeMapID()
-    charData.keystoneLevel = C_MythicPlus.GetOwnedKeystoneLevel()
-
-    charData.mythicPlus = {}
-
-    local maps = C_ChallengeMode.GetMapTable()
-    for i = 1, #maps do
-        local inTime, overTime = C_MythicPlus.GetSeasonBestForMap(maps[i])
-        charData.mythicPlus[maps[i]] = {
-            inTime = inTime,
-            overTime = overTime,
-        }
-    end
-end
-
 -- Scan quests
 function wwtc:ScanQuests()
     if charData == nil then return end
@@ -1064,6 +1032,49 @@ function wwtc:ScanQuests()
 
     for questID, _ in ipairs(weeklyQuests) do
         charData.weeklyQuests[questID] = C_QuestLog.IsQuestFlaggedCompleted(questID)
+    end
+end
+
+-- Scan dirtyVault
+function wwtc:ScanVault()
+    if charData == nil then return end
+
+    local now = time()
+    charData.scanTimes["vault"] = now
+    charData.vault = {}
+
+    -- Mythic dungeons
+    charData.mythicDungeons = {}
+    local runs = C_MythicPlus.GetRunHistory(false, true) -- includePreviousWeeks, includeIncompleteRuns
+    for i = 1, #runs do
+        local run = runs[i]
+        charData.mythicDungeons[i] = {
+            map = run.mapChallengeModeID,
+            level = run.level,
+        }
+    end
+
+    -- Vault completion
+    local activities = C_WeeklyRewards.GetActivities()
+    for i = 1, #activities do
+        -- [1]={
+        --      threshold=10,
+        --      type=1,
+        --      index=3,
+        --      progress=8,
+        --      level=0,
+        --      rewards={
+        --      },
+        --      id=34
+        -- },
+        local activity = activities[i]
+
+        charData.vault[activity.type] = charData.vault[activity.type] or {}
+        charData.vault[activity.type][activity.index] = {
+            level = activity.level,
+            progress = activity.progress,
+            threshold = activity.threshold,
+        }
     end
 end
 
@@ -1552,8 +1563,7 @@ end
 SLASH_WWTC1 = "/wwtc"
 SlashCmdList["WWTC"] = function(msg)
     print('sigh')
-    wwtc:ScanWorldQuests()
-    --wwtc:ParseItemLink(msg)
+    wwtc:ScanVault()
 end
 
 SLASH_RL1 = "/rl"
