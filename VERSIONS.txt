@@ -1,3 +1,6 @@
+v9.0.5.2
+- Changed Chromie Time tracking from yes/no to which specific expansion.
+
 v9.0.5.1
 --------
 - Added Chromie Time tracking.

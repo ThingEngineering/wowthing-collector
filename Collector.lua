@@ -616,8 +616,8 @@ function wwtc:Initialise()
     charData = WWTCSaved.chars[charName] or {}
     WWTCSaved.chars[charName] = charData
 
+    charData.chromieTime = 0
     charData.copper = 0
-    charData.isChromieTime = false
     charData.isResting = false
     charData.isWarMode = false
     charData.keystoneInstance = 0
@@ -774,7 +774,7 @@ end
 function wwtc:UpdateChromieTime()
     if charData == nil then return end
 
-    charData.isChromieTime = C_PlayerInfo.IsPlayerInChromieTime()
+    charData.chromieTime = UnitChromieTimeID("player")
 end
 
 -- Update resting status and rested XP
