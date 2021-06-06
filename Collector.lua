@@ -519,16 +519,18 @@ end
 function events:QUEST_LOG_UPDATE()
     dirtyWorldQuests = true
 end
--- War mode status updates
-function events:WAR_MODE_STATUS_UPDATE()
-    wwtc:UpdateWarMode()
-end
 -- Chromie time
 function events:CHROMIE_TIME_CLOSE()
     wwtc:UpdateChromieTime()
 end
 function events:CHROMIE_TIME_OPEN()
     wwtc:UpdateChromieTime()
+end
+-- Vague about what this does, but it includes war mode
+function events:PLAYER_FLAGS_CHANGED(unitId)
+    if unitId == 'player' then
+        wwtc:UpdateWarMode()
+    end
 end
 
 -------------------------------------------------------------------------------
@@ -588,11 +590,6 @@ function wwtc:Timer()
     if dirtyVault then
         dirtyVault = false
         wwtc:ScanVault()
-    end
-
-    if dirtyWarMode then
-        dirtyWarMode = false
-        wwtc:UpdateWarMode()
     end
 
     if dirtyWorldQuests then
@@ -794,7 +791,7 @@ end
 function wwtc:UpdateWarMode()
     if charData == nil then return end
 
-    charData.isWarMode = C_PvP.IsWarModeActive()
+    charData.isWarMode = C_PvP.IsWarModeDesired()
 end
 
 -- Scan a specific bag
