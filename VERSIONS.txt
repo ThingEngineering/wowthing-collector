@@ -1,4 +1,10 @@
+v9.0.5.3
+--------
+- Fix mount skill scanning, 280% still exists if you bought it pre-Shadowlands.
+- Fix war mode scanning, WAR_MODE_STATUS_UPDATE event doesn't actually do anything.
+
 v9.0.5.2
+--------
 - Changed Chromie Time tracking from yes/no to which specific expansion.
 
 v9.0.5.1
