@@ -718,15 +718,18 @@ function wwtc:UpdateCharacterData()
 
     -- Master Riding
     if IsSpellKnown(90265) then
-        charData.mountSkill = 4
-    -- Artisan Riding
+        charData.mountSkill = 5
+    -- Artisan Riding (DEPRECATED but still gives 280%)
     elseif IsSpellKnown(34091) then
-        charData.mountSkill = 3
+        charData.mountSkill = 4
     -- Expert Riding
     elseif IsSpellKnown(34090) then
-        charData.mountSkill = 2
+        charData.mountSkill = 3
     -- Journeyman Riding
     elseif IsSpellKnown(33391) then
+        charData.mountSkill = 2
+    -- Apprentice Riding
+    elseif IsSpellKnown(33388) then
         charData.mountSkill = 1
     end
 
