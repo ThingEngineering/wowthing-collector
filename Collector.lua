@@ -4,7 +4,7 @@ local charClassID, charData, charName, guildName, playedLevel, playedLevelUpdate
 local collectionsHooked, loggingOut = false, false
 local bankOpen, crafterOpen, guildBankOpen, reagentBankUpdated = false, false, false, false
 local maxScannedToys = 0
-local dirtyBags, dirtyFollowers, dirtyHonor, dirtyLockouts, dirtyMissions, dirtyMounts, dirtyPets, dirtyReputations, dirtyVault, dirtyWorldQuests =
+local dirtyBags, dirtyFollowers, dirtyHonor, dirtyLockouts, dirtyMissions, dirtyMounts, dirtyPets, dirtyQuests, dirtyReputations, dirtyVault =
     {}, false, false, false, false, false, false, false, false, false, false, false
 
 -- Libs
@@ -206,6 +206,10 @@ local weeklyQuests = {
     [37639] = "Silver Invasion",
     [37640] = "Gold Invasion",
     [38482] = "Platinum Invasion",
+}
+local weeklyUghQuests = {
+    ["anima"] = {61981, 61982, 61983, 61984},
+    ["souls"] = {61331, 61332, 61333, 61334, 62858, 62859, 62860, 62861, 62862, 62863, 62864, 62865, 62866, 62867, 62868, 62869},
 }
 
 -- Check things the Battle.net API is bugged for
@@ -517,7 +521,7 @@ function events:WEEKLY_REWARDS_UPDATE()
 end
 -- Fires A LOT, whenever just about anything happens with quests
 function events:QUEST_LOG_UPDATE()
-    dirtyWorldQuests = true
+    dirtyQuests = true
 end
 -- Chromie time
 function events:CHROMIE_TIME_CLOSE()
@@ -592,8 +596,9 @@ function wwtc:Timer()
         wwtc:ScanVault()
     end
 
-    if dirtyWorldQuests then
-        dirtyWorldQuests = false
+    if dirtyQuests then
+        dirtyQuests = false
+        wwtc:ScanQuests()
         wwtc:ScanWorldQuests()
     end
 end
@@ -648,6 +653,7 @@ function wwtc:Initialise()
     charData.tradeSkills = charData.tradeSkills or {}
     charData.vault = charData.vault or {}
     charData.weeklyQuests = charData.weeklyQuests or {}
+    charData.weeklyUghQuests = charData.weeklyUghQuests or {}
     charData.worldQuests = charData.worldQuests or {}
 
     charData.dailyResetTime = wwtc:GetDailyResetTime()
@@ -1025,6 +1031,7 @@ function wwtc:ScanQuests()
 
     charData.quests = {}
     charData.weeklyQuests = {}
+    charData.weeklyUghQuests = {}
 
     for _, questID in ipairs(checkQuests) do
         charData.quests[questID] = C_QuestLog.IsQuestFlaggedCompleted(questID)
@@ -1032,6 +1039,30 @@ function wwtc:ScanQuests()
 
     for questID, _ in ipairs(weeklyQuests) do
         charData.weeklyQuests[questID] = C_QuestLog.IsQuestFlaggedCompleted(questID)
+    end
+
+    for name, questIds in pairs(weeklyUghQuests) do
+        local ugh = { status = 0 }
+
+        for _, questId in ipairs(questIds) do
+            -- Quest is completed
+            if C_QuestLog.IsQuestFlaggedCompleted(questId) then
+                ugh.status = 2
+                break
+            -- Quest is in progress, parse the stupid text
+            elseif C_QuestLog.IsOnQuest(questId) then
+                local index = C_QuestLog.GetLogIndexForQuestID(questId)
+                local description, _, _ = GetQuestLogLeaderBoard(1, index)
+                local have, need, text = description:match("(%d+)%s*/%s*(%d+)%s*(.+)")
+                ugh.have = tonumber(have)
+                ugh.need = tonumber(need)
+                ugh.text = text
+                ugh.status = 1
+                break
+            end
+        end
+
+        charData.weeklyUghQuests[name] = ugh
     end
 end
 
@@ -1563,7 +1594,7 @@ end
 SLASH_WWTC1 = "/wwtc"
 SlashCmdList["WWTC"] = function(msg)
     print('sigh')
-    wwtc:ScanVault()
+    wwtc:ScanQuests()
 end
 
 SLASH_RL1 = "/rl"
