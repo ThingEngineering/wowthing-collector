@@ -1,0 +1,23 @@
+name: Release Addon
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Zip it
+        run: |
+          VERSION=$( echo '${{ github.ref }}' | sed -E 's#^refs/tags/v(.*?)$#\1#' )
+          zip -r WoWthing_Collector-${{ $VERSION }}.zip libs/ LICENSE VERSIONS.txt *.lua *.toc
+
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          files: |
+            *.zip
