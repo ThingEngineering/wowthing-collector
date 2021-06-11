@@ -25,6 +25,11 @@ jobs:
           )
           awk '/^v'$SHORT_VERSION'$/,/^$/' VERSIONS.txt > RELEASE_BODY.txt
 
+          echo $VERSION
+          echo $RELEASE_VERSION
+          echo $SHORT_VERSION
+          cat RELEASE_BODY.txt
+
       - name: Zip
         run: |
           zip -r WoWthing_Collector-${{ env.RELEASE_VERSION }}.zip libs/ LICENSE VERSIONS.txt *.lua *.toc
