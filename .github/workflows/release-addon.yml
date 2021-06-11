@@ -50,7 +50,7 @@ jobs:
         with:
           changelog: ${{ steps.mangle.outputs.release-history }}
           changelog_type: 'markdown'
-          display_name: ${{ env.RELEASE_VERSION }}
+          display_name: 'v${{ env.RELEASE_VERSION }}'
           file_path: 'WoWthing_Collector-${{ env.RELEASE_VERSION }}.zip'
           game_endpoint: wow
           game_versions: ${{ env.GAME_VERSION }}
