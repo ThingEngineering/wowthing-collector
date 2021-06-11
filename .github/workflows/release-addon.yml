@@ -11,13 +11,29 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Zip it
+      - name: Mangle
         run: |
-          VERSION=$( echo '${{ github.ref }}' | sed -E 's#^refs/tags/v(.*?)$#\1#' )
-          zip -r WoWthing_Collector-$VERSION.zip libs/ LICENSE VERSIONS.txt *.lua *.toc
+          VERSION=$(
+            echo '${{ github.ref }}' |\
+            sed -E -e 's#^refs/tags/v(.*?)$#\1#'
+          )
+          echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
 
-      - uses: "marvinpinto/action-automatic-releases@latest"
+          SHORT_VERSION=$(
+            echo $VERSION |\
+            sed -E 's#-.*?$##'
+          )
+          awk '/^v'$SHORT_VERSION'$/,/^$/' VERSIONS.txt > RELEASE_BODY.txt
+
+      - name: Zip
+        run: |
+          zip -r WoWthing_Collector-${{ env.RELEASE_VERSION }}.zip libs/ LICENSE VERSIONS.txt *.lua *.toc
+
+      - uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          files: |
-            *.zip
+          body_path: 'RELEASE_BODY.txt'
+          fail_on_unmatched_files: true
+          files: '*.zip'
+          prerelease: ${{ contains(env.RELEASE_VERSION, '-') }}
