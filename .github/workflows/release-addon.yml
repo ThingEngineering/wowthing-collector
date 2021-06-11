@@ -12,6 +12,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Mangle
+        id: mangle
         run: |
           RELEASE_VERSION=$(
             echo '${{ github.ref }}' |\
@@ -23,7 +24,14 @@ jobs:
             echo $RELEASE_VERSION |\
             sed -E 's#-.*?$##'
           )
-          awk '/^v'$SHORT_VERSION'$/,/^$/' VERSIONS.txt > RELEASE_BODY.txt
+          RELEASE_HISTORY=$( awk '/^v'$SHORT_VERSION'$/,/^$/' VERSIONS.txt )
+          RELEASE_HISTORY="${RELEASE_HISTORY//'%'/'%25'}"
+          RELEASE_HISTORY="${RELEASE_HISTORY//$'\n'/'%0A'}"
+          RELEASE_HISTORY="${RELEASE_HISTORY//$'\r'/'%0D'}"
+          echo "::set-output name=release-history::$RELEASE_HISTORY"
+
+          GAME_VERSION=$( echo $SHORT_VERSION | sed -E 's/^([0-9]+\.[0-9]+\.[0-9]+).*?$/\1/' )
+          echo "GAME_VERSION=$GAME_VERSION" >> $GITHUB_ENV
 
       - name: Zip
         run: |
@@ -33,7 +41,18 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          body_path: 'RELEASE_BODY.txt'
-          fail_on_unmatched_files: true
+          body: ${{ steps.mangle.outputs.release-history }}
           files: '*.zip'
           prerelease: ${{ contains(env.RELEASE_VERSION, '-') }}
+
+      - uses: itsmeow/curseforge-upload@master
+        with:
+          changelog: ${{ steps.mangle.outputs.release-history }}
+          changelog_type: 'markdown'
+          display_name: ${{ env.RELEASE_VERSION }}
+          file_path: 'WoWthing_Collector-${{ env.RELEASE_VERSION }}.zip'
+          game_endpoint: wow
+          game_versions: ${{ env.GAME_VERSION }}
+          project_id: 93397
+          release_type: ${{ contains(env.RELEASE_VERSION, '-') && 'alpha' || 'release' }}
+          token: ${{ secrets.CURSEFORGE_TOKEN }}
