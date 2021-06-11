@@ -1053,12 +1053,14 @@ function wwtc:ScanQuests()
             elseif C_QuestLog.IsOnQuest(questId) then
                 local index = C_QuestLog.GetLogIndexForQuestID(questId)
                 local description, _, _ = GetQuestLogLeaderBoard(1, index)
-                local have, need, text = description:match("(%d+)%s*/%s*(%d+)%s*(.+)")
-                ugh.have = tonumber(have)
-                ugh.need = tonumber(need)
-                ugh.text = text
-                ugh.status = 1
-                break
+                if description ~= nil then
+                    local have, need, text = description:match("(%d+)%s*/%s*(%d+)%s*(.+)")
+                    ugh.have = tonumber(have)
+                    ugh.need = tonumber(need)
+                    ugh.text = text
+                    ugh.status = 1
+                    break
+                end
             end
         end
 
