@@ -11,9 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          path: 'WoWthing_Collector'
 
       - name: Mangle
         id: mangle
+        working-directory: 'WoWthing_Collector'
         run: |
           RELEASE_VERSION=$(
             echo '${{ github.ref }}' |\
@@ -36,7 +39,7 @@ jobs:
 
       - name: Zip
         run: |
-          zip -r WoWthing_Collector-${{ env.RELEASE_VERSION }}.zip libs/ LICENSE VERSIONS.txt *.lua *.toc
+          zip -r WoWthing_Collector-${{ env.RELEASE_VERSION }}.zip WoWthing_Collector/ -x WoWthing_Collector/README.md -x 'WoWthing_Collector/.git*'
 
       - uses: softprops/action-gh-release@v1
         env:
