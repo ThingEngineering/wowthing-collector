@@ -1,3 +1,7 @@
+next
+--------
+- Add Torghast scanning.
+
 v9.0.5.4
 --------
 - Add weekly anima/souls quest scanning.

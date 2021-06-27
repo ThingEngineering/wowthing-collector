@@ -308,6 +308,15 @@ local worldQuestFactions = {
     [50598] = 2103, -- Zandalari Empire
 }
 
+local torghastWidgets = {
+    {name = 2927, level = 2936}, -- Coldheart Interstitia
+    {name = 2925, level = 2930}, -- Fracture Chambers
+    {name = 2928, level = 2938}, -- Mort'regar
+    {name = 2926, level = 2932}, -- Skoldus Hall
+    {name = 2924, level = 2934}, -- Soulforges
+    {name = 2929, level = 2940}, -- The Upper Reaches
+}
+
 
 -- Misc constants
 local MAP_KULTIRAS = 876
@@ -650,6 +659,7 @@ function wwtc:Initialise()
     charData.quests = charData.quests or {}
     charData.reputations = charData.reputations or {}
     charData.scanTimes = charData.scanTimes or {}
+    charData.torghast = charData.torghast or {}
     charData.tradeSkills = charData.tradeSkills or {}
     charData.vault = charData.vault or {}
     charData.weeklyQuests = charData.weeklyQuests or {}
@@ -748,6 +758,7 @@ function wwtc:UpdateCharacterData()
 
         wwtc:ScanCriteria()
         wwtc:ScanQuests()
+        wwtc:ScanTorghast()
         wwtc:ScanWorldQuests()
 
         RequestRaidInfo()
@@ -1338,6 +1349,28 @@ function wwtc:ScanReputations()
     end
 end
 
+-- Scan Torghast
+function wwtc:ScanTorghast()
+    if charData == nil then return end
+
+    charData.torghast = {}
+
+    -- Into Torghast, intro quest
+    if C_QuestLog.IsQuestFlaggedCompleted(60136) then
+        for _, widget in ipairs(torghastWidgets) do
+            local name = C_UIWidgetManager.GetTextWithStateWidgetVisualizationInfo(widget.name)
+            local level = C_UIWidgetManager.GetTextWithStateWidgetVisualizationInfo(widget.level)
+
+            if name and level and name.shownState == 1 then
+                charData.torghast[#charData.torghast + 1] = {
+                    level = tonumber(strmatch(level.text, '|cFF00FF00.+(%d+).+|r')),
+                    name = strmatch(name.text, '|n|cffffffff(.+)|r'),
+                }
+            end
+        end
+    end
+end
+
 -- Scan toys
 function wwtc:ScanToys()
     if charData == nil then return end
@@ -1596,7 +1629,7 @@ end
 SLASH_WWTC1 = "/wwtc"
 SlashCmdList["WWTC"] = function(msg)
     print('sigh')
-    wwtc:ScanQuests()
+    wwtc:ScanTorghast()
 end
 
 SLASH_RL1 = "/rl"
