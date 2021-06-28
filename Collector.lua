@@ -971,7 +971,7 @@ function wwtc:ScanLockouts()
         while name do
             bosses[#bosses + 1] = {
                 name = name,
-                dead = dead
+                dead = dead,
             }
 
             j = j + 1
@@ -998,7 +998,10 @@ function wwtc:ScanLockouts()
             local instanceID, numBosses = unpack(instanceData.instances[j])
             for k = 1 + count, numBosses + count do
                 local bossName, _, isKilled = GetLFGDungeonEncounterInfo(instanceID, k)
-                bosses[#bosses + 1] = { bossName, isKilled }
+                bosses[#bosses + 1] = {
+                    name = bossName,
+                    dead = isKilled,
+                }
                 if isKilled then
                     defeated = defeated + 1
                 end
