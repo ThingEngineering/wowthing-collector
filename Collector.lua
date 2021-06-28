@@ -727,7 +727,7 @@ function wwtc:UpdateCharacterData()
                 total = currencyInfo.quantity,
                 maxTotal = currencyInfo.maxQuantity,
                 week = currencyInfo.quantityEarnedThisWeek,
-                weekTotal = currencyInfo.maxWeeklyQuantity,
+                maxWeek = currencyInfo.maxWeeklyQuantity,
             }
         end
     end
