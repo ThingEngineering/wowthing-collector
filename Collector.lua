@@ -127,51 +127,6 @@ local tradeSkills = {
     [176058] = true, -- Secrets of Draenor Tailoring
 }
 
--- LFR instances
-local LFRInstances = {
-    {
-        name = 'The Emerald Nightmare',
-        instances = {
-            {1287, 3}, -- Darkbough
-            {1288, 3}, -- Tormented Guardians
-            {1289, 1}, -- Rift of Aln
-        },
-    },
-    {
-        name = 'Trial of Valor',
-        instances ={
-            {1411, 3}, -- Trial of Valor
-        },
-    },
-    {
-        name = 'The Nighthold',
-        instances = {
-            {1290, 3}, -- Arcing Aqueducts
-            {1291, 3}, -- Royal Athenaeum
-            {1292, 3}, -- Nightspire
-            {1293, 1}, -- Betrayer's Rise
-        },
-    },
-    {
-        name = 'Tomb of Sargeras',
-        instances = {
-            {1494, 3}, -- The Gates of Hell
-            {1495, 3}, -- Wailing Halls
-            {1496, 2}, -- Chamber of the Avatar
-            {1497, 1}, -- Deceiver's Fall
-        },
-    },
-    {
-        name = 'Antorus, the Burning Throne',
-        instances = {
-            {1610, 3}, -- Light's Breach
-            {1611, 3}, -- Forbidden Descent
-            {1612, 3}, -- Hope's End
-            {1613, 2}, -- Seat of the Pantheon
-        },
-    },
-}
-
 -- World boss quests
 local worldBossQuests = {
     [37460] = "Gorgrond Bosses", -- Drov the Ruinator
@@ -948,7 +903,7 @@ function wwtc:ScanCriteria()
     charData.balanceMythic15 = wasEarnedByMe
 end
 
--- Scan instance/LFR/world boss lockouts
+-- Scan instance/world boss lockouts
 function wwtc:ScanLockouts()
     if charData == nil then return end
 
@@ -986,38 +941,6 @@ function wwtc:ScanLockouts()
             defeatedBosses = defeatedBosses,
             locked = locked,
             maxBosses = maxBosses,
-        }
-    end
-
-    -- LFR
-    for i = 1, #LFRInstances do
-        local instanceData = LFRInstances[i]
-
-        local bosses, count, defeated = {}, 0, 0
-        for j = 1, #instanceData.instances do
-            local instanceID, numBosses = unpack(instanceData.instances[j])
-            for k = 1 + count, numBosses + count do
-                local bossName, _, isKilled = GetLFGDungeonEncounterInfo(instanceID, k)
-                bosses[#bosses + 1] = {
-                    name = bossName,
-                    dead = isKilled,
-                }
-                if isKilled then
-                    defeated = defeated + 1
-                end
-            end
-
-            count = count + numBosses
-        end
-
-        charData.lockouts[#charData.lockouts+1] = {
-            name = instanceData.name,
-            bosses = bosses,
-            weeklyQuest = true,
-            difficulty = 17, -- LFR
-            defeatedBosses = defeated,
-            locked = defeated > 0,
-            maxBosses = count,
         }
     end
 
