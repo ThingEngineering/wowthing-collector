@@ -964,7 +964,10 @@ function wwtc:ScanLockouts()
         local bosses, j = {}, 1
         local name, _, dead = GetSavedInstanceEncounterInfo(i, j)
         while name do
-            bosses[#bosses + 1] = { name, dead }
+            bosses[#bosses + 1] = {
+                name = name,
+                dead = dead
+            }
 
             j = j + 1
             name, _, dead = GetSavedInstanceEncounterInfo(i, j)
