@@ -856,7 +856,12 @@ function wwtc:ScanBag(bagID)
             local texture, count, locked, quality, readable, lootable, link, isFiltered = GetContainerItemInfo(bagID, i)
             if count ~= nil and link ~= nil then
                 local itemID, extra = wwtc:ParseItemLink(link)
-                bag["s"..i] = { count, itemID, quality, extra }
+                bag["s"..i] = {
+                    count = count,
+                    itemID = itemID,
+                    quality = quality,
+                    extra = extra,
+                }
             end
         end
     end
