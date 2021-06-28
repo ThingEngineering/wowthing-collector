@@ -129,11 +129,13 @@ local tradeSkills = {
 
 -- World boss quests
 local worldBossQuests = {
+    -- Warlords of Draenor
     [37460] = "Gorgrond Bosses", -- Drov the Ruinator
     [37462] = "Gorgrond Bosses", -- Tarlna
     [37464] = "Rukhmar",
     [94015] = "Supreme Lord Kazzak",
 
+    -- Legion
     [42269] = "Legion Bosses", -- The Soultakers
     [42270] = "Legion Bosses", -- Nithogg
     [42779] = "Legion Bosses", -- Shar'thos
@@ -154,6 +156,14 @@ local worldBossQuests = {
     [49171] = "Greater Invasions", -- Sotanathor
 
     [48799] = "Pristine Argunite", -- Fuel of a Doomed World weekly
+
+    -- Battle for Azeroth
+
+    -- Shadowlands
+    [61813] = "Shadowlands Bosses", -- Valinor, the Light of Eons
+    [61814] = "Shadowlands Bosses", -- Nurgash Muckformed
+    [61815] = "Shadowlands Bosses", -- Oranomonos the Everbranching
+    [61816] = "Shadowlands Bosses", -- Mortanis
 }
 -- Weekly quests
 local weeklyQuests = {
