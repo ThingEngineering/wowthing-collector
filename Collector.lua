@@ -724,10 +724,10 @@ function wwtc:UpdateCharacterData()
         local currencyInfo = C_CurrencyInfo.GetCurrencyInfo(currencyID)
         if currencyInfo ~= nil then
             charData.currencies[currencyID] = {
-                currencyInfo.quantity,
-                currencyInfo.maxQuantity,
-                currencyInfo.quantityEarnedThisWeek,
-                currencyInfo.maxWeeklyQuantity
+                total = currencyInfo.quantity,
+                maxTotal = currencyInfo.maxQuantity,
+                week = currencyInfo.quantityEarnedThisWeek,
+                weekTotal = currencyInfo.maxWeeklyQuantity,
             }
         end
     end
