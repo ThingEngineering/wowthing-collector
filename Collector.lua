@@ -920,6 +920,7 @@ function wwtc:ScanLockouts()
     charData.lockouts = {}
 
     local now = time()
+    charData.scanTimes["lockouts"] = now
 
     -- Instances
     for i = 1, GetNumSavedInstances() do
