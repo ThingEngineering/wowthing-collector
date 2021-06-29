@@ -94,11 +94,13 @@ local currencies = {
     1803, -- Echoes of Ny'alotha
 
     -- Shadowlands
+    1191, -- Valor
     1754, -- Argent Commendation
     1767, -- Stygia
     1810, -- Redeemed Soul
     1813, -- Reservoir Anima
     1816, -- Sinstone Fragments
+    1819, -- Medallion of Service
     1820, -- Infused Ruby
     1822, -- Renown
     1828, -- Soul Ash
