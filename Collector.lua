@@ -725,10 +725,12 @@ function wwtc:UpdateCharacterData()
     end
 
     -- Currencies
+    charData.currencies = {}
     for i, currencyID in ipairs(currencies) do
         local currencyInfo = C_CurrencyInfo.GetCurrencyInfo(currencyID)
         if currencyInfo ~= nil then
-            charData.currencies[currencyID] = {
+            charData.currencies[#charData.currencies + 1] = {
+                id = currencyID,
                 total = currencyInfo.quantity,
                 maxTotal = currencyInfo.maxQuantity,
                 week = currencyInfo.quantityEarnedThisWeek,
