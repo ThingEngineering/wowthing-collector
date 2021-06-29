@@ -246,16 +246,27 @@ local paragonReputations = {
     2170, -- Argussian Reach
 
     -- Battle for Azeroth
-    2157, -- 7th Legion
-    2164, -- Champions of Azeroth
-    2158, -- Order of Embers
-    2103, -- Proudmoore Admiralty
-    2156, -- Storm's Wake
+    2103, -- Zandalari Empire
     2156, -- Talanji's Expedition
     2157, -- The Honorbound
-    2163, -- Tortollan Seekers
     2158, -- Voldunai
-    2103, -- Zandalari Empire
+    2159, -- 7th Legion
+    2160, -- Proudmoore Admiralty
+    2161, -- Order of Embers
+    2162, -- Storm's Wake
+    2163, -- Tortollan Seekers
+    2164, -- Champions of Azeroth
+    2373, -- The Unshackled
+    2391, -- Rustbolt Resistance
+    2400, -- Waveblade Ankoan
+    2415, -- Rajani
+    2417, -- Uldum Accord
+
+    -- Shadowlands
+    2407, -- The Ascended
+    2410, -- The Undying Army
+    2413, -- Court of Harvesters
+    2465, -- The Wild Hunt
 }
 local worldQuestFactions = {
     -- Both
