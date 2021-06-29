@@ -19,6 +19,8 @@ local defaultWWTCSaved = {
     toys = {},
 }
 
+local instanceNameToId = {}
+
 -- Currencies
 local currencies = {
     -- Player vs Player
@@ -633,6 +635,7 @@ function wwtc:Initialise()
 
     charData.dailyResetTime = wwtc:GetDailyResetTime()
 
+    wwtc:BuildEJData()
     wwtc:UpdateGuildData()
 end
 
@@ -665,6 +668,25 @@ function wwtc:Cleanup()
     for cName, cData in pairs(WWTCSaved.chars) do
         if not cData.lastSeen or cData.lastSeen < old then
             WWTCSaved.chars[cName] = nil
+        end
+    end
+end
+
+-- Build a mapping of instanceName => instanceId
+function wwtc:BuildEJData()
+    for tier = 1, EJ_GetNumTiers() do
+        EJ_SelectTier(tier)
+
+        for i = 1, 2 do
+            local isRaid = i == 1
+            local index = 1
+            local instanceId, name = EJ_GetInstanceByIndex(index, isRaid)
+
+            while instanceId do
+                instanceNameToId[name] = instanceId
+                index = index + 1
+                instanceId, name = EJ_GetInstanceByIndex(index, isRaid)
+            end
         end
     end
 end
@@ -924,7 +946,7 @@ function wwtc:ScanLockouts()
 
     -- Instances
     for i = 1, GetNumSavedInstances() do
-        local instanceName, instanceID, instanceReset, instanceDifficulty, locked, extended, _,
+        local instanceName, _, instanceReset, instanceDifficulty, locked, _, _,
             _, _, _, maxBosses, defeatedBosses = GetSavedInstanceInfo(i)
 
         if instanceReset > 0 then
@@ -945,6 +967,7 @@ function wwtc:ScanLockouts()
         end
 
         charData.lockouts[#charData.lockouts+1] = {
+            id = instanceNameToId[instanceName],
             name = instanceName,
             resetTime = instanceReset,
             bosses = bosses,
