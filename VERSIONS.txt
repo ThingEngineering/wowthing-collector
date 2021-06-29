@@ -1,15 +1,25 @@
+v9.1.0.1
+--------
+- Added Shadowlands bosses to world boss scanning.
+- Changed currency data to objects for easier parsing.
+- Changed item data to objects for easier parsing.
+- Changed lockout boss data to objects for easier parsing.
+- Removed LFR-specific lockout scanning, the normal lockout scan works fine nowadays.
+- Increased addon data version to force reset.
+- Updated TOC for 9.1.0.
+
 v9.0.5.5
 --------
-- Add Torghast scanning.
+- Added Torghast scanning.
 
 v9.0.5.4
 --------
-- Add weekly anima/souls quest scanning.
+- Added weekly anima/souls quest scanning.
 
 v9.0.5.3
 --------
-- Fix mount skill scanning, 280% still exists if you bought it pre-Shadowlands.
-- Fix war mode scanning, WAR_MODE_STATUS_UPDATE event doesn't actually do anything.
+- Fixed mount skill scanning, 280% still exists if you bought it pre-Shadowlands.
+- Fixed war mode scanning, WAR_MODE_STATUS_UPDATE event doesn't actually do anything.
 
 v9.0.5.2
 --------
