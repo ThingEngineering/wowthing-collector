@@ -1,3 +1,10 @@
+v9.1.0.2
+--------
+- Changed how currency scanning stores data
+- Updated currency list
+- Updated paragon reputation list
+- Increased addon data version to force reset.
+
 v9.1.0.1
 --------
 - Added Shadowlands bosses to world boss scanning.
