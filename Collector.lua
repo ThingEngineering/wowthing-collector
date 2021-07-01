@@ -645,6 +645,7 @@ function wwtc:Initialise()
     charData.mounts = charData.mounts or {}
     charData.mythicDungeons = charData.mythicDungeons or {}
     charData.orderHallResearch = charData.orderHallResearch or {}
+    charData.paragons = charData.paragons or {}
     charData.pets = charData.pets or {}
     charData.quests = charData.quests or {}
     charData.reputations = charData.reputations or {}
