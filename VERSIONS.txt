@@ -1,8 +1,15 @@
+v9.1.0.3
+--------
+- Added friendship reputation scanning for Marasmius.
+- Added "Shaping Fate" to ugh-quest scanning.
+- Changed ugh-quest scanning to use appropriate quest functions to get progress.
+- Updated paragon reputation list again.
+
 v9.1.0.2
 --------
-- Changed how currency scanning stores data
-- Updated currency list
-- Updated paragon reputation list
+- Changed how currency scanning stores data.
+- Updated currency list.
+- Updated paragon reputation list.
 - Increased addon data version to force reset.
 
 v9.1.0.1
