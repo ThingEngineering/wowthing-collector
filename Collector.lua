@@ -1065,7 +1065,7 @@ function wwtc:ScanQuests()
                 local objectives = C_QuestLog.GetQuestObjectives(questId)
                 if objectives ~= nil then
                     local obj = objectives[1]
-                    ugh.status = 2
+                    ugh.status = 1
                     ugh.text = obj.text
                     ugh.type = obj.type
 
