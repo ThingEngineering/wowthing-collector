@@ -186,6 +186,7 @@ local weeklyQuests = {
 local weeklyUghQuests = {
     ["anima"] = {61981, 61982, 61983, 61984},
     ["souls"] = {61331, 61332, 61333, 61334, 62858, 62859, 62860, 62861, 62862, 62863, 62864, 62865, 62866, 62867, 62868, 62869},
+    ["shapingFate"] = {63949}
 }
 
 -- Check things the Battle.net API is bugged for
@@ -1054,16 +1055,25 @@ function wwtc:ScanQuests()
             if C_QuestLog.IsQuestFlaggedCompleted(questId) then
                 ugh.status = 2
                 break
-            -- Quest is in progress, parse the stupid text
+            -- Quest is in progress, check progress
             elseif C_QuestLog.IsOnQuest(questId) then
-                local index = C_QuestLog.GetLogIndexForQuestID(questId)
-                local description, _, _ = GetQuestLogLeaderBoard(1, index)
-                if description ~= nil then
-                    local have, need, text = description:match("(%d+)%s*/%s*(%d+)%s*(.+)")
-                    ugh.have = tonumber(have)
-                    ugh.need = tonumber(need)
-                    ugh.text = text
-                    ugh.status = 1
+                --local index = C_QuestLog.GetLogIndexForQuestID(questId)
+                --local description, _, _ = GetQuestLogLeaderBoard(1, index)
+                local objectives = C_QuestLog.GetQuestObjectives(questId)
+                if objectives ~= nil then
+                    local obj = objectives[1]
+                    ugh.status = 2
+                    ugh.text = obj.text
+                    ugh.type = obj.type
+
+                    if obj.type == 'progressbar' then
+                        ugh.have = GetQuestProgressBarPercent(questId)
+                        ugh.need = 100
+                    else
+                        ugh.have = obj.numFulfilled
+                        ugh.need = obj.numRequired
+                    end
+
                     break
                 end
             end
