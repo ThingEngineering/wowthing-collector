@@ -242,6 +242,9 @@ local checkQuests = {
 local checkReputations = {
     --1492, -- Emperor Shaohao
 }
+local checkFriendships = {
+    2463, -- Marasmius
+}
 local paragonReputations = {
     -- Legion
     1828, -- Highmountain Tribe
@@ -1315,15 +1318,23 @@ function wwtc:ScanReputations()
     if charData == nil then return end
 
     charData.scanTimes['reputations'] = time()
-    charData.reputations = {}
+
     charData.paragons = {}
+    charData.reputations = {}
 
     for i, factionID in ipairs(checkReputations) do
-        local _, _, standingID, _, barMax, barValue = GetFactionInfoByID(factionID)
-        charData.reputations[factionID] = {
-            level = standingID,
-            current = barValue,
-            max_value = barMax,
+        local _, _, _, _, _, barValue = GetFactionInfoByID(factionID)
+        charData.reputations[#charData.reputations + 1] = {
+            id = factionID,
+            value = barValue,
+        }
+    end
+
+    for i, factionID in ipairs(checkFriendships) do
+        _, friendRep = GetFriendshipReputation(factionID)
+        charData.reputations[#charData.reputations + 1] = {
+            id = factionID,
+            value = friendRep,
         }
     end
 
