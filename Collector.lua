@@ -1378,7 +1378,7 @@ function wwtc:ScanTorghast()
 
             if name and level and name.shownState == 1 then
                 charData.torghast[#charData.torghast + 1] = {
-                    level = tonumber(strmatch(level.text, '|cFF00FF00.+(%d+).+|r')),
+                    level = tonumber(strmatch(level.text, '|cFF00FF00.-(%d+).+|r')),
                     name = strmatch(name.text, '|n|cffffffff(.+)|r'),
                 }
             end
