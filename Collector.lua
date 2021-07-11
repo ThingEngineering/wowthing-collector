@@ -727,10 +727,8 @@ function wwtc:UpdateCharacterData()
     charData.lastSeen = now
 
     -- Played time
-    if playedLevel then
+    if playedLevel and playedTotal then
         charData.playedLevel = playedLevel + (now - playedLevelUpdated)
-    end
-    if playedTotal then
         charData.playedTotal = playedTotal + (now - playedTotalUpdated)
     end
 
@@ -745,6 +743,8 @@ function wwtc:UpdateCharacterData()
                 maxTotal = currencyInfo.maxQuantity,
                 week = currencyInfo.quantityEarnedThisWeek,
                 maxWeek = currencyInfo.maxWeeklyQuantity,
+                totalEarned = currencyInfo.totalEarned,
+                useTotalEarned = currencyInfo.useTotalEarnedForMaxQty,
             }
         end
     end
