@@ -1,6 +1,12 @@
+v9.1.0.4
+--------
+- Changed currency scanning to include per-season information.
+- Fixed broken Torghast scanning, Lua has strange regular expression syntax. Luckily SavedInstances had the exact same bug
+  and showed how to fix it.
+
 v9.1.0.3-2
 --------
-- Fix broken ugh-quest scanning.
+- Fixed broken ugh-quest scanning.
 
 v9.1.0.3
 --------
