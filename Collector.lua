@@ -4,8 +4,8 @@ local charClassID, charData, charName, guildName, playedLevel, playedLevelUpdate
 local collectionsHooked, loggingOut = false, false
 local bankOpen, crafterOpen, guildBankOpen, reagentBankUpdated = false, false, false, false
 local maxScannedToys = 0
-local dirtyBags, dirtyFollowers, dirtyHonor, dirtyLockouts, dirtyMissions, dirtyMounts, dirtyPets, dirtyQuests, dirtyReputations, dirtyVault =
-    {}, false, false, false, false, false, false, false, false, false, false, false
+local dirtyBags, dirtyFollowers, dirtyHonor, dirtyLockouts, dirtyMissions, dirtyMounts, dirtyMythicPlus, dirtyPets, dirtyQuests, dirtyReputations, dirtyVault =
+    {}, false, false, false, false, false, false, false, false, false, false, false, false
 
 -- Libs
 local LibRealmInfo = LibStub('LibRealmInfo17janekjl')
@@ -510,6 +510,7 @@ function events:CHALLENGE_MODE_COMPLETED()
 end
 -- Fires when Mythic dungeon map information updates
 function events:CHALLENGE_MODE_MAPS_UPDATE()
+    dirtyMythicPlus = true
     dirtyVault = true
 end
 -- ?
@@ -584,6 +585,11 @@ function wwtc:Timer()
         wwtc:ScanMounts()
     end
 
+    if dirtyMythicPlus then
+        dirtyMythicPlus = false
+        wwtc:ScanMythicPlus()
+    end
+
     if dirtyPets then
         dirtyPets = false
         wwtc:ScanPets()
@@ -648,6 +654,7 @@ function wwtc:Initialise()
     charData.missions = charData.missions or {}
     charData.mounts = charData.mounts or {}
     charData.mythicDungeons = charData.mythicDungeons or {}
+    charData.mythicPlus = charData.mythicPlus or {}
     charData.orderHallResearch = charData.orderHallResearch or {}
     charData.paragons = charData.paragons or {}
     charData.pets = charData.pets or {}
@@ -1083,6 +1090,27 @@ function wwtc:ScanQuests()
         end
 
         charData.weeklyUghQuests[name] = ugh
+    end
+end
+
+-- Scan mythic plus dungeons
+function wwtc:ScanMythicPlus()
+    if charData == nil then return end
+
+    local now = time()
+    charData.scanTimes["mythicPlus"] = now
+    charData.mythicPlus = {
+        maps = {},
+        season = C_MythicPlus.GetCurrentSeason(),
+    }
+
+    local maps = C_ChallengeMode.GetMapTable()
+    for i = 1, #maps do
+        local affixScores, overallScore = C_MythicPlus.GetSeasonBestAffixScoreInfoForMap(maps[i])
+        charData.mythicPlus.maps[maps[i]] = {
+            affixScores = affixScores,
+            overallScore = overallScore,
+        }
     end
 end
 
