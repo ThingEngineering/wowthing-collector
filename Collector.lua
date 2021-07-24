@@ -141,40 +141,41 @@ local tradeSkills = {
 -- World boss quests
 local worldBossQuests = {
     -- Warlords of Draenor
-    [37460] = "Gorgrond Bosses", -- Drov the Ruinator
-    [37462] = "Gorgrond Bosses", -- Tarlna
-    [37464] = "Rukhmar",
-    [94015] = "Supreme Lord Kazzak",
+    --[37460] = "Gorgrond Bosses", -- Drov the Ruinator
+    --[37462] = "Gorgrond Bosses", -- Tarlna
+    --[37464] = "Rukhmar",
+    --[94015] = "Supreme Lord Kazzak",
 
     -- Legion
-    [42269] = "Legion Bosses", -- The Soultakers
-    [42270] = "Legion Bosses", -- Nithogg
-    [42779] = "Legion Bosses", -- Shar'thos
-    [42819] = "Legion Bosses", -- Humongris
-    [43192] = "Legion Bosses", -- Levantus
-    [43193] = "Legion Bosses", -- Calamir
-    [43448] = "Legion Bosses", -- Drugon the Frostblood
-    [43512] = "Legion Bosses", -- Ana-Mouz
-    [43513] = "Legion Bosses", -- Na'zak the Fiend
-    [43985] = "Legion Bosses", -- Flotsam
-    [44287] = "Legion Bosses", -- Withered Jim
+    --[42269] = "Legion Bosses", -- The Soultakers
+    --[42270] = "Legion Bosses", -- Nithogg
+    --[42779] = "Legion Bosses", -- Shar'thos
+    --[42819] = "Legion Bosses", -- Humongris
+    --[43192] = "Legion Bosses", -- Levantus
+    --[43193] = "Legion Bosses", -- Calamir
+    --[43448] = "Legion Bosses", -- Drugon the Frostblood
+    --[43512] = "Legion Bosses", -- Ana-Mouz
+    --[43513] = "Legion Bosses", -- Na'zak the Fiend
+    --[43985] = "Legion Bosses", -- Flotsam
+    --[44287] = "Legion Bosses", -- Withered Jim
 
-    [49166] = "Greater Invasions", -- Inquisitor Meto
-    [49167] = "Greater Invasions", -- Mistress Alluradel
-    [49168] = "Greater Invasions", -- Pit Lord Vilemus
-    [49169] = "Greater Invasions", -- Matron Folnuna
-    [49170] = "Greater Invasions", -- Occularus
-    [49171] = "Greater Invasions", -- Sotanathor
+    --[49166] = "Greater Invasions", -- Inquisitor Meto
+    --[49167] = "Greater Invasions", -- Mistress Alluradel
+    --[49168] = "Greater Invasions", -- Pit Lord Vilemus
+    --[49169] = "Greater Invasions", -- Matron Folnuna
+    --[49170] = "Greater Invasions", -- Occularus
+    --[49171] = "Greater Invasions", -- Sotanathor
 
-    [48799] = "Pristine Argunite", -- Fuel of a Doomed World weekly
+    --[48799] = "Pristine Argunite", -- Fuel of a Doomed World weekly
 
     -- Battle for Azeroth
 
     -- Shadowlands
-    [61813] = "Shadowlands Bosses", -- Valinor, the Light of Eons
-    [61814] = "Shadowlands Bosses", -- Nurgash Muckformed
-    [61815] = "Shadowlands Bosses", -- Oranomonos the Everbranching
-    [61816] = "Shadowlands Bosses", -- Mortanis
+    [61813] = { 108001, "Shadowlands World Bosses", "Valinor, the Light of Eons" },
+    [61814] = { 108001, "Shadowlands World Bosses", "Nurgash Muckformed" },
+    [61815] = { 108001, "Shadowlands World Bosses", "Oranomonos the Everbranching" },
+    [61816] = { 108001, "Shadowlands World Bosses", "Mortanis" },
+    [64531] = { 108002, "Mor'geth", "Mor'geth, Tormentor of the Damned" },
 }
 -- Weekly quests
 local weeklyQuests = {
@@ -1016,26 +1017,38 @@ function wwtc:ScanLockouts()
     end
 
     -- World bosses
-    for i = 1, GetNumSavedWorldBosses() do
-        local instanceName, worldBossID, instanceReset = GetSavedWorldBossInfo(i)
-        charData.lockouts[#charData.lockouts+1] = {
-            name = instanceName,
-            resetTime = now + instanceReset,
-            difficulty = 0,
-            defeatedBosses = 1,
-            maxBosses = 1,
-        }
-    end
+    --for i = 1, GetNumSavedWorldBosses() do
+    --    local instanceName, worldBossID, instanceReset = GetSavedWorldBossInfo(i)
+    --    charData.lockouts[#charData.lockouts+1] = {
+    --        name = instanceName,
+    --        resetTime = now + instanceReset,
+    --        difficulty = 0,
+    --        defeatedBosses = 1,
+    --        maxBosses = 1,
+    --    }
+    --end
+
+    local weeklyReset = time() + C_DateAndTime.GetSecondsUntilWeeklyReset()
 
     -- Other world bosses
-    for questID, instanceName in pairs(worldBossQuests) do
+    for questID, questData in pairs(worldBossQuests) do
+        groupId, groupName, bossName = unpack(questData)
         if C_QuestLog.IsQuestFlaggedCompleted(questID) then
             charData.lockouts[#charData.lockouts+1] = {
-                name = instanceName,
-                weeklyQuest = true,
+                id = groupId,
+                name = groupName,
+                resetTime = weeklyReset,
+                bosses = {
+                    {
+                        name = bossName,
+                        dead = true,
+                    },
+                },
                 difficulty = 0,
                 defeatedBosses = 1,
+                locked = true,
                 maxBosses = 1,
+                weeklyQuest = true,
             }
         end
     end
