@@ -1,3 +1,10 @@
+v9.1.0.6
+--------
+- Changed world boss scanning to store more information.
+- Changed how M+ scanning stores data.
+- Fixed vault scanning saving weird extra data.
+- Increased addon data version to force reset.
+
 v9.1.0.5
 --------
 - Added scanning for Fortified/Tyrannical M+ scores.
