@@ -1120,7 +1120,8 @@ function wwtc:ScanMythicPlus()
     local maps = C_ChallengeMode.GetMapTable()
     for i = 1, #maps do
         local affixScores, overallScore = C_MythicPlus.GetSeasonBestAffixScoreInfoForMap(maps[i])
-        charData.mythicPlus.maps[maps[i]] = {
+        charData.mythicPlus.maps[#charData.mythicPlus.maps + 1] = {
+            mapId = maps[i],
             affixScores = affixScores,
             overallScore = overallScore,
         }
