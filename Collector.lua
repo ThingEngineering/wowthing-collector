@@ -1161,13 +1161,15 @@ function wwtc:ScanVault()
         --      id=34
         -- },
         local activity = activities[i]
-
-        charData.vault[activity.type] = charData.vault[activity.type] or {}
-        charData.vault[activity.type][activity.index] = {
-            level = activity.level,
-            progress = activity.progress,
-            threshold = activity.threshold,
-        }
+        -- We only care about 1 (MythicPlus), 2 (RankedPvP), 3 (Raid)
+        if activity.type >= 1 and activity.type <= 3 then
+            charData.vault[activity.type] = charData.vault[activity.type] or {}
+            charData.vault[activity.type][activity.index] = {
+                level = activity.level,
+                progress = activity.progress,
+                threshold = activity.threshold,
+            }
+        end
     end
 end
 
