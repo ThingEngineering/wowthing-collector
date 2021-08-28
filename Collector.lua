@@ -4,7 +4,7 @@ local charClassID, charData, charName, guildName, playedLevel, playedLevelUpdate
 local collectionsHooked, loggingOut = false, false
 local bankOpen, crafterOpen, guildBankOpen, reagentBankUpdated = false, false, false, false
 local maxScannedToys = 0
-local dirtyBags, dirtyFollowers, dirtyHonor, dirtyLockouts, dirtyMissions, dirtyMounts, dirtyMythicPlus, dirtyPets, dirtyQuests, dirtyReputations, dirtyVault =
+local dirtyBags, dirtyFollowers, dirtyHonor, dirtyLockouts, dirtyMissions, dirtyMounts, dirtyMythicPlus, dirtyPets, dirtyQuests, dirtyReputations, dirtyTransmog, dirtyVault =
     {}, false, false, false, false, false, false, false, false, false, false, false, false
 
 -- Libs
@@ -364,6 +364,7 @@ function events:PLAYER_ENTERING_WORLD()
 
     wwtc:UpdateCharacterData()
     dirtyHonor = true
+    dirtyTransmog = true
     dirtyVault = true
 end
 -- Fires when /played information is available
@@ -601,6 +602,11 @@ function wwtc:Timer()
         wwtc:ScanReputations()
     end
 
+    if dirtyTransmog then
+        dirtyTransmog = false
+        wwtc:ScanTransmog()
+    end
+
     if dirtyVault then
         dirtyVault = false
         wwtc:ScanVault()
@@ -664,6 +670,7 @@ function wwtc:Initialise()
     charData.scanTimes = charData.scanTimes or {}
     charData.torghast = charData.torghast or {}
     charData.tradeSkills = charData.tradeSkills or {}
+    charData.transmog = charData.transmog or {}
     charData.vault = charData.vault or {}
     charData.weeklyQuests = charData.weeklyQuests or {}
     charData.weeklyUghQuests = charData.weeklyUghQuests or {}
@@ -1126,6 +1133,27 @@ function wwtc:ScanMythicPlus()
             overallScore = overallScore,
         }
     end
+end
+
+-- Scan transmog
+function wwtc:ScanTransmog()
+    if charData == nil then return end
+
+    local now = time()
+    charData.scanTimes["transmog"] = now
+    charData.transmog = {}
+
+    local count = 0
+    for categoryID = 1, 28 do
+        local appearances = C_TransmogCollection.GetCategoryAppearances(categoryID)
+        for _, appearance in pairs(appearances) do
+            if appearance.isCollected then
+                charData.transmog[appearance.visualID] = true
+                count = count + 1
+            end
+        end
+    end
+    print("WoWthing_Collector: scanned", count, "transmog appearances")
 end
 
 -- Scan dirtyVault
@@ -1688,7 +1716,7 @@ end
 SLASH_WWTC1 = "/wwtc"
 SlashCmdList["WWTC"] = function(msg)
     print('sigh')
-    wwtc:ScanTorghast()
+    wwtc:ScanTransmog()
 end
 
 SLASH_RL1 = "/rl"
