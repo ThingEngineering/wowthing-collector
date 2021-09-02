@@ -1,3 +1,9 @@
+v9.1.0.8
+--------
+- Changed Transmog scanning to happen when the Collections/Appearances window is shown.
+- Fixed Transmog scanning skipping the selected category due to a REALLY OLD BUG from 7.2:
+  https://www.curseforge.com/wow/addons/transmogroulette/files/2406530
+
 v9.1.0.7
 --------
 - Added Transmog scanning.
