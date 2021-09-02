@@ -364,7 +364,6 @@ function events:PLAYER_ENTERING_WORLD()
 
     wwtc:UpdateCharacterData()
     dirtyHonor = true
-    dirtyTransmog = true
     dirtyVault = true
 end
 -- Fires when /played information is available
@@ -1144,7 +1143,7 @@ function wwtc:ScanTransmog()
     charData.transmog = {}
 
     local count = 0
-    for categoryID = 1, 28 do
+    for categoryID = 0, 29 do
         local appearances = C_TransmogCollection.GetCategoryAppearances(categoryID)
         for _, appearance in pairs(appearances) do
             if appearance.isCollected then
@@ -1335,6 +1334,16 @@ function wwtc:HookCollections()
                 end)
             else
                 print("WoWthing_Collector: unable to hook 'ToyBox' frame!")
+            end
+
+            -- Hook transmog
+            local tmogframe = _G["WardrobeCollectionFrame"]
+            if tmogframe then
+                tmogframe:HookScript("OnShow", function(self)
+                    dirtyTransmog = true
+                end)
+            else
+                print("WoWthing_Collector: unable to hook 'WardrobeCollectionFrame' frame!")
             end
 
             collectionsHooked = true
