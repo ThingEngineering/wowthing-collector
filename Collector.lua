@@ -12,7 +12,7 @@ local LibRealmInfo = LibStub('LibRealmInfo17janekjl')
 
 -- Default SavedVariables
 local defaultWWTCSaved = {
-    version = 9102,
+    version = 9103,
     chars = {},
     guilds = {},
     heirlooms = {},
@@ -1147,7 +1147,7 @@ function wwtc:ScanTransmog()
         local appearances = C_TransmogCollection.GetCategoryAppearances(categoryID)
         for _, appearance in pairs(appearances) do
             if appearance.isCollected then
-                charData.transmog[appearance.visualID] = true
+                charData.transmog[#charData.transmog + 1] = appearance.visualID
                 count = count + 1
             end
         end
