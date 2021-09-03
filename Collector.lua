@@ -1142,17 +1142,21 @@ function wwtc:ScanTransmog()
     charData.scanTimes["transmog"] = now
     charData.transmog = {}
 
-    local count = 0
-    for categoryID = 0, 29 do
-        local appearances = C_TransmogCollection.GetCategoryAppearances(categoryID)
-        for _, appearance in pairs(appearances) do
-            if appearance.isCollected then
-                charData.transmog[#charData.transmog + 1] = appearance.visualID
-                count = count + 1
+    -- Try the hack that TransmogRoulette uses to fix the category bug
+    -- https://github.com/semlar/TransmogRoulette/blob/181615d0bb7fb19992bbcefae7f5c6970865e52b/TransmogRoulette.xml#L119
+    C_Timer.After(1, function()
+        local count = 0
+        for categoryID = 0, 29 do
+            local appearances = C_TransmogCollection.GetCategoryAppearances(categoryID)
+            for _, appearance in pairs(appearances) do
+                if appearance.isCollected then
+                    charData.transmog[#charData.transmog + 1] = appearance.visualID
+                    count = count + 1
+                end
             end
         end
-    end
-    print("WoWthing_Collector: scanned", count, "transmog appearances")
+        print("WoWthing_Collector: scanned", count, "transmog appearances")
+    end)
 end
 
 -- Scan dirtyVault
