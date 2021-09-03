@@ -1,3 +1,7 @@
+v9.1.0.10
+---------
+- Trying an even hackier workaround for the Transmog category bug.
+
 v9.1.0.9
 --------
 - Changed how Transmog scanning stores data.
