@@ -177,7 +177,29 @@ local worldBossQuests = {
     [61816] = { 108001, "Shadowlands World Bosses", "Mortanis" },
     [64531] = { 108002, "Mor'geth", "Mor'geth, Tormentor of the Damned" },
 }
--- Weekly quests
+-- Quests
+local dailyQuests = {
+    -- Farms: Korthia
+    64258, -- Carriage Crusher
+    64243, -- Consumption
+    63830, -- Dominated Protector
+    64320, -- Escaped Wilderling
+    64349, -- Fleshwing
+    64428, -- Kroke the Tormented
+    64233, -- Malbog
+    64291, -- Relic Breaker Krelva
+    64455, -- Reliwik the Defiant
+    64313, -- Stygian Stonecrusher
+    64338, -- Wild Worldcracker
+    64278, -- Xyraxz the Unknowable
+    64257, -- Yarxhov the Pillager
+    64442, -- Zelnithop
+    -- Farms: Korthia Rift
+    64285, -- Deadsoul Hatcher
+    64440, -- Observer Yorik
+    64263, -- Screaming Shade
+    64284, -- Silent Soulstalker
+}
 local weeklyQuests = {
     [37638] = "Bronze Invasion",
     [37639] = "Silver Invasion",
@@ -653,6 +675,7 @@ function wwtc:Initialise()
     charData.balanceMythic15 = false
 
     charData.currencies = charData.currencies or {}
+    charData.dailyQuests = charData.dailyQuests or {}
     charData.followers = charData.followers or {}
     charData.honor = charData.honor or {}
     charData.items = charData.items or {}
@@ -1065,15 +1088,26 @@ function wwtc:ScanQuests()
     if charData == nil then return end
 
     charData.quests = {}
+    charData.dailyQuests = {}
     charData.weeklyQuests = {}
     charData.weeklyUghQuests = {}
+
+    charData.scanTimes["quests"] = time()
 
     for _, questID in ipairs(checkQuests) do
         charData.quests[questID] = C_QuestLog.IsQuestFlaggedCompleted(questID)
     end
 
+    for _, questID in ipairs(dailyQuests) do
+        if C_QuestLog.IsQuestFlaggedCompleted(questID) then
+            charData.dailyQuests[#charData.dailyQuests + 1] = questID
+        end
+    end
+
     for questID, _ in ipairs(weeklyQuests) do
-        charData.weeklyQuests[questID] = C_QuestLog.IsQuestFlaggedCompleted(questID)
+        if C_QuestLog.IsQuestFlaggedCompleted(questID) then
+            charData.weeklyQuests[#charData.weeklyQuests + 1] = questID
+        end
     end
 
     for name, questIds in pairs(weeklyUghQuests) do
