@@ -1488,6 +1488,9 @@ end
 function wwtc:ScanTorghast()
     if charData == nil then return end
 
+    local now = time()
+    charData.scanTimes["torghast"] = now
+
     charData.torghast = {}
 
     -- Into Torghast, intro quest
