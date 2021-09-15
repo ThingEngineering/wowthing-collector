@@ -219,6 +219,7 @@ local checkMounts = {
     --[229377] = true, -- Gift of the Holy Keepers (Priest Order Hall)
     --[229417] = true, -- Slayer's Felbroken Shrieker (Demon Hunter Order Hall)
     --[232412] = true, -- Netherlord's Chaotic Wrathsteed (Warlock Order Hall)
+    [215545] = true, -- Mastercraft Gravewing (Korthia rare)
 }
 local checkPets = {
     [216] = 33239, -- Argent Gruntling
