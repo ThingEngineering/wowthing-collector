@@ -194,11 +194,17 @@ local dailyQuests = {
     64278, -- Xyraxz the Unknowable
     64257, -- Yarxhov the Pillager
     64442, -- Zelnithop
+
     -- Farms: Korthia Rift
     64285, -- Deadsoul Hatcher
     64440, -- Observer Yorik
     64263, -- Screaming Shade
     64284, -- Silent Soulstalker
+
+    -- Farms: Korthia Random
+    64246, -- Konthrogz the Obliterator
+    64245, -- Towering Exterminator
+    64457, -- Ve'rayn
 }
 local weeklyQuests = {
     [37638] = "Bronze Invasion",
