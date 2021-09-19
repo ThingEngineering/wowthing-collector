@@ -194,17 +194,132 @@ local dailyQuests = {
     64278, -- Xyraxz the Unknowable
     64257, -- Yarxhov the Pillager
     64442, -- Zelnithop
-
-    -- Farms: Korthia Rift
     64285, -- Deadsoul Hatcher
     64440, -- Observer Yorik
     64263, -- Screaming Shade
     64284, -- Silent Soulstalker
-
-    -- Farms: Korthia Random
     64246, -- Konthrogz the Obliterator
     64245, -- Towering Exterminator
     64457, -- Ve'rayn
+    -- Farms: Ardenweald
+    59226, -- Deathbinder Hroth
+    59201, -- Deifir the Untamed
+    62271, -- Deifir the Untamed
+    58987, -- Dustbrawl
+    60266, -- Egg-Tender Leh'go
+    61184, -- Faeflayer
+    59006, -- Gormbore
+    59145, -- Gormtamer Tizo
+    59157, -- Humon'gozz
+    59221, -- Hunter Vivanna
+    59431, -- Mymaen
+    59235, -- Mystic Rainbowhorn
+    60306, -- Night Mare
+    59208, -- Old Ardeite
+    62270, -- Old Ardeite
+    60273, -- Rootwrithe
+    59220, -- Skuld Vit
+    61177, -- Soultwister Cero
+    61632, -- Valfir the Unrelenting
+    59170, -- Wrigglemortis
+    59140, -- Macabre
+    61633, -- Star Lake: Argus
+    61633, -- Star Lake: Azshara
+    -- Farms: Bastion
+    60977, -- The Ascended Council
+    61083, -- Aspirant Eolis
+    60978, -- Cloudfeather Guardian
+    62191, -- Cloudfeather Guardian
+    61002, -- Collector Astorestes
+    60883, -- Dark Watcher
+    61069, -- Demi the Relic Hoarder
+    61000, -- Demi the Relic Hoarder
+    62650, -- Dionae
+    60998, -- Enforcer Aegeon
+    58222, -- Fallen Acolyte Erisne
+    58319, -- Nikara Blackheart
+    61634, -- Orstus and Sotiros
+    58320, -- Selena the Reborn
+    60862, -- Sundancer
+    60997, -- Unstable Memory
+    58526, -- Aethon
+    60571, -- Cloudtail
+    60569, -- Nemaeus
+    60570, -- Sigilback
+    61001, -- Swelling Tear
+    61046, -- Swelling Tear
+    61047, -- Swelling Tear
+    -- Farms: Maldraxxus
+    58870, -- Bubbleblood
+    58005, -- Collector Kash
+    58335, -- Corpsecutter Moroc
+    58868, -- Deadly Dapperling
+    58878, -- Deepscar
+    58835, -- Devour'us
+    58872, -- Gieger
+    58837, -- Gristlebeak
+    58837, -- Indomitable Schmitd
+    62369, -- Necromantic Anomaly
+    58851, -- Nerissa Heartless
+    58629, -- Nirvaska the Summoner
+    58875, -- Pesticide
+    58004, -- Ravenomous
+    58784, -- Sabriel the Bonecleaver
+    58006, -- Scunner
+    58003, -- Sister Chelicerae
+    58768, -- Smorgas the Feaster
+    58783, -- Tahonta
+    58091, -- Taskmaster Xox
+    58678, -- Thread Mistress Leeda
+    58889, -- Warbringer Mal'Korak
+    59290, -- Zargox the Reborn
+    62786, -- Theater of Pain
+    -- Farms: Revendreth
+    59854, -- Amalgamation of Filth
+    59584, -- Amalgamation of Light
+    60836, -- Amalgamation of Sin
+    59893, -- Azgar
+    59582, -- Bog Beast
+    59913, -- Executioner Aatron
+    58441, -- Executioner Adrastia
+    59869, -- Famu the Infinite
+    61618, -- Forgemaster Madalav
+    60173, -- Grand Arcanist Dimitri
+    59612, -- Harika the Horrid
+    59900, -- Hopecrusher
+    58210, -- Innervus
+    59580, -- Leeched Soul
+    58633, -- Lord Mortegore
+    60729, -- Manifestation of Wrath
+    58213, -- Scrivener Lenua
+    62252, -- Sinstone Hoarder
+    58263, -- Sire Ladinas
+    62220, -- Stonefist
+    56877, -- Tomb Burster
+    59259, -- Worldedge Gorger
+    -- Farms: The Maw
+    57482, -- Adjutant Dekaris
+    57469, -- Borr-Geth
+    61106, -- Conjured Death
+    62282, -- Darithis the Bleak
+    62282, -- Darklord Taraxis
+    64251, -- Deomen the Vortex
+    60909, -- Dolos
+    60915, -- Eketra
+    57509, -- Eternas the Tormentor
+    64164, -- Fallen Charger
+    62788, -- Ikras the Devourer
+    60987, -- Morguliax
+    57573, -- Nascent Devourer
+    60667, -- Obolos
+    61519, -- Orophea
+    60884, -- Shadeweaver Zeris
+    60834, -- Soulforger Rhovus
+    60789, -- Talaporas, Herald of Pain
+    60914, -- Thanassos
+    64258, -- Traitor Balthier
+    61568, -- Yero the Skittish
+    64152, -- Ylva, Mate of Guarm
 }
 local weeklyQuests = {
     [37638] = "Bronze Invasion",
