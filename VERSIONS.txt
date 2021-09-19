@@ -1,3 +1,7 @@
+v9.1.0.13
+---------
+- Added (most of) the rest of Shadowlands rares to quest scanning.
+
 v9.1.0.12
 ---------
 - Added Mastercraft Gravewing to mount scanning.
