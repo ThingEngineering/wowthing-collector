@@ -979,8 +979,8 @@ function wwtc:Timer()
         wwtc:ScanWorldQuests()
     end
 end
--- Run the timer once per second to do chunky things
-local _ = C_Timer.NewTicker(1, function() wwtc:Timer() end, nil)
+-- Run the timer once per 2 seconds to do chunky things
+local _ = C_Timer.NewTicker(2, function() wwtc:Timer() end, nil)
 
 -------------------------------------------------------------------------------
 
