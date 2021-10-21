@@ -179,29 +179,86 @@ local worldBossQuests = {
 }
 -- Quests
 local dailyQuests = {
-    -- Farms: Korthia
+    -- Zone Maps: Shadowlands
+    -- Zone Maps: Korthia
     64258, -- Carriage Crusher
     64243, -- Consumption
+    64285, -- Deadsoul Hatcher
     63830, -- Dominated Protector
     64320, -- Escaped Wilderling
-    64349, -- Fleshwing
+    64349, -- Fleshwing <Lord of the Heap>
+    64246, -- Konthrogz the Obliterator
     64428, -- Kroke the Tormented
     64233, -- Malbog
+    64440, -- Observer Yorik
     64291, -- Relic Breaker Krelva
     64455, -- Reliwik the Defiant
+    64263, -- Screaming Shade
+    64284, -- Silent Soulstalker
     64313, -- Stygian Stonecrusher
+    64245, -- Towering Exterminator
+    64457, -- Ve'rayn
     64338, -- Wild Worldcracker
     64278, -- Xyraxz the Unknowable
     64257, -- Yarxhov the Pillager
     64442, -- Zelnithop
-    64285, -- Deadsoul Hatcher
-    64440, -- Observer Yorik
-    64263, -- Screaming Shade
-    64284, -- Silent Soulstalker
-    64246, -- Konthrogz the Obliterator
-    64245, -- Towering Exterminator
-    64457, -- Ve'rayn
-    -- Farms: Ardenweald
+    64241, -- Dislodged Nest
+    64234, -- Forgotten Feather
+    64268, -- Offering Box
+    64247, -- Spectral Bound Chest
+    -- Zone Maps: The Maw
+    57482, -- Adjutant Dekaris
+    61136, -- Agonix
+    60920, -- Akros <Death's Hammer>
+    64276, -- Blinding Shadow
+    57469, -- Borr-Geth
+    61106, -- Conjured Death
+    61346, -- Cyrixia <The Willbreaker>
+    62281, -- Darithis the Bleak
+    62282, -- Darklord Taraxis
+    59230, -- Dartanos <Flayer of Souls>
+    61140, -- Dath Rezara <Lord of Blades>
+    64251, -- Deomen the Vortex
+    60909, -- Dolos <Death's Knife>
+    59183, -- Drifting Sorrow
+    60915, -- Eketra <The Impaler>
+    57509, -- Eternas the Tormentor
+    62260, -- Exos, Herald of Domination
+    64164, -- Fallen Charger
+    64272, -- Guard Orguluus
+    62209, -- Houndmaster Vasanok
+    58918, -- Huwerath
+    62788, -- Ikras the Devourer
+    63381, -- Krala <Death's Wings>
+    61125, -- Malevolent Stygia
+    60987, -- Morguliax <Lord of Decapitation>
+    57573, -- Nascent Devourer
+    60667, -- Obolos <Prime Adjutant>
+    62618, -- Odalrik
+    61519, -- Orophea
+    60991, -- Orrholyn <Lord of Bloodletting>
+    63044, -- Ratgusher
+    60992, -- Razkazzar <Lord of Axes>
+    62210, -- Sanngror the Torturer
+    60884, -- Shadeweaver Zeris
+    60834, -- Soulforger Rhovus
+    59441, -- Soulsmith Yol-Mattar
+    60789, -- Talaporas, Herald of Pain
+    60914, -- Thanassos <Death's Voice>
+    64232, -- Torglluun
+    64258, -- Traitor Balthier
+    61728, -- Valis the Cruel
+    61568, -- Yero the Skittish
+    64152, -- Ylva, Mate of Guarm
+    64531, -- Mor'geth
+    64256, -- Helsworn Chest
+    64000, -- Infused Etherwyrm
+    64008, -- Lil'Abom
+    64009, -- Lil'Abom
+    64010, -- Lil'Abom
+    64011, -- Lil'Abom
+    64013, -- Lil'Abom
+    -- Zone Maps: Ardenweald
     59226, -- Deathbinder Hroth
     59201, -- Deifir the Untamed
     62271, -- Deifir the Untamed
@@ -225,7 +282,22 @@ local dailyQuests = {
     59140, -- Macabre
     61633, -- Star Lake: Argus
     61633, -- Star Lake: Azshara
-    -- Farms: Bastion
+    61815, -- Oranomonos the Everbranching
+    61072, -- Aerto's Body
+    61074, -- Cache of the Moon
+    61110, -- Cache of the Night
+    61068, -- Darkreach Supplies
+    61147, -- Desiccated Moth
+    61070, -- Dreamsong Heart
+    61175, -- Elusive Faerie Cache
+    62259, -- Enchanted Dreamcatcher
+    61073, -- Faerie Trove
+    61165, -- Harmonic Chest
+    61067, -- Hearty Dragon Plume
+    62187, -- Lost Satchel
+    62186, -- Swollen Anima Seed
+    61192, -- Tame Gladerunner
+    -- Zone Maps: Bastion
     60977, -- The Ascended Council
     61083, -- Aspirant Eolis
     60978, -- Cloudfeather Guardian
@@ -249,7 +321,14 @@ local dailyQuests = {
     61001, -- Swelling Tear
     61046, -- Swelling Tear
     61047, -- Swelling Tear
-    -- Farms: Maldraxxus
+    61813, -- Valinor, the Light of Eons
+    61052, -- Experimental Construct Part
+    60892, -- Gift of Chyrus
+    61048, -- Lost Disciple's Notes
+    58298, -- Scroll of Aeons
+    61044, -- Stolen Equipment
+    61183, -- Vesper of the Silver Wind
+    -- Zone Maps: Maldraxxus
     58870, -- Bubbleblood
     58005, -- Collector Kash
     58335, -- Corpsecutter Moroc
@@ -258,7 +337,7 @@ local dailyQuests = {
     58835, -- Devour'us
     58872, -- Gieger
     58837, -- Gristlebeak
-    58837, -- Indomitable Schmitd
+    58332, -- Indomitable Schmitd
     62369, -- Necromantic Anomaly
     58851, -- Nerissa Heartless
     58629, -- Nirvaska the Summoner
@@ -274,7 +353,20 @@ local dailyQuests = {
     58889, -- Warbringer Mal'Korak
     59290, -- Zargox the Reborn
     62786, -- Theater of Pain
-    -- Farms: Revendreth
+    61816, -- Mortanis
+    60368, -- Blackhound Cache
+    62602, -- Giant Cache of Epic Treasure
+    61470, -- Necro Tome
+    61127, -- Oonar's Arm and Sorrowbane
+    61128, -- Oonar's Arm and Sorrowbane
+    59358, -- Ornate Bone Shield
+    61474, -- Plaguefallen Chest
+    61514, -- Ritualist's Cache
+    61491, -- Runespeaker's Trove
+    59428, -- Strange Growth
+    59429, -- Strange Growth
+    61444, -- Vat of Conspicuous Slime
+    -- Zone Maps: Revendreth
     59854, -- Amalgamation of Filth
     59584, -- Amalgamation of Light
     60836, -- Amalgamation of Sin
@@ -296,30 +388,152 @@ local dailyQuests = {
     58263, -- Sire Ladinas
     62220, -- Stonefist
     56877, -- Tomb Burster
-    59259, -- Worldedge Gorger
-    -- Farms: The Maw
-    57482, -- Adjutant Dekaris
-    57469, -- Borr-Geth
-    61106, -- Conjured Death
-    62282, -- Darithis the Bleak
-    62282, -- Darklord Taraxis
-    64251, -- Deomen the Vortex
-    60909, -- Dolos
-    60915, -- Eketra
-    57509, -- Eternas the Tormentor
-    64164, -- Fallen Charger
-    62788, -- Ikras the Devourer
-    60987, -- Morguliax
-    57573, -- Nascent Devourer
-    60667, -- Obolos
-    61519, -- Orophea
-    60884, -- Shadeweaver Zeris
-    60834, -- Soulforger Rhovus
-    60789, -- Talaporas, Herald of Pain
-    60914, -- Thanassos
-    64258, -- Traitor Balthier
-    61568, -- Yero the Skittish
-    64152, -- Ylva, Mate of Guarm
+    58259, -- Worldedge Gorger
+    61814, -- Nurgash Muckformed
+    59833, -- Chest of Envious Dreams
+    62243, -- Forbidden Chamber
+    62196, -- Forgotten Angler's Rod
+    61990, -- Lost Quill
+    62198, -- Makeshift Muckpool
+    59889, -- Smuggled Cache
+    61999, -- Stylish Parasol
+    62199, -- Taskmaster's Trove
+    62063, -- The Count
+    62164, -- Vrytha's Dredglaive
+    -- Zone Maps: Battle for Azeroth
+    -- Zone Maps: Mechagon
+    55512, -- Arachnoid Harvester
+    55546, -- Armored Vaultbot
+    55539, -- Boggac Skullbash
+    55857, -- Boilburn
+    55537, -- Bonepicker
+    56368, -- Caustic Mechaslime
+    55812, -- Crazed Trogg
+    55514, -- Deepwater Maw
+    55814, -- Earthbreaker Gulroc
+    56207, -- Enforcer KX-T57
+    55513, -- Foul Manifestation
+    55367, -- Fungarian Furor
+    55852, -- Gear Checker Cogstar
+    55855, -- Gemicide
+    56367, -- Gorged Gear-Cruncher
+    55369, -- Killsaw
+    55544, -- Malfunctioning Beastbot (55926 56506)
+    55207, -- Mechagonian Nullifier
+    55386, -- Mecharantula
+    55859, -- Mr. Fixthis
+    55515, -- OOX-Avenger/MG
+    55853, -- Ol' Big Tusk
+    55856, -- Oxidized Leachbeast
+    55405, -- Paol Pondwader
+    55368, -- Rumblerocks
+    55811, -- Rustfeather
+    56737, -- Scrapclaw
+    55545, -- Seaspit
+    55854, -- Steel Singer Freza
+    55858, -- The Kleptoboss
+    56182, -- The Rusty Prince
+    55364, -- The Scrap King
+    -- Zone Maps: Nazjatar
+    55584, -- Avarius
+    56269, -- Blindlight
+    55366, -- Carnivorous Lasher
+    56283, -- Caverndark Terror
+    56285, -- Elderspawn Nalaada
+    56286, -- Iridescent Glimmershell
+    55671, -- King Gakula
+    56275, -- Needlespine
+    56289, -- Prince Typhonus
+    56290, -- Prince Vortran
+    56292, -- Scale Matriarch Gratinax
+    56293, -- Scale Matriarch Vynara
+    56294, -- Scale Matriarch Zodia
+    56295, -- Shassera
+    56298, -- Soundless
+    56106, -- Tidemistress Leth'sindra
+    55603, -- Vor'koth
+    -- Zone Maps: Arathi Highlands
+    53083, -- Beastrider Kama
+    53504, -- Beastrider Kama
+    53013, -- Branchlord Aldrus
+    53505, -- Branchlord Aldrus
+    53084, -- Darbel Montrose
+    53507, -- Darbel Montrose
+    53085, -- Doomrider Helgrim
+    53059, -- Echo of Myzrael
+    53508, -- Echo of Myzrael
+    53086, -- Foulbelly
+    53509, -- Foulbelly
+    53019, -- Fozruk
+    53510, -- Fozruk
+    53060, -- Geomancer Flintdagger
+    53511, -- Geomancer Flintdagger
+    53087, -- Horrific Apparition
+    53512, -- Horrific Apparition
+    53088, -- Knight-Captain Aldrin
+    53058, -- Kor'gresh Coldrage
+    53513, -- Kor'gresh Coldrage
+    53089, -- Kovork
+    53514, -- Kovork
+    53090, -- Man-Hunter Rog
+    53515, -- Man-Hunter Rog
+    53057, -- Molok the Crusher
+    53516, -- Molok the Crusher
+    53091, -- Nimar the Slayer
+    53517, -- Nimar the Slayer
+    53014, -- Overseer Krix
+    53518, -- Overseer Krix
+    53020, -- Plaguefeather
+    53519, -- Plaguefeather
+    53016, -- Ragebeak
+    53522, -- Ragebeak
+    53092, -- Ruul Onestone
+    53524, -- Ruul Onestone
+    53093, -- Singer
+    53525, -- Singer
+    53022, -- Skullripper
+    53526, -- Skullripper
+    53024, -- Venomarus
+    53528, -- Venomarus
+    53015, -- Yogursa
+    53529, -- Yogursa
+    53094, -- Zalas Witherbark
+    53530, -- Zalas Witherbark
+    53002, -- Doom's Howl
+    53001, -- The Lion's Roar
+    -- Zone Maps: Darkshore
+    54695, -- Alash'anir
+    54696, -- Alash'anir
+    54278, -- Athrikus Narassin
+    54279, -- Athrikus Narassin
+    54309, -- Commander Drald
+    54426, -- Commander Ral'esh
+    54427, -- Commander Ral'esh
+    54232, -- Conflagros
+    54233, -- Conflagros
+    54886, -- Croz Bloodrage
+    54229, -- Cyclarus
+    54230, -- Cyclarus
+    54428, -- Gren Tornfur
+    54429, -- Gren Tornfur
+    54891, -- Grimhorn
+    54227, -- Hydrath
+    54228, -- Hydrath
+    54277, -- Moxo the Beheader
+    54291, -- Onu
+    54452, -- Sapper Odette
+    54320, -- Soggoth the Slitherer
+    54321, -- Soggoth the Slitherer
+    54252, -- Thelar Moonstrike
+    54397, -- Twilight Prophet Graeme
+    54398, -- Twilight Prophet Graeme
+    54274, -- Zim'kaga
+    54883, -- Agathe Wyrmwood
+    54890, -- Blackpaw
+    54431, -- Athil Dewfire
+    54768, -- Burninator Mark V
+    54889, -- Orwell Stevenson
+    54892, -- Shadowclaw
 }
 local weeklyQuests = {
     [37638] = "Bronze Invasion",
