@@ -882,8 +882,12 @@ end
 function events:WEEKLY_REWARDS_UPDATE()
     dirtyVault = true
 end
--- Fires A LOT, whenever just about anything happens with quests
+-- Quest changes, spammy
 function events:QUEST_LOG_UPDATE()
+    dirtyQuests = true
+end
+-- Finished looting a corpse, check quests now for rare tracking
+function events:LOOT_CLOSED()
     dirtyQuests = true
 end
 -- Chromie time
