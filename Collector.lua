@@ -241,6 +241,7 @@ local dailyQuests = {
     60992, -- Razkazzar <Lord of Axes>
     62210, -- Sanngror the Torturer
     60884, -- Shadeweaver Zeris
+    62211, -- Skittering Broodmother
     60834, -- Soulforger Rhovus
     59441, -- Soulsmith Yol-Mattar
     60789, -- Talaporas, Herald of Pain
@@ -258,6 +259,8 @@ local dailyQuests = {
     64010, -- Lil'Abom
     64011, -- Lil'Abom
     64013, -- Lil'Abom
+    63180, -- Hunt: Shadehounds
+    63854, -- Tormentors of Torghast
     -- Zone Maps: Ardenweald
     59226, -- Deathbinder Hroth
     59201, -- Deifir the Untamed
