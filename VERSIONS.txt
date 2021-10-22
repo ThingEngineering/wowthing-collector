@@ -1,3 +1,9 @@
+v9.1.0.14
+---------
+- Added a pile of new mobs/treasures to quest scanning.
+- Fixed (hopefully) quest scanning not triggering until you do something else.
+- Increased the scan timer from every 1 second to every 2 seconds.
+
 v9.1.0.13
 ---------
 - Added (most of) the rest of Shadowlands rares to quest scanning.
