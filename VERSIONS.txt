@@ -1,3 +1,9 @@
+v9.1.0.15
+---------
+- Updated quest scanning list.
+- Fixed toys saving bad data whenever you search in the toy box.
+- Split various big chunks of data into separate files under data\ for my sanity.
+
 v9.1.0.14
 ---------
 - Added a pile of new mobs/treasures to quest scanning.
