@@ -8,4 +8,8 @@
 libs\LibStub\LibStub.lua
 libs\LibRealmInfo17janekjl\LibRealmInfo17janekjl.lua
 
+data\currencies.lua
+data\scan_quests.lua
+data\world_bosses.lua
+
 Collector.lua
