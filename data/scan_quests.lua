@@ -84,6 +84,11 @@ ns.scanQuests = {
     64013, -- Lil'Abom
     63180, -- Hunt: Shadehounds
     63854, -- Tormentors of Torghast
+    63854, -- Tormentors - Cloth
+    63854, -- Tormentors - Leather
+    63854, -- Tormentors - Mail
+    63854, -- Tormentors - Plate
+    63854, -- Tormentors - Weapons
     -- Zone Maps: Ardenweald
     59226, -- Deathbinder Hroth
     59201, -- Deifir the Untamed
@@ -150,6 +155,8 @@ ns.scanQuests = {
     61813, -- Valinor, the Light of Eons
     61052, -- Experimental Construct Part
     60892, -- Gift of Chyrus
+    60894, -- Gift of Thenios
+    60890, -- Gift of Vesiphone
     61048, -- Lost Disciple's Notes
     58298, -- Scroll of Aeons
     61044, -- Stolen Equipment
@@ -391,12 +398,10 @@ ns.scanQuests = {
     54427, -- Commander Ral'esh
     54232, -- Conflagros
     54233, -- Conflagros
-    54886, -- Croz Bloodrage
     54229, -- Cyclarus
     54230, -- Cyclarus
     54428, -- Gren Tornfur
     54429, -- Gren Tornfur
-    54891, -- Grimhorn
     54227, -- Hydrath
     54228, -- Hydrath
     54277, -- Moxo the Beheader
@@ -414,6 +419,10 @@ ns.scanQuests = {
     54768, -- Burninator Mark V
     54889, -- Orwell Stevenson
     54892, -- Shadowclaw
+    54886, -- Croz Bloodrage
+    54891, -- Grimhorn
+    54895, -- Ivus the Decayed / Ivus the Forest Lord
+    54896, -- Ivus the Decayed / Ivus the Forest Lord
     -- Zone Maps: Drustvar
     51470, -- Arclight
     51383, -- Arvon the Betrayed
@@ -451,6 +460,7 @@ ns.scanQuests = {
     53471, -- Hexed Chest
     53386, -- Runebound Chest
     53387, -- Runebound Coffer
+    52157, -- Hailstone Construct
     -- Zone Maps: Stormsong Valley
     51298, -- Broodmother
     50170, -- Captain Razorspine
@@ -478,6 +488,7 @@ ns.scanQuests = {
     52123, -- Taja the Tidehowler
     50974, -- The Lichen King
     50037, -- Vinespeaker Ratha
+    52166, -- Warbringer Yenajz
     -- Zone Maps: Tiragarde Sound
     50233, -- Barman Bill
     50094, -- Bashmu
@@ -507,6 +518,7 @@ ns.scanQuests = {
     51835, -- Tort Jaw
     50073, -- Twin-hearted Construct
     49963, -- Hay Covered Chest
+    52163, -- Azurethos
     -- Zone Maps: Nazmir
     50563, -- Azerite-Infused Slag
     48439, -- Bajiatha
@@ -534,6 +546,7 @@ ns.scanQuests = {
     50348, -- Xu'ba
     49469, -- Za'amar the Queen's Blade
     50423, -- Zanxib
+    52181, -- T'zane
     -- Zone Maps: Vol'dun
     51058, -- Ak'tar
     47532, -- Ashmane
@@ -583,4 +596,5 @@ ns.scanQuests = {
     49004, -- Torraske the Eternal
     47567, -- Umbra'jin
     50438, -- Warcrawler Karkithiss
+    52169, -- Ji'arak
 }
