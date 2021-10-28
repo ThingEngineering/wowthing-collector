@@ -1,3 +1,8 @@
+v9.1.0.16
+---------
+- Updated quest scanning list.
+- Updated world boss scanning list.
+
 v9.1.0.15
 ---------
 - Updated quest scanning list.
