@@ -70,7 +70,6 @@ ns.scanQuests = {
     60789, -- Talaporas, Herald of Pain
     60914, -- Thanassos <Death's Voice>
     64232, -- Torglluun
-    64258, -- Traitor Balthier
     61728, -- Valis the Cruel
     61568, -- Yero the Skittish
     64152, -- Ylva, Mate of Guarm
@@ -84,11 +83,6 @@ ns.scanQuests = {
     64013, -- Lil'Abom
     63180, -- Hunt: Shadehounds
     63854, -- Tormentors of Torghast
-    63854, -- Tormentors - Cloth
-    63854, -- Tormentors - Leather
-    63854, -- Tormentors - Mail
-    63854, -- Tormentors - Plate
-    63854, -- Tormentors - Weapons
     -- Zone Maps: Ardenweald
     59226, -- Deathbinder Hroth
     59201, -- Deifir the Untamed
@@ -112,7 +106,6 @@ ns.scanQuests = {
     59170, -- Wrigglemortis
     59140, -- Macabre
     61633, -- Star Lake: Argus
-    61633, -- Star Lake: Azshara
     61815, -- Oranomonos the Everbranching
     61072, -- Aerto's Body
     61074, -- Cache of the Moon
@@ -145,10 +138,10 @@ ns.scanQuests = {
     58320, -- Selena the Reborn
     60862, -- Sundancer
     60997, -- Unstable Memory
-    58526, -- Aethon
-    60571, -- Cloudtail
-    60569, -- Nemaeus
-    60570, -- Sigilback
+    58526, -- Orator Kloe:Aethon's Horn
+    60571, -- Orator Kloe:Cloudtail's Paw
+    60569, -- Orator Kloe:Fang of Nemaeus
+    60570, -- Orator Kloe:Sigilback's Smashshell
     61001, -- Swelling Tear
     61046, -- Swelling Tear
     61047, -- Swelling Tear
@@ -199,6 +192,10 @@ ns.scanQuests = {
     59428, -- Strange Growth
     59429, -- Strange Growth
     61444, -- Vat of Conspicuous Slime
+    61720, -- Pool of Mixed Monstrosities:Hulking Deathroc
+    61724, -- Pool of Mixed Monstrosities:Invertebrate Oil
+    61719, -- Pool of Mixed Monstrosities:Residue-Coated Muck Waders
+    61723, -- Pool of Mixed Monstrosities:Bone-Blistering Wand
     -- Zone Maps: Revendreth
     59854, -- Amalgamation of Filth
     59584, -- Amalgamation of Light
@@ -255,6 +252,7 @@ ns.scanQuests = {
     57688, -- The Grand Executor
     58702, -- Warcaster Xeshro
     58695, -- Zuythiz
+    55466, -- Vuk'laz the Earthbreaker
     -- Zone Maps: Vale of Eternal Blossoms
     58300, -- Amber-Shaper Esh'ri
     57363, -- Anh-De the Loyal
@@ -288,6 +286,7 @@ ns.scanQuests = {
     57364, -- Tisiphon
     56303, -- Will of N'Zoth
     57358, -- Xiln the Mountain
+    58705, -- Grand Empress Shek'zara
     -- Zone Maps: Mechagon
     55512, -- Arachnoid Harvester
     55546, -- Armored Vaultbot
@@ -339,6 +338,8 @@ ns.scanQuests = {
     56298, -- Soundless
     56106, -- Tidemistress Leth'sindra
     55603, -- Vor'koth
+    56057, -- Ulmath <The Soulbinder>
+    56056, -- Wekemara
     -- Zone Maps: Arathi Highlands
     53083, -- Beastrider Kama
     53504, -- Beastrider Kama
@@ -517,7 +518,6 @@ ns.scanQuests = {
     51879, -- Tentulos the Drifter
     51835, -- Tort Jaw
     50073, -- Twin-hearted Construct
-    49963, -- Hay Covered Chest
     52163, -- Azurethos
     -- Zone Maps: Nazmir
     50563, -- Azerite-Infused Slag
@@ -597,4 +597,16 @@ ns.scanQuests = {
     47567, -- Umbra'jin
     50438, -- Warcrawler Karkithiss
     52169, -- Ji'arak
+    -- Zone Maps: Legion
+    -- Zone Maps: Antoran Wastes
+    -- Zone Maps: Eredath
+    48718, -- Instructor Tarahna
+    48705, -- Venomtail Skyfin
+    -- Zone Maps: Krokuun
+    -- Zone Maps: The Broken Shore
+    -- Zone Maps: Azsuna
+    -- Zone Maps: Highmountain
+    -- Zone Maps: Stormheim
+    -- Zone Maps: Suramar
+    -- Zone Maps: Val'sharah
 }
