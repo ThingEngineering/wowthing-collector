@@ -4,11 +4,11 @@ local an, ns = ...
 -- Things
 local wwtc = {}
 local charClassID, charData, charName, guildName, playedLevel, playedLevelUpdated, playedTotal, playedTotalUpdated, regionName, zoneDiff
-local collectionsHooked, loggingOut = false, false
+local hookedCollections, loggingOut = false, false, false
 local bankOpen, crafterOpen, guildBankOpen, reagentBankUpdated = false, false, false, false
 local maxScannedToys = 0
-local dirtyBags, dirtyFollowers, dirtyHonor, dirtyLockouts, dirtyMissions, dirtyMounts, dirtyMythicPlus, dirtyPets, dirtyQuests, dirtyReputations, dirtyTransmog, dirtyVault =
-    {}, false, false, false, false, false, false, false, false, false, false, false, false
+local dirtyBags, dirtyCovenant, dirtyFollowers, dirtyHonor, dirtyLockouts, dirtyMissions, dirtyMounts, dirtyMythicPlus, dirtyPets, dirtyQuests, dirtyReputations, dirtyTransmog, dirtyVault =
+    {}, false, false, false, false, false, false, false, false, false, false, false, false, false
 
 -- Libs
 local LibRealmInfo = LibStub('LibRealmInfo17janekjl')
@@ -239,6 +239,7 @@ function events:PLAYER_ENTERING_WORLD()
     --wwtc:Initialise()
 
     wwtc:UpdateCharacterData()
+    dirtyCovenant = true
     dirtyHonor = true
     dirtyVault = true
 end
@@ -266,6 +267,14 @@ end
 function events:UPDATE_INSTANCE_INFO()
     dirtyLockouts = true
 end
+-- Fires when currency changes
+function events:CURRENCY_DISPLAY_UPDATE(currencyType)
+    -- Redeemed Soul, Reservoir Anima
+    if currencyType == 1810 or currencyType == 1813 then
+        dirtyCovenant = true
+    end
+end
+
 -- Fires when player money changes
 function events:PLAYER_MONEY()
     charData.copper = GetMoney()
@@ -421,6 +430,19 @@ function events:PLAYER_FLAGS_CHANGED(unitId)
         wwtc:UpdateWarMode()
     end
 end
+-- Shadowlands: Covenants
+function events:COVENANT_CHOSEN()
+    dirtyCovenant = true
+end
+function events:COVENANT_SANCTUM_RENOWN_LEVEL_CHANGED()
+    dirtyCovenant = true
+end
+function events:COVENANT_SANCTUM_INTERACTION_STARTED()
+    dirtyCovenant = true
+end
+function events:COVENANT_SANCTUM_INTERACTION_ENDED()
+    dirtyCovenant = true
+end
 
 -------------------------------------------------------------------------------
 -- Call functions in the events table for events
@@ -439,6 +461,11 @@ function wwtc:Timer()
     for bagID, dirty in pairs(dirtyBags) do
         dirtyBags[bagID] = nil
         wwtc:ScanBag(bagID)
+    end
+
+    if dirtyCovenant then
+        dirtyCovenant = false
+        wwtc:ScanCovenants()
     end
 
     if dirtyFollowers then
@@ -532,6 +559,7 @@ function wwtc:Initialise()
     charData.balanceUnleashedMonstrosities = {}
     charData.balanceMythic15 = false
 
+    charData.covenants = charData.covenants or {}
     charData.currencies = charData.currencies or {}
     charData.dailyQuests = charData.dailyQuests or {}
     charData.followers = charData.followers or {}
@@ -814,6 +842,92 @@ function wwtc:ScanGuildBankTab()
             local _, _, quality = GetItemInfo(link)
             tab["s"..i] = { count, itemID, quality, extra }
         end
+    end
+end
+
+-- Scan covenant
+local function SortTalents(talentA, talentB)
+    return talentA.tier < talentB.tier
+end
+
+function wwtc:ScanCovenants()
+    if charData == nil then return end
+
+    local now = time()
+
+    -- 1=Kyrian 2=Venthyr 3=NightFae 4=Necrolord
+    local covenantId = C_Covenants.GetActiveCovenantID()
+    if covenantId == 0 then return end
+
+    local covenantData = {
+        id = covenantId,
+        renown = C_CovenantSanctumUI.GetRenownLevel(),
+        anima = 0,
+        souls = 0,
+        conductor = {},
+        transport = {},
+        missions = {},
+        unique = {},
+    }
+
+    local animaInfo = C_CurrencyInfo.GetCurrencyInfo(1813)
+    if animaInfo ~= nil then
+        covenantData.anima = animaInfo.quantity
+    end
+
+    local soulsInfo = C_CurrencyInfo.GetCurrencyInfo(1810)
+    if soulsInfo ~= nil then
+        covenantData.souls = soulsInfo.quantity
+    end
+
+    local covenant = ns.covenants[covenantId]
+    for thing, talentTreeId in pairs(covenant.features) do
+        local talentData = C_Garrison.GetTalentTreeInfo(talentTreeId)
+        table.sort(talentData.talents, SortTalents)
+
+        local thingData = {
+            name = talentData.title,
+            rank = 0,
+        }
+
+        for _, talent in ipairs(talentData.talents) do
+            if talent.researched == true then
+                thingData.rank = talent.tier + 1
+            else
+                if talent.isBeingResearched == true then
+                    thingData.researchEnds = now + talent.timeRemaining
+                end
+                break
+            end
+        end
+
+        covenantData[thing] = thingData
+    end
+
+    local found = false
+    for i = 1, #charData.covenants do
+        if charData.covenants[i].id == covenantId then
+            charData.covenants[i] = covenantData
+            found = true
+            break
+        end
+    end
+
+    if found == false then
+        charData.covenants[#charData.covenants + 1] = covenantData
+    end
+end
+
+function wwtc:ScanCovenantSanctum()
+    if charData == nil then return end
+
+    local covenantId = C_Covenants.GetActiveCovenantID()
+    local covenantData = charData.covenants[covenantId]
+
+    -- 1=conductor 2=transport 3=missions 4=unused?? 5=unique
+    local features = C_CovenantSanctumUI.GetFeatures()
+    for i, featureInfo in ipairs(features) do
+        print(i .. ': garrTalentTreeID=' .. featureInfo.garrTalentTreeID .. ' featureType=' .. featureInfo.featureType .. ' uiOrder=' .. featureInfo.uiOrder)
     end
 end
 
@@ -1633,7 +1747,7 @@ end
 SLASH_WWTC1 = "/wwtc"
 SlashCmdList["WWTC"] = function(msg)
     print('sigh')
-    wwtc:ScanTransmog()
+    wwtc:ScanCovenants()
 end
 
 SLASH_RL1 = "/rl"
