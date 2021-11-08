@@ -1324,41 +1324,42 @@ end
 function wwtc:HookCollections()
     if not IsAddOnLoaded("Blizzard_Collections") then
         UIParentLoadAddOn("Blizzard_Collections")
-    else
-        if not collectionsHooked then
-            -- Hook heirlooms
-            local hlframe = _G["HeirloomsJournal"]
-            if hlframe then
-                hlframe:HookScript("OnShow", function(self)
-                    wwtc:ScanHeirlooms()
-                end)
-            else
-                print("WoWthing_Collector: unable to hook 'HeirloomsJournal' frame!")
-            end
-
-            -- Hook toys
-            local tbframe = _G["ToyBox"]
-            if tbframe then
-                tbframe:HookScript("OnShow", function(self)
-                    wwtc:ScanToys()
-                end)
-            else
-                print("WoWthing_Collector: unable to hook 'ToyBox' frame!")
-            end
-
-            -- Hook transmog
-            local tmogframe = _G["WardrobeCollectionFrame"]
-            if tmogframe then
-                tmogframe:HookScript("OnShow", function(self)
-                    dirtyTransmog = true
-                end)
-            else
-                print("WoWthing_Collector: unable to hook 'WardrobeCollectionFrame' frame!")
-            end
-
-            collectionsHooked = true
-        end
+        return
     end
+
+    if hookedCollections then return end
+
+    -- Hook heirlooms
+    local hlframe = _G["HeirloomsJournal"]
+    if hlframe then
+        hlframe:HookScript("OnShow", function(self)
+            wwtc:ScanHeirlooms()
+        end)
+    else
+        print("WoWthing_Collector: unable to hook 'HeirloomsJournal' frame!")
+    end
+
+    -- Hook toys
+    local tbframe = _G["ToyBox"]
+    if tbframe then
+        tbframe:HookScript("OnShow", function(self)
+            wwtc:ScanToys()
+        end)
+    else
+        print("WoWthing_Collector: unable to hook 'ToyBox' frame!")
+    end
+
+    -- Hook transmog
+    local tmogframe = _G["WardrobeCollectionFrame"]
+    if tmogframe then
+        tmogframe:HookScript("OnShow", function(self)
+            dirtyTransmog = true
+        end)
+    else
+        print("WoWthing_Collector: unable to hook 'WardrobeCollectionFrame' frame!")
+    end
+
+    hookedCollections = true
 end
 
 -- Scan heirlooms
