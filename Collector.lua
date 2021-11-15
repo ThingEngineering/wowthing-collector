@@ -241,6 +241,7 @@ function events:PLAYER_ENTERING_WORLD()
     wwtc:UpdateCharacterData()
     dirtyCovenant = true
     dirtyHonor = true
+    dirtyTransmog = true
     dirtyVault = true
 end
 -- Fires when /played information is available
@@ -442,6 +443,16 @@ function events:COVENANT_SANCTUM_INTERACTION_STARTED()
 end
 function events:COVENANT_SANCTUM_INTERACTION_ENDED()
     dirtyCovenant = true
+end
+-- Transmog
+function events:TRANSMOG_COLLECTION_SOURCE_ADDED()
+    dirtyTransmog = true
+end
+function events:TRANSMOG_COLLECTION_SOURCE_REMOVED()
+    dirtyTransmog = true
+end
+function events:TRANSMOG_COLLECTION_UPDATED()
+    dirtyTransmog = true
 end
 
 -------------------------------------------------------------------------------
@@ -1145,24 +1156,25 @@ function wwtc:ScanTransmog()
     if charData == nil then return end
 
     local now = time()
+    local oldCount = #charData.transmog
     charData.scanTimes["transmog"] = now
     charData.transmog = {}
 
     -- Try the hack that TransmogRoulette uses to fix the category bug
     -- https://github.com/semlar/TransmogRoulette/blob/181615d0bb7fb19992bbcefae7f5c6970865e52b/TransmogRoulette.xml#L119
-    C_Timer.After(1, function()
-        local count = 0
-        for categoryID = 0, 29 do
-            local appearances = C_TransmogCollection.GetCategoryAppearances(categoryID)
-            for _, appearance in pairs(appearances) do
-                if appearance.isCollected then
-                    charData.transmog[#charData.transmog + 1] = appearance.visualID
-                    count = count + 1
-                end
+    --C_Timer.After(1, function()
+    for categoryID = 0, 29 do
+        local appearances = C_TransmogCollection.GetCategoryAppearances(categoryID)
+        for _, appearance in pairs(appearances) do
+            if appearance.isCollected then
+                charData.transmog[#charData.transmog + 1] = appearance.visualID
             end
         end
-        print("WoWthing_Collector: scanned", count, "transmog appearances")
-    end)
+    end
+
+    if oldCount ~= #charData.transmog then
+        print("WoWthing_Collector: found", #charData.transmog, "transmog appearances")
+    end
 end
 
 -- Scan dirtyVault
