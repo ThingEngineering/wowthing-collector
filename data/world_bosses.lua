@@ -3,6 +3,9 @@ local an, ns = ...
 
 -- World boss quests
 ns.worldBossQuests = {
+    -- Anniversary bosses
+    [60214] = { 100017, "Doomwalker", "Doomwalker" },
+
     -- Mists of Pandaria
     [32099] = { 104001, "Sha of Anger", "Sha of Anger" },
     [32098] = { 104002, "Galleon", "Galleon" },
