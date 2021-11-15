@@ -213,6 +213,15 @@ function events:ADDON_LOADED(name)
             WWTCSaved = defaultWWTCSaved
         end
 
+        if WWTCSaved.fixedBagItemID == nil then
+            for _, char in pairs(WWTCSaved.chars) do
+                for _, bag in pairs(char.items) do
+                    bag['bagItemID'] = nil
+                end
+            end
+            WWTCSaved.fixedBagItemID = true
+        end
+
         -- Timezones suck
         wwtc:CalculateTimeZoneDiff()
 
@@ -570,6 +579,7 @@ function wwtc:Initialise()
     charData.balanceUnleashedMonstrosities = {}
     charData.balanceMythic15 = false
 
+    charData.bags = charData.bags or {}
     charData.covenants = charData.covenants or {}
     charData.currencies = charData.currencies or {}
     charData.dailyQuests = charData.dailyQuests or {}
@@ -798,13 +808,13 @@ function wwtc:ScanBag(bagID)
     -- Update bag ID
     if bagID >= 1 then
         local bagItemID, _ = GetInventoryItemID('player', ContainerIDToInventoryID(bagID))
-        bag['bagItemID'] = bagItemID
+        charData.bags["bag "..bagID] = bagItemID
     end
 
     local numSlots = GetContainerNumSlots(bagID)
     if numSlots > 0 then
         for i = 1, numSlots do
-            local texture, count, locked, quality, readable, lootable, link, isFiltered = GetContainerItemInfo(bagID, i)
+            local _, count, _, quality, _, _, link, _ = GetContainerItemInfo(bagID, i)
             if count ~= nil and link ~= nil then
                 local itemID, extra = wwtc:ParseItemLink(link)
                 bag["s"..i] = {
