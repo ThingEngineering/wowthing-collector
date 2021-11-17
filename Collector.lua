@@ -425,6 +425,11 @@ function events:QUEST_LOG_UPDATE()
 end
 -- Finished looting a corpse, check quests now for rare tracking
 function events:LOOT_CLOSED()
+    dirtyLockouts = true
+    dirtyQuests = true
+end
+function events:SHOW_LOOT_TOAST()
+    dirtyLockouts = true
     dirtyQuests = true
 end
 -- Chromie time
@@ -1050,16 +1055,24 @@ function wwtc:ScanLockouts()
     --    }
     --end
 
-    local weeklyReset = time() + C_DateAndTime.GetSecondsUntilWeeklyReset()
+    local dailyReset = now + C_DateAndTime.GetSecondsUntilDailyReset()
+    local weeklyReset = now + C_DateAndTime.GetSecondsUntilWeeklyReset()
 
     -- Other world bosses
     for questID, questData in pairs(ns.worldBossQuests) do
-        groupId, groupName, bossName = unpack(questData)
+        groupId, groupName, bossName, isDaily = unpack(questData)
         if C_QuestLog.IsQuestFlaggedCompleted(questID) then
+            local resetTime
+            if isDaily == true then
+                resetTime = dailyReset
+            else
+                resetTime = weeklyReset
+            end
+
             charData.lockouts[#charData.lockouts+1] = {
                 id = groupId,
                 name = groupName,
-                resetTime = weeklyReset,
+                resetTime = resetTime,
                 bosses = {
                     {
                         name = bossName,
