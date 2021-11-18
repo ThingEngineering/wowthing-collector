@@ -9,6 +9,7 @@ local bankOpen, crafterOpen, guildBankOpen, reagentBankUpdated = false, false, f
 local maxScannedToys = 0
 local dirtyBags, dirtyCovenant, dirtyFollowers, dirtyHonor, dirtyLockouts, dirtyMissions, dirtyMounts, dirtyMythicPlus, dirtyPets, dirtyQuests, dirtyReputations, dirtyTransmog, dirtyVault =
     {}, false, false, false, false, false, false, false, false, false, false, false, false, false
+local dirtyGuildBank, guildBankQueried = false, false
 
 -- Libs
 local LibRealmInfo = LibStub('LibRealmInfo17janekjl')
@@ -222,6 +223,14 @@ function events:ADDON_LOADED(name)
             WWTCSaved.fixedBagItemID = true
         end
 
+        if WWTCSaved.newItemFormat == nil then
+            for _, char in pairs(WWTCSaved.chars) do
+                char.items = {}
+            end
+            WWTCSaved.guilds = {}
+            WWTCSaved.newItemFormat = true
+        end
+
         -- Timezones suck
         wwtc:CalculateTimeZoneDiff()
 
@@ -326,6 +335,7 @@ end
 -- Fires when the guild bank opens
 function events:GUILDBANKFRAME_OPENED()
     guildBankOpen = true
+    guildBankQueried = false
     wwtc:UpdateGuildBank()
 end
 -- Fires when the guild bank closes
@@ -334,7 +344,7 @@ function events:GUILDBANKFRAME_CLOSED()
 end
 -- Fires when something changes in a guild bank tab, including when it is first filled
 function events:GUILDBANKBAGSLOTS_CHANGED()
-    wwtc:ScanGuildBankTab()
+    dirtyGuildBank = true
 end
 -- ??
 --function events:GARRISON_UPDATE()
@@ -496,6 +506,11 @@ function wwtc:Timer()
     if dirtyFollowers then
         dirtyFollowers = false
         wwtc:ScanFollowers()
+    end
+
+    if dirtyGuildBank then
+        dirtyGuildBank = false
+        wwtc:ScanGuildBankTabs()
     end
 
     if dirtyHonor then
@@ -819,15 +834,11 @@ function wwtc:ScanBag(bagID)
     local numSlots = GetContainerNumSlots(bagID)
     if numSlots > 0 then
         for i = 1, numSlots do
-            local _, count, _, quality, _, _, link, _ = GetContainerItemInfo(bagID, i)
+            local _, count, _, _, _, _, link, _ = GetContainerItemInfo(bagID, i)
             if count ~= nil and link ~= nil then
-                local itemID, extra = wwtc:ParseItemLink(link)
-                bag["s"..i] = {
-                    count = count,
-                    itemID = itemID,
-                    quality = quality,
-                    extra = extra,
-                }
+                local parsed = wwtc:ParseItemLink(link)
+                parsed.count = count
+                bag["s"..i] = parsed
             end
         end
     end
@@ -842,8 +853,8 @@ function wwtc:UpdateGuildBank()
     end
 end
 
--- Scan the current guild bank tab
-function wwtc:ScanGuildBankTab()
+-- Scan guild bank tabs
+function wwtc:ScanGuildBankTabs()
     if charData == nil then return end
 
     -- Short circuit if guild bank isn't open
@@ -851,23 +862,33 @@ function wwtc:ScanGuildBankTab()
         return
     end
 
-    local tabID = GetCurrentGuildBankTab()
+    local now = time()
 
-    charData.scanTimes["tab "..tabID] = time()
-
-    WWTCSaved.guilds[guildName].items["tab "..tabID] = {}
-    local tab = WWTCSaved.guilds[guildName].items["tab "..tabID]
-
-    -- SIGH constants
-    for i = 1, SLOTS_PER_GUILD_BANK_TAB do
-        local link = GetGuildBankItemLink(tabID, i)
-        if link ~= nil then
-            local _, count = GetGuildBankItemInfo(tabID, i)
-            local link = GetGuildBankItemLink(tabID, i)
-            local itemID, extra = wwtc:ParseItemLink(link)
-            local _, _, quality = GetItemInfo(link)
-            tab["s"..i] = { count, itemID, quality, extra }
+    -- Request data for every tab, but only once per guild bank opening or we scan infinitely
+    if guildBankQueried == false then
+        for tabIndex = 1, GetNumGuildBankTabs() do
+            QueryGuildBankTab(tabIndex)
         end
+        guildBankQueried = true
+    end
+
+    for tabIndex = 1, GetNumGuildBankTabs() do
+        local tabKey = "tab "..tabIndex
+        charData.scanTimes[tabKey] = now
+
+        WWTCSaved.guilds[guildName].items[tabKey] = {}
+        local tab = WWTCSaved.guilds[guildName].items[tabKey]
+
+        for slotIndex = 1, SLOTS_PER_GUILD_BANK_TAB do
+            local link = GetGuildBankItemLink(tabIndex, slotIndex)
+            if link ~= nil then
+                local _, itemCount, _, _, _ = GetGuildBankItemInfo(tabIndex, slotIndex)
+                local parsed = wwtc:ParseItemLink(link)
+                parsed.count = itemCount
+                tab["s"..slotIndex] = parsed
+            end
+        end
+
     end
 end
 
@@ -1735,25 +1756,54 @@ end
 -- Parse an item link and return useful information
 function wwtc:ParseItemLink(link)
     local parts = { strsplit(":", link) }
-    local itemID = tonumber(parts[2])
-    local extra = {
-        enchant = tonumber(parts[3]),
-        gem1 = tonumber(parts[4]),
-        gem2 = tonumber(parts[5]),
-        gem3 = tonumber(parts[6]),
-        gem4 = tonumber(parts[7]),
-        suffix = tonumber(parts[8]),
-        difficulty = tonumber(parts[13]),
+
+    local item = {
+        itemID = tonumber(parts[2])
     }
 
-    local numBonusIDs = tonumber(parts[14])
-    if numBonusIDs ~= nil then
-        for i = 1, numBonusIDs do
-            extra["bonus"..i] = tonumber(parts[14 + i])
+    if parts[3] ~= '' then
+        item.enchantID = tonumber(parts[3])
+    end
+
+    if parts[4] ~= '' then
+        item.gems = {}
+        for i = 4, 7 do
+            if parts[i] then
+                item.gems[#item.gems + 1] = tonumber(parts[i])
+            end
         end
     end
 
-    return itemID, extra
+    if parts[8] ~= '' then
+        item.suffixID = tonumber(parts[8])
+    end
+
+    -- 9 = uniqueID
+    -- 10 = linkLevel
+    -- 11 = specializationID
+    -- 12 = modifiersMask
+
+    if parts[13] ~= '' then
+        item.context = tonumber(parts[13])
+    end
+
+    local numBonusIDs = tonumber(parts[14])
+    if numBonusIDs ~= nil then
+        item.bonusIDs = {}
+        for i = 15, 14 + numBonusIDs do
+            item.bonusIDs[#item.bonusIDs + 1] = tonumber(parts[i])
+        end
+    end
+
+    -- 15 + numBonusIds = numModifiers
+    -- <modifiers>
+
+    local effectiveILvl, _, _ = GetDetailedItemLevelInfo(link)
+    item.itemLevel = effectiveILvl
+
+    item.quality = C_Item.GetItemQualityByID(link)
+
+    return item
 end
 
 -- Returns the daily quest reset time in the local timezone
