@@ -1,3 +1,12 @@
+v9.1.5.4
+--------
+- Added support for daily world boss resets.
+- Changed character bag/bank/reagent bank scanning to provide more useful info.
+- Changed guild bank scanning to actually work properly without requiring viewing
+  every tab.
+- Fixed world boss scanning to actually trigger consistently. Hopefully.
+- Removed a bunch of old scanning code.
+
 v9.1.5.3
 --------
 - Added Doomwalker to world boss scanning.
