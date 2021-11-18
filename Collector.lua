@@ -7,8 +7,8 @@ local charClassID, charData, charName, guildName, playedLevel, playedLevelUpdate
 local hookedCollections, loggingOut = false, false, false
 local bankOpen, crafterOpen, guildBankOpen, reagentBankUpdated = false, false, false, false
 local maxScannedToys = 0
-local dirtyBags, dirtyCovenant, dirtyHonor, dirtyLockouts, dirtyMounts, dirtyMythicPlus, dirtyPets, dirtyQuests, dirtyReputations, dirtyTransmog, dirtyVault =
-    {}, false, false, false, false, false, false, false, false, false, false, false
+local dirtyBags, dirtyCovenant, dirtyLockouts, dirtyMounts, dirtyMythicPlus, dirtyPets, dirtyQuests, dirtyReputations, dirtyTransmog, dirtyVault =
+    {}, false, false, false, false, false, false, false, false, false, false
 local dirtyGuildBank, guildBankQueried = false, false
 
 -- Libs
@@ -456,11 +456,6 @@ function wwtc:Timer()
     if dirtyGuildBank then
         dirtyGuildBank = false
         wwtc:ScanGuildBankTabs()
-    end
-
-    if dirtyHonor then
-        dirtyHonor = false
-        wwtc:ScanHonor()
     end
 
     if dirtyLockouts then
