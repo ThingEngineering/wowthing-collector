@@ -7,8 +7,8 @@ local charClassID, charData, charName, guildName, playedLevel, playedLevelUpdate
 local hookedCollections, loggingOut = false, false, false
 local bankOpen, crafterOpen, guildBankOpen, reagentBankUpdated = false, false, false, false
 local maxScannedToys = 0
-local dirtyBags, dirtyCovenant, dirtyFollowers, dirtyHonor, dirtyLockouts, dirtyMissions, dirtyMounts, dirtyMythicPlus, dirtyPets, dirtyQuests, dirtyReputations, dirtyTransmog, dirtyVault =
-    {}, false, false, false, false, false, false, false, false, false, false, false, false, false
+local dirtyBags, dirtyCovenant, dirtyHonor, dirtyLockouts, dirtyMounts, dirtyMythicPlus, dirtyPets, dirtyQuests, dirtyReputations, dirtyTransmog, dirtyVault =
+    {}, false, false, false, false, false, false, false, false, false, false, false
 local dirtyGuildBank, guildBankQueried = false, false
 
 -- Libs
@@ -194,15 +194,6 @@ local torghastWidgets = {
 local MAP_KULTIRAS = 876
 local SLOTS_PER_GUILD_BANK_TAB = 98
 
--- Blizzard_GarrisonUI/Blizzard_GarrisonSharedTemplates.lua::477
-local statusPriority = {
-    [GARRISON_FOLLOWER_IN_PARTY] = 1,
-    [GARRISON_FOLLOWER_WORKING] = 2,
-    [GARRISON_FOLLOWER_ON_MISSION] = 3,
-    [GARRISON_FOLLOWER_EXHAUSTED] = 4,
-    [GARRISON_FOLLOWER_INACTIVE] = 5,
-}
-
 -- Need a frame for events
 local frame, events = CreateFrame("FRAME"), {}
 
@@ -346,40 +337,6 @@ end
 function events:GUILDBANKBAGSLOTS_CHANGED()
     dirtyGuildBank = true
 end
--- ??
---function events:GARRISON_UPDATE()
---    dirtyFollowers = true
---end
--- Fires whenever the available follower list changes
---function events:GARRISON_FOLLOWER_LIST_UPDATE()
---    dirtyFollowers = true
---end
--- Fires when a follower is added
---function events:GARRISON_FOLLOWER_ADDED()
---    dirtyFollowers = true
---end
--- Fires when a follower is removed
---function events:GARRISON_FOLLOWER_REMOVED()
---    dirtyFollowers = true
---end
--- ?? Probably when shipments show up
---function events:GARRISON_LANDINGPAGE_SHIPMENTS()
---    wwtc:ScanOrderHallResearch()
---end
--- Fires when a follower gains XP
---function events:GARRISON_FOLLOWER_XP_CHANGED()
---    dirtyFollowers = true
---end
--- Fires when the garrison mission list updates?
---function events:GARRISON_MISSION_LIST_UPDATE()
---    dirtyFollowers = true
---    dirtyMissions = true
---end
---
---function events:GARRISON_MISSION_NPC_OPENED()
---    dirtyFollowers = true
---    dirtyMissions = true
---end
 -- Fires ??
 function events:COMPANION_UPDATE()
     dirtyMounts = true
@@ -402,14 +359,6 @@ end
 function events:UPDATE_FACTION()
     dirtyReputations = true
 end
--- Fires when Honor XP updates
---function events:HONOR_XP_UPDATE()
---    dirtyHonor = true
---end
--- Fires when Honor level updates
---function events:HONOR_LEVEL_UPDATE()
---    dirtyHonor = true
---end
 -- Fires when Mythic dungeon ends
 function events:CHALLENGE_MODE_COMPLETED()
     C_MythicPlus.RequestMapInfo()
@@ -433,11 +382,12 @@ end
 function events:QUEST_LOG_UPDATE()
     dirtyQuests = true
 end
--- Finished looting a corpse, check quests now for rare tracking
+-- Finished looting something
 function events:LOOT_CLOSED()
     dirtyLockouts = true
     dirtyQuests = true
 end
+-- Popup "you got loot" box
 function events:SHOW_LOOT_TOAST()
     dirtyLockouts = true
     dirtyQuests = true
@@ -503,11 +453,6 @@ function wwtc:Timer()
         wwtc:ScanCovenants()
     end
 
-    if dirtyFollowers then
-        dirtyFollowers = false
-        wwtc:ScanFollowers()
-    end
-
     if dirtyGuildBank then
         dirtyGuildBank = false
         wwtc:ScanGuildBankTabs()
@@ -521,11 +466,6 @@ function wwtc:Timer()
     if dirtyLockouts then
         dirtyLockouts = false
         wwtc:ScanLockouts()
-    end
-
-    if dirtyMissions then
-        dirtyMissions = false
-        wwtc:ScanMissions()
     end
 
     if dirtyMounts then
@@ -603,11 +543,8 @@ function wwtc:Initialise()
     charData.covenants = charData.covenants or {}
     charData.currencies = charData.currencies or {}
     charData.dailyQuests = charData.dailyQuests or {}
-    charData.followers = charData.followers or {}
-    charData.honor = charData.honor or {}
     charData.items = charData.items or {}
     charData.lockouts = charData.lockouts or {}
-    charData.missions = charData.missions or {}
     charData.mounts = charData.mounts or {}
     charData.mythicDungeons = charData.mythicDungeons or {}
     charData.mythicPlus = charData.mythicPlus or {}
@@ -1566,137 +1503,6 @@ function wwtc:ScanToys()
     end
 end
 
--- Scan order hall followers
-function wwtc:ScanFollowers()
-    if nil == nil then return end -- FIXME missions v17
-    if charData == nil then return end
-
-    charData.scanTimes['followers'] = time()
-    charData.followers = {}
-
-    -- Followers
-    local followers = C_Garrison.GetFollowers(LE_FOLLOWER_TYPE_GARRISON_7_0)
-    if followers == nil then return end
-
-    for i = 1, #followers do
-        local follower = followers[i]
-        if follower.isCollected then
-            -- Fetch abilities
-            local abilityList, equipmentList = {}, {}
-
-            local abilities = C_Garrison.GetFollowerAbilities(follower.followerID)
-            for j = 1, #abilities do
-                local ability = abilities[j]
-                if ability.isTrait then
-                    equipmentList[#equipmentList+1] = ability.id
-                else
-                    abilityList[#abilityList+1] = ability.id
-                end
-            end
-
-            active = true
-            if follower.status == "Inactive" then active = false end
-
-            charData.followers[#charData.followers+1] = {
-                id = follower.garrFollowerID,
-                quality = follower.quality,
-                level = follower.level,
-                itemLevel = follower.iLevel,
-                currentXP = follower.xp,
-                levelXP = follower.levelXP,
-                isTroop = follower.isTroop,
-                isActive = follower.status ~= "Inactive",
-                spec = follower.classSpec,
-                abilities = abilityList,
-                equipment = equipmentList,
-                vitality = follower.durability,
-                maxVitality = follower.maxDurability,
-            }
-        end
-    end
-end
-
--- Scan garrison missions
-function wwtc:ScanMissions()
-    if nil == nil then return end -- FIXME missions v17
-
-    if charData == nil then return end
-
-    charData.scanTimes['missions'] = time()
-    charData.missions = {}
-
-    -- Scan followers first
-    local followerMap = {}
-    local followers = C_Garrison.GetFollowers(LE_GARRISON_TYPE_6_0)
-    if followers == nil then return end
-
-    for i = 1, #followers do
-        local follower = followers[i]
-        if follower.isCollected then
-            local followerID = tonumber(follower.garrFollowerID, 16)
-            followerMap[follower.followerID] = followerID
-        end
-    end
-
-    -- description = "blah blah blah"
-    -- cost = 15
-    -- duration = "4 hr"
-    -- durationSeconds = 14400
-    -- level = 100
-    -- timeLeft = "4 hr 48 min", "59 min", "46 sec"
-    -- type = "Combat"
-    -- inProgress = true
-    -- locPrefix = "blah"
-    -- rewards = {}
-    -- numRewards = 1
-    -- numFollowers = 2
-    -- state = -1 ??
-    -- iLevel = 0
-    -- name = "Hefty Metal"
-    -- followers = {}
-    -- location = "Gorgrond"
-    -- isRare = false
-    -- typeAtlas = "blah"
-    -- missionID = 385
-    local inProgressMissions = C_Garrison.GetInProgressMissions(LE_GARRISON_TYPE_6_0)
-    local now = time()
-    
-    if inProgressMissions then
-        for i = 1, #inProgressMissions do
-            local mission = inProgressMissions[i]
-
-            local followerIDs = {}
-            for j = 1, mission.numFollowers do
-                followerIDs[j] = followerMap[mission.followers[j]]
-                if not followerIDs[j] then
-                    print("missing follower?", mission.followers[j])
-                end
-            end
-
-            local timeLeft = wwtc:ParseMissionTime(mission.timeLeft)
-            -- Pad minute resolution times by 60s as we have no idea when they'll actually finish
-            if timeLeft >= 60 then
-                timeLeft = timeLeft + 60
-            end
-
-            charData.missions[#charData.missions+1] = {
-                id = mission.missionID,
-                followers = followerIDs,
-                finishes = now + timeLeft,
-            }
-        end
-    end
-
-    local availableMissions = C_Garrison.GetAvailableMissions(LE_GARRISON_TYPE_6_0)
-    if availableMissions then
-        for _, mission in pairs(availableMissions) do
-            charData.missions[#charData.missions+1] = {
-                id = mission.missionID,
-            }
-        end
-    end
-end
-
 function wwtc:ScanOrderHallResearch()
     if charData == nil then return end
 
@@ -1737,17 +1543,6 @@ function wwtc:ScanOrderHallResearch()
     --     ["researchGoldCost"] = 0,
     --     ["researchStartTime"] = 1524344516,
     -- }, -- [14]
-end
-
--- Scan honor stuff
-function wwtc:ScanHonor()
-    if charData == nil then return end
-
-    charData.honor = {
-        level = UnitHonorLevel("player"),
-        current = UnitHonor("player"),
-        max = UnitHonorMax("player"),
-   }
 end
 
 -------------------------------------------------------------------------------
@@ -1813,14 +1608,6 @@ function wwtc:GetDailyResetTime()
         return nil
     end
     return time() + resetTime
-end
-
--- Parses annoying mission remaining times
-function wwtc:ParseMissionTime(t)
-    local hours = tonumber(t:match("(%d+) hr")) or 0
-    local minutes = tonumber(t:match("(%d+) min")) or 0
-    local seconds = tonumber(t:match("(%d+) sec")) or 0
-    return (hours * 3600) + (minutes * 60) + seconds
 end
 
 function wwtc:GetItemLevel(itemLink)
