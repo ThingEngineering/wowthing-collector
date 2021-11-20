@@ -7,8 +7,8 @@ local charClassID, charData, charName, guildName, playedLevel, playedLevelUpdate
 local hookedCollections, loggingOut = false, false, false
 local bankOpen, crafterOpen, guildBankOpen, reagentBankUpdated = false, false, false, false
 local maxScannedToys = 0
-local dirtyBags, dirtyCovenant, dirtyLockouts, dirtyMounts, dirtyMythicPlus, dirtyPets, dirtyQuests, dirtyReputations, dirtyTransmog, dirtyVault =
-    {}, false, false, false, false, false, false, false, false, false, false
+local dirtyBags, dirtyCovenant, dirtyCurrencies, dirtyLockouts, dirtyMounts, dirtyMythicPlus, dirtyPets, dirtyQuests, dirtyReputations, dirtyTransmog, dirtyVault =
+    {}, false, false, false, false, false, false, false, false, false, false, false
 local dirtyGuildBank, guildBankQueried = false, false
 
 -- Libs
@@ -250,6 +250,7 @@ function events:PLAYER_ENTERING_WORLD()
     wwtc:UpdateCharacterData()
     dirtyCovenant = true
     dirtyHonor = true
+    dirtyCurrencies = true
     dirtyTransmog = true
     dirtyVault = true
 end
@@ -283,6 +284,8 @@ function events:CURRENCY_DISPLAY_UPDATE(currencyType)
     if currencyType == 1810 or currencyType == 1813 then
         dirtyCovenant = true
     end
+
+    dirtyCurrencies = true
 end
 
 -- Fires when player money changes
@@ -451,6 +454,11 @@ function wwtc:Timer()
     if dirtyCovenant then
         dirtyCovenant = false
         wwtc:ScanCovenants()
+    end
+
+    if dirtyCurrencies then
+        dirtyCurrencies = false
+        wwtc:ScanCurrencies()
     end
 
     if dirtyGuildBank then
@@ -626,23 +634,6 @@ function wwtc:UpdateCharacterData()
     if playedLevel and playedTotal then
         charData.playedLevel = playedLevel + (now - playedLevelUpdated)
         charData.playedTotal = playedTotal + (now - playedTotalUpdated)
-    end
-
-    -- Currencies
-    charData.currencies = {}
-    for i, currencyID in ipairs(ns.currencies) do
-        local currencyInfo = C_CurrencyInfo.GetCurrencyInfo(currencyID)
-        if currencyInfo ~= nil then
-            charData.currencies[#charData.currencies + 1] = {
-                id = currencyID,
-                total = currencyInfo.quantity,
-                maxTotal = currencyInfo.maxQuantity,
-                week = currencyInfo.quantityEarnedThisWeek,
-                maxWeek = currencyInfo.maxWeeklyQuantity,
-                totalEarned = currencyInfo.totalEarned,
-                useTotalEarned = currencyInfo.useTotalEarnedForMaxQty,
-            }
-        end
     end
 
     -- Master Riding
@@ -951,6 +942,30 @@ function wwtc:ScanCriteria()
 
     local wasEarnedByMe = select(13, GetAchievementInfo(11162))
     charData.balanceMythic15 = wasEarnedByMe
+end
+
+-- Scan currencies
+function wwtc:ScanCurrencies()
+    if charData == nil then return end
+
+    charData.currencies = {}
+    charData.scanTimes["currencies"] = time()
+
+    for _, currencyID in ipairs(ns.currencies) do
+        local currencyInfo = C_CurrencyInfo.GetCurrencyInfo(currencyID)
+        if currencyInfo ~= nil then
+            -- quantity:max:isWeekly:weekQuantity:weekMax:isMovingMax:totalQuantity
+            charData.currencies[currencyID] = table.concat({
+                currencyInfo.quantity,
+                currencyInfo.maxQuantity,
+                currencyInfo.canEarnPerWeek and 1 or 0,
+                currencyInfo.quantityEarnedThisWeek,
+                currencyInfo.maxWeeklyQuantity,
+                currencyInfo.useTotalEarnedForMaxQty and 1 or 0,
+                currencyInfo.totalEarned,
+            }, ':')
+        end
+    end
 end
 
 -- Scan instance/world boss lockouts
