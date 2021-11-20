@@ -745,13 +745,13 @@ function wwtc:ScanBag(bagID)
         charData.scanTimes["bank"] = now
     end
 
-    charData.items["bag "..bagID] = {}
-    local bag = charData.items["bag "..bagID]
+    charData.items["b"..bagID] = {}
+    local bag = charData.items["b"..bagID]
 
     -- Update bag ID
     if bagID >= 1 then
         local bagItemID, _ = GetInventoryItemID('player', ContainerIDToInventoryID(bagID))
-        charData.bags["bag "..bagID] = bagItemID
+        charData.bags["b"..bagID] = bagItemID
     end
 
     local numSlots = GetContainerNumSlots(bagID)
@@ -759,8 +759,7 @@ function wwtc:ScanBag(bagID)
         for i = 1, numSlots do
             local _, count, _, _, _, _, link, _ = GetContainerItemInfo(bagID, i)
             if count ~= nil and link ~= nil then
-                local parsed = wwtc:ParseItemLink(link)
-                parsed.count = count
+                local parsed = wwtc:ParseItemLink(link, count)
                 bag["s"..i] = parsed
             end
         end
@@ -796,7 +795,7 @@ function wwtc:ScanGuildBankTabs()
     end
 
     for tabIndex = 1, GetNumGuildBankTabs() do
-        local tabKey = "tab "..tabIndex
+        local tabKey = "t"..tabIndex
         charData.scanTimes[tabKey] = now
 
         WWTCSaved.guilds[guildName].items[tabKey] = {}
@@ -806,12 +805,10 @@ function wwtc:ScanGuildBankTabs()
             local link = GetGuildBankItemLink(tabIndex, slotIndex)
             if link ~= nil then
                 local _, itemCount, _, _, _ = GetGuildBankItemInfo(tabIndex, slotIndex)
-                local parsed = wwtc:ParseItemLink(link)
-                parsed.count = itemCount
+                local parsed = wwtc:ParseItemLink(link, itemCount)
                 tab["s"..slotIndex] = parsed
             end
         end
-
     end
 end
 
@@ -1559,11 +1556,14 @@ end
 -- Util functions
 -------------------------------------------------------------------------------
 -- Parse an item link and return useful information
-function wwtc:ParseItemLink(link)
+function wwtc:ParseItemLink(link, count)
     local parts = { strsplit(":", link) }
 
     local item = {
-        itemID = tonumber(parts[2])
+        count = count,
+        itemID = tonumber(parts[2]),
+        bonusIDs = {},
+        gems = {},
     }
 
     if parts[3] ~= '' then
@@ -1571,7 +1571,6 @@ function wwtc:ParseItemLink(link)
     end
 
     if parts[4] ~= '' then
-        item.gems = {}
         for i = 4, 7 do
             if parts[i] then
                 item.gems[#item.gems + 1] = tonumber(parts[i])
@@ -1594,7 +1593,6 @@ function wwtc:ParseItemLink(link)
 
     local numBonusIDs = tonumber(parts[14])
     if numBonusIDs ~= nil then
-        item.bonusIDs = {}
         for i = 15, 14 + numBonusIDs do
             item.bonusIDs[#item.bonusIDs + 1] = tonumber(parts[i])
         end
@@ -1608,7 +1606,20 @@ function wwtc:ParseItemLink(link)
 
     item.quality = C_Item.GetItemQualityByID(link)
 
-    return item
+    -- count:id:context:enchant:ilvl:quality:suffix:bonusIDs:gems
+    return table.concat({
+        item.count,
+        item.itemID,
+        item.context or 0,
+        item.enchantID or 0,
+        item.itemLevel or 0,
+        item.quality or 0,
+        item.suffixID or 0,
+        table.concat(item.bonusIDs, ','),
+        table.concat(item.gems, ','),
+    }, ':')
+
+    --return item
 end
 
 -- Returns the daily quest reset time in the local timezone
