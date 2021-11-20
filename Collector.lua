@@ -7,6 +7,7 @@ local charClassID, charData, charName, guildName, playedLevel, playedLevelUpdate
 local hookedCollections, loggingOut = false, false, false
 local bankOpen, crafterOpen, guildBankOpen, reagentBankUpdated = false, false, false, false
 local maxScannedToys = 0
+local oldScannedTransmog = 0
 local dirtyBags, dirtyCovenant, dirtyCurrencies, dirtyLockouts, dirtyMounts, dirtyMythicPlus, dirtyPets, dirtyQuests, dirtyReputations, dirtyTransmog, dirtyVault =
     {}, false, false, false, false, false, false, false, false, false, false, false
 local dirtyGuildBank, guildBankQueried = false, false
@@ -559,7 +560,7 @@ function wwtc:Initialise()
     charData.scanTimes = charData.scanTimes or {}
     charData.torghast = charData.torghast or {}
     charData.tradeSkills = charData.tradeSkills or {}
-    charData.transmog = charData.transmog or {}
+    charData.transmog = charData.transmog or nil
     charData.vault = charData.vault or {}
     charData.weeklyQuests = charData.weeklyQuests or {}
     charData.weeklyUghQuests = charData.weeklyUghQuests or {}
@@ -1143,10 +1144,8 @@ end
 function wwtc:ScanTransmog()
     if charData == nil then return end
 
-    local now = time()
-    local oldCount = #charData.transmog
-    charData.scanTimes["transmog"] = now
-    charData.transmog = {}
+    charData.scanTimes["transmog"] = time()
+    local transmog = {}
 
     -- Try the hack that TransmogRoulette uses to fix the category bug
     -- https://github.com/semlar/TransmogRoulette/blob/181615d0bb7fb19992bbcefae7f5c6970865e52b/TransmogRoulette.xml#L119
@@ -1155,14 +1154,23 @@ function wwtc:ScanTransmog()
         local appearances = C_TransmogCollection.GetCategoryAppearances(categoryID)
         for _, appearance in pairs(appearances) do
             if appearance.isCollected then
-                charData.transmog[#charData.transmog + 1] = appearance.visualID
+                transmog[appearance.visualID] = true
             end
         end
     end
 
-    if oldCount ~= #charData.transmog then
-        print("WoWthing_Collector: found", #charData.transmog, "transmog appearances")
+    if oldScannedTransmog ~= #transmog then
+        print("WoWthing_Collector: found", #transmog, "transmog appearances")
+        oldScannedTransmog = #transmog
     end
+
+    local keys = {}
+    for key in pairs(transmog) do
+        keys[#keys + 1] = key
+    end
+
+    table.sort(keys)
+    charData.transmog = table.concat(keys, ':')
 end
 
 -- Scan dirtyVault
@@ -1428,31 +1436,26 @@ function wwtc:ScanReputations()
     charData.paragons = {}
     charData.reputations = {}
 
-    for i, factionID in ipairs(checkReputations) do
+    for _, factionID in ipairs(checkReputations) do
         local _, _, _, _, _, barValue = GetFactionInfoByID(factionID)
-        charData.reputations[#charData.reputations + 1] = {
-            id = factionID,
-            value = barValue,
-        }
+        charData.reputations[factionID] = barValue
     end
 
-    for i, factionID in ipairs(checkFriendships) do
-        _, friendRep = GetFriendshipReputation(factionID)
-        charData.reputations[#charData.reputations + 1] = {
-            id = factionID,
-            value = friendRep,
-        }
+    for _, friendshipID in ipairs(checkFriendships) do
+        local _, friendRep = GetFriendshipReputation(friendshipID)
+        charData.reputations[friendshipID] = friendRep
     end
 
     for i, factionID in ipairs(paragonReputations) do
         if C_Reputation.IsFactionParagon(factionID) then 
-            local currentValue, threshold, _, hasRewardPending = C_Reputation.GetFactionParagonInfo(factionID) 
-            charData.paragons[factionID] = { 
-                value = mod(currentValue, threshold), 
-                maxValue = threshold, 
-                hasReward = hasRewardPending, 
-            } 
-        end 
+            local currentValue, threshold, _, hasRewardPending = C_Reputation.GetFactionParagonInfo(factionID)
+            -- value:max:hasReward
+            charData.paragons[factionID] = table.concat({
+                currentValue,
+                threshold,
+                hasRewardPending and 1 or 0,
+            }, ':')
+        end
     end
 end
 
