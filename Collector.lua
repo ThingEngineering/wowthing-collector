@@ -206,23 +206,6 @@ function events:ADDON_LOADED(name)
             WWTCSaved = defaultWWTCSaved
         end
 
-        if WWTCSaved.fixedBagItemID == nil then
-            for _, char in pairs(WWTCSaved.chars) do
-                for _, bag in pairs(char.items) do
-                    bag['bagItemID'] = nil
-                end
-            end
-            WWTCSaved.fixedBagItemID = true
-        end
-
-        if WWTCSaved.newItemFormat == nil then
-            for _, char in pairs(WWTCSaved.chars) do
-                char.items = {}
-            end
-            WWTCSaved.guilds = {}
-            WWTCSaved.newItemFormat = true
-        end
-
         -- Timezones suck
         wwtc:CalculateTimeZoneDiff()
 
@@ -250,7 +233,6 @@ function events:PLAYER_ENTERING_WORLD()
 
     wwtc:UpdateCharacterData()
     dirtyCovenant = true
-    dirtyHonor = true
     dirtyCurrencies = true
     dirtyTransmog = true
     dirtyVault = true
