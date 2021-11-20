@@ -1,3 +1,12 @@
+v9.1.5.6
+--------
+- Changed currency scanning to work more consistently.
+- Changed currency scanning to use a more compact data representation.
+- Changed lockout scanning to use a more compact data representation.
+- Changed reputation scanning to use a more compact data representation.
+- Changed transmog scanning to use a more compact data representation.
+- Increased addon data version to force reset.
+
 v9.1.5.5
 --------
 - Fixed ScanHonor error.
