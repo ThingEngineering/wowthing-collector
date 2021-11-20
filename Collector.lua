@@ -988,10 +988,10 @@ function wwtc:ScanLockouts()
         local bosses, j = {}, 1
         local name, _, dead = GetSavedInstanceEncounterInfo(i, j)
         while name do
-            bosses[#bosses + 1] = {
-                name = name,
-                dead = dead,
-            }
+            bosses[#bosses + 1] = table.concat({
+                dead and 1 or 0,
+                name,
+            }, ':')
 
             j = j + 1
             name, _, dead = GetSavedInstanceEncounterInfo(i, j)
@@ -1040,10 +1040,7 @@ function wwtc:ScanLockouts()
                 name = groupName,
                 resetTime = resetTime,
                 bosses = {
-                    {
-                        name = bossName,
-                        dead = true,
-                    },
+                    "1:"..bossName,
                 },
                 difficulty = 0,
                 defeatedBosses = 1,
