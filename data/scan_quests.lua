@@ -81,7 +81,7 @@ ns.scanQuests = {
     64010, -- Lil'Abom
     64011, -- Lil'Abom
     64013, -- Lil'Abom
-    63180, -- Hunt: Shadehounds
+    63180, -- Gorged Shadehound
     63854, -- Tormentors of Torghast
     -- Zone Maps: Ardenweald
     59226, -- Deathbinder Hroth
@@ -304,7 +304,7 @@ ns.scanQuests = {
     55855, -- Gemicide
     56367, -- Gorged Gear-Cruncher
     55369, -- Killsaw
-    55544, -- Malfunctioning Beastbot (55926 56506)
+    55544, -- Malfunctioning Beastbot
     55207, -- Mechagonian Nullifier
     55386, -- Mecharantula
     55859, -- Mr. Fixthis
@@ -320,6 +320,8 @@ ns.scanQuests = {
     55858, -- The Kleptoboss
     56182, -- The Rusty Prince
     55364, -- The Scrap King
+    55848, -- Reclamation Rig:Blueprint: Rustbolt Requisitions
+    55847, -- Reclamation Rig:Echoing Oozeling
     -- Zone Maps: Nazjatar
     55584, -- Avarius
     56269, -- Blindlight
@@ -422,8 +424,8 @@ ns.scanQuests = {
     54892, -- Shadowclaw
     54886, -- Croz Bloodrage
     54891, -- Grimhorn
-    54895, -- Ivus the Decayed / Ivus the Forest Lord
-    54896, -- Ivus the Decayed / Ivus the Forest Lord
+    54895, -- Ivus the Decayed
+    54896, -- Ivus the Decayed
     -- Zone Maps: Drustvar
     51470, -- Arclight
     51383, -- Arvon the Betrayed
@@ -461,7 +463,7 @@ ns.scanQuests = {
     53471, -- Hexed Chest
     53386, -- Runebound Chest
     53387, -- Runebound Coffer
-    52157, -- Hailstone Construct
+    52157, -- Azurethos
     -- Zone Maps: Stormsong Valley
     51298, -- Broodmother
     50170, -- Captain Razorspine
@@ -599,14 +601,136 @@ ns.scanQuests = {
     52169, -- Ji'arak
     -- Zone Maps: Legion
     -- Zone Maps: Antoran Wastes
+    48817, -- Admiral Rel'var
+    49183, -- Blistermaw
+    48821, -- Houndmaster Kerrax
+    49240, -- Mistress Il'thendra
+    48970, -- Mother Rosula
+    48809, -- Puscilla
+    48967, -- Squadron Commander Vishax
+    48966, -- The Many-Faced Devourer
+    48812, -- Varga
+    48824, -- Void Warden Valsuran
+    48810, -- Vrax'thul
+    48820, -- Worldsplitter Skuul
+    48814, -- Wrath-Lord Yarez
     -- Zone Maps: Eredath
     48718, -- Instructor Tarahna
+    48713, -- Jed'hin Champion Vorusk
+    48714, -- Overseer Y'Beda
+    48716, -- Overseer Y'Sorna
+    48712, -- Sabuul
+    48706, -- Turek the Lucid
     48705, -- Venomtail Skyfin
+    48704, -- Vigilant Kuro
+    48695, -- Wrangler Kravos
     -- Zone Maps: Krokuun
+    48564, -- Commander Endaxis
+    48563, -- Commander Vecaya
+    48561, -- Khazaduum
+    48565, -- Sister Subversia
+    48628, -- Talestra the Vile
+    48664, -- Tereck the Selector
     -- Zone Maps: The Broken Shore
     -- Zone Maps: Azsuna
+    42505, -- Arcanist Shal'iman
+    37932, -- Arcavellus
+    38238, -- Beacher
+    42417, -- Bilebrain
+    42450, -- Brawlgoth
+    38212, -- Brogozog
+    44670, -- Broodmother Lizax
+    38268, -- Cailyn Paledoom
+    37821, -- Captain Volo'ren
+    37869, -- Daggerbeak
+    42069, -- Felwing
+    37824, -- Flog the Captain-Eater
+    42286, -- Houndmaster Stroxis
+    38037, -- Infernal Lord
+    37928, -- Normantis the Deposed
+    38061, -- Pridelord Meowl
+    44108, -- Ragemaw
+    37537, -- Ravyn-Drath
+    37989, -- Syphonus
+    37822, -- The Oracle
+    38217, -- Tide Behemoth
+    37726, -- Valiyaka the Stormbringer
+    42280, -- Vorthax
+    37909, -- Warbringer Mox'na
+    43193, -- Calamir
     -- Zone Maps: Highmountain
+    39784, -- Beastmaster Pao'lek
+    40405, -- Bristlemaul
+    39235, -- Brogrul the Mighty
+    39994, -- Crab Rider Grmlrml
+    39806, -- Crawshuk the Hungry
+    40414, -- Devouring Darkness
+    39963, -- Flamescale
+    40347, -- Gurbog da Basher
+    40406, -- Luggut the Eggeater
+    39646, -- Majestic Elderhorn
+    39866, -- Mynta Talonscreech
+    40681, -- Sekhan
+    39762, -- Shara Felbreath
+    39465, -- Skullhat
+    39782, -- Tenpak Flametotem <The Exiled Shaman>
+    43985, -- Flotsam
     -- Zone Maps: Stormheim
+    38431, -- Bladesquall
+    38642, -- Captain Brvet
+    43343, -- First Arcanist Thalyssra
+    40068, -- Egyl the Enduring
+    38333, -- Glimar Ironfist
+    40113, -- Grrvrgull the Conqueror
+    42591, -- Hannval the Butcher
+    37908, -- Inquisitor Ernstenbok
+    39120, -- Isel the Hammer
+    40109, -- Kottr Vondyr
+    38837, -- Mordvigbjorn
+    43342, -- Roteye
+    42437, -- Starbuck
+    38423, -- Stormdrake Matriarch
+    38424, -- Thane Irglov the Merciless
+    38685, -- The Nameless King
+    38847, -- Urgev the Flayer
+    38472, -- Whitewater Typhoon
+    42270, -- Nithogg
     -- Zone Maps: Suramar
+    43794, -- Orux Thrice-Damned
+    43954, -- Blood Prince Dreven
+    43580, -- Apothecary Faldren
+    43495, -- Cadraeus
+    41135, -- Cora'kar
+    40897, -- Garvrulg
+    43992, -- Gorgroth
+    43993, -- Hertha Grimdottir
+    44675, -- Head
+    40905, -- Lieutenant Strathmar
+    44071, -- Maia the White
+    43358, -- Myonix
+    43968, -- Pinchshank
+    43484, -- Rauren
+    40680, -- Rok'nash
+    42831, -- Shal'an
     -- Zone Maps: Val'sharah
+    43446, -- Alleria Windrunner
+    38767, -- Darkshade
+    39858, -- Dreadbog
+    38468, -- Kiro
+    40079, -- Lyrath Moonfeather
+    39357, -- Mad Henryk
+    39596, -- Perrexx the Corruptor
+    39130, -- Pollous the Fetid
+    38479, -- Seersei
+    38772, -- Theryssia
+    38780, -- Thondrax
+    43176, -- Lady Liadrin
+    39856, -- Wraithtalon
+    43447, -- Wraithtalon
+    38466, -- Unguarded Thistlemaw Treasure
+    38889, -- Shivering Ashmaw Cub
+    42819, -- Humongris
+    42779, -- Shar'thos
+    -- Zone Maps: Mists of Pandaria
+    -- Zone Maps: Timeless Isle
 }
