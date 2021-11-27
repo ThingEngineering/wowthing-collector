@@ -1,3 +1,9 @@
+v9.1.5.7
+--------
+- Attempt a fix for non-Latin-encoded realm names breaking things (eg Russian realms), the Blizzard API returns
+  names in English in those cases.
+- Updated quest scanning list.
+
 v9.1.5.6
 --------
 - Changed currency scanning to work more consistently.
