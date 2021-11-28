@@ -603,6 +603,7 @@ ns.scanQuests = {
     -- Zone Maps: Antoran Wastes
     48817, -- Admiral Rel'var
     49183, -- Blistermaw
+    48968, -- Doomcaster Suprax
     48821, -- Houndmaster Kerrax
     49240, -- Mistress Il'thendra
     48970, -- Mother Rosula
@@ -615,19 +616,27 @@ ns.scanQuests = {
     48820, -- Worldsplitter Skuul
     48814, -- Wrath-Lord Yarez
     -- Zone Maps: Eredath
+    48709, -- Ataxon
+    48700, -- Baruut the Bloodthirsty
     48718, -- Instructor Tarahna
     48713, -- Jed'hin Champion Vorusk
     48714, -- Overseer Y'Beda
+    48717, -- Overseer Y'Morna
     48716, -- Overseer Y'Sorna
     48712, -- Sabuul
+    48692, -- Shadowcaster Voruun
+    48721, -- Skreeg the Devourer
+    48710, -- Sorolis the Ill-Fated
     48706, -- Turek the Lucid
     48705, -- Venomtail Skyfin
     48704, -- Vigilant Kuro
+    48703, -- Vigilant Thanos
     48695, -- Wrangler Kravos
     -- Zone Maps: Krokuun
     48564, -- Commander Endaxis
     48563, -- Commander Vecaya
     48561, -- Khazaduum
+    48667, -- Naroua
     48565, -- Sister Subversia
     48628, -- Talestra the Vile
     48664, -- Tereck the Selector
