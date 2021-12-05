@@ -81,7 +81,7 @@ ns.scanQuests = {
     64010, -- Lil'Abom
     64011, -- Lil'Abom
     64013, -- Lil'Abom
-    63180, -- Gorged Shadehound
+    63433, -- Gorged Shadehound
     63854, -- Tormentors of Torghast
     -- Zone Maps: Ardenweald
     59226, -- Deathbinder Hroth
