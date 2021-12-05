@@ -200,20 +200,8 @@ local frame, events = CreateFrame("FRAME"), {}
 
 -- Fires when the addon has finished loading
 function events:ADDON_LOADED(name)
-    -- Us!
-    if name == "WoWthing_Collector" then
-        if WWTCSaved == nil or WWTCSaved.version < defaultWWTCSaved.version then
-            WWTCSaved = defaultWWTCSaved
-        end
-
-        -- Timezones suck
-        wwtc:CalculateTimeZoneDiff()
-
-        -- Perform any cleanup
-        wwtc:Cleanup()
-
     -- Damn Pet Journal!
-    elseif name == "Blizzard_Collections" then
+    if name == "Blizzard_Collections" then
         wwtc:HookCollections()
     end
 end
@@ -496,6 +484,16 @@ local _ = C_Timer.NewTicker(2, function() wwtc:Timer() end, nil)
 -------------------------------------------------------------------------------
 
 function wwtc:Initialise()
+    if WWTCSaved == nil or WWTCSaved.version < defaultWWTCSaved.version then
+        WWTCSaved = defaultWWTCSaved
+    end
+
+    -- Timezones suck
+    wwtc:CalculateTimeZoneDiff()
+
+    -- Perform any cleanup
+    wwtc:Cleanup()
+
     -- Build a unique ID for this character
     -- id, name, nameForAPI, rules, locale, nil, region, timezone, connections, englishName, englishNameForAPI
     local _, realm, _, _, _, _, region, _, _, realmEnglish = LibRealmInfo:GetRealmInfoByUnit("player")
