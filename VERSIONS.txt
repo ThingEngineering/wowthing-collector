@@ -1,3 +1,9 @@
+v9.1.5.8
+- Move addon initialization from ADDON_LOADED to PLAYER_LOGIN, hopefully resolves some issues with
+  data not being migrated/reset properly.
+- Updated quest scanning list.
+- Increased addon data version to force reset.
+
 v9.1.5.7
 --------
 - Attempt a fix for non-Latin-encoded realm names breaking things (eg Russian realms), the Blizzard API returns
