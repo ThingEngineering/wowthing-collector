@@ -1,5 +1,7 @@
 local an, ns = ...
 
+local _G = getfenv(0)
+
 
 -- Things
 local wwtc = {}
@@ -10,7 +12,7 @@ local maxScannedToys = 0
 local oldScannedTransmog = 0
 local dirtyBags, dirtyCovenant, dirtyCurrencies, dirtyLockouts, dirtyMounts, dirtyMythicPlus, dirtyPets, dirtyQuests, dirtyReputations, dirtyTransmog, dirtyVault =
     {}, false, false, false, false, false, false, false, false, false, false, false
-local dirtyGuildBank, guildBankQueried = false, false
+local dirtyGuildBank, guildBankQueried, requestingPlayedTime = false, false, true
 
 -- Libs
 local LibRealmInfo = LibStub('LibRealmInfo17janekjl')
@@ -194,6 +196,18 @@ local torghastWidgets = {
 -- Misc constants
 local MAP_KULTIRAS = 876
 local SLOTS_PER_GUILD_BANK_TAB = 98
+
+-- Hook the time played message so that we don't print it to chat every time
+do
+    local originalDisplayTimePlayed = _G.ChatFrame_DisplayTimePlayed
+    _G.ChatFrame_DisplayTimePlayed = function(...)
+        if requestingPlayedTime then
+            requestingPlayedTime = false
+            return
+        end
+        return originalDisplayTimePlayed(...)
+    end
+end
 
 -- Need a frame for events
 local frame, events = CreateFrame("FRAME"), {}
