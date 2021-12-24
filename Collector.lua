@@ -10,8 +10,8 @@ local hookedCollections, loggingOut = false, false, false
 local bankOpen, crafterOpen, guildBankOpen, reagentBankUpdated = false, false, false, false
 local maxScannedToys = 0
 local oldScannedTransmog = 0
-local dirtyBags, dirtyCovenant, dirtyCurrencies, dirtyLockouts, dirtyMounts, dirtyMythicPlus, dirtyPets, dirtyQuests, dirtyReputations, dirtyTransmog, dirtyVault =
-    {}, false, false, false, false, false, false, false, false, false, false, false
+local dirtyBags, dirtyCovenant, dirtyCurrencies, dirtyLockouts, dirtyMounts, dirtyMythicPlus, dirtyPets, dirtyQuests, dirtyReputations, dirtyToys, dirtyTransmog, dirtyVault =
+    {}, false, false, false, false, false, false, false, false, false, false, false, false
 local dirtyGuildBank, guildBankQueried, requestingPlayedTime = false, false, true
 
 -- Libs
@@ -406,6 +406,13 @@ end
 function events:COVENANT_SANCTUM_INTERACTION_ENDED()
     dirtyCovenant = true
 end
+-- Toys
+function events:NEW_TOY_ADDED()
+    dirtyToys = true
+end
+function events:TOYS_UPDATED()
+    dirtyToys = true
+end
 -- Transmog
 function events:TRANSMOG_COLLECTION_SOURCE_ADDED()
     dirtyTransmog = true
@@ -474,6 +481,11 @@ function wwtc:Timer()
     if dirtyReputations then
         dirtyReputations = false
         wwtc:ScanReputations()
+    end
+
+    if dirtyToys then
+        dirtyToys = false
+        wwtc:ScanToys(false)
     end
 
     if dirtyTransmog then
@@ -576,6 +588,7 @@ function wwtc:Login()
     RequestTimePlayed()
     C_Garrison.RequestLandingPageShipmentInfo()
     wwtc:ScanMounts()
+    wwtc:ScanToys(true)
 end
 
 function wwtc:Logout()
@@ -1343,7 +1356,7 @@ function wwtc:HookCollections()
     local tbframe = _G["ToyBox"]
     if tbframe then
         tbframe:HookScript("OnShow", function(self)
-            wwtc:ScanToys()
+            wwtc:ScanToys(false)
         end)
     else
         print("WoWthing_Collector: unable to hook 'ToyBox' frame!")
@@ -1477,17 +1490,27 @@ function wwtc:ScanTorghast()
 end
 
 -- Scan toys
-function wwtc:ScanToys()
+function wwtc:ScanToys(resetToyBox)
     if charData == nil then return end
 
     charData.scanTimes['toys'] = time()
 
     local toys = {}
-    for i = 1, #WWTCSaved.toys do
-        toys[WWTCSaved.toys[i]] = true
+    for _, toyId in pairs(WWTCSaved.toys) do
+        toys[toyId] = true
     end
 
-    for i = 1, C_ToyBox.GetNumToys() do
+    -- Reset toy box to show everything
+    if resetToyBox == true then
+        C_ToyBox.SetAllSourceTypeFilters(true)
+        C_ToyBox.SetCollectedShown(true)
+        C_ToyBox.SetUncollectedShown(true)
+        C_ToyBox.SetUnusableShown(true)
+        C_ToyBox.SetFilterString("")
+    end
+
+    local numToys = C_ToyBox.GetNumToys()
+    for i = 1, numToys do
         local itemID = C_ToyBox.GetToyFromIndex(i)
         if itemID > 0 and PlayerHasToy(itemID) then
             toys[itemID] = true
