@@ -844,8 +844,10 @@ function wwtc:ScanCovenants()
         transport = {},
         missions = {},
         unique = {},
+        soulbinds = {},
     }
 
+    -- Currencies
     local animaInfo = C_CurrencyInfo.GetCurrencyInfo(1813)
     if animaInfo ~= nil then
         covenantData.anima = animaInfo.quantity
@@ -856,6 +858,7 @@ function wwtc:ScanCovenants()
         covenantData.souls = soulsInfo.quantity
     end
 
+    -- Features
     local covenant = ns.covenants[covenantId]
     for thing, talentTreeId in pairs(covenant.features) do
         local talentData = C_Garrison.GetTalentTreeInfo(talentTreeId)
@@ -878,6 +881,30 @@ function wwtc:ScanCovenants()
         end
 
         covenantData[thing] = thingData
+    end
+
+    -- Soulbinds
+    local soulbindIds = C_Covenants.GetCovenantData(covenantId)['soulbindIDs']
+    for _, soulbindId in ipairs(soulbindIds) do
+        local soulbindData = C_Soulbinds.GetSoulbindData(soulbindId)
+        local soulbind = {
+            id = soulbindData.ID,
+            unlocked = soulbindData.unlocked,
+            specs = C_Soulbinds.GetSpecsAssignedToSoulbind(soulbindId),
+            tree = {},
+        }
+
+        for _, node in ipairs(soulbindData.tree.nodes) do
+            if node.state == 3 then
+                soulbind.tree[node.row + 1] = {
+                    node.column + 1,
+                    C_Soulbinds.GetConduitSpellID(node.conduitID, node.conduitRank),
+                    node.conduitRank,
+                }
+            end
+        end
+
+        covenantData.soulbinds[#covenantData.soulbinds + 1] = soulbind
     end
 
     local found = false
