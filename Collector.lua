@@ -921,19 +921,6 @@ function wwtc:ScanCovenants()
     end
 end
 
-function wwtc:ScanCovenantSanctum()
-    if charData == nil then return end
-
-    local covenantId = C_Covenants.GetActiveCovenantID()
-    local covenantData = charData.covenants[covenantId]
-
-    -- 1=conductor 2=transport 3=missions 4=unused?? 5=unique
-    local features = C_CovenantSanctumUI.GetFeatures()
-    for i, featureInfo in ipairs(features) do
-        print(i .. ': garrTalentTreeID=' .. featureInfo.garrTalentTreeID .. ' featureType=' .. featureInfo.featureType .. ' uiOrder=' .. featureInfo.uiOrder)
-    end
-end
-
 -- Scan achievement criteria
 function wwtc:ScanCriteria()
     if charData == nil then return end
