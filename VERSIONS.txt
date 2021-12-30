@@ -1,8 +1,13 @@
+v9.1.5.11
+---------
+- Added more events to covenant scanning trigger, should catch soulbind changes better.
+- Added Maw/Torghast/Korthia unlocks to quest scanning.
+
 v9.1.5.10
 ---------
-- Add soulbind scanning.
-- Change toy scanning to run on login and whenever a new toy is learned.
-- Remove unused function.
+- Added soulbind scanning.
+- Changed toy scanning to run on login and whenever a new toy is learned.
+- Removed unused function.
 
 v9.1.5.9
 --------
