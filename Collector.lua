@@ -406,6 +406,15 @@ end
 function events:COVENANT_SANCTUM_INTERACTION_ENDED()
     dirtyCovenant = true
 end
+function events:SOULBIND_ACTIVATED()
+    dirtyCovenant = true
+end
+function events:SOULBIND_FORGE_INTERACTION_STARTED()
+    dirtyCovenant = true
+end
+function events:SOULBIND_FORGE_INTERACTION_ENDED()
+    dirtyCovenant = true
+end
 -- Toys
 function events:NEW_TOY_ADDED()
     dirtyToys = true
