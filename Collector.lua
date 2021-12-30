@@ -56,7 +56,6 @@ local tradeSkills = {
     [176058] = true, -- Secrets of Draenor Tailoring
 }
 
-
 local weeklyQuests = {
     [37638] = "Bronze Invasion",
     [37639] = "Silver Invasion",
@@ -76,50 +75,11 @@ local checkMounts = {
     --[229377] = true, -- Gift of the Holy Keepers (Priest Order Hall)
     --[229417] = true, -- Slayer's Felbroken Shrieker (Demon Hunter Order Hall)
     --[232412] = true, -- Netherlord's Chaotic Wrathsteed (Warlock Order Hall)
-    [215545] = true, -- Mastercraft Gravewing (Korthia rare)
+    --[215545] = true, -- Mastercraft Gravewing (Korthia rare)
 }
 local checkPets = {
     [216] = 33239, -- Argent Gruntling
     [1350] = 73809, -- Sky Lantern
-}
-local checkQuests = {
-    -- Artifact Hidden Appearances
-    43646,
-    43647,
-    43648,
-    43649,
-    43650,
-    43651,
-    43652,
-    43653,
-    43654,
-    43655,
-    43656,
-    43657,
-    43658,
-    43659,
-    43660,
-    43661,
-    43662,
-    43663,
-    43664,
-    43665,
-    43666,
-    43667,
-    43668,
-    43669,
-    43670,
-    43671,
-    43672,
-    43673,
-    43674,
-    43675,
-    43676,
-    43677,
-    43678,
-    43679,
-    43680,
-    43681,
 }
 local checkReputations = {
     --1492, -- Emperor Shaohao
@@ -569,9 +529,9 @@ function wwtc:Initialise()
     charData.mythicDungeons = charData.mythicDungeons or {}
     charData.mythicPlus = charData.mythicPlus or {}
     charData.orderHallResearch = charData.orderHallResearch or {}
+    charData.otherQuests = charData.otherQuests or {}
     charData.paragons = charData.paragons or {}
     charData.pets = charData.pets or {}
-    charData.quests = charData.quests or {}
     charData.reputations = charData.reputations or {}
     charData.scanTimes = charData.scanTimes or {}
     charData.torghast = charData.torghast or {}
@@ -1087,15 +1047,17 @@ end
 function wwtc:ScanQuests()
     if charData == nil then return end
 
-    charData.quests = {}
     charData.dailyQuests = {}
+    charData.otherQuests = {}
     charData.weeklyQuests = {}
     charData.weeklyUghQuests = {}
 
     charData.scanTimes["quests"] = time()
 
-    for _, questID in ipairs(checkQuests) do
-        charData.quests[questID] = C_QuestLog.IsQuestFlaggedCompleted(questID)
+    for _, questID in ipairs(ns.otherQuests) do
+        if C_QuestLog.IsQuestFlaggedCompleted(questID) then
+            charData.otherQuests[#charData.otherQuests + 1] = questID
+        end
     end
 
     for _, questID in ipairs(ns.scanQuests) do
