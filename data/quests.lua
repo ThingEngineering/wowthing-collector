@@ -217,6 +217,7 @@ ns.scanQuests = {
     60894, -- Gift of Thenios
     60890, -- Gift of Vesiphone
     61048, -- Lost Disciple's Notes
+    61688, -- Penitence of Purity
     58298, -- Scroll of Aeons
     61044, -- Stolen Equipment
     61183, -- Vesper of the Silver Wind
