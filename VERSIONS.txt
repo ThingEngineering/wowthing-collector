@@ -1,3 +1,8 @@
+v9.1.5.12
+---------
+- Added calling scanning.
+- Updated quest scanning list.
+
 v9.1.5.11
 ---------
 - Added more events to covenant scanning trigger, should catch soulbind changes better.
