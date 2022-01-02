@@ -12,6 +12,7 @@ local maxScannedToys = 0
 local oldScannedTransmog = 0
 local dirtyBags, dirtyCovenant, dirtyCurrencies, dirtyLockouts, dirtyMounts, dirtyMythicPlus, dirtyPets, dirtyQuests, dirtyReputations, dirtyToys, dirtyTransmog, dirtyVault =
     {}, false, false, false, false, false, false, false, false, false, false, false, false
+local dirtyCallings, callingData = false, nil
 local dirtyGuildBank, guildBankQueried, requestingPlayedTime = false, false, true
 
 -- Libs
@@ -316,7 +317,7 @@ function events:CHALLENGE_MODE_MAPS_UPDATE()
     dirtyMythicPlus = true
     dirtyVault = true
 end
--- ?
+-- Vault
 function events:WEEKLY_REWARDS_HIDE()
     dirtyVault = true
 end
@@ -352,6 +353,11 @@ function events:PLAYER_FLAGS_CHANGED(unitId)
     if unitId == 'player' then
         wwtc:UpdateWarMode()
     end
+end
+-- Quests
+function events:COVENANT_CALLINGS_UPDATED(callings)
+    dirtyCallings = true
+    callingData = callings
 end
 -- Shadowlands: Covenants
 function events:COVENANT_CHOSEN()
@@ -469,8 +475,13 @@ function wwtc:Timer()
 
     if dirtyQuests then
         dirtyQuests = false
+        C_CovenantCallings.RequestCallings()
         wwtc:ScanQuests()
-        wwtc:ScanWorldQuests()
+    end
+
+    if dirtyCallings then
+        dirtyCallings = false
+        wwtc:ScanCallings()
     end
 end
 -- Run the timer once per 2 seconds to do chunky things
@@ -520,6 +531,7 @@ function wwtc:Initialise()
     charData.balanceMythic15 = false
 
     charData.bags = charData.bags or {}
+    charData.callings = charData.callings or {}
     charData.covenants = charData.covenants or {}
     charData.currencies = charData.currencies or {}
     charData.dailyQuests = charData.dailyQuests or {}
@@ -540,7 +552,8 @@ function wwtc:Initialise()
     charData.vault = charData.vault or {}
     charData.weeklyQuests = charData.weeklyQuests or {}
     charData.weeklyUghQuests = charData.weeklyUghQuests or {}
-    charData.worldQuests = charData.worldQuests or {}
+
+    charData.worldQuests = nil
 
     charData.dailyResetTime = wwtc:GetDailyResetTime()
 
@@ -632,6 +645,8 @@ function wwtc:UpdateCharacterData()
     end
 
     if not loggingOut then
+        dirtyQuests = true
+
         charData.copper = GetMoney()
 
         wwtc:UpdateChromieTime()
@@ -639,12 +654,10 @@ function wwtc:UpdateCharacterData()
         wwtc:UpdateWarMode()
 
         wwtc:ScanCriteria()
-        wwtc:ScanQuests()
         wwtc:ScanTorghast()
-        wwtc:ScanWorldQuests()
 
-        RequestRaidInfo()
         C_MythicPlus.RequestMapInfo()
+        RequestRaidInfo()
     end
 end
 
@@ -836,6 +849,7 @@ function wwtc:ScanCovenants()
         local thingData = {
             name = talentData.title,
             rank = 0,
+            researchEnds = 0,
         }
 
         for _, talent in ipairs(talentData.talents) do
@@ -1208,88 +1222,43 @@ function wwtc:ScanVault()
     end
 end
 
--- Scan world quests
-function wwtc:ScanWorldQuests()
-    if nil == nil then return end -- FIXME scan callings
-
+-- Scan callings
+function wwtc:ScanCallings()
     if charData == nil then return end
 
     local now = time()
-    charData.scanTimes["worldQuests"] = now
-    charData.worldQuests = {}
+    charData.scanTimes["callings"] = now
+    charData.callings = {}
 
-    local bountyQuests = GetQuestBountyInfoForMapID(MAP_KULTIRAS)
-    for _, bountyInfo in ipairs(bountyQuests) do
-        -- for k, v in pairs(bountyInfo) do
-        --     print(k, "=>", v)
-        -- end
-        
-        -- factionID => 1883
-        -- icon => 1394953
-        -- numObjectives => 1
-        -- questID => 42170
+    if callingData == nil then return end
+    if not C_CovenantCallings.AreCallingsUnlocked() then return end
 
-        local timeLeft = C_TaskQuest.GetQuestTimeLeftMinutes(bountyInfo.questID)
-        if timeLeft ~= nil then
-            local _, _, finished, numFulfilled, numRequired = GetQuestObjectiveInfo(bountyInfo.questID, 1, false)
-
-            local index = 3
-            if timeLeft < 1440 then
-                index = 1
-            elseif timeLeft < 2880 then
-                index = 2
-            end
-
-            -- print(timeLeft, index, finished, numFulfilled, numRequired)
-
-            -- This seems to be 0 all the time now, cool
-            local factionID = 0 --bountyInfo.factionID
-            if worldQuestFactions[bountyInfo.questID] then
-                factionID = worldQuestFactions[bountyInfo.questID]
-            end
-            
-            charData.worldQuests['day ' .. index] = {
-                quest = bountyInfo.questID,
-                faction = factionID,
-                expires = now + (timeLeft * 60),
-                finished = finished,
-                numCompleted = numFulfilled,
-                numRequired = numRequired,
-            }
-        end
+    local dailyReset = now + C_DateAndTime.GetSecondsUntilDailyReset()
+    for i = 1, 3 do
+        charData.callings[i] = {
+            completed = true,
+            expires = dailyReset + ((i - 1) * 24 * 60 * 60),
+        }
     end
 
-    -- World Quest unlock quest. 51916=Horde, 51918=Alliance, both return true?
-    if #charData.worldQuests < 3 and C_QuestLog.IsQuestFlaggedCompleted(51916) then
-        local resetDates = {}
-
-        local nowDate = date("!*t", now) -- reset is 15:00:00 UTC, 08:00:00 PST?
-        local addDay = (nowDate.hour >= 15)
-        
-        nowDate.sec = zoneDiff -- we need UTC times, add the stupid timezone difference
-        nowDate.min = 0
-        nowDate.hour = 15
-
-        resetDates[1] = time(nowDate)
-        if addDay then
-            resetDates[1] = resetDates[1] + 86400
+    -- questID                  number
+    -- factionID                number
+    -- icon                     number
+    -- numObjectives            number
+    -- turninRequirementText    string?
+    for _, calling in ipairs(callingData) do
+        local timeLeft = C_TaskQuest.GetQuestTimeLeftMinutes(calling.questID) or 0
+        local index = 3
+        if timeLeft < 1440 then
+            index = 1
+        elseif timeLeft < 2880 then
+            index = 2
         end
-        resetDates[2] = resetDates[1] + 86400
-        resetDates[3] = resetDates[2] + 86400
 
-        for i = 1, 3 do
-            local key = 'day ' .. i
-            if charData.worldQuests[key] == nil then
-                charData.worldQuests[key] = {
-                    faction = 0,
-                    expires = resetDates[i],
-                    finished = true,
-                    numCompleted = 1,
-                    numRequired = 1,
-                }                
-            end
-        end
+        charData.callings[index].completed = C_QuestLog.IsQuestFlaggedCompleted(calling.questID)
     end
+
+    return
 end
 
 -- Scan trade skills for cooldowns
@@ -1644,7 +1613,8 @@ end
 SLASH_WWTC1 = "/wwtc"
 SlashCmdList["WWTC"] = function(msg)
     print('sigh')
-    wwtc:ScanCovenants()
+    C_CovenantCallings.RequestCallings()
+    --wwtc:ScanCovenants()
 end
 
 SLASH_RL1 = "/rl"
