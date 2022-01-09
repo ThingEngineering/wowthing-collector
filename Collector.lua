@@ -5,7 +5,7 @@ local _G = getfenv(0)
 
 -- Things
 local wwtc = {}
-local charClassID, charData, charName, guildName, playedLevel, playedLevelUpdated, playedTotal, playedTotalUpdated, regionName, zoneDiff
+local charClassID, charData, charName, guildName, playedLevel, playedLevelUpdated, playedTotal, playedTotalUpdated, regionName
 local hookedCollections, loggingOut = false, false, false
 local bankOpen, crafterOpen, guildBankOpen, reagentBankUpdated = false, false, false, false
 local maxScannedToys = 0
@@ -494,9 +494,6 @@ function wwtc:Initialise()
         WWTCSaved = defaultWWTCSaved
     end
 
-    -- Timezones suck
-    wwtc:CalculateTimeZoneDiff()
-
     -- Perform any cleanup
     wwtc:Cleanup()
 
@@ -523,13 +520,7 @@ function wwtc:Initialise()
     charData.playedTotal = 0
     charData.restedXP = 0
 
-    charData.biggerFishToFry = {}
-    charData.hiddenDungeons = 0
-    charData.hiddenKills = 0
-    charData.hiddenWorldQuests = 0
-    charData.balanceUnleashedMonstrosities = {}
-    charData.balanceMythic15 = false
-
+    charData.achievements = charData.achievements or {}
     charData.bags = charData.bags or {}
     charData.callings = charData.callings or {}
     charData.covenants = charData.covenants or {}
@@ -553,6 +544,13 @@ function wwtc:Initialise()
     charData.weeklyQuests = charData.weeklyQuests or {}
     charData.weeklyUghQuests = charData.weeklyUghQuests or {}
 
+    -- Deprecated
+    charData.biggerFishToFry = nil
+    charData.hiddenDungeons = nil
+    charData.hiddenKills = nil
+    charData.hiddenWorldQuests = nil
+    charData.balanceUnleashedMonstrosities = nil
+    charData.balanceMythic15 = nil
     charData.worldQuests = nil
 
     charData.dailyResetTime = wwtc:GetDailyResetTime()
@@ -578,16 +576,9 @@ function wwtc:Logout()
     wwtc:UpdateCharacterData()
 end
 
-function wwtc:CalculateTimeZoneDiff()
-    local now = time()
-    local d1 = date("*t", now)
-    local d2 = date("!*t", now)
-    zoneDiff = difftime(time(d1), time(d2))
-end
-
 function wwtc:Cleanup()
+    -- Remove data for any characters not seen in the last 3 days
     local old = time() - (3 * 24 * 60 * 60)
-
     for cName, cData in pairs(WWTCSaved.chars) do
         if not cData.lastSeen or cData.lastSeen < old then
             WWTCSaved.chars[cName] = nil
@@ -653,7 +644,7 @@ function wwtc:UpdateCharacterData()
         wwtc:UpdateExhausted()
         wwtc:UpdateWarMode()
 
-        wwtc:ScanCriteria()
+        wwtc:ScanAchievements()
         wwtc:ScanTorghast()
 
         C_MythicPlus.RequestMapInfo()
@@ -904,47 +895,31 @@ function wwtc:ScanCovenants()
     end
 end
 
--- Scan achievement criteria
-function wwtc:ScanCriteria()
+-- Scan achievements
+function wwtc:ScanAchievements()
     if charData == nil then return end
 
-    -- Legion rare fish
-    local fishEarnedByMe = select(13, GetAchievementInfo(10596))
-    charData.biggerFishToFry = {}
-    local numCriteria = GetAchievementNumCriteria(10596)
-    for i = 1, numCriteria do
-        local _, _, completed = GetAchievementCriteriaInfo(10596, i)
-        if fishEarnedByMe or completed then
-            charData.biggerFishToFry[#charData.biggerFishToFry + 1] = i
+    charData.achievements = {}
+    charData.scanTimes['achievements'] = time()
+
+    for _, achievementId in ipairs(ns.achievements) do
+        local criteria = {}
+        local earnedByCharacter = select(13, GetAchievementInfo(achievementId))
+
+        if not earnedByCharacter then
+            local numCriteria = GetAchievementNumCriteria(achievementId)
+            for i = 1, numCriteria do
+                local _, _, _, quantity = GetAchievementCriteriaInfo(achievementId, i)
+                table.insert(criteria, quantity)
+            end
         end
+
+        charData.achievements[#charData.achievements + 1] = {
+            id = achievementId,
+            earned = earnedByCharacter,
+            criteria = criteria,
+        }
     end
-
-    -- Hidden variations
-    charData.hiddenDungeons = 0
-    local numCriteria = GetAchievementNumCriteria(11152)
-    for i = 1, numCriteria do
-        local _, _, _, quantity = GetAchievementCriteriaInfo(11152, i)
-        charData.hiddenDungeons = charData.hiddenDungeons + quantity
-    end
-
-    local _, _, _, quantity = GetAchievementCriteriaInfo(11153, 1)
-    charData.hiddenWorldQuests = quantity
-
-    local _, _, _, quantity = GetAchievementCriteriaInfo(11154, 1)
-    charData.hiddenKills = quantity
-
-    -- Balance of Power variations
-    charData.balanceUnleashedMonstrosities = {}
-    local numCriteria = GetAchievementNumCriteria(11160)
-    for i = 1, numCriteria do
-        local _, _, completed = GetAchievementCriteriaInfo(11160, i)
-        if completed then
-            charData.balanceUnleashedMonstrosities[#charData.balanceUnleashedMonstrosities + 1] = i
-        end
-    end
-
-    local wasEarnedByMe = select(13, GetAchievementInfo(11162))
-    charData.balanceMythic15 = wasEarnedByMe
 end
 
 -- Scan currencies
@@ -1612,9 +1587,7 @@ end
 
 SLASH_WWTC1 = "/wwtc"
 SlashCmdList["WWTC"] = function(msg)
-    print('sigh')
-    C_CovenantCallings.RequestCallings()
-    --wwtc:ScanCovenants()
+    wwtc:ScanAchievements()
 end
 
 SLASH_RL1 = "/rl"
