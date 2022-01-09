@@ -1,3 +1,8 @@
+v9.1.5.13
+---------
+- Cleaned up achievement criteria scanning.
+- Removed some unused code.
+
 v9.1.5.12
 ---------
 - Added calling scanning.
@@ -12,7 +17,7 @@ v9.1.5.10
 ---------
 - Added soulbind scanning.
 - Changed toy scanning to run on login and whenever a new toy is learned.
-- Removed unused function.
+- Removed some unused code.
 
 v9.1.5.9
 --------
