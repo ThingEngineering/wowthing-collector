@@ -28,6 +28,10 @@ ns.otherQuests = {
     63217, -- Animated Levitating Chain
     63177, -- Encased Riftwalker Essence
 
+    -- Soulshapes
+    64982, -- Cat (Well Fed)
+    64938, -- Corgi
+
     -- Artifact Hidden Appearances
     43646,
     43647,
