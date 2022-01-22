@@ -1506,6 +1506,15 @@ end
 function wwtc:ParseItemLink(link, count)
     local parts = { strsplit(":", link) }
 
+    if string.find(parts[1], '\|Hbattlepet') then
+        return table.concat({
+            'pet',
+            parts[2], -- speciesID
+            parts[3], -- level
+            parts[4], -- quality
+        }, ':')
+    end
+
     local item = {
         count = count,
         itemID = tonumber(parts[2]),
