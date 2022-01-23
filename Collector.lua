@@ -25,6 +25,7 @@ local defaultWWTCSaved = {
     guilds = {},
     heirlooms = {},
     toys = {},
+    transmogSources = {},
 }
 
 local instanceNameToId = {}
@@ -504,6 +505,8 @@ function wwtc:Initialise()
     charName = regionName .. "/" .. (realmEnglish or realm)  .. "/" .. UnitName("player")
     charClassID = select(3, UnitClass("player"))
 
+    WWTCSaved.transmogSources = WWTCSaved.transmogSources or {}
+
     -- Set up character data table
     charData = WWTCSaved.chars[charName] or {}
     WWTCSaved.chars[charName] = charData
@@ -582,6 +585,8 @@ function wwtc:Cleanup()
     for cName, cData in pairs(WWTCSaved.chars) do
         if not cData.lastSeen or cData.lastSeen < old then
             WWTCSaved.chars[cName] = nil
+        else
+            cData.transmog = nil
         end
     end
 end
@@ -1141,6 +1146,18 @@ function wwtc:ScanTransmog()
         for _, appearance in pairs(appearances) do
             if appearance.isCollected then
                 transmog[appearance.visualID] = true
+            end
+        end
+    end
+
+    for appearanceId, _ in pairs(transmog) do
+        local sources = C_TransmogCollection.GetAppearanceSources(appearanceId)
+
+        WWTCSaved.transmogSources[appearanceId] = WWTCSaved.transmogSources[appearanceId] or {}
+        for _, source in ipairs(sources) do
+            if source.isCollected then
+                local sourceKey = string.format("%d_%d", source.sourceID, source.itemModID)
+                WWTCSaved.transmogSources[appearanceId][sourceKey] = true
             end
         end
     end
