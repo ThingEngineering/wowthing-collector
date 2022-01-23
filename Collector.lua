@@ -589,8 +589,6 @@ function wwtc:Cleanup()
     for cName, cData in pairs(WWTCSaved.chars) do
         if not cData.lastSeen or cData.lastSeen < old then
             WWTCSaved.chars[cName] = nil
-        else
-            cData.transmog = nil
         end
     end
 end
