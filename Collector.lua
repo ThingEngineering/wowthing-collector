@@ -661,13 +661,20 @@ function wwtc:UpdateGuildData()
     end
 
     -- Build a unique ID for this character's guild
-    local gName, gRankName, gRankIndex = GetGuildInfo("player")
+    charData.guildName = nil
+    local gName, _, _, gRealm = GetGuildInfo("player")
     if gName then
-        guildName = regionName .. "/" .. GetRealmName() .. "/" .. gName
+        if gRealm == nil then
+            gRealm = GetRealmName()
+        end
+
+        guildName = regionName .. "/" .. gRealm .. "/" .. gName
+        charData.guildName = guildName
 
         WWTCSaved.guilds[guildName] = WWTCSaved.guilds[guildName] or {}
         WWTCSaved.guilds[guildName].copper = WWTCSaved.guilds[guildName].copper or 0
         WWTCSaved.guilds[guildName].items = WWTCSaved.guilds[guildName].items or {}
+        WWTCSaved.guilds[guildName].scanTimes = WWTCSaved.guilds[guildName].scanTimes or {}
         WWTCSaved.guilds[guildName].tabs = WWTCSaved.guilds[guildName].tabs or {}
     else
         guildName = nil
