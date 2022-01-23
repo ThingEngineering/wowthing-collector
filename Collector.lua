@@ -18,6 +18,10 @@ local dirtyGuildBank, guildBankQueried, requestingPlayedTime = false, false, tru
 -- Libs
 local LibRealmInfo = LibStub('LibRealmInfo17janekjl')
 
+-- Tooltips?
+local scanTooltip = CreateFrame('GameTooltip', 'WWTCTooltip', nil, 'GameTooltipTemplate')
+scanTooltip:SetOwner(WorldFrame, 'ANCHOR_NONE')
+
 -- Default SavedVariables
 local defaultWWTCSaved = {
     version = 9158,
@@ -779,6 +783,7 @@ function wwtc:ScanGuildBankTabs()
     end
 
     local now = time()
+    WWTCSaved.guilds[guildName].scanTimes['bank'] = now
 
     -- Request data for every tab, but only once per guild bank opening or we scan infinitely
     if guildBankQueried == false then
@@ -790,7 +795,6 @@ function wwtc:ScanGuildBankTabs()
 
     for tabIndex = 1, GetNumGuildBankTabs() do
         local tabKey = "t"..tabIndex
-        charData.scanTimes[tabKey] = now
 
         WWTCSaved.guilds[guildName].items[tabKey] = {}
         local tab = WWTCSaved.guilds[guildName].items[tabKey]
@@ -798,9 +802,21 @@ function wwtc:ScanGuildBankTabs()
         for slotIndex = 1, SLOTS_PER_GUILD_BANK_TAB do
             local link = GetGuildBankItemLink(tabIndex, slotIndex)
             if link ~= nil then
-                local _, itemCount, _, _, _ = GetGuildBankItemInfo(tabIndex, slotIndex)
-                local parsed = wwtc:ParseItemLink(link, itemCount)
-                tab["s"..slotIndex] = parsed
+                if string.find(link, '\Hitem:82800:') then
+                    scanTooltip:ClearLines()
+                    local speciesId, level, breedQuality = scanTooltip:SetGuildBankItem(tabIndex, slotIndex)
+                    tab["s"..slotIndex] = table.concat({
+                        'pet',
+                        speciesId,
+                        level,
+                        breedQuality,
+                    }, ':')
+
+                else
+                    local _, itemCount, _, _, _ = GetGuildBankItemInfo(tabIndex, slotIndex)
+                    local parsed = wwtc:ParseItemLink(link, itemCount)
+                    tab["s"..slotIndex] = parsed
+                end
             end
         end
     end
