@@ -1166,12 +1166,10 @@ function wwtc:ScanTransmog()
 
     for appearanceId, _ in pairs(transmog) do
         local sources = C_TransmogCollection.GetAppearanceSources(appearanceId)
-
-        WWTCSaved.transmogSources[appearanceId] = WWTCSaved.transmogSources[appearanceId] or {}
         for _, source in ipairs(sources) do
             if source.isCollected then
                 local sourceKey = string.format("%d_%d", source.sourceID, source.itemModID)
-                WWTCSaved.transmogSources[appearanceId][sourceKey] = true
+                WWTCSaved.transmogSources[sourceKey] = true
             end
         end
     end
