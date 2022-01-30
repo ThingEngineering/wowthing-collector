@@ -1,3 +1,10 @@
+v9.1.5.16
+---------
+- Added Shadowlands Conquest/Honor to currency scanning.
+- Added guild name/home realm to character scanning.
+- Added transmog source scanning.
+- Fixed handling of caged pets in guild bank scanning.
+
 v9.1.5.15
 ---------
 - Fixed handling of caged pets in item scanning.
