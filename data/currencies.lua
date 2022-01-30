@@ -4,9 +4,10 @@ local an, ns = ...
 -- Currencies
 ns.currencies = {
     -- Player vs Player
-    -- 390, -- Conquest Points
-    -- 392, -- Honor Points
+    1602, -- Conquest Points
+    1792, -- Honor Points
     391, -- Tol Barad Commendation
+
     -- Dungeon and Raid
     615, -- Essence of Corrupted Deathwing
     614, -- Mote of Darkness
