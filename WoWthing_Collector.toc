@@ -1,7 +1,7 @@
 ## Interface: 90105
 ## Title: WoWthing Collector
 ## Notes: Collects data to sync with WoWthing.
-## Version: 9.1.5.16
+## Version: 9.1.5.17
 ## Author: Freddie
 ## SavedVariables: WWTCSaved
 

@@ -1,3 +1,7 @@
+v9.1.5.17
+---------
+- Added LFG lockout scanning for Crown Chemical Co.
+
 v9.1.5.16
 ---------
 - Added Shadowlands Conquest/Honor to currency scanning.
