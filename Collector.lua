@@ -225,6 +225,10 @@ function events:PLAYER_GUILD_UPDATE(unitID)
         wwtc:UpdateGuildData()
     end
 end
+-- Fires when LFG something
+function events:LFG_UPDATE_RANDOM_INFO()
+    dirtyLockouts = true
+end
 -- Fires when RequestRaidInfo() completes
 function events:UPDATE_INSTANCE_INFO()
     dirtyLockouts = true
@@ -981,6 +985,9 @@ function wwtc:ScanLockouts()
     local now = time()
     charData.scanTimes["lockouts"] = now
 
+    local dailyReset = now + C_DateAndTime.GetSecondsUntilDailyReset()
+    local weeklyReset = now + C_DateAndTime.GetSecondsUntilWeeklyReset()
+
     -- Instances
     for i = 1, GetNumSavedInstances() do
         local instanceName, _, instanceReset, instanceDifficulty, locked, _, _,
@@ -1027,8 +1034,26 @@ function wwtc:ScanLockouts()
     --    }
     --end
 
-    local dailyReset = now + C_DateAndTime.GetSecondsUntilDailyReset()
-    local weeklyReset = now + C_DateAndTime.GetSecondsUntilWeeklyReset()
+    -- LFG lockouts are weird
+    for _, instance in pairs(ns.instances) do
+        GetLFGDungeonInfo(instance.dungeonId)
+        local locked, _ = GetLFGDungeonRewards(instance.dungeonId)
+        if locked then
+            local instanceName, _ = GetLFGDungeonInfo(instance.dungeonId)
+            charData.lockouts[#charData.lockouts+1] = {
+                id = 200000 + instance.dungeonId,
+                name = instanceName,
+                resetTime = dailyReset,
+                bosses = {
+                    "1:"..instanceName,
+                },
+                difficulty = 1,
+                defeatedBosses = 1,
+                locked = true,
+                maxBosses = 1,
+            }
+        end
+    end
 
     -- Other world bosses
     for questID, questData in pairs(ns.worldBossQuests) do
