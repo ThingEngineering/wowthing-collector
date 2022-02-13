@@ -1036,22 +1036,24 @@ function wwtc:ScanLockouts()
 
     -- LFG lockouts are weird
     for _, instance in pairs(ns.instances) do
-        GetLFGDungeonInfo(instance.dungeonId)
-        local locked, _ = GetLFGDungeonRewards(instance.dungeonId)
-        if locked then
-            local instanceName, _ = GetLFGDungeonInfo(instance.dungeonId)
-            charData.lockouts[#charData.lockouts+1] = {
-                id = 200000 + instance.dungeonId,
-                name = instanceName,
-                resetTime = dailyReset,
-                bosses = {
-                    "1:"..instanceName,
-                },
-                difficulty = 1,
-                defeatedBosses = 1,
-                locked = true,
-                maxBosses = 1,
-            }
+        local isActive = select(21, GetLFGDungeonInfo(instance.dungeonId))
+        if isActive then
+            local locked, _ = GetLFGDungeonRewards(instance.dungeonId)
+            if locked then
+                local instanceName, _ = GetLFGDungeonInfo(instance.dungeonId)
+                charData.lockouts[#charData.lockouts+1] = {
+                    id = 200000 + instance.dungeonId,
+                    name = instanceName,
+                    resetTime = dailyReset,
+                    bosses = {
+                        "1:"..instanceName,
+                    },
+                    difficulty = 1,
+                    defeatedBosses = 1,
+                    locked = true,
+                    maxBosses = 1,
+                }
+            end
         end
     end
 
