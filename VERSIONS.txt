@@ -1,3 +1,13 @@
+v9.2.0.1
+--------
+- Added 9.2 currencies to currency scanning.
+- Added 9.2 world boss to quest scanning.
+- Added Headless Horseman/Frost Lord Ahune/Coren Direbrew to LFG lockout scanning.
+- Added quest scanning support for bi-weekly quest expiry.
+- Changed weekly/weekly "ugh" quest scanning to generic progress quest scanning.
+- Fixed LFG lockout scanning not checking if the instance is actually available.
+- Updated TOC for 9.2.0.
+
 v9.1.5.17
 ---------
 - Added LFG lockout scanning for Crown Chemical Co.
