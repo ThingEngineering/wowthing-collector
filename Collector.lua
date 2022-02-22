@@ -62,18 +62,6 @@ local tradeSkills = {
     [176058] = true, -- Secrets of Draenor Tailoring
 }
 
-local weeklyQuests = {
-    [37638] = "Bronze Invasion",
-    [37639] = "Silver Invasion",
-    [37640] = "Gold Invasion",
-    [38482] = "Platinum Invasion",
-}
-local weeklyUghQuests = {
-    ["anima"] = {61981, 61982, 61983, 61984},
-    ["souls"] = {61331, 61332, 61333, 61334, 62858, 62859, 62860, 62861, 62862, 62863, 62864, 62865, 62866, 62867, 62868, 62869},
-    ["shapingFate"] = {63949}
-}
-
 -- Check things the Battle.net API is bugged for
 local checkMounts = {
     --[458] = true, -- Brown Horse
@@ -546,14 +534,13 @@ function wwtc:Initialise()
     charData.otherQuests = charData.otherQuests or {}
     charData.paragons = charData.paragons or {}
     charData.pets = charData.pets or {}
+    charData.progressQuests = charData.progressQuests or {}
     charData.reputations = charData.reputations or {}
     charData.scanTimes = charData.scanTimes or {}
     charData.torghast = charData.torghast or {}
     charData.tradeSkills = charData.tradeSkills or {}
     charData.transmog = charData.transmog or nil
     charData.vault = charData.vault or {}
-    charData.weeklyQuests = charData.weeklyQuests or {}
-    charData.weeklyUghQuests = charData.weeklyUghQuests or {}
 
     -- Deprecated
     charData.biggerFishToFry = nil
@@ -593,6 +580,9 @@ function wwtc:Cleanup()
     for cName, cData in pairs(WWTCSaved.chars) do
         if not cData.lastSeen or cData.lastSeen < old then
             WWTCSaved.chars[cName] = nil
+        else
+            cData.weeklyQuests = nil
+            cData.weeklyUghQuests = nil
         end
     end
 end
@@ -1091,10 +1081,18 @@ function wwtc:ScanQuests()
 
     charData.dailyQuests = {}
     charData.otherQuests = {}
-    charData.weeklyQuests = {}
-    charData.weeklyUghQuests = {}
+    charData.progressQuests = {}
 
+    local now = time()
     charData.scanTimes["quests"] = time()
+
+    local dailyReset = now + C_DateAndTime.GetSecondsUntilDailyReset()
+    local weeklyReset = now + C_DateAndTime.GetSecondsUntilWeeklyReset()
+
+    local biweeklyReset = weeklyReset - (3.5 * 24 * 60 * 60)
+    if biweeklyReset < now then
+        biweeklyReset = weeklyReset
+    end
 
     for _, questID in ipairs(ns.otherQuests) do
         if C_QuestLog.IsQuestFlaggedCompleted(questID) then
@@ -1108,20 +1106,22 @@ function wwtc:ScanQuests()
         end
     end
 
-    for questID, _ in ipairs(weeklyQuests) do
-        if C_QuestLog.IsQuestFlaggedCompleted(questID) then
-            charData.weeklyQuests[#charData.weeklyQuests + 1] = questID
+    for questKey, questData in pairs(ns.progressQuests) do
+        local prog = { status = 0 }
+        if questData[1] == 'weekly' then
+            prog.reset = weeklyReset
+        elseif questData[1] == 'biweekly' then
+            prog.reset = biweeklyReset
         end
-    end
 
-    for name, questIds in pairs(weeklyUghQuests) do
-        local ugh = { status = 0 }
-
-        for _, questId in ipairs(questIds) do
+        for _, questId in ipairs(questData[2]) do
             -- Quest is completed
             if C_QuestLog.IsQuestFlaggedCompleted(questId) then
-                ugh.status = 2
+                prog.id = questId
+                prog.name = QuestUtils_GetQuestName(questId)
+                prog.status = 2
                 break
+
             -- Quest is in progress, check progress
             elseif C_QuestLog.IsOnQuest(questId) then
                 --local index = C_QuestLog.GetLogIndexForQuestID(questId)
@@ -1129,16 +1129,18 @@ function wwtc:ScanQuests()
                 local objectives = C_QuestLog.GetQuestObjectives(questId)
                 if objectives ~= nil then
                     local obj = objectives[1]
-                    ugh.status = 1
-                    ugh.text = obj.text
-                    ugh.type = obj.type
+                    prog.id = questId
+                    prog.name = QuestUtils_GetQuestName(questId)
+                    prog.status = 1
+                    prog.text = obj.text
+                    prog.type = obj.type
 
                     if obj.type == 'progressbar' then
-                        ugh.have = GetQuestProgressBarPercent(questId)
-                        ugh.need = 100
+                        prog.have = GetQuestProgressBarPercent(questId)
+                        prog.need = 100
                     else
-                        ugh.have = obj.numFulfilled
-                        ugh.need = obj.numRequired
+                        prog.have = obj.numFulfilled
+                        prog.need = obj.numRequired
                     end
 
                     break
@@ -1146,7 +1148,19 @@ function wwtc:ScanQuests()
             end
         end
 
-        charData.weeklyUghQuests[name] = ugh
+        if prog.status > 0 then
+            charData.progressQuests[#charData.progressQuests + 1] = table.concat({
+                questKey,
+                prog.id,
+                prog.name,
+                prog.status,
+                prog.reset,
+                prog.have,
+                prog.need,
+                prog.type,
+                prog.text,
+            }, '|')
+        end
     end
 end
 

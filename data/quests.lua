@@ -1,76 +1,6 @@
 local an, ns = ...
 
 
-ns.otherQuests = {
-    -- Korthia
-    64027, -- Treatise: The Study of Anima and Harnessing Every Drop
-    64300, -- Research Report: Adaptive Alloys
-    64303, -- Research Report: First Alloys
-    64307, -- Treatise: Recognizing Stygia and its Uses
-    64366, -- Treatise: Relics Abound in the Shadowlands
-    64367, -- Research Report: Relic Examination Techniques
-    64828, -- Treatise: Bonds of Stygia in Mortals
-
-    -- Torghast
-    61144, -- Possibility Matrix
-    63183, -- Extradimensional Pockets
-    63193, -- Bangle of Seniority
-    63200, -- Rank Insignia: Acquisitionist
-    63201, -- Loupe of Unusual Charm
-    63202, -- Vessel of Unfortunate Spirits
-    63204, -- Ritual Prism of Fortune
-    63523, -- Broker Traversal Enhancer
-
-    -- The Maw
-    61600, -- Animaflow Stabilizer
-    63091, -- Soul-Stabilizing Talisman
-    63092, -- Sigil of the Unseen
-    63217, -- Animated Levitating Chain
-    63177, -- Encased Riftwalker Essence
-
-    -- Soulshapes
-    64982, -- Cat (Well Fed)
-    64938, -- Corgi
-
-    -- Artifact Hidden Appearances
-    43646,
-    43647,
-    43648,
-    43649,
-    43650,
-    43651,
-    43652,
-    43653,
-    43654,
-    43655,
-    43656,
-    43657,
-    43658,
-    43659,
-    43660,
-    43661,
-    43662,
-    43663,
-    43664,
-    43665,
-    43666,
-    43667,
-    43668,
-    43669,
-    43670,
-    43671,
-    43672,
-    43673,
-    43674,
-    43675,
-    43676,
-    43677,
-    43678,
-    43679,
-    43680,
-    43681,
-}
-
 ns.scanQuests = {
     -- Zone Maps: Shadowlands
     -- Zone Maps: Korthia
@@ -813,4 +743,102 @@ ns.scanQuests = {
     42779, -- Shar'thos
     -- Zone Maps: Mists of Pandaria
     -- Zone Maps: Timeless Isle
+}
+
+-- Hidden quests
+ns.otherQuests = {
+    -- Korthia
+    64027, -- Treatise: The Study of Anima and Harnessing Every Drop
+    64300, -- Research Report: Adaptive Alloys
+    64303, -- Research Report: First Alloys
+    64307, -- Treatise: Recognizing Stygia and its Uses
+    64366, -- Treatise: Relics Abound in the Shadowlands
+    64367, -- Research Report: Relic Examination Techniques
+    64828, -- Treatise: Bonds of Stygia in Mortals
+
+    -- Torghast
+    61144, -- Possibility Matrix
+    63183, -- Extradimensional Pockets
+    63193, -- Bangle of Seniority
+    63200, -- Rank Insignia: Acquisitionist
+    63201, -- Loupe of Unusual Charm
+    63202, -- Vessel of Unfortunate Spirits
+    63204, -- Ritual Prism of Fortune
+    63523, -- Broker Traversal Enhancer
+
+    -- The Maw
+    61600, -- Animaflow Stabilizer
+    63091, -- Soul-Stabilizing Talisman
+    63092, -- Sigil of the Unseen
+    63217, -- Animated Levitating Chain
+    63177, -- Encased Riftwalker Essence
+
+    -- Soulshapes
+    64982, -- Cat (Well Fed)
+    64938, -- Corgi
+
+    -- Artifact Hidden Appearances
+    43646,
+    43647,
+    43648,
+    43649,
+    43650,
+    43651,
+    43652,
+    43653,
+    43654,
+    43655,
+    43656,
+    43657,
+    43658,
+    43659,
+    43660,
+    43661,
+    43662,
+    43663,
+    43664,
+    43665,
+    43666,
+    43667,
+    43668,
+    43669,
+    43670,
+    43671,
+    43672,
+    43673,
+    43674,
+    43675,
+    43676,
+    43677,
+    43678,
+    43679,
+    43680,
+    43681,
+}
+
+ns.progressQuests = {
+    -- Warlords of Draenor
+    ["invasionBronze"] = {"weekly", {37638}},
+    ["invasionSilver"] = {"weekly", {37639}},
+    ["invasionGold"] = {"weekly", {37640}},
+    ["invasionPlatinum"] = {"weekly", {38482}},
+
+    -- Shadowlands
+    ["kyrianAnima"] = {"weekly", {61982}},
+    ["kyrianSouls"] = {"weekly", {62863}},
+
+    ["necrolordAnima"] = {"weekly", {61983}},
+    ["necrolordSouls"] = {"weekly", {62866}},
+
+    ["nightFaeAnima"] = {"weekly", {61984}},
+    ["nightFaeSouls"] = {"weekly", {62860}},
+
+    ["venthyrAnima"] = {"weekly", {61981}},
+    ["venthyrSouls"] = {"weekly", {62869}},
+
+    -- 9.1
+    ["shapingFate"] = {"weekly", {63949}},
+
+    -- 9.2
+    ["patterns"] = {"biweekly", {65324}},
 }
