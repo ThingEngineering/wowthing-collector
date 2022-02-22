@@ -75,4 +75,6 @@ ns.worldBossQuests = {
     [63854] = { 108003, "Tormentors of Torghast", "Tormentors of Torghast" },
 
     [64531] = { 108004, "Mor'geth", "Mor'geth, Tormentor of the Damned" },
+
+    [65143] = { 108005, "Antros", "Antros" },
 }
