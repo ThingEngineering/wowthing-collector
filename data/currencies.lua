@@ -90,4 +90,8 @@ ns.currencies = {
     1906, -- Soul Cinders
     1931, -- Cataloged Research
     1977, -- Stygian Ember
+    1979, -- Cyphers of the First Ones
+    2000, -- Motes of Fate?
+    2009, -- Cosmic Flux
+    2010, -- Valor 2?
 }
