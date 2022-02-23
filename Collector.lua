@@ -1529,8 +1529,10 @@ function wwtc:ScanToys(resetToyBox)
     end
 
     if #WWTCSaved.toys > maxScannedToys then
+        if maxScannedToys > 0 then
+            print("WoWthing_Collector: scanned", maxScannedToys, "toys")
+        end
         maxScannedToys = #WWTCSaved.toys
-        print("WoWthing_Collector: scanned", maxScannedToys, "toys")
     end
 end
 
