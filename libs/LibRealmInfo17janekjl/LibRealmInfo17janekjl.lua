@@ -122,7 +122,7 @@ function lib:GetRealmInfoByGUID(guid)
 		return debug("Unsupported GUID type", (strsplit("-", guid)))
 	end
 	local _, _, _, _, _, _, realm = GetPlayerInfoByGUID(guid)
-	if realm == "" then
+	if realm == "" or realm == nil then
 		realm = GetRealmName()
 	end
 	return self:GetRealmInfo(realm)
