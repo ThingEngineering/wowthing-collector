@@ -29,7 +29,7 @@ local defaultWWTCSaved = {
     guilds = {},
     heirlooms = {},
     toys = {},
-    transmogSources = {},
+    transmogSourcesV2 = {},
 }
 
 local instanceNameToId = {}
@@ -501,7 +501,7 @@ function wwtc:Initialise()
     charName = regionName .. "/" .. (realmEnglish or realm)  .. "/" .. UnitName("player")
     charClassID = select(3, UnitClass("player"))
 
-    WWTCSaved.transmogSources = WWTCSaved.transmogSources or {}
+    WWTCSaved.transmogSourcesV2 = WWTCSaved.transmogSourcesV2 or {}
 
     -- Set up character data table
     charData = WWTCSaved.chars[charName] or {}
@@ -575,6 +575,8 @@ function wwtc:Logout()
 end
 
 function wwtc:Cleanup()
+    WWTCSaved.transmogSources = nil
+
     -- Remove data for any characters not seen in the last 3 days
     local old = time() - (3 * 24 * 60 * 60)
     for cName, cData in pairs(WWTCSaved.chars) do
@@ -1191,6 +1193,7 @@ function wwtc:ScanTransmog()
     if charData == nil then return end
 
     charData.scanTimes["transmog"] = time()
+    local sources = {}
     local transmog = {}
 
     -- Try the hack that TransmogRoulette uses to fix the category bug
@@ -1204,13 +1207,14 @@ function wwtc:ScanTransmog()
             end
         end
     end
+    --end)
 
     for appearanceId, _ in pairs(transmog) do
         local sources = C_TransmogCollection.GetAppearanceSources(appearanceId)
         for _, source in ipairs(sources) do
             if source.isCollected then
-                local sourceKey = string.format("%d_%d", source.sourceID, source.itemModID)
-                WWTCSaved.transmogSources[sourceKey] = true
+                local sourceKey = string.format("%d_%d", source.itemID, source.itemModID)
+                WWTCSaved.transmogSourcesV2[sourceKey] = true
             end
         end
     end

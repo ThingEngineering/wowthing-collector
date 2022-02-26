@@ -1,3 +1,7 @@
+v9.2.0.3
+--------
+- Fixed transmog source scanning.
+
 v9.2.0.2
 --------
 - Changed toy scanning to not print the "scanned x toys" on login.
