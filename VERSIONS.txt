@@ -1,5 +1,6 @@
 v9.2.0.3
 --------
+- Changed Patterns quest to weekly.
 - Fixed transmog source scanning.
 
 v9.2.0.2
