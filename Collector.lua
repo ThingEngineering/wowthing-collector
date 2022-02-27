@@ -1028,8 +1028,8 @@ function wwtc:ScanLockouts()
 
     -- LFG lockouts are weird
     for _, instance in pairs(ns.instances) do
-        local isActive = select(21, GetLFGDungeonInfo(instance.dungeonId))
-        if isActive then
+        local availableAll, availablePlayer = IsLFGDungeonJoinable(instance.dungeonId)
+        if availableAll then
             local locked, _ = GetLFGDungeonRewards(instance.dungeonId)
             if locked then
                 local instanceName, _ = GetLFGDungeonInfo(instance.dungeonId)
