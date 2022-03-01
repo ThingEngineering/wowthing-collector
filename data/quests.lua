@@ -840,5 +840,5 @@ ns.progressQuests = {
     ["shapingFate"] = {"weekly", {63949}},
 
     -- 9.2
-    ["patterns"] = {"weekly", {65324}},
+    ["patterns"] = {"weekly", {66042}},
 }
