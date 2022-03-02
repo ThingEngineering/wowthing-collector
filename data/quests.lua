@@ -3,6 +3,57 @@ local an, ns = ...
 
 ns.scanQuests = {
     -- Zone Maps: Shadowlands
+    -- Zone Maps: Zereth Mortis
+    65552, -- Akkaris
+    65553, -- Chitali the Eldest
+    65273, -- Corrupted Architect
+    64716, -- Destabilized Core
+    65555, -- Euv'ouk
+    65557, -- Feasting
+    65544, -- Furidian
+    64719, -- Garudeon
+    65583, -- General Zarathura
+    65579, -- Gluttonous Overgrowth
+    63988, -- Gorkek
+    65581, -- Hadeon the Stonebreaker
+    65551, -- Helmix
+    65548, -- Hirukon
+    65547, -- Mother Phestis
+    65582, -- Orixal
+    65257, -- Otaris the Provoked
+    65556, -- Otiosen
+    64668, -- Protector of the First Ones
+    65574, -- Sand Matriarch Ileus
+    65549, -- Shifting Stargorger
+    65240, -- Sorranos
+    65272, -- Tahkwitz
+    65550, -- Tethos
+    65580, -- The Engulfer
+    65239, -- Vexis
+    65584, -- Vitiane
+    65241, -- Xy'rath the Covetous
+    65251, -- Zatojin
+    65586, -- High Reaver Damaris
+    65585, -- Iska, Outrider of Ruin
+    65587, -- Reanimatrox Marzan
+    65143, -- Antros
+    65520, -- Architect's Reserve
+    65573, -- Bushel of Progenitor Produce
+    64667, -- Damaged Jiro Stash
+    65523, -- Drowned Broker Supplies
+    65178, -- Forgotten Proto-Vault
+    65545, -- Grateful Boon
+    65173, -- Library Vault (Lost Scroll)
+    65441, -- Mawsworn Cache
+    65522, -- Mistaken Ovoid
+    65542, -- Pilfered Curio
+    65546, -- Protoflora Harvester
+    65540, -- Protomineral Extractor
+    65184, -- Prying Eye Discovery
+    65501, -- Pulp-Covered Relic
+    65611, -- Sandworn Chest
+    64545, -- Submerged Chest
+    65565, -- Syntactic Vault
     -- Zone Maps: Korthia
     64258, -- Carriage Crusher
     64243, -- Consumption
@@ -81,7 +132,7 @@ ns.scanQuests = {
     64010, -- Lil'Abom
     64011, -- Lil'Abom
     64013, -- Lil'Abom
-    63433, -- Gorged Shadehound
+    63433, -- Hunt: Shadehounds
     63854, -- Tormentors of Torghast
     -- Zone Maps: Ardenweald
     59226, -- Deathbinder Hroth
@@ -226,6 +277,7 @@ ns.scanQuests = {
     62196, -- Forgotten Angler's Rod
     61990, -- Lost Quill
     62198, -- Makeshift Muckpool
+    60197, -- Secret Treasure
     59889, -- Smuggled Cache
     61999, -- Stylish Parasol
     62199, -- Taskmaster's Trove
@@ -425,8 +477,8 @@ ns.scanQuests = {
     54892, -- Shadowclaw
     54886, -- Croz Bloodrage
     54891, -- Grimhorn
-    54895, -- Ivus the Decayed
-    54896, -- Ivus the Decayed
+    54895, -- Ivus the Decayed / Ivus the Forest Lord
+    54896, -- Ivus the Decayed / Ivus the Forest Lord
     -- Zone Maps: Drustvar
     51470, -- Arclight
     51383, -- Arvon the Betrayed
@@ -464,7 +516,7 @@ ns.scanQuests = {
     53471, -- Hexed Chest
     53386, -- Runebound Chest
     53387, -- Runebound Coffer
-    52157, -- Azurethos
+    52157, -- Hailstone Construct
     -- Zone Maps: Stormsong Valley
     51298, -- Broodmother
     50170, -- Captain Razorspine
@@ -650,7 +702,7 @@ ns.scanQuests = {
     42450, -- Brawlgoth
     38212, -- Brogozog
     44670, -- Broodmother Lizax
-    38268, -- Cailyn Paledoom
+    38268, -- Cailyn Paledoom <Felsworn>
     37821, -- Captain Volo'ren
     37869, -- Daggerbeak
     42069, -- Felwing
@@ -671,7 +723,7 @@ ns.scanQuests = {
     -- Zone Maps: Highmountain
     39784, -- Beastmaster Pao'lek
     40405, -- Bristlemaul
-    39235, -- Brogrul the Mighty
+    39235, -- Brogul the Mighty
     39994, -- Crab Rider Grmlrml
     39806, -- Crawshuk the Hungry
     40414, -- Devouring Darkness
@@ -681,14 +733,14 @@ ns.scanQuests = {
     39646, -- Majestic Elderhorn
     39866, -- Mynta Talonscreech
     40681, -- Sekhan
-    39762, -- Shara Felbreath
+    39762, -- Shara Felbreath <Feltotem Warlock>
     39465, -- Skullhat
     39782, -- Tenpak Flametotem <The Exiled Shaman>
     43985, -- Flotsam
     -- Zone Maps: Stormheim
     38431, -- Bladesquall
     38642, -- Captain Brvet
-    43343, -- First Arcanist Thalyssra
+    43343, -- Dread-Rider Cortis
     40068, -- Egyl the Enduring
     38333, -- Glimar Ironfist
     40113, -- Grrvrgull the Conqueror
@@ -706,15 +758,15 @@ ns.scanQuests = {
     38472, -- Whitewater Typhoon
     42270, -- Nithogg
     -- Zone Maps: Suramar
-    43794, -- Orux Thrice-Damned
-    43954, -- Blood Prince Dreven
+    43794, -- Ambassador D'vwinn
+    43954, -- Anax
     43580, -- Apothecary Faldren
     43495, -- Cadraeus
     41135, -- Cora'kar
     40897, -- Garvrulg
     43992, -- Gorgroth
     43993, -- Hertha Grimdottir
-    44675, -- Head
+    44675, -- Lady Rivantas
     40905, -- Lieutenant Strathmar
     44071, -- Maia the White
     43358, -- Myonix
@@ -723,10 +775,10 @@ ns.scanQuests = {
     40680, -- Rok'nash
     42831, -- Shal'an
     -- Zone Maps: Val'sharah
-    43446, -- Alleria Windrunner
+    43446, -- Bahagar
     38767, -- Darkshade
     39858, -- Dreadbog
-    38468, -- Kiro
+    38468, -- Gorebeak
     40079, -- Lyrath Moonfeather
     39357, -- Mad Henryk
     39596, -- Perrexx the Corruptor
@@ -734,12 +786,12 @@ ns.scanQuests = {
     38479, -- Seersei
     38772, -- Theryssia
     38780, -- Thondrax
-    43176, -- Lady Liadrin
+    43176, -- Undergrell Attack
     39856, -- Wraithtalon
     43447, -- Wraithtalon
     38466, -- Unguarded Thistlemaw Treasure
     38889, -- Shivering Ashmaw Cub
-    42819, -- Humongris
+    42819, -- Humongris <The Wizard>
     42779, -- Shar'thos
     -- Zone Maps: Mists of Pandaria
     -- Zone Maps: Timeless Isle
