@@ -1,3 +1,7 @@
+v9.2.0.5
+--------
+- Updated quest scanning list.
+
 v9.2.0.4
 --------
 - Updated Patterns quest ID.
