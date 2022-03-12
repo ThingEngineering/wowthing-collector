@@ -869,6 +869,20 @@ ns.otherQuests = {
 }
 
 ns.progressQuests = {
+    -- Weekly Holidays
+    ["weeklyHoliday"] = {"weekly", {
+        62631, -- "The World Awaits", World Quests
+        62632, -- "A Burning Path Through Time", TBC Timewalking
+        62633, -- "A Frozen Path Through Time", Wrath Timewalking
+        62634, -- "A Shattered Path Through Time", Cata Timewalking
+        62635, -- "A Shattered Path Through Time", MoP Timewalking
+        62636, -- "A Savage Path Through Time", WoD Timewalking
+        62637, -- "A Call to Battle", Battlegrounds
+        62638, -- "Emissary of War", Mythic Dungeons
+        62639, -- "The Very Best", PvP Pet Battles
+        62640, -- "The Arena Calls", Arena Skirmishes
+    }},
+
     -- Warlords of Draenor
     ["invasionBronze"] = {"weekly", {37638}},
     ["invasionSilver"] = {"weekly", {37639}},
@@ -888,9 +902,9 @@ ns.progressQuests = {
     ["venthyrAnima"] = {"weekly", {61981}},
     ["venthyrSouls"] = {"weekly", {62869}},
 
-    -- 9.1
+    -- Shadowlands: 9.1
     ["shapingFate"] = {"weekly", {63949}},
 
-    -- 9.2
+    -- Shadowlands: 9.2
     ["patterns"] = {"weekly", {66042}},
 }
