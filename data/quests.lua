@@ -799,6 +799,9 @@ ns.scanQuests = {
 
 -- Hidden quests
 ns.otherQuests = {
+    -- Zereth Mortis
+    65282, -- Improved Cypher Analysis Tool
+
     -- Korthia
     64027, -- Treatise: The Study of Anima and Harnessing Every Drop
     64300, -- Research Report: Adaptive Alloys
