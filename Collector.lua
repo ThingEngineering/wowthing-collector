@@ -1284,14 +1284,14 @@ function wwtc:ScanCallings()
 
     local now = time()
     charData.scanTimes["callings"] = now
-    charData.callings = {}
 
     if callingData == nil then return end
     if not C_CovenantCallings.AreCallingsUnlocked() then return end
 
+    local callings = {}
     local dailyReset = now + C_DateAndTime.GetSecondsUntilDailyReset()
     for i = 1, 3 do
-        charData.callings[i] = {
+        callings[i] = {
             completed = true,
             expires = dailyReset + ((i - 1) * 24 * 60 * 60),
         }
@@ -1303,7 +1303,12 @@ function wwtc:ScanCallings()
     -- numObjectives            number
     -- turninRequirementText    string?
     for _, calling in ipairs(callingData) do
-        local timeLeft = C_TaskQuest.GetQuestTimeLeftMinutes(calling.questID) or 0
+        local timeLeft = C_TaskQuest.GetQuestTimeLeftMinutes(calling.questID)
+        if not timeLeft then
+            C_CovenantCallings.RequestCallings()
+            return
+        end
+
         local index = 3
         if timeLeft < 1440 then
             index = 1
@@ -1311,8 +1316,10 @@ function wwtc:ScanCallings()
             index = 2
         end
 
-        charData.callings[index].completed = C_QuestLog.IsQuestFlaggedCompleted(calling.questID)
+        callings[index].completed = C_QuestLog.IsQuestFlaggedCompleted(calling.questID)
     end
+
+    charData.callings = callings
 
     return
 end
