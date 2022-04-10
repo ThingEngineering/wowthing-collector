@@ -11,6 +11,7 @@ libs\LibRealmInfo17janekjl\LibRealmInfo17janekjl.lua
 data\achievements.lua
 data\covenants.lua
 data\currencies.lua
+data\garrisons.lua
 data\instances.lua
 data\quests.lua
 data\world_bosses.lua

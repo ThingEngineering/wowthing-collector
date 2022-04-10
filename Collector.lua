@@ -10,8 +10,8 @@ local hookedCollections, loggingOut = false, false, false
 local bankOpen, crafterOpen, guildBankOpen, reagentBankUpdated = false, false, false, false
 local maxScannedToys = 0
 local oldScannedTransmog = 0
-local dirtyBags, dirtyCovenant, dirtyCurrencies, dirtyLockouts, dirtyMounts, dirtyMythicPlus, dirtyPets, dirtyQuests, dirtyReputations, dirtyToys, dirtyTransmog, dirtyVault =
-    {}, false, false, false, false, false, false, false, false, false, false, false, false
+local dirtyBags, dirtyCovenant, dirtyCurrencies, dirtyGarrisons, dirtyLockouts, dirtyMounts, dirtyMythicPlus, dirtyPets, dirtyQuests, dirtyReputations, dirtyToys, dirtyTransmog, dirtyVault =
+    {}, false, false, false, false, false, false, false, false, false, false, false, false, false
 local dirtyCallings, callingData = false, nil
 local dirtyGuildBank, guildBankQueried, requestingPlayedTime = false, false, true
 
@@ -190,6 +190,7 @@ function events:PLAYER_ENTERING_WORLD()
     wwtc:UpdateCharacterData()
     dirtyCovenant = true
     dirtyCurrencies = true
+    dirtyGarrisons = true
     dirtyTransmog = true
     dirtyVault = true
 end
@@ -351,6 +352,16 @@ function events:PLAYER_FLAGS_CHANGED(unitId)
         wwtc:UpdateWarMode()
     end
 end
+-- Garrisons
+function events:GARRISON_TALENT_COMPLETE()
+    dirtyGarrisons = true
+end
+function events:GARRISON_TALENT_RESEARCH_STARTED()
+    dirtyGarrisons = true
+end
+function events:GARRISON_TALENT_UPDATE()
+    dirtyGarrisons = true
+end
 -- Quests
 function events:COVENANT_CALLINGS_UPDATED(callings)
     dirtyCallings = true
@@ -423,6 +434,11 @@ function wwtc:Timer()
     if dirtyCurrencies then
         dirtyCurrencies = false
         wwtc:ScanCurrencies()
+    end
+
+    if dirtyGarrisons then
+        dirtyGarrisons = false
+        wwtc:ScanGarrisons()
     end
 
     if dirtyGuildBank then
@@ -525,6 +541,7 @@ function wwtc:Initialise()
     charData.covenants = charData.covenants or {}
     charData.currencies = charData.currencies or {}
     charData.dailyQuests = charData.dailyQuests or {}
+    charData.garrisonTrees = charData.garrisonTrees or nil
     charData.items = charData.items or {}
     charData.lockouts = charData.lockouts or {}
     charData.mounts = charData.mounts or {}
@@ -1544,6 +1561,36 @@ function wwtc:ScanToys(resetToyBox)
             print("WoWthing_Collector: scanned", maxScannedToys, "toys")
         end
         maxScannedToys = #WWTCSaved.toys
+    end
+end
+
+-- Garrison weirdness
+function wwtc:ScanGarrisons()
+    if charData == nil then return end
+
+    charData.scanTimes["garrisons"] = time()
+    charData.garrisonTrees = {}
+
+    for _, treeId in ipairs(ns.garrisonTrees) do
+        wwtc:ScanGarrisonTree(treeId)
+    end
+end
+
+function wwtc:ScanGarrisonTree(treeId)
+    charData.garrisonTrees[treeId] = {}
+
+    local talentTree = C_Garrison.GetTalentTreeInfo(treeId)
+    for _, talent in ipairs(talentTree.talents) do
+        local finishes = 0
+        if talent.isBeingResearched and talent.researchStartTime and talent.researchDuration then
+            finishes = talent.researchStartTime + talent.researchDuration
+        end
+
+        charData.garrisonTrees[treeId][#charData.garrisonTrees[treeId] + 1] = table.concat({
+            talent.id,
+            talent.talentRank,
+            finishes,
+        }, ':')
     end
 end
 
