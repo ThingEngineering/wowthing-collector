@@ -1,3 +1,9 @@
+v9.2.0.7
+--------
+- Added generic garrison talent tree scanning for The Box of Many Things, Cypher Research, and Build-a-Pocopooc.
+- Added Improved Cypher Analysis Tool to quest scanning.
+- Fixed (maybe) calling scanning showing all completed.
+
 v9.2.0.6
 --------
 - Added weekly holidays to quest scanning list.
