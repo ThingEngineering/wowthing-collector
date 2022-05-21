@@ -1,3 +1,7 @@
+v9.2.0.9
+--------
+- Added raid skips to quest scanning list.
+
 v9.2.0.8
 --------
 - Fixed LibRealmInfo error by updating realm data (Leomaradan@github).
