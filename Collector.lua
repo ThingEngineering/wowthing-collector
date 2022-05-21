@@ -1126,7 +1126,11 @@ function wwtc:ScanQuests()
     end
 
     for questKey, questData in pairs(ns.progressQuests) do
-        local prog = { status = 0 }
+        local prog = {
+            reset = 0,
+            status = 0,
+        }
+
         if questData[1] == 'weekly' then
             prog.reset = weeklyReset
         elseif questData[1] == 'biweekly' then

@@ -892,6 +892,43 @@ ns.progressQuests = {
     ["invasionGold"] = {"weekly", {37640}},
     ["invasionPlatinum"] = {"weekly", {38482}},
 
+    -- Warlords of Draenor: Raids
+    ["legBlackrock1Normal"] = {"once", {37029}},
+    ["legBlackrock1Heroic"] = {"once", {37030}},
+    ["legBlackrock1Mythic"] = {"once", {37031}},
+
+    ["legHellfire1Normal"] = {"once", {39499}},
+    ["legHellfire2Normal"] = {"once", {39502}},
+    ["legHellfire1Heroic"] = {"once", {39500}},
+    ["legHellfire2Heroic"] = {"once", {39504}},
+    ["legHellfire1Mythic"] = {"once", {39501}},
+    ["legHellfire2Mythic"] = {"once", {39505}},
+
+    -- Legion: Raids
+    ["legEmerald1Normal"] = {"once", {44283}},
+    ["legEmerald1Heroic"] = {"once", {44284}},
+    ["legEmerald1Mythic"] = {"once", {44285}},
+
+    ["legNighthold1Normal"] = {"once", {45381}},
+    ["legNighthold1Heroic"] = {"once", {45382}},
+    ["legNighthold1Mythic"] = {"once", {45383}},
+
+    ["legTomb1Normal"] = {"once", {47725}},
+    ["legTomb1Heroic"] = {"once", {47726}},
+    ["legTomb1Mythic"] = {"once", {47727}},
+    
+    ["legAntorus1Normal"] = {"once", {49032}},
+    ["legAntorus2Normal"] = {"once", {49133}},
+    ["legAntorus1Heroic"] = {"once", {49075}},
+    ["legAntorus2Heroic"] = {"once", {49134}},
+    ["legAntorus1Mythic"] = {"once", {49076}},
+    ["legAntorus2Mythic"] = {"once", {49135}},
+
+    -- Battle for Azeroth: Raids
+    ["bfaNyalotha1Normal"] = {"once", {58373}},
+    ["bfaNyalotha1Heroic"] = {"once", {58374}},
+    ["bfaNyalotha1Mythic"] = {"once", {58375}},
+
     -- Shadowlands
     ["kyrianAnima"] = {"weekly", {61982}},
     ["kyrianSouls"] = {"weekly", {62863}},
@@ -910,4 +947,17 @@ ns.progressQuests = {
 
     -- Shadowlands: 9.2
     ["patterns"] = {"weekly", {66042}},
+
+    -- Shadowlands: Raids
+    ["slNathria1Normal"] = {"once", {62054}},
+    ["slNathria1Heroic"] = {"once", {62055}},
+    ["slNathria1Mythic"] = {"once", {62056}},
+
+    ["slSanctum1Normal"] = {"once", {64597}},
+    ["slSanctum1Heroic"] = {"once", {64598}},
+    ["slSanctum1Mythic"] = {"once", {64599}},
+
+    ["slSepulcher1Normal"] = {"once", {65764}},
+    ["slSepulcher1Heroic"] = {"once", {65763}},
+    ["slSepulcher1Mythic"] = {"once", {65762}},
 }
