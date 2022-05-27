@@ -886,6 +886,18 @@ ns.progressQuests = {
         62640, -- "The Arena Calls", Arena Skirmishes
     }},
 
+    -- Weekly PvP
+    ["weeklyPvp"] = {"weekly", {
+        62284, -- Observing Battle
+        62285, -- Observing War
+        62286, -- Observing Skirmishes
+        62287, -- Observing Arenas
+        62288, -- Observing Teamwork
+        --64527, -- Observing the Chase
+        65773, -- Solo Mission
+        65775, -- Soloing Strategy
+    }},
+
     -- Warlords of Draenor
     ["invasionBronze"] = {"weekly", {37638}},
     ["invasionSilver"] = {"weekly", {37639}},
