@@ -1,3 +1,7 @@
+v9.2.0.10
+---------
+- Added weekly PvP to quest scanning list.
+
 v9.2.0.9
 --------
 - Added raid skips to quest scanning list.
