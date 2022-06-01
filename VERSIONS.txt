@@ -1,3 +1,8 @@
+v9.2.5.1
+--------
+- Initial fix for 9.2.5 transmog API changes.
+- Updated TOC for 9.2.5.
+
 v9.2.0.10
 ---------
 - Added weekly PvP to quest scanning list.
