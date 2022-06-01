@@ -1217,25 +1217,26 @@ function wwtc:ScanTransmog()
     local sources = {}
     local transmog = {}
 
-    -- Try the hack that TransmogRoulette uses to fix the category bug
-    -- https://github.com/semlar/TransmogRoulette/blob/181615d0bb7fb19992bbcefae7f5c6970865e52b/TransmogRoulette.xml#L119
-    --C_Timer.After(1, function()
-    for categoryID = 0, 29 do
-        local appearances = C_TransmogCollection.GetCategoryAppearances(categoryID)
-        for _, appearance in pairs(appearances) do
-            if appearance.isCollected then
-                transmog[appearance.visualID] = true
-            end
-        end
-    end
-    --end)
+    for categoryID = 1, 29 do
+        local slot = CollectionWardrobeUtil.GetSlotFromCategoryID(categoryID)
+        if slot == nil then
+            --print('category='..categoryID..' slot=NIL')
+        else
+            local transmogLocation = TransmogUtil.GetTransmogLocation(slot, Enum.TransmogType.Appearance, Enum.TransmogModification.Main)
+            local appearances = C_TransmogCollection.GetCategoryAppearances(categoryID, transmogLocation)
+            for _, appearance in pairs(appearances) do
+                if appearance.isCollected then
+                    local visualId = appearance.visualID
+                    transmog[visualId] = true
 
-    for appearanceId, _ in pairs(transmog) do
-        local sources = C_TransmogCollection.GetAppearanceSources(appearanceId)
-        for _, source in ipairs(sources) do
-            if source.isCollected then
-                local sourceKey = string.format("%d_%d", source.itemID, source.itemModID)
-                WWTCSaved.transmogSourcesV2[sourceKey] = true
+                    local sources = C_TransmogCollection.GetAppearanceSources(visualId, categoryID, transmogLocation)
+                    for _, source in ipairs(sources) do
+                        if source.isCollected then
+                            local sourceKey = string.format("%d_%d", source.itemID, source.itemModID)
+                            WWTCSaved.transmogSourcesV2[sourceKey] = true
+                        end
+                    end
+                end
             end
         end
     end
