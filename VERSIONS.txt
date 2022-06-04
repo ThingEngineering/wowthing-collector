@@ -1,3 +1,7 @@
+v9.2.5.2
+--------
+- Added Mythic+ run scanning.
+
 v9.2.5.1
 --------
 - Initial fix for 9.2.5 transmog API changes.
