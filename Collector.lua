@@ -1194,8 +1194,9 @@ function wwtc:ScanMythicPlus()
     local now = time()
     charData.scanTimes["mythicPlus"] = now
     charData.mythicPlus = {
-        maps = {},
         season = C_MythicPlus.GetCurrentSeason(),
+        maps = {},
+        runs = {},
     }
 
     local maps = C_ChallengeMode.GetMapTable()
@@ -1206,6 +1207,17 @@ function wwtc:ScanMythicPlus()
             affixScores = affixScores,
             overallScore = overallScore,
         }
+    end
+
+    local runs = charData.mythicPlus.runs
+    local runHistory = C_MythicPlus.GetRunHistory(true, true)
+    for _, run in ipairs(runHistory) do
+        table.insert(runs, table.concat({
+            run.mapChallengeModeID,
+            run.completed and 1 or 0,
+            run.level,
+            run.runScore,
+        }, ':'))
     end
 end
 
