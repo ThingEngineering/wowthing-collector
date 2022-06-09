@@ -373,6 +373,8 @@ ns.scanQuests = {
     55858, -- The Kleptoboss
     56182, -- The Rusty Prince
     55364, -- The Scrap King
+    57134, -- Azeroth Mini Pack: Bondo's Yard
+    57132, -- Azeroth Mini Pack: Mechagon
     55848, -- Reclamation Rig:Blueprint: Rustbolt Requisitions
     55847, -- Reclamation Rig:Echoing Oozeling
     -- Zone Maps: Nazjatar
