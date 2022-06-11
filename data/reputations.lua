@@ -46,4 +46,5 @@ ns.paragonReputations = {
     2465, -- The Wild Hunt
     2470, -- Death's Advance
     2472, -- The Archivists' Codex
+    2478, -- The Enlightened
 }
