@@ -1307,6 +1307,7 @@ function wwtc:ScanCallings()
         end
 
         callings[index].completed = C_QuestLog.IsQuestFlaggedCompleted(calling.questID)
+        callings[index].questId = calling.questID
     end
 
     charData.callings = callings
