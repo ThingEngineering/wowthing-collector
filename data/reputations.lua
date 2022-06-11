@@ -6,6 +6,12 @@ ns.reputations = {
 }
 
 ns.friendships = {
+    -- Battle for Azeroth
+    2396, -- Honeyback Drone
+    2397, -- Honeyback Hivemother
+    2398, -- Honeyback Harvester
+
+    -- Shadowlands
     2463, -- Marasmius
 }
 
