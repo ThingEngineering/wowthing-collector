@@ -1,3 +1,10 @@
+v9.2.5.4
+--------
+- Added quest ID to calling scanning.
+- Added Honeyback Hive bees to friendship scanning.
+- Added The Enlightened to paragon scanning.
+- Moved reputation data to separate file.
+
 v9.2.5.3
 --------
 - Added Mechagon minis to quest scanning list.
