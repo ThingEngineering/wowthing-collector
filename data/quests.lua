@@ -375,6 +375,7 @@ ns.scanQuests = {
     55364, -- The Scrap King
     57134, -- Azeroth Mini Pack: Bondo's Yard
     57132, -- Azeroth Mini Pack: Mechagon
+    57133, -- Azeroth Mini Pack: Mechagon
     55848, -- Reclamation Rig:Blueprint: Rustbolt Requisitions
     55847, -- Reclamation Rig:Echoing Oozeling
     -- Zone Maps: Nazjatar
@@ -795,8 +796,199 @@ ns.scanQuests = {
     38889, -- Shivering Ashmaw Cub
     42819, -- Humongris <The Wizard>
     42779, -- Shar'thos
+    -- Zone Maps: Warlords of Draenor
+    -- Zone Maps: Tanaan Jungle
+    -- Zone Maps: Frostfire Ridge
+    -- Zone Maps: Gorgrond
+    37371, -- Alkali
+    35335, -- Bashiok
+    37369, -- Basten
+    36597, -- Berthora
+    37368, -- Blademaster Ro'gor
+    35503, -- Char the Burning
+    37362, -- Defector Dazgo
+    35996, -- Depthroot
+    37366, -- Durp the Hated
+    37373, -- Firestarter Grash
+    36387, -- Fossilwood the Petrified
+    36391, -- Gelgor of the Blue Flame
+    36204, -- Glut
+    37413, -- Gnarljaw
+    36186, -- Greldrok the Cunning
+    37375, -- Grove Warden Yal
+    35908, -- Hive Queen Skrikka
+    37365, -- Horgg
+    37377, -- Hunter Bal'ra
+    37367, -- Inventor Blammo
+    37412, -- King Slime
+    36178, -- Mandrakor
+    37363, -- Maniacal Madgard
+    37376, -- Mogamago
+    37364, -- Morgo Kain
+    34726, -- Mother Araneae
+    36600, -- Riptar
+    36393, -- Rolkor
+    36837, -- Stompalupagus
+    35910, -- Stomper Kreego
+    36394, -- Sulfurious
+    36656, -- Sunclaw
+    37374, -- Swift Onyx Flayer
+    36794, -- Sylldross
+    37405, -- Typhon
+    37372, -- Venolasix
+    -- Zone Maps: Nagrand
+    37396, -- Bonebreaker
+    37400, -- Brutag Grimblade
+    34727, -- Captain Ironbeard
+    37395, -- Durg Spinecrusher
+    35893, -- Flinthide
+    35898, -- Gorepetal
+    36159, -- Graveltooth
+    35714, -- Greatfeather
+    35784, -- Grizzlemaw
+    40074, -- Guk
+    35923, -- Hunter Blacktooth
+    37399, -- Karosh Blackwind
+    37398, -- Krud the Eviscerator
+    35932, -- Malroc Stonesunder
+    35865, -- Netherspawn
+    35875, -- Ophiis
+    35943, -- Outrider Duretha
+    37637, -- Pit Beast
+    40073, -- Pugg
+    35712, -- Redclaw the Feral
+    35900, -- Ru'klaa
+    40075, -- Rukdug
+    35931, -- Scout Pokhar
+    35912, -- Sean Whitesea
+    36128, -- Soulfang
+    35920, -- Tura'aka
+    34645, -- Warmaster Blugthol
+    35877, -- Windcaller Korast
+    -- Zone Maps: Shadowmoon Valley
+    33061, -- Amaukwa
+    37410, -- Avalanche
+    35731, -- Ba'ruun
+    33383, -- Brambleking Fili
+    35448, -- Darkmaster Go'vid
+    35555, -- Darktalon
+    37351, -- Demidos
+    35725, -- Faebright
+    35558, -- Hypnocroak
+    35909, -- Insha'tar
+    33043, -- Killmaw
+    33039, -- Ku'targ the Voidseer
+    37355, -- Lady Temptessa
+    35906, -- Mad "King" Sporeon
+    37357, -- Malgosh Shadowkeeper
+    37353, -- Master Sergeant Milgra
+    35523, -- Morva Soultwister
+    37409, -- Nagidna
+    37352, -- Quartermaster Hershak
+    35553, -- Rai'vosh
+    34068, -- Rockhoof
+    37354, -- Shadowspeaker Niir
+    35732, -- Shinri
+    37411, -- Slivermaw
+    36880, -- Sneevel
+    33643, -- Venomshade
+    35847, -- Voidseer Kalurg
+    33038, -- Windfang Matriarch
+    33389, -- Yggdrel
+    -- Zone Maps: Spires of Arak
+    36291, -- Betsi Boombasket
+    36283, -- Blightglow
+    36267, -- Durkath Steelmaw
+    36297, -- Festerbloom
+    37360, -- Formless Nightmare
+    37393, -- Giga Sentinel
+    37390, -- Gluttonous Giant
+    36887, -- Hermit Palefur
+    36268, -- Kalos the Bloodbathed
+    37361, -- Kenos the Unraveler
+    37391, -- Mecha Plunderer
+    36396, -- Mutafen
+    36129, -- Nas Dunberlin
+    36288, -- Oskiira the Vengeful
+    36470, -- Rotcap
+    36276, -- Sangrikrass
+    37392, -- Shadow Hulk
+    36478, -- Shadowbark
+    37394, -- Solar Magnifier
+    37358, -- Soul-Twister Torek
+    36265, -- Stonespite
+    36298, -- Sunderthorn
+    36472, -- Swarmleaf
+    35334, -- Varasha
+    37359, -- Voidreaver Urnae
+    37464, -- Rukhmar
+    -- Zone Maps: Talador
+    37338, -- Avatar of Socrethar
+    37339, -- Bombardier Gu'gok
+    34165, -- Cro Fleshrender
+    34220, -- Echo of Murmur
+    35018, -- Felbark
+    34145, -- Frenzied Golem
+    34483, -- Galzomar
+    34189, -- Glimmerwing
+    36919, -- Grrbrrgle
+    37340, -- Gug'tol
+    37312, -- Haakun the All-Consuming
+    34185, -- Hammertooth
+    34167, -- Hen-Mother Hami
+    35220, -- Kharazos the Triumphant
+    34498, -- Klikixx
+    37348, -- Kurlosh Doomfang
+    37346, -- Lady Demlash
+    37342, -- Legion Vanguard
+    37349, -- Matron of Sin
+    35219, -- O'mogg Blackheart
+    37344, -- Orumo the Observer
+    34196, -- Ra'kahn
+    37347, -- Shadowflame Terrorwalker
+    34671, -- Shirzir
+    36858, -- Steeltusk
+    37337, -- Strategist Ankor
+    34171, -- Taladorantula
+    34668, -- Talonpriest Zorkra
+    37350, -- Vigilant Paarthos
+    34204, -- Wandering Vindicator
+    37343, -- Xothear, the Destroyer
+    34135, -- Yazheera the Incinerator
     -- Zone Maps: Mists of Pandaria
+    -- Zone Maps: Isle of Giants
+    32519, -- Oondasta
+    -- Zone Maps: Isle of Thunder
+    32518, -- Nalak
+    32599, -- Securing A Future
+    32589, -- Life Blood
     -- Zone Maps: Timeless Isle
+    -- Zone Maps: Dread Wastes
+    31083, -- Promises of Gold
+    -- Zone Maps: Jade Forest, The
+    31307, -- Jade Warrior Statue
+    -- Zone Maps: Krasarang Wilds
+    30675, -- Buried Hozen Treasure
+    30169, -- Raid Leader Slovan
+    30090, -- Zhu's Despair
+    -- Zone Maps: Kun-Lai Summit
+    32099, -- Sha of Anger
+    30599, -- A Monkey Idol
+    30991, -- Do a Barrel Roll!
+    30682, -- Holed Up
+    30617, -- Roadside Assistance
+    -- Zone Maps: Townlong Steppes
+    31032, -- Choking the Skies
+    30783, -- Hatred Becomes Us
+    30930, -- Pick a Yak
+    32681, -- The Storm Gathers
+    32680, -- The Storm Gathers
+    -- Zone Maps: Vale of Eternal Blossoms
+    -- Zone Maps: Valley of the Four Winds
+    32098, -- Galleon
+    29944, -- Leaders Among Breeders
+    29910, -- Rampaging Rodents
+    29945, -- Yellow and Red Make Orange
 }
 
 -- Hidden quests
