@@ -13,4 +13,5 @@ ns.achievements = {
     -- Shadowlands
     14765, -- Ramparts Racer
     14766, -- Parasoling
+    14799, -- Sojourner of Maldraxxus
 }
