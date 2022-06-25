@@ -14,6 +14,7 @@ data\currencies.lua
 data\garrisons.lua
 data\instances.lua
 data\quests.lua
+data\quests_scan.lua
 data\reputations.lua
 data\world_bosses.lua
 

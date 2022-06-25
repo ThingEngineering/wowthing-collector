@@ -1311,8 +1311,6 @@ function wwtc:ScanCallings()
     end
 
     charData.callings = callings
-
-    return
 end
 
 -- Scan trade skills for cooldowns
