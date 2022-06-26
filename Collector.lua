@@ -497,6 +497,7 @@ function wwtc:Initialise()
     charData.covenants = charData.covenants or {}
     charData.currencies = charData.currencies or {}
     charData.dailyQuests = charData.dailyQuests or {}
+    charData.emissaries = charData.emissaries or {}
     charData.garrisonTrees = charData.garrisonTrees or nil
     charData.items = charData.items or {}
     charData.lockouts = charData.lockouts or {}
@@ -1055,6 +1056,7 @@ function wwtc:ScanQuests()
     if charData == nil then return end
 
     charData.dailyQuests = {}
+    charData.emissaries = {}
     charData.otherQuests = {}
     charData.progressQuests = {}
 
@@ -1139,6 +1141,60 @@ function wwtc:ScanQuests()
                 prog.type,
                 prog.text,
             }, '|')
+        end
+    end
+
+    -- Emissaries
+    for _, emissary in ipairs(ns.emissaries) do
+        charData.emissaries[emissary.expansion] = {}
+        if C_QuestLog.IsQuestFlaggedCompleted(emissary.questId) then
+            local bounties = C_QuestLog.GetBountiesForMapID(emissary.mapId)
+            if bounties and #bounties > 0 then
+                for i = 1, 3 do
+                    charData.emissaries[emissary.expansion][i] = {
+                        completed = true,
+                        expires = dailyReset + ((i - 1) * 24 * 60 * 60),
+                    }
+                end
+
+                -- { questID, factionID, icon, numObjectives, turninRequirementText }[]
+                for i, bounty in ipairs(bounties) do
+                    local timeLeft = C_TaskQuest.GetQuestTimeLeftMinutes(bounty.questID)
+
+                    local index = 3
+                    if timeLeft < 1440 then
+                        index = 1
+                    elseif timeLeft < 2880 then
+                        index = 2
+                    end
+
+                    local emissary = charData.emissaries[emissary.expansion][index]
+                    emissary.completed = C_QuestLog.IsQuestFlaggedCompleted(bounty.questID)
+                    emissary.questId = bounty.questID
+
+                    local rewardCurrencyCount = GetNumQuestLogRewardCurrencies(bounty.questID)
+                    local rewardItemCount = GetNumQuestLogRewards(bounty.questID)
+                    local rewardMoney = GetQuestLogRewardMoney(bounty.questID)
+                    
+                    if rewardCurrencyCount > 0 or rewardItemCount > 0 or rewardMoney > 0 then
+                        emissary.reward = {}
+                        
+                        if rewardMoney > 0 then
+                            emissary.reward.money = rewardMoney
+                        elseif rewardItemCount > 0 then
+                            local itemIndex = QuestUtils_GetBestQualityItemRewardIndex(bounty.questID)
+                            local _, _, quantity, quality, _, itemId, _ = GetQuestLogRewardInfo(itemIndex, bounty.questID)
+                            emissary.reward.itemId = itemId
+                            emissary.reward.quality = quality
+                            emissary.reward.quantity = quantity
+                        else
+                            local _, _, quantity, currencyId = GetQuestLogRewardCurrencyInfo(1, bounty.questID)
+                            emissary.reward.currencyId = currencyId
+                            emissary.reward.quantity = quantity
+                        end
+                    end
+                end
+            end
         end
     end
 end

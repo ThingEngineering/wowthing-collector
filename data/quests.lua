@@ -1,6 +1,20 @@
 local an, ns = ...
 
 
+-- Emissaries
+ns.emissaries = {
+    {
+        expansion = 6,
+        mapId = 627,
+        questId = 43341,
+    },
+    {
+        expansion = 7,
+        mapId = 876,
+        questId = 51722,
+    },
+}
+
 -- Hidden quests
 ns.otherQuests = {
     -- Zereth Mortis
