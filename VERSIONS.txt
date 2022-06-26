@@ -1,3 +1,9 @@
+v9.2.5.7
+--------
+- Added Legion/BfA emissary scanning.
+- Updated quest scanning list.
+- Moved scan quest data to separate file.
+
 v9.2.5.6
 --------
 - Added Sojourner of Maldraxxus to achievement scanning.
