@@ -723,6 +723,9 @@ ns.scanQuests = {
     42280, -- Vorthax
     37909, -- Warbringer Mox'na
     43193, -- Calamir
+    37736, -- Dressing With Class
+    37959, -- The Hunter Returns
+    38237, -- This IS In My Contract
     -- Zone Maps: Highmountain
     39784, -- Beastmaster Pao'lek
     40405, -- Bristlemaul
@@ -798,7 +801,92 @@ ns.scanQuests = {
     42779, -- Shar'thos
     -- Zone Maps: Warlords of Draenor
     -- Zone Maps: Tanaan Jungle
+    38430, -- Argosh the Destroyer
+    38609, -- Belgork
+    38262, -- Bilkor the Thrower
+    38266, -- Bloodhunter Zulk
+    38209, -- Bramblefell
+    38820, -- Captain Grok'mar
+    38756, -- Captain Ironbeard
+    38746, -- Commander Krag'goth
+    38749, -- Commander Org'mok
+    39287, -- Deathtalon
+    39289, -- Doomroller
+    38265, -- Dorg the Bloody
+    40105, -- Drakum
+    38736, -- Driss Vile
+    38264, -- Drivnul
+    38411, -- Executor Riloth
+    38634, -- Felsmith Damorka
+    38211, -- Felspark
+    38604, -- Gloomtalon
+    38764, -- Glub'glok
+    40106, -- Gondar
+    38709, -- Gorabosh
+    38400, -- Grand Warlock Nethekurse
+    39046, -- Harbormaster Korak
+    38028, -- High Priest Ikzan
+    38026, -- Imp-Master Valessa
+    38030, -- Jax'zor
+    38825, -- Kris'kar the Unredeemed
+    38029, -- Lady Oran
+    38726, -- Magwia
+    38032, -- Mistress Thavra
+    38580, -- Overlord Ma'gruth
+    38557, -- Painmistress Selora
+    38282, -- Podlord Wakkawam
+    38496, -- Relgor
+    39159, -- Remnant of the Blood Moon
+    38631, -- Rendrak
+    38263, -- Rogond the Tracker
+    37953, -- Sergeant Mor'grak
+    38812, -- Shadowthrash
+    40104, -- Smashum Grabb
+    38600, -- Soulslicer
+    38700, -- Steelsnout
+    38628, -- Sylissa
+    38752, -- Szirek the Twisted
+    39288, -- Terrorfist
+    38597, -- The Blackfang
+    38654, -- The Goreclaw
+    38751, -- The Iron Houndmaster
+    38632, -- The Night Haunter
+    38747, -- Tho'gar Gorefist
+    38620, -- Thromma the Gutslicer
+    39290, -- Vengeance
+    38579, -- Xanzith the Everlasting
+    38207, -- Zeter'el
+    39045, -- Zoug the Heavy
+    39380, -- Supreme Lord Kazzak
     -- Zone Maps: Frostfire Ridge
+    37525, -- Ak'ox the Slaughterer
+    34497, -- Breathless
+    34843, -- Chillfang
+    33014, -- Cindermaw
+    33531, -- Clumsy Cragmaul Brute
+    34131, -- Coldtusk
+    34477, -- Cyclonic Fury
+    33504, -- Firefury Giant
+    37380, -- Gibblette the Cowardly
+    33512, -- Gorg'ak the Lava Guzzler
+    37388, -- Gorivax
+    34865, -- Grutush the Pillager
+    34839, -- Gurun
+    37386, -- Jabberjaw
+    34708, -- Jehil the Climber
+    37404, -- Kaga the Ironbender
+    37387, -- Moltnoma
+    37402, -- Ogom the Mangler
+    33938, -- Primalist Mur'og
+    37401, -- Ragore Driftstalker
+    34132, -- Scout Goreseeker
+    37385, -- Slogtusk the Corpse-Eater
+    37383, -- Son of Goramal
+    34133, -- The Beater
+    34361, -- The Bone Crawler
+    37384, -- Tor'goroth
+    34559, -- Yaga the Scarred
+    36380, -- Diamonds Are Forever
     -- Zone Maps: Gorgrond
     37371, -- Alkali
     35335, -- Bashiok
@@ -811,8 +899,6 @@ ns.scanQuests = {
     37366, -- Durp the Hated
     37373, -- Firestarter Grash
     36387, -- Fossilwood the Petrified
-    36391, -- Gelgor of the Blue Flame
-    36204, -- Glut
     37413, -- Gnarljaw
     36186, -- Greldrok the Cunning
     37375, -- Grove Warden Yal
@@ -822,20 +908,18 @@ ns.scanQuests = {
     37367, -- Inventor Blammo
     37412, -- King Slime
     36178, -- Mandrakor
-    37363, -- Maniacal Madgard
     37376, -- Mogamago
     37364, -- Morgo Kain
     34726, -- Mother Araneae
     36600, -- Riptar
-    36393, -- Rolkor
     36837, -- Stompalupagus
     35910, -- Stomper Kreego
     36394, -- Sulfurious
     36656, -- Sunclaw
     37374, -- Swift Onyx Flayer
     36794, -- Sylldross
-    37405, -- Typhon
     37372, -- Venolasix
+    37462, -- Drov the Ruiner
     -- Zone Maps: Nagrand
     37396, -- Bonebreaker
     37400, -- Brutag Grimblade
@@ -922,6 +1006,8 @@ ns.scanQuests = {
     35334, -- Varasha
     37359, -- Voidreaver Urnae
     37464, -- Rukhmar
+    37287, -- Cleaning House
+    37292, -- Not in Your Army
     -- Zone Maps: Talador
     37338, -- Avatar of Socrethar
     37339, -- Bombardier Gu'gok
