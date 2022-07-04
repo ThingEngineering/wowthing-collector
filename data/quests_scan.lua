@@ -1049,6 +1049,7 @@ ns.scanQuests = {
     32599, -- Securing A Future
     32589, -- Life Blood
     -- Zone Maps: Timeless Isle
+    33210, -- Blazing Chest
     -- Zone Maps: Dread Wastes
     31083, -- Promises of Gold
     -- Zone Maps: Jade Forest, The
@@ -1057,12 +1058,14 @@ ns.scanQuests = {
     30675, -- Buried Hozen Treasure
     30169, -- Raid Leader Slovan
     30090, -- Zhu's Despair
+    31410, -- Equipment Locker
     -- Zone Maps: Kun-Lai Summit
     32099, -- Sha of Anger
     30599, -- A Monkey Idol
     30991, -- Do a Barrel Roll!
     30682, -- Holed Up
     30617, -- Roadside Assistance
+    31412, -- Sprite's Cloth Chest
     -- Zone Maps: Townlong Steppes
     31032, -- Choking the Skies
     30783, -- Hatred Becomes Us
