@@ -6,14 +6,16 @@ local _G = getfenv(0)
 -- Things
 local wwtc = {}
 local charClassID, charData, charName, guildName, playedLevel, playedLevelUpdated, playedTotal, playedTotalUpdated, regionName
-local hookedCollections, loggingOut = false, false, false
-local bankOpen, crafterOpen, guildBankOpen, reagentBankUpdated = false, false, false, false
+local hookedCollections, loggingOut = false, false
+local bankOpen, crafterOpen, guildBankOpen, reagentBankUpdated, transmogOpen = false, false, false, false, false
 local maxScannedToys = 0
 local oldScannedTransmog = 0
 local dirtyBags, dirtyCovenant, dirtyCurrencies, dirtyGarrisons, dirtyLockouts, dirtyMounts, dirtyMythicPlus, dirtyPets, dirtyQuests, dirtyReputations, dirtyToys, dirtyTransmog, dirtyVault =
-    {}, false, false, false, false, false, false, false, false, false, false, false, false, false
+    {}, false, false, false, false, false, false, false, false, false, false, false, false
 local dirtyCallings, callingData = false, nil
 local dirtyGuildBank, guildBankQueried, requestingPlayedTime = false, false, true
+
+local transmogLocation = TransmogUtil.GetTransmogLocation("HEADSLOT", Enum.TransmogType.Appearance, Enum.TransmogModification.Main)
 
 -- Libs
 local LibRealmInfo = LibStub('LibRealmInfo17janekjl')
@@ -144,6 +146,7 @@ function events:PLAYER_ENTERING_WORLD()
     --wwtc:Initialise()
 
     wwtc:UpdateCharacterData()
+    
     dirtyCovenant = true
     dirtyCurrencies = true
     dirtyGarrisons = true
@@ -353,6 +356,12 @@ function events:TOYS_UPDATED()
     dirtyToys = true
 end
 -- Transmog
+function events:TRANSMOGRIFY_OPEN()
+    transmogOpen = true
+end
+function events:TRANSMOGRIFY_CLOSE()
+    transmogOpen = false
+end
 function events:TRANSMOG_COLLECTION_SOURCE_ADDED()
     dirtyTransmog = true
 end
@@ -1238,45 +1247,65 @@ function wwtc:ScanTransmog()
     if charData == nil then return end
 
     charData.scanTimes["transmog"] = time()
-    local sources = {}
     local transmog = {}
 
-    for categoryID = 1, 29 do
-        local slot = CollectionWardrobeUtil.GetSlotFromCategoryID(categoryID)
-        if slot == nil then
-            --print('category='..categoryID..' slot=NIL')
-        else
-            local transmogLocation = TransmogUtil.GetTransmogLocation(slot, Enum.TransmogType.Appearance, Enum.TransmogModification.Main)
-            local appearances = C_TransmogCollection.GetCategoryAppearances(categoryID, transmogLocation)
-            for _, appearance in pairs(appearances) do
-                if appearance.isCollected then
-                    local visualId = appearance.visualID
-                    transmog[visualId] = true
+    -- Save this to reset later
+    local showCollected = C_TransmogCollection.GetCollectedShown()
+    local showUncollected = C_TransmogCollection.GetUncollectedShown()
+    local sourceTypes = {}
+    for index = 1, 6 do
+        sourceTypes[index] = C_TransmogCollection.IsSourceTypeFilterChecked(index)
+    end
+    
+    if transmogOpen == false then
+        C_TransmogCollection.SetAllCollectionTypeFilters(true)
+        C_TransmogCollection.SetAllSourceTypeFilters(true)
+    end
 
-                    local sources = C_TransmogCollection.GetAppearanceSources(visualId, categoryID, transmogLocation)
-                    for _, source in ipairs(sources) do
-                        if source.isCollected then
-                            local sourceKey = string.format("%d_%d", source.itemID, source.itemModID)
-                            WWTCSaved.transmogSourcesV2[sourceKey] = true
+    -- Run this in a timer so that the filter changes take effect
+    C_Timer.After(0, function()
+        for categoryID = 1, 29 do
+            local slot = CollectionWardrobeUtil.GetSlotFromCategoryID(categoryID)
+            if slot ~= nil then
+                local appearances = C_TransmogCollection.GetCategoryAppearances(categoryID, transmogLocation)
+                for _, appearance in pairs(appearances) do
+                    if appearance.isCollected then
+                        local visualId = appearance.visualID
+                        transmog[visualId] = true
+
+                        local sources = C_TransmogCollection.GetAppearanceSources(visualId, categoryID, transmogLocation)
+                        for _, source in ipairs(sources) do
+                            if source.isCollected then
+                                local sourceKey = string.format("%d_%d", source.itemID, source.itemModID)
+                                WWTCSaved.transmogSourcesV2[sourceKey] = true
+                            end
                         end
                     end
                 end
             end
         end
-    end
 
-    if oldScannedTransmog ~= #transmog then
-        print("WoWthing_Collector: found", #transmog, "transmog appearances")
-        oldScannedTransmog = #transmog
-    end
+        if oldScannedTransmog ~= #transmog then
+            print("WoWthing_Collector: found", #transmog, "transmog appearances")
+            oldScannedTransmog = #transmog
+        end
 
-    local keys = {}
-    for key in pairs(transmog) do
-        keys[#keys + 1] = key
-    end
+        local keys = {}
+        for key in pairs(transmog) do
+            keys[#keys + 1] = key
+        end
 
-    table.sort(keys)
-    charData.transmog = table.concat(keys, ':')
+        table.sort(keys)
+        charData.transmog = table.concat(keys, ':')
+
+        if transmogOpen == false then
+            C_TransmogCollection.SetCollectedShown(showCollected)
+            C_TransmogCollection.SetUncollectedShown(showUncollected)
+            for index = 1, 6 do
+                C_TransmogCollection.SetSourceTypeFilter(index, sourceTypes[index])
+            end
+        end
+    end)
 end
 
 -- Scan dirtyVault
@@ -1428,6 +1457,10 @@ function wwtc:HookCollections()
     local tmogframe = _G["WardrobeCollectionFrame"]
     if tmogframe then
         tmogframe:HookScript("OnShow", function(self)
+            transmogOpen = true
+        end)
+        tmogframe:HookScript("OnHide", function(self)
+            transmogOpen = false
             dirtyTransmog = true
         end)
     else
