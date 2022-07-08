@@ -1078,4 +1078,18 @@ ns.scanQuests = {
     29944, -- Leaders Among Breeders
     29910, -- Rampaging Rodents
     29945, -- Yellow and Red Make Orange
+    -- Zone Maps: Miscellaneous
+    -- Zone Maps: Darkmoon Island
+    47767, -- Blight Boar Concert
+    36471, -- A New Darkmoon Challenger!
+    32175, -- Darkmoon Pet Battle!
+    64783, -- Dance Dance Darkmoon
+    36481, -- Firebird's Challenge
+    29438, -- He Shoots, He Scores!
+    28463, -- It's Hammer Time
+    29436, -- The Humanoid Cannonball
+    29455, -- Target: Turtle
+    29434, -- Tonk Commander
+    37910, -- The Real Race: Powermonger
+    37911, -- The Real Big Race: Powermonger
 }
