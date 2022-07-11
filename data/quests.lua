@@ -117,6 +117,7 @@ ns.progressQuests = {
     }},
 
     -- Warlords of Draenor
+    ["invasionBoss"] = {"weekly", {38276}},
     ["invasionBronze"] = {"weekly", {37638}},
     ["invasionSilver"] = {"weekly", {37639}},
     ["invasionGold"] = {"weekly", {37640}},
