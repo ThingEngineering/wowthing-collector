@@ -10,8 +10,8 @@ local hookedCollections, loggingOut = false, false
 local bankOpen, crafterOpen, guildBankOpen, reagentBankUpdated, transmogOpen = false, false, false, false, false
 local maxScannedToys = 0
 local oldScannedTransmog = 0
-local dirtyBags, dirtyCovenant, dirtyCurrencies, dirtyGarrisons, dirtyLockouts, dirtyMounts, dirtyMythicPlus, dirtyPets, dirtyQuests, dirtyReputations, dirtyToys, dirtyTransmog, dirtyVault =
-    {}, false, false, false, false, false, false, false, false, false, false, false, false
+local dirtyBags, dirtyCovenant, dirtyCurrencies, dirtyGarrisons, dirtyLocation, dirtyLockouts, dirtyMounts, dirtyMythicPlus, dirtyPets, dirtyQuests, dirtyReputations, dirtyToys, dirtyTransmog, dirtyVault =
+    {}, false, false, false, false, false, false, false, false, false, false, false, false, false
 local dirtyCallings, callingData = false, nil
 local dirtyGuildBank, guildBankQueried, requestingPlayedTime = false, false, true
 
@@ -150,8 +150,13 @@ function events:PLAYER_ENTERING_WORLD()
     dirtyCovenant = true
     dirtyCurrencies = true
     dirtyGarrisons = true
+    dirtyLocation = true
     dirtyTransmog = true
     dirtyVault = true
+end
+-- Zone changed
+function events:ZONE_CHANGED()
+    dirtyLocation = true
 end
 -- Fires when /played information is available
 function events:TIME_PLAYED_MSG(total, level)
@@ -409,6 +414,11 @@ function wwtc:Timer()
     if dirtyGuildBank then
         dirtyGuildBank = false
         wwtc:ScanGuildBankTabs()
+    end
+
+    if dirtyLocation then
+        dirtyLocation = false
+        wwtc:ScanLocation()
     end
 
     if dirtyLockouts then
@@ -948,6 +958,25 @@ function wwtc:ScanCurrencies()
                 currencyInfo.totalEarned,
             }, ':')
         end
+    end
+end
+
+function wwtc:ScanLocation()
+    if charData == nil then return end
+
+    charData.bindLocation = GetBindLocation()
+    
+    local realZone = GetRealZoneText()
+    if realZone == nil then
+        dirtyLocation = true
+        return
+    end
+
+    local subZone = GetSubZoneText()
+    if subZone ~= realZone then
+        charData.currentLocation = subZone .. ', ' .. realZone
+    else
+        charData.currentLocation = realZone
     end
 end
 
