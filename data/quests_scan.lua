@@ -134,6 +134,11 @@ ns.scanQuests = {
     64013, -- Lil'Abom
     63433, -- Hunt: Shadehounds
     63854, -- Tormentors of Torghast
+    -- Zone Maps: :covenant-kyrian: Elysian Hold
+    -- Zone Maps: :covenant-night-fae: Heart of the Forest
+    -- Zone Maps: :covenant-necrolord: Seat of the Primus
+    -- Zone Maps: :covenant-venthyr: Sinfall [Upper]
+    -- Zone Maps: :covenant-venthyr: Sinfall [Lower]
     -- Zone Maps: Ardenweald
     59226, -- Deathbinder Hroth
     59201, -- Deifir the Untamed
@@ -189,10 +194,10 @@ ns.scanQuests = {
     58320, -- Selena the Reborn
     60862, -- Sundancer
     60997, -- Unstable Memory
-    58526, -- Orator Kloe:Aethon's Horn
-    60571, -- Orator Kloe:Cloudtail's Paw
-    60569, -- Orator Kloe:Fang of Nemaeus
-    60570, -- Orator Kloe:Sigilback's Smashshell
+    58526, -- Orator Kloe
+    60571, -- Orator Kloe
+    60569, -- Orator Kloe
+    60570, -- Orator Kloe
     61001, -- Swelling Tear
     61046, -- Swelling Tear
     61047, -- Swelling Tear
@@ -244,10 +249,10 @@ ns.scanQuests = {
     59428, -- Strange Growth
     59429, -- Strange Growth
     61444, -- Vat of Conspicuous Slime
-    61720, -- Pool of Mixed Monstrosities:Hulking Deathroc
-    61724, -- Pool of Mixed Monstrosities:Invertebrate Oil
-    61719, -- Pool of Mixed Monstrosities:Residue-Coated Muck Waders
-    61723, -- Pool of Mixed Monstrosities:Bone-Blistering Wand
+    61720, -- Pool of Mixed Monstrosities
+    61724, -- Pool of Mixed Monstrosities
+    61719, -- Pool of Mixed Monstrosities
+    61723, -- Pool of Mixed Monstrosities
     -- Zone Maps: Revendreth
     59854, -- Amalgamation of Filth
     59584, -- Amalgamation of Light
@@ -283,6 +288,7 @@ ns.scanQuests = {
     62199, -- Taskmaster's Trove
     62063, -- The Count
     62164, -- Vrytha's Dredglaive
+    -- Zone Maps: Oribos
     -- Zone Maps: Battle for Azeroth
     -- Zone Maps: Uldum
     56834, -- Anq'uri the Titanic
@@ -374,10 +380,11 @@ ns.scanQuests = {
     56182, -- The Rusty Prince
     55364, -- The Scrap King
     57134, -- Azeroth Mini Pack: Bondo's Yard
+    57135, -- Azeroth Mini Pack: Bondo's Yard
     57132, -- Azeroth Mini Pack: Mechagon
     57133, -- Azeroth Mini Pack: Mechagon
-    55848, -- Reclamation Rig:Blueprint: Rustbolt Requisitions
-    55847, -- Reclamation Rig:Echoing Oozeling
+    55848, -- Reclamation Rig
+    55847, -- Reclamation Rig
     -- Zone Maps: Nazjatar
     55584, -- Avarius
     56269, -- Blindlight
@@ -482,6 +489,8 @@ ns.scanQuests = {
     54891, -- Grimhorn
     54895, -- Ivus the Decayed / Ivus the Forest Lord
     54896, -- Ivus the Decayed / Ivus the Forest Lord
+    -- Zone Maps: Boralus
+    53720, -- Allegiance of Kul Tiras
     -- Zone Maps: Drustvar
     51470, -- Arclight
     51383, -- Arvon the Betrayed
@@ -577,6 +586,8 @@ ns.scanQuests = {
     51835, -- Tort Jaw
     50073, -- Twin-hearted Construct
     52163, -- Azurethos
+    -- Zone Maps: Dazar'alor
+    53719, -- Allegiance of the Zandalari
     -- Zone Maps: Nazmir
     50563, -- Azerite-Infused Slag
     48439, -- Bajiatha
@@ -696,7 +707,9 @@ ns.scanQuests = {
     48565, -- Sister Subversia
     48628, -- Talestra the Vile
     48664, -- Tereck the Selector
-    -- Zone Maps: The Broken Shore
+    -- Zone Maps: Vindicaar, The
+    49015, -- Antorus, the Burning Throne: The Death of a Titan
+    -- Zone Maps: Broken Shore, The
     -- Zone Maps: Azsuna
     42505, -- Arcanist Shal'iman
     37932, -- Arcavellus
@@ -799,6 +812,7 @@ ns.scanQuests = {
     38889, -- Shivering Ashmaw Cub
     42819, -- Humongris <The Wizard>
     42779, -- Shar'thos
+    -- Zone Maps: Dalaran
     -- Zone Maps: Warlords of Draenor
     -- Zone Maps: Tanaan Jungle
     38430, -- Argosh the Destroyer
@@ -1041,6 +1055,8 @@ ns.scanQuests = {
     34204, -- Wandering Vindicator
     37343, -- Xothear, the Destroyer
     34135, -- Yazheera the Incinerator
+    -- Zone Maps: Stormshield
+    -- Zone Maps: Warspear
     -- Zone Maps: Mists of Pandaria
     -- Zone Maps: Isle of Giants
     32519, -- Oondasta
@@ -1078,6 +1094,47 @@ ns.scanQuests = {
     29944, -- Leaders Among Breeders
     29910, -- Rampaging Rodents
     29945, -- Yellow and Red Make Orange
+    -- Zone Maps: Veiled Stair, The
+    -- Zone Maps: Cataclsym
+    -- Zone Maps: Motlen Front, The
+    -- Zone Maps: Tol Barad Peninsula
+    -- Zone Maps: Abyssal Depths
+    -- Zone Maps: Kelp'thar Forest
+    -- Zone Maps: Shimmering Expanse
+    -- Zone Maps: Deepholm
+    -- Zone Maps: Mount Hyjal
+    -- Zone Maps: Twilight Highlands
+    -- Zone Maps: Uldum
+    -- Zone Maps: Wrath of the Lich King
+    -- Zone Maps: Borean Tundra
+    -- Zone Maps: Crystalsong Forest
+    -- Zone Maps: Dragonblight
+    -- Zone Maps: Grizzly Hills
+    -- Zone Maps: Howling Fjord
+    -- Zone Maps: Icecrown
+    -- Zone Maps: Sholazar Basin
+    -- Zone Maps: Storm Peaks, The
+    -- Zone Maps: Zul'Drak
+    -- Zone Maps: Dalaran
+    -- Zone Maps: Dalaran Underbelly
+    -- Zone Maps: The Burning Crusade
+    -- Zone Maps: Isle of Quel'Danas
+    -- Zone Maps: Blade's Edge Mountains
+    10675, -- Show Them Gnome Mercy!
+    -- Zone Maps: Hellfire Peninsula
+    -- Zone Maps: Nagrand
+    -- Zone Maps: Netherstorm
+    10249, -- Back to the Chief!
+    -- Zone Maps: Shadowmoon Valley
+    -- Zone Maps: Terokkar Forest
+    -- Zone Maps: Zangarmarsh
+    -- Zone Maps: Azuremyst Isle
+    -- Zone Maps: Bloodmyst Isle
+    -- Zone Maps: Exodar, The
+    -- Zone Maps: Eversong Woods
+    -- Zone Maps: Ghostlands
+    -- Zone Maps: Silvermoon
+    -- Zone Maps: Shattrath City
     -- Zone Maps: Miscellaneous
     -- Zone Maps: Darkmoon Island
     47767, -- Blight Boar Concert
@@ -1092,4 +1149,18 @@ ns.scanQuests = {
     29434, -- Tonk Commander
     37910, -- The Real Race: Powermonger
     37911, -- The Real Big Race: Powermonger
+    -- Zone Maps: Exile's Reach
+    55988, -- Like Ogres to the Slaughter
+    59979, -- Like Ogres to the Slaughter
+    55992, -- Dungeon: Darkmaul Citadel
+    59984, -- Dungeon: Darkmaul Citadel
+    55991, -- An End to Beginngs
+    59985, -- An End to Beginngs
+    55881, -- Purge the Totems
+    59946, -- Purge the Totems
+    55882, -- Message to Base
+    59947, -- Message to Base
+    56839, -- Killclaw the Terrible
+    55639, -- Who Lurks in the Pit
+    59949, -- Who Lurks in the Pit
 }
