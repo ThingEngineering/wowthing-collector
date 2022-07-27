@@ -1,3 +1,8 @@
+v9.2.5.13
+---------
+- Added illusion scanning.
+- Fixed occasional weird current location values.
+
 v9.2.5.12
 ---------
 - Added current/hearth location scanning.
