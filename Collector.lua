@@ -518,6 +518,7 @@ function wwtc:Initialise()
     charData.dailyQuests = charData.dailyQuests or {}
     charData.emissaries = charData.emissaries or {}
     charData.garrisonTrees = charData.garrisonTrees or nil
+    charData.illusions = charData.illusions or ''
     charData.items = charData.items or {}
     charData.lockouts = charData.lockouts or {}
     charData.mounts = charData.mounts or {}
@@ -1278,6 +1279,18 @@ function wwtc:ScanTransmog()
     charData.scanTimes["transmog"] = time()
     local transmog = {}
 
+    -- Illusions
+    local illusions = {}
+    local illusionData = C_TransmogCollection.GetIllusions()
+    for _, illusion in ipairs(illusionData) do
+        if illusion.isCollected then
+            table.insert(illusions, illusion.sourceID)
+        end
+    end
+    
+    table.sort(illusions)
+    charData.illusions = table.concat(illusions, ':')
+
     -- Save this to reset later
     local showCollected = C_TransmogCollection.GetCollectedShown()
     local showUncollected = C_TransmogCollection.GetUncollectedShown()
@@ -1327,6 +1340,7 @@ function wwtc:ScanTransmog()
         table.sort(keys)
         charData.transmog = table.concat(keys, ':')
 
+        -- Reset settings
         if transmogOpen == false then
             C_TransmogCollection.SetCollectedShown(showCollected)
             C_TransmogCollection.SetUncollectedShown(showUncollected)
