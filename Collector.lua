@@ -973,7 +973,7 @@ function wwtc:ScanLocation()
     end
 
     local subZone = GetSubZoneText()
-    if subZone ~= realZone then
+    if subZone and subZone ~= realZone then
         charData.currentLocation = subZone .. ', ' .. realZone
     else
         charData.currentLocation = realZone
