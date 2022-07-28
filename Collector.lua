@@ -10,8 +10,8 @@ local hookedCollections, loggingOut = false, false
 local bankOpen, crafterOpen, guildBankOpen, reagentBankUpdated, transmogOpen = false, false, false, false, false
 local maxScannedToys = 0
 local oldScannedTransmog = 0
-local dirtyBags, dirtyCovenant, dirtyCurrencies, dirtyGarrisons, dirtyLocation, dirtyLockouts, dirtyMounts, dirtyMythicPlus, dirtyPets, dirtyQuests, dirtyReputations, dirtyToys, dirtyTransmog, dirtyVault =
-    {}, false, false, false, false, false, false, false, false, false, false, false, false, false
+local dirtyBags, dirtyCovenant, dirtyCurrencies, dirtyGarrisons, dirtyHeirlooms, dirtyLocation, dirtyLockouts, dirtyMounts, dirtyMythicPlus, dirtyPets, dirtyQuests, dirtyReputations, dirtyToys, dirtyTransmog, dirtyVault =
+    {}, false, false, false, false, false, false, false, false, false, false, false, false, false, false
 local dirtyCallings, callingData = false, nil
 local dirtyGuildBank, guildBankQueried, requestingPlayedTime = false, false, true
 
@@ -29,7 +29,7 @@ local defaultWWTCSaved = {
     version = 9158,
     chars = {},
     guilds = {},
-    heirlooms = {},
+    heirloomsV2 = {},
     toys = {},
     transmogSourcesV2 = {},
 }
@@ -150,6 +150,7 @@ function events:PLAYER_ENTERING_WORLD()
     dirtyCovenant = true
     dirtyCurrencies = true
     dirtyGarrisons = true
+    dirtyHeirlooms = true
     dirtyLocation = true
     dirtyTransmog = true
     dirtyVault = true
@@ -376,6 +377,9 @@ end
 function events:TRANSMOG_COLLECTION_UPDATED()
     dirtyTransmog = true
 end
+function events:HEIRLOOMS_UPDATED()
+    dirtyHeirlooms = true
+end
 
 -------------------------------------------------------------------------------
 -- Call functions in the events table for events
@@ -414,6 +418,11 @@ function wwtc:Timer()
     if dirtyGuildBank then
         dirtyGuildBank = false
         wwtc:ScanGuildBankTabs()
+    end
+
+    if dirtyHeirlooms then
+        dirtyHeirlooms = false
+        wwtc:ScanHeirlooms()
     end
 
     if dirtyLocation then
@@ -492,6 +501,7 @@ function wwtc:Initialise()
     charName = regionName .. "/" .. (realmEnglish or realm)  .. "/" .. UnitName("player")
     charClassID = select(3, UnitClass("player"))
 
+    WWTCSaved.heirloomsV2 = WWTCSaved.heirloomsV2 or {}
     WWTCSaved.transmogSourcesV2 = WWTCSaved.transmogSourcesV2 or {}
 
     -- Set up character data table
@@ -569,6 +579,7 @@ function wwtc:Logout()
 end
 
 function wwtc:Cleanup()
+    WWTCSaved.heirlooms = nil
     WWTCSaved.transmogSources = nil
 
     -- Remove data for any characters not seen in the last 3 days
@@ -1359,6 +1370,7 @@ function wwtc:ScanTransmog()
                 C_TransmogCollection.SetSourceTypeFilter(index, sourceTypes[index])
             end
         end
+
     end)
 end
 
@@ -1488,14 +1500,14 @@ function wwtc:HookCollections()
     if hookedCollections then return end
 
     -- Hook heirlooms
-    local hlframe = _G["HeirloomsJournal"]
-    if hlframe then
-        hlframe:HookScript("OnShow", function(self)
-            wwtc:ScanHeirlooms()
-        end)
-    else
-        print("WoWthing_Collector: unable to hook 'HeirloomsJournal' frame!")
-    end
+    -- local hlframe = _G["HeirloomsJournal"]
+    -- if hlframe then
+    --     hlframe:HookScript("OnShow", function(self)
+    --         wwtc:ScanHeirlooms()
+    --     end)
+    -- else
+    --     print("WoWthing_Collector: unable to hook 'HeirloomsJournal' frame!")
+    -- end
 
     -- Hook toys
     local tbframe = _G["ToyBox"]
@@ -1528,16 +1540,17 @@ end
 function wwtc:ScanHeirlooms()
     if charData == nil then return end
 
-    charData.scanTimes['heirlooms'] = time()
-    WWTCSaved.heirlooms = {}
+    WWTCSaved.heirloomsV2 = {}
 
-    for i = 1, C_Heirloom.GetNumDisplayedHeirlooms() do
-        local itemID = C_Heirloom.GetHeirloomItemIDFromDisplayedIndex(i)
-        -- name, itemEquipLoc, isPvP, itemTexture, upgradeLevel, source, searchFiltered, effectiveLevel, minLevel, maxLevel
-        if C_Heirloom.PlayerHasHeirloom(itemID) then
-            local _, _, _, _, upgradeLevel = C_Heirloom.GetHeirloomInfo(itemID)
-            WWTCSaved.heirlooms[itemID] = upgradeLevel
-        end
+    local itemIds = C_Heirloom.GetHeirloomItemIDs()
+    for _, itemId in ipairs(itemIds) do
+        local collected = C_Heirloom.PlayerHasHeirloom(itemId)
+        local _, _, _, _, upgradeLevel = C_Heirloom.GetHeirloomInfo(itemId)
+        WWTCSaved.heirloomsV2[#WWTCSaved.heirloomsV2 + 1] = table.concat({
+            itemId,
+            collected and 1 or 0,
+            upgradeLevel or 0,
+        }, ':')
     end
 end
 
