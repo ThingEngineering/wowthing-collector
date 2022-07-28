@@ -1327,6 +1327,17 @@ function wwtc:ScanTransmog()
             end
         end
 
+        -- Manual checks
+        for _, manualTransmog in ipairs(ns.transmog) do
+            local have = C_TransmogCollection.PlayerHasTransmog(manualTransmog.itemId, manualTransmog.modifierId)
+            if have then
+                transmog[manualTransmog.appearanceId] = true
+
+                local sourceKey = string.format("%d_%d", manualTransmog.itemId, manualTransmog.modifierId)
+                WWTCSaved.transmogSourcesV2[sourceKey] = true
+            end
+        end
+
         if oldScannedTransmog ~= #transmog then
             print("WoWthing_Collector: found", #transmog, "transmog appearances")
             oldScannedTransmog = #transmog
