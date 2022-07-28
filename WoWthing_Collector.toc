@@ -16,6 +16,7 @@ data\instances.lua
 data\quests.lua
 data\quests_scan.lua
 data\reputations.lua
+data\transmog.lua
 data\world_bosses.lua
 
 Collector.lua
