@@ -1,3 +1,9 @@
+v9.2.5.14
+---------
+- Added manual transmog checks for buggy items.
+- Changed heirloom scanning to work better and not require a hook.
+- Updated quest scanning list.
+
 v9.2.5.13
 ---------
 - Added illusion scanning.
