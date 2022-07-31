@@ -7,7 +7,7 @@ local _G = getfenv(0)
 local wwtc = {}
 local charClassID, charData, charName, guildName, playedLevel, playedLevelUpdated, playedTotal, playedTotalUpdated, regionName
 local hookedCollections, loggingOut = false, false
-local bankOpen, crafterOpen, guildBankOpen, reagentBankUpdated, transmogOpen = false, false, false, false, false
+local bankOpen, guildBankOpen, reagentBankUpdated, transmogOpen = false, false, false, false
 local maxScannedToys = 0
 local oldScannedTransmog = 0
 local dirtyBags, dirtyCovenant, dirtyCurrencies, dirtyGarrisons, dirtyHeirlooms, dirtyLocation, dirtyLockouts, dirtyMounts, dirtyMythicPlus, dirtyPets, dirtyQuests, dirtyReputations, dirtyToys, dirtyTransmog, dirtyVault =
@@ -37,33 +37,6 @@ local defaultWWTCSaved = {
 local instanceNameToId = {}
 
 
--- Trade skill cooldowns
-local tradeSkills = {
-    [156587] = true, -- Alchemical Catalyst
-    [175880] = true, -- Secrets of Draenor Alchemy
-
-    [171690] = true, -- Truesteel Ingot
-    [176090] = true, -- Secrets of Draenor Blacksmithing
-
-    [169092] = true, -- Temporal Crystal
-    [177043] = true, -- Secrets of Draenor Enchanting
-
-    [169080] = true, -- Gearspring Parts
-    [177054] = true, -- Secrets of Draenor Engineering
-
-    [169081] = true, -- War Paints
-    [177045] = true, -- Secrets of Draenor Inscription
-
-    [170700] = true, -- Taladite Crystal
-    [176087] = true, -- Secrets of Draenor Jewelcrafting
-
-    [171391] = true, -- Burnished Leather
-    [176089] = true, -- Secrets of Draenor Leatherworking
-
-    [168835] = true, -- Hexweave Cloth
-    [176058] = true, -- Secrets of Draenor Tailoring
-}
-
 -- Check things the Battle.net API is bugged for
 local checkMounts = {
     --[458] = true, -- Brown Horse
@@ -77,36 +50,9 @@ local checkPets = {
     [216] = 33239, -- Argent Gruntling
     [1350] = 73809, -- Sky Lantern
 }
-local worldQuestFactions = {
-    -- Both
-    [50562] = 2164, -- Champions of Azeroth
-    [50604] = 2163, -- Tortollan Seekers
-
-    -- Alliance
-    [50605] = 2157, -- 7th Legion => The Honorbound
-    [50600] = 2158, -- Order of Embers => Voldunai
-    [50599] = 2103, -- Proudmoore Admiralty => Zandalari Empire
-    [50601] = 2156, -- Storm's Wake => Talanji's Expedition
-
-    -- Horde
-    [50602] = 2156, -- Talanji's Expedition
-    [50606] = 2157, -- The Honorbound
-    [50603] = 2158, -- Voldunai
-    [50598] = 2103, -- Zandalari Empire
-}
-
-local torghastWidgets = {
-    {name = 2927, level = 2936}, -- Coldheart Interstitia
-    {name = 2925, level = 2930}, -- Fracture Chambers
-    {name = 2928, level = 2938}, -- Mort'regar
-    {name = 2926, level = 2932}, -- Skoldus Hall
-    {name = 2924, level = 2934}, -- Soulforges
-    {name = 2929, level = 2940}, -- The Upper Reaches
-}
 
 
 -- Misc constants
-local MAP_KULTIRAS = 876
 local SLOTS_PER_GUILD_BANK_TAB = 98
 
 -- Hook the time played message so that we don't print it to chat every time
@@ -142,9 +88,6 @@ function events:PLAYER_LOGOUT()
 end
 -- Fires any time the player sees a loading screen
 function events:PLAYER_ENTERING_WORLD()
-    -- FIXME: goes in PLAYER_LOGIN when not dev?
-    --wwtc:Initialise()
-
     wwtc:UpdateCharacterData()
     
     dirtyCovenant = true
@@ -201,17 +144,6 @@ end
 function events:PLAYER_MONEY()
     charData.copper = GetMoney()
 end
--- Fires when information about the contents of a trade skill recipe list changes or becomes available
---function events:TRADE_SKILL_UPDATE()
---    wwtc:ScanTradeSkills()
---end
--- Fires when a unit casts a spell - used for trade skill updating
---function events:UNIT_SPELLCAST_SUCCEEDED(evt, unit, spellName, rank, lineID, spellID)
---    -- We only care about the player's trade skills
---    if unit == "player" and tradeSkills[spellID] == true then
---        C_Timer.NewTimer(0.5, function() wwtc:ScanTradeSkills() end)
---    end
---end
 -- Fires when the contents of a bag changes
 function events:BAG_UPDATE(bagID)
     dirtyBags[bagID] = true
@@ -541,8 +473,6 @@ function wwtc:Initialise()
     charData.progressQuests = charData.progressQuests or {}
     charData.reputations = charData.reputations or {}
     charData.scanTimes = charData.scanTimes or {}
-    charData.torghast = charData.torghast or {}
-    charData.tradeSkills = charData.tradeSkills or {}
     charData.transmog = charData.transmog or nil
     charData.vault = charData.vault or {}
 
@@ -653,7 +583,6 @@ function wwtc:UpdateCharacterData()
         wwtc:UpdateWarMode()
 
         wwtc:ScanAchievements()
-        wwtc:ScanTorghast()
 
         C_MythicPlus.RequestMapInfo()
         RequestRaidInfo()
@@ -1464,32 +1393,6 @@ function wwtc:ScanCallings()
     charData.callings = callings
 end
 
--- Scan trade skills for cooldowns
-function wwtc:ScanTradeSkills()
-    if charData == nil then return end
-
-    -- Don't care about tradeskills that aren't our own
-    if IsTradeSkillGuild() or IsTradeSkillLinked() then
-        return
-    end
-
-    local now = time()
-    for i = 1, GetNumTradeSkills() do
-        local link = GetTradeSkillRecipeLink(i)
-        if link then
-            local spellID = tonumber(link:match("\|Henchant:(%d+)\|h"))
-            if spellID and tradeSkills[spellID] == true then
-                local cooldown = GetTradeSkillCooldown(i)
-                if cooldown then
-                    charData.tradeSkills[spellID] = now + cooldown
-                else
-                    charData.tradeSkills[spellID] = nil
-                end
-            end
-        end
-    end
-end
-
 -- Hook various Blizzard_Collections things for scanning
 function wwtc:HookCollections()
     if not IsAddOnLoaded("Blizzard_Collections") then
@@ -1498,16 +1401,6 @@ function wwtc:HookCollections()
     end
 
     if hookedCollections then return end
-
-    -- Hook heirlooms
-    -- local hlframe = _G["HeirloomsJournal"]
-    -- if hlframe then
-    --     hlframe:HookScript("OnShow", function(self)
-    --         wwtc:ScanHeirlooms()
-    --     end)
-    -- else
-    --     print("WoWthing_Collector: unable to hook 'HeirloomsJournal' frame!")
-    -- end
 
     -- Hook toys
     local tbframe = _G["ToyBox"]
@@ -1622,31 +1515,6 @@ function wwtc:ScanReputations()
                 threshold,
                 hasRewardPending and 1 or 0,
             }, ':')
-        end
-    end
-end
-
--- Scan Torghast
-function wwtc:ScanTorghast()
-    if charData == nil then return end
-
-    local now = time()
-    charData.scanTimes["torghast"] = now
-
-    charData.torghast = {}
-
-    -- Into Torghast, intro quest
-    if C_QuestLog.IsQuestFlaggedCompleted(60136) then
-        for _, widget in ipairs(torghastWidgets) do
-            local name = C_UIWidgetManager.GetTextWithStateWidgetVisualizationInfo(widget.name)
-            local level = C_UIWidgetManager.GetTextWithStateWidgetVisualizationInfo(widget.level)
-
-            if name and level and name.shownState == 1 then
-                charData.torghast[#charData.torghast + 1] = {
-                    level = tonumber(strmatch(level.text, '|cFF00FF00.-(%d+).+|r')),
-                    name = strmatch(name.text, '|n|cffffffff(.+)|r'),
-                }
-            end
         end
     end
 end
