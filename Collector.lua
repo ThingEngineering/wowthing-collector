@@ -17,6 +17,10 @@ local dirtyGuildBank, guildBankQueried, requestingPlayedTime = false, false, tru
 
 local transmogLocation = TransmogUtil.GetTransmogLocation("HEADSLOT", Enum.TransmogType.Appearance, Enum.TransmogModification.Main)
 
+-- Local globals
+local C_CurrencyInfo_GetCurrencyInfo, C_TransmogCollection_GetAppearanceSources, C_TransmogCollection_GetCategoryAppearances, C_QuestLog_IsQuestFlaggedCompleted, CollectionWardrobeUtil_GetSlotFromCategoryID = C_CurrencyInfo.GetCurrencyInfo, C_TransmogCollection.GetAppearanceSources, C_TransmogCollection.GetCategoryAppearances, C_QuestLog.IsQuestFlaggedCompleted, CollectionWardrobeUtil.GetSlotFromCategoryID
+
+
 -- Libs
 local LibRealmInfo = LibStub('LibRealmInfo17janekjl')
 
@@ -777,12 +781,12 @@ function wwtc:ScanCovenants()
     }
 
     -- Currencies
-    local animaInfo = C_CurrencyInfo.GetCurrencyInfo(1813)
+    local animaInfo = C_CurrencyInfo_GetCurrencyInfo(1813)
     if animaInfo ~= nil then
         covenantData.anima = animaInfo.quantity
     end
 
-    local soulsInfo = C_CurrencyInfo.GetCurrencyInfo(1810)
+    local soulsInfo = C_CurrencyInfo_GetCurrencyInfo(1810)
     if soulsInfo ~= nil then
         covenantData.souls = soulsInfo.quantity
     end
@@ -886,7 +890,7 @@ function wwtc:ScanCurrencies()
     charData.scanTimes["currencies"] = time()
 
     for _, currencyID in ipairs(ns.currencies) do
-        local currencyInfo = C_CurrencyInfo.GetCurrencyInfo(currencyID)
+        local currencyInfo = C_CurrencyInfo_GetCurrencyInfo(currencyID)
         if currencyInfo ~= nil then
             -- quantity:max:isWeekly:weekQuantity:weekMax:isMovingMax:totalQuantity
             charData.currencies[currencyID] = table.concat({
@@ -1005,7 +1009,7 @@ function wwtc:ScanLockouts()
     -- Other world bosses
     for questID, questData in pairs(ns.worldBossQuests) do
         groupId, groupName, bossName, isDaily = unpack(questData)
-        if C_QuestLog.IsQuestFlaggedCompleted(questID) then
+        if C_QuestLog_IsQuestFlaggedCompleted(questID) then
             local resetTime
             if isDaily == true then
                 resetTime = dailyReset
@@ -1051,13 +1055,13 @@ function wwtc:ScanQuests()
     end
 
     for _, questID in ipairs(ns.otherQuests) do
-        if C_QuestLog.IsQuestFlaggedCompleted(questID) then
+        if C_QuestLog_IsQuestFlaggedCompleted(questID) then
             charData.otherQuests[#charData.otherQuests + 1] = questID
         end
     end
 
     for _, questID in ipairs(ns.scanQuests) do
-        if C_QuestLog.IsQuestFlaggedCompleted(questID) then
+        if C_QuestLog_IsQuestFlaggedCompleted(questID) then
             charData.dailyQuests[#charData.dailyQuests + 1] = questID
         end
     end
@@ -1076,7 +1080,7 @@ function wwtc:ScanQuests()
 
         for _, questId in ipairs(questData[2]) do
             -- Quest is completed
-            if C_QuestLog.IsQuestFlaggedCompleted(questId) then
+            if C_QuestLog_IsQuestFlaggedCompleted(questId) then
                 prog.id = questId
                 prog.name = QuestUtils_GetQuestName(questId)
                 prog.status = 2
@@ -1126,7 +1130,7 @@ function wwtc:ScanQuests()
     -- Emissaries
     for _, emissary in ipairs(ns.emissaries) do
         charData.emissaries[emissary.expansion] = {}
-        if C_QuestLog.IsQuestFlaggedCompleted(emissary.questId) then
+        if C_QuestLog_IsQuestFlaggedCompleted(emissary.questId) then
             local bounties = C_QuestLog.GetBountiesForMapID(emissary.mapId)
             if bounties and #bounties > 0 then
                 for i = 1, 3 do
@@ -1148,7 +1152,7 @@ function wwtc:ScanQuests()
                     end
 
                     local emissary = charData.emissaries[emissary.expansion][index]
-                    emissary.completed = C_QuestLog.IsQuestFlaggedCompleted(bounty.questID)
+                    emissary.completed = C_QuestLog_IsQuestFlaggedCompleted(bounty.questID)
                     emissary.questId = bounty.questID
 
                     local rewardCurrencyCount = GetNumQuestLogRewardCurrencies(bounty.questID)
@@ -1247,15 +1251,15 @@ function wwtc:ScanTransmog()
     -- Run this in a timer so that the filter changes take effect
     C_Timer.After(0, function()
         for categoryID = 1, 29 do
-            local slot = CollectionWardrobeUtil.GetSlotFromCategoryID(categoryID)
+            local slot = CollectionWardrobeUtil_GetSlotFromCategoryID(categoryID)
             if slot ~= nil then
-                local appearances = C_TransmogCollection.GetCategoryAppearances(categoryID, transmogLocation)
+                local appearances = C_TransmogCollection_GetCategoryAppearances(categoryID, transmogLocation)
                 for _, appearance in pairs(appearances) do
                     if appearance.isCollected then
                         local visualId = appearance.visualID
                         transmog[visualId] = true
 
-                        local sources = C_TransmogCollection.GetAppearanceSources(visualId, categoryID, transmogLocation)
+                        local sources = C_TransmogCollection_GetAppearanceSources(visualId, categoryID, transmogLocation)
                         for _, source in ipairs(sources) do
                             if source.isCollected then
                                 local sourceKey = string.format("%d_%d", source.itemID, source.itemModID)
@@ -1386,7 +1390,7 @@ function wwtc:ScanCallings()
             index = 2
         end
 
-        callings[index].completed = C_QuestLog.IsQuestFlaggedCompleted(calling.questID)
+        callings[index].completed = C_QuestLog_IsQuestFlaggedCompleted(calling.questID)
         callings[index].questId = calling.questID
     end
 
