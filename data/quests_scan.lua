@@ -277,6 +277,7 @@ ns.scanQuests = {
     56877, -- Tomb Burster
     58259, -- Worldedge Gorger
     61814, -- Nurgash Muckformed
+    66615, -- Nurgash Muckformed
     59833, -- Chest of Envious Dreams
     62243, -- Forbidden Chamber
     62196, -- Forgotten Angler's Rod

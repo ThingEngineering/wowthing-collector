@@ -77,4 +77,6 @@ ns.worldBossQuests = {
     [64531] = { 108004, "Mor'geth", "Mor'geth, Tormentor of the Damned" },
 
     [65143] = { 108005, "Antros", "Antros" },
+
+    [66615] = { 108006, "Fated Shadowlands World Bosses", "Nurgash Muckformed" },
 }
