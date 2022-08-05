@@ -469,7 +469,7 @@ function wwtc:Initialise()
     charData.lockouts = charData.lockouts or {}
     charData.mounts = charData.mounts or {}
     charData.mythicDungeons = charData.mythicDungeons or {}
-    charData.mythicPlus = charData.mythicPlus or {}
+    charData.mythicPlusV2 = charData.mythicPlusV2 or {}
     charData.orderHallResearch = charData.orderHallResearch or {}
     charData.otherQuests = charData.otherQuests or {}
     charData.paragons = charData.paragons or {}
@@ -522,6 +522,7 @@ function wwtc:Cleanup()
         if not cData.lastSeen or cData.lastSeen < old then
             WWTCSaved.chars[cName] = nil
         else
+            cData.mythicPlus = nil
             cData.weeklyQuests = nil
             cData.weeklyUghQuests = nil
         end
@@ -1188,24 +1189,28 @@ function wwtc:ScanMythicPlus()
 
     local now = time()
     charData.scanTimes["mythicPlus"] = now
-    charData.mythicPlus = {
-        season = C_MythicPlus.GetCurrentSeason(),
-        maps = {},
-        runs = {},
-    }
+
+    charData.mythicPlusV2.seasons = charData.mythicPlusV2.seasons or {}
+    charData.mythicPlusV2.weeks = charData.mythicPlusV2.weeks or {}
+
+    local season = C_MythicPlus.GetCurrentSeason()
+    charData.mythicPlusV2.seasons[season] = {}
 
     local maps = C_ChallengeMode.GetMapTable()
     for i = 1, #maps do
         local affixScores, overallScore = C_MythicPlus.GetSeasonBestAffixScoreInfoForMap(maps[i])
-        charData.mythicPlus.maps[#charData.mythicPlus.maps + 1] = {
+        charData.mythicPlusV2.seasons[season][i] = {
             mapId = maps[i],
             affixScores = affixScores,
             overallScore = overallScore,
         }
     end
 
-    local runs = charData.mythicPlus.runs
-    local runHistory = C_MythicPlus.GetRunHistory(true, true)
+    local weeklyReset = now + C_DateAndTime.GetSecondsUntilWeeklyReset()
+    charData.mythicPlusV2.weeks[weeklyReset] = {}
+
+    local runs = charData.mythicPlusV2.weeks[weeklyReset]
+    local runHistory = C_MythicPlus.GetRunHistory(false, true)
     for _, run in ipairs(runHistory) do
         table.insert(runs, table.concat({
             run.mapChallengeModeID,
