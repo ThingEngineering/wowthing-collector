@@ -1,3 +1,7 @@
+v9.2.5.16
+---------
+- Changed how M+ scanning stores data, again.
+
 v9.2.5.15
 ---------
 - Added Fated Nurgash Muckformed to quest scanning and world boss lists.
