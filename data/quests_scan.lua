@@ -125,6 +125,7 @@ ns.scanQuests = {
     61568, -- Yero the Skittish
     64152, -- Ylva, Mate of Guarm
     64531, -- Mor'geth
+    66618, -- Mor'geth
     64256, -- Helsworn Chest
     64000, -- Infused Etherwyrm
     64008, -- Lil'Abom
