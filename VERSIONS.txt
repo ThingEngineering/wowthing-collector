@@ -1,3 +1,8 @@
+v9.2.5.18
+---------
+- Added A New Deal to quest scanning.
+- Updated quest scanning list.
+
 v9.2.5.17
 ---------
 - Added Fated Mor'geth to quest scanning and world boss lists.
