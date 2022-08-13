@@ -177,6 +177,7 @@ ns.progressQuests = {
     ["shapingFate"] = {"weekly", {63949}},
 
     -- Shadowlands: 9.2
+    ["newDeal"] = {"weekly", {65649}},
     ["patterns"] = {"weekly", {66042}},
 
     -- Shadowlands: Raids
