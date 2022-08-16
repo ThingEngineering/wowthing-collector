@@ -78,6 +78,10 @@ ns.worldBossQuests = {
 
     [65143] = { 108005, "Antros", "Antros" },
 
+    [66614] = { 108006, "Fated Shadowlands World Bosses", "Valinor, the Light of Eons" },
     [66615] = { 108006, "Fated Shadowlands World Bosses", "Nurgash Muckformed" },
+    [66616] = { 108006, "Fated Shadowlands World Bosses", "Oranomonos the Everbranching" },
+    [66617] = { 108006, "Fated Shadowlands World Bosses", "Mortanis" },
     [66618] = { 108006, "Fated Shadowlands World Bosses", "Mor'geth, Tormentor of the Damned" },
+    [66619] = { 108006, "Fated Shadowlands World Bosses", "Antros" },
 }

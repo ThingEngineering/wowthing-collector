@@ -37,6 +37,7 @@ ns.scanQuests = {
     65585, -- Iska, Outrider of Ruin
     65587, -- Reanimatrox Marzan
     65143, -- Antros
+    66619, -- Antros
     65520, -- Architect's Reserve
     65573, -- Bushel of Progenitor Produce
     64667, -- Damaged Jiro Stash
@@ -159,6 +160,7 @@ ns.scanQuests = {
     59140, -- Macabre
     61633, -- Star Lake: Argus
     61815, -- Oranomonos the Everbranching
+    66616, -- Oranomonos the Everbranching
     61072, -- Aerto's Body
     61074, -- Cache of the Moon
     61110, -- Cache of the Night
@@ -199,6 +201,7 @@ ns.scanQuests = {
     61046, -- Swelling Tear
     61047, -- Swelling Tear
     61813, -- Valinor, the Light of Eons
+    66614, -- Valinor, the Light of Eons
     61052, -- Experimental Construct Part
     60892, -- Gift of Chyrus
     60894, -- Gift of Thenios
@@ -235,6 +238,7 @@ ns.scanQuests = {
     59290, -- Zargox the Reborn
     62786, -- Theater of Pain
     61816, -- Mortanis
+    66617, -- Mortanis
     60368, -- Blackhound Cache
     62602, -- Giant Cache of Epic Treasure
     61470, -- Necro Tome
