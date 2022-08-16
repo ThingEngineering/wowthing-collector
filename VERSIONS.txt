@@ -1,3 +1,9 @@
+v9.2.7.1
+--------
+- Added other Fated world bosses to quest scanning and world boss lists.
+- Added caching for item link parsing, seems to reduce bag jank.
+- Updated TOC for 9.2.7.
+
 v9.2.5.18
 ---------
 - Added A New Deal to quest scanning.
