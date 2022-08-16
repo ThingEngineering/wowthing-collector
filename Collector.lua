@@ -1645,7 +1645,13 @@ end
 -- Util functions
 -------------------------------------------------------------------------------
 -- Parse an item link and return useful information
+local parseItemLinkCache = {}
 function wwtc:ParseItemLink(link, count)
+    local cached = parseItemLinkCache[link]
+    if cached ~= nil then
+        return table.concat({ count, cached }, ':')
+    end
+
     local parts = { strsplit(":", link) }
 
     if string.find(parts[1], '\|Hbattlepet') then
@@ -1705,8 +1711,7 @@ function wwtc:ParseItemLink(link, count)
     item.quality = C_Item.GetItemQualityByID(link)
 
     -- count:id:context:enchant:ilvl:quality:suffix:bonusIDs:gems
-    return table.concat({
-        item.count,
+    local ret = table.concat({
         item.itemID,
         item.context or 0,
         item.enchantID or 0,
@@ -1717,7 +1722,9 @@ function wwtc:ParseItemLink(link, count)
         table.concat(item.gems, ','),
     }, ':')
 
-    --return item
+    parseItemLinkCache[link] = ret
+
+    return table.concat({ count, ret }, ':')
 end
 
 -- Returns the daily quest reset time in the local timezone
