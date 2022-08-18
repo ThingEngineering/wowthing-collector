@@ -1,3 +1,8 @@
+v9.2.7.2
+--------
+- Added Legion Timewalking weekly quest to quest scanning.
+- Added Timewalking turn-in quests to quest scanning.
+
 v9.2.7.1
 --------
 - Added other Fated world bosses to quest scanning and world boss lists.
