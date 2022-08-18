@@ -117,6 +117,16 @@ ns.progressQuests = {
         65775, -- Soloing Strategy
     }},
 
+    -- Timewalking turn-ins
+    ["timewalking"] = {"weekly", {
+        40168, -- The Swirling Vial, TBC
+        40173, -- The Unstable Prism, Wrath
+        40786, -- The Smoldering Ember, Cata
+        45563, -- The Shrouded Coin, MoP
+        55498, -- The Shimmering Crystal, WoD
+        64710, -- Whispering Fel Crystal, Legion
+    }},
+
     -- Warlords of Draenor
     ["invasionBoss"] = {"weekly", {38276}},
     ["invasionBronze"] = {"weekly", {37638}},
