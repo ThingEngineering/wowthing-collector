@@ -98,6 +98,7 @@ ns.progressQuests = {
         62634, -- "A Shattered Path Through Time", Cata Timewalking
         62635, -- "A Shattered Path Through Time", MoP Timewalking
         62636, -- "A Savage Path Through Time", WoD Timewalking
+        64709, -- "A Fel Path Through Time", Legion Timewalking
         62637, -- "A Call to Battle", Battlegrounds
         62638, -- "Emissary of War", Mythic Dungeons
         62639, -- "The Very Best", PvP Pet Battles
