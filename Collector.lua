@@ -1097,17 +1097,26 @@ function wwtc:ScanQuests()
                     prog.id = questId
                     prog.name = QuestUtils_GetQuestName(questId)
                     prog.status = 1
-                    prog.text = obj.text
-                    prog.type = obj.type
+                    if obj ~= nil then
+                        prog.text = obj.text
+                        prog.type = obj.type
 
-                    if obj.type == 'progressbar' then
-                        prog.have = GetQuestProgressBarPercent(questId)
-                        prog.need = 100
+                        if obj.type == 'progressbar' then
+                            prog.have = GetQuestProgressBarPercent(questId)
+                            prog.need = 100
+                        else
+                            prog.have = obj.numFulfilled
+                            prog.need = obj.numRequired
+                        end
                     else
-                        prog.have = obj.numFulfilled
-                        prog.need = obj.numRequired
+                        local oldQuestId = C_QuestLog.GetSelectedQuest()
+                        C_QuestLog.SetSelectedQuest(questId)
+                        prog.text = GetQuestLogCompletionText()
+                        prog.type = 'object'
+                        prog.have = 1
+                        prog.need = 1
+                        C_QuestLog.SetSelectedQuest(oldQuestId)
                     end
-
                     break
                 end
             end
