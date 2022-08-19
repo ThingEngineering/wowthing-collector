@@ -1,3 +1,7 @@
+v9.2.7.3
+--------
+- Fixed quest scanning when quests have no obectives.
+
 v9.2.7.2
 --------
 - Added Legion Timewalking weekly quest to quest scanning.
