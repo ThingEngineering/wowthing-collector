@@ -1,3 +1,8 @@
+v9.2.7.4
+--------
+- Added Dinar quests to quest scanning.
+- Added Fated raid world quests to quest scanning.
+
 v9.2.7.3
 --------
 - Fixed quest scanning when quests have no obectives.
