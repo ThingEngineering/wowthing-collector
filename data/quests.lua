@@ -19,6 +19,11 @@ ns.emissaries = {
 ns.otherQuests = {
     -- Zereth Mortis
     65282, -- Improved Cypher Analysis Tool
+    65753, -- Cosmic Gladiator's Devouring Malediction
+    65754, -- Cosmic Gladiator's Eternal Aegis
+    65755, -- Cosmic Gladiator's Resonator
+    65756, -- Cosmic Gladiator's Echoing Resolve
+    65757, -- Cosmic Gladiator's Fastidious Resolve
 
     -- Korthia
     64027, -- Treatise: The Study of Anima and Harnessing Every Drop
