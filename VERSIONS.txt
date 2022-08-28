@@ -1,3 +1,7 @@
+v9.2.7.5
+--------
+- Added A New Deal reward tracking quests to quest scanning.
+
 v9.2.7.4
 --------
 - Added Dinar quests to quest scanning.
