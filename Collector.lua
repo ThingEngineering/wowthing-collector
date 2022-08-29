@@ -72,7 +72,7 @@ do
 end
 
 -- Need a frame for events
-local frame, events = CreateFrame("FRAME"), {}
+local frame, events = CreateFrame("FRAME", "WoWthing_Collector"), {}
 
 -- Fires when the addon has finished loading
 -- function events:ADDON_LOADED(name)
