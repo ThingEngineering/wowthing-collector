@@ -10,8 +10,8 @@ local hookedCollections, loggingOut = false, false
 local bankOpen, guildBankOpen, reagentBankUpdated, transmogOpen = false, false, false, false
 local maxScannedToys = 0
 local oldScannedTransmog = 0
-local dirtyBags, dirtyCovenant, dirtyCurrencies, dirtyGarrisons, dirtyHeirlooms, dirtyLocation, dirtyLockouts, dirtyMounts, dirtyMythicPlus, dirtyPets, dirtyQuests, dirtyReputations, dirtyToys, dirtyTransmog, dirtyVault =
-    {}, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+local dirtyBag, dirtyBags, dirtyCovenant, dirtyCurrencies, dirtyGarrisons, dirtyHeirlooms, dirtyLocation, dirtyLockouts, dirtyMounts, dirtyMythicPlus, dirtyPets, dirtyQuests, dirtyReputations, dirtyToys, dirtyTransmog, dirtyVault =
+    {}, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
 local dirtyCallings, callingData = false, nil
 local dirtyGuildBank, guildBankQueried, requestingPlayedTime = false, false, true
 
@@ -150,16 +150,19 @@ function events:PLAYER_MONEY()
 end
 -- Fires when the contents of a bag changes
 function events:BAG_UPDATE(bagID)
-    dirtyBags[bagID] = true
+    dirtyBag[bagID] = true
+end
+function events:BAG_UPDATE_DELAYED()
+    dirtyBags = true
 end
 -- Fires when the bank is opened
 function events:BANKFRAME_OPENED()
     -- Force a bag scan of the bank now that it's open
     bankOpen = true
-    dirtyBags[-1] = true
-    dirtyBags[-3] = true
+    dirtyBag[-1] = true
+    dirtyBag[-3] = true
     for i = 5, 11 do
-        dirtyBags[i] = true
+        dirtyBag[i] = true
     end
 end
 -- Fires when the bank is closed
@@ -168,7 +171,7 @@ function events:BANKFRAME_CLOSED()
 end
 -- Fires when something changes in the reagent bank
 function events:PLAYERREAGENTBANKSLOTS_CHANGED()
-    dirtyBags[-3] = true
+    dirtyBag[-3] = true
     reagentBankUpdated = true
 end
 -- Fires when the guild bank opens
@@ -331,9 +334,9 @@ end
 -------------------------------------------------------------------------------
 -- Timer to do spammy things
 function wwtc:Timer()
-    for bagID, dirty in pairs(dirtyBags) do
-        dirtyBags[bagID] = nil
-        wwtc:ScanBag(bagID)
+    if dirtyBags then
+        dirtyBags = false
+        wwtc:ScanBags()
     end
 
     if dirtyCovenant then
@@ -647,6 +650,13 @@ function wwtc:UpdateWarMode()
     if charData == nil then return end
 
     charData.isWarMode = C_PvP.IsWarModeDesired()
+end
+
+function wwtc:ScanBags()
+    for bagID, _ in pairs(dirtyBag) do
+        --wwtc:ScanBag(bagID)
+        dirtyBag[bagID] = nil
+    end
 end
 
 -- Scan a specific bag
