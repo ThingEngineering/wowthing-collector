@@ -655,7 +655,7 @@ end
 
 function wwtc:ScanBags()
     for bagID, _ in pairs(dirtyBag) do
-        --wwtc:ScanBag(bagID)
+        wwtc:ScanBag(bagID)
         dirtyBag[bagID] = nil
     end
 end
