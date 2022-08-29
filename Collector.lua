@@ -75,12 +75,12 @@ end
 local frame, events = CreateFrame("FRAME"), {}
 
 -- Fires when the addon has finished loading
-function events:ADDON_LOADED(name)
-    -- Damn Pet Journal!
-    if name == "Blizzard_Collections" then
-        wwtc:HookCollections()
-    end
-end
+-- function events:ADDON_LOADED(name)
+--     -- Damn Pet Journal!
+--     if name == "Blizzard_Collections" then
+--         wwtc:HookCollections()
+--     end
+-- end
 
 -- Fires when the player logs in, surprisingly
 function events:PLAYER_LOGIN()
@@ -323,6 +323,7 @@ end
 -------------------------------------------------------------------------------
 -- Call functions in the events table for events
 frame:SetScript("OnEvent", function(self, event, ...)
+    --print(event)
     events[event](self, ...)
 end)
 
@@ -502,7 +503,7 @@ function wwtc:Login()
     wwtc:Initialise()
 
     -- Try to hook things
-    wwtc:HookCollections()
+    -- wwtc:HookCollections()
 
     RequestTimePlayed()
     C_Garrison.RequestLandingPageShipmentInfo()
