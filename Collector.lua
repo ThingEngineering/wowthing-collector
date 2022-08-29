@@ -189,23 +189,23 @@ function events:GUILDBANKBAGSLOTS_CHANGED()
     dirtyGuildBank = true
 end
 -- Fires ??
-function events:COMPANION_UPDATE()
-    dirtyMounts = true
-    dirtyPets = true
-end
--- Fires when a new companion is learned
-function events:COMPANION_LEARNED()
-    dirtyMounts = true
-    dirtyPets = true
-end
--- Fires when the mount journal usability list changes (move between inside/outside/water/etc)
-function events:MOUNT_JOURNAL_USABILITY_CHANGED()
-    dirtyMounts = true
-end
--- Fires when the pet journal list updates
-function events:PET_JOURNAL_LIST_UPDATE()
-    dirtyPets = true
-end
+-- function events:COMPANION_UPDATE()
+--     dirtyMounts = true
+--     dirtyPets = true
+-- end
+-- -- Fires when a new companion is learned
+-- function events:COMPANION_LEARNED()
+--     dirtyMounts = true
+--     dirtyPets = true
+-- end
+-- -- Fires when the mount journal usability list changes (move between inside/outside/water/etc)
+-- function events:MOUNT_JOURNAL_USABILITY_CHANGED()
+--     dirtyMounts = true
+-- end
+-- -- Fires when the pet journal list updates
+-- function events:PET_JOURNAL_LIST_UPDATE()
+--     dirtyPets = true
+-- end
 -- Fires when the contents of the reputation listing change or become available
 function events:UPDATE_FACTION()
     dirtyReputations = true
