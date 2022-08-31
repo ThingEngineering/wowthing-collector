@@ -1,3 +1,11 @@
+v9.2.7.6
+--------
+- Reworked item and transmog scanning to do some work per frame, hopefully reducing
+  jank.
+- Changed item scanning to wait for all bag updates to be complete before starting.
+- Disabled Blizzard_Collections addon hooking as it shouldn't be needed any more.
+- Disabled mount/pet scanning, they trigger constantly and aren't needed right now.
+
 v9.2.7.5
 --------
 - Added A New Deal reward tracking quests to quest scanning.
