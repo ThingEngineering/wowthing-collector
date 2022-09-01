@@ -122,6 +122,9 @@ ns.progressQuests = {
         65775, -- Soloing Strategy
     }},
 
+    -- PvP Brawl
+    ["somethingDifferent"] = {"weekly", {47148}},
+
     -- Timewalking turn-ins
     ["timewalking"] = {"weekly", {
         40168, -- The Swirling Vial, TBC
