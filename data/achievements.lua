@@ -2,6 +2,9 @@ local an, ns = ...
 
 
 ns.achievements = {
+    -- Warlords of Draenor
+    9452, -- Trap Superstar
+
     -- Legion
     10596, -- Bigger Fish to Fry
     11152, -- Artifact - Hidden - Dungeons
