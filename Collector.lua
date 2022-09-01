@@ -9,8 +9,8 @@ local charClassID, charData, charName, guildName, playedLevel, playedLevelUpdate
 local hookedCollections, loggingOut = false, false
 local bankOpen, guildBankOpen, reagentBankUpdated, transmogOpen = false, false, false, false
 local maxScannedToys = 0
-local dirtyBag, dirtyBags, dirtyCovenant, dirtyCurrencies, dirtyGarrisons, dirtyHeirlooms, dirtyLocation, dirtyLockouts, dirtyMounts, dirtyMythicPlus, dirtyPets, dirtyQuests, dirtyReputations, dirtyToys, dirtyTransmog, dirtyVault =
-    {}, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+local dirtyAchievements, dirtyBag, dirtyBags, dirtyCovenant, dirtyCurrencies, dirtyGarrisonTrees, dirtyHeirlooms, dirtyLocation, dirtyLockouts, dirtyMounts, dirtyMythicPlus, dirtyPets, dirtyQuests, dirtyReputations, dirtyToys, dirtyTransmog, dirtyVault =
+    false, {}, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
 local dirtyCallings, callingData = false, nil
 local dirtyGuildBank, guildBankQueried, requestingPlayedTime = false, false, true
 
@@ -96,7 +96,7 @@ function events:PLAYER_ENTERING_WORLD()
     
     dirtyCovenant = true
     dirtyCurrencies = true
-    dirtyGarrisons = true
+    dirtyGarrisonTrees = true
     dirtyHeirlooms = true
     dirtyLocation = true
     dirtyTransmog = true
@@ -133,6 +133,10 @@ end
 -- Fires when RequestRaidInfo() completes
 function events:UPDATE_INSTANCE_INFO()
     dirtyLockouts = true
+end
+-- Fires when achievement criteria updates
+function events:CRITERIA_UPDATE()
+    dirtyAchievements = true
 end
 -- Fires when currency changes
 function events:CURRENCY_DISPLAY_UPDATE(currencyType)
@@ -258,13 +262,13 @@ function events:PLAYER_FLAGS_CHANGED(unitId)
 end
 -- Garrisons
 function events:GARRISON_TALENT_COMPLETE()
-    dirtyGarrisons = true
+    dirtyGarrisonTrees = true
 end
 function events:GARRISON_TALENT_RESEARCH_STARTED()
-    dirtyGarrisons = true
+    dirtyGarrisonTrees = true
 end
 function events:GARRISON_TALENT_UPDATE()
-    dirtyGarrisons = true
+    dirtyGarrisonTrees = true
 end
 -- Quests
 function events:COVENANT_CALLINGS_UPDATED(callings)
@@ -335,6 +339,11 @@ end
 -------------------------------------------------------------------------------
 -- Timer to do spammy things
 function wwtc:Timer()
+    if dirtyAchievements then
+        dirtyAchievements = false
+        wwtc:ScanAchievements()
+    end
+
     if dirtyBags then
         dirtyBags = false
         wwtc:ScanBags()
@@ -350,9 +359,9 @@ function wwtc:Timer()
         wwtc:ScanCurrencies()
     end
 
-    if dirtyGarrisons then
-        dirtyGarrisons = false
-        wwtc:ScanGarrisons()
+    if dirtyGarrisonTrees then
+        dirtyGarrisonTrees = false
+        wwtc:ScanGarrisonTrees()
     end
 
     if dirtyGuildBank then
@@ -367,6 +376,7 @@ function wwtc:Timer()
 
     if dirtyLocation then
         dirtyLocation = false
+        wwtc:ScanGarrisons()
         wwtc:ScanLocation()
     end
 
@@ -467,6 +477,7 @@ function wwtc:Initialise()
     charData.currencies = charData.currencies or {}
     charData.dailyQuests = charData.dailyQuests or {}
     charData.emissaries = charData.emissaries or {}
+    charData.garrisons = charData.garrisons or nil
     charData.garrisonTrees = charData.garrisonTrees or nil
     charData.illusions = charData.illusions or ''
     charData.items = charData.items or {}
@@ -1643,7 +1654,56 @@ end
 function wwtc:ScanGarrisons()
     if charData == nil then return end
 
-    charData.scanTimes["garrisons"] = time()
+    for _, garrisonData in ipairs(ns.garrisons) do
+        if C_Garrison.IsPlayerInGarrison(garrisonData.type) then
+            wwtc:ScanGarrison(garrisonData)
+            break
+        end
+    end
+end
+
+function wwtc:ScanGarrison(garrisonData)
+    local garrison
+    for _, charGarrison in ipairs(charData.garrisons) do
+        if charGarrison.type == garrisonData.type then
+            garrison = charGarrison
+            break
+        end
+    end
+
+    if garrison == nil then
+        garrison = {
+            type = garrisonData.type
+        }
+        charData.garrisons[#charData.garrisons + 1] = garrison
+    end
+
+    garrison.scannedAt = time()
+
+    local level, _ = C_Garrison.GetGarrisonInfo(garrisonData.type)
+    garrison.level = level
+
+    garrison.buildings = {}
+    local buildings = C_Garrison.GetBuildings(garrisonData.type) or {}
+
+    for _, building in ipairs(buildings) do
+        -- id, name, textureKit, icon, description, rank, currencyID, currencyQty, goldQty,
+        -- buildTime, needsPlan, isPrebuilt, possSpecs, upgrades, canUpgrade, isMaxLevel, hasFollowerSlot
+        local _, name, _, _, _, rank = C_Garrison.GetBuildingInfo(building.buildingID)
+
+        tinsert(garrison.buildings, {
+            buildingId = building.buildingID,
+            plotId = building.plotID,
+            name = name,
+            rank = rank,
+        })
+    end
+end
+
+function wwtc:ScanGarrisonTrees()
+    if charData == nil then return end
+
+    charData.scanTimes["garrisonTrees"] = time()
     charData.garrisonTrees = {}
 
     for _, treeId in ipairs(ns.garrisonTrees) do
