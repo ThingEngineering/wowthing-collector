@@ -1139,7 +1139,10 @@ function wwtc:ScanQuests()
 
         for _, questId in ipairs(questData[2]) do
             if questData[1] == 'wq' and prog.reset == 0 then
-                prog.reset = now + C_TaskQuest.GetQuestTimeLeftSeconds(questId)
+                local timeLeft = C_TaskQuest.GetQuestTimeLeftSeconds(questId)
+                if timeLeft ~= nil then
+                    prog.reset = now + timeLeft
+                end
             end
 
             -- Quest is completed
