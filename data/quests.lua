@@ -154,6 +154,9 @@ ns.progressQuests = {
     ["legHellfire1Mythic"] = {"once", {39501}},
     ["legHellfire2Mythic"] = {"once", {39505}},
 
+    -- Legion: Misc
+    ["legionWitheredTraining"] = {"wq", {43943}},
+
     -- Legion: Raids
     ["legEmerald1Normal"] = {"once", {44283}},
     ["legEmerald1Heroic"] = {"once", {44284}},
@@ -194,6 +197,13 @@ ns.progressQuests = {
 
     -- Shadowlands: 9.1
     ["shapingFate"] = {"weekly", {63949}},
+    ["slTormentors"] = {"weekly", {63854}},
+    ["slMawAssault"] = {"biweekly", {
+        63543, -- Necrolord
+        63822, -- Venthyr
+        63823, -- Night Fae
+        63824, -- Kyrian
+    }},
 
     -- Shadowlands: 9.2
     ["newDeal"] = {"weekly", {65649}},
