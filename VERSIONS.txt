@@ -1,3 +1,10 @@
+v9.2.7.9
+--------
+- Added Legion - Withered Army Training to quest scanning.
+- Added Shadowlands - Maw Assault to quest scanning.
+- Added Shadowlands - Tormentors of Torghast to quest scanning.
+- Added support for World Quest reset times to quest scanning.
+
 v9.2.7.8
 --------
 - Fixed garrison/garrison tree scanning error.
