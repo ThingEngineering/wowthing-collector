@@ -477,8 +477,8 @@ function wwtc:Initialise()
     charData.currencies = charData.currencies or {}
     charData.dailyQuests = charData.dailyQuests or {}
     charData.emissaries = charData.emissaries or {}
-    charData.garrisons = charData.garrisons or nil
-    charData.garrisonTrees = charData.garrisonTrees or nil
+    charData.garrisons = charData.garrisons or {}
+    charData.garrisonTrees = charData.garrisonTrees or {}
     charData.illusions = charData.illusions or ''
     charData.items = charData.items or {}
     charData.lockouts = charData.lockouts or {}
