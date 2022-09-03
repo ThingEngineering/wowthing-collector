@@ -1,3 +1,7 @@
+v9.2.7.8
+--------
+- Fixed garrison/garrison tree scanning error.
+
 v9.2.7.7
 --------
 - Added basic garrison scanning (garrison level, building levels).
