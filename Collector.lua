@@ -1103,7 +1103,7 @@ function wwtc:ScanQuests()
     charData.progressQuests = {}
 
     local now = time()
-    charData.scanTimes["quests"] = time()
+    charData.scanTimes["quests"] = now
 
     local dailyReset = now + C_DateAndTime.GetSecondsUntilDailyReset()
     local weeklyReset = now + C_DateAndTime.GetSecondsUntilWeeklyReset()
@@ -1138,6 +1138,10 @@ function wwtc:ScanQuests()
         end
 
         for _, questId in ipairs(questData[2]) do
+            if questData[1] == 'wq' and prog.reset == 0 then
+                prog.reset = now + C_TaskQuest.GetQuestTimeLeftSeconds(questId)
+            end
+
             -- Quest is completed
             if C_QuestLog_IsQuestFlaggedCompleted(questId) then
                 prog.id = questId
