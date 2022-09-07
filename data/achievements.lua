@@ -22,3 +22,9 @@ ns.achievements = {
     14766, -- Parasoling
     14799, -- Sojourner of Maldraxxus
 }
+
+ns.achievementCriteria = {
+    [11657] = 1, -- Artifact - Challenge - Color 2
+    [11661] = 1, -- Artifact - Challenge - Color 3
+    [11665] = 15, -- Artifact - Challenge - Color 4
+}

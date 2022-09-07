@@ -937,9 +937,9 @@ function wwtc:ScanAchievements()
         local earnedByCharacter = select(13, GetAchievementInfo(achievementId))
 
         if not earnedByCharacter then
-            local numCriteria = GetAchievementNumCriteria(achievementId)
+            local numCriteria = ns.achievementCriteria[achievementId] or GetAchievementNumCriteria(achievementId)
             for i = 1, numCriteria do
-                local _, _, _, quantity = GetAchievementCriteriaInfo(achievementId, i)
+                local _, _, _, quantity = GetAchievementCriteriaInfo(achievementId, i, true)
                 table.insert(criteria, quantity)
             end
         end
