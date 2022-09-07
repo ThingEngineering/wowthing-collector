@@ -454,6 +454,10 @@ function wwtc:Initialise()
     WWTCSaved.heirloomsV2 = WWTCSaved.heirloomsV2 or {}
     WWTCSaved.transmogSourcesV2 = WWTCSaved.transmogSourcesV2 or {}
 
+    WWTCSaved.honorLevel = 0
+    WWTCSaved.honorCurrent = 0
+    WWTCSaved.honorMax = 0
+
     -- Set up character data table
     charData = WWTCSaved.chars[charName] or {}
     WWTCSaved.chars[charName] = charData
@@ -608,6 +612,7 @@ function wwtc:UpdateCharacterData()
 
         wwtc:UpdateChromieTime()
         wwtc:UpdateExhausted()
+        wwtc:UpdateHonor()
         wwtc:UpdateWarMode()
 
         wwtc:ScanAchievements()
@@ -664,6 +669,12 @@ function wwtc:UpdateExhausted()
     else
         charData.restedXP = 0
     end
+end
+
+function wwtc:UpdateHonor()
+    WWTCSaved.honorLevel = UnitHonorLevel('player')
+    WWTCSaved.honorCurrent = UnitHonor('player')
+    WWTCSaved.honorMax = UnitHonorMax('player')
 end
 
 function wwtc:UpdateWarMode()
