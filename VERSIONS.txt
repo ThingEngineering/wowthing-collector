@@ -1,3 +1,9 @@
+v9.2.7.10
+---------
+- Added honor level scanning.
+- Added more hidden Legion artifact tracking achievement scanning.
+- Added an override for achievement criteria count.
+
 v9.2.7.9
 --------
 - Added Legion - Withered Army Training to quest scanning.
