@@ -935,20 +935,22 @@ function wwtc:ScanAchievements()
     for _, achievementId in ipairs(ns.achievements) do
         local criteria = {}
         local earnedByCharacter = select(13, GetAchievementInfo(achievementId))
-
-        if not earnedByCharacter then
-            local numCriteria = ns.achievementCriteria[achievementId] or GetAchievementNumCriteria(achievementId)
-            for i = 1, numCriteria do
-                local _, _, _, quantity = GetAchievementCriteriaInfo(achievementId, i, true)
-                table.insert(criteria, quantity)
+        -- This is nil if the achievement doesn't exist somehow
+        if earnedByCharacter ~= nil then
+            if not earnedByCharacter then
+                local numCriteria = ns.achievementCriteria[achievementId] or GetAchievementNumCriteria(achievementId)
+                for i = 1, numCriteria do
+                    local _, _, _, quantity = GetAchievementCriteriaInfo(achievementId, i, true)
+                    table.insert(criteria, quantity)
+                end
             end
-        end
 
-        charData.achievements[#charData.achievements + 1] = {
-            id = achievementId,
-            earned = earnedByCharacter,
-            criteria = criteria,
-        }
+            charData.achievements[#charData.achievements + 1] = {
+                id = achievementId,
+                earned = earnedByCharacter,
+                criteria = criteria,
+            }
+        end
     end
 end
 
