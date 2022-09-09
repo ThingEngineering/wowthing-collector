@@ -1619,8 +1619,8 @@ function wwtc:ScanReputations()
             local currentValue, threshold, _, hasRewardPending = C_Reputation.GetFactionParagonInfo(factionID)
             -- value:max:hasReward
             charData.paragons[factionID] = table.concat({
-                currentValue,
-                threshold,
+                currentValue or 0,
+                threshold or 0,
                 hasRewardPending and 1 or 0,
             }, ':')
         end
