@@ -54,8 +54,8 @@ ns.otherQuests = {
     -- Soulshapes
     64982, -- Cat (Well Fed)
     64938, -- Corgi
-
-    -- Artifact Hidden Appearances
+    
+    -- Legion: Artifact Hidden Appearances
     43646,
     43647,
     43648,
