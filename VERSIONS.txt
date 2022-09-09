@@ -1,3 +1,8 @@
+v9.2.7.11
+---------
+- Fix achievement scanning error.
+- Fix reputation scanning error (#8).
+
 v9.2.7.10
 ---------
 - Added honor level scanning.
