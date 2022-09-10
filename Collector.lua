@@ -1230,7 +1230,7 @@ function wwtc:ScanQuests()
 
                 -- { questID, factionID, icon, numObjectives, turninRequirementText }[]
                 for i, bounty in ipairs(bounties) do
-                    local timeLeft = C_TaskQuest.GetQuestTimeLeftMinutes(bounty.questID)
+                    local timeLeft = C_TaskQuest.GetQuestTimeLeftMinutes(bounty.questID) or 0
 
                     local index = 3
                     if timeLeft < 1440 then
