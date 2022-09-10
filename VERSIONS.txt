@@ -1,3 +1,8 @@
+v9.2.7.12
+---------
+- Fix achievement scanning error, maybe for real this time.
+- Fix bounty scanning error.
+
 v9.2.7.11
 ---------
 - Fix achievement scanning error.
