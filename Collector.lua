@@ -940,7 +940,11 @@ function wwtc:ScanAchievements()
             if not earnedByCharacter then
                 local numCriteria = ns.achievementCriteria[achievementId] or GetAchievementNumCriteria(achievementId)
                 for i = 1, numCriteria do
-                    local _, _, _, quantity = GetAchievementCriteriaInfo(achievementId, i, true)
+                    local success, _, _, _, quantity = pcall(GetAchievementCriteriaInfo, achievementId, i, true)
+                    if success == false then
+                        criteria = {}
+                        break
+                    end
                     table.insert(criteria, quantity)
                 end
             end
@@ -1895,7 +1899,7 @@ end
 
 SLASH_WWTC1 = "/wwtc"
 SlashCmdList["WWTC"] = function(msg)
-    wwtc:ScanTransmog()
+    wwtc:ScanAchievements()
 end
 
 SLASH_RL1 = "/rl"
