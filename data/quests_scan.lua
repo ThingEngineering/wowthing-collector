@@ -104,23 +104,23 @@ ns.scanQuests = {
     62209, -- Houndmaster Vasanok
     58918, -- Huwerath
     62788, -- Ikras the Devourer
-    63381, -- Krala <Death's Wings>
+    63381, -- Krala
     61125, -- Malevolent Stygia
-    60987, -- Morguliax <Lord of Decapitation>
+    60987, -- Morguliax
     57573, -- Nascent Devourer
-    60667, -- Obolos <Prime Adjutant>
+    60667, -- Obolos
     62618, -- Odalrik
     61519, -- Orophea
-    60991, -- Orrholyn <Lord of Bloodletting>
+    60991, -- Orrholyn
     63044, -- Ratgusher
-    60992, -- Razkazzar <Lord of Axes>
+    60992, -- Razkazzar
     62210, -- Sanngror the Torturer
     60884, -- Shadeweaver Zeris
     62211, -- Skittering Broodmother
     60834, -- Soulforger Rhovus
     59441, -- Soulsmith Yol-Mattar
     60789, -- Talaporas, Herald of Pain
-    60914, -- Thanassos <Death's Voice>
+    60914, -- Thanassos
     64232, -- Torglluun
     61728, -- Valis the Cruel
     61568, -- Yero the Skittish
@@ -175,7 +175,6 @@ ns.scanQuests = {
     62187, -- Lost Satchel
     62186, -- Swollen Anima Seed
     61192, -- Tame Gladerunner
-    -- Zone Maps: :covenant-night-fae: Heart of the Forest
     -- Zone Maps: Bastion
     60977, -- The Ascended Council
     61083, -- Aspirant Eolis
@@ -211,7 +210,6 @@ ns.scanQuests = {
     58298, -- Scroll of Aeons
     61044, -- Stolen Equipment
     61183, -- Vesper of the Silver Wind
-    -- Zone Maps: :covenant-kyrian: Elysian Hold
     -- Zone Maps: Maldraxxus
     58870, -- Bubbleblood
     58005, -- Collector Kash
@@ -255,7 +253,6 @@ ns.scanQuests = {
     61724, -- Pool of Mixed Monstrosities
     61719, -- Pool of Mixed Monstrosities
     61723, -- Pool of Mixed Monstrosities
-    -- Zone Maps: :covenant-necrolord: Seat of the Primus
     -- Zone Maps: Revendreth
     59854, -- Amalgamation of Filth
     59584, -- Amalgamation of Light
@@ -292,6 +289,9 @@ ns.scanQuests = {
     62199, -- Taskmaster's Trove
     62063, -- The Count
     62164, -- Vrytha's Dredglaive
+    -- Zone Maps: :covenant-night-fae: Heart of the Forest
+    -- Zone Maps: :covenant-kyrian: Elysian Hold
+    -- Zone Maps: :covenant-necrolord: Seat of the Primus
     -- Zone Maps: :covenant-venthyr: Sinfall [Upper]
     -- Zone Maps: :covenant-venthyr: Sinfall [Lower]
     -- Zone Maps: Oribos
@@ -409,7 +409,7 @@ ns.scanQuests = {
     56298, -- Soundless
     56106, -- Tidemistress Leth'sindra
     55603, -- Vor'koth
-    56057, -- Ulmath <The Soulbinder>
+    56057, -- Ulmath
     56056, -- Wekemara
     -- Zone Maps: Arathi Highlands
     53083, -- Beastrider Kama
@@ -713,6 +713,10 @@ ns.scanQuests = {
     48664, -- Tereck the Selector
     -- Zone Maps: Vindicaar, The
     -- Zone Maps: Broken Shore, The
+    47061, -- Aprocon
+    46947, -- Brutallus
+    46948, -- Malificus
+    46945, -- Si'vash
     -- Zone Maps: Azsuna
     42505, -- Arcanist Shal'iman
     37932, -- Arcavellus
