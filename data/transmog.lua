@@ -14,6 +14,12 @@ ns.transmog = {
         itemId = 1959,
         modifierId = 0,
     },
+    -- The Emperor's New Cape
+    {
+        appearanceId = 2352,
+        itemId = 11930,
+        modifierId = 0,
+    },
     -- Admiral Taylor's Greatsword
     {
         appearanceId = 22283,
