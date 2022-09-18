@@ -19,6 +19,29 @@ ns.emissaries = {
 ns.otherQuests = {
     -- Zereth Mortis
     65282, -- Improved Cypher Analysis Tool
+
+    65471, -- Pocopoc's Bronze and Gold Body
+    65472, -- Pocopoc's Beryllium and Silver Body
+    65473, -- Pocopoc's Cobalt and Copper Body
+    65474, -- Pocopoc's Ruby and Platinum Body
+    65476, -- Pocopoc's Gold and Ruby Components
+    65477, -- Pocopoc's Silver and Beryllium Components
+    65478, -- Pocopoc's Copper and Cobalt Components
+    65479, -- Pocopoc's Platinum and Emerald Components
+    65481, -- Pocopoc's Diamond Vambraces
+    65482, -- Pocopoc's Face Decoration
+    65483, -- Pocopoc's Shielded Core
+    65484, -- Pocopoc's Upgraded Core
+
+    65524, -- Chef Pocopoc
+    65525, -- Peaceful Pocopoc
+    65526, -- Pirate Pocopoc
+    65527, -- Adventurous Pocopoc
+    65528, -- Dapper Pocopoc
+    65529, -- Admiral Pocopoc
+    65534, -- Pocobold
+    65538, -- Pepepec
+
     65753, -- Cosmic Gladiator's Devouring Malediction
     65754, -- Cosmic Gladiator's Eternal Aegis
     65755, -- Cosmic Gladiator's Resonator
