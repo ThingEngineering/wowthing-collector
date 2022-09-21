@@ -1,3 +1,8 @@
+v9.2.7.15
+---------
+- Added Path of Ascension fights to quest scanning.
+- Added Legion Order Halls to garrison scanning.
+
 v9.2.7.14
 ---------
 - Added Pocopoc customizations to quest scanning.
