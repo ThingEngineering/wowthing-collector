@@ -77,6 +77,96 @@ ns.otherQuests = {
     -- Soulshapes
     64982, -- Cat (Well Fed)
     64938, -- Corgi
+
+    -- Path of Ascension: Kalisthene
+    60917, -- Courage
+    61023, -- Loyalty
+    61033, -- Wisdom
+    61043, -- Humility - no charms
+    63102, -- Humility - Pelagos
+    63103, -- Humility - Kleia
+    63104, -- Humility - Mikanikos
+
+    -- Path of Ascension: Echthra
+    60918, -- Courage
+    61022, -- Loyalty
+    61032, -- Wisdom
+    61042, -- Humility - no charms
+    63105, -- Humility - Pelagos
+    63106, -- Humility - Kleia
+    63107, -- Humility - Mikanikos
+
+    -- Path of Ascension: Alderyn and Myn'ir
+    60919, -- Courage
+    61021, -- Loyalty
+    61031, -- Wisdom
+    61041, -- Humility - no charms
+    63108, -- Humility - Pelagos
+    63109, -- Humility - Kleia
+    63110, -- Humility - Mikanikos
+
+    -- Path of Ascension: Nuuminuuru
+    60921, -- Courage
+    61020, -- Loyalty
+    61030, -- Wisdom
+    61040, -- Humility - no charms
+    63111, -- Humility - Pelagos
+    63112, -- Humility - Kleia
+    63113, -- Humility - Mikanikos
+
+    -- Path of Ascension: Craven Corinth
+    60922, -- Courage
+    61019, -- Loyalty
+    61029, -- Wisdom
+    61039, -- Humility - no charms
+    63114, -- Humility - Pelagos
+    63115, -- Humility - Kleia
+    63116, -- Humility - Mikanikos
+
+    -- Path of Ascension: Splinterbark Nightmare
+    60923, -- Courage
+    61018, -- Loyalty
+    61028, -- Wisdom
+    61038, -- Humility - no charms
+    63117, -- Humility - Pelagos
+    63118, -- Humility - Kleia
+    63119, -- Humility - Mikanikos
+
+    -- Path of Ascension: Thran'tiok
+    60924, -- Courage
+    61017, -- Loyalty
+    61027, -- Wisdom
+    61037, -- Humility - no charms
+    63120, -- Humility - Pelagos
+    63121, -- Humility - Kleia
+    63122, -- Humility - Mikanikos
+
+    -- Path of Ascension: Mad Mortimer
+    60925, -- Courage
+    61016, -- Loyalty
+    61026, -- Wisdom
+    61036, -- Humility - no charms
+    63123, -- Humility - Pelagos
+    63124, -- Humility - Kleia
+    63125, -- Humility - Mikanikos
+
+    -- Path of Ascension: Athanos
+    60926, -- Courage
+    61015, -- Loyalty
+    61025, -- Wisdom
+    61035, -- Humility - no charms
+    63126, -- Humility - Pelagos
+    63127, -- Humility - Kleia
+    63128, -- Humility - Mikanikos
+
+    -- Path of Ascension: Azaruux
+    60927, -- Courage
+    61014, -- Loyalty
+    61024, -- Wisdom
+    61034, -- Humility - no charms
+    63129, -- Humility - Pelagos
+    63130, -- Humility - Kleia
+    63131, -- Humility - Mikanikos
     
     -- Legion: Artifact Hidden Appearances
     43646,
