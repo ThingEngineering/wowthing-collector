@@ -1679,9 +1679,8 @@ function wwtc:ScanGarrisons()
     if charData == nil then return end
 
     for _, garrisonData in ipairs(ns.garrisons) do
-        if C_Garrison.IsPlayerInGarrison(garrisonData.type) then
+        if garrisonData.mustBeInGarrison == false or C_Garrison.IsPlayerInGarrison(garrisonData.type) then
             wwtc:ScanGarrison(garrisonData)
-            break
         end
     end
 end
@@ -1721,6 +1720,11 @@ function wwtc:ScanGarrison(garrisonData)
             name = name,
             rank = rank,
         })
+    end
+
+    local treeIds = C_Garrison.GetTalentTreeIDsByClassID(garrisonData.type, charClassID)
+    for _, treeId in ipairs(treeIds or {}) do
+        wwtc:ScanGarrisonTree(treeId)
     end
 end
 
@@ -1899,7 +1903,7 @@ end
 
 SLASH_WWTC1 = "/wwtc"
 SlashCmdList["WWTC"] = function(msg)
-    wwtc:ScanAchievements()
+    wwtc:ScanGarrisons()
 end
 
 SLASH_RL1 = "/rl"
