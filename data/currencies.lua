@@ -20,6 +20,7 @@ ns.currencies = {
     81, -- Epicurean's Award
     402, -- Ironpaw Token
     416, -- Mark of the World Tree
+    1379, -- Trial of Style Token
 
     -- Cataclysm
     361, -- Illustrious Jewelcrafter's Token
