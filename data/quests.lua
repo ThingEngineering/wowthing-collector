@@ -168,6 +168,56 @@ ns.otherQuests = {
     63130, -- Humility - Kleia
     63131, -- Humility - Mikanikos
     
+    -- Ember Court: Unlocks
+    61493, -- Decorations
+    61494, -- Security
+    -- 61705, -- Refreshments
+    -- 61706, -- Entertainment
+    61497, -- Stock: Greeting Kits
+    61498, -- Stock: Appetizers
+    61499, -- Stock: Anima Samples
+    61500, -- Stock: Comfy Chairs
+    61501, -- Staff: Revendreth Ambassador
+    61502, -- Staff: Ardenweald Ambassador
+    61887, -- Staff: Maldraxxus Ambassador
+    61888, -- Staff: Bastion Ambassador
+
+    -- Ember Court: RSVP
+    59383, -- Baroness Vashj
+    59386, -- Lady Moonberry
+    59389, -- Mikanikos
+    59392, -- The Countess
+    59395, -- Alexandros Mograine
+    59398, -- Hunt-Captain Korayn
+    59401, -- Polemarch Adrestes
+    59404, -- Rendle & Cudgelface
+    59407, -- Choofa
+    59410, -- Cryptkeeper Kassir
+    59413, -- Droman Aliothe
+    59416, -- Grandmaster Vole
+    59419, -- Kleia & Pelagos
+    59422, -- Plague Deviser Marileth
+    59425, -- Sika
+    59619, -- Stonehead
+
+    -- Ember Court: Friend of a Friend
+    -- 65121, -- Baroness Vashj
+    -- 65123, -- Lady Moonberry
+    -- 65124, -- Mikanikos
+    -- 65126, -- The Countess
+    -- 65128, -- Alexandros Mograine
+    -- 65129, -- Hunt-Captain Korayn
+    -- 65130, -- Polemarch Adrestes
+    -- 65131, -- Rendle & Cudgelface
+    -- 65132, -- Choofa
+    -- 65134, -- Cryptkeeper Kassir
+    -- 65135, -- Droman Aliothe
+    -- 65136, -- Grandmaster Vole
+    -- 65137, -- Kleia & Pelagos
+    -- 65138, -- Plague Deviser Marileth
+    -- 65140, -- Sika
+    -- 65141, -- Stonehead
+
     -- Legion: Artifact Hidden Appearances
     43646,
     43647,

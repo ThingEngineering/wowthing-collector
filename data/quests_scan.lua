@@ -134,6 +134,7 @@ ns.scanQuests = {
     64010, -- Lil'Abom
     64011, -- Lil'Abom
     64013, -- Lil'Abom
+    64282, -- Zovaal's Vault
     63433, -- Hunt: Shadehounds
     63854, -- Tormentors of Torghast
     -- Zone Maps: Ardenweald
@@ -165,6 +166,11 @@ ns.scanQuests = {
     61074, -- Cache of the Moon
     61110, -- Cache of the Night
     61068, -- Darkreach Supplies
+    60672, -- Decayed Husk
+    60715, -- Decayed Husk
+    60714, -- Decayed Husk
+    60711, -- Decayed Husk
+    60710, -- Decayed Husk
     61147, -- Desiccated Moth
     61070, -- Dreamsong Heart
     61175, -- Elusive Faerie Cache
@@ -273,6 +279,7 @@ ns.scanQuests = {
     58213, -- Scrivener Lenua
     62252, -- Sinstone Hoarder
     58263, -- Sire Ladinas
+    58130, -- Soulstalker Doina
     62220, -- Stonefist
     56877, -- Tomb Burster
     58259, -- Worldedge Gorger
@@ -289,11 +296,10 @@ ns.scanQuests = {
     62199, -- Taskmaster's Trove
     62063, -- The Count
     62164, -- Vrytha's Dredglaive
-    -- Zone Maps: :covenant-night-fae: Heart of the Forest
     -- Zone Maps: :covenant-kyrian: Elysian Hold
+    -- Zone Maps: :covenant-night-fae: Heart of the Forest
     -- Zone Maps: :covenant-necrolord: Seat of the Primus
-    -- Zone Maps: :covenant-venthyr: Sinfall [Upper]
-    -- Zone Maps: :covenant-venthyr: Sinfall [Lower]
+    -- Zone Maps: :covenant-venthyr: Sinfall
     -- Zone Maps: Oribos
     -- Zone Maps: Battle for Azeroth
     -- Zone Maps: Uldum
@@ -409,6 +415,7 @@ ns.scanQuests = {
     56298, -- Soundless
     56106, -- Tidemistress Leth'sindra
     55603, -- Vor'koth
+    55121, -- The Laboratory of Mardivas
     56057, -- Ulmath
     56056, -- Wekemara
     -- Zone Maps: Arathi Highlands
@@ -533,7 +540,7 @@ ns.scanQuests = {
     53471, -- Hexed Chest
     53386, -- Runebound Chest
     53387, -- Runebound Coffer
-    52157, -- Hailstone Construct
+    52999, -- Hailstone Construct
     -- Zone Maps: Stormsong Valley
     51298, -- Broodmother
     50170, -- Captain Razorspine
@@ -686,6 +693,7 @@ ns.scanQuests = {
     48810, -- Vrax'thul
     48820, -- Worldsplitter Skuul
     48814, -- Wrath-Lord Yarez
+    49018, -- Ancient Legion War Cache
     -- Zone Maps: Eredath
     48709, -- Ataxon
     48700, -- Baruut the Bloodthirsty
@@ -817,6 +825,7 @@ ns.scanQuests = {
     42819, -- Humongris <The Wizard>
     42779, -- Shar'thos
     -- Zone Maps: Dalaran
+    -- Zone Maps: Dalaran Underbelly
     -- Zone Maps: Warlords of Draenor
     -- Zone Maps: Tanaan Jungle
     38430, -- Argosh the Destroyer
