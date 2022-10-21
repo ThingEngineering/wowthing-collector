@@ -1,3 +1,9 @@
+v9.2.7.16
+---------
+- Added Ember Court unlocks to quest scanning.
+- Added Trial of Style to currency scanning.
+- Updated quest scanning list.
+
 v9.2.7.15
 ---------
 - Added Path of Ascension fights to quest scanning.
