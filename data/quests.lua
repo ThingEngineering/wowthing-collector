@@ -292,7 +292,8 @@ ns.progressQuests = {
     ["timewalking"] = {"weekly", {
         40168, -- The Swirling Vial, TBC
         40173, -- The Unstable Prism, Wrath
-        40786, -- The Smoldering Ember, Cata
+        40786, -- The Smoldering Ember, Cata [Horde]
+        40787, -- The Smoldering Ember, Cata [Alliance]
         45563, -- The Shrouded Coin, MoP
         55498, -- The Shimmering Crystal, WoD
         64710, -- Whispering Fel Crystal, Legion
