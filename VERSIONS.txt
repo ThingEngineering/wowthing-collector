@@ -1,3 +1,7 @@
+v9.2.7.17
+---------
+- Added the Alliance Cataclysm Timewalking item turn-in to quest tracking.
+
 v9.2.7.16
 ---------
 - Added Ember Court unlocks to quest scanning.
