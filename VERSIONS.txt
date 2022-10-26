@@ -1,3 +1,8 @@
+v10.0.0.1
+---------
+- Initial fixes for 10.0 release.
+- Added Adventure Campaign Progress to currency scanning.
+
 v9.2.7.17
 ---------
 - Added the Alliance Cataclysm Timewalking item turn-in to quest tracking.
