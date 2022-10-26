@@ -87,6 +87,7 @@ ns.currencies = {
     1822, -- Renown
     1828, -- Soul Ash
     1885, -- Grateful Offering
+    1889, -- Adventure Campaign Progress
     1904, -- Tower Knowledge
     1906, -- Soul Cinders
     1931, -- Cataloged Research
