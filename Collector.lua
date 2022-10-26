@@ -25,7 +25,7 @@ local C_CurrencyInfo_GetCurrencyInfo, C_TransmogCollection_GetAppearanceSources,
 local LibRealmInfo = LibStub('LibRealmInfo17janekjl')
 
 -- Tooltips?
-local scanTooltip = CreateFrame('GameTooltip', 'WWTCTooltip', nil, 'GameTooltipTemplate')
+local scanTooltip = CreateFrame('GameTooltip', 'WWTCTooltip', nil, 'SharedTooltipTemplate')
 scanTooltip:SetOwner(WorldFrame, 'ANCHOR_NONE')
 
 -- Default SavedVariables
@@ -224,12 +224,6 @@ function events:CHALLENGE_MODE_MAPS_UPDATE()
     dirtyVault = true
 end
 -- Vault
-function events:WEEKLY_REWARDS_HIDE()
-    dirtyVault = true
-end
-function events:WEEKLY_REWARDS_SHOW()
-    dirtyVault = true
-end
 function events:WEEKLY_REWARDS_UPDATE()
     dirtyVault = true
 end
@@ -246,13 +240,6 @@ end
 function events:SHOW_LOOT_TOAST()
     dirtyLockouts = true
     dirtyQuests = true
-end
--- Chromie time
-function events:CHROMIE_TIME_CLOSE()
-    wwtc:UpdateChromieTime()
-end
-function events:CHROMIE_TIME_OPEN()
-    wwtc:UpdateChromieTime()
 end
 -- Vague about what this does, but it includes war mode
 function events:PLAYER_FLAGS_CHANGED(unitId)
@@ -280,12 +267,6 @@ function events:COVENANT_CHOSEN()
     dirtyCovenant = true
 end
 function events:COVENANT_SANCTUM_RENOWN_LEVEL_CHANGED()
-    dirtyCovenant = true
-end
-function events:COVENANT_SANCTUM_INTERACTION_STARTED()
-    dirtyCovenant = true
-end
-function events:COVENANT_SANCTUM_INTERACTION_ENDED()
     dirtyCovenant = true
 end
 function events:SOULBIND_ACTIVATED()
@@ -1616,7 +1597,7 @@ function wwtc:ScanReputations()
     end
 
     for _, friendshipID in ipairs(ns.friendships) do
-        local _, friendRep = GetFriendshipReputation(friendshipID)
+        local _, friendRep = C_GossipInfo.GetFriendshipReputation(friendshipID)
         charData.reputations[friendshipID] = friendRep
     end
 
