@@ -9,6 +9,7 @@ libs\LibStub\LibStub.lua
 libs\LibRealmInfo17janekjl\LibRealmInfo17janekjl.lua
 
 data\achievements.lua
+data\auras.lua
 data\covenants.lua
 data\currencies.lua
 data\garrisons.lua

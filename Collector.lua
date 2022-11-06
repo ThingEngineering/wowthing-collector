@@ -9,10 +9,10 @@ local charClassID, charData, charName, guildName, playedLevel, playedLevelUpdate
 local hookedCollections, loggingOut = false, false
 local bankOpen, guildBankOpen, reagentBankUpdated, transmogOpen = false, false, false, false
 local maxScannedToys = 0
-local dirtyAchievements, dirtyBag, dirtyBags, dirtyCovenant, dirtyCurrencies, dirtyGarrisonTrees, dirtyHeirlooms, dirtyLocation, dirtyLockouts, dirtyMounts, dirtyMythicPlus, dirtyPets, dirtyQuests, dirtyReputations, dirtyToys, dirtyTransmog, dirtyVault =
-    false, {}, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+local dirtyAchievements, dirtyAuras, dirtyBags, dirtyCovenant, dirtyCurrencies, dirtyGarrisonTrees, dirtyHeirlooms, dirtyLocation, dirtyLockouts, dirtyMounts, dirtyMythicPlus, dirtyPets, dirtyQuests, dirtyReputations, dirtyToys, dirtyTransmog, dirtyVault =
+    false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
 local dirtyCallings, callingData = false, nil
-local dirtyGuildBank, guildBankQueried, requestingPlayedTime = false, false, true
+local dirtyBag, dirtyGuildBank, guildBankQueried, requestingPlayedTime = {}, false, false, true
 
 local transmogLocation = TransmogUtil.GetTransmogLocation("HEADSLOT", Enum.TransmogType.Appearance, Enum.TransmogModification.Main)
 local transmogSlots = {}
@@ -94,6 +94,7 @@ end
 function events:PLAYER_ENTERING_WORLD()
     wwtc:UpdateCharacterData()
     
+    dirtyAuras = true
     dirtyCovenant = true
     dirtyCurrencies = true
     dirtyGarrisonTrees = true
@@ -119,6 +120,12 @@ end
 -- Fires when the player's rest state or amount of rested XP changes
 function events:UPDATE_EXHAUSTION()
     wwtc:UpdateExhausted()
+end
+-- Fires when auras update
+function events:UNIT_AURA(unitTarget)
+    if unitTarget == 'player' then
+        dirtyAuras = true
+    end
 end
 -- Fires when guild stats changes
 function events:PLAYER_GUILD_UPDATE(unitID)
@@ -325,6 +332,11 @@ function wwtc:Timer()
         wwtc:ScanAchievements()
     end
 
+    if dirtyAuras then
+        dirtyAuras = false
+        wwtc:ScanAuras()
+    end
+
     if dirtyBags then
         dirtyBags = false
         wwtc:ScanBags()
@@ -456,6 +468,7 @@ function wwtc:Initialise()
     charData.restedXP = 0
 
     charData.achievements = charData.achievements or {}
+    charData.auras = charData.auras or {}
     charData.bags = charData.bags or {}
     charData.callings = charData.callings or {}
     charData.covenants = charData.covenants or {}
@@ -935,6 +948,18 @@ function wwtc:ScanAchievements()
                 earned = earnedByCharacter,
                 criteria = criteria,
             }
+        end
+    end
+end
+
+function wwtc:ScanAuras()
+    if charData == nil then return end
+
+    charData.auras = {}
+    
+    for _, spellID in ipairs(ns.auras) do
+        if C_UnitAuras.GetPlayerAuraBySpellID(spellID) ~= nil then
+            charData.auras[#charData.auras + 1] = spellID
         end
     end
 end
@@ -1884,7 +1909,7 @@ end
 
 SLASH_WWTC1 = "/wwtc"
 SlashCmdList["WWTC"] = function(msg)
-    wwtc:ScanGarrisons()
+    wwtc:ScanAuras()
 end
 
 SLASH_RL1 = "/rl"
