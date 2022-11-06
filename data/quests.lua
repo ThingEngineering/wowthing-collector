@@ -168,20 +168,6 @@ ns.otherQuests = {
     63130, -- Humility - Kleia
     63131, -- Humility - Mikanikos
     
-    -- Ember Court: Unlocks
-    61493, -- Decorations
-    61494, -- Security
-    -- 61705, -- Refreshments
-    -- 61706, -- Entertainment
-    61497, -- Stock: Greeting Kits
-    61498, -- Stock: Appetizers
-    61499, -- Stock: Anima Samples
-    61500, -- Stock: Comfy Chairs
-    61501, -- Staff: Revendreth Ambassador
-    61502, -- Staff: Ardenweald Ambassador
-    61887, -- Staff: Maldraxxus Ambassador
-    61888, -- Staff: Bastion Ambassador
-
     -- Ember Court: RSVP
     59383, -- Baroness Vashj
     59386, -- Lady Moonberry
@@ -199,6 +185,38 @@ ns.otherQuests = {
     59422, -- Plague Deviser Marileth
     59425, -- Sika
     59619, -- Stonehead
+
+    -- Ember Court: Unlocks
+    61493, -- Decorations
+    61494, -- Security
+    -- 61705, -- Refreshments
+    -- 61706, -- Entertainment
+    61497, -- Stock: Greeting Kits
+    61498, -- Stock: Appetizers
+    61499, -- Stock: Anima Samples
+    61500, -- Stock: Comfy Chairs
+    61501, -- Staff: Revendreth Ambassador
+    61502, -- Staff: Ardenweald Ambassador
+    61887, -- Staff: Maldraxxus Ambassador
+    61888, -- Staff: Bastion Ambassador
+
+    -- Ember Court: Be Our Guest tracking?
+    62487, -- Baroness Vashj
+    62488, -- Lady Moonberry
+    62489, -- Mikanikos
+    62490, -- The Countess
+    62491, -- Alexandros Mograine
+    62492, -- Hunt-Captain Korayn
+    62493, -- Polemarch Adrestes
+    62494, -- Rendle & Cudgelface
+    62495, -- Choofa
+    62496, -- Cryptkeeper Kassir
+    62497, -- Droman Aliothe
+    62498, -- Grandmaster Vole
+    62499, -- Kleia & Pelagos
+    62500, -- Plague Deviser Marileth
+    62501, -- Sika
+    62502, -- Stonehead
 
     -- Ember Court: Friend of a Friend
     -- 65121, -- Baroness Vashj
