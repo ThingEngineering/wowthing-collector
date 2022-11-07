@@ -4,6 +4,9 @@ local an, ns = ...
 -- World boss quests
 ns.worldBossQuests = {
     -- Anniversary bosses
+    [47461] = { 100001, "Lord Kazzak", "Lord Kazzak", true },
+    [47462] = { 100002, "Azuregos", "Azuregos", true },
+    [47463] = { 100003, "Dragon of Nightmare", "Dragon of Nightmare", true },
     [60214] = { 100017, "Doomwalker", "Doomwalker", true },
 
     -- Mists of Pandaria
