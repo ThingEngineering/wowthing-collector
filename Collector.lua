@@ -1090,7 +1090,7 @@ function wwtc:ScanLockouts()
 
     -- Other world bosses
     for questID, questData in pairs(ns.worldBossQuests) do
-        groupId, groupName, bossName, isDaily = unpack(questData)
+        local groupId, groupName, bossName, isDaily = unpack(questData)
         if C_QuestLog_IsQuestFlaggedCompleted(questID) then
             local resetTime
             if isDaily == true then
