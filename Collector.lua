@@ -718,6 +718,7 @@ function wwtc:ScanBagQueue()
         reagentBankUpdated = false
     end
 
+    local requestedData = false
     if scan then
         local now = time()
         if bagID >= 0 and bagID <= 4 then
@@ -741,11 +742,20 @@ function wwtc:ScanBagQueue()
 
         local numSlots = GetContainerNumSlots(bagID)
         if numSlots > 0 then
-            for i = 1, numSlots do
-                local _, count, _, _, _, _, link, _ = GetContainerItemInfo(bagID, i)
-                if count ~= nil and link ~= nil then
-                    local parsed = wwtc:ParseItemLink(link, count)
-                    bag["s"..i] = parsed
+            for slot = 1, numSlots do
+                -- This always works, even if the full item data isn't cached
+                local itemID = GetContainerItemID(bagID, slot)
+                if itemID then
+                    if C_Item.IsItemDataCachedByID(itemID) then
+                        local _, count, _, _, _, _, link, _ = GetContainerItemInfo(bagID, slot)
+                        if count ~= nil and link ~= nil then
+                            local parsed = wwtc:ParseItemLink(link, count)
+                            bag["s"..slot] = parsed
+                        end
+                    else
+                        C_Item.RequestLoadItemDataByID(itemID)
+                        requestedData = true
+                    end
                 end
             end
         end
@@ -757,6 +767,12 @@ function wwtc:ScanBagQueue()
         end)
     else
         scanningBags = false
+    end
+
+    -- If we requested item data, come back and scan this bag again next timer tick
+    if requestedData then
+        dirtyBag[bagID] = true
+        dirtyBags = true
     end
 end
 
