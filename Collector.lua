@@ -9,8 +9,8 @@ local charClassID, charData, charName, guildName, playedLevel, playedLevelUpdate
 local hookedCollections, loggingOut = false, false
 local bankOpen, guildBankOpen, reagentBankUpdated, transmogOpen = false, false, false, false
 local maxScannedToys = 0
-local dirtyAchievements, dirtyAuras, dirtyBags, dirtyCovenant, dirtyCurrencies, dirtyGarrisonTrees, dirtyHeirlooms, dirtyLocation, dirtyLockouts, dirtyMounts, dirtyMythicPlus, dirtyPets, dirtyQuests, dirtyReputations, dirtyToys, dirtyTransmog, dirtyVault =
-    false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+local dirtyAchievements, dirtyAuras, dirtyBags, dirtyCovenant, dirtyCurrencies, dirtyGarrisonTrees, dirtyHeirlooms, dirtyLocation, dirtyLockouts, dirtyMounts, dirtyMythicPlus, dirtyPets, dirtyQuests, dirtyReputations, dirtySpells, dirtyToys, dirtyTransmog, dirtyVault =
+    false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
 local dirtyCallings, callingData = false, nil
 local dirtyBag, dirtyGuildBank, guildBankQueried, requestingPlayedTime = {}, false, false, true
 
@@ -120,6 +120,10 @@ end
 -- Fires when the player's rest state or amount of rested XP changes
 function events:UPDATE_EXHAUSTION()
     wwtc:UpdateExhausted()
+end
+-- Fires when a new spell/ability is added to the spellbook
+function events:LEARNED_SPELL_IN_TAB()
+    dirtySpells = true
 end
 -- Fires when auras update
 function events:UNIT_AURA(unitTarget)
@@ -398,6 +402,11 @@ function wwtc:Timer()
         wwtc:ScanReputations()
     end
 
+    if dirtySpells then
+        dirtySpells = false
+        wwtc:ScanSpells()
+    end
+
     if dirtyToys then
         dirtyToys = false
         wwtc:ScanToys(false)
@@ -582,25 +591,9 @@ function wwtc:UpdateCharacterData()
         charData.playedTotal = playedTotal + (now - playedTotalUpdated)
     end
 
-    -- Master Riding
-    if IsSpellKnown(90265) then
-        charData.mountSkill = 5
-    -- Artisan Riding (DEPRECATED but still gives 280%)
-    elseif IsSpellKnown(34091) then
-        charData.mountSkill = 4
-    -- Expert Riding
-    elseif IsSpellKnown(34090) then
-        charData.mountSkill = 3
-    -- Journeyman Riding
-    elseif IsSpellKnown(33391) then
-        charData.mountSkill = 2
-    -- Apprentice Riding
-    elseif IsSpellKnown(33388) then
-        charData.mountSkill = 1
-    end
-
     if not loggingOut then
         dirtyQuests = true
+        dirtySpells = true
 
         charData.copper = GetMoney()
 
@@ -1652,6 +1645,28 @@ function wwtc:ScanReputations()
                 hasRewardPending and 1 or 0,
             }, ':')
         end
+    end
+end
+
+-- Scan spells
+function wwtc:ScanSpells()
+    if charData == nil then return end
+
+    -- Master Riding
+    if IsSpellKnown(90265) then
+        charData.mountSkill = 5
+    -- Artisan Riding (DEPRECATED but still gives 280%)
+    elseif IsSpellKnown(34091) then
+        charData.mountSkill = 4
+    -- Expert Riding
+    elseif IsSpellKnown(34090) then
+        charData.mountSkill = 3
+    -- Journeyman Riding
+    elseif IsSpellKnown(33391) then
+        charData.mountSkill = 2
+    -- Apprentice Riding
+    elseif IsSpellKnown(33388) then
+        charData.mountSkill = 1
     end
 end
 
