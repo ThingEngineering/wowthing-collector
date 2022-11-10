@@ -1,3 +1,8 @@
+v10.0.0.4
+---------
+- Changed bag scanning to make sure items are cached before looking at them,
+  maybe fixes bag addons (eg AdiBags/ElvUI) losing quality/etc info.
+
 v10.0.0.3
 ---------
 - Added anniversary event bosses to world boss scanning.
