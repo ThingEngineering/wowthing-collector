@@ -319,7 +319,7 @@ end
 -------------------------------------------------------------------------------
 -- Call functions in the events table for events
 frame:SetScript("OnEvent", function(self, event, ...)
-    --print(event)
+    --if event ~= "CRITERIA_UPDATE" and event ~= "UNIT_AURA" then print(event) end
     events[event](self, ...)
 end)
 
