@@ -1,3 +1,8 @@
+v10.0.0.5
+---------
+- Changed mount speed scanning to also happen when a new spell is learned.
+- Updated quest scanning list.
+
 v10.0.0.4
 ---------
 - Changed bag scanning to make sure items are cached before looking at them,
