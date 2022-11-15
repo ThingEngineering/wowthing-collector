@@ -24,10 +24,6 @@ local C_CurrencyInfo_GetCurrencyInfo, C_TransmogCollection_GetAppearanceSources,
 -- Libs
 local LibRealmInfo = LibStub('LibRealmInfo17janekjl')
 
--- Tooltips?
-local scanTooltip = CreateFrame('GameTooltip', 'WWTCTooltip', nil, 'SharedTooltipTemplate')
-scanTooltip:SetOwner(WorldFrame, 'ANCHOR_NONE')
-
 -- Default SavedVariables
 local defaultWWTCSaved = {
     version = 9158,
@@ -729,18 +725,18 @@ function wwtc:ScanBagQueue()
 
         -- Update bag ID
         if bagID >= 1 then
-            local bagItemID, _ = GetInventoryItemID('player', ContainerIDToInventoryID(bagID))
+            local bagItemID, _ = GetInventoryItemID('player', C_Container.ContainerIDToInventoryID(bagID))
             charData.bags["b"..bagID] = bagItemID
         end
 
-        local numSlots = GetContainerNumSlots(bagID)
+        local numSlots = C_Container.GetContainerNumSlots(bagID)
         if numSlots > 0 then
             for slot = 1, numSlots do
                 -- This always works, even if the full item data isn't cached
-                local itemID = GetContainerItemID(bagID, slot)
+                local itemID = C_Container.GetContainerItemID(bagID, slot)
                 if itemID then
                     if C_Item.IsItemDataCachedByID(itemID) then
-                        local _, count, _, _, _, _, link, _ = GetContainerItemInfo(bagID, slot)
+                        local _, count, _, _, _, _, link, _ = C_Container.GetContainerItemInfo(bagID, slot)
                         if count ~= nil and link ~= nil then
                             local parsed = wwtc:ParseItemLink(link, count)
                             bag["s"..slot] = parsed
@@ -783,9 +779,9 @@ function wwtc:ScanGuildBankTabs()
     if charData == nil then return end
 
     -- Short circuit if guild bank isn't open
-    if not guildBankOpen then
-        return
-    end
+    -- if not guildBankOpen then
+    --     return
+    -- end
 
     local now = time()
     WWTCSaved.guilds[guildName].scanTimes['bank'] = now
@@ -808,13 +804,17 @@ function wwtc:ScanGuildBankTabs()
             local link = GetGuildBankItemLink(tabIndex, slotIndex)
             if link ~= nil then
                 if string.find(link, '\Hitem:82800:') then
-                    scanTooltip:ClearLines()
-                    local speciesId, level, breedQuality = scanTooltip:SetGuildBankItem(tabIndex, slotIndex)
+                    local tooltipData = C_TooltipInfo.GetGuildBankItem(tabIndex, slotIndex)
+                    local args = {}
+                    for _, arg in ipairs(tooltipData.args) do
+                        args[arg.field] = arg.stringVal or arg.intVal
+                    end
+
                     tab["s"..slotIndex] = table.concat({
                         'pet',
-                        speciesId,
-                        level,
-                        breedQuality,
+                        args['battlePetSpeciesID'],
+                        args['battlePetLevel'],
+                        args['battlePetBreedQuality'],
                     }, ':')
 
                 else
