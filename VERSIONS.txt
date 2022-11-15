@@ -1,3 +1,7 @@
+v10.0.2.1
+---------
+- Initial fixes for 10.0.2 release.
+
 v10.0.0.5
 ---------
 - Changed mount speed scanning to also happen when a new spell is learned.
@@ -19,7 +23,7 @@ v10.0.0.2
 
 v10.0.0.1
 ---------
-- Initial fixes for 10.0 release.
+- Initial fixes for 10.0.0 release.
 - Added Adventure Campaign Progress to currency scanning.
 
 v9.2.7.17
