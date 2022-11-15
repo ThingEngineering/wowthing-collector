@@ -187,10 +187,9 @@ ns.otherQuests = {
     59619, -- Stonehead
 
     -- Ember Court: Unlocks
+    61458, -- Visions of Sire Denathrius
     61493, -- Decorations
     61494, -- Security
-    -- 61705, -- Refreshments
-    -- 61706, -- Entertainment
     61497, -- Stock: Greeting Kits
     61498, -- Stock: Appetizers
     61499, -- Stock: Anima Samples
@@ -199,6 +198,8 @@ ns.otherQuests = {
     61502, -- Staff: Ardenweald Ambassador
     61887, -- Staff: Maldraxxus Ambassador
     61888, -- Staff: Bastion Ambassador
+    -- 61705, -- Refreshments
+    -- 61706, -- Entertainment
 
     -- Ember Court: Be Our Guest tracking?
     62487, -- Baroness Vashj
