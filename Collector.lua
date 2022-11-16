@@ -736,9 +736,9 @@ function wwtc:ScanBagQueue()
                 local itemID = C_Container.GetContainerItemID(bagID, slot)
                 if itemID then
                     if C_Item.IsItemDataCachedByID(itemID) then
-                        local _, count, _, _, _, _, link, _ = C_Container.GetContainerItemInfo(bagID, slot)
-                        if count ~= nil and link ~= nil then
-                            local parsed = wwtc:ParseItemLink(link, count)
+                        local itemInfo = C_Container.GetContainerItemInfo(bagID, slot)
+                        if itemInfo ~= nil and itemInfo.hyperlink ~= nil and itemInfo.stackCount ~= nil then
+                            local parsed = wwtc:ParseItemLink(itemInfo.hyperlink, itemInfo.stackCount)
                             bag["s"..slot] = parsed
                         end
                     else
@@ -750,19 +750,26 @@ function wwtc:ScanBagQueue()
         end
     end
 
+    -- If we requested item data, come back and scan this bag again later
+    if requestedData then
+        dirtyBag[bagID] = true
+    end
+
+    -- If the scan queue still has bags, add a timer for the next one
     if #bagScanQueue > 0 then
         C_Timer.After(0, function()
             wwtc:ScanBagQueue()
         end)
     else
         scanningBags = false
+
+        -- Queue another scan if any bags are dirty
+        local bagKeys = wwtc:TableKeys(dirtyBag)
+        if #bagKeys > 0 then
+            dirtyBags = true
+        end
     end
 
-    -- If we requested item data, come back and scan this bag again next timer tick
-    if requestedData then
-        dirtyBag[bagID] = true
-        dirtyBags = true
-    end
 end
 
 function wwtc:UpdateGuildBank()
@@ -1411,11 +1418,7 @@ function wwtc:ScanTransmogQueue()
         C_Timer.After(0, function() wwtc:ScanTransmogQueue() end)
     -- All done
     else
-        local keys = {}
-        for key in pairs(transmogTemp) do
-            keys[#keys + 1] = key
-        end
-
+        local keys = wwtc:TableKeys(transmogTemp)
         table.sort(keys)
         charData.transmog = table.concat(keys, ':')
 
@@ -1934,6 +1937,14 @@ end
 function wwtc:GetItemLevel(itemLink)
     local effectiveLevel, _, _ = GetDetailedItemLevelInfo(itemLink)
     return effectiveLevel
+end
+
+function wwtc:TableKeys(tbl)
+    local keys = {}
+    for key in pairs(tbl) do
+        keys[#keys + 1] = key
+    end
+    return keys
 end
 
 -------------------------------------------------------------------------------
