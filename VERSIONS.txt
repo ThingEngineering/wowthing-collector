@@ -1,3 +1,7 @@
+v10.0.2.2
+---------
+- Fix bag scanning not actually working.
+
 v10.0.2.1
 ---------
 - Initial fixes for 10.0.2 release.
