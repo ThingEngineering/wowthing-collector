@@ -738,8 +738,8 @@ function wwtc:ScanBagQueue()
                 if itemID then
                     if C_Item.IsItemDataCachedByID(itemID) then
                         local itemInfo = C_Container.GetContainerItemInfo(bagID, slot)
-                        if itemInfo ~= nil and itemInfo.hyperlink ~= nil and itemInfo.stackCount ~= nil then
-                            local parsed = wwtc:ParseItemLink(itemInfo.hyperlink, itemInfo.stackCount)
+                        if itemInfo ~= nil and itemInfo.hyperlink ~= nil then
+                            local parsed = wwtc:ParseItemLink(itemInfo.hyperlink, itemInfo.quality or -1, itemInfo.stackCount or 1)
                             bag["s"..slot] = parsed
                         end
                     else
@@ -826,8 +826,8 @@ function wwtc:ScanGuildBankTabs()
                     }, ':')
 
                 else
-                    local _, itemCount, _, _, _ = GetGuildBankItemInfo(tabIndex, slotIndex)
-                    local parsed = wwtc:ParseItemLink(link, itemCount)
+                    local _, itemCount, _, _, itemQuality = GetGuildBankItemInfo(tabIndex, slotIndex)
+                    local parsed = wwtc:ParseItemLink(link, itemQuality or -1, itemCount or 1)
                     tab["s"..slotIndex] = parsed
                 end
             end
@@ -1845,7 +1845,7 @@ end
 -------------------------------------------------------------------------------
 -- Parse an item link and return useful information
 local parseItemLinkCache = {}
-function wwtc:ParseItemLink(link, count)
+function wwtc:ParseItemLink(link, quality, count)
     local cached = parseItemLinkCache[link]
     if cached ~= nil then
         return table.concat({ count, cached }, ':')
@@ -1907,7 +1907,9 @@ function wwtc:ParseItemLink(link, count)
     local effectiveILvl, _, _ = GetDetailedItemLevelInfo(link)
     item.itemLevel = effectiveILvl
 
-    item.quality = C_Item.GetItemQualityByID(link)
+    if quality < 0 then
+        item.quality = C_Item.GetItemQualityByID(link)
+    end
 
     -- count:id:context:enchant:ilvl:quality:suffix:bonusIDs:gems
     local ret = table.concat({
