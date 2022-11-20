@@ -20,6 +20,7 @@ local transmogSlots = {}
 -- Local globals
 local C_CurrencyInfo_GetCurrencyInfo, C_TransmogCollection_GetAppearanceSources, C_TransmogCollection_GetCategoryAppearances, C_QuestLog_IsQuestFlaggedCompleted = C_CurrencyInfo.GetCurrencyInfo, C_TransmogCollection.GetAppearanceSources, C_TransmogCollection.GetCategoryAppearances, C_QuestLog.IsQuestFlaggedCompleted
 
+local NUM_TOTAL_BAG_FRAMES = _G.NUM_TOTAL_BAG_FRAMES
 
 -- Libs
 local LibRealmInfo = LibStub('LibRealmInfo17janekjl')
@@ -696,7 +697,7 @@ function wwtc:ScanBagQueue()
 
     -- Short circuit if bank isn't open
     local scan = true
-    if (bagID == -1 or (bagID >= 5 and bagID <= 11)) and not bankOpen then
+    if (bagID == -1 or bagID > NUM_TOTAL_BAG_FRAMES) and not bankOpen then
         scan = false
     end
     -- Reagent bank is weird, make sure that the bank is open or it was actually updated
@@ -710,7 +711,7 @@ function wwtc:ScanBagQueue()
     local requestedData = false
     if scan then
         local now = time()
-        if bagID >= 0 and bagID <= 4 then
+        if bagID >= 0 and bagID <= NUM_TOTAL_BAG_FRAMES then
             charData.scanTimes["bags"] = now
 
             -- Update mythic plus keystone since bags changed
