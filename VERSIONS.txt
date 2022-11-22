@@ -1,3 +1,8 @@
+v10.0.2.3
+---------
+- Change bag scanning to not ask for item quality unless it needs to.
+- Fix bag scanning for reagent bag slot.
+
 v10.0.2.2
 ---------
 - Fix bag scanning not actually working.
