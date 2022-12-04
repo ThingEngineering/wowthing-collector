@@ -406,7 +406,7 @@ ns.progressQuests = {
     ["slSepulcher1Mythic"] = {"once", {65762}},
 
     -- Dragonflight
-    ["aidingAccord"] = {"weekly", {
+    ["dfAidingAccord"] = {"weekly", {
         70750, -- Aiding the Accord
         --71243
         72068, -- Aiding the Accord: A Feast For All
