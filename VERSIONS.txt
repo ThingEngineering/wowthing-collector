@@ -1,3 +1,12 @@
+v10.0.2.4
+---------
+- Added Aiding the Accord to quest scanning.
+- Added Dragonflight currency scanning.
+- Added Dragonflight world boss scanning.
+- Added level/XP scanning for partial level display.
+- Removed Fated things from quest/world boss scanning.
+- Removed unused UI hooking code.
+
 v10.0.2.3
 ---------
 - Change bag scanning to not ask for item quality unless it needs to.
