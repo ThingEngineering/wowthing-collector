@@ -404,10 +404,4 @@ ns.progressQuests = {
     ["slSepulcher1Normal"] = {"once", {65764}},
     ["slSepulcher1Heroic"] = {"once", {65763}},
     ["slSepulcher1Mythic"] = {"once", {65762}},
-
-    -- Shadowlands: Fated
-    ["slFatedDinar1"] = {"once", {66648}},
-    ["slFatedDinar2"] = {"once", {66649}},
-    ["slFatedDinar3"] = {"once", {66650}},
-    ["slFatedWorldQuest"] = {"weekly", {66693, 66694, 66695}},
 }
