@@ -4,22 +4,23 @@ local an, ns = ...
 -- Currencies
 ns.currencies = {
     -- Player vs Player
+    391, -- Tol Barad Commendation
     1602, -- Conquest Points
     1792, -- Honor Points
-    391, -- Tol Barad Commendation
+    2123, -- Bloody Tokens
 
     -- Dungeon and Raid
-    615, -- Essence of Corrupted Deathwing
     614, -- Mote of Darkness
+    615, -- Essence of Corrupted Deathwing
     1166, -- Timewarped Badge
 
     -- Miscellaneous
-    241, -- Champion's Seal
     61, -- Dalaran Jewelcrafter's Token
-    515, -- Darkmoon Prize Ticket
     81, -- Epicurean's Award
+    241, -- Champion's Seal
     402, -- Ironpaw Token
     416, -- Mark of the World Tree
+    515, -- Darkmoon Prize Ticket
     1379, -- Trial of Style Token
 
     -- Cataclysm
@@ -96,4 +97,12 @@ ns.currencies = {
     2000, -- Motes of Fate?
     2009, -- Cosmic Flux
     2010, -- Valor 2?
+    
+    -- Dragonflight
+    2003, -- Dragon Isles Supplies
+    2011, -- Effigy Adornments
+    2045, -- Dragon Glyph Embers
+    2118, -- Elemental Overflow
+    2122, -- Storm Sigil
+    -- 2134, -- Cobalt Assembly
 }
