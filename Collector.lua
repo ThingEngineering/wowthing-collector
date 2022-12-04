@@ -6,11 +6,11 @@ local _G = getfenv(0)
 -- Things
 local wwtc = {}
 local charClassID, charData, charName, guildName, playedLevel, playedLevelUpdated, playedTotal, playedTotalUpdated, regionName
-local hookedCollections, loggingOut = false, false
+local loggingOut = false
 local bankOpen, guildBankOpen, reagentBankUpdated, transmogOpen = false, false, false, false
 local maxScannedToys = 0
-local dirtyAchievements, dirtyAuras, dirtyBags, dirtyCovenant, dirtyCurrencies, dirtyGarrisonTrees, dirtyHeirlooms, dirtyLocation, dirtyLockouts, dirtyMounts, dirtyMythicPlus, dirtyPets, dirtyQuests, dirtyReputations, dirtySpells, dirtyToys, dirtyTransmog, dirtyVault =
-    false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+local dirtyAchievements, dirtyAuras, dirtyBags, dirtyCovenant, dirtyCurrencies, dirtyGarrisonTrees, dirtyHeirlooms, dirtyLocation, dirtyLockouts, dirtyMounts, dirtyMythicPlus, dirtyPets, dirtyQuests, dirtyReputations, dirtySpells, dirtyToys, dirtyTransmog, dirtyVault, dirtyXp =
+    false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
 local dirtyCallings, callingData = false, nil
 local dirtyBag, dirtyGuildBank, guildBankQueried, requestingPlayedTime = {}, false, false, true
 
@@ -99,6 +99,11 @@ function events:PLAYER_ENTERING_WORLD()
     dirtyLocation = true
     dirtyTransmog = true
     dirtyVault = true
+    dirtyXp = true
+end
+--
+function events:PLAYER_XP_UPDATE(target)
+    dirtyXp = true
 end
 -- Zone changed
 function events:ZONE_CHANGED()
@@ -343,6 +348,11 @@ function wwtc:Timer()
         wwtc:ScanBags()
     end
 
+    if dirtyCallings then
+        dirtyCallings = false
+        wwtc:ScanCallings()
+    end
+
     if dirtyCovenant then
         dirtyCovenant = false
         wwtc:ScanCovenants()
@@ -394,6 +404,12 @@ function wwtc:Timer()
         wwtc:ScanPets()
     end
 
+    if dirtyQuests then
+        dirtyQuests = false
+        C_CovenantCallings.RequestCallings()
+        wwtc:ScanQuests()
+    end
+
     if dirtyReputations then
         dirtyReputations = false
         wwtc:ScanReputations()
@@ -419,15 +435,9 @@ function wwtc:Timer()
         wwtc:ScanVault()
     end
 
-    if dirtyQuests then
-        dirtyQuests = false
-        C_CovenantCallings.RequestCallings()
-        wwtc:ScanQuests()
-    end
-
-    if dirtyCallings then
-        dirtyCallings = false
-        wwtc:ScanCallings()
+    if dirtyXp then
+        dirtyXp = false
+        wwtc:ScanXP()
     end
 end
 -- Run the timer once per 2 seconds to do chunky things
@@ -468,6 +478,8 @@ function wwtc:Initialise()
     charData.keystoneInstance = 0
     charData.keystoneLevel = 0
     charData.lastSeen = 0
+    charData.level = 0
+    charData.levelXp = 0
     charData.mountSkill = 0
     charData.playedLevel = 0
     charData.playedTotal = 0
@@ -1802,6 +1814,13 @@ function wwtc:ScanOrderHallResearch()
     --     ["researchGoldCost"] = 0,
     --     ["researchStartTime"] = 1524344516,
     -- }, -- [14]
+end
+
+function wwtc:ScanXP()
+    if charData == nil then return end
+
+    charData.level = UnitLevel('player')
+    charData.levelXp = UnitXP('player')
 end
 
 -------------------------------------------------------------------------------
