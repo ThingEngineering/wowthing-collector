@@ -1526,42 +1526,6 @@ function wwtc:ScanCallings()
     charData.callings = callings
 end
 
--- Hook various Blizzard_Collections things for scanning
-function wwtc:HookCollections()
-    if not IsAddOnLoaded("Blizzard_Collections") then
-        UIParentLoadAddOn("Blizzard_Collections")
-        return
-    end
-
-    if hookedCollections then return end
-
-    -- Hook toys
-    local tbframe = _G["ToyBox"]
-    if tbframe then
-        tbframe:HookScript("OnShow", function(self)
-            wwtc:ScanToys(false)
-        end)
-    else
-        print("WoWthing_Collector: unable to hook 'ToyBox' frame!")
-    end
-
-    -- Hook transmog
-    local tmogframe = _G["WardrobeCollectionFrame"]
-    if tmogframe then
-        tmogframe:HookScript("OnShow", function(self)
-            transmogOpen = true
-        end)
-        tmogframe:HookScript("OnHide", function(self)
-            transmogOpen = false
-            dirtyTransmog = true
-        end)
-    else
-        print("WoWthing_Collector: unable to hook 'WardrobeCollectionFrame' frame!")
-    end
-
-    hookedCollections = true
-end
-
 -- Scan heirlooms
 function wwtc:ScanHeirlooms()
     if charData == nil then return end
