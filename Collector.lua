@@ -9,8 +9,8 @@ local charClassID, charData, charName, guildName, playedLevel, playedLevelUpdate
 local loggingOut = false
 local bankOpen, guildBankOpen, reagentBankUpdated, transmogOpen = false, false, false, false
 local maxScannedToys = 0
-local dirtyAchievements, dirtyAuras, dirtyBags, dirtyCovenant, dirtyCurrencies, dirtyGarrisonTrees, dirtyHeirlooms, dirtyLocation, dirtyLockouts, dirtyMounts, dirtyMythicPlus, dirtyPets, dirtyQuests, dirtyReputations, dirtySpells, dirtyToys, dirtyTransmog, dirtyVault, dirtyXp =
-    false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+local dirtyAchievements, dirtyAuras, dirtyBags, dirtyCovenant, dirtyCurrencies, dirtyGarrisonTrees, dirtyHeirlooms, dirtyLocation, dirtyLockouts, dirtyMounts, dirtyMythicPlus, dirtyPets, dirtyQuests, dirtyReputations, dirtyRested, dirtySpells, dirtyToys, dirtyTransmog, dirtyVault, dirtyXp =
+    false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
 local dirtyCallings, callingData = false, nil
 local dirtyBag, dirtyGuildBank, guildBankQueried, requestingPlayedTime = {}, false, false, true
 
@@ -119,9 +119,13 @@ end
 function events:PLAYER_LEVEL_UP()
     playedLevel, playedLevelUpdated = 0, time()
 end
--- Fires when the player's rest state or amount of rested XP changes
+-- Fires when the player starts or stops resting
+function events:PLAYER_UPDATE_RESTING()
+    dirtyRested = true
+end
+-- Fires when the player's amount of rested XP changes
 function events:UPDATE_EXHAUSTION()
-    wwtc:UpdateExhausted()
+    dirtyRested = true
 end
 -- Fires when a new spell/ability is added to the spellbook
 function events:LEARNED_SPELL_IN_TAB()
@@ -257,6 +261,7 @@ end
 -- Vague about what this does, but it includes war mode
 function events:PLAYER_FLAGS_CHANGED(unitId)
     if unitId == 'player' then
+        dirtyRested = true
         wwtc:UpdateWarMode()
     end
 end
@@ -415,6 +420,11 @@ function wwtc:Timer()
         wwtc:ScanReputations()
     end
 
+    if dirtyRested then
+        dirtyRested = false
+        wwtc:UpdateExhausted()
+    end
+
     if dirtySpells then
         dirtySpells = false
         wwtc:ScanSpells()
@@ -440,8 +450,8 @@ function wwtc:Timer()
         wwtc:ScanXP()
     end
 end
--- Run the timer once per 2 seconds to do chunky things
-local _ = C_Timer.NewTicker(2, function() wwtc:Timer() end, nil)
+-- Run the timer once per 1 second to do chunky things
+local _ = C_Timer.NewTicker(1, function() wwtc:Timer() end, nil)
 
 -------------------------------------------------------------------------------
 
@@ -602,12 +612,12 @@ function wwtc:UpdateCharacterData()
 
     if not loggingOut then
         dirtyQuests = true
+        dirtyRested = true
         dirtySpells = true
 
         charData.copper = GetMoney()
 
         wwtc:UpdateChromieTime()
-        wwtc:UpdateExhausted()
         wwtc:UpdateHonor()
         wwtc:UpdateWarMode()
 
@@ -658,13 +668,7 @@ function wwtc:UpdateExhausted()
     if charData == nil then return end
 
     charData.isResting = IsResting()
-
-    local rested = GetXPExhaustion()
-    if rested and rested > 0 then
-        charData.restedXP = rested
-    else
-        charData.restedXP = 0
-    end
+    charData.restedXP = GetXPExhaustion() or 0
 end
 
 function wwtc:UpdateHonor()
