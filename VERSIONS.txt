@@ -1,3 +1,7 @@
+v10.0.2.6
+---------
+- Added more various DF weeklies to quest scanning.
+
 v10.0.2.5
 ---------
 - Added various DF weeklies to quest scanning.
