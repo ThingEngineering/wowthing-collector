@@ -1,3 +1,10 @@
+v10.0.2.5
+---------
+- Added various DF weeklies to quest scanning.
+- Changed "The World Awaits" (world quests weekly) quest ID for DF.
+- Changed rested scanning so that it actually updates immediately when your
+  resting state changes.
+
 v10.0.2.4
 ---------
 - Added Aiding the Accord to quest scanning.
@@ -9,12 +16,12 @@ v10.0.2.4
 
 v10.0.2.3
 ---------
-- Change bag scanning to not ask for item quality unless it needs to.
-- Fix bag scanning for reagent bag slot.
+- Changed bag scanning to not ask for item quality unless it needs to.
+- Fixed bag scanning for reagent bag slot.
 
 v10.0.2.2
 ---------
-- Fix bag scanning not actually working.
+- Fixed bag scanning not actually working.
 
 v10.0.2.1
 ---------
