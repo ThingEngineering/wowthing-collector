@@ -417,4 +417,13 @@ ns.progressQuests = {
         72375, -- Aiding the Accord: The Isles Call
         --72892
     }},
+    ["dfCommunityFeast"] = {"weekly", {70893}},
+    ["dfDragonAllegiance"] = {"weekly", {66419}}, -- choose a dragon
+    ["dfDragonKey"] = {"weekly", {66133, 66805}}, -- hand in key (wrathion, sabellian)
+    ["dfGrandHuntMythic"] = {"weekly", {70906}},
+    ["dfGrandHuntRare"] = {"weekly", {71136}},
+    ["dfGrandHuntUncommon"] = {"weekly", {71137}},
+    ["dfSiegeDragonbaneKeep"] = {"weekly", {70866}},
+    ["dfTrialElements"] = {"weekly", {71995}},
+    ["dfTrialFlood"] = {"weekly", {71033}},
 }
