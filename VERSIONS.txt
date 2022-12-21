@@ -1,3 +1,9 @@
+v10.0.2.7
+---------
+- Added DF dungeon weeklies to quest scanning.
+- Changed quest scanning to support multiple objectives per quest.
+- Removed Community Feast Boss from quest scanning.
+
 v10.0.2.6
 ---------
 - Added more various DF weeklies to quest scanning.
