@@ -1185,6 +1185,7 @@ function wwtc:ScanQuests()
         local prog = {
             reset = 0,
             status = 0,
+            objectives = {}
         }
 
         if questData[1] == 'weekly' then
@@ -1214,28 +1215,44 @@ function wwtc:ScanQuests()
                 --local description, _, _ = GetQuestLogLeaderBoard(1, index)
                 local objectives = C_QuestLog.GetQuestObjectives(questId)
                 if objectives ~= nil then
-                    local obj = objectives[1]
                     prog.id = questId
                     prog.name = QuestUtils_GetQuestName(questId)
                     prog.status = 1
-                    if obj ~= nil then
-                        prog.text = obj.text
-                        prog.type = obj.type
 
-                        if obj.type == 'progressbar' then
-                            prog.have = GetQuestProgressBarPercent(questId)
-                            prog.need = 100
-                        else
-                            prog.have = obj.numFulfilled
-                            prog.need = obj.numRequired
+                    for _, objective in ipairs(objectives) do
+                        if objective ~= nil then
+                            local objectiveData = {
+                                ['type'] = objective.type,
+                                ['text'] = objective.text,
+                            }
+    
+                            if objective.type == 'progressbar' then
+                                objectiveData.have = GetQuestProgressBarPercent(questId)
+                                objectiveData.need = 100
+                            else
+                                objectiveData.have = objective.numFulfilled
+                                objectiveData.need = objective.numRequired
+                            end
+
+                            table.insert(prog.objectives, table.concat({
+                                objectiveData.type,
+                                objectiveData.text,
+                                objectiveData.have,
+                                objectiveData.need,
+                            }, ';'))
                         end
-                    else
+                    end
+                    
+                    -- Backup plan for weird quests like Timewalking item turnins
+                    if #prog.objectives == 0 then
                         local oldQuestId = C_QuestLog.GetSelectedQuest()
                         C_QuestLog.SetSelectedQuest(questId)
-                        prog.text = GetQuestLogCompletionText()
-                        prog.type = 'object'
-                        prog.have = 1
-                        prog.need = 1
+                        prog.objectives[1] = {
+                            type = 'object',
+                            text = GetQuestLogCompletionText(),
+                            have = 1,
+                            need = 1,
+                        }
                         C_QuestLog.SetSelectedQuest(oldQuestId)
                     end
                     break
@@ -1250,10 +1267,7 @@ function wwtc:ScanQuests()
                 prog.name,
                 prog.status,
                 prog.reset,
-                prog.have,
-                prog.need,
-                prog.type,
-                prog.text,
+                table.concat(prog.objectives, '_'),
             }, '|')
         end
     end
