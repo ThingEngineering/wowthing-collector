@@ -1,3 +1,7 @@
+v10.0.2.8
+---------
+- Fix quest scanning error.
+
 v10.0.2.7
 ---------
 - Added DF dungeon weeklies to quest scanning.
