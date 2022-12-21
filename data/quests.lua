@@ -444,7 +444,6 @@ ns.progressQuests = {
         72649, -- Sparks of Life: Thaldraszus
     }},
     ["dfCommunityFeast"] = {"weekly", {70893}},
-    ["dfCommunityFeastKill"] = {"weekly", {74097}},
     ["dfDragonAllegiance"] = {"weekly", {66419}}, -- choose a dragon
     ["dfDragonKey"] = {"weekly", {66133, 66805}}, -- hand in key (wrathion, sabellian)
     ["dfGrandHuntMythic"] = {"weekly", {70906}},
