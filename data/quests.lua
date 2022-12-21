@@ -417,6 +417,26 @@ ns.progressQuests = {
         72375, -- Aiding the Accord: The Isles Call
         --72892
     }},
+    ["dfDungeonPreserving"] = {"weekly", {
+        66868, -- Preserving the Past: Legacy of Tyr
+        66869, -- Preserving the Past: Court of Stars (?)
+        66870, -- Preserving the Past: Ruby Life Pools
+        66871, -- Preserving the Past: The Nokhud Offensive
+        66872, -- Preserving the Past: Brackenhide Hollow (?)
+        66873, -- Preserving the Past: The Azure Vault (?)
+        66874, -- Preserving the Past: Halls of Infusion
+        66875, -- Preserving the Past: Algeth'ar Academy
+    }},
+    ["dfDungeonRelic"] = {"weekly", {
+        66860, -- Relic Recovery: Legacy of Tyr
+        66861, -- Relic Recovery: Court of Stars (?)
+        66862, -- Relic Recovery: Ruby Life Pools
+        66863, -- Relic Recovery: The Nokhud Offensive (?)
+        66864, -- Relic Recovery: Brackenhide Hollow
+        66865, -- Relic Recovery: The Azure Vault
+        66866, -- Relic Recovery: Halls of Infusion
+        66867, -- Relic Recovery: Algeth'ar Academy
+    }},
     ["dfSparks"] = {"weekly", {
         72646, -- Sparks of Life: The Waking Shores
         72647, -- Sparks of Life: Ohn'ahran Plains
