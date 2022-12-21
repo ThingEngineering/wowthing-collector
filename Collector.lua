@@ -1211,8 +1211,6 @@ function wwtc:ScanQuests()
 
             -- Quest is in progress, check progress
             elseif C_QuestLog.IsOnQuest(questId) then
-                --local index = C_QuestLog.GetLogIndexForQuestID(questId)
-                --local description, _, _ = GetQuestLogLeaderBoard(1, index)
                 local objectives = C_QuestLog.GetQuestObjectives(questId)
                 if objectives ~= nil then
                     prog.id = questId
@@ -1247,12 +1245,14 @@ function wwtc:ScanQuests()
                     if #prog.objectives == 0 then
                         local oldQuestId = C_QuestLog.GetSelectedQuest()
                         C_QuestLog.SetSelectedQuest(questId)
-                        prog.objectives[1] = {
-                            type = 'object',
-                            text = GetQuestLogCompletionText(),
-                            have = 1,
-                            need = 1,
-                        }
+
+                        table.insert(prog.objectives, table.concat({
+                            'object',
+                            GetQuestLogCompletionText(),
+                            1,
+                            1,
+                        }, ';'))
+
                         C_QuestLog.SetSelectedQuest(oldQuestId)
                     end
                     break
