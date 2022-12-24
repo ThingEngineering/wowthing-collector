@@ -180,9 +180,9 @@ end
 function events:BANKFRAME_OPENED()
     -- Force a bag scan of the bank now that it's open
     bankOpen = true
-    dirtyBag[-1] = true
-    dirtyBag[-3] = true
-    for i = 5, 11 do
+    dirtyBag[-1] = true -- bank
+    dirtyBag[-3] = true -- reagent bank
+    for i = 6, 12 do
         dirtyBag[i] = true
     end
 end
