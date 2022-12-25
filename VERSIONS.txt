@@ -1,6 +1,12 @@
+v10.0.2.9
+---------
+- Added Catch and Releases weeklies to quest scanning.
+- Added profession weeklies to quest scanning.
+- Fixed the final bank bag not being scanned.
+
 v10.0.2.8
 ---------
-- Fix quest scanning error.
+- Fixed quest scanning error.
 
 v10.0.2.7
 ---------
