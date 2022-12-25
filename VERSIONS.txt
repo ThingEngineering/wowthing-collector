@@ -1,3 +1,8 @@
+v10.0.2.11
+----------
+- Added profession equipment scanning.
+- Fixed item link parsing not including quality.
+
 v10.0.2.10
 ----------
 - Fixed profession quests breaking quest scanning.
