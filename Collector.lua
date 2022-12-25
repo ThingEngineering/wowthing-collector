@@ -1906,7 +1906,12 @@ function wwtc:ParseItemLink(link, quality, count)
         itemID = tonumber(parts[2]),
         bonusIDs = {},
         gems = {},
+        quality = quality,
     }
+
+    if quality < 0 then
+        item.quality = C_Item.GetItemQualityByID(link)
+    end
 
     if parts[3] ~= '' then
         item.enchantID = tonumber(parts[3])
@@ -1945,10 +1950,6 @@ function wwtc:ParseItemLink(link, quality, count)
 
     local effectiveILvl, _, _ = GetDetailedItemLevelInfo(link)
     item.itemLevel = effectiveILvl
-
-    if quality < 0 then
-        item.quality = C_Item.GetItemQualityByID(link)
-    end
 
     -- count:id:context:enchant:ilvl:quality:suffix:bonusIDs:gems
     local ret = table.concat({
