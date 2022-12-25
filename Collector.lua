@@ -1221,7 +1221,11 @@ function wwtc:ScanQuests()
                         if objective ~= nil then
                             local objectiveData = {
                                 ['type'] = objective.type,
-                                ['text'] = objective.text,
+                                ['text'] = gsub(
+                                    objective.text,
+                                    "%|A:Professions%-Icon%-Quality%-Tier(%d)%-Small:18:18:0:2%|a",
+                                    "[[tier%1]]"
+                                ),
                             }
     
                             if objective.type == 'progressbar' then
