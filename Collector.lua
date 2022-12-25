@@ -9,8 +9,12 @@ local charClassID, charData, charName, guildName, playedLevel, playedLevelUpdate
 local loggingOut = false
 local bankOpen, guildBankOpen, reagentBankUpdated, transmogOpen = false, false, false, false
 local maxScannedToys = 0
-local dirtyAchievements, dirtyAuras, dirtyBags, dirtyCovenant, dirtyCurrencies, dirtyGarrisonTrees, dirtyHeirlooms, dirtyLocation, dirtyLockouts, dirtyMounts, dirtyMythicPlus, dirtyPets, dirtyQuests, dirtyReputations, dirtyRested, dirtySpells, dirtyToys, dirtyTransmog, dirtyVault, dirtyXp =
-    false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+local dirtyAchievements, dirtyAuras, dirtyBags, dirtyCovenant, dirtyCurrencies, dirtyEquipment,
+    dirtyGarrisonTrees, dirtyHeirlooms, dirtyLocation, dirtyLockouts, dirtyMounts, dirtyMythicPlus,
+    dirtyPets, dirtyQuests, dirtyReputations, dirtyRested, dirtySpells, dirtyToys, dirtyTransmog,
+    dirtyVault, dirtyXp =
+    false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+    false, false, false, false, false, false, false
 local dirtyCallings, callingData = false, nil
 local dirtyBag, dirtyGuildBank, guildBankQueried, requestingPlayedTime = {}, false, false, true
 
@@ -94,6 +98,7 @@ function events:PLAYER_ENTERING_WORLD()
     dirtyAuras = true
     dirtyCovenant = true
     dirtyCurrencies = true
+    dirtyEquipment = true
     dirtyGarrisonTrees = true
     dirtyHeirlooms = true
     dirtyLocation = true
@@ -275,6 +280,10 @@ end
 function events:GARRISON_TALENT_UPDATE()
     dirtyGarrisonTrees = true
 end
+-- Items
+function events:PROFESSION_EQUIPMENT_CHANGED()
+    dirtyEquipment = true
+end
 -- Quests
 function events:COVENANT_CALLINGS_UPDATED(callings)
     dirtyCallings = true
@@ -366,6 +375,11 @@ function wwtc:Timer()
     if dirtyCurrencies then
         dirtyCurrencies = false
         wwtc:ScanCurrencies()
+    end
+
+    if dirtyEquipment then
+        dirtyEquipment = false
+        wwtc:ScanEquipment()
     end
 
     if dirtyGarrisonTrees then
@@ -503,6 +517,7 @@ function wwtc:Initialise()
     charData.currencies = charData.currencies or {}
     charData.dailyQuests = charData.dailyQuests or {}
     charData.emissaries = charData.emissaries or {}
+    charData.equipment = charData.equipment or {}
     charData.garrisons = charData.garrisons or {}
     charData.garrisonTrees = charData.garrisonTrees or {}
     charData.illusions = charData.illusions or ''
@@ -1017,6 +1032,25 @@ function wwtc:ScanCurrencies()
                 currencyInfo.useTotalEarnedForMaxQty and 1 or 0,
                 currencyInfo.totalEarned,
             }, ':')
+        end
+    end
+end
+
+function wwtc:ScanEquipment()
+    if charData == nil then return end
+
+    charData.equipment = {}
+    for slot = 20, 30 do
+        local itemLink = GetInventoryItemLink('player', slot)
+
+        if itemLink ~= nil then
+            local itemQuality = GetInventoryItemQuality('player', slot)
+            -- Item isn't loaded yet, try again in a bit
+            if itemQuality == nil then
+                dirtyEquipment = true
+            else
+                charData.equipment[slot] = wwtc:ParseItemLink(itemLink, itemQuality, 1)
+            end
         end
     end
 end
