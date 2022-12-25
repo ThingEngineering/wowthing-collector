@@ -1,3 +1,7 @@
+v10.0.2.10
+----------
+- Fixed profession quests breaking quest scanning.
+
 v10.0.2.9
 ---------
 - Added Catch and Releases weeklies to quest scanning.
