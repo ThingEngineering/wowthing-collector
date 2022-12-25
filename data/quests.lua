@@ -417,6 +417,14 @@ ns.progressQuests = {
         72375, -- Aiding the Accord: The Isles Call
         --72892
     }},
+
+    ["dfCatchAileron"] = {"weekly", {70201}}, -- Catch and Release: Aileron Seamoth
+    ["dfCatchCerulean"] = {"weekly", {70202}}, -- Catch and Release: Cerulean Spinefish
+    ["dfCatchIslefin"] = {"weekly", {70935}}, -- Catch and Release: Islefin Dorado
+    ["dfCatchScalebelly"] = {"weekly", {70199}}, -- Catch and Release: Scalebelly Mackerel
+    ["dfCatchTemporal"] = {"weekly", {70203}}, -- Catch and Release: Temporal Dragonhead
+    ["dfCatchThousandbite"] = {"weekly", {70200}}, -- Catch and Release: Thousandbite Piranha
+
     ["dfDungeonPreserving"] = {"weekly", {
         66868, -- Preserving the Past: Legacy of Tyr
         66869, -- Preserving the Past: Court of Stars (?)
