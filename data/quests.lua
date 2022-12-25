@@ -445,12 +445,144 @@ ns.progressQuests = {
         66866, -- Relic Recovery: Halls of Infusion
         66867, -- Relic Recovery: Algeth'ar Academy
     }},
+
+    ["dfProfessionMettle"] = {"weekly", { 70221 }},
+
+    ["dfProfessionAlchemyCraft"] = {"weekly", {
+        70530, -- 
+        70531, -- 
+        70532, -- 
+        70533, -- 
+    }},
+    ["dfProfessionAlchemyGather"] = {"weekly", {
+        66937, -- 
+        66938, -- 
+        66940, -- Elixir Experiment
+        72427, -- Animated Infusion
+    }},
+
+    ["dfProfessionBlacksmithingCraft"] = {"weekly", {
+        70211, -- Stomping Explorers
+        70233, -- Axe Shortage
+        70234, -- All This Hammering
+        70235, -- Repair Bill
+    }},
+    ["dfProfessionBlacksmithingGather"] = {"weekly", {
+        66517, -- A New Source of Weapons
+        66897, -- Fuel for the Forge
+        66941, -- Tremendous Tools
+        72398, -- Rock and Stone
+    }},
+    ["dfProfessionBlacksmithingOrders"] = {"weekly", { 70589 }},
+
+    ["dfProfessionEnchantingCraft"] = {"weekly", {
+        72155, -- 
+        72172, -- 
+        72173, -- 
+        72175, -- 
+    }},
+    ["dfProfessionEnchantingGather"] = {"weekly", {
+        66884, -- 
+        66900, -- 
+        66935, -- 
+        72423, -- 
+    }},
+
+    ["dfProfessionEngineeringCraft"] = {"weekly", {
+        70539, --
+        70540, --
+        70545, --
+        70557, --
+    }},
+    ["dfProfessionEngineeringGather"] = {"weekly", {
+        66890, -- 
+        66891, -- Explosive Ash
+        66942, -- Enemy Engineering
+        72396, -- 
+    }},
+    ["dfProfessionEngineeringOrders"] = {"weekly", { 70591 }},
+
+    ["dfProfessionInscriptionCraft"] = {"weekly", {
+        70558, -- 
+        70559, -- 
+        70560, -- 
+        70561, -- 
+    }},
+    ["dfProfessionInscriptionGather"] = {"weekly", {
+        66943, -- 
+        66944, -- Peacock Pigments
+        66945, -- 
+    }},
+    ["dfProfessionInscriptionOrders"] = {"weekly", { 70592 }},
+
+    ["dfProfessionJewelcraftingCraft"] = {"weekly", {
+        70562, -- 
+        70563, -- 
+        70564, -- 
+        70565, -- 
+    }},
+    ["dfProfessionJewelcraftingGather"] = {"weekly", {
+        66516, -- Mundane Gems, I Think Not!
+        66949, -- 
+        66950, -- 
+        72428, -- 
+    }},
+    ["dfProfessionJewelcraftingOrders"] = {"weekly", { }},
+
+    ["dfProfessionLeatherworkingCraft"] = {"weekly", {
+        70567, -- When You Give Bakar a Bone
+        70568, -- Tipping the Scales
+        70569, -- For Trisket, a Task Kit
+        70571, -- Drums Here!
+    }},
+    ["dfProfessionLeatherworkingGather"] = {"weekly", {
+        66363, -- Basilisk Bucklers
+        66364, -- To Fly a Kite
+        66951, -- Population Control
+        72407, -- Soaked in Success
+    }},
+    ["dfProfessionLeatherworkingOrders"] = {"weekly", { 70589 }},
+
+    ["dfProfessionTailoringCraft"] = {"weekly", {
+        70572, -- 
+        70582, -- 
+        70586, -- Sew Many Cooks
+        70587, -- 
+    }},
+    ["dfProfessionTailoringGather"] = {"weekly", {
+        66952, -- 
+        66899, -- 
+        66953, -- 
+        72410, -- Pincers and Needles
+    }},
+    ["dfProfessionTailoringOrders"] = {"weekly", { 70595 }},
+
+    ["dfProfessionHerbalismGather"] = {"weekly", {
+        70613, -- Get Their Bark Before They Bite
+        70614, -- Bubble Craze
+        70615, -- The Case of the Missing Herbs
+        70616, -- How Many??
+    }},
+    ["dfProfessionMiningGather"] = {"weekly", {
+        70617, -- All Mine, Mine, Mine
+        70618, -- The Call of the Forge
+        72156, -- A Fiery Fight
+        72157, -- The Weight of Earth
+    }},
+    ["dfProfessionSkinningGather"] = {"weekly", {
+        70619, -- A Study of Leather
+        70620, -- Scaling Up
+        72158, -- A Dense Delivery
+        72159, -- Scaling Down
+    }},
+
     ["dfSparks"] = {"weekly", {
         72646, -- Sparks of Life: The Waking Shores
         72647, -- Sparks of Life: Ohn'ahran Plains
         72648, -- Sparks of Life: Azure Span
         72649, -- Sparks of Life: Thaldraszus
     }},
+
     ["dfCommunityFeast"] = {"weekly", {70893}},
     ["dfDragonAllegiance"] = {"weekly", {66419}}, -- choose a dragon
     ["dfDragonKey"] = {"weekly", {66133, 66805}}, -- hand in key (wrathion, sabellian)
