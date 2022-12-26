@@ -460,6 +460,7 @@ ns.progressQuests = {
         66940, -- Elixir Experiment
         72427, -- Animated Infusion
     }},
+    ["dfProfessionAlchemyTreatise"] = {"weekly", { 74108 }},
 
     ["dfProfessionBlacksmithingCraft"] = {"weekly", {
         70211, -- Stomping Explorers
@@ -474,6 +475,7 @@ ns.progressQuests = {
         72398, -- Rock and Stone
     }},
     ["dfProfessionBlacksmithingOrders"] = {"weekly", { 70589 }},
+    ["dfProfessionBlacksmithingTreatise"] = {"weekly", { 74109 }},
 
     ["dfProfessionEnchantingCraft"] = {"weekly", {
         72155, -- 
@@ -487,6 +489,7 @@ ns.progressQuests = {
         66935, -- 
         72423, -- 
     }},
+    ["dfProfessionEnchantingTreatise"] = {"weekly", { 74110 }},
 
     ["dfProfessionEngineeringCraft"] = {"weekly", {
         70539, --
@@ -501,6 +504,7 @@ ns.progressQuests = {
         72396, -- 
     }},
     ["dfProfessionEngineeringOrders"] = {"weekly", { 70591 }},
+    ["dfProfessionEngineeringTreatise"] = {"weekly", { 74111 }},
 
     ["dfProfessionInscriptionCraft"] = {"weekly", {
         70558, -- 
@@ -514,6 +518,7 @@ ns.progressQuests = {
         66945, -- 
     }},
     ["dfProfessionInscriptionOrders"] = {"weekly", { 70592 }},
+    ["dfProfessionInscriptionTreatise"] = {"weekly", { 74105 }},
 
     ["dfProfessionJewelcraftingCraft"] = {"weekly", {
         70562, -- 
@@ -528,6 +533,7 @@ ns.progressQuests = {
         72428, -- 
     }},
     ["dfProfessionJewelcraftingOrders"] = {"weekly", { 70593 }},
+    ["dfProfessionJewelcraftingTreatise"] = {"weekly", { 74112 }},
 
     ["dfProfessionLeatherworkingCraft"] = {"weekly", {
         70567, -- When You Give Bakar a Bone
@@ -542,6 +548,7 @@ ns.progressQuests = {
         72407, -- Soaked in Success
     }},
     ["dfProfessionLeatherworkingOrders"] = {"weekly", { 70594 }},
+    ["dfProfessionLeatherworkingTreatise"] = {"weekly", { 74113 }},
 
     ["dfProfessionTailoringCraft"] = {"weekly", {
         70572, -- 
@@ -556,6 +563,7 @@ ns.progressQuests = {
         72410, -- Pincers and Needles
     }},
     ["dfProfessionTailoringOrders"] = {"weekly", { 70595 }},
+    ["dfProfessionTailoringTreatise"] = {"weekly", { 74115 }},
 
     ["dfProfessionHerbalismGather"] = {"weekly", {
         70613, -- Get Their Bark Before They Bite
@@ -563,18 +571,23 @@ ns.progressQuests = {
         70615, -- The Case of the Missing Herbs
         70616, -- How Many??
     }},
+    ["dfProfessionHerbalismTreatise"] = {"weekly", { 74107 }},
+
     ["dfProfessionMiningGather"] = {"weekly", {
         70617, -- All Mine, Mine, Mine
         70618, -- The Call of the Forge
         72156, -- A Fiery Fight
         72157, -- The Weight of Earth
     }},
+    ["dfProfessionMiningTreatise"] = {"weekly", { 74106 }},
+
     ["dfProfessionSkinningGather"] = {"weekly", {
         70619, -- A Study of Leather
         70620, -- Scaling Up
         72158, -- A Dense Delivery
         72159, -- Scaling Down
     }},
+    ["dfProfessionSkinningTreatise"] = {"weekly", { 74114 }},
 
     ["dfSparks"] = {"weekly", {
         72646, -- Sparks of Life: The Waking Shores
