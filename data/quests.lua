@@ -527,7 +527,7 @@ ns.progressQuests = {
         66950, -- 
         72428, -- 
     }},
-    ["dfProfessionJewelcraftingOrders"] = {"weekly", { }},
+    ["dfProfessionJewelcraftingOrders"] = {"weekly", { 70593 }},
 
     ["dfProfessionLeatherworkingCraft"] = {"weekly", {
         70567, -- When You Give Bakar a Bone
