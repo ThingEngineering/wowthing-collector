@@ -541,7 +541,7 @@ ns.progressQuests = {
         66951, -- Population Control
         72407, -- Soaked in Success
     }},
-    ["dfProfessionLeatherworkingOrders"] = {"weekly", { 70589 }},
+    ["dfProfessionLeatherworkingOrders"] = {"weekly", { 70594 }},
 
     ["dfProfessionTailoringCraft"] = {"weekly", {
         70572, -- 
