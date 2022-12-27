@@ -287,10 +287,13 @@ ns.progressQuests = {
         62636, -- "A Savage Path Through Time", WoD Timewalking
         64709, -- "A Fel Path Through Time", Legion Timewalking
         62637, -- "A Call to Battle", Battlegrounds
-        62638, -- "Emissary of War", Mythic Dungeons
+        --62638, -- "Emissary of War", Mythic Dungeons
         62639, -- "The Very Best", PvP Pet Battles
         62640, -- "The Arena Calls", Arena Skirmishes
-        72728, -- "The World Awaits", World Quests [DF]
+
+        -- Dragonflight
+        72722, -- "Emissary of War", Mythic Dungeons
+        72728, -- "The World Awaits", World Quests
     }},
 
     -- Weekly PvP
