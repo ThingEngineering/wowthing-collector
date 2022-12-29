@@ -1906,6 +1906,7 @@ function wwtc:ParseItemLink(link, quality, count)
         itemID = tonumber(parts[2]),
         bonusIDs = {},
         gems = {},
+        modifiers = {},
         quality = quality,
     }
 
@@ -1946,7 +1947,13 @@ function wwtc:ParseItemLink(link, quality, count)
     end
 
     -- 15 + numBonusIds = numModifiers
-    -- <modifiers>
+    local startModifiers = 15 + (numBonusIDs or 0)
+    local numModifiers = tonumber(parts[startModifiers])
+    if numModifiers ~= nil then
+        for i = startModifiers + 1, startModifiers + (numModifiers * 2), 2 do
+           item.modifiers[#item.modifiers + 1] = parts[i] .. '_' .. parts[i + 1]
+        end
+    end
 
     local effectiveILvl, _, _ = GetDetailedItemLevelInfo(link)
     item.itemLevel = effectiveILvl
@@ -1961,6 +1968,7 @@ function wwtc:ParseItemLink(link, quality, count)
         item.suffixID or 0,
         table.concat(item.bonusIDs, ','),
         table.concat(item.gems, ','),
+        table.concat(item.modifiers, ','),
     }, ':')
 
     parseItemLinkCache[link] = ret
