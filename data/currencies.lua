@@ -101,6 +101,17 @@ ns.currencies = {
     -- Dragonflight
     2003, -- Dragon Isles Supplies
     2011, -- Effigy Adornments
+    2023, -- Blacksmithing Knowledge
+    2024, -- Alchemy Knowledge
+    2025, -- Leatherworking Knowledge
+    2026, -- Tailoring Knowledge
+    2027, -- Engineering Knowledge
+    2028, -- Inscription Knowledge
+    2029, -- Jewelcrafting Knowledge
+    2030, -- Enchanting Knowledge
+    2033, -- Skinning Knowledge
+    2034, -- Herbalism Knowledge
+    2035, -- Mining Knowledge
     2045, -- Dragon Glyph Embers
     2118, -- Elemental Overflow
     2122, -- Storm Sigil
