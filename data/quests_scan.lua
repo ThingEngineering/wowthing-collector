@@ -676,6 +676,7 @@ ns.scanQuests = {
     48978, -- Bonesquall
     51922, -- Braedan Whitewall
     50939, -- Captain Leadfist
+    49216, -- Cottontail Matron
     49530, -- Emily Mayville
     50546, -- Executioner Blackwell
     51749, -- Fungi Trio
@@ -722,6 +723,7 @@ ns.scanQuests = {
     51762, -- Nestmother Acada
     52461, -- Osca the Bloodied
     51959, -- Pinku'shon
+    52469, -- Poacher Zane
     50725, -- Ragna
     51956, -- Sabertron
     52125, -- Sandfang
@@ -1145,6 +1147,37 @@ ns.scanQuests = {
     -- Zone Maps: :covenant-necrolord: Seat of the Primus
     -- Zone Maps: :covenant-venthyr: Sinfall
     -- Zone Maps: Oribos
+    -- Zone Maps: Dragonflight
+    -- Zone Maps: Azure Span
+    73868, -- Beogoka
+    73985, -- Blisterhide
+    73873, -- Dragonhunter Gorund
+    73996, -- Gnarls
+    70252, -- Frizz Buzzcrank
+    70254, -- Lydiara Whisperfeather
+    70255, -- Pluutar
+    70606, -- Lost Compass
+    70441, -- Pepper Hammer
+    -- Zone Maps: Ohn'ahran Plains
+    70256, -- Erden
+    70253, -- Hua Greenpaw
+    70251, -- Shalasar Glimmerdusk
+    -- Zone Maps: Thaldraszus
+    70258, -- Bridgette Holdug
+    -- Zone Maps: Waking Shores, The
+    73890, -- Brundin the Dragonbane
+    73075, -- Captain Lancer
+    72838, -- Dragonhunter Igordan
+    73072, -- Enkine the Voracious
+    70250, -- Grekka Anvilsmash
+    70247, -- Grigori Vialtry
+    70259, -- Zenzi
+    70346, -- Dead Man's Chestplate
+    70600, -- Golden Dragon Goblet
+    65646, -- Misty Treasure Chest
+    70345, -- Yennu's Kite
+    -- Zone Maps: Valdrakken
+    70260, -- Elysa Raywinder
     -- Zone Maps: Miscellaneous
     -- Zone Maps: Darkmoon Island
     47767, -- Blight Boar Concert
