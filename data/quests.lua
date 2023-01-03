@@ -421,12 +421,12 @@ ns.progressQuests = {
         --72892
     }},
 
-    ["dfCatchAileron"] = {"weekly", {70201}}, -- Catch and Release: Aileron Seamoth
-    ["dfCatchCerulean"] = {"weekly", {70202}}, -- Catch and Release: Cerulean Spinefish
-    ["dfCatchIslefin"] = {"weekly", {70935}}, -- Catch and Release: Islefin Dorado
-    ["dfCatchScalebelly"] = {"weekly", {70199}}, -- Catch and Release: Scalebelly Mackerel
-    ["dfCatchTemporal"] = {"weekly", {70203}}, -- Catch and Release: Temporal Dragonhead
-    ["dfCatchThousandbite"] = {"weekly", {70200}}, -- Catch and Release: Thousandbite Piranha
+    ["dfCatchIslefin"] = {"weekly", {72823}}, -- Catch and Release: Islefin Dorado
+    ["dfCatchTemporal"] = {"weekly", {72824}}, -- Catch and Release: Temporal Dragonhead
+    ["dfCatchCerulean"] = {"weekly", {72825}}, -- Catch and Release: Cerulean Spinefish
+    ["dfCatchAileron"] = {"weekly", {72826}}, -- Catch and Release: Aileron Seamoth
+    ["dfCatchThousandbite"] = {"weekly", {72827}}, -- Catch and Release: Thousandbite Piranha
+    ["dfCatchScalebelly"] = {"weekly", {72828}}, -- Catch and Release: Scalebelly Mackerel
 
     ["dfDungeonPreserving"] = {"weekly", {
         66868, -- Preserving the Past: Legacy of Tyr
