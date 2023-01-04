@@ -1,3 +1,7 @@
+v10.0.2.20
+----------
+- Added profession drops to quest scanning.
+
 v10.0.2.19
 ----------
 - Updated more holiday quest IDs.
@@ -8,7 +12,7 @@ v10.0.2.18
 
 v10.0.2.17
 ----------
-- Added profession knowledge to currency scanning list.
+- Added profession knowledge to currency scanning.
 - Updated quest scanning list.
 
 v10.0.2.16
