@@ -460,6 +460,10 @@ ns.progressQuests = {
         70532, -- 
         70533, -- 
     }},
+    ["dfProfessionAlchemyDrop1"] = {"weekly", { 66373 }},
+    ["dfProfessionAlchemyDrop2"] = {"weekly", { 66374 }},
+    ["dfProfessionAlchemyDrop3"] = {"weekly", { 70504 }},
+    ["dfProfessionAlchemyDrop4"] = {"weekly", { 70511 }},
     ["dfProfessionAlchemyGather"] = {"weekly", {
         66937, -- 
         66938, -- 
@@ -474,6 +478,10 @@ ns.progressQuests = {
         70234, -- All This Hammering
         70235, -- Repair Bill
     }},
+    ["dfProfessionBlacksmithingDrop1"] = {"weekly", { 66381 }},
+    ["dfProfessionBlacksmithingDrop2"] = {"weekly", { 66382 }},
+    ["dfProfessionBlacksmithingDrop3"] = {"weekly", { 70512 }},
+    ["dfProfessionBlacksmithingDrop4"] = {"weekly", { 70513 }},
     ["dfProfessionBlacksmithingGather"] = {"weekly", {
         66517, -- A New Source of Weapons
         66897, -- Fuel for the Forge
@@ -489,6 +497,10 @@ ns.progressQuests = {
         72173, -- 
         72175, -- 
     }},
+    ["dfProfessionEnchantingDrop1"] = {"weekly", { 66377 }},
+    ["dfProfessionEnchantingDrop2"] = {"weekly", { 66378 }},
+    ["dfProfessionEnchantingDrop3"] = {"weekly", { 70514 }},
+    ["dfProfessionEnchantingDrop4"] = {"weekly", { 70515 }},
     ["dfProfessionEnchantingGather"] = {"weekly", {
         66884, -- 
         66900, -- 
@@ -503,6 +515,10 @@ ns.progressQuests = {
         70545, --
         70557, --
     }},
+    ["dfProfessionEngineeringDrop1"] = {"weekly", { 66379 }},
+    ["dfProfessionEngineeringDrop2"] = {"weekly", { 66380 }},
+    ["dfProfessionEngineeringDrop3"] = {"weekly", { 70516 }},
+    ["dfProfessionEngineeringDrop4"] = {"weekly", { 70517 }},
     ["dfProfessionEngineeringGather"] = {"weekly", {
         66890, -- 
         66891, -- Explosive Ash
@@ -518,6 +534,10 @@ ns.progressQuests = {
         70560, -- 
         70561, -- 
     }},
+    ["dfProfessionInscriptionDrop1"] = {"weekly", { 66375 }},
+    ["dfProfessionInscriptionDrop2"] = {"weekly", { 66376 }},
+    ["dfProfessionInscriptionDrop3"] = {"weekly", { 70518 }},
+    ["dfProfessionInscriptionDrop4"] = {"weekly", { 70519 }},
     ["dfProfessionInscriptionGather"] = {"weekly", {
         66943, -- 
         66944, -- Peacock Pigments
@@ -532,6 +552,10 @@ ns.progressQuests = {
         70564, -- 
         70565, -- 
     }},
+    ["dfProfessionJewelcraftingDrop1"] = {"weekly", { 66388 }},
+    ["dfProfessionJewelcraftingDrop2"] = {"weekly", { 66389 }},
+    ["dfProfessionJewelcraftingDrop3"] = {"weekly", { 70520 }},
+    ["dfProfessionJewelcraftingDrop4"] = {"weekly", { 70521 }},
     ["dfProfessionJewelcraftingGather"] = {"weekly", {
         66516, -- Mundane Gems, I Think Not!
         66949, -- 
@@ -547,6 +571,10 @@ ns.progressQuests = {
         70569, -- For Trisket, a Task Kit
         70571, -- Drums Here!
     }},
+    ["dfProfessionLeatherworkingDrop1"] = {"weekly", { 66384 }},
+    ["dfProfessionLeatherworkingDrop2"] = {"weekly", { 66385 }},
+    ["dfProfessionLeatherworkingDrop3"] = {"weekly", { 70522 }},
+    ["dfProfessionLeatherworkingDrop4"] = {"weekly", { 70523 }},
     ["dfProfessionLeatherworkingGather"] = {"weekly", {
         66363, -- Basilisk Bucklers
         66364, -- To Fly a Kite
@@ -562,6 +590,10 @@ ns.progressQuests = {
         70586, -- Sew Many Cooks
         70587, -- 
     }},
+    ["dfProfessionTailoringDrop1"] = {"weekly", { 66386 }},
+    ["dfProfessionTailoringDrop2"] = {"weekly", { 66387 }},
+    ["dfProfessionTailoringDrop3"] = {"weekly", { 70524 }},
+    ["dfProfessionTailoringDrop4"] = {"weekly", { 70525 }},
     ["dfProfessionTailoringGather"] = {"weekly", {
         66952, -- 
         66899, -- 
@@ -571,6 +603,12 @@ ns.progressQuests = {
     ["dfProfessionTailoringOrders"] = {"weekly", { 70595 }},
     ["dfProfessionTailoringTreatise"] = {"weekly", { 74115 }},
 
+    ["dfProfessionHerbalismDrop1"] = {"weekly", { 71857 }},
+    ["dfProfessionHerbalismDrop2"] = {"weekly", { 71858 }},
+    ["dfProfessionHerbalismDrop3"] = {"weekly", { 71859 }},
+    ["dfProfessionHerbalismDrop4"] = {"weekly", { 71860 }},
+    ["dfProfessionHerbalismDrop5"] = {"weekly", { 71861 }},
+    ["dfProfessionHerbalismDrop6"] = {"weekly", { 71864 }},
     ["dfProfessionHerbalismGather"] = {"weekly", {
         70613, -- Get Their Bark Before They Bite
         70614, -- Bubble Craze
@@ -579,6 +617,12 @@ ns.progressQuests = {
     }},
     ["dfProfessionHerbalismTreatise"] = {"weekly", { 74107 }},
 
+    ["dfProfessionMiningDrop1"] = {"weekly", { 72160 }},
+    ["dfProfessionMiningDrop2"] = {"weekly", { 72161 }},
+    ["dfProfessionMiningDrop3"] = {"weekly", { 72162 }},
+    ["dfProfessionMiningDrop4"] = {"weekly", { 72163 }},
+    ["dfProfessionMiningDrop5"] = {"weekly", { 72164 }},
+    ["dfProfessionMiningDrop6"] = {"weekly", { 72165 }},
     ["dfProfessionMiningGather"] = {"weekly", {
         70617, -- All Mine, Mine, Mine
         70618, -- The Call of the Forge
@@ -587,6 +631,12 @@ ns.progressQuests = {
     }},
     ["dfProfessionMiningTreatise"] = {"weekly", { 74106 }},
 
+    ["dfProfessionSkinningDrop1"] = {"weekly", { 70381 }},
+    ["dfProfessionSkinningDrop2"] = {"weekly", { 70383 }},
+    ["dfProfessionSkinningDrop3"] = {"weekly", { 70384 }},
+    ["dfProfessionSkinningDrop4"] = {"weekly", { 70385 }},
+    ["dfProfessionSkinningDrop5"] = {"weekly", { 70386 }},
+    ["dfProfessionSkinningDrop6"] = {"weekly", { 70389 }},
     ["dfProfessionSkinningGather"] = {"weekly", {
         70619, -- A Study of Leather
         70620, -- Scaling Up
