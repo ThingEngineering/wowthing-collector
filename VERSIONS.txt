@@ -1,3 +1,7 @@
+v10.0.2.19
+----------
+- Updated more holiday quest IDs.
+
 v10.0.2.18
 ----------
 - Fix IDs for Catch and Release weekly quests.
