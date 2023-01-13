@@ -1,3 +1,7 @@
+v10.0.2.21
+----------
+- Updated quest scanning list.
+
 v10.0.2.20
 ----------
 - Added profession drops to quest scanning.
