@@ -2,64 +2,22 @@ local an, ns = ...
 
 
 ns.scanQuests = {
-    -- Zone Maps: Classic
+    -- Vendors: Galissa Sundew
+    38934, -- ??
     -- Zone Maps: Blasted Lands
     47461, -- Lord Kazzak
     -- Zone Maps: Duskwood
     47463, -- Emeriss
-    -- Zone Maps: The Hinterlands
-    -- Zone Maps: Ashenvale
     -- Zone Maps: Azshara
     47462, -- Azuregos
-    -- Zone Maps: Feralas
     -- Zone Maps: Tanaris
     60214, -- Doomwalker
-    -- Zone Maps: Burning Crusade
-    -- Zone Maps: Isle of Quel'Danas
-    -- Zone Maps: Blade's Edge Mountains
-    -- Zone Maps: Hellfire Peninsula
-    -- Zone Maps: Nagrand
-    -- Zone Maps: Netherstorm
-    -- Zone Maps: Shadowmoon Valley
-    -- Zone Maps: Terokkar Forest
-    -- Zone Maps: Zangarmarsh
-    -- Zone Maps: Azuremyst Isle
-    -- Zone Maps: Bloodmyst Isle
-    -- Zone Maps: Exodar, The
-    -- Zone Maps: Eversong Woods
-    -- Zone Maps: Ghostlands
-    -- Zone Maps: Silvermoon
-    -- Zone Maps: Shattrath City
-    -- Zone Maps: Wrath of the Lich King
-    -- Zone Maps: Borean Tundra
-    -- Zone Maps: Crystalsong Forest
-    -- Zone Maps: Dragonblight
-    -- Zone Maps: Grizzly Hills
-    -- Zone Maps: Howling Fjord
-    -- Zone Maps: Icecrown
-    -- Zone Maps: Sholazar Basin
-    -- Zone Maps: Storm Peaks, The
-    -- Zone Maps: Zul'Drak
-    -- Zone Maps: Dalaran
-    -- Zone Maps: Dalaran Underbelly
-    -- Zone Maps: Cataclsym
-    -- Zone Maps: Motlen Front, The
-    -- Zone Maps: Tol Barad Peninsula
-    -- Zone Maps: Abyssal Depths
-    -- Zone Maps: Kelp'thar Forest
-    -- Zone Maps: Shimmering Expanse
-    -- Zone Maps: Deepholm
-    -- Zone Maps: Mount Hyjal
-    -- Zone Maps: Twilight Highlands
-    -- Zone Maps: Uldum
-    -- Zone Maps: Mists of Pandaria
     -- Zone Maps: Isle of Giants
     32519, -- Oondasta
     -- Zone Maps: Isle of Thunder
     32518, -- Nalak
     -- Zone Maps: Timeless Isle
     33210, -- Blazing Chest
-    -- Zone Maps: Dread Wastes
     -- Zone Maps: Jade Forest, The
     31307, -- Jade Warrior Statue
     -- Zone Maps: Krasarang Wilds
@@ -67,12 +25,8 @@ ns.scanQuests = {
     -- Zone Maps: Kun-Lai Summit
     32099, -- Sha of Anger
     31412, -- Sprite's Cloth Chest
-    -- Zone Maps: Townlong Steppes
-    -- Zone Maps: Vale of Eternal Blossoms
     -- Zone Maps: Valley of the Four Winds
     32098, -- Galleon
-    -- Zone Maps: Veiled Stair, The
-    -- Zone Maps: Warlords of Draenor
     -- Zone Maps: Tanaan Jungle
     38430, -- Argosh the Destroyer
     38609, -- Belgork
@@ -311,9 +265,6 @@ ns.scanQuests = {
     34204, -- Wandering Vindicator
     37343, -- Xothear, the Destroyer
     34135, -- Yazheera the Incinerator
-    -- Zone Maps: Stormshield
-    -- Zone Maps: Warspear
-    -- Zone Maps: Legion
     -- Zone Maps: Antoran Wastes
     48817, -- Admiral Rel'var
     49183, -- Blistermaw
@@ -355,7 +306,6 @@ ns.scanQuests = {
     48565, -- Sister Subversia
     48628, -- Talestra the Vile
     48664, -- Tereck the Selector
-    -- Zone Maps: Vindicaar, The
     -- Zone Maps: Broken Shore, The
     47061, -- Aprocon
     46947, -- Brutallus
@@ -387,6 +337,7 @@ ns.scanQuests = {
     42280, -- Vorthax
     37909, -- Warbringer Mox'na
     43193, -- Calamir
+    37828, -- Treasure Chest
     -- Zone Maps: Highmountain
     39784, -- Beastmaster Pao'lek
     40405, -- Bristlemaul
@@ -460,9 +411,6 @@ ns.scanQuests = {
     38889, -- Shivering Ashmaw Cub
     42819, -- Humongris <The Wizard>
     42779, -- Shar'thos
-    -- Zone Maps: Dalaran
-    -- Zone Maps: Dalaran Underbelly
-    -- Zone Maps: Battle for Azeroth
     -- Zone Maps: Uldum
     56834, -- Anq'uri the Titanic
     58612, -- Aqir Flayer
@@ -663,7 +611,6 @@ ns.scanQuests = {
     54891, -- Grimhorn
     54895, -- Ivus the Decayed / Ivus the Forest Lord
     54896, -- Ivus the Decayed / Ivus the Forest Lord
-    -- Zone Maps: Boralus
     -- Zone Maps: Drustvar
     51470, -- Arclight
     51383, -- Arvon the Betrayed
@@ -765,7 +712,6 @@ ns.scanQuests = {
     50073, -- Twin-hearted Construct
     52866, -- Precarious Noble Cache
     52163, -- Azurethos
-    -- Zone Maps: Dazar'alor
     -- Zone Maps: Nazmir
     50563, -- Azerite-Infused Slag
     48439, -- Bajiatha
@@ -848,7 +794,6 @@ ns.scanQuests = {
     50308, -- Jani's Stash
     50949, -- The Exile's Lament
     52169, -- Ji'arak
-    -- Zone Maps: Shadowlands
     -- Zone Maps: Zereth Mortis
     65552, -- Akkaris
     65553, -- Chitali the Eldest
@@ -1142,44 +1087,64 @@ ns.scanQuests = {
     62199, -- Taskmaster's Trove
     62063, -- The Count
     62164, -- Vrytha's Dredglaive
-    -- Zone Maps: :covenant-kyrian: Elysian Hold
-    -- Zone Maps: :covenant-night-fae: Heart of the Forest
-    -- Zone Maps: :covenant-necrolord: Seat of the Primus
-    -- Zone Maps: :covenant-venthyr: Sinfall
-    -- Zone Maps: Oribos
-    -- Zone Maps: Dragonflight
     -- Zone Maps: Azure Span
     73868, -- Beogoka
     73985, -- Blisterhide
     73873, -- Dragonhunter Gorund
     73996, -- Gnarls
+    71215, -- The Highest Peaks
+    71216, -- The Highest Peaks
+    71217, -- The Highest Peaks
+    71218, -- The Highest Peaks
+    71220, -- The Highest Peaks
+    71221, -- The Highest Peaks
     70252, -- Frizz Buzzcrank
     70254, -- Lydiara Whisperfeather
     70255, -- Pluutar
+    70314, -- Spelltouched Tongs
     70606, -- Lost Compass
     70441, -- Pepper Hammer
     -- Zone Maps: Ohn'ahran Plains
+    70827, -- The Highest Peaks
+    71200, -- The Highest Peaks
+    71207, -- The Highest Peaks
+    71208, -- The Highest Peaks
     70256, -- Erden
     70253, -- Hua Greenpaw
     70251, -- Shalasar Glimmerdusk
+    70313, -- Ancient Spear Shards
+    70353, -- Falconer Gauntlet Drawings
     -- Zone Maps: Thaldraszus
+    70024, -- The Highest Peaks
+    70039, -- The Highest Peaks
+    71222, -- The Highest Peaks
+    71223, -- The Highest Peaks
+    71224, -- The Highest Peaks
     70258, -- Bridgette Holdug
+    70311, -- Draconic Flux
     -- Zone Maps: Waking Shores, The
     73890, -- Brundin the Dragonbane
     73075, -- Captain Lancer
     72838, -- Dragonhunter Igordan
     73072, -- Enkine the Voracious
+    70823, -- The Highest Peaks
+    70824, -- The Highest Peaks
+    70825, -- The Highest Peaks
+    70826, -- The Highest Peaks
+    71204, -- The Highest Peaks
     70250, -- Grekka Anvilsmash
     70247, -- Grigori Vialtry
     70259, -- Zenzi
+    70246, -- Ancient Monument
+    70312, -- Curious Ingots
+    70296, -- Molten Ingot
+    70310, -- Qalashi Weapon Diagram
     70346, -- Dead Man's Chestplate
     70600, -- Golden Dragon Goblet
     65646, -- Misty Treasure Chest
     70345, -- Yennu's Kite
     -- Zone Maps: Valdrakken
     70260, -- Elysa Raywinder
-    -- Zone Maps: Miscellaneous
     -- Zone Maps: Darkmoon Island
     47767, -- Blight Boar Concert
-    -- Zone Maps: Exile's Reach
 }
