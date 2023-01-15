@@ -542,6 +542,7 @@ ns.progressQuests = {
         66943, -- 
         66944, -- Peacock Pigments
         66945, -- 
+        72438, -- Tarasek Intentions
     }},
     ["dfProfessionInscriptionOrders"] = {"weekly", { 70592 }},
     ["dfProfessionInscriptionTreatise"] = {"weekly", { 74105 }},
