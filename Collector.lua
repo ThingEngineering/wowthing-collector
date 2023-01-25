@@ -177,6 +177,7 @@ end
 -- Fires when the contents of a bag changes
 function events:BAG_UPDATE(bagID)
     dirtyBag[bagID] = true
+    dirtyBags = true -- TODO remove this if Blizzard ever fixes DELAYED not triggering
 end
 function events:BAG_UPDATE_DELAYED()
     dirtyBags = true
@@ -260,6 +261,7 @@ function events:LOOT_CLOSED()
 end
 -- Popup "you got loot" box
 function events:SHOW_LOOT_TOAST()
+    wwtc:SetPlayerBagsDirty()
     dirtyLockouts = true
     dirtyQuests = true
 end
@@ -610,6 +612,13 @@ function wwtc:BuildEJData()
             end
         end
     end
+end
+
+function wwtc:SetPlayerBagsDirty()
+    for i = 0, NUM_TOTAL_BAG_FRAMES do
+        dirtyBag[i] = true
+    end
+    dirtyBags = true
 end
 
 -- Update various character data
