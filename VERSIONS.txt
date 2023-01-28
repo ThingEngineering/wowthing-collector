@@ -1,3 +1,7 @@
+v10.0.5.2
+---------
+- Updated quest scanning list.
+
 v10.0.5.1
 ---------
 - Initial fixes for 10.0.5 release.
