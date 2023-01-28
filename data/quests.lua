@@ -279,19 +279,14 @@ ns.otherQuests = {
 ns.progressQuests = {
     -- Weekly Holidays
     ["weeklyHoliday"] = {"weekly", {
-        --62631, -- "The World Awaits", World Quests [SL]
-        62632, -- "A Burning Path Through Time", TBC Timewalking
-        62633, -- "A Frozen Path Through Time", Wrath Timewalking
-        62634, -- "A Shattered Path Through Time", Cata Timewalking
-        --62635, -- "A Shrouded Path Through Time", MoP Timewalking
-        --62636, -- "A Savage Path Through Time", WoD Timewalking
-        64709, -- "A Fel Path Through Time", Legion Timewalking
-        --62637, -- "A Call to Battle", Battlegrounds
-        --62638, -- "Emissary of War", Mythic Dungeons
-        62639, -- "The Very Best", PvP Pet Battles
-        62640, -- "The Arena Calls", Arena Skirmishes
+        -- 62632, -- "A Burning Path Through Time", TBC Timewalking
+        -- 62633, -- "A Frozen Path Through Time", Wrath Timewalking
+        -- 62634, -- "A Shattered Path Through Time", Cata Timewalking
+        -- 62639, -- "The Very Best", PvP Pet Battles
 
         -- Dragonflight
+        72719, -- "A Fel Path Through Time", Legion Timewalking
+        72720, -- "The Arena Calls", Arena Skirmishes
         72722, -- "Emissary of War", Mythic Dungeons
         72723, -- "A Call to Battle", Battlegrounds
         72724, -- "A Savage Path Through Time", WoD Timewalking
