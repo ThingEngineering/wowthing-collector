@@ -1,3 +1,7 @@
+v10.0.5.3
+---------
+- Added Storm's Fury to quest scanning list.
+
 v10.0.5.2
 ---------
 - Updated quest scanning list.
