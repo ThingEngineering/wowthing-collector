@@ -1,3 +1,8 @@
+v10.0.5.5
+---------
+- Added account-wide quest scanning.
+- Added drake customizations to quest scanning list.
+
 v10.0.5.4
 ---------
 - Changed Chromie Time scanning to be more robust.
