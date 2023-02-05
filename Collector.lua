@@ -35,6 +35,7 @@ local defaultWWTCSaved = {
     chars = {},
     guilds = {},
     heirloomsV2 = {},
+    quests = {},
     toys = {},
     transmogSourcesV2 = {},
 }
@@ -500,6 +501,7 @@ function wwtc:Initialise()
     charClassID = select(3, UnitClass("player"))
 
     WWTCSaved.heirloomsV2 = WWTCSaved.heirloomsV2 or {}
+    WWTCSaved.quests = WWTCSaved.quests or {}
     WWTCSaved.transmogSourcesV2 = WWTCSaved.transmogSourcesV2 or {}
 
     WWTCSaved.honorLevel = 0
@@ -1223,6 +1225,14 @@ function wwtc:ScanQuests()
     if biweeklyReset < now then
         biweeklyReset = weeklyReset
     end
+
+    local accountQuests = {}
+    for _, questID in ipairs(ns.accountQuests) do
+        if C_QuestLog_IsQuestFlaggedCompleted(questID) then
+            table.insert(accountQuests, questID)
+        end
+    end
+    WWTCSaved.quests = accountQuests
 
     for _, questID in ipairs(ns.otherQuests) do
         if C_QuestLog_IsQuestFlaggedCompleted(questID) then
