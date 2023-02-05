@@ -1,3 +1,8 @@
+v10.0.5.4
+---------
+- Changed Chromie Time scanning to be more robust.
+- Fixed Storm's Fury quest ID.
+
 v10.0.5.3
 ---------
 - Added Storm's Fury to quest scanning list.
