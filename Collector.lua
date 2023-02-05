@@ -9,12 +9,12 @@ local charClassID, charData, charName, guildName, playedLevel, playedLevelUpdate
 local loggingOut = false
 local bankOpen, guildBankOpen, reagentBankUpdated, transmogOpen = false, false, false, false
 local maxScannedToys = 0
-local dirtyAchievements, dirtyAuras, dirtyBags, dirtyCovenant, dirtyCurrencies, dirtyEquipment,
-    dirtyGarrisonTrees, dirtyHeirlooms, dirtyLocation, dirtyLockouts, dirtyMounts, dirtyMythicPlus,
-    dirtyPets, dirtyQuests, dirtyReputations, dirtyRested, dirtySpells, dirtyToys, dirtyTransmog,
-    dirtyVault, dirtyXp =
+local dirtyAchievements, dirtyAuras, dirtyBags, dirtyChromieTime, dirtyCovenant, dirtyCurrencies,
+    dirtyEquipment, dirtyGarrisonTrees, dirtyHeirlooms, dirtyLocation, dirtyLockouts, dirtyMounts,
+    dirtyMythicPlus, dirtyPets, dirtyQuests, dirtyReputations, dirtyRested, dirtySpells, dirtyToys,
+    dirtyTransmog, dirtyVault, dirtyXp =
     false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-    false, false, false, false, false, false, false
+    false, false, false, false, false, false, false, false
 local dirtyCallings, callingData = false, nil
 local dirtyBag, dirtyGuildBank, guildBankQueried, requestingPlayedTime = {}, false, false, true
 
@@ -96,6 +96,7 @@ function events:PLAYER_ENTERING_WORLD()
     wwtc:UpdateCharacterData()
     
     dirtyAuras = true
+    dirtyChromieTime = true
     dirtyCovenant = true
     dirtyCurrencies = true
     dirtyEquipment = true
@@ -246,12 +247,19 @@ function events:CHALLENGE_MODE_MAPS_UPDATE()
     dirtyMythicPlus = true
     dirtyVault = true
 end
+-- Fires when you stop using a fancy frame
+function events:PLAYER_INTERACTION_MANAGER_FRAME_HIDE(type)
+    if type == Enum.PlayerInteractionType.ChromieTime then
+        dirtyChromieTime = true
+    end
+end
 -- Vault
 function events:WEEKLY_REWARDS_UPDATE()
     dirtyVault = true
 end
 -- Quest changes, spammy
 function events:QUEST_LOG_UPDATE()
+    dirtyChromieTime = true
     dirtyQuests = true
 end
 -- Finished looting something
@@ -367,6 +375,11 @@ function wwtc:Timer()
     if dirtyCallings then
         dirtyCallings = false
         wwtc:ScanCallings()
+    end
+
+    if dirtyChromieTime then
+        dirtyChromieTime = false
+        wwtc:ScanChromieTime()
     end
 
     if dirtyCovenant then
@@ -641,7 +654,6 @@ function wwtc:UpdateCharacterData()
 
         charData.copper = GetMoney()
 
-        wwtc:UpdateChromieTime()
         wwtc:UpdateHonor()
         wwtc:UpdateWarMode()
 
@@ -681,7 +693,7 @@ function wwtc:UpdateGuildData()
     end
 end
 
-function wwtc:UpdateChromieTime()
+function wwtc:ScanChromieTime()
     if charData == nil then return end
 
     charData.chromieTime = UnitChromieTimeID("player")
