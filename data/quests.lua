@@ -659,7 +659,7 @@ ns.progressQuests = {
     ["dfPrimalStorm"] = {"weekly", {70753}},
     ["dfPrimalWater"] = {"weekly", {70752}},
     ["dfSiegeDragonbaneKeep"] = {"weekly", {70866}},
-    ["dfStormsFury"] = {"weekly", {74378}},
+    ["dfStormsFury"] = {"weekly", {73162}},
     ["dfTrialElements"] = {"weekly", {71995}},
     ["dfTrialFlood"] = {"weekly", {71033}},
 }
