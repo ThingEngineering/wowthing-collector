@@ -115,5 +115,6 @@ ns.currencies = {
     2045, -- Dragon Glyph Embers
     2118, -- Elemental Overflow
     2122, -- Storm Sigil
+    2167, -- Catalyst Charges
     -- 2134, -- Cobalt Assembly
 }
