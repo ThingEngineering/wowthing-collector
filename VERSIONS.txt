@@ -1,3 +1,7 @@
+v10.0.5.6
+---------
+- Added Catalyst Charges to currency scanning.
+
 v10.0.5.5
 ---------
 - Added account-wide quest scanning.
