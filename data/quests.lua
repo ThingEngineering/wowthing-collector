@@ -264,6 +264,32 @@ ns.otherQuests = {
     -- 65755, -- Cosmic Gladiator's Resonator
     -- 65756, -- Cosmic Gladiator's Echoing Resolve
     -- 65757, -- Cosmic Gladiator's Fastidious Resolve
+
+    -- Dragonflight: Artisan's Consortium books
+    71893, -- Alchemy 1
+    71904, -- Alchemy 2
+    71915, -- Alchemy 3
+    71894, -- Blacksmithing 1
+    71905, -- Blacksmithing 2
+    71916, -- Blacksmithing 3
+    71895, -- Enchanting 1
+    71906, -- Enchanting 2
+    71917, -- Enchanting 3
+    71896, -- Engineering 1
+    71907, -- Engineering 2
+    71918, -- Engineering 3
+    71898, -- Inscription 1
+    71909, -- Inscription 2
+    71920, -- Inscription 3
+    71899, -- Jewelcrafting 1
+    71910, -- Jewelcrafting 2
+    71921, -- Jewelcrafting 3
+    71900, -- Leatherworking 1
+    71911, -- Leatherworking 2
+    71922, -- Leatherworking 3
+    71903, -- Tailoring 1
+    71914, -- Tailoring 2
+    71925, -- Tailoring 3
 }
 
 ns.progressQuests = {
