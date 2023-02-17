@@ -148,7 +148,7 @@ ns.otherQuests = {
     63129, -- Humility - Pelagos
     63130, -- Humility - Kleia
     63131, -- Humility - Mikanikos
-    
+
     -- Shadowlands: Ember Court: RSVP
     59383, -- Baroness Vashj
     59386, -- Lady Moonberry
@@ -268,7 +268,7 @@ ns.otherQuests = {
 
 ns.progressQuests = {
     -- Weekly Holidays
-    ["weeklyHoliday"] = {"weekly", {
+    ["weeklyHoliday"] = { "weekly", {
         -- 62632, -- "A Burning Path Through Time", TBC Timewalking
         -- 62633, -- "A Frozen Path Through Time", Wrath Timewalking
         -- 62634, -- "A Shattered Path Through Time", Cata Timewalking
@@ -282,10 +282,9 @@ ns.progressQuests = {
         72724, -- "A Savage Path Through Time", WoD Timewalking
         72725, -- "A Shrouded Path Through Time", MoP Timewalking
         72728, -- "The World Awaits", World Quests
-    }},
-
+    } },
     -- Weekly PvP
-    ["weeklyPvp"] = {"weekly", {
+    ["weeklyPvp"] = { "weekly", {
         62284, -- Observing Battle
         62285, -- Observing War
         62286, -- Observing Skirmishes
@@ -294,13 +293,11 @@ ns.progressQuests = {
         --64527, -- Observing the Chase
         65773, -- Solo Mission
         65775, -- Soloing Strategy
-    }},
-
+    } },
     -- PvP Brawl
-    ["somethingDifferent"] = {"weekly", {47148}},
-
+    ["somethingDifferent"] = { "weekly", { 47148 } },
     -- Timewalking turn-ins
-    ["timewalking"] = {"weekly", {
+    ["timewalking"] = { "weekly", {
         40168, -- The Swirling Vial, TBC
         40173, -- The Unstable Prism, Wrath
         40786, -- The Smoldering Ember, Cata [Horde]
@@ -308,97 +305,78 @@ ns.progressQuests = {
         45563, -- The Shrouded Coin, MoP
         55498, -- The Shimmering Crystal, WoD
         64710, -- Whispering Fel Crystal, Legion
-    }},
-
+    } },
     -- Warlords of Draenor
-    ["invasionBoss"] = {"weekly", {38276}},
-    ["invasionBronze"] = {"weekly", {37638}},
-    ["invasionSilver"] = {"weekly", {37639}},
-    ["invasionGold"] = {"weekly", {37640}},
-    ["invasionPlatinum"] = {"weekly", {38482}},
-
+    ["invasionBoss"] = { "weekly", { 38276 } },
+    ["invasionBronze"] = { "weekly", { 37638 } },
+    ["invasionSilver"] = { "weekly", { 37639 } },
+    ["invasionGold"] = { "weekly", { 37640 } },
+    ["invasionPlatinum"] = { "weekly", { 38482 } },
     -- Warlords of Draenor: Raids
-    ["legBlackrock1Normal"] = {"once", {37029}},
-    ["legBlackrock1Heroic"] = {"once", {37030}},
-    ["legBlackrock1Mythic"] = {"once", {37031}},
-
-    ["legHellfire1Normal"] = {"once", {39499}},
-    ["legHellfire2Normal"] = {"once", {39502}},
-    ["legHellfire1Heroic"] = {"once", {39500}},
-    ["legHellfire2Heroic"] = {"once", {39504}},
-    ["legHellfire1Mythic"] = {"once", {39501}},
-    ["legHellfire2Mythic"] = {"once", {39505}},
-
+    ["legBlackrock1Normal"] = { "once", { 37029 } },
+    ["legBlackrock1Heroic"] = { "once", { 37030 } },
+    ["legBlackrock1Mythic"] = { "once", { 37031 } },
+    ["legHellfire1Normal"] = { "once", { 39499 } },
+    ["legHellfire2Normal"] = { "once", { 39502 } },
+    ["legHellfire1Heroic"] = { "once", { 39500 } },
+    ["legHellfire2Heroic"] = { "once", { 39504 } },
+    ["legHellfire1Mythic"] = { "once", { 39501 } },
+    ["legHellfire2Mythic"] = { "once", { 39505 } },
     -- Legion: Misc
-    ["legionWitheredTraining"] = {"wq", {43943}},
-
+    ["legionWitheredTraining"] = { "wq", { 43943 } },
     -- Legion: Raids
-    ["legEmerald1Normal"] = {"once", {44283}},
-    ["legEmerald1Heroic"] = {"once", {44284}},
-    ["legEmerald1Mythic"] = {"once", {44285}},
-
-    ["legNighthold1Normal"] = {"once", {45381}},
-    ["legNighthold1Heroic"] = {"once", {45382}},
-    ["legNighthold1Mythic"] = {"once", {45383}},
-
-    ["legTomb1Normal"] = {"once", {47725}},
-    ["legTomb1Heroic"] = {"once", {47726}},
-    ["legTomb1Mythic"] = {"once", {47727}},
-    
-    ["legAntorus1Normal"] = {"once", {49032}},
-    ["legAntorus2Normal"] = {"once", {49133}},
-    ["legAntorus1Heroic"] = {"once", {49075}},
-    ["legAntorus2Heroic"] = {"once", {49134}},
-    ["legAntorus1Mythic"] = {"once", {49076}},
-    ["legAntorus2Mythic"] = {"once", {49135}},
-
+    ["legEmerald1Normal"] = { "once", { 44283 } },
+    ["legEmerald1Heroic"] = { "once", { 44284 } },
+    ["legEmerald1Mythic"] = { "once", { 44285 } },
+    ["legNighthold1Normal"] = { "once", { 45381 } },
+    ["legNighthold1Heroic"] = { "once", { 45382 } },
+    ["legNighthold1Mythic"] = { "once", { 45383 } },
+    ["legTomb1Normal"] = { "once", { 47725 } },
+    ["legTomb1Heroic"] = { "once", { 47726 } },
+    ["legTomb1Mythic"] = { "once", { 47727 } },
+    ["legAntorus1Normal"] = { "once", { 49032 } },
+    ["legAntorus2Normal"] = { "once", { 49133 } },
+    ["legAntorus1Heroic"] = { "once", { 49075 } },
+    ["legAntorus2Heroic"] = { "once", { 49134 } },
+    ["legAntorus1Mythic"] = { "once", { 49076 } },
+    ["legAntorus2Mythic"] = { "once", { 49135 } },
     -- Battle for Azeroth: Raids
-    ["bfaNyalotha1Normal"] = {"once", {58373}},
-    ["bfaNyalotha1Heroic"] = {"once", {58374}},
-    ["bfaNyalotha1Mythic"] = {"once", {58375}},
-
+    ["bfaNyalotha1Normal"] = { "once", { 58373 } },
+    ["bfaNyalotha1Heroic"] = { "once", { 58374 } },
+    ["bfaNyalotha1Mythic"] = { "once", { 58375 } },
     -- Shadowlands
-    ["kyrianAnima"] = {"weekly", {61982}},
-    ["kyrianSouls"] = {"weekly", {62863}},
-
-    ["necrolordAnima"] = {"weekly", {61983}},
-    ["necrolordSouls"] = {"weekly", {62866}},
-
-    ["nightFaeAnima"] = {"weekly", {61984}},
-    ["nightFaeSouls"] = {"weekly", {62860}},
-
-    ["venthyrAnima"] = {"weekly", {61981}},
-    ["venthyrSouls"] = {"weekly", {62869}},
-
+    ["kyrianAnima"] = { "weekly", { 61982 } },
+    ["kyrianSouls"] = { "weekly", { 62863 } },
+    ["necrolordAnima"] = { "weekly", { 61983 } },
+    ["necrolordSouls"] = { "weekly", { 62866 } },
+    ["nightFaeAnima"] = { "weekly", { 61984 } },
+    ["nightFaeSouls"] = { "weekly", { 62860 } },
+    ["venthyrAnima"] = { "weekly", { 61981 } },
+    ["venthyrSouls"] = { "weekly", { 62869 } },
     -- Shadowlands: 9.1
-    ["shapingFate"] = {"weekly", {63949}},
-    ["slTormentors"] = {"weekly", {63854}},
-    ["slMawAssault"] = {"biweekly", {
+    ["shapingFate"] = { "weekly", { 63949 } },
+    ["slTormentors"] = { "weekly", { 63854 } },
+    ["slMawAssault"] = { "biweekly", {
         63543, -- Necrolord
         63822, -- Venthyr
         63823, -- Night Fae
         63824, -- Kyrian
-    }},
-
+    } },
     -- Shadowlands: 9.2
-    ["newDeal"] = {"weekly", {65649}},
-    ["patterns"] = {"weekly", {66042}},
-
+    ["newDeal"] = { "weekly", { 65649 } },
+    ["patterns"] = { "weekly", { 66042 } },
     -- Shadowlands: Raids
-    ["slNathria1Normal"] = {"once", {62054}},
-    ["slNathria1Heroic"] = {"once", {62055}},
-    ["slNathria1Mythic"] = {"once", {62056}},
-
-    ["slSanctum1Normal"] = {"once", {64597}},
-    ["slSanctum1Heroic"] = {"once", {64598}},
-    ["slSanctum1Mythic"] = {"once", {64599}},
-
-    ["slSepulcher1Normal"] = {"once", {65764}},
-    ["slSepulcher1Heroic"] = {"once", {65763}},
-    ["slSepulcher1Mythic"] = {"once", {65762}},
-
+    ["slNathria1Normal"] = { "once", { 62054 } },
+    ["slNathria1Heroic"] = { "once", { 62055 } },
+    ["slNathria1Mythic"] = { "once", { 62056 } },
+    ["slSanctum1Normal"] = { "once", { 64597 } },
+    ["slSanctum1Heroic"] = { "once", { 64598 } },
+    ["slSanctum1Mythic"] = { "once", { 64599 } },
+    ["slSepulcher1Normal"] = { "once", { 65764 } },
+    ["slSepulcher1Heroic"] = { "once", { 65763 } },
+    ["slSepulcher1Mythic"] = { "once", { 65762 } },
     -- Dragonflight
-    ["dfAidingAccord"] = {"weekly", {
+    ["dfAidingAccord"] = { "weekly", {
         70750, -- Aiding the Accord
         --71243
         72068, -- Aiding the Accord: A Feast For All
@@ -407,16 +385,14 @@ ns.progressQuests = {
         72374, -- Aiding the Accord: Dragonbane Keep
         72375, -- Aiding the Accord: The Isles Call
         --72892
-    }},
-
-    ["dfCatchIslefin"] = {"weekly", {72823}}, -- Catch and Release: Islefin Dorado
-    ["dfCatchTemporal"] = {"weekly", {72824}}, -- Catch and Release: Temporal Dragonhead
-    ["dfCatchCerulean"] = {"weekly", {72825}}, -- Catch and Release: Cerulean Spinefish
-    ["dfCatchAileron"] = {"weekly", {72826}}, -- Catch and Release: Aileron Seamoth
-    ["dfCatchThousandbite"] = {"weekly", {72827}}, -- Catch and Release: Thousandbite Piranha
-    ["dfCatchScalebelly"] = {"weekly", {72828}}, -- Catch and Release: Scalebelly Mackerel
-
-    ["dfDungeonPreserving"] = {"weekly", {
+    } },
+    ["dfCatchIslefin"] = { "weekly", { 72823 } }, -- Catch and Release: Islefin Dorado
+    ["dfCatchTemporal"] = { "weekly", { 72824 } }, -- Catch and Release: Temporal Dragonhead
+    ["dfCatchCerulean"] = { "weekly", { 72825 } }, -- Catch and Release: Cerulean Spinefish
+    ["dfCatchAileron"] = { "weekly", { 72826 } }, -- Catch and Release: Aileron Seamoth
+    ["dfCatchThousandbite"] = { "weekly", { 72827 } }, -- Catch and Release: Thousandbite Piranha
+    ["dfCatchScalebelly"] = { "weekly", { 72828 } }, -- Catch and Release: Scalebelly Mackerel
+    ["dfDungeonPreserving"] = { "weekly", {
         66868, -- Preserving the Past: Legacy of Tyr
         66869, -- Preserving the Past: Court of Stars (?)
         66870, -- Preserving the Past: Ruby Life Pools
@@ -425,8 +401,8 @@ ns.progressQuests = {
         66873, -- Preserving the Past: The Azure Vault (?)
         66874, -- Preserving the Past: Halls of Infusion
         66875, -- Preserving the Past: Algeth'ar Academy
-    }},
-    ["dfDungeonRelic"] = {"weekly", {
+    } },
+    ["dfDungeonRelic"] = { "weekly", {
         66860, -- Relic Recovery: Legacy of Tyr
         66861, -- Relic Recovery: Court of Stars (?)
         66862, -- Relic Recovery: Ruby Life Pools
@@ -435,221 +411,207 @@ ns.progressQuests = {
         66865, -- Relic Recovery: The Azure Vault
         66866, -- Relic Recovery: Halls of Infusion
         66867, -- Relic Recovery: Algeth'ar Academy
-    }},
-
-    ["dfProfessionMettle"] = {"weekly", { 70221 }},
-
-    ["dfProfessionAlchemyCraft"] = {"weekly", {
-        70530, -- 
-        70531, -- 
-        70532, -- 
-        70533, -- 
-    }},
-    ["dfProfessionAlchemyDrop1"] = {"weekly", { 66373 }},
-    ["dfProfessionAlchemyDrop2"] = {"weekly", { 66374 }},
-    ["dfProfessionAlchemyDrop3"] = {"weekly", { 70504 }},
-    ["dfProfessionAlchemyDrop4"] = {"weekly", { 70511 }},
-    ["dfProfessionAlchemyGather"] = {"weekly", {
-        66937, -- 
-        66938, -- 
+    } },
+    ["dfProfessionMettle"] = { "weekly", { 70221 } },
+    ["dfProfessionAlchemyCraft"] = { "weekly", {
+        70530, --
+        70531, --
+        70532, --
+        70533, --
+    } },
+    ["dfProfessionAlchemyDrop1"] = { "weekly", { 66373 } },
+    ["dfProfessionAlchemyDrop2"] = { "weekly", { 66374 } },
+    ["dfProfessionAlchemyDrop3"] = { "weekly", { 70504 } },
+    ["dfProfessionAlchemyDrop4"] = { "weekly", { 70511 } },
+    ["dfProfessionAlchemyGather"] = { "weekly", {
+        66937, --
+        66938, --
         66940, -- Elixir Experiment
         72427, -- Animated Infusion
-    }},
-    ["dfProfessionAlchemyTreatise"] = {"weekly", { 74108 }},
-
-    ["dfProfessionBlacksmithingCraft"] = {"weekly", {
+    } },
+    ["dfProfessionAlchemyTreatise"] = { "weekly", { 74108 } },
+    ["dfProfessionBlacksmithingCraft"] = { "weekly", {
         70211, -- Stomping Explorers
         70233, -- Axe Shortage
         70234, -- All This Hammering
         70235, -- Repair Bill
-    }},
-    ["dfProfessionBlacksmithingDrop1"] = {"weekly", { 66381 }},
-    ["dfProfessionBlacksmithingDrop2"] = {"weekly", { 66382 }},
-    ["dfProfessionBlacksmithingDrop3"] = {"weekly", { 70512 }},
-    ["dfProfessionBlacksmithingDrop4"] = {"weekly", { 70513 }},
-    ["dfProfessionBlacksmithingGather"] = {"weekly", {
+    } },
+    ["dfProfessionBlacksmithingDrop1"] = { "weekly", { 66381 } },
+    ["dfProfessionBlacksmithingDrop2"] = { "weekly", { 66382 } },
+    ["dfProfessionBlacksmithingDrop3"] = { "weekly", { 70512 } },
+    ["dfProfessionBlacksmithingDrop4"] = { "weekly", { 70513 } },
+    ["dfProfessionBlacksmithingGather"] = { "weekly", {
         66517, -- A New Source of Weapons
         66897, -- Fuel for the Forge
         66941, -- Tremendous Tools
         72398, -- Rock and Stone
-    }},
-    ["dfProfessionBlacksmithingOrders"] = {"weekly", { 70589 }},
-    ["dfProfessionBlacksmithingTreatise"] = {"weekly", { 74109 }},
-
-    ["dfProfessionEnchantingCraft"] = {"weekly", {
-        72155, -- 
-        72172, -- 
-        72173, -- 
-        72175, -- 
-    }},
-    ["dfProfessionEnchantingDrop1"] = {"weekly", { 66377 }},
-    ["dfProfessionEnchantingDrop2"] = {"weekly", { 66378 }},
-    ["dfProfessionEnchantingDrop3"] = {"weekly", { 70514 }},
-    ["dfProfessionEnchantingDrop4"] = {"weekly", { 70515 }},
-    ["dfProfessionEnchantingGather"] = {"weekly", {
-        66884, -- 
-        66900, -- 
-        66935, -- 
-        72423, -- 
-    }},
-    ["dfProfessionEnchantingTreatise"] = {"weekly", { 74110 }},
-
-    ["dfProfessionEngineeringCraft"] = {"weekly", {
+    } },
+    ["dfProfessionBlacksmithingOrders"] = { "weekly", { 70589 } },
+    ["dfProfessionBlacksmithingTreatise"] = { "weekly", { 74109 } },
+    ["dfProfessionEnchantingCraft"] = { "weekly", {
+        72155, --
+        72172, --
+        72173, --
+        72175, --
+    } },
+    ["dfProfessionEnchantingDrop1"] = { "weekly", { 66377 } },
+    ["dfProfessionEnchantingDrop2"] = { "weekly", { 66378 } },
+    ["dfProfessionEnchantingDrop3"] = { "weekly", { 70514 } },
+    ["dfProfessionEnchantingDrop4"] = { "weekly", { 70515 } },
+    ["dfProfessionEnchantingGather"] = { "weekly", {
+        66884, --
+        66900, --
+        66935, --
+        72423, --
+    } },
+    ["dfProfessionEnchantingTreatise"] = { "weekly", { 74110 } },
+    ["dfProfessionEngineeringCraft"] = { "weekly", {
         70539, --
         70540, --
         70545, --
         70557, --
-    }},
-    ["dfProfessionEngineeringDrop1"] = {"weekly", { 66379 }},
-    ["dfProfessionEngineeringDrop2"] = {"weekly", { 66380 }},
-    ["dfProfessionEngineeringDrop3"] = {"weekly", { 70516 }},
-    ["dfProfessionEngineeringDrop4"] = {"weekly", { 70517 }},
-    ["dfProfessionEngineeringGather"] = {"weekly", {
-        66890, -- 
+    } },
+    ["dfProfessionEngineeringDrop1"] = { "weekly", { 66379 } },
+    ["dfProfessionEngineeringDrop2"] = { "weekly", { 66380 } },
+    ["dfProfessionEngineeringDrop3"] = { "weekly", { 70516 } },
+    ["dfProfessionEngineeringDrop4"] = { "weekly", { 70517 } },
+    ["dfProfessionEngineeringGather"] = { "weekly", {
+        66890, --
         66891, -- Explosive Ash
         66942, -- Enemy Engineering
-        72396, -- 
-    }},
-    ["dfProfessionEngineeringOrders"] = {"weekly", { 70591 }},
-    ["dfProfessionEngineeringTreatise"] = {"weekly", { 74111 }},
-
-    ["dfProfessionInscriptionCraft"] = {"weekly", {
-        70558, -- 
-        70559, -- 
-        70560, -- 
-        70561, -- 
-    }},
-    ["dfProfessionInscriptionDrop1"] = {"weekly", { 66375 }},
-    ["dfProfessionInscriptionDrop2"] = {"weekly", { 66376 }},
-    ["dfProfessionInscriptionDrop3"] = {"weekly", { 70518 }},
-    ["dfProfessionInscriptionDrop4"] = {"weekly", { 70519 }},
-    ["dfProfessionInscriptionGather"] = {"weekly", {
-        66943, -- 
+        72396, --
+    } },
+    ["dfProfessionEngineeringOrders"] = { "weekly", { 70591 } },
+    ["dfProfessionEngineeringTreatise"] = { "weekly", { 74111 } },
+    ["dfProfessionInscriptionCraft"] = { "weekly", {
+        70558, --
+        70559, --
+        70560, --
+        70561, --
+    } },
+    ["dfProfessionInscriptionDrop1"] = { "weekly", { 66375 } },
+    ["dfProfessionInscriptionDrop2"] = { "weekly", { 66376 } },
+    ["dfProfessionInscriptionDrop3"] = { "weekly", { 70518 } },
+    ["dfProfessionInscriptionDrop4"] = { "weekly", { 70519 } },
+    ["dfProfessionInscriptionGather"] = { "weekly", {
+        66943, --
         66944, -- Peacock Pigments
-        66945, -- 
+        66945, --
         72438, -- Tarasek Intentions
-    }},
-    ["dfProfessionInscriptionOrders"] = {"weekly", { 70592 }},
-    ["dfProfessionInscriptionTreatise"] = {"weekly", { 74105 }},
-
-    ["dfProfessionJewelcraftingCraft"] = {"weekly", {
-        70562, -- 
-        70563, -- 
-        70564, -- 
-        70565, -- 
-    }},
-    ["dfProfessionJewelcraftingDrop1"] = {"weekly", { 66388 }},
-    ["dfProfessionJewelcraftingDrop2"] = {"weekly", { 66389 }},
-    ["dfProfessionJewelcraftingDrop3"] = {"weekly", { 70520 }},
-    ["dfProfessionJewelcraftingDrop4"] = {"weekly", { 70521 }},
-    ["dfProfessionJewelcraftingGather"] = {"weekly", {
+    } },
+    ["dfProfessionInscriptionOrders"] = { "weekly", { 70592 } },
+    ["dfProfessionInscriptionTreatise"] = { "weekly", { 74105 } },
+    ["dfProfessionJewelcraftingCraft"] = { "weekly", {
+        70562, --
+        70563, --
+        70564, --
+        70565, --
+    } },
+    ["dfProfessionJewelcraftingDrop1"] = { "weekly", { 66388 } },
+    ["dfProfessionJewelcraftingDrop2"] = { "weekly", { 66389 } },
+    ["dfProfessionJewelcraftingDrop3"] = { "weekly", { 70520 } },
+    ["dfProfessionJewelcraftingDrop4"] = { "weekly", { 70521 } },
+    ["dfProfessionJewelcraftingGather"] = { "weekly", {
         66516, -- Mundane Gems, I Think Not!
-        66949, -- 
-        66950, -- 
-        72428, -- 
-    }},
-    ["dfProfessionJewelcraftingOrders"] = {"weekly", { 70593 }},
-    ["dfProfessionJewelcraftingTreatise"] = {"weekly", { 74112 }},
-
-    ["dfProfessionLeatherworkingCraft"] = {"weekly", {
+        66949, --
+        66950, --
+        72428, --
+    } },
+    ["dfProfessionJewelcraftingOrders"] = { "weekly", { 70593 } },
+    ["dfProfessionJewelcraftingTreatise"] = { "weekly", { 74112 } },
+    ["dfProfessionLeatherworkingCraft"] = { "weekly", {
         70567, -- When You Give Bakar a Bone
         70568, -- Tipping the Scales
         70569, -- For Trisket, a Task Kit
         70571, -- Drums Here!
-    }},
-    ["dfProfessionLeatherworkingDrop1"] = {"weekly", { 66384 }},
-    ["dfProfessionLeatherworkingDrop2"] = {"weekly", { 66385 }},
-    ["dfProfessionLeatherworkingDrop3"] = {"weekly", { 70522 }},
-    ["dfProfessionLeatherworkingDrop4"] = {"weekly", { 70523 }},
-    ["dfProfessionLeatherworkingGather"] = {"weekly", {
+    } },
+    ["dfProfessionLeatherworkingDrop1"] = { "weekly", { 66384 } },
+    ["dfProfessionLeatherworkingDrop2"] = { "weekly", { 66385 } },
+    ["dfProfessionLeatherworkingDrop3"] = { "weekly", { 70522 } },
+    ["dfProfessionLeatherworkingDrop4"] = { "weekly", { 70523 } },
+    ["dfProfessionLeatherworkingGather"] = { "weekly", {
         66363, -- Basilisk Bucklers
         66364, -- To Fly a Kite
         66951, -- Population Control
         72407, -- Soaked in Success
-    }},
-    ["dfProfessionLeatherworkingOrders"] = {"weekly", { 70594 }},
-    ["dfProfessionLeatherworkingTreatise"] = {"weekly", { 74113 }},
-
-    ["dfProfessionTailoringCraft"] = {"weekly", {
-        70572, -- 
-        70582, -- 
+    } },
+    ["dfProfessionLeatherworkingOrders"] = { "weekly", { 70594 } },
+    ["dfProfessionLeatherworkingTreatise"] = { "weekly", { 74113 } },
+    ["dfProfessionTailoringCraft"] = { "weekly", {
+        70572, --
+        70582, --
         70586, -- Sew Many Cooks
-        70587, -- 
-    }},
-    ["dfProfessionTailoringDrop1"] = {"weekly", { 66386 }},
-    ["dfProfessionTailoringDrop2"] = {"weekly", { 66387 }},
-    ["dfProfessionTailoringDrop3"] = {"weekly", { 70524 }},
-    ["dfProfessionTailoringDrop4"] = {"weekly", { 70525 }},
-    ["dfProfessionTailoringGather"] = {"weekly", {
-        66952, -- 
-        66899, -- 
-        66953, -- 
+        70587, --
+    } },
+    ["dfProfessionTailoringDrop1"] = { "weekly", { 66386 } },
+    ["dfProfessionTailoringDrop2"] = { "weekly", { 66387 } },
+    ["dfProfessionTailoringDrop3"] = { "weekly", { 70524 } },
+    ["dfProfessionTailoringDrop4"] = { "weekly", { 70525 } },
+    ["dfProfessionTailoringGather"] = { "weekly", {
+        66952, --
+        66899, --
+        66953, --
         72410, -- Pincers and Needles
-    }},
-    ["dfProfessionTailoringOrders"] = {"weekly", { 70595 }},
-    ["dfProfessionTailoringTreatise"] = {"weekly", { 74115 }},
-
-    ["dfProfessionHerbalismDrop1"] = {"weekly", { 71857 }},
-    ["dfProfessionHerbalismDrop2"] = {"weekly", { 71858 }},
-    ["dfProfessionHerbalismDrop3"] = {"weekly", { 71859 }},
-    ["dfProfessionHerbalismDrop4"] = {"weekly", { 71860 }},
-    ["dfProfessionHerbalismDrop5"] = {"weekly", { 71861 }},
-    ["dfProfessionHerbalismDrop6"] = {"weekly", { 71864 }},
-    ["dfProfessionHerbalismGather"] = {"weekly", {
+    } },
+    ["dfProfessionTailoringOrders"] = { "weekly", { 70595 } },
+    ["dfProfessionTailoringTreatise"] = { "weekly", { 74115 } },
+    ["dfProfessionHerbalismDrop1"] = { "weekly", { 71857 } },
+    ["dfProfessionHerbalismDrop2"] = { "weekly", { 71858 } },
+    ["dfProfessionHerbalismDrop3"] = { "weekly", { 71859 } },
+    ["dfProfessionHerbalismDrop4"] = { "weekly", { 71860 } },
+    ["dfProfessionHerbalismDrop5"] = { "weekly", { 71861 } },
+    ["dfProfessionHerbalismDrop6"] = { "weekly", { 71864 } },
+    ["dfProfessionHerbalismGather"] = { "weekly", {
         70613, -- Get Their Bark Before They Bite
         70614, -- Bubble Craze
         70615, -- The Case of the Missing Herbs
         70616, -- How Many??
-    }},
-    ["dfProfessionHerbalismTreatise"] = {"weekly", { 74107 }},
-
-    ["dfProfessionMiningDrop1"] = {"weekly", { 72160 }},
-    ["dfProfessionMiningDrop2"] = {"weekly", { 72161 }},
-    ["dfProfessionMiningDrop3"] = {"weekly", { 72162 }},
-    ["dfProfessionMiningDrop4"] = {"weekly", { 72163 }},
-    ["dfProfessionMiningDrop5"] = {"weekly", { 72164 }},
-    ["dfProfessionMiningDrop6"] = {"weekly", { 72165 }},
-    ["dfProfessionMiningGather"] = {"weekly", {
+    } },
+    ["dfProfessionHerbalismTreatise"] = { "weekly", { 74107 } },
+    ["dfProfessionMiningDrop1"] = { "weekly", { 72160 } },
+    ["dfProfessionMiningDrop2"] = { "weekly", { 72161 } },
+    ["dfProfessionMiningDrop3"] = { "weekly", { 72162 } },
+    ["dfProfessionMiningDrop4"] = { "weekly", { 72163 } },
+    ["dfProfessionMiningDrop5"] = { "weekly", { 72164 } },
+    ["dfProfessionMiningDrop6"] = { "weekly", { 72165 } },
+    ["dfProfessionMiningGather"] = { "weekly", {
         70617, -- All Mine, Mine, Mine
         70618, -- The Call of the Forge
         72156, -- A Fiery Fight
         72157, -- The Weight of Earth
-    }},
-    ["dfProfessionMiningTreatise"] = {"weekly", { 74106 }},
-
-    ["dfProfessionSkinningDrop1"] = {"weekly", { 70381 }},
-    ["dfProfessionSkinningDrop2"] = {"weekly", { 70383 }},
-    ["dfProfessionSkinningDrop3"] = {"weekly", { 70384 }},
-    ["dfProfessionSkinningDrop4"] = {"weekly", { 70385 }},
-    ["dfProfessionSkinningDrop5"] = {"weekly", { 70386 }},
-    ["dfProfessionSkinningDrop6"] = {"weekly", { 70389 }},
-    ["dfProfessionSkinningGather"] = {"weekly", {
+    } },
+    ["dfProfessionMiningTreatise"] = { "weekly", { 74106 } },
+    ["dfProfessionSkinningDrop1"] = { "weekly", { 70381 } },
+    ["dfProfessionSkinningDrop2"] = { "weekly", { 70383 } },
+    ["dfProfessionSkinningDrop3"] = { "weekly", { 70384 } },
+    ["dfProfessionSkinningDrop4"] = { "weekly", { 70385 } },
+    ["dfProfessionSkinningDrop5"] = { "weekly", { 70386 } },
+    ["dfProfessionSkinningDrop6"] = { "weekly", { 70389 } },
+    ["dfProfessionSkinningGather"] = { "weekly", {
         70619, -- A Study of Leather
         70620, -- Scaling Up
         72158, -- A Dense Delivery
         72159, -- Scaling Down
-    }},
-    ["dfProfessionSkinningTreatise"] = {"weekly", { 74114 }},
-
-    ["dfSparks"] = {"weekly", {
+    } },
+    ["dfProfessionSkinningTreatise"] = { "weekly", { 74114 } },
+    ["dfSparks"] = { "weekly", {
         72646, -- Sparks of Life: The Waking Shores
         72647, -- Sparks of Life: Ohn'ahran Plains
         72648, -- Sparks of Life: Azure Span
         72649, -- Sparks of Life: Thaldraszus
-    }},
-
-    ["dfCommunityFeast"] = {"weekly", {70893}},
-    ["dfDragonAllegiance"] = {"weekly", {66419}}, -- choose a dragon
-    ["dfDragonKey"] = {"weekly", {66133, 66805}}, -- hand in key (wrathion, sabellian)
-    ["dfGrandHuntMythic"] = {"weekly", {70906}},
-    ["dfGrandHuntRare"] = {"weekly", {71136}},
-    ["dfGrandHuntUncommon"] = {"weekly", {71137}},
-    ["dfPrimalEarth"] = {"weekly", {70723}},
-    ["dfPrimalFire"] = {"weekly", {70754}},
-    ["dfPrimalStorm"] = {"weekly", {70753}},
-    ["dfPrimalWater"] = {"weekly", {70752}},
-    ["dfSiegeDragonbaneKeep"] = {"weekly", {70866}},
-    ["dfStormsFury"] = {"weekly", {73162}},
-    ["dfTrialElements"] = {"weekly", {71995}},
-    ["dfTrialFlood"] = {"weekly", {71033}},
+    } },
+    ["dfCommunityFeast"] = { "weekly", { 70893 } },
+    ["dfDragonAllegiance"] = { "weekly", { 66419 } }, -- choose a dragon
+    ["dfDragonKey"] = { "weekly", { 66133, 66805 } }, -- hand in key (wrathion, sabellian)
+    ["dfGrandHuntMythic"] = { "weekly", { 70906 } },
+    ["dfGrandHuntRare"] = { "weekly", { 71136 } },
+    ["dfGrandHuntUncommon"] = { "weekly", { 71137 } },
+    ["dfPrimalEarth"] = { "weekly", { 70723 } },
+    ["dfPrimalFire"] = { "weekly", { 70754 } },
+    ["dfPrimalStorm"] = { "weekly", { 70753 } },
+    ["dfPrimalWater"] = { "weekly", { 70752 } },
+    ["dfSiegeDragonbaneKeep"] = { "weekly", { 70866 } },
+    ["dfStormsFury"] = { "weekly", { 73162 } },
+    ["dfTrialElements"] = { "weekly", { 71995 } },
+    ["dfTrialFlood"] = { "weekly", { 71033 } },
 }
