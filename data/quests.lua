@@ -295,7 +295,6 @@ ns.otherQuests = {
 ns.progressQuests = {
     -- Weekly Holidays
     ["weeklyHoliday"] = { "weekly", {
-        -- 62632, -- "A Burning Path Through Time", TBC Timewalking
         -- 62633, -- "A Frozen Path Through Time", Wrath Timewalking
         -- 62634, -- "A Shattered Path Through Time", Cata Timewalking
         -- 62639, -- "The Very Best", PvP Pet Battles
@@ -307,6 +306,7 @@ ns.progressQuests = {
         72723, -- "A Call to Battle", Battlegrounds
         72724, -- "A Savage Path Through Time", WoD Timewalking
         72725, -- "A Shrouded Path Through Time", MoP Timewalking
+        72727, -- "A Burning Path Through Time", TBC Timewalking
         72728, -- "The World Awaits", World Quests
     } },
     -- Weekly PvP
