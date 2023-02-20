@@ -116,6 +116,12 @@ end
 function events:ZONE_CHANGED()
     dirtyLocation = true
 end
+function events:ZONE_CHANGED_INDOORS()
+    dirtyLocation = true
+end
+function events:ZONE_CHANGED_NEW_AREA()
+    dirtyLocation = true
+end
 -- Fires when /played information is available
 function events:TIME_PLAYED_MSG(total, level)
     playedLevel, playedLevelUpdated, playedTotal, playedTotalUpdated = level, time(), total, time()
