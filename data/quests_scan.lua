@@ -1111,6 +1111,8 @@ ns.scanQuests = {
     70254, -- Lydiara Whisperfeather
     70255, -- Pluutar
     70314, -- Spelltouched Tongs
+    70277, -- {item:198664}
+    70271, -- {item:201016}
     70284, -- {item:198702}
     70267, -- {item:198662}
     70606, -- Lost Compass
@@ -1144,6 +1146,8 @@ ns.scanQuests = {
     70251, -- Shalasar Glimmerdusk
     70313, -- Ancient Spear Shards
     70353, -- Falconer Gauntlet Drawings
+    70263, -- {item:198657}
+    70282, -- {item:198670}
     70295, -- Battle Hardened Centaur Carpet
     70303, -- Silky Surprise
     -- Zone Maps: Thaldraszus
@@ -1173,6 +1177,8 @@ ns.scanQuests = {
     71224, -- The Highest Peaks
     70258, -- Bridgette Holdug
     70311, -- Draconic Flux
+    70285, -- {item:198682}
+    70261, -- {item:198656}
     70372, -- Ancient Dragonweave Loom
     70288, -- {item:198684}
     -- Zone Maps: Waking Shores, The
@@ -1211,6 +1217,8 @@ ns.scanQuests = {
     70312, -- Curious Ingots
     70296, -- Molten Ingot
     70310, -- Qalashi Weapon Diagram
+    70292, -- {item:198687}
+    70273, -- {item:201017}
     70304, -- {item:198702}
     70302, -- {item:198699}
     70346, -- Dead Man's Chestplate
