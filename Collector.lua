@@ -121,6 +121,7 @@ function events:ZONE_CHANGED_INDOORS()
 end
 function events:ZONE_CHANGED_NEW_AREA()
     dirtyLocation = true
+    dirtyVault = true
 end
 -- Fires when /played information is available
 function events:TIME_PLAYED_MSG(total, level)
