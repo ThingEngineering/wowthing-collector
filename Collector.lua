@@ -191,6 +191,7 @@ end
 function events:BAG_UPDATE_DELAYED()
     dirtyBags = true
 end
+-- ITEM_CHANGED
 -- Fires when the bank is opened
 function events:BANKFRAME_OPENED()
     -- Force a bag scan of the bank now that it's open
@@ -1090,18 +1091,28 @@ function wwtc:ScanLocation()
 
     charData.bindLocation = GetBindLocation()
     
-    local realZone = GetRealZoneText()
-    if realZone == nil then
+    local areaText = GetAreaText()
+
+    if areaText == nil then
         dirtyLocation = true
         return
     end
 
-    local subZone = GetSubZoneText()
-    if subZone and subZone ~= realZone then
-        charData.currentLocation = subZone .. ', ' .. realZone
-    else
-        charData.currentLocation = realZone
+    local zoneParts = {
+        areaText,
+    }
+
+    local realZoneText = GetRealZoneText()
+    if realZoneText ~= nil and realZoneText ~= '' and realZoneText ~= zoneParts[#zoneParts] then
+        table.insert(zoneParts, realZoneText)
     end
+
+    local subZoneText = GetSubZoneText()
+    if subZoneText ~= nil and subZoneText ~= '' and subZoneText ~= zoneParts[#zoneParts] then
+        table.insert(zoneParts, subZoneText)
+    end
+
+    charData.currentLocation = table.concat(zoneParts, ' > ')
 end
 
 -- Scan instance/world boss lockouts
