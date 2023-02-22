@@ -1,3 +1,10 @@
+v10.0.5.8
+---------
+- Changed location scanning to get more accurate area information.
+- Changed location scanning to update more consistently when changing areas.
+- Changed vault scanning to update more consistently when changing areas.
+- Updated quest scanning list.
+
 v10.0.5.7
 ---------
 - Added Artisan's Consortium profession books to quest scanning list.

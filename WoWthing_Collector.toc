@@ -1,7 +1,7 @@
 ## Interface: 100005
 ## Title: WoWthing Collector
 ## Notes: Collects data to sync with WoWthing.
-## Version: 10.0.5.7
+## Version: 10.0.5.8
 ## Author: Freddie
 ## SavedVariables: WWTCSaved
 
