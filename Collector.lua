@@ -535,7 +535,7 @@ function wwtc:Initialise()
     charData.restedXP = 0
 
     charData.achievements = charData.achievements or {}
-    charData.auras = charData.auras or {}
+    charData.aurasV2 = charData.auras or {}
     charData.bags = charData.bags or {}
     charData.callings = charData.callings or {}
     charData.covenants = charData.covenants or {}
@@ -611,6 +611,7 @@ function wwtc:Cleanup()
         if not cData.lastSeen or cData.lastSeen < old then
             WWTCSaved.chars[cName] = nil
         else
+            cData.auras = nil
             cData.mythicPlus = nil
             cData.weeklyQuests = nil
             cData.weeklyUghQuests = nil
@@ -1034,11 +1035,23 @@ end
 function wwtc:ScanAuras()
     if charData == nil then return end
 
-    charData.auras = {}
-    
+    charData.aurasV2 = {}
+
+    local now = time()
+    local uptime = GetTime() -- Blizzard why
+
     for _, spellID in ipairs(ns.auras) do
-        if C_UnitAuras.GetPlayerAuraBySpellID(spellID) ~= nil then
-            charData.auras[#charData.auras + 1] = spellID
+        local auraInfo = C_UnitAuras.GetPlayerAuraBySpellID(spellID)
+        if auraInfo ~= nil then
+            local expire = 0
+            if auraInfo.expirationTime > 0 then
+                expire = math.floor(now + (auraInfo.expirationTime - uptime))
+            end
+
+            charData.aurasV2[#charData.aurasV2 + 1] = table.concat({
+                spellID,
+                expire,
+            }, ':')
         end
     end
 end
