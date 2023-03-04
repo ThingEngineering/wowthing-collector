@@ -1,3 +1,8 @@
+v10.0.5.9
+---------
+- Added Contracts to aura scanning.
+- Changed aura scanning to store expiration time.
+
 v10.0.5.8
 ---------
 - Changed location scanning to get more accurate area information.
