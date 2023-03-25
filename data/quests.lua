@@ -404,13 +404,11 @@ ns.progressQuests = {
     -- Dragonflight
     ["dfAidingAccord"] = { "weekly", {
         70750, -- Aiding the Accord
-        --71243
         72068, -- Aiding the Accord: A Feast For All
-        --72369
         72373, -- Aiding the Accord: A Hunt Is On
         72374, -- Aiding the Accord: Dragonbane Keep
         72375, -- Aiding the Accord: The Isles Call
-        --72892
+        75259, -- Aiding the Accord: Zskera Vaults
     } },
     ["dfCatchIslefin"] = { "weekly", { 72823 } }, -- Catch and Release: Islefin Dorado
     ["dfCatchTemporal"] = { "weekly", { 72824 } }, -- Catch and Release: Temporal Dragonhead
