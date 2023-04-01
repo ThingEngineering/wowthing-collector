@@ -296,7 +296,6 @@ ns.progressQuests = {
     -- Weekly Holidays
     ["weeklyHoliday"] = { "weekly", {
         -- 62633, -- "A Frozen Path Through Time", Wrath Timewalking
-        -- 62634, -- "A Shattered Path Through Time", Cata Timewalking
         -- 62639, -- "The Very Best", PvP Pet Battles
 
         -- Dragonflight
@@ -308,6 +307,7 @@ ns.progressQuests = {
         72725, -- "A Shrouded Path Through Time", MoP Timewalking
         72727, -- "A Burning Path Through Time", TBC Timewalking
         72728, -- "The World Awaits", World Quests
+        72810, -- "A Shattered Path Through Time", Cata Timewalking
     } },
     -- Weekly PvP
     ["weeklyPvp"] = { "weekly", {
