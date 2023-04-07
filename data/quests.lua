@@ -367,16 +367,20 @@ ns.progressQuests = {
     ["bfaNyalotha1Heroic"] = { "once", { 58374 } },
     ["bfaNyalotha1Mythic"] = { "once", { 58375 } },
     -- Shadowlands
-    ["kyrianAnima"] = { "weekly", { 61982 } },
-    ["kyrianSouls"] = { "weekly", { 62863 } },
-    ["necrolordAnima"] = { "weekly", { 61983 } },
-    ["necrolordSouls"] = { "weekly", { 62866 } },
-    ["nightFaeAnima"] = { "weekly", { 61984 } },
-    ["nightFaeSouls"] = { "weekly", { 62860 } },
-    ["venthyrAnima"] = { "weekly", { 61981 } },
-    ["venthyrSouls"] = { "weekly", { 62869 } },
+    ["slAnima"] = { "weekly", {
+        61982, -- Kyrian
+        61983, -- Necrolord
+        61984, -- Night Fae
+        61981, -- Venthyr
+    } },
+    ["slSouls"] = { "weekly", {
+        62863, -- Kyrian
+        62866, -- Necrolord
+        62860, -- Night Fae
+        62869, -- Venthyr
+    } },
     -- Shadowlands: 9.1
-    ["shapingFate"] = { "weekly", { 63949 } },
+    ["slShapingFate"] = { "weekly", { 63949 } },
     ["slTormentors"] = { "weekly", { 63854 } },
     ["slMawAssault"] = { "biweekly", {
         63543, -- Necrolord
@@ -385,8 +389,8 @@ ns.progressQuests = {
         63824, -- Kyrian
     } },
     -- Shadowlands: 9.2
-    ["newDeal"] = { "weekly", { 65649 } },
-    ["patterns"] = { "weekly", { 66042 } },
+    ["slNewDeal"] = { "weekly", { 65649 } },
+    ["slPatterns"] = { "weekly", { 66042 } },
     -- Shadowlands: Raids
     ["slNathria1Normal"] = { "once", { 62054 } },
     ["slNathria1Heroic"] = { "once", { 62055 } },
