@@ -294,36 +294,19 @@ ns.otherQuests = {
 
 ns.progressQuests = {
     -- Weekly Holidays
-    ["weeklyHoliday"] = { "weekly", {
-        -- 62633, -- "A Frozen Path Through Time", Wrath Timewalking
-        -- 62639, -- "The Very Best", PvP Pet Battles
-
-        -- Dragonflight
+    ["holidayArena"] = { "weekly", { 72720 } }, -- "The Arena Calls", Arena Skirmishes
+    ["holidayBattlegrounds"] = { "weekly", { 72723 } }, -- "A Call to Battle", Battlegrounds
+    ["holidayDungeons"] = { "weekly", { 72722 } }, -- "Emissary of War", Mythic Dungeons
+    ["holidayPetPvp"] = { "weekly", { 72721 } }, -- "The Very Best", PvP Pet Battles
+    ["holidayTimewalking"] = { "weekly", {
         72719, -- "A Fel Path Through Time", Legion Timewalking
-        72720, -- "The Arena Calls", Arena Skirmishes
-        72722, -- "Emissary of War", Mythic Dungeons
-        72723, -- "A Call to Battle", Battlegrounds
         72724, -- "A Savage Path Through Time", WoD Timewalking
         72725, -- "A Shrouded Path Through Time", MoP Timewalking
+        72726, -- "A Frozen Path Through Time", Wrath Timewalking
         72727, -- "A Burning Path Through Time", TBC Timewalking
-        72728, -- "The World Awaits", World Quests
-        72810, -- "A Shattered Path Through Time", Cata Timewalking
+        72810, -- "A Shattered Path Through Time", Cata Timewalking [Heroic]
     } },
-    -- Weekly PvP
-    ["weeklyPvp"] = { "weekly", {
-        62284, -- Observing Battle
-        62285, -- Observing War
-        62286, -- Observing Skirmishes
-        62287, -- Observing Arenas
-        62288, -- Observing Teamwork
-        --64527, -- Observing the Chase
-        65773, -- Solo Mission
-        65775, -- Soloing Strategy
-    } },
-    -- PvP Brawl
-    ["somethingDifferent"] = { "weekly", { 47148 } },
-    -- Timewalking turn-ins
-    ["timewalking"] = { "weekly", {
+    ["holidayTimewalkingItem"] = { "weekly", {
         40168, -- The Swirling Vial, TBC
         40173, -- The Unstable Prism, Wrath
         40786, -- The Smoldering Ember, Cata [Horde]
@@ -332,6 +315,19 @@ ns.progressQuests = {
         55498, -- The Shimmering Crystal, WoD
         64710, -- Whispering Fel Crystal, Legion
     } },
+    ["holidayWorldQuests"] = { "weekly", { 72728 } }, -- "The World Awaits", World Quests
+    -- Weekly PvP
+    ["pvpArenas"] = { "weekly", { 72169 } }, -- Proving in Arenas (Rated Arenas)
+    ["pvpBattle"] = { "weekly", { 72166 } }, -- Proving in Battle (Random Battlegrounds)
+    ["pvpOverwhelmingOdds"] = { "weekly", {
+        71025, -- Against Overwhelming Odds [H]
+        71026, -- Against Overwhelming Odds [A]
+    } },
+    ["pvpSkirmishes"] = { "weekly", { 72168 } }, -- Proving in Skirmishes (Arena Skirmishes)
+    ["pvpSolo"] = { "weekly", { 72171 } }, -- Proving Solo (Solo Shuffle)
+    ["pvpSomethingDifferent"] = { "weekly", { 47148 } }, -- Something Different (Brawl)
+    ["pvpTeamwork"] = { "weekly", { 72170 } }, -- Proving Teamwork (Rated Battlegrounds)
+    ["pvpWar"] = { "weekly", { 72167 } }, -- Proving in War (Epic Battlegrounds)
     -- Warlords of Draenor
     ["invasionBoss"] = { "weekly", { 38276 } },
     ["invasionBronze"] = { "weekly", { 37638 } },
