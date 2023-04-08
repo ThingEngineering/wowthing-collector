@@ -319,13 +319,13 @@ ns.progressQuests = {
     -- Weekly PvP
     ["pvpArenas"] = { "weekly", { 72169 } }, -- Proving in Arenas (Rated Arenas)
     ["pvpBattle"] = { "weekly", { 72166 } }, -- Proving in Battle (Random Battlegrounds)
+    ["pvpBrawl"] = { "weekly", { 47148 } }, -- Something Different (Brawl)
     ["pvpOverwhelmingOdds"] = { "weekly", {
         71025, -- Against Overwhelming Odds [H]
         71026, -- Against Overwhelming Odds [A]
     } },
     ["pvpSkirmishes"] = { "weekly", { 72168 } }, -- Proving in Skirmishes (Arena Skirmishes)
     ["pvpSolo"] = { "weekly", { 72171 } }, -- Proving Solo (Solo Shuffle)
-    ["pvpSomethingDifferent"] = { "weekly", { 47148 } }, -- Something Different (Brawl)
     ["pvpTeamwork"] = { "weekly", { 72170 } }, -- Proving Teamwork (Rated Battlegrounds)
     ["pvpWar"] = { "weekly", { 72167 } }, -- Proving in War (Epic Battlegrounds)
     -- Warlords of Draenor
