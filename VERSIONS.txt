@@ -1,6 +1,10 @@
+v10.0.7.5
+---------
+- Added Forbidden Reach profession drops to quest scanning.
+
 v10.0.7.4
 ---------
-- Added tracking quest for The Four Celestials world boss.
+- Added The Four Celestials world bosses to quest scanning.
 
 v10.0.7.3
 ---------
