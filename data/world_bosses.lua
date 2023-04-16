@@ -14,7 +14,7 @@ ns.worldBossQuests = {
     [32098] = { 104002, "Galleon", "Galleon" },
     [32518] = { 104003, "Nalak", "Nalak" },
     [32519] = { 104004, "Oondasta", "Oondasta" },
-    [33117] = { 104005, "The Four Celestials", "A Big Beastie", true },
+    [33117] = { 104005, "The Four Celestials", "A Big Beastie" },
 
     -- Warlords of Draenor
     [37460] = { 105001, "Gorgrond World Bosses", "Drov the Ruinator" },
