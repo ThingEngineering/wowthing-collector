@@ -1,3 +1,7 @@
+v10.0.7.6
+---------
+- Fixed The Four Celestials world bosses being marked as daily.
+
 v10.0.7.5
 ---------
 - Added Forbidden Reach profession drops to quest scanning.
