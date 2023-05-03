@@ -119,4 +119,27 @@ ns.currencies = {
     -- 2134, -- Cobalt Assembly
     2167, -- Catalyst Charges
     2245, -- Flightstones
+    
+    2264, -- Account HWM - Helm [DNT]
+    2265, -- Account HWM - Neck [DNT]
+    2266, -- Account HWM - Shoulders [DNT]
+    2267, -- Account HWM - Chest [DNT]
+    2268, -- Account HWM - Waist [DNT]
+    2269, -- Account HWM - Legs [DNT]
+    2270, -- Account HWM - Feet [DNT]
+    2271, -- Account HWM - Wrist [DNT]
+    2272, -- Account HWM - Hands [DNT]
+    2273, -- Account HWM - Ring [DNT]
+    2274, -- Account HWM - Trinket [DNT]
+    2275, -- Account HWM - Cloak [DNT]
+    2276, -- Account HWM - Two Hand [DNT]
+    2277, -- Account HWM - Main Hand [DNT]
+    2278, -- Account HWM - One Hand [DNT]
+    2279, -- Account HWM - One Hand (Second) [DNT]
+    2280, -- Account HWM - Off Hand [DNT]
+    2409, -- Whelpling Crest Fragment Tracker [DNT]
+    2410, -- Drake Crest Fragment Tracker [DNT]
+    2411, -- Wyrm Crest Fragment Tracker [DNT]
+    2412, -- Aspect Crest Fragment Tracker [DNT]
+    2413, -- 10.1 Professions - Personal Tracker - S2 Spark Drops (Hidden)
 }
