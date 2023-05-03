@@ -439,6 +439,7 @@ ns.progressQuests = {
         66866, -- Relic Recovery: Halls of Infusion
         66867, -- Relic Recovery: Algeth'ar Academy
     } },
+    ["dfFighting"] = { "weekly", { 76122 } }, -- Fighting is its Own Reward
     ["dfProfessionMettle"] = { "weekly", { 70221 } },
     ["dfProfessionAlchemyCraft"] = { "weekly", {
         70530, --
