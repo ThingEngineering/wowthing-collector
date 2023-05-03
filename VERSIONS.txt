@@ -1,3 +1,11 @@
+v10.1.0.1
+---------
+- Added 3 new Aiding the Accord quests to quest scanning.
+- Added "Fighting is its Own Reward" to quest scanning.
+- Added Flightstones to currency scanning.
+- Added a bunch of new hidden tracking currencies to currency scanning.
+- Updated TOC.
+
 v10.0.7.6
 ---------
 - Fixed The Four Celestials world bosses being marked as daily.
