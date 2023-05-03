@@ -409,6 +409,9 @@ ns.progressQuests = {
         72374, -- Aiding the Accord: Dragonbane Keep
         72375, -- Aiding the Accord: The Isles Call
         75259, -- Aiding the Accord: Zskera Vaults
+        75859, -- Aiding the Accord: Sniffenseeking
+        75860, -- Aiding the Accord: Researchers Under Fire
+        75861, -- Aiding the Accord: Suffusion Camp
     } },
     ["dfCatchIslefin"] = { "weekly", { 72823 } }, -- Catch and Release: Islefin Dorado
     ["dfCatchTemporal"] = { "weekly", { 72824 } }, -- Catch and Release: Temporal Dragonhead
