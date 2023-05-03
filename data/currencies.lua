@@ -118,4 +118,5 @@ ns.currencies = {
     2133, -- Dragonriding - Accepting Passengers
     -- 2134, -- Cobalt Assembly
     2167, -- Catalyst Charges
+    2245, -- Flightstones
 }
