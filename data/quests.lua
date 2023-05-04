@@ -639,6 +639,7 @@ ns.progressQuests = {
         72648, -- Sparks of Life: Azure Span
         72649, -- Sparks of Life: Thaldraszus
     } },
+    ["dfWorthyAlly"] = { "weekly", { 75665 } }, -- A Worthy Ally: Loamm Niffen
     ["dfCommunityFeast"] = { "weekly", { 70893 } },
     ["dfDragonAllegiance"] = { "weekly", { 66419 } }, -- choose a dragon
     ["dfDragonKey"] = { "weekly", { 66133, 66805 } }, -- hand in key (wrathion, sabellian)
