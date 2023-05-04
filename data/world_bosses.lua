@@ -90,8 +90,9 @@ ns.worldBossQuests = {
     -- [66619] = { 108006, "Fated Shadowlands World Bosses", "Antros" },
 
     -- Dragonflight
-    [69927] = { 109001, "Dragonflight World Bosses", "Bazual, The Dreaded Flame"},
-    [69928] = { 109001, "Dragonflight World Bosses", "Liskanoth, The Futurebane"},
-    [69929] = { 109001, "Dragonflight World Bosses", "Strunraan, The Sky's Misery"},
-    [69930] = { 109001, "Dragonflight World Bosses", "Basrikron, The Shale Wing"},
+    [69927] = { 109001, "Dragonflight World Bosses", "Bazual, The Dreaded Flame" },
+    [69928] = { 109001, "Dragonflight World Bosses", "Liskanoth, The Futurebane" },
+    [69929] = { 109001, "Dragonflight World Bosses", "Strunraan, The Sky's Misery" },
+    [69930] = { 109001, "Dragonflight World Bosses", "Basrikron, The Shale Wing" },
+    [74892] = { 109002, "Zaqali Elders", "The Zaqali Elders" },
 }
