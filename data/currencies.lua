@@ -119,7 +119,8 @@ ns.currencies = {
     -- 2134, -- Cobalt Assembly
     2167, -- Catalyst Charges
     2245, -- Flightstones
-    
+    2533, -- Renascent Shadowflame
+
     2264, -- Account HWM - Helm [DNT]
     2265, -- Account HWM - Neck [DNT]
     2266, -- Account HWM - Shoulders [DNT]
