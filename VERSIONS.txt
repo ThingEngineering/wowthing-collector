@@ -1,3 +1,11 @@
+v10.1.0.2
+---------
+- Added A Worthy Ally: Loamm Niffen to quest scanning.
+- Added first set of Zaralek Cavern profession gather quests to quest scanning.
+- Added The Zaqlai Elders to world boss scanning.
+- Added Renascent Shadowflame to currency scanning.
+- Added addon icon for the addon list.
+
 v10.1.0.1
 ---------
 - Added 3 new Aiding the Accord quests to quest scanning.
