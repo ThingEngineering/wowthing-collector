@@ -401,6 +401,7 @@ ns.progressQuests = {
     ["slSepulcher1Normal"] = { "once", { 65764 } },
     ["slSepulcher1Heroic"] = { "once", { 65763 } },
     ["slSepulcher1Mythic"] = { "once", { 65762 } },
+    
     -- Dragonflight
     ["dfAidingAccord"] = { "weekly", {
         70750, -- Aiding the Accord
@@ -457,6 +458,7 @@ ns.progressQuests = {
         66938, --
         66940, -- Elixir Experiment
         72427, -- Animated Infusion
+        75363, -- Deepflayer Dust
     } },
     ["dfProfessionAlchemyTreatise"] = { "weekly", { 74108 } },
     ["dfProfessionBlacksmithingCraft"] = { "weekly", {
@@ -475,6 +477,7 @@ ns.progressQuests = {
         66897, -- Fuel for the Forge
         66941, -- Tremendous Tools
         72398, -- Rock and Stone
+        75569, -- Blacksmith, Black Dragon
     } },
     ["dfProfessionBlacksmithingOrders"] = { "weekly", { 70589 } },
     ["dfProfessionBlacksmithingTreatise"] = { "weekly", { 74109 } },
@@ -494,6 +497,7 @@ ns.progressQuests = {
         66900, --
         66935, --
         72423, --
+        75865, -- Relic Rustler
     } },
     ["dfProfessionEnchantingTreatise"] = { "weekly", { 74110 } },
     ["dfProfessionEngineeringCraft"] = { "weekly", {
@@ -512,6 +516,7 @@ ns.progressQuests = {
         66891, -- Explosive Ash
         66942, -- Enemy Engineering
         72396, --
+        75575, -- Ballistae Bits
     } },
     ["dfProfessionEngineeringOrders"] = { "weekly", { 70591 } },
     ["dfProfessionEngineeringTreatise"] = { "weekly", { 74111 } },
@@ -531,6 +536,7 @@ ns.progressQuests = {
         66944, -- Peacock Pigments
         66945, --
         72438, -- Tarasek Intentions
+        75573, -- Proclamation Reclamation
     } },
     ["dfProfessionInscriptionOrders"] = { "weekly", { 70592 } },
     ["dfProfessionInscriptionTreatise"] = { "weekly", { 74105 } },
@@ -550,6 +556,7 @@ ns.progressQuests = {
         66949, --
         66950, --
         72428, --
+        75362, -- Cephalo-crystalization
     } },
     ["dfProfessionJewelcraftingOrders"] = { "weekly", { 70593 } },
     ["dfProfessionJewelcraftingTreatise"] = { "weekly", { 74112 } },
@@ -569,6 +576,7 @@ ns.progressQuests = {
         66364, -- To Fly a Kite
         66951, -- Population Control
         72407, -- Soaked in Success
+        75354, -- Mycelium Mastery
     } },
     ["dfProfessionLeatherworkingOrders"] = { "weekly", { 70594 } },
     ["dfProfessionLeatherworkingTreatise"] = { "weekly", { 74113 } },
@@ -588,6 +596,7 @@ ns.progressQuests = {
         66899, --
         66953, --
         72410, -- Pincers and Needles
+        75407, -- Silk Scavenging
     } },
     ["dfProfessionTailoringOrders"] = { "weekly", { 70595 } },
     ["dfProfessionTailoringTreatise"] = { "weekly", { 74115 } },
