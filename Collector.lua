@@ -107,6 +107,8 @@ function events:PLAYER_ENTERING_WORLD()
     dirtyTransmog = true
     dirtyVault = true
     dirtyXp = true
+
+    wwtc:SetPlayerBagsDirty()
 end
 --
 function events:PLAYER_XP_UPDATE(target)
@@ -355,7 +357,7 @@ end
 -------------------------------------------------------------------------------
 -- Call functions in the events table for events
 frame:SetScript("OnEvent", function(self, event, ...)
-    --if event ~= "CRITERIA_UPDATE" and event ~= "UNIT_AURA" then print(event) end
+    -- if event ~= "CRITERIA_UPDATE" and event ~= "UNIT_AURA" then print(event) end
     events[event](self, ...)
 end)
 
