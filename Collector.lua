@@ -1348,7 +1348,7 @@ function wwtc:ScanQuests()
 
                         table.insert(prog.objectives, table.concat({
                             'object',
-                            GetQuestLogCompletionText(),
+                            GetQuestLogCompletionText() or '',
                             1,
                             1,
                         }, ';'))
