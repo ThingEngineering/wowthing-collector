@@ -401,7 +401,7 @@ ns.progressQuests = {
     ["slSepulcher1Normal"] = { "once", { 65764 } },
     ["slSepulcher1Heroic"] = { "once", { 65763 } },
     ["slSepulcher1Mythic"] = { "once", { 65762 } },
-    
+
     -- Dragonflight
     ["dfAidingAccord"] = { "weekly", {
         70750, -- Aiding the Accord
@@ -414,12 +414,12 @@ ns.progressQuests = {
         75860, -- Aiding the Accord: Researchers Under Fire
         75861, -- Aiding the Accord: Suffusion Camp
     } },
-    ["dfCatchIslefin"] = { "weekly", { 72823 } }, -- Catch and Release: Islefin Dorado
-    ["dfCatchTemporal"] = { "weekly", { 72824 } }, -- Catch and Release: Temporal Dragonhead
-    ["dfCatchCerulean"] = { "weekly", { 72825 } }, -- Catch and Release: Cerulean Spinefish
     ["dfCatchAileron"] = { "weekly", { 72826 } }, -- Catch and Release: Aileron Seamoth
-    ["dfCatchThousandbite"] = { "weekly", { 72827 } }, -- Catch and Release: Thousandbite Piranha
+    ["dfCatchCerulean"] = { "weekly", { 72825 } }, -- Catch and Release: Cerulean Spinefish
+    ["dfCatchIslefin"] = { "weekly", { 72823 } }, -- Catch and Release: Islefin Dorado
     ["dfCatchScalebelly"] = { "weekly", { 72828 } }, -- Catch and Release: Scalebelly Mackerel
+    ["dfCatchTemporal"] = { "weekly", { 72824 } }, -- Catch and Release: Temporal Dragonhead
+    ["dfCatchThousandbite"] = { "weekly", { 72827 } }, -- Catch and Release: Thousandbite Piranha
     ["dfDungeonPreserving"] = { "weekly", {
         66868, -- Preserving the Past: Legacy of Tyr
         66869, -- Preserving the Past: Court of Stars (?)
@@ -441,7 +441,41 @@ ns.progressQuests = {
         66867, -- Relic Recovery: Algeth'ar Academy
     } },
     ["dfFighting"] = { "weekly", { 76122 } }, -- Fighting is its Own Reward
+    ["dfSparks"] = { "weekly", {
+        72646, -- Sparks of Life: The Waking Shores
+        72647, -- Sparks of Life: Ohn'ahran Plains
+        72648, -- Sparks of Life: Azure Span
+        72649, -- Sparks of Life: Thaldraszus
+        74871, -- Sparks of Life: The Forbidden Reach
+        75305, -- Sparks of Life: Zaralek Cavern
+    } },
+    ["dfWorthyAlly"] = { "weekly", { 75665 } }, -- A Worthy Ally: Loamm Niffen
+    
+    -- Chores
+    ["dfCommunityFeast"] = { "weekly", { 70893 } },
+    ["dfDragonAllegiance"] = { "weekly", { 66419 } }, -- choose a dragon
+    ["dfDragonKey"] = { "weekly", { 66133, 66805 } }, -- hand in key (wrathion, sabellian)
+    ["dfGrandHuntMythic"] = { "weekly", { 70906 } },
+    ["dfGrandHuntRare"] = { "weekly", { 71136 } },
+    ["dfGrandHuntUncommon"] = { "weekly", { 71137 } },
+    ["dfPrimalEarth"] = { "weekly", { 70723 } },
+    ["dfPrimalFire"] = { "weekly", { 70754 } },
+    ["dfPrimalStorm"] = { "weekly", { 70753 } },
+    ["dfPrimalWater"] = { "weekly", { 70752 } },
+    ["dfReachStormsChest"] = { "weekly", { 74567 } },
+    ["dfReachStormsEvent"] = { "weekly", {
+        75399, -- Water
+        75400, -- Fire
+        75401, -- Earth
+        75402, -- Air
+    }, },
+    ["dfSiegeDragonbaneKeep"] = { "weekly", { 70866 } },
+    ["dfStormsFury"] = { "weekly", { 73162 } },
+    ["dfTrialElements"] = { "weekly", { 71995 } },
+    ["dfTrialFlood"] = { "weekly", { 71033 } },
+    
     ["dfProfessionMettle"] = { "weekly", { 70221 } },
+    -- Crafting Professions
     ["dfProfessionAlchemyCraft"] = { "weekly", {
         70530, --
         70531, --
@@ -600,6 +634,7 @@ ns.progressQuests = {
     } },
     ["dfProfessionTailoringOrders"] = { "weekly", { 70595 } },
     ["dfProfessionTailoringTreatise"] = { "weekly", { 74115 } },
+    -- Gathering Professions
     ["dfProfessionHerbalismDrop1"] = { "weekly", { 71857 } },
     ["dfProfessionHerbalismDrop2"] = { "weekly", { 71858 } },
     ["dfProfessionHerbalismDrop3"] = { "weekly", { 71859 } },
@@ -642,25 +677,11 @@ ns.progressQuests = {
         72159, -- Scaling Down
     } },
     ["dfProfessionSkinningTreatise"] = { "weekly", { 74114 } },
-    ["dfSparks"] = { "weekly", {
-        72646, -- Sparks of Life: The Waking Shores
-        72647, -- Sparks of Life: Ohn'ahran Plains
-        72648, -- Sparks of Life: Azure Span
-        72649, -- Sparks of Life: Thaldraszus
+    -- Secondary Professions
+    ["dfProfessionCookingCraft"] = { "weekly", {
+        75307, -- Road to Season City
     } },
-    ["dfWorthyAlly"] = { "weekly", { 75665 } }, -- A Worthy Ally: Loamm Niffen
-    ["dfCommunityFeast"] = { "weekly", { 70893 } },
-    ["dfDragonAllegiance"] = { "weekly", { 66419 } }, -- choose a dragon
-    ["dfDragonKey"] = { "weekly", { 66133, 66805 } }, -- hand in key (wrathion, sabellian)
-    ["dfGrandHuntMythic"] = { "weekly", { 70906 } },
-    ["dfGrandHuntRare"] = { "weekly", { 71136 } },
-    ["dfGrandHuntUncommon"] = { "weekly", { 71137 } },
-    ["dfPrimalEarth"] = { "weekly", { 70723 } },
-    ["dfPrimalFire"] = { "weekly", { 70754 } },
-    ["dfPrimalStorm"] = { "weekly", { 70753 } },
-    ["dfPrimalWater"] = { "weekly", { 70752 } },
-    ["dfSiegeDragonbaneKeep"] = { "weekly", { 70866 } },
-    ["dfStormsFury"] = { "weekly", { 73162 } },
-    ["dfTrialElements"] = { "weekly", { 71995 } },
-    ["dfTrialFlood"] = { "weekly", { 71033 } },
+    ["dfProfessionFishingCraft"] = { "weekly", {
+        75308, -- Scrybbil Engineering
+    } },
 }
