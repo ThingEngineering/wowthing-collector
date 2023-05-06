@@ -450,8 +450,7 @@ ns.progressQuests = {
         75305, -- Sparks of Life: Zaralek Cavern
     } },
     ["dfWorthyAlly"] = { "weekly", { 75665 } }, -- A Worthy Ally: Loamm Niffen
-    
-    -- Chores
+    -- Dragonflight: Chores
     ["dfCommunityFeast"] = { "weekly", { 70893 } },
     ["dfDragonAllegiance"] = { "weekly", { 66419 } }, -- choose a dragon
     ["dfDragonKey"] = { "weekly", { 66133, 66805 } }, -- hand in key (wrathion, sabellian)
@@ -473,9 +472,9 @@ ns.progressQuests = {
     ["dfStormsFury"] = { "weekly", { 73162 } },
     ["dfTrialElements"] = { "weekly", { 71995 } },
     ["dfTrialFlood"] = { "weekly", { 71033 } },
-    
+    -- Dragonflight: Professions
     ["dfProfessionMettle"] = { "weekly", { 70221 } },
-    -- Crafting Professions
+    -- Dragonflight: Crafting Professions
     ["dfProfessionAlchemyCraft"] = { "weekly", {
         70530, --
         70531, --
@@ -634,7 +633,7 @@ ns.progressQuests = {
     } },
     ["dfProfessionTailoringOrders"] = { "weekly", { 70595 } },
     ["dfProfessionTailoringTreatise"] = { "weekly", { 74115 } },
-    -- Gathering Professions
+    -- Dragonflight: Gathering Professions
     ["dfProfessionHerbalismDrop1"] = { "weekly", { 71857 } },
     ["dfProfessionHerbalismDrop2"] = { "weekly", { 71858 } },
     ["dfProfessionHerbalismDrop3"] = { "weekly", { 71859 } },
@@ -677,11 +676,18 @@ ns.progressQuests = {
         72159, -- Scaling Down
     } },
     ["dfProfessionSkinningTreatise"] = { "weekly", { 74114 } },
-    -- Secondary Professions
+    -- Dragonflight: Secondary Professions
     ["dfProfessionCookingCraft"] = { "weekly", {
         75307, -- Road to Season City
     } },
     ["dfProfessionFishingCraft"] = { "weekly", {
         75308, -- Scrybbil Engineering
-    } },
+    }, },
+    -- Dragonflight: Raids
+    ["dfVault1Normal"] = { "once", { 71018 } },
+    ["dfVault1Heroic"] = { "once", { 71019 } },
+    ["dfVault1Mythic"] = { "once", { 71020 } },
+    -- ["dfAberrus1Normal"] = { "once", {  } },
+    -- ["dfAberrus1Heroic"] = { "once", {  } },
+    -- ["dfAberrus1Mythic"] = { "once", {  } },
 }
