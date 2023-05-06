@@ -1,3 +1,12 @@
+v10.1.0.3
+---------
+- Added more new profession quests to quest scanning.
+- Changed bag scanning to always run when entering world.
+- Fixed quest scanning error.
+- Fixed guild bank scanning error.
+- Fixed bank scanning not triggering properly.
+- Removed hacky workaround for Blizzard breaking bag updates a while back.
+
 v10.1.0.2
 ---------
 - Added A Worthy Ally: Loamm Niffen to quest scanning.
