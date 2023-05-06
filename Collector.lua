@@ -876,16 +876,12 @@ function wwtc:ScanGuildBankTabs()
             if link ~= nil then
                 if string.find(link, '\Hitem:82800:') then
                     local tooltipData = C_TooltipInfo.GetGuildBankItem(tabIndex, slotIndex)
-                    local args = {}
-                    for _, arg in ipairs(tooltipData.args) do
-                        args[arg.field] = arg.stringVal or arg.intVal
-                    end
 
                     tab["s"..slotIndex] = table.concat({
                         'pet',
-                        args['battlePetSpeciesID'],
-                        args['battlePetLevel'],
-                        args['battlePetBreedQuality'],
+                        tooltipData['battlePetSpeciesID'],
+                        tooltipData['battlePetLevel'],
+                        tooltipData['battlePetBreedQuality'],
                     }, ':')
 
                 else
