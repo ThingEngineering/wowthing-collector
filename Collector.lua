@@ -196,11 +196,12 @@ end
 function events:BANKFRAME_OPENED()
     -- Force a bag scan of the bank now that it's open
     bankOpen = true
-    dirtyBag[-1] = true -- bank
-    dirtyBag[-3] = true -- reagent bank
-    for i = 6, 12 do
+    dirtyBag[Enum.BagIndex.Bank] = true
+    dirtyBag[Enum.BagIndex.Reagentbank] = true
+    for i = Enum.BagIndex.BankBag_1, Enum.BagIndex.BankBag_7 do
         dirtyBag[i] = true
     end
+    dirtyBags = true
 end
 -- Fires when the bank is closed
 function events:BANKFRAME_CLOSED()
@@ -208,7 +209,7 @@ function events:BANKFRAME_CLOSED()
 end
 -- Fires when something changes in the reagent bank
 function events:PLAYERREAGENTBANKSLOTS_CHANGED()
-    dirtyBag[-3] = true
+    dirtyBag[Enum.BagIndex.Reagentbank] = true
     reagentBankUpdated = true
 end
 -- Fires when the guild bank opens
@@ -759,12 +760,18 @@ function wwtc:ScanBagQueue()
     end
 
     -- Short circuit if bank isn't open
+    local isBank = (
+        bagID == Enum.BagIndex.Bank or
+        bagID == Enum.BagIndex.Reagentbank or
+        (bagID >= Enum.BagIndex.BankBag_1 and bagID <= Enum.BagIndex.BankBag_7)
+    )
     local scan = true
-    if (bagID == -1 or bagID > NUM_TOTAL_BAG_FRAMES) and not bankOpen then
+
+    if isBank and not bankOpen then
         scan = false
     end
     -- Reagent bank is weird, make sure that the bank is open or it was actually updated
-    if bagID == -3 then
+    if bagID == Enum.BagIndex.Reagentbank then
         if not (bankOpen or reagentBankUpdated) then
             scan = false
         end
@@ -774,14 +781,15 @@ function wwtc:ScanBagQueue()
     local requestedData = false
     if scan then
         local now = time()
-        if bagID >= 0 and bagID <= NUM_TOTAL_BAG_FRAMES then
+
+        if isBank then
+            charData.scanTimes["bank"] = now
+        else
             charData.scanTimes["bags"] = now
 
             -- Update mythic plus keystone since bags changed
             charData.keystoneInstance = C_MythicPlus.GetOwnedKeystoneChallengeMapID()
             charData.keystoneLevel = C_MythicPlus.GetOwnedKeystoneLevel()
-        else
-            charData.scanTimes["bank"] = now
         end
 
         charData.items["b"..bagID] = {}
