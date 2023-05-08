@@ -369,6 +369,8 @@ end
 -------------------------------------------------------------------------------
 -- Timer to do spammy things
 function wwtc:Timer()
+    if charData == nil then return end
+
     if dirtyAchievements then
         dirtyAchievements = false
         wwtc:ScanAchievements()
