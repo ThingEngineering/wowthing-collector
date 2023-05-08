@@ -12,9 +12,9 @@ local maxScannedToys = 0
 local dirtyAchievements, dirtyAuras, dirtyBags, dirtyChromieTime, dirtyCovenant, dirtyCurrencies,
     dirtyEquipment, dirtyGarrisonTrees, dirtyHeirlooms, dirtyLocation, dirtyLockouts, dirtyMounts,
     dirtyMythicPlus, dirtyPets, dirtyQuests, dirtyReputations, dirtyRested, dirtySpells, dirtyToys,
-    dirtyTransmog, dirtyVault, dirtyXp =
+    dirtyTransmog, dirtyVault, dirtyWorldQuests, dirtyXp =
     false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-    false, false, false, false, false, false, false, false
+    false, false, false, false, false, false, false, false, false
 local dirtyCallings, callingData = false, nil
 local dirtyBag, dirtyGuildBank, guildBankQueried, requestingPlayedTime = {}, false, false, true
 
@@ -38,6 +38,7 @@ local defaultWWTCSaved = {
     quests = {},
     toys = {},
     transmogSourcesV2 = {},
+    worldQuestIds = {},
 }
 
 local instanceNameToId = {}
@@ -273,6 +274,7 @@ end
 function events:QUEST_LOG_UPDATE()
     dirtyChromieTime = true
     dirtyQuests = true
+    dirtyWorldQuests = true
 end
 -- Finished looting something
 function events:LOOT_CLOSED()
@@ -488,6 +490,11 @@ function wwtc:Timer()
         wwtc:ScanVault()
     end
 
+    if dirtyWorldQuests then
+        dirtyWorldQuests = false
+        wwtc:ScanWorldQuests()
+    end
+
     if dirtyXp then
         dirtyXp = false
         wwtc:ScanXP()
@@ -516,6 +523,7 @@ function wwtc:Initialise()
     WWTCSaved.heirloomsV2 = WWTCSaved.heirloomsV2 or {}
     WWTCSaved.quests = WWTCSaved.quests or {}
     WWTCSaved.transmogSourcesV2 = WWTCSaved.transmogSourcesV2 or {}
+    WWTCSaved.worldQuestIds = WWTCSaved.worldQuestIds or {}
 
     WWTCSaved.honorLevel = 0
     WWTCSaved.honorCurrent = 0
@@ -565,6 +573,7 @@ function wwtc:Initialise()
     charData.scanTimes = charData.scanTimes or {}
     charData.transmog = charData.transmog or nil
     charData.vault = charData.vault or {}
+    charData.worldQuests = charData.worldQuests or {}
 
     -- Deprecated
     charData.biggerFishToFry = nil
@@ -573,7 +582,6 @@ function wwtc:Initialise()
     charData.hiddenWorldQuests = nil
     charData.balanceUnleashedMonstrosities = nil
     charData.balanceMythic15 = nil
-    charData.worldQuests = nil
 
     charData.dailyResetTime = wwtc:GetDailyResetTime()
 
@@ -1285,6 +1293,12 @@ function wwtc:ScanQuests()
         end
     end
 
+    for questID, _ in pairs(WWTCSaved.worldQuestIds) do
+        if C_QuestLog_IsQuestFlaggedCompleted(questID) then
+            charData.dailyQuests[#charData.dailyQuests + 1] = questID
+        end
+    end
+
     for questKey, questData in pairs(ns.progressQuests) do
         local prog = {
             reset = 0,
@@ -1817,6 +1831,97 @@ function wwtc:ScanToys(resetToyBox)
     end
 end
 
+-- World quests
+function wwtc:ScanWorldQuests()
+    local now = time()
+    charData.scanTimes['worldQuests'] = now
+
+    for _, expansion in pairs(ns.worldQuests) do
+        if charData.level >= expansion.minimumLevel then
+            charData.worldQuests[expansion.id] = charData.worldQuests[expansion.id] or {}
+            for _, zoneId in ipairs(expansion.zones) do
+                charData.worldQuests[expansion.id][zoneId] = charData.worldQuests[expansion.id][zoneId] or {}
+                
+                local questMap = {}
+                for _, quest in pairs(charData.worldQuests[expansion.id][zoneId]) do
+                    local questId, expires = strsplit(':', quest)
+                    if tonumber(expires) > now then
+                        questMap[tonumber(questId)] = quest
+                    end
+                end
+
+                local quests = C_TaskQuest.GetQuestsForPlayerByMapID(zoneId)
+                if quests ~= nil then
+                    for _, quest in pairs(quests) do
+                        if quest.mapID == zoneId then
+                            local timeRemaining = C_TaskQuest.GetQuestTimeLeftSeconds(quest.questId)
+                            if timeRemaining ~= nil and timeRemaining > 0 then
+                                WWTCSaved.worldQuestIds[quest.questId] = true
+
+                                local expires = now + timeRemaining
+                                -- Clamp to the nearest 30 minutes
+                                local mod = expires % 1800
+                                if mod > 900 then
+                                    expires = expires + (1800 - mod)
+                                else
+                                    expires = expires - mod
+                                end
+
+                                local rewardCurrencyCount = GetNumQuestLogRewardCurrencies(quest.questId)
+                                local rewardItemCount = GetNumQuestLogRewards(quest.questId)
+                                local rewardMoney = GetQuestLogRewardMoney(quest.questId)
+
+                                if rewardCurrencyCount > 0 or rewardItemCount > 0 or rewardMoney > 0 then
+                                    local rewards = {}
+
+                                    for i = 1, rewardCurrencyCount do
+                                        local _, _, quantity, currencyId = GetQuestLogRewardCurrencyInfo(i, quest.questId)
+                                        tinsert(rewards, table.concat({
+                                            11, -- Currency
+                                            currencyId,
+                                            quantity,
+                                        }, '-'))
+                                    end
+
+                                    for i = 1, rewardItemCount do
+                                        local _, _, quantity, _, _, itemId, _ = GetQuestLogRewardInfo(i, quest.questId)
+                                        tinsert(rewards, table.concat({
+                                            9, -- Item
+                                            itemId,
+                                            quantity,
+                                        }, '-'))
+                                    end
+
+                                    if rewardMoney > 0 then
+                                        tinsert(rewards, table.concat({
+                                            11, -- Currency
+                                            0,
+                                            rewardMoney
+                                        }, '-'))
+                                    end
+
+                                    questMap[quest.questId] = table.concat({
+                                        quest.questId,
+                                        expires,
+                                        string.format('%.1f', quest.x * 100),
+                                        string.format('%.1f', quest.y * 100),
+                                        table.concat(rewards, '|')
+                                    }, ':')
+                                end
+                            end
+                        end
+                    end
+
+                    charData.worldQuests[expansion.id][zoneId] = {}
+                    for _, quest in pairs(questMap) do
+                        tinsert(charData.worldQuests[expansion.id][zoneId], quest)
+                    end
+                end
+            end
+        end
+    end
+end
+
 -- Garrison weirdness
 function wwtc:ScanGarrisons()
     if charData == nil then return end
@@ -2072,7 +2177,7 @@ end
 
 SLASH_WWTC1 = "/wwtc"
 SlashCmdList["WWTC"] = function(msg)
-    wwtc:ScanAuras()
+    wwtc:ScanWorldQuests()
 end
 
 SLASH_RL1 = "/rl"
