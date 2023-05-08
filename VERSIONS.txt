@@ -1,3 +1,9 @@
+v10.1.0.4
+---------
+- Added basic world quest scanning.
+- Added Loamm Niffen contracts to aura scanning.
+- Updated quest scanning list.
+
 v10.1.0.3
 ---------
 - Added more new profession quests to quest scanning.
