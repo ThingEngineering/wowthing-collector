@@ -485,7 +485,7 @@ ns.progressQuests = {
     ["dfProfessionAlchemyDrop2"] = { "weekly", { 66374 } },
     ["dfProfessionAlchemyDrop3"] = { "weekly", { 70504 } },
     ["dfProfessionAlchemyDrop4"] = { "weekly", { 70511 } },
-    ["dfProfessionAlchemyDrop5"] = { "weekly", { 74331 } }, -- FR: Blazehoof Ashes
+    ["dfProfessionAlchemyDrop5"] = { "weekly", { 74935 } }, -- FR: Blazehoof Ashes
     ["dfProfessionAlchemyGather"] = { "weekly", {
         66937, --
         66938, --
@@ -504,7 +504,7 @@ ns.progressQuests = {
     ["dfProfessionBlacksmithingDrop2"] = { "weekly", { 66382 } },
     ["dfProfessionBlacksmithingDrop3"] = { "weekly", { 70512 } },
     ["dfProfessionBlacksmithingDrop4"] = { "weekly", { 70513 } },
-    ["dfProfessionBlacksmithingDrop5"] = { "weekly", { 74325 } }, -- FR: Dense Seaforged Javelin
+    ["dfProfessionBlacksmithingDrop5"] = { "weekly", { 74931 } }, -- FR: Dense Seaforged Javelin
     ["dfProfessionBlacksmithingGather"] = { "weekly", {
         66517, -- A New Source of Weapons
         66897, -- Fuel for the Forge
@@ -524,7 +524,7 @@ ns.progressQuests = {
     ["dfProfessionEnchantingDrop2"] = { "weekly", { 66378 } },
     ["dfProfessionEnchantingDrop3"] = { "weekly", { 70514 } },
     ["dfProfessionEnchantingDrop4"] = { "weekly", { 70515 } },
-    ["dfProfessionEnchantingDrop5"] = { "weekly", { 74306 } }, -- FR: Speck of Arcane Awareness
+    ["dfProfessionEnchantingDrop5"] = { "weekly", { 74927 } }, -- FR: Speck of Arcane Awareness
     ["dfProfessionEnchantingGather"] = { "weekly", {
         66884, --
         66900, --
@@ -543,7 +543,7 @@ ns.progressQuests = {
     ["dfProfessionEngineeringDrop2"] = { "weekly", { 66380 } },
     ["dfProfessionEngineeringDrop3"] = { "weekly", { 70516 } },
     ["dfProfessionEngineeringDrop4"] = { "weekly", { 70517 } },
-    ["dfProfessionEngineeringDrop5"] = { "weekly", { 74330 } }, -- FR: Everflowing Antifreeze
+    ["dfProfessionEngineeringDrop5"] = { "weekly", { 74934 } }, -- FR: Everflowing Antifreeze
     ["dfProfessionEngineeringGather"] = { "weekly", {
         66890, --
         66891, -- Explosive Ash
@@ -563,7 +563,7 @@ ns.progressQuests = {
     ["dfProfessionInscriptionDrop2"] = { "weekly", { 66376 } },
     ["dfProfessionInscriptionDrop3"] = { "weekly", { 70518 } },
     ["dfProfessionInscriptionDrop4"] = { "weekly", { 70519 } },
-    ["dfProfessionInscriptionDrop5"] = { "weekly", { 74328 } }, -- FR: Glimmering Rune of Arcantrix
+    ["dfProfessionInscriptionDrop5"] = { "weekly", { 74932 } }, -- FR: Glimmering Rune of Arcantrix
     ["dfProfessionInscriptionGather"] = { "weekly", {
         66943, --
         66944, -- Peacock Pigments
@@ -583,7 +583,7 @@ ns.progressQuests = {
     ["dfProfessionJewelcraftingDrop2"] = { "weekly", { 66389 } },
     ["dfProfessionJewelcraftingDrop3"] = { "weekly", { 70520 } },
     ["dfProfessionJewelcraftingDrop4"] = { "weekly", { 70521 } },
-    ["dfProfessionJewelcraftingDrop5"] = { "weekly", { 74333 } }, -- FR: Conductive Ametrine Shard
+    ["dfProfessionJewelcraftingDrop5"] = { "weekly", { 74936 } }, -- FR: Conductive Ametrine Shard
     ["dfProfessionJewelcraftingGather"] = { "weekly", {
         66516, -- Mundane Gems, I Think Not!
         66949, --
@@ -603,7 +603,7 @@ ns.progressQuests = {
     ["dfProfessionLeatherworkingDrop2"] = { "weekly", { 66385 } },
     ["dfProfessionLeatherworkingDrop3"] = { "weekly", { 70522 } },
     ["dfProfessionLeatherworkingDrop4"] = { "weekly", { 70523 } },
-    ["dfProfessionLeatherworkingDrop5"] = { "weekly", { 74307 } }, -- FR: Sylvern Alpha Claw
+    ["dfProfessionLeatherworkingDrop5"] = { "weekly", { 74928 } }, -- FR: Sylvern Alpha Claw
     ["dfProfessionLeatherworkingGather"] = { "weekly", {
         66363, -- Basilisk Bucklers
         66364, -- To Fly a Kite
@@ -623,7 +623,7 @@ ns.progressQuests = {
     ["dfProfessionTailoringDrop2"] = { "weekly", { 66387 } },
     ["dfProfessionTailoringDrop3"] = { "weekly", { 70524 } },
     ["dfProfessionTailoringDrop4"] = { "weekly", { 70525 } },
-    ["dfProfessionTailoringDrop5"] = { "weekly", { 74321 } }, -- FR: Perfect Windfeather
+    ["dfProfessionTailoringDrop5"] = { "weekly", { 74929 } }, -- FR: Perfect Windfeather
     ["dfProfessionTailoringGather"] = { "weekly", {
         66952, --
         66899, --
@@ -640,7 +640,7 @@ ns.progressQuests = {
     ["dfProfessionHerbalismDrop4"] = { "weekly", { 71860 } },
     ["dfProfessionHerbalismDrop5"] = { "weekly", { 71861 } },
     ["dfProfessionHerbalismDrop6"] = { "weekly", { 71864 } },
-    ["dfProfessionHerbalismDrop7"] = { "weekly", { 74329 } }, -- FR: Undigested Hochenblume Petal
+    ["dfProfessionHerbalismDrop7"] = { "weekly", { 74933 } }, -- FR: Undigested Hochenblume Petal
     ["dfProfessionHerbalismGather"] = { "weekly", {
         70613, -- Get Their Bark Before They Bite
         70614, -- Bubble Craze
@@ -654,7 +654,7 @@ ns.progressQuests = {
     ["dfProfessionMiningDrop4"] = { "weekly", { 72163 } },
     ["dfProfessionMiningDrop5"] = { "weekly", { 72164 } },
     ["dfProfessionMiningDrop6"] = { "weekly", { 72165 } },
-    ["dfProfessionMiningDrop7"] = { "weekly", { 74300 } }, -- FR: Impenetrable Elemental Core
+    ["dfProfessionMiningDrop7"] = { "weekly", { 74926 } }, -- FR: Impenetrable Elemental Core
     ["dfProfessionMiningGather"] = { "weekly", {
         70617, -- All Mine, Mine, Mine
         70618, -- The Call of the Forge
@@ -668,7 +668,7 @@ ns.progressQuests = {
     ["dfProfessionSkinningDrop4"] = { "weekly", { 70385 } },
     ["dfProfessionSkinningDrop5"] = { "weekly", { 70386 } },
     ["dfProfessionSkinningDrop6"] = { "weekly", { 70389 } },
-    ["dfProfessionSkinningDrop7"] = { "weekly", { 74322 } }, -- FR: Kingly Sheepskin Pelt
+    ["dfProfessionSkinningDrop7"] = { "weekly", { 74930 } }, -- FR: Kingly Sheepskin Pelt
     ["dfProfessionSkinningGather"] = { "weekly", {
         70619, -- A Study of Leather
         70620, -- Scaling Up
