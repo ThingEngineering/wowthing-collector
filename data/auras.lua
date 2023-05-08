@@ -20,4 +20,7 @@ ns.auras = {
     384462, -- Contract: Valdrakken Accord 1
     384463, -- Contract: Valdrakken Accord 2
     384464, -- Contract: Valdrakken Accord 3
+    409666, -- Contract: Loamm Niffen 1
+    409665, -- Contract: Loamm Niffen 2
+    409664, -- Contract: Loamm Niffen 3
 }
