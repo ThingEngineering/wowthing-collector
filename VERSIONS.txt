@@ -1,3 +1,7 @@
+v10.1.0.6
+---------
+- Added more new profession quests to quest scanning.
+
 v10.1.0.5
 ---------
 - Updated Forbidden Reach profession drop quest IDs to (hopefully) be correct.
