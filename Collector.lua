@@ -187,10 +187,10 @@ function events:PLAYER_MONEY()
     charData.copper = GetMoney()
 end
 -- Fires when the contents of a bag changes
--- function events:BAG_UPDATE(bagID)
---     dirtyBag[bagID] = true
---     dirtyBags = true -- TODO remove this if Blizzard ever fixes DELAYED not triggering
--- end
+function events:BAG_UPDATE(bagID)
+    dirtyBag[bagID] = true
+end
+-- Fires when bag updates have finished occurring
 function events:BAG_UPDATE_DELAYED()
     dirtyBags = true
 end
