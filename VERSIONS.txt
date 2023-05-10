@@ -1,3 +1,8 @@
+v10.1.0.7
+---------
+- Added Aberrus skip quests.
+- Added Researchers Under Fire quest. Probably the right one. Maybe.
+
 v10.1.0.6
 ---------
 - Added more new profession quests to quest scanning.
