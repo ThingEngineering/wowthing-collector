@@ -468,6 +468,7 @@ ns.progressQuests = {
         75401, -- Earth
         75402, -- Air
     }, },
+    ["dfResearchersUnderFire"] = { "weekly", { 75630 } },
     ["dfSiegeDragonbaneKeep"] = { "weekly", { 70866 } },
     ["dfStormsFury"] = { "weekly", { 73162 } },
     ["dfTrialElements"] = { "weekly", { 71995 } },
