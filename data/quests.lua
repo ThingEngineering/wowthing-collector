@@ -695,7 +695,7 @@ ns.progressQuests = {
     ["dfVault1Normal"] = { "once", { 71018 } },
     ["dfVault1Heroic"] = { "once", { 71019 } },
     ["dfVault1Mythic"] = { "once", { 71020 } },
-    -- ["dfAberrus1Normal"] = { "once", {  } },
-    -- ["dfAberrus1Heroic"] = { "once", {  } },
-    -- ["dfAberrus1Mythic"] = { "once", {  } },
+    ["dfAberrus1Normal"] = { "once", { 76083 } },
+    ["dfAberrus1Heroic"] = { "once", { 76085 } },
+    ["dfAberrus1Mythic"] = { "once", { 76086 } },
 }
