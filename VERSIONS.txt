@@ -1,3 +1,9 @@
+v10.1.0.8
+---------
+- Added all 4 tiers of Researchers Under Fire quest.
+- Fixed hearthstone location not actually updating when you bind somewhere.
+- Fixed bag scanning not actually doing anything when bag items change.
+
 v10.1.0.7
 ---------
 - Added Aberrus skip quests.
