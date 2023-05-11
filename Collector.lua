@@ -126,6 +126,10 @@ function events:ZONE_CHANGED_NEW_AREA()
     dirtyLocation = true
     dirtyVault = true
 end
+-- Guess what this does
+function events:HEARTHSTONE_BOUND()
+    wwtc:ScanLocationHearth()
+end
 -- Fires when /played information is available
 function events:TIME_PLAYED_MSG(total, level)
     playedLevel, playedLevelUpdated, playedTotal, playedTotalUpdated = level, time(), total, time()
@@ -431,7 +435,7 @@ function wwtc:Timer()
     if dirtyLocation then
         dirtyLocation = false
         wwtc:ScanGarrisons()
-        wwtc:ScanLocation()
+        wwtc:ScanLocationCurrent()
     end
 
     if dirtyLockouts then
@@ -682,6 +686,7 @@ function wwtc:UpdateCharacterData()
         wwtc:UpdateWarMode()
 
         wwtc:ScanAchievements()
+        wwtc:ScanLocationHearth()
 
         C_MythicPlus.RequestMapInfo()
         RequestRaidInfo()
@@ -1115,13 +1120,8 @@ function wwtc:ScanEquipment()
     end
 end
 
-function wwtc:ScanLocation()
-    if charData == nil then return end
-
-    charData.bindLocation = GetBindLocation()
-    
+function wwtc:ScanLocationCurrent()
     local areaText = GetAreaText()
-
     if areaText == nil then
         dirtyLocation = true
         return
@@ -1142,6 +1142,10 @@ function wwtc:ScanLocation()
     end
 
     charData.currentLocation = table.concat(zoneParts, ' > ')
+end
+
+function wwtc:ScanLocationHearth()
+    charData.bindLocation = GetBindLocation()
 end
 
 -- Scan instance/world boss lockouts
