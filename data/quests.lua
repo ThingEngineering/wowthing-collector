@@ -279,8 +279,8 @@ ns.otherQuests = {
     71907, -- Engineering 2
     71918, -- Engineering 3
     71897, -- Herbalism 1
-    71908, -- Herbalism 1
-    71919, -- Herbalism 1
+    71908, -- Herbalism 2
+    71919, -- Herbalism 3
     71898, -- Inscription 1
     71909, -- Inscription 2
     71920, -- Inscription 3
@@ -299,6 +299,18 @@ ns.otherQuests = {
     71903, -- Tailoring 1
     71914, -- Tailoring 2
     71925, -- Tailoring 3
+    -- Dragonflight: Loamm Niffen books
+    75756, -- Alchemy
+    75755, -- Blacksmithing
+    75752, -- Enchanting
+    75759, -- Engineering
+    75753, -- Herbalism
+    75761, -- Inscription
+    75754, -- Jewelcrafting
+    75751, -- Leatherworking
+    75758, -- Mining
+    75760, -- Skinning
+    75757, -- Tailoring
 }
 
 ns.progressQuests = {
