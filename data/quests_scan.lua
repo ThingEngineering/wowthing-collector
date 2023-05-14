@@ -1140,9 +1140,19 @@ ns.scanQuests = {
     70252, -- Frizz Buzzcrank
     70254, -- Lydiara Whisperfeather
     70255, -- Pluutar
+    70208, -- Experimental Decay Cauldron
+    70309, -- Small Basket of Firewater Powder
     70314, -- Spelltouched Tongs
+    70298, -- {item:198694}
+    70290, -- {item:201013}
+    70336, -- {item:198799}
+    70297, -- {item:198693}
+    70293, -- {item:198686}
     70277, -- {item:198664}
     70271, -- {item:201016}
+    70286, -- Crate of Treated Hides
+    70266, -- {item:198658}
+    70269, -- {item:201018}
     70284, -- {item:198702}
     70267, -- {item:198662}
     70606, -- Lost Compass
@@ -1174,10 +1184,14 @@ ns.scanQuests = {
     70256, -- Erden
     70253, -- Hua Greenpaw
     70251, -- Shalasar Glimmerdusk
+    70305, -- {item:198710}
     70313, -- Ancient Spear Shards
     70353, -- Falconer Gauntlet Drawings
+    70291, -- {item:198689}
+    70307, -- {item:198703}
     70263, -- {item:198657}
     70282, -- {item:198670}
+    70300, -- {item:198696}
     70295, -- Battle Hardened Centaur Carpet
     70303, -- Silky Surprise
     -- Zone Maps: Thaldraszus
@@ -1206,9 +1220,15 @@ ns.scanQuests = {
     71223, -- The Highest Peaks
     71224, -- The Highest Peaks
     70258, -- Bridgette Holdug
+    70278, -- Mysterious Cauldrons
     70311, -- Draconic Flux
+    70342, -- {item:198800}
+    70287, -- {item:201015}
+    70248, -- Curious Glyph
+    70264, -- {item:198659}
     70285, -- {item:198682}
     70261, -- {item:198656}
+    70294, -- {item:198690}
     70372, -- Ancient Dragonweave Loom
     70288, -- {item:198684}
     -- Zone Maps: Waking Shores, The
@@ -1243,12 +1263,21 @@ ns.scanQuests = {
     70250, -- Grekka Anvilsmash
     70247, -- Grigori Vialtry
     70259, -- Zenzi
+    70274, -- {item:198663}
+    70289, -- {item:198685}
     70246, -- Ancient Monument
     70312, -- Curious Ingots
     70296, -- Molten Ingot
     70310, -- Qalashi Weapon Diagram
+    70272, -- {item:201012}
+    70320, -- {item:198798}
+    70283, -- {item:198675}
+    70270, -- {item:201014}
+    70275, -- Disabled Tesla Coil
     70292, -- {item:198687}
     70273, -- {item:201017}
+    70308, -- {item:198711}
+    70280, -- {item:198667}
     70304, -- {item:198702}
     70302, -- {item:198699}
     70346, -- Dead Man's Chestplate
@@ -1257,6 +1286,7 @@ ns.scanQuests = {
     70345, -- Yennu's Kite
     -- Zone Maps: Valdrakken
     70260, -- Elysa Raywinder
+    70281, -- {item:198669}
     -- Zone Maps: Darkmoon Island
     47767, -- Blight Boar Concert
 }
