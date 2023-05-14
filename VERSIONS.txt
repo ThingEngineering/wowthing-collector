@@ -1,3 +1,7 @@
+v10.1.0.10
+----------
+- Added Zaralek Cavern bartering knowledge book quest IDs.
+
 v10.1.0.9
 ---------
 - Added missing Artisans's Consortium knowledge book quest IDs.
