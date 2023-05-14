@@ -311,6 +311,29 @@ ns.otherQuests = {
     75758, -- Mining
     75760, -- Skinning
     75757, -- Tailoring
+    -- Dragonflight: Zaralek Cavern bartering books
+    75848, -- Alchemy Journal
+    75847, -- Alchemy Notes
+    75849, -- Blacksmithing Journal
+    75846, -- Blacksmthing Notes
+    75850, -- Enchanting Journal
+    75845, -- Enchanting Notes
+    75851, -- Engineering Journal
+    75844, -- Engineering Notes
+    75852, -- Herbalism Journal
+    75843, -- Herbalism Notes
+    75853, -- Inscription Journal
+    75842, -- Inscription Notes
+    75854, -- Jewelcrafting Journal
+    75841, -- Jewelcrafting Notes
+    75855, -- Leatherworking Journal
+    75840, -- Leatherworking Notes
+    75856, -- Mining Journal
+    75839, -- Mining Notes
+    75857, -- Skinning Journal
+    75838, -- Skinning Notes
+    75858, -- Tailoring Journal
+    75837, -- Tailoring Notes
 }
 
 ns.progressQuests = {
