@@ -278,6 +278,9 @@ ns.otherQuests = {
     71896, -- Engineering 1
     71907, -- Engineering 2
     71918, -- Engineering 3
+    71897, -- Herbalism 1
+    71908, -- Herbalism 1
+    71919, -- Herbalism 1
     71898, -- Inscription 1
     71909, -- Inscription 2
     71920, -- Inscription 3
@@ -287,6 +290,12 @@ ns.otherQuests = {
     71900, -- Leatherworking 1
     71911, -- Leatherworking 2
     71922, -- Leatherworking 3
+    71901, -- Mining 1
+    71912, -- Mining 2
+    71923, -- Mining 3
+    71902, -- Skinning 1
+    71913, -- Skinning 2
+    71924, -- Skinning 3
     71903, -- Tailoring 1
     71914, -- Tailoring 2
     71925, -- Tailoring 3
