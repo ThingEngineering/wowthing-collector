@@ -1,3 +1,9 @@
+v10.1.0.9
+---------
+- Added missing Artisans's Consortium knowledge book quest IDs.
+- Added Loamm Niffen knowledge book quest IDs.
+- Updated quest scanning list.
+
 v10.1.0.8
 ---------
 - Added all 4 tiers of Researchers Under Fire quest.
