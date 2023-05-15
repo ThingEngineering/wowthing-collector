@@ -1119,17 +1119,13 @@ ns.scanQuests = {
     76110, -- {item:206025}
     -- Zone Maps: Azure Span
     73868, -- Beogoka
-    69858, -- Blightfur
     73985, -- Blisterhide
     72358, -- Cascade
     73873, -- Dragonhunter Gorund
-    72254, -- Fisherman Tinnak's Ghost
     69864, -- Forgotten Creation
     73996, -- Gnarls
-    69892, -- Grumbletrunk
     69895, -- Summoned Destroyer
     67173, -- Thieving Gnolls
-    69861, -- Trilvarus Loreweaver
     69872, -- Vakril, the Strongest Tuskarr
     71215, -- The Highest Peaks
     71216, -- The Highest Peaks
@@ -1158,25 +1154,12 @@ ns.scanQuests = {
     70606, -- Lost Compass
     70441, -- Pepper Hammer
     -- Zone Maps: Ohn'ahran Plains
-    73869, -- Blightpaw the Depraved
-    69856, -- Fulgurb
-    66356, -- Irontree
-    69871, -- Malsegan
-    69857, -- Mikrin of the Raging Winds
-    69877, -- Oshigol
     69968, -- Prozela Galeshot
-    70698, -- Researcher Sneakwing
     69851, -- Ripsaw the Stalker
-    69878, -- Ronsak the Decimator
-    69865, -- Scaleseeker Mezeri
     70783, -- Skaara
-    69667, -- Steamgill
     69837, -- Sunscale Behemoth
     69852, -- Territorial Coastling
-    65892, -- The Sundered Asunder
-    66421, -- The Storm Scar
     66970, -- Ty'foon the Ascended
-    72364, -- Zarizz
     70827, -- The Highest Peaks
     71200, -- The Highest Peaks
     71207, -- The Highest Peaks
@@ -1196,30 +1179,16 @@ ns.scanQuests = {
     70303, -- Silky Surprise
     -- Zone Maps: Thaldraszus
     72114, -- Acrosoth
-    69963, -- Ancient Protector
-    69868, -- Broodweaver Araznae
-    69962, -- Corrupted Proto-Dragon
-    69964, -- Craggravated Elemental
-    69875, -- Eldoren the Reborn
-    69873, -- Henlare
     72116, -- Liskron the Dazzling
     69967, -- Lookout Mordren
-    69882, -- Lord Epochbrgl
-    69883, -- Matriarch Remalla
-    69866, -- Phleep
     70986, -- Private Shikzar
-    69880, -- Riverwalker Tamopo
-    69966, -- Rokmur
-    69859, -- Sandana the Tempest
-    72121, -- The Great Shellkhan
-    70947, -- Treasure-Mad Trambladd
-    69850, -- Woolfang
     70024, -- The Highest Peaks
     70039, -- The Highest Peaks
     71222, -- The Highest Peaks
     71223, -- The Highest Peaks
     71224, -- The Highest Peaks
     70258, -- Bridgette Holdug
+    70301, -- {item:198697}
     70278, -- Mysterious Cauldrons
     70311, -- Draconic Flux
     70342, -- {item:198800}
@@ -1232,28 +1201,16 @@ ns.scanQuests = {
     70372, -- Ancient Dragonweave Loom
     70288, -- {item:198684}
     -- Zone Maps: Waking Shores, The
-    69838, -- Amethyzar the Glittering
     66076, -- Ancient Hornswog
-    69839, -- Azra's Prized Peony
     73890, -- Brundin the Dragonbane
     73075, -- Captain Lancer
     72127, -- Captain Lancer
     72838, -- Dragonhunter Igordan
     66956, -- Dragonhunter Igordan
     73072, -- Enkine the Voracious
-    72128, -- Enkine the Voracious
     70648, -- Firava the Rekindler
-    72130, -- Forgotten Gryphon
-    69874, -- Gorjo the Crab Shackler
     66960, -- Klozicc the Ascended
-    69891, -- Lepidoralia the Resplendent
-    70979, -- Magmaton
-    69848, -- Massive Magmashell
-    70983, -- O'nank Shorescour
     66074, -- Primal Scythid Queen
-    70719, -- Shadeslash Trakken
-    72126, -- Slurpo, the Incredible Snail
-    69668, -- Smogswog the Firebreather
     70751, -- Terillod the Devout
     70823, -- The Highest Peaks
     70824, -- The Highest Peaks
@@ -1274,6 +1231,7 @@ ns.scanQuests = {
     70283, -- {item:198675}
     70270, -- {item:201014}
     70275, -- Disabled Tesla Coil
+    70306, -- {item:198704}
     70292, -- {item:198687}
     70273, -- {item:201017}
     70308, -- {item:198711}
