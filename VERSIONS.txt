@@ -1,3 +1,7 @@
+v10.1.0.11
+----------
+- Updated quest scanning list.
+
 v10.1.0.10
 ----------
 - Added Zaralek Cavern bartering knowledge book quest IDs.
