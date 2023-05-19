@@ -498,6 +498,18 @@ ns.progressQuests = {
     ["dfCommunityFeast"] = { "weekly", { 70893 } },
     ["dfDragonAllegiance"] = { "weekly", { 66419 } }, -- choose a dragon
     ["dfDragonKey"] = { "weekly", { 66133, 66805 } }, -- hand in key (wrathion, sabellian)
+    ["dfFyrakkAssault"] = { "weekly", {
+        75280, -- Frostburn (AS)
+        74501, -- Cinderwind (OP)
+    } },
+    ["dfFyrakkDisciple"] = { "weekly", {
+        75239, -- Shadeisethal (AS)
+        74775, -- Kretchenwrath (OP)
+    } },
+    ["dfFyrakkShipment"] = { "weekly", {
+        74526, -- (AS)
+        75525, -- (OP)
+    } },
     ["dfGrandHuntMythic"] = { "weekly", { 70906 } },
     ["dfGrandHuntRare"] = { "weekly", { 71136 } },
     ["dfGrandHuntUncommon"] = { "weekly", { 71137 } },
@@ -511,7 +523,7 @@ ns.progressQuests = {
         75400, -- Fire
         75401, -- Earth
         75402, -- Air
-    }, },
+    } },
     ["dfResearchersUnderFire1"] = { "weekly", { 75627 } },
     ["dfResearchersUnderFire2"] = { "weekly", { 75628 } },
     ["dfResearchersUnderFire3"] = { "weekly", { 75629 } },
