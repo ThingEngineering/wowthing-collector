@@ -257,11 +257,24 @@ function events:UPDATE_FACTION()
 end
 -- Fires when Mythic dungeon ends
 function events:CHALLENGE_MODE_COMPLETED()
-    C_MythicPlus.RequestMapInfo()
+    dirtyMythicPlus = true
+    dirtyVault = true
+end
+function events:CHALLENGE_MODE_LEADERS_UPDATE()
+    dirtyMythicPlus = true
+    dirtyVault = true
+end
+function events:CHALLENGE_MODE_MEMBER_INFO_UPDATED()
+    dirtyMythicPlus = true
+    dirtyVault = true
 end
 -- Fires when Mythic dungeon map information updates
 function events:CHALLENGE_MODE_MAPS_UPDATE()
     dirtyMythicPlus = true
+    dirtyVault = true
+end
+-- Vault
+function events:WEEKLY_REWARDS_UPDATE()
     dirtyVault = true
 end
 -- Fires when you stop using a fancy frame
@@ -269,10 +282,6 @@ function events:PLAYER_INTERACTION_MANAGER_FRAME_HIDE(type)
     if type == Enum.PlayerInteractionType.ChromieTime then
         dirtyChromieTime = true
     end
-end
--- Vault
-function events:WEEKLY_REWARDS_UPDATE()
-    dirtyVault = true
 end
 -- Quest changes, spammy
 function events:QUEST_LOG_UPDATE()
@@ -688,7 +697,7 @@ function wwtc:UpdateCharacterData()
         wwtc:ScanAchievements()
         wwtc:ScanLocationHearth()
 
-        C_MythicPlus.RequestMapInfo()
+        -- C_MythicPlus.RequestMapInfo()
         RequestRaidInfo()
     end
 end
@@ -1460,6 +1469,7 @@ function wwtc:ScanMythicPlus()
     local now = time()
     charData.scanTimes["mythicPlus"] = now
 
+    charData.mythicDungeons = {}
     charData.mythicPlusV2.seasons = charData.mythicPlusV2.seasons or {}
     charData.mythicPlusV2.weeks = charData.mythicPlusV2.weeks or {}
 
@@ -1478,10 +1488,20 @@ function wwtc:ScanMythicPlus()
 
     local weeklyReset = now + C_DateAndTime.GetSecondsUntilWeeklyReset()
     charData.mythicPlusV2.weeks[weeklyReset] = {}
-
+    
+    -- Mythic dungeons
     local runs = charData.mythicPlusV2.weeks[weeklyReset]
     local runHistory = C_MythicPlus.GetRunHistory(false, true)
     for _, run in ipairs(runHistory) do
+        if run.mapChallengeModeID == nil or run.mapChallengeModeID == 0 then
+            dirtyMythicPlus = true
+        end
+
+        table.insert(charData.mythicDungeons, {
+            map = run.mapChallengeModeID,
+            level = run.level,
+        })
+
         table.insert(runs, table.concat({
             run.mapChallengeModeID,
             run.completed and 1 or 0,
@@ -1600,17 +1620,6 @@ function wwtc:ScanVault()
     charData.scanTimes["vault"] = now
     charData.vault = {}
 
-    -- Mythic dungeons
-    charData.mythicDungeons = {}
-    local runs = C_MythicPlus.GetRunHistory(false, true) -- includePreviousWeeks, includeIncompleteRuns
-    for i = 1, #runs do
-        local run = runs[i]
-        charData.mythicDungeons[i] = {
-            map = run.mapChallengeModeID,
-            level = run.level,
-        }
-    end
-
     -- Vault completion
     local activities = C_WeeklyRewards.GetActivities()
     for i = 1, #activities do
@@ -1633,6 +1642,13 @@ function wwtc:ScanVault()
                 progress = activity.progress,
                 threshold = activity.threshold,
             }
+        end
+    end
+
+    if charData.vault[1] and charData.vault[1][3] and charData.vault[1][3].progress > 0 then
+        local runHistory = C_MythicPlus.GetRunHistory(false, true)
+        if #runHistory < charData.vault[1][3].progress then
+            dirtyMythicPlus = true
         end
     end
 end
