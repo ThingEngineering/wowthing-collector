@@ -1,3 +1,7 @@
+v10.1.0.12
+----------
+- Added Fyrakk Assault tracking quests.
+
 v10.1.0.11
 ----------
 - Updated quest scanning list.
