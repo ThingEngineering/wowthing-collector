@@ -35,6 +35,7 @@ Modules/Bags.lua
 Modules/Currencies.lua
 Modules/Location.lua
 Modules/MythicPlus.lua
+Modules/ProfessionEquipment.lua
 Modules/Quests.lua
 Modules/Reputations.lua
 Modules/TimePlayed.lua
