@@ -14,6 +14,7 @@ function Module:OnEnable()
         'UpdateMythicPlus'
     )
 
+    Addon.charData.mythicPlusV2 = Addon.charData.mythicPlusV2 or {}
     Addon.charData.mythicPlusV2.seasons = Addon.charData.mythicPlusV2.seasons or {}
     Addon.charData.mythicPlusV2.weeks = Addon.charData.mythicPlusV2.weeks or {}
 end
@@ -46,12 +47,13 @@ function Module:UpdateMythicPlus()
     local runHistory = C_MythicPlus.GetRunHistory(false, true)
     local weeklyReset = now + C_DateAndTime.GetSecondsUntilWeeklyReset()
 
+    local rescan = false
     local mythicDungeons = {}
     local week = {}
     for _, run in ipairs(runHistory) do
-        -- TODO re-scan?
-        -- if run.mapChallengeModeID == nil or run.mapChallengeModeID == 0 then
-        -- end
+        if run.mapChallengeModeID == nil or run.mapChallengeModeID == 0 then
+            rescan = true
+        end
 
         table.insert(mythicDungeons, {
             map = run.mapChallengeModeID,
@@ -68,4 +70,8 @@ function Module:UpdateMythicPlus()
 
     Addon.charData.mythicDungeons = mythicDungeons
     Addon.charData.mythicPlusV2.weeks[weeklyReset] = week
+
+    if rescan then
+        C_Timer.After(5, function() self:UpdateMythicPlus() end)
+    end
 end
