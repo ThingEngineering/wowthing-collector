@@ -9,7 +9,7 @@ function Module:OnEnable()
     self.isBankOpen = false
     self.isScanning = false
     self.wasReagentBankChanged = false
-    self.scanBags = {}
+    self.dirtyBags = {}
 
     self:RegisterEvent('BAG_UPDATE')
     self:RegisterEvent('BANKFRAME_CLOSED')
@@ -20,8 +20,12 @@ function Module:OnEnable()
     self:RegisterBucketMessage({ 'WWTC_SCAN_BAGS' }, 1, 'UpdateBags')
 end
 
+function Module:OnEnteringWorld()
+    self:SetPlayerBagsDirty()
+end
+
 function Module:BAG_UPDATE(_, bagId)
-    self.scanBags[bagId] = true
+    self.dirtyBags[bagId] = true
 end
 
 function Module:BANKFRAME_CLOSED()
@@ -31,30 +35,36 @@ end
 -- Mark bank and bank bags for scanning
 function Module:BANKFRAME_OPENED()
     self.isBankOpen = true
-    self.scanBags[Enum.BagIndex.Bank] = true
-    self.scanBags[Enum.BagIndex.Reagentbank] = true
+    self.dirtyBags[Enum.BagIndex.Bank] = true
+    self.dirtyBags[Enum.BagIndex.Reagentbank] = true
     for i = Enum.BagIndex.BankBag_1, Enum.BagIndex.BankBag_7 do
-        self.scanBags[i] = true
+        self.dirtyBags[i] = true
     end
 
     self:SendMessage('WWTC_SCAN_BAGS')
 end
 
 function Module:PLAYERREAGENTBANKSLOTS_CHANGED()
-    self.scanBags[Enum.BagIndex.Reagentbank] = true
     self.wasReagentBankChanged = false
+    self.dirtyBags[Enum.BagIndex.Reagentbank] = true
+end
+
+function Module:SetPlayerBagsDirty()
+    for i = 0, NUM_TOTAL_BAG_FRAMES do
+        self.dirtyBags[i] = true
+    end
+
+    self:SendMessage('WWTC_SCAN_BAGS')
 end
 
 function Module:UpdateBags()
-    print('gday')
-
     if self.isScanning then return end
 
     self.isScanning = true
     self.scanQueue = {}
-    for bagId, _ in pairs(self.scanBags) do
+    for bagId, _ in pairs(self.dirtyBags) do
         tinsert(self.scanQueue, bagId)
-        self.scanBags[bagId] = nil
+        self.dirtyBags[bagId] = nil
     end
 
     C_Timer.After(0, function() self:ScanBagQueue() end)
@@ -128,7 +138,7 @@ function Module:ScanBagQueue()
 
     -- If we requested item data, come back and scan this bag again later
     if requestedData then
-        self.scanBags[bagId] = true
+        self.dirtyBags[bagId] = true
     end
 
     -- If the scan queue still has bags, add a timer for the next one
@@ -138,7 +148,7 @@ function Module:ScanBagQueue()
         self.isScanning = false
 
         -- Queue another scan if any bags are dirty
-        local bagKeys = Addon:TableKeys(self.scanBags)
+        local bagKeys = Addon:TableKeys(self.dirtyBags)
         if #bagKeys > 0 then
             self:SendMessage('WWTC_SCAN_BAGS')
         end
