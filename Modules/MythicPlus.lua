@@ -3,6 +3,10 @@ local Module = Addon:NewModule('MythicPlus')
 
 
 function Module:OnEnable()
+    Addon.charData.mythicPlusV2 = Addon.charData.mythicPlusV2 or {}
+    Addon.charData.mythicPlusV2.seasons = Addon.charData.mythicPlusV2.seasons or {}
+    Addon.charData.mythicPlusV2.weeks = Addon.charData.mythicPlusV2.weeks or {}
+
     self:RegisterBucketEvent(
         {
             'CHALLENGE_MODE_COMPLETED',
@@ -13,10 +17,6 @@ function Module:OnEnable()
         1,
         'UpdateMythicPlus'
     )
-
-    Addon.charData.mythicPlusV2 = Addon.charData.mythicPlusV2 or {}
-    Addon.charData.mythicPlusV2.seasons = Addon.charData.mythicPlusV2.seasons or {}
-    Addon.charData.mythicPlusV2.weeks = Addon.charData.mythicPlusV2.weeks or {}
 end
 
 function Module:OnEnteringWorld()

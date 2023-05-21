@@ -3,6 +3,14 @@ local Module = Addon:NewModule('Bags')
 
 
 function Module:OnEnable()
+    Addon.charData.bags = Addon.charData.bags or {}
+    Addon.charData.items = Addon.charData.items or {}
+
+    self.isBankOpen = false
+    self.isScanning = false
+    self.wasReagentBankChanged = false
+    self.scanBags = {}
+
     self:RegisterEvent('BAG_UPDATE')
     self:RegisterEvent('BANKFRAME_CLOSED')
     self:RegisterEvent('BANKFRAME_OPENED')
@@ -10,14 +18,6 @@ function Module:OnEnable()
 
     self:RegisterBucketEvent({ 'BAG_UPDATE_DELAYED' }, 1, 'UpdateBags')
     self:RegisterBucketMessage({ 'WWTC_SCAN_BAGS' }, 1, 'UpdateBags')
-
-    self.isBankOpen = false
-    self.isScanning = false
-    self.wasReagentBankChanged = false
-    self.scanBags = {}
-
-    Addon.charData.bags = Addon.charData.bags or {}
-    Addon.charData.items = Addon.charData.items or {}
 end
 
 function Module:BAG_UPDATE(_, bagId)

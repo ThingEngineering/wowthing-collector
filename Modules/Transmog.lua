@@ -8,18 +8,6 @@ local C_TransmogCollection_GetAppearanceSources = C_TransmogCollection.GetAppear
 local C_TransmogCollection_GetCategoryAppearances = C_TransmogCollection.GetCategoryAppearances
 
 function Module:OnEnable()
-    self:RegisterBucketEvent(
-        {
-            'TRANSMOG_COLLECTION_SOURCE_ADDED',
-            'TRANSMOG_COLLECTION_SOURCE_REMOVED',
-            'TRANSMOG_COLLECTION_UPDATED',
-        },
-        2,
-        'UpdateTransmog'
-    )
-    self:RegisterEvent('TRANSMOGRIFY_OPEN')
-    self:RegisterEvent('TRANSMOGRIFY_CLOSE')
-    
     self.isOpen = false
     self.isScanning = false
 
@@ -32,6 +20,19 @@ function Module:OnEnable()
             self.transmogSlots[categoryID] = slot
         end
     end
+
+    self:RegisterEvent('TRANSMOGRIFY_OPEN')
+    self:RegisterEvent('TRANSMOGRIFY_CLOSE')
+
+    self:RegisterBucketEvent(
+        {
+            'TRANSMOG_COLLECTION_SOURCE_ADDED',
+            'TRANSMOG_COLLECTION_SOURCE_REMOVED',
+            'TRANSMOG_COLLECTION_UPDATED',
+        },
+        2,
+        'UpdateTransmog'
+    )
 end
 
 function Module:OnEnteringWorld()

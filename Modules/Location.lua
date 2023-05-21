@@ -3,12 +3,13 @@ local Module = Addon:NewModule('Location')
 
 
 function Module:OnEnable()
+    self:RegisterEvent('HEARTHSTONE_BOUND', 'UpdateHearth')
+
     self:RegisterBucketEvent(
         { 'ZONE_CHANGED', 'ZONE_CHANGED_INDOORS', 'ZONE_CHANGED_NEW_AREA' },
         1,
         'UpdateCurrent'
     )
-    self:RegisterEvent('HEARTHSTONE_BOUND', 'UpdateHearth')
 end
 
 function Module:OnEnteringWorld()
