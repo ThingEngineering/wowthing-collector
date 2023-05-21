@@ -31,6 +31,7 @@ data\world_bosses.lua
 # Collector.lua
 Core.lua
 
+Modules/Achievements.lua
 Modules/Bags.lua
 Modules/Currencies.lua
 Modules/Location.lua
@@ -44,6 +45,7 @@ Modules/Transmog.lua
 Modules/Vault.lua
 Modules/XP.lua
 
+DB/Achievements.lua
 DB/Currencies.lua
 DB/Reputations.lua
 DB/Spells.lua
