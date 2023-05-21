@@ -9,18 +9,34 @@ function Module:OnEnable()
 
     self:RegisterBucketEvent(
         {
+            'BAG_UPDATE_DELAYED',
+            'CHALLENGE_MODE_COMPLETED',
+            'CHALLENGE_MODE_RESET',
+            'CHALLENGE_MODE_START',
+        },
+        2,
+        'UpdateKeystone'
+    )
+    self:RegisterBucketEvent(
+        {
             'CHALLENGE_MODE_COMPLETED',
             'CHALLENGE_MODE_LEADERS_UPDATE',
             'CHALLENGE_MODE_MAPS_UPDATE',
             'CHALLENGE_MODE_MEMBER_INFO_UPDATED',
         },
-        1,
+        5,
         'UpdateMythicPlus'
     )
 end
 
 function Module:OnEnteringWorld()
+    self:UpdateKeystone()
     self:UpdateMythicPlus()
+end
+
+function Module:UpdateKeystone()
+    Addon.charData.keystoneInstance = C_MythicPlus.GetOwnedKeystoneChallengeMapID()
+    Addon.charData.keystoneLevel = C_MythicPlus.GetOwnedKeystoneLevel()
 end
 
 -- Scan mythic plus dungeons
