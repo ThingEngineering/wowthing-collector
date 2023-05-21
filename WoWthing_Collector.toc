@@ -34,6 +34,7 @@ Core.lua
 Modules/Achievements.lua
 Modules/Bags.lua
 Modules/Currencies.lua
+Modules/Guild.lua
 Modules/Location.lua
 Modules/Lockouts.lua
 Modules/MythicPlus.lua
