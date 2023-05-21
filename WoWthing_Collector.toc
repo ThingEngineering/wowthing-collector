@@ -38,6 +38,7 @@ Modules/MythicPlus.lua
 Modules/ProfessionEquipment.lua
 Modules/Quests.lua
 Modules/Reputations.lua
+Modules/Spells.lua
 Modules/TimePlayed.lua
 Modules/Transmog.lua
 Modules/Vault.lua
@@ -45,6 +46,7 @@ Modules/XP.lua
 
 DB/Currencies.lua
 DB/Reputations.lua
+DB/Spells.lua
 DB/Transmog.lua
 
 DB/Quests/Account.lua
