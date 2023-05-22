@@ -1,6 +1,7 @@
 local Module = LibStub('AceAddon-3.0'):GetAddon('WoWthing_Collector'):GetModule('Lockouts')
 
 
+-- [questId] = { wowthingBossId, lockoutName, bossName, isDaily=false }
 Module.db.worldBosses = {
     -- Anniversary bosses
     [47461] = { 100001, "Lord Kazzak", "Lord Kazzak", true },
