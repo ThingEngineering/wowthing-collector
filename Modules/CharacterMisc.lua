@@ -14,14 +14,14 @@ function Module:OnEnteringWorld()
     self:UpdateWarMode()
 end
 
-function Module:PLAYER_FLAGS_CHANGED(unitId)
+function Module:PLAYER_FLAGS_CHANGED(_, unitId)
     if unitId == 'player' then
         self:UpdateWarMode()
     end
 end
 
 function Module:PLAYER_INTERACTION_MANAGER_FRAME_HIDE(_, interactionType)
-    if type == Enum.PlayerInteractionType.ChromieTime then
+    if interactionType == Enum.PlayerInteractionType.ChromieTime then
         self:UpdateChromieTime()
     end
 end
