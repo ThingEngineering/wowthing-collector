@@ -1,3 +1,10 @@
+v10.1.0.13
+----------
+- Added Sniffenseeking dig quest IDs.
+- Large rewrite to use Ace3 and split code into modules. This probably broke
+  some things.
+- Updated LibRealmInfo with current realm data.
+
 v10.1.0.12
 ----------
 - Added Fyrakk Assault tracking quests.
