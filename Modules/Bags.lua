@@ -24,7 +24,7 @@ function Module:OnEnable()
     self:RegisterEvent('PLAYERREAGENTBANKSLOTS_CHANGED')
 
     self:RegisterBucketEvent({ 'BAG_UPDATE_DELAYED' }, 1, 'UpdateBags')
-    self:RegisterBucketMessage({ 'WWTC_SCAN_BAGS' }, 1, 'UpdateBags')
+    self:RegisterBucketMessage({ 'WWTC_SCAN_BAGS' }, 2, 'UpdateBags')
 end
 
 function Module:OnEnteringWorld()
