@@ -163,18 +163,6 @@ Module.db.progress = {
     ["dfCommunityFeast"] = { "weekly", { 70893 } },
     ["dfDragonAllegiance"] = { "weekly", { 66419 } }, -- choose a dragon
     ["dfDragonKey"] = { "weekly", { 66133, 66805 } }, -- hand in key (wrathion, sabellian)
-    ["dfFyrakkAssault"] = { "weekly", {
-        75280, -- Frostburn (AS)
-        74501, -- Cinderwind (OP)
-    } },
-    ["dfFyrakkDisciple"] = { "weekly", {
-        75239, -- Shadeisethal (AS)
-        74775, -- Kretchenwrath (OP)
-    } },
-    ["dfFyrakkShipment"] = { "weekly", {
-        74526, -- (AS)
-        75525, -- (OP)
-    } },
     ["dfGrandHuntMythic"] = { "weekly", { 70906 } },
     ["dfGrandHuntRare"] = { "weekly", { 71136 } },
     ["dfGrandHuntUncommon"] = { "weekly", { 71137 } },
@@ -189,14 +177,30 @@ Module.db.progress = {
         75401, -- Earth
         75402, -- Air
     } },
-    ["dfResearchersUnderFire1"] = { "weekly", { 75627 } },
-    ["dfResearchersUnderFire2"] = { "weekly", { 75628 } },
-    ["dfResearchersUnderFire3"] = { "weekly", { 75629 } },
-    ["dfResearchersUnderFire4"] = { "weekly", { 75630 } },
     ["dfSiegeDragonbaneKeep"] = { "weekly", { 70866 } },
     ["dfStormsFury"] = { "weekly", { 73162 } },
     ["dfTrialElements"] = { "weekly", { 71995 } },
     ["dfTrialFlood"] = { "weekly", { 71033 } },
+    -- Dragonflight: 10.1
+    ["dfFyrakkAssault"] = { "weekly", {
+        75280, -- Frostburn (AS)
+        74501, -- Cinderwind (OP)
+    } },
+    ["dfFyrakkDisciple"] = { "weekly", {
+        75239, -- Shadeisethal (AS)
+        74775, -- Kretchenwrath (OP)
+    } },
+    ["dfFyrakkShipment"] = { "weekly", {
+        74526, -- (AS)
+        75525, -- (OP)
+    } },
+    ["dfResearchersUnderFire1"] = { "weekly", { 75627 } },
+    ["dfResearchersUnderFire2"] = { "weekly", { 75628 } },
+    ["dfResearchersUnderFire3"] = { "weekly", { 75629 } },
+    ["dfResearchersUnderFire4"] = { "weekly", { 75630 } },
+    ["dfSniffenDig1"] = { "weekly", { 75749 } },
+    ["dfSniffenDig2"] = { "weekly", { 75748 } },
+    ["dfSniffenDig3"] = { "weekly", { 75747 } },
     -- Dragonflight: Professions
     ["dfProfessionMettle"] = { "weekly", { 70221 } },
     -- Dragonflight: Crafting Professions
