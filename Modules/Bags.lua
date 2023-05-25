@@ -52,7 +52,7 @@ function Module:BANKFRAME_OPENED()
 end
 
 function Module:PLAYERREAGENTBANKSLOTS_CHANGED()
-    self.wasReagentBankChanged = false
+    self.wasReagentBankChanged = true
     self.dirtyBags[Enum.BagIndex.Reagentbank] = true
 end
 
