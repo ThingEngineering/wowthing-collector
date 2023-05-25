@@ -2,6 +2,13 @@ local Addon = LibStub('AceAddon-3.0'):GetAddon('WoWthing_Collector')
 local Module = Addon:NewModule('Bags')
 
 
+local C_Container_ContainerIDToInventoryID = C_Container.ContainerIDToInventoryID
+local C_Container_GetContainerItemID = C_Container.GetContainerItemID
+local C_Container_GetContainerItemInfo = C_Container.GetContainerItemInfo
+local C_Container_GetContainerNumSlots = C_Container.GetContainerNumSlots
+local C_Item_IsItemDataCachedByID = C_Item.IsItemDataCachedByID
+local C_Item_RequestLoadItemDataByID = C_Item.RequestLoadItemDataByID
+
 function Module:OnEnable()
     Addon.charData.bags = Addon.charData.bags or {}
     Addon.charData.items = Addon.charData.items or {}
@@ -111,24 +118,24 @@ function Module:ScanBagQueue()
 
         -- Update bag ID
         if bagId >= 1 then
-            local bagItemID, _ = GetInventoryItemID('player', C_Container.ContainerIDToInventoryID(bagId))
+            local bagItemID, _ = GetInventoryItemID('player', C_Container_ContainerIDToInventoryID(bagId))
             Addon.charData.bags["b"..bagId] = bagItemID
         end
 
-        local numSlots = C_Container.GetContainerNumSlots(bagId)
+        local numSlots = C_Container_GetContainerNumSlots(bagId)
         if numSlots > 0 then
             for slot = 1, numSlots do
                 -- This always works, even if the full item data isn't cached
-                local itemId = C_Container.GetContainerItemID(bagId, slot)
+                local itemId = C_Container_GetContainerItemID(bagId, slot)
                 if itemId then
-                    if C_Item.IsItemDataCachedByID(itemId) then
-                        local itemInfo = C_Container.GetContainerItemInfo(bagId, slot)
+                    if C_Item_IsItemDataCachedByID(itemId) then
+                        local itemInfo = C_Container_GetContainerItemInfo(bagId, slot)
                         if itemInfo ~= nil and itemInfo.hyperlink ~= nil then
                             local parsed = Addon:ParseItemLink(itemInfo.hyperlink, itemInfo.quality or -1, itemInfo.stackCount or 1)
                             bag["s"..slot] = parsed
                         end
                     else
-                        C_Item.RequestLoadItemDataByID(itemId)
+                        C_Item_RequestLoadItemDataByID(itemId)
                         requestedData = true
                     end
                 end
