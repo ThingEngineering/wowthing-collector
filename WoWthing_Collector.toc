@@ -14,21 +14,10 @@ libs\AceHook-3.0\AceHook-3.0.xml
 libs\AceTimer-3.0\AceTimer-3.0.xml
 libs\LibRealmInfo17janekjl\LibRealmInfo17janekjl.lua
 
-data\achievements.lua
-data\auras.lua
-data\covenants.lua
-data\currencies.lua
-data\garrisons.lua
-data\instances.lua
-# data\quests.lua
-# data\quests_account.lua
-# data\quests_scan.lua
-# data\reputations.lua
-data\transmog.lua
-data\world_bosses.lua
-# data\world_quests.lua
-
+# data\covenants.lua
+# data\garrisons.lua
 # Collector.lua
+
 Core.lua
 
 Modules/Achievements.lua
