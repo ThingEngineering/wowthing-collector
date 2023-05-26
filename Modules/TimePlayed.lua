@@ -36,7 +36,6 @@ end
 function Module:ChatFrame_DisplayTimePlayed(...)
     if self.requestingPlayedTime then
         self.requestingPlayedTime = false
-        self:Unhook('ChatFrame_DisplayTimePlayed')
         return
     end
     
