@@ -76,9 +76,9 @@ function Module:UpdateGuildBank()
     print('UpdateGuildBank')
 
     -- Short circuit if guild bank isn't open
-    -- if not guildBankOpen then
-    --     return
-    -- end
+    if not self.isBankOpen then
+        return
+    end
 
     local now = time()
     self.guild.scanTimes['bank'] = now
