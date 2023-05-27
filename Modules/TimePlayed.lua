@@ -5,6 +5,7 @@ local Module = Addon:NewModule('TimePlayed', 'AceHook-3.0')
 function Module:OnEnable()
     self:RawHook('ChatFrame_DisplayTimePlayed', true)
     self:RegisterEvent('PLAYER_LEVEL_UP')
+    self:RegisterEvent('TIME_PLAYED_MSG')
 end
 
 function Module:OnEnteringWorld()
@@ -16,7 +17,6 @@ function Module:OnLogout()
 end
 
 function Module:RequestTimePlayed()
-    self:RegisterEvent('TIME_PLAYED_MSG')
     self.requestingPlayedTime = true
     RequestTimePlayed()
 end
@@ -50,7 +50,5 @@ function Module:TIME_PLAYED_MSG(_, total, level)
     local now = time()
     self.playedLevel, self.playedLevelUpdated = level, now
     self.playedTotal, self.playedTotalUpdated = total, now
-    
     self:SaveData()
-    self:UnregisterEvent('TIME_PLAYED_MSG')
 end
