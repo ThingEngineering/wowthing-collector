@@ -119,6 +119,9 @@ function Module:ScanQueue()
         table.sort(keys)
         Addon.charData.transmog = table.concat(keys, ':')
 
+        self.isScanning = false
+        self.transmog = {}
+
         -- Reset settings
         if self.isOpen == false then
             C_TransmogCollection.SetCollectedShown(self.oldSettings.showCollected)
@@ -127,7 +130,5 @@ function Module:ScanQueue()
                 C_TransmogCollection.SetSourceTypeFilter(index, self.oldSettings.sourceTypes[index])
             end
         end
-
-        self.isScanning = false
     end
 end
