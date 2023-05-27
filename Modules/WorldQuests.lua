@@ -8,6 +8,8 @@ local C_TaskQuest_GetQuestsForPlayerByMapID = C_TaskQuest.GetQuestsForPlayerByMa
 local C_TaskQuest_GetQuestTimeLeftSeconds = C_TaskQuest.GetQuestTimeLeftSeconds
 
 function Module:OnEnable()
+    Addon.charData.worldQuests = Addon.charData.worldQuests or {}
+
     self:RegisterBucketEvent({ 'QUEST_LOG_UPDATE' }, 5, 'UpdateWorldQuests')
 end
 
