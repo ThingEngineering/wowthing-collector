@@ -1,3 +1,10 @@
+v10.1.0.15
+----------
+- Enabled the WorldQuests module.
+- Changed bag scans to wait for all requested items to be loaded before retrying.
+- Changed /played message hook back to the basic original one.
+- Fixed transmog scan not clearing temporary data after completing.
+
 v10.1.0.14
 ----------
 - Changed bag scans to be a bit less aggressive about retrying.
