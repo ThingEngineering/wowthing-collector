@@ -35,6 +35,7 @@ Modules/Spells.lua
 Modules/TimePlayed.lua
 Modules/Transmog.lua
 Modules/Vault.lua
+Modules/WorldQuests.lua
 Modules/XP.lua
 
 DB/Achievements.lua
@@ -42,6 +43,7 @@ DB/Currencies.lua
 DB/Reputations.lua
 DB/Spells.lua
 DB/Transmog.lua
+DB/WorldQuests.lua
 DB/Lockouts/Instances.lua
 DB/Lockouts/WorldBosses.lua
 DB/Quests/Account.lua
