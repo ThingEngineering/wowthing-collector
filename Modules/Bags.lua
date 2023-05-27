@@ -14,9 +14,11 @@ function Module:OnEnable()
     Addon.charData.items = Addon.charData.items or {}
 
     self.isBankOpen = false
+    self.isRequesting = false
     self.isScanning = false
     self.wasReagentBankChanged = false
     self.dirtyBags = {}
+    self.requested = {}
 
     self:RegisterEvent('BAG_UPDATE')
     self:RegisterEvent('BANKFRAME_CLOSED')
@@ -24,11 +26,12 @@ function Module:OnEnable()
     self:RegisterEvent('PLAYERREAGENTBANKSLOTS_CHANGED')
 
     self:RegisterBucketEvent({ 'BAG_UPDATE_DELAYED' }, 1, 'UpdateBags')
+    self:RegisterBucketEvent({ 'ITEM_DATA_LOAD_RESULT' }, 2, 'UpdateRequested')
     self:RegisterBucketMessage({ 'WWTC_SCAN_BAGS' }, 2, 'UpdateBags')
 end
 
 function Module:OnEnteringWorld()
-    self:SetPlayerBagsDirty()
+    C_Timer.After(5, function() self:SetPlayerBagsDirty() end)
 end
 
 function Module:BAG_UPDATE(_, bagId)
@@ -64,8 +67,24 @@ function Module:SetPlayerBagsDirty()
     self:SendMessage('WWTC_SCAN_BAGS')
 end
 
+function Module:UpdateRequested(items)
+    if not self.isRequesting then return end
+
+    for itemId, _ in pairs(items) do
+        self.requested[itemId] = nil
+    end
+
+    local keys = Addon:TableKeys(self.requested)
+    if #keys == 0 then
+        self.isRequesting = false
+        self:SendMessage('WWTC_SCAN_BAGS')
+    end
+end
+
 function Module:UpdateBags()
-    if self.isScanning then return end
+    if self.isRequesting or self.isScanning then
+        return
+    end
 
     self.isScanning = true
     self.scanQueue = {}
@@ -134,9 +153,10 @@ function Module:ScanBagQueue()
                             local parsed = Addon:ParseItemLink(itemInfo.hyperlink, itemInfo.quality or -1, itemInfo.stackCount or 1)
                             bag["s"..slot] = parsed
                         end
-                    else
-                        C_Item_RequestLoadItemDataByID(itemId)
+                    elseif self.requested[itemId] == nil then
                         requestedData = true
+                        self.requested[itemId] = true
+                        C_Item_RequestLoadItemDataByID(itemId)
                     end
                 end
             end
@@ -146,6 +166,7 @@ function Module:ScanBagQueue()
     -- If we requested item data, come back and scan this bag again later
     if requestedData then
         self.dirtyBags[bagId] = true
+        self.isRequesting = true
     end
 
     -- If the scan queue still has bags, add a timer for the next one
