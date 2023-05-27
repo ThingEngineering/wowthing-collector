@@ -2,8 +2,20 @@ local Addon = LibStub('AceAddon-3.0'):GetAddon('WoWthing_Collector')
 local Module = Addon:NewModule('TimePlayed', 'AceHook-3.0')
 
 
+-- Hook the time played message so that we don't print it to chat every time
+do
+    local originalDisplayTimePlayed = _G.ChatFrame_DisplayTimePlayed
+    _G.ChatFrame_DisplayTimePlayed = function(...)
+        if Module.requestingPlayedTime then
+            Module.requestingPlayedTime = false
+            return
+        end
+        return originalDisplayTimePlayed(...)
+    end
+end
+
 function Module:OnEnable()
-    self:RawHook('ChatFrame_DisplayTimePlayed', true)
+    -- self:RawHook('ChatFrame_DisplayTimePlayed', true)
     self:RegisterEvent('PLAYER_LEVEL_UP')
     self:RegisterEvent('TIME_PLAYED_MSG')
 end
@@ -33,14 +45,14 @@ function Module:SaveData()
 end
 
 -- Don't display the chat message if we're asking for the data
-function Module:ChatFrame_DisplayTimePlayed(...)
-    if self.requestingPlayedTime then
-        self.requestingPlayedTime = false
-        return
-    end
+-- function Module:ChatFrame_DisplayTimePlayed(...)
+--     if self.requestingPlayedTime then
+--         self.requestingPlayedTime = false
+--         return
+--     end
     
-    self.hooks.ChatFrame_DisplayTimePlayed(...)
-end
+--     self.hooks.ChatFrame_DisplayTimePlayed(...)
+-- end
 
 function Module:PLAYER_LEVEL_UP()
     self.playedLevel, self.playedLevelUpdated = 0, time()
