@@ -25,6 +25,7 @@ Modules/Bags.lua
 Modules/CharacterMisc.lua
 Modules/Covenants.lua
 Modules/Currencies.lua
+Modules/GarrisonTrees.lua
 Modules/Guild.lua
 Modules/Location.lua
 Modules/Lockouts.lua
@@ -42,6 +43,7 @@ Modules/XP.lua
 DB/Achievements.lua
 DB/Covenants.lua
 DB/Currencies.lua
+DB/GarrisonTrees.lua
 DB/Reputations.lua
 DB/Spells.lua
 DB/Transmog.lua
