@@ -23,6 +23,7 @@ Core.lua
 Modules/Achievements.lua
 Modules/Bags.lua
 Modules/CharacterMisc.lua
+Modules/Covenants.lua
 Modules/Currencies.lua
 Modules/Guild.lua
 Modules/Location.lua
@@ -39,6 +40,7 @@ Modules/WorldQuests.lua
 Modules/XP.lua
 
 DB/Achievements.lua
+DB/Covenants.lua
 DB/Currencies.lua
 DB/Reputations.lua
 DB/Spells.lua
