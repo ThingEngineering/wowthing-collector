@@ -1,3 +1,8 @@
+v10.1.0.17
+----------
+- Added Covenants module.
+- Added GarrisonTrees module.
+
 v10.1.0.16
 ----------
 - Fixed world quest storage not being initialized properly.
