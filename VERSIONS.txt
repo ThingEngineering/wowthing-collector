@@ -1,3 +1,7 @@
+v10.1.0.18
+----------
+- Added ProfessionTraits module.
+
 v10.1.0.17
 ----------
 - Added Covenants module.
