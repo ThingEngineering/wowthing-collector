@@ -27,6 +27,7 @@ Modules/Location.lua
 Modules/Lockouts.lua
 Modules/MythicPlus.lua
 Modules/ProfessionEquipment.lua
+Modules/ProfessionTraits.lua
 Modules/Quests.lua
 Modules/Reputations.lua
 Modules/Spells.lua
@@ -40,6 +41,7 @@ DB/Achievements.lua
 DB/Covenants.lua
 DB/Currencies.lua
 DB/GarrisonTrees.lua
+DB/ProfessionTraits.lua
 DB/Reputations.lua
 DB/Spells.lua
 DB/Transmog.lua

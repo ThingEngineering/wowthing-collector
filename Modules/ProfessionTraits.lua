@@ -8,7 +8,7 @@ function Module:OnEnable()
     self:RegisterBucketEvent(
         {
             'SKILL_LINES_CHANGED',
-            'SKILL_LINE_SPEC_RANKS_CHANGED',
+            'SKILL_LINE_SPECS_RANKS_CHANGED',
             'TRAIT_CONFIG_UPDATED',
         },
         2,
@@ -33,11 +33,11 @@ function Module:UpdateTraits(spellbookIndex)
 
     local professionSkillLineId = select(7, GetProfessionInfo(spellbookIndex))
     if not self.db.skillLines[professionSkillLineId] then
-        print("No skill lines? "..(professionSkillLineId or nil))
+        return
     end
 
     for _, skillLineId in ipairs(self.db.skillLines[professionSkillLineId]) do
-        local skillLineData = {}
+        local skillLineData = { skillLineId }
 
         local configId = C_ProfSpecs.GetConfigIDForSkillLine(skillLineId)
         local specTabIds = C_ProfSpecs.GetSpecTabIDsForSkillLine(skillLineId)
@@ -64,7 +64,7 @@ function Module:UpdateTraits(spellbookIndex)
                 end
             end
         end
-        
-        Addon.charData.professionTraits[skillLineId] = table.concat(skillLineData, '|')
+
+        table.insert(Addon.charData.professionTraits, table.concat(skillLineData, '|'))
     end
 end
