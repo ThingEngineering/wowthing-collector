@@ -27,7 +27,6 @@ function Module:OnEnable()
 
     self:RegisterBucketEvent({ 'BAG_UPDATE_DELAYED' }, 1, 'UpdateBags')
     self:RegisterBucketEvent({ 'ITEM_DATA_LOAD_RESULT' }, 2, 'UpdateRequested')
-    self:RegisterBucketMessage({ 'WWTC_SCAN_BAGS' }, 2, 'UpdateBags')
 end
 
 function Module:OnEnteringWorld()
@@ -51,12 +50,14 @@ function Module:BANKFRAME_OPENED()
         self.dirtyBags[i] = true
     end
 
-    self:SendMessage('WWTC_SCAN_BAGS')
+    self:StartUpdateBagsTimer()
 end
 
 function Module:PLAYERREAGENTBANKSLOTS_CHANGED()
     self.wasReagentBankChanged = true
     self.dirtyBags[Enum.BagIndex.Reagentbank] = true
+
+    self:StartUpdateBagsTimer()
 end
 
 function Module:SetPlayerBagsDirty()
@@ -64,7 +65,11 @@ function Module:SetPlayerBagsDirty()
         self.dirtyBags[i] = true
     end
 
-    self:SendMessage('WWTC_SCAN_BAGS')
+    self:StartUpdateBagsTimer()
+end
+
+function Module:StartUpdateBagsTimer()
+    self:UniqueTimer('UpdateBags', 2, 'UpdateBags')
 end
 
 function Module:UpdateRequested(items)
@@ -77,7 +82,7 @@ function Module:UpdateRequested(items)
     local keys = Addon:TableKeys(self.requested)
     if #keys == 0 then
         self.isRequesting = false
-        self:SendMessage('WWTC_SCAN_BAGS')
+        self:StartUpdateBagsTimer()
     end
 end
 
@@ -178,7 +183,7 @@ function Module:ScanBagQueue()
         -- Queue another scan if any bags are dirty
         local bagKeys = Addon:TableKeys(self.dirtyBags)
         if #bagKeys > 0 then
-            self:SendMessage('WWTC_SCAN_BAGS')
+            self:StartUpdateBagsTimer()
         end
     end
 end

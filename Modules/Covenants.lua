@@ -19,19 +19,21 @@ function Module:OnEnable()
         'UpdateCovenants'
     )
     self:RegisterBucketEvent({ 'CURRENCY_DISPLAY_UPDATE' }, 1, 'CheckCurrencies')
-
-    self:RegisterBucketMessage({ 'WWTC_SCAN_COVENANT' }, 1, 'UpdateCovenants')
 end
 
 function Module:OnEnteringWorld()
-    self:SendMessage('WWTC_SCAN_COVENANT')
+    self:StartUpdateCovenantsTimer()
 end
 
 function Module:CheckCurrencies(currencyIds)
     -- Redeemed Soul, Reservoir Anima
     if currencyIds[1810] or currencyIds[1813] then
-        self:SendMessage('WWTC_SCAN_COVENANT')
+        self:StartUpdateCovenantsTimer()
     end
+end
+
+function Module:StartUpdateCovenantsTimer()
+    self:UniqueTimer('UpdateCovenants', 2, 'UpdateCovenants')
 end
 
 local function SortTalents(talentA, talentB)

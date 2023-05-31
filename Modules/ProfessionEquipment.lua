@@ -4,8 +4,6 @@ local Module = Addon:NewModule('ProfessionEquipment')
 
 function Module:OnEnable()
     self:RegisterBucketEvent({ 'PROFESSION_EQUIPMENT_CHANGED' }, 2, 'UpdateEquipment')
-
-    self:RegisterBucketMessage({ 'WWTC_SCAN_EQUIPMENT' }, 2, 'UpdateEquipment')
 end
 
 function Module:OnEnteringWorld()
@@ -19,19 +17,19 @@ function Module:UpdateEquipment()
 
     for slot = 20, 30 do
         local itemLink = GetInventoryItemLink('player', slot)
-
         if itemLink ~= nil then
-            local itemQuality = GetInventoryItemQuality('player', slot)
-            -- Item isn't loaded yet, try again in a bit
-            if itemQuality == nil then
+            local name = C_Item.GetItemNameByID(itemLink)
+            if name == nil then
+                C_Item.RequestLoadItemDataByID(itemLink)
                 rescan = true
             else
+                local itemQuality = GetInventoryItemQuality('player', slot)
                 Addon.charData.equipment[slot] = Addon:ParseItemLink(itemLink, itemQuality, 1)
             end
         end
     end
 
     if rescan then
-        self:SendMessage('WWTC_SCAN_EQUIPMENT')
+        self:UniqueTimer('UpdateEquipment', 2, 'UpdateEquipment')
     end
 end

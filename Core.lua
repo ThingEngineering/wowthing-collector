@@ -1,5 +1,19 @@
 local Addon = LibStub("AceAddon-3.0"):NewAddon("WoWthing_Collector", "AceEvent-3.0")
-Addon:SetDefaultModuleLibraries("AceBucket-3.0", "AceEvent-3.0")
+Addon:SetDefaultModuleLibraries("AceBucket-3.0", "AceEvent-3.0", "AceTimer-3.0")
+
+local ModulePrototype = {
+    UniqueTimer = function(self, name, seconds, callback, ...)
+        self.__timers = self.__timers or {}
+        
+        if self.__timers[name] and self:TimeLeft(self.__timers[name]) > 0 then
+            print('Timer '..name..' already exists')
+            return
+        end
+
+        self.__timers[name] = self:ScheduleTimer(callback, seconds, ...)
+    end
+}
+Addon:SetDefaultModulePrototype(ModulePrototype)
 
 local LibRealmInfo = LibStub('LibRealmInfo17janekjl')
 
