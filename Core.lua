@@ -6,7 +6,7 @@ local ModulePrototype = {
         self.__timers = self.__timers or {}
         
         if self.__timers[name] and self:TimeLeft(self.__timers[name]) > 0 then
-            print('Timer '..name..' already exists')
+            -- print('Timer '..name..' already exists')
             return
         end
 
