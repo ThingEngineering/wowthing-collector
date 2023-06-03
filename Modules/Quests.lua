@@ -39,25 +39,27 @@ function Module:UpdateQuests()
     end
 
     local accountQuests = {}
-    for _, questID in ipairs(self.db.account) do
-        if C_QuestLog_IsQuestFlaggedCompleted(questID) then
-            table.insert(accountQuests, questID)
+    for _, questId in ipairs(self.db.account) do
+        if C_QuestLog_IsQuestFlaggedCompleted(questId) then
+            table.insert(accountQuests, questId)
         end
     end
     WWTCSaved.quests = accountQuests
 
     local dailyQuests = {}
-    for _, questID in ipairs(self.db.auto) do
-        if C_QuestLog_IsQuestFlaggedCompleted(questID) then
-            table.insert(dailyQuests, questID)
+    for _, autoQuestIds in pairs(self.db.auto) do
+        for _, questId in ipairs(autoQuestIds) do
+            if C_QuestLog_IsQuestFlaggedCompleted(questId) then
+                table.insert(dailyQuests, questId)
+            end
         end
     end
     Addon.charData.dailyQuests = dailyQuests
 
     local otherQuests = {}
-    for _, questID in ipairs(self.db.tracking) do
-        if C_QuestLog_IsQuestFlaggedCompleted(questID) then
-            table.insert(otherQuests, questID)
+    for _, questId in ipairs(self.db.tracking) do
+        if C_QuestLog_IsQuestFlaggedCompleted(questId) then
+            table.insert(otherQuests, questId)
         end
     end
     Addon.charData.otherQuests = otherQuests
