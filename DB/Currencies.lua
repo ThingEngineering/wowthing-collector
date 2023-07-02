@@ -142,4 +142,55 @@ Module.db.currencies = {
     2411, -- Wyrm Crest Fragment Tracker [DNT]
     2412, -- Aspect Crest Fragment Tracker [DNT]
     2413, -- 10.1 Professions - Personal Tracker - S2 Spark Drops (Hidden)
+
+    -- The Waking Shores
+    2042, 2044, 2154, -- Ruby Lifeshrine Loop
+    2046, 2047, 2181, -- Flashfrost Flyover
+    2048, 2049, 2176, -- Wild Preserve Slalom
+    2050, 2051, 2182, -- Wild Preserve Circuit
+    2054, 2055, 2178, -- Apex Canopy River Run
+    2052, 2053, 2177, -- Emberflow Flight
+    2056, 2057, 2179, -- Uktulut Coaster
+    2058, 2059, 2180, -- Wingrest Roundabout
+
+    -- Ohn'ahran Plains
+    2060, 2061, 2183, -- Sundapple Copse Circuit
+    2062, 2063, 2184, -- Fen Flythrough
+    2064, 2065, 2185, -- Ravine River Run
+    2066, 2067, 2186, -- Emerald Garden Ascent
+    2069, -- Maruukai Dash
+    2070, -- Mirror of the Sky Dash
+    2119, 2120, 2187, -- River Rapids Route
+
+    -- Azure Span
+    2074, 2075, 2188, -- The Azure Span Sprint
+    2076, 2077, 2189, -- The Azure Span Slalom
+    2078, 2079, 2190, -- The Vakthros Ascent
+    2083, 2084, 2191, -- Iskaara Tour
+    2085, 2086, 2192, -- Frostland Flyover
+    2089, 2090, 2193, -- Archive Ambit
+
+    -- Thaldraszus
+    2080, 2081, 2194, -- The Flowing Forest Flight
+    2092, 2093, 2195, -- Tyrhold Trial
+    2096, 2097, 2196, -- Cliffside Circuit
+    2098, 2099, 2197, -- Academy Ascent
+    2101, 2102, 2198, -- Garden Gallivant
+    2103, 2104, 2199, -- Caverns Criss-Cross
+
+    -- Forbidden Reach
+    2201, 2207, 2213, -- Stormsunder Crate Circuit
+    2202, 2208, 2214, -- Morqut Ascent
+    2203, 2209, 2215, -- Aerie Chasm Cruise
+    2204, 2210, 2216, -- Southern Reach Route
+    2205, 2211, 2217, -- Caldera Coaster
+    2206, 2212, 2218, -- Forbidden Reach Rush
+
+    -- Zaralek Cavern
+    2246, 2252, 2258, -- Crystal Circuit
+    2247, 2253, 2259, -- Caldera Cruise
+    2248, 2254, 2260, -- Brimstone Scramble
+    2249, 2255, 2261, -- Shimmering Slalom
+    2250, 2256, 2262, -- Loamm Roamm
+    2251, 2257, 2263, -- Sulfur Sprint
 }
