@@ -183,12 +183,12 @@ Module.db.progress = {
     ["dfTrialFlood"] = { "weekly", { 71033 } },
     -- Dragonflight: 10.1
     ["dfFyrakkAssault"] = { "weekly", {
+        75157, -- First completion tracking quest?
         75280, -- Frostburn (AS)
         74501, -- Cinderwind (OP)
     } },
     ["dfFyrakkDisciple"] = { "weekly", {
-        75239, -- Shadeisethal (AS)
-        74775, -- Kretchenwrath (OP)
+        75467, -- Killed disciple
     } },
     ["dfFyrakkShipment"] = { "weekly", {
         74526, -- (AS)

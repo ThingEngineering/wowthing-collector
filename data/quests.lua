@@ -499,6 +499,7 @@ ns.progressQuests = {
     ["dfDragonAllegiance"] = { "weekly", { 66419 } }, -- choose a dragon
     ["dfDragonKey"] = { "weekly", { 66133, 66805 } }, -- hand in key (wrathion, sabellian)
     ["dfFyrakkAssault"] = { "weekly", {
+        75157, -- First completion tracking quest?
         75280, -- Frostburn (AS)
         74501, -- Cinderwind (OP)
     } },
