@@ -1,3 +1,8 @@
+v10.1.0.20
+----------
+- Added initial Suffusion Camp tracking quest ID.
+- Fixed quest IDs in the wrong file, oof.
+
 v10.1.0.19
 ----------
 - Added first craft IDs to quest scanning.
