@@ -1,3 +1,10 @@
+v10.1.0.19
+----------
+- Added first craft IDs to quest scanning.
+- Addad dragonriding best times to currency scanning.
+- Fixed Fyrakk Discpile quest ID.
+- Fixed rescan behaviour in Bags/Covenants/ProfessionEquipment modules.
+
 v10.1.0.18
 ----------
 - Added ProfessionTraits module.
