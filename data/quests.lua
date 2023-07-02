@@ -503,8 +503,7 @@ ns.progressQuests = {
         74501, -- Cinderwind (OP)
     } },
     ["dfFyrakkDisciple"] = { "weekly", {
-        75239, -- Shadeisethal (AS)
-        74775, -- Kretchenwrath (OP)
+        75467, -- Killed disciple
     } },
     ["dfFyrakkShipment"] = { "weekly", {
         74526, -- (AS)
