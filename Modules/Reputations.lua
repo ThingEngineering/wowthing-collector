@@ -24,8 +24,8 @@ function Module:UpdateReputations()
     end
 
     for _, friendshipID in ipairs(self.db.friendships) do
-        local _, friendRep = C_GossipInfo.GetFriendshipReputation(friendshipID)
-        Addon.charData.reputations[friendshipID] = friendRep
+        local friendRep = C_GossipInfo.GetFriendshipReputation(friendshipID)
+        Addon.charData.reputations[friendshipID] = friendRep.standing
     end
 
     for i, factionID in ipairs(self.db.paragon) do
