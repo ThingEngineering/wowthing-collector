@@ -1,3 +1,9 @@
+v10.1.5.1
+----------
+- Added new Aiding the Accord quest ID.
+- Fixed friendship reputation scanning.
+- Updated TOC.
+
 v10.1.0.20
 ----------
 - Added initial Suffusion Camp tracking quest ID.
