@@ -1,4 +1,4 @@
-## Interface: 100100
+## Interface: 100105
 ## Title: WoWthing Collector
 ## Notes: Collects data to sync with WoWthing.
 ## Version: 10.1.0.20
