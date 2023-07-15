@@ -1,3 +1,7 @@
+v10.1.5.2
+---------
+- Added Time Rift completion quest ID.
+
 v10.1.5.1
 ----------
 - Added new Aiding the Accord quest ID.
