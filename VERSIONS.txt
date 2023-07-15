@@ -1,3 +1,8 @@
+v10.1.5.3
+---------
+- Added When Time Needs Mending quest ID.
+- Added 10.1.5 currency IDs.
+
 v10.1.5.2
 ---------
 - Added Time Rift completion quest ID.
