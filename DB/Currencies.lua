@@ -119,6 +119,8 @@ Module.db.currencies = {
     2167, -- Catalyst Charges
     2245, -- Flightstones
     2533, -- Renascent Shadowflame
+    2588, -- Riders of Azeroth Badge
+    2594, -- Paracausal Flakes
 
     2264, -- Account HWM - Helm [DNT]
     2265, -- Account HWM - Neck [DNT]
