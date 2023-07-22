@@ -1,3 +1,7 @@
+v10.1.5.4
+---------
+- Added Illusions module.
+
 v10.1.5.3
 ---------
 - Added When Time Needs Mending quest ID.
