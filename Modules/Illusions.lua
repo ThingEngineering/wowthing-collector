@@ -29,5 +29,6 @@ function Module:UpdateIllusions()
         end
     end
 
-    Addon.charData.illusions = illusions
+    table.sort(illusions)
+    Addon.charData.illusions = table.concat(illusions, ':')
 end

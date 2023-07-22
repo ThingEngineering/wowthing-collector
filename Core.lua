@@ -87,6 +87,10 @@ function Addon:Cleanup()
             charData.mythicPlus = nil
             charData.weeklyQuests = nil
             charData.weeklyUghQuests = nil
+
+            if type(charData.illusions) == 'table' then
+                charData.illusions = nil
+            end
         end
     end
 end
