@@ -23,6 +23,7 @@ Modules/Covenants.lua
 Modules/Currencies.lua
 Modules/GarrisonTrees.lua
 Modules/Guild.lua
+Modules/Illusions.lua
 Modules/Location.lua
 Modules/Lockouts.lua
 Modules/MythicPlus.lua
