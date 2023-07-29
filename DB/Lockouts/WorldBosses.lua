@@ -61,8 +61,8 @@ Module.db.worldBosses = {
     [54896] = { 107003, "Darkshore World Bosses", "Ivus the Forest Lord" },
     [54895] = { 107003, "Darkshore World Bosses", "Ivus the Decayed" },
 
-    [56057] = { 107004, "Nazjatar World Bosses", "Ulmath, the Soulbinder" },
-    [56056] = { 107004, "Nazjatar World Bosses", "Wekemara" },
+    [56058] = { 107004, "Nazjatar World Bosses", "Ulmath, the Soulbinder" },
+    [56055] = { 107004, "Nazjatar World Bosses", "Wekemara" },
 
     [55466] = { 107005, "Uldum World Bosses", "Vuk'laz the Earthbreaker" },
 
