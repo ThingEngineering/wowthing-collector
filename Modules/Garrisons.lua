@@ -5,6 +5,9 @@ local Module = Addon:NewModule('Garrisons')
 Module.db = {}
 
 function Module:OnEnable()
+    Addon.charData.garrisons = Addon.charData.garrisons or {}
+    Addon.charData.garrisonTrees = Addon.charData.garrisonTrees or {}
+
     self:RegisterBucketEvent(
         {
             'ZONE_CHANGED',
