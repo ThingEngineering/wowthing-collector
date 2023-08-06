@@ -21,7 +21,7 @@ Modules/Bags.lua
 Modules/CharacterMisc.lua
 Modules/Covenants.lua
 Modules/Currencies.lua
-Modules/GarrisonTrees.lua
+Modules/Garrisons.lua
 Modules/Guild.lua
 Modules/Illusions.lua
 Modules/Location.lua
@@ -41,7 +41,7 @@ Modules/XP.lua
 DB/Achievements.lua
 DB/Covenants.lua
 DB/Currencies.lua
-DB/GarrisonTrees.lua
+DB/Garrisons.lua
 DB/ProfessionTraits.lua
 DB/Reputations.lua
 DB/Spells.lua
