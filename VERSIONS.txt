@@ -1,3 +1,7 @@
+v10.1.5.7
+---------
+- Fixed Garrisons module missing initialization.
+
 v10.1.5.6
 ---------
 - Added Garrisons module.
