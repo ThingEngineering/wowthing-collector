@@ -1,3 +1,7 @@
+v10.1.5.8
+---------
+- Added ProfessionCooldowns module.
+
 v10.1.5.7
 ---------
 - Fixed Garrisons module missing initialization.
