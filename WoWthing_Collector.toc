@@ -27,6 +27,7 @@ Modules/Illusions.lua
 Modules/Location.lua
 Modules/Lockouts.lua
 Modules/MythicPlus.lua
+Modules/ProfessionCooldowns.lua
 Modules/ProfessionEquipment.lua
 Modules/ProfessionTraits.lua
 Modules/Quests.lua
@@ -42,6 +43,7 @@ DB/Achievements.lua
 DB/Covenants.lua
 DB/Currencies.lua
 DB/Garrisons.lua
+DB/ProfessionCooldowns.lua
 DB/ProfessionTraits.lua
 DB/Reputations.lua
 DB/Spells.lua
