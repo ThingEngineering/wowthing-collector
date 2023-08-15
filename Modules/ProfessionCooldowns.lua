@@ -24,51 +24,53 @@ function Module:UpdateCooldowns()
     local now = time()
     Addon.charData.scanTimes['professionCooldowns'] = now
 
-    for professionId, subProfessions in pairs(self.db.cooldowns) do
-        -- check for profession learned?
-        for subProfessionId, cooldowns in pairs(subProfessions) do
-            for key, spellIds in pairs(cooldowns) do
-                for _, spellId in ipairs(spellIds) do
-                    local recipeInfo = C_TradeSkillUI_GetRecipeInfo(spellId)
-                    if recipeInfo ~= nil and recipeInfo.learned == true then
-                        local remainingSeconds, _, currentValue, maxValue = C_TradeSkillUI_GetRecipeCooldown(spellId)
-                        local nextAvailable = 0
-                        if remainingSeconds ~= nil and remainingSeconds > 0 then
-                            nextAvailable = math.floor(now + remainingSeconds + 0.5) -- round() hack
-                        end
+    -- professionID = id, profession = enum
+    local profInfo = C_TradeSkillUI.GetBaseProfessionInfo()
+    if profInfo == nil or profInfo.isPrimaryProfession == false then return end
 
-                        -- Blizzard lies about these, whee
-                        if currentValue == 0 and maxValue == 0 then
-                            if remainingSeconds == nil then
-                                currentValue = 1
-                            end
-                            maxValue = 1
-                        end
-                    
+    local cooldowns = self.db.cooldowns[profInfo.professionID]
+    if cooldowns == nil then return end
 
-                        local newString = table.concat({
-                            key,
-                            nextAvailable,
-                            currentValue,
-                            maxValue,
-                        }, ':')
+    for key, spellIds in pairs(cooldowns) do
+        for _, spellId in ipairs(spellIds) do
+            local recipeInfo = C_TradeSkillUI_GetRecipeInfo(spellId)
+            if recipeInfo ~= nil and recipeInfo.learned == true then
+                local remainingSeconds, _, currentValue, maxValue = C_TradeSkillUI_GetRecipeCooldown(spellId)
+                local nextAvailable = 0
+                if remainingSeconds ~= nil and remainingSeconds > 0 then
+                    nextAvailable = math.floor(now + remainingSeconds + 0.5) -- round() hack
+                end
 
-                        local found = false
-                        for i, existingString in pairs(Addon.charData.professionCooldowns) do
-                            local existingParts = { strsplit(':', existingString) }
-                            if existingParts[1] == key then
-                                found = true
-                                Addon.charData.professionCooldowns[i] = newString
-                            end
-                        end
+                -- Blizzard lies about these, whee
+                if currentValue == 0 and maxValue == 0 then
+                    if remainingSeconds == nil then
+                        currentValue = 1
+                    end
+                    maxValue = 1
+                end
+            
 
-                        if found == false then
-                            table.insert(Addon.charData.professionCooldowns, newString)
-                        end
+                local newString = table.concat({
+                    key,
+                    nextAvailable,
+                    currentValue,
+                    maxValue,
+                }, ':')
 
-                        break
+                local found = false
+                for i, existingString in pairs(Addon.charData.professionCooldowns) do
+                    local existingParts = { strsplit(':', existingString) }
+                    if existingParts[1] == key then
+                        found = true
+                        Addon.charData.professionCooldowns[i] = newString
                     end
                 end
+
+                if found == false then
+                    table.insert(Addon.charData.professionCooldowns, newString)
+                end
+
+                break
             end
         end
     end
