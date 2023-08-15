@@ -29,6 +29,7 @@ Modules/Lockouts.lua
 Modules/MythicPlus.lua
 Modules/ProfessionCooldowns.lua
 Modules/ProfessionEquipment.lua
+Modules/ProfessionOrders.lua
 Modules/ProfessionTraits.lua
 Modules/Quests.lua
 Modules/Reputations.lua
