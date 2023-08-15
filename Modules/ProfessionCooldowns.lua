@@ -20,10 +20,6 @@ function Module:OnEnable()
     )
 end
 
-function Module:OnEnteringWorld()
-    self:UpdateCooldowns()
-end
-
 function Module:UpdateCooldowns()
     local now = time()
     Addon.charData.scanTimes['professionCooldowns'] = now
