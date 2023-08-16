@@ -65,4 +65,5 @@ function Module:UpdateVault()
     -- end
 
     Addon.charData.vault = vault
+    Addon.charData.vaultHasRewards = C_WeeklyRewards.HasAvailableRewards()
 end
