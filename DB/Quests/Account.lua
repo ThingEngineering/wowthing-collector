@@ -264,4 +264,68 @@ Module.db.account = {
     69786, -- Windborne Velocidrake: White and Pink Armor
     69845, -- Windborne Velocidrake: Windswept Pattern
     69814, -- Windborne Velocidrake: Yellow Horns
+    73829, -- Winding Slitherdrake: Antler Horns
+    73810, -- Winding Slitherdrake: Blonde Hair
+    73788, -- Winding Slitherdrake: Blue and Silver Armor
+    73841, -- Winding Slitherdrake: Blue Scales
+    73842, -- Winding Slitherdrake: Bronze Scales
+    73811, -- Winding Slitherdrake: Brown Hair
+    73800, -- Winding Slitherdrake: Cluster Chin Horn
+    73820, -- Winding Slitherdrake: Cluster Horns
+    73831, -- Winding Slitherdrake: Cluster Jaw Horns
+    73809, -- Winding Slitherdrake: Curled Cheek Horn
+    73824, -- Winding Slitherdrake: Curled Horns
+    73837, -- Winding Slitherdrake: Curled Nose
+    73802, -- Winding Slitherdrake: Curved Chin Horn
+    73825, -- Winding Slitherdrake: Curved Horns
+    73840, -- Winding Slitherdrake: Curved Nose Horn
+    73808, -- Winding Slitherdrake: Ears
+    75941, -- Winding Slitherdrake: Embodiment of the Obsidian Gladiator
+    73807, -- Winding Slitherdrake: Finned Cheek
+    73853, -- Winding Slitherdrake: Finned Tip Tail
+    73798, -- Winding Slitherdrake: Grand Chin Thorn
+    73787, -- Winding Slitherdrake: Green and Bronze Armor
+    73843, -- Winding Slitherdrake: Green Scales
+    73796, -- Winding Slitherdrake: Hairy Brow
+    73799, -- Winding Slitherdrake: Hairy Chin
+    73806, -- Winding Slitherdrake: Hairy Crest
+    73834, -- Winding Slitherdrake: Hairy Jaw
+    73854, -- Winding Slitherdrake: Hairy Tail
+    73857, -- Winding Slitherdrake: Hairy Throat
+    73817, -- Winding Slitherdrake: Heavy Horns
+    75743, -- Winding Slitherdrake: Heavy Scales
+    73794, -- Winding Slitherdrake: Horned Brow
+    73830, -- Winding Slitherdrake: Impaler Horns
+    73804, -- Winding Slitherdrake: Large Finned Crest
+    73852, -- Winding Slitherdrake: Large Finned Tail
+    73855, -- Winding Slitherdrake: Large Finned Throat
+    73838, -- Winding Slitherdrake: Large Spiked Nose
+    73797, -- Winding Slitherdrake: Long Chin Horn
+    73832, -- Winding Slitherdrake: Long Jaw Horns
+    73826, -- Winding Slitherdrake: Paired Horns
+    73795, -- Winding Slitherdrake: Plated Brow
+    73839, -- Winding Slitherdrake: Pointed Nose
+    73791, -- Winding Slitherdrake: Red and Gold Armor
+    73813, -- Winding Slitherdrake: Red Hair
+    73844, -- Winding Slitherdrake: Red Scales
+    73851, -- Winding Slitherdrake: Shark Finned Tail
+    73822, -- Winding Slitherdrake: Short Horns
+    73835, -- Winding Slitherdrake: Single Jaw Horn
+    73805, -- Winding Slitherdrake: Small Finned Crest
+    73850, -- Winding Slitherdrake: Small Finned Tail
+    73856, -- Winding Slitherdrake: Small Finned Throat
+    73803, -- Winding Slitherdrake: Small Spiked Crest
+    73801, -- Winding Slitherdrake: Spiked Chin
+    73821, -- Winding Slitherdrake: Spiked Horns
+    73849, -- Winding Slitherdrake: Spiked Tail
+    73836, -- Winding Slitherdrake: Split Jaw Horns
+    73818, -- Winding Slitherdrake: Swept Horns
+    73815, -- Winding Slitherdrake: Tan Horns
+    73827, -- Winding Slitherdrake: Thorn Horns
+    73833, -- Winding Slitherdrake: Triple Jaw Horns
+    73812, -- Winding Slitherdrake: White Hair
+    73816, -- Winding Slitherdrake: White Horns
+    73845, -- Winding Slitherdrake: White Scales
+    73792, -- Winding Slitherdrake: Yellow and Silver Armor
+    73846, -- Winding Slitherdrake: Yellow Scales
 }
