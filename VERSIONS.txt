@@ -1,3 +1,9 @@
+v10.1.5.9
+---------
+- Added ProfessionOrders module.
+- Added Winding Slitherdrake customization quest IDs.
+- Fixed various issues with ProfessionCooldowns module saving bad data.
+
 v10.1.5.8
 ---------
 - Added ProfessionCooldowns module.
