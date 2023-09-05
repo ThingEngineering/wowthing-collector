@@ -123,6 +123,7 @@ Module.db.progress = {
         75860, -- Aiding the Accord: Researchers Under Fire
         75861, -- Aiding the Accord: Suffusion Camp
         77254, -- Aiding the Accord: Time Rift
+        77976, -- Aiding the Accord: Dreamsurge
     } },
     ["dfCatchAileron"] = { "weekly", { 72826 } }, -- Catch and Release: Aileron Seamoth
     ["dfCatchCerulean"] = { "weekly", { 72825 } }, -- Catch and Release: Cerulean Spinefish
