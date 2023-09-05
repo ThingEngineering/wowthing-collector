@@ -206,6 +206,8 @@ Module.db.progress = {
     -- Dragonflight: 10.1.5
     ["dfTimeRift"] = { "weekly", { 77836 } },
     ["dfWhenTimeNeedsMending"] = { "weekly", { 77236 } },
+    -- Dragonflight: 10.1.7
+    ["dfDreamsurge"] = { "weekly", { 77251 } },
     -- Dragonflight: Professions
     ["dfProfessionMettle"] = { "weekly", { 70221 } },
     -- Dragonflight: Crafting Professions
