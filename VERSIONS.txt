@@ -1,3 +1,9 @@
+v10.1.7.1
+---------
+- Added new Aiding the Accord quest ID.
+- Added Dreamsurge weekly quest ID.
+- Updated TOC.
+
 v10.1.5.9
 ---------
 - Added ProfessionOrders module.
