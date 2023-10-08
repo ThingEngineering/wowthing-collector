@@ -23,6 +23,8 @@ function Module:OnEnable()
     self:RegisterEvent('BAG_UPDATE')
     self:RegisterEvent('BANKFRAME_CLOSED')
     self:RegisterEvent('BANKFRAME_OPENED')
+    self:RegisterEvent('ITEM_LOCKED')
+    self:RegisterEvent('ITEM_UNLOCKED')
     self:RegisterEvent('PLAYERREAGENTBANKSLOTS_CHANGED')
 
     self:RegisterBucketEvent({ 'BAG_UPDATE_DELAYED' }, 1, 'UpdateBags')
@@ -51,6 +53,20 @@ function Module:BANKFRAME_OPENED()
     end
 
     self:StartUpdateBagsTimer()
+end
+
+function Module:ITEM_LOCKED(_, bag, slot)
+    if slot ~= nil then
+        self.dirtyBags[bag] = true
+        self:StartUpdateBagsTimer()
+    end
+end
+
+function Module:ITEM_UNLOCKED(_, bag, slot)
+    if slot ~= nil then
+        self.dirtyBags[bag] = true
+        self:StartUpdateBagsTimer()
+    end
 end
 
 function Module:PLAYERREAGENTBANKSLOTS_CHANGED()
