@@ -1,3 +1,10 @@
+v10.1.7.2
+---------
+- Added Timeways event auras to aura tracking.
+- Added stacks/duration to aura tracking.
+- Added Ordos to world boss lockouts.
+- Fixed player bank items not being scanned consistently.
+
 v10.1.7.1
 ---------
 - Added new Aiding the Accord quest ID.
