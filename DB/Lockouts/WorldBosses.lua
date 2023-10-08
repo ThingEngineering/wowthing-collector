@@ -15,6 +15,7 @@ Module.db.worldBosses = {
     [32518] = { 104003, "Nalak", "Nalak" },
     [32519] = { 104004, "Oondasta", "Oondasta" },
     [33117] = { 104005, "The Four Celestials", "A Big Beastie" },
+    [33118] = { 104006, "Ordos", "Ordos" },
 
     -- Warlords of Draenor
     [37460] = { 105001, "Gorgrond World Bosses", "Drov the Ruinator" },
