@@ -22,3 +22,9 @@ Module.db.auras = {
     409665, -- Contract: Loamm Niffen 2
     409664, -- Contract: Loamm Niffen 3
 }
+
+Module.db.gameTimeAuras = {
+    -- Events
+    423860, -- Knowledge of Timeways
+    423861, -- Mastery of Timeways
+}

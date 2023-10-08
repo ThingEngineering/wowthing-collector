@@ -27,6 +27,7 @@ function Module:UpdateAuras()
     local uptime = GetTime() -- Blizzard why
     
     local auras = {}
+    
     for _, spellId in ipairs(self.db.auras) do
         local auraInfo = C_UnitAuras_GetPlayerAuraBySpellID(spellId)
         if auraInfo ~= nil then
@@ -38,6 +39,22 @@ function Module:UpdateAuras()
             table.insert(auras, table.concat({
                 spellId,
                 expire,
+                auraInfo.applications,
+            }, ':'))
+        end
+    end
+
+    -- Auras that only tick down while online, save remaining duration instead
+    for _, spellId in ipairs(self.db.gameTimeAuras) do
+        local auraInfo = C_UnitAuras_GetPlayerAuraBySpellID(spellId)
+        if auraInfo ~= nil then
+            local duration = math.floor(auraInfo.expirationTime - uptime)
+
+            table.insert(auras, table.concat({
+                spellId,
+                0,
+                auraInfo.applications,
+                duration,
             }, ':'))
         end
     end
