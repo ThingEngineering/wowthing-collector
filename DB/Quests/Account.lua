@@ -12,6 +12,10 @@ Module.db.account = {
     63204, -- Ritual Prism of Fortune
     63523, -- Broker Traversal Enhancer
 
+    -- Dragonflight: Unlocks
+    67030, -- Adventure Mode unlock?
+    75658, -- Zaralek Cavern world quests
+
     -- Dragonflight: Drake Customization
     69161, -- Cliffside Wylderdrake: Armor
     69191, -- Cliffside Wylderdrake: Black Horns
