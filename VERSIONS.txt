@@ -1,3 +1,9 @@
+v10.1.7.3
+---------
+- Added world quest completion scanning.
+- Added Dungeon Deserter to aura scanning.
+- Added several Dragonflight account-wide unlock quests.
+
 v10.1.7.2
 ---------
 - Added Timeways event auras to aura tracking.
