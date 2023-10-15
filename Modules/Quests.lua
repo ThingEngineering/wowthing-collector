@@ -54,6 +54,13 @@ function Module:UpdateQuests()
             end
         end
     end
+
+    for questId, _ in pairs(WWTCSaved.worldQuestIds or {}) do
+        if C_QuestLog_IsQuestFlaggedCompleted(questId) then
+            table.insert(dailyQuests, questId)
+        end
+    end
+
     Addon.charData.dailyQuests = dailyQuests
 
     local otherQuests = {}
@@ -63,12 +70,6 @@ function Module:UpdateQuests()
         end
     end
     Addon.charData.otherQuests = otherQuests
-
-    -- for questID, _ in pairs(WWTCSaved.worldQuestIds) do
-    --     if C_QuestLog_IsQuestFlaggedCompleted(questID) then
-    --         Collector.charData.dailyQuests[#charData.dailyQuests + 1] = questID
-    --     end
-    -- end
 
     local progressQuests = {}
     for questKey, questData in pairs(self.db.progress) do
@@ -99,7 +100,7 @@ function Module:UpdateQuests()
                 prog.status = 2
                 break
 
-                -- Quest is in progress, check progress
+            -- Quest is in progress, check progress
             elseif C_QuestLog.IsOnQuest(questId) then
                 local objectives = C_QuestLog.GetQuestObjectives(questId)
                 if objectives ~= nil then
