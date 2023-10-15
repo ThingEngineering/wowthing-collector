@@ -2,6 +2,8 @@ local Module = LibStub('AceAddon-3.0'):GetAddon('WoWthing_Collector'):GetModule(
 
 
 Module.db.auras = {
+    71041, -- Dugeon Deserter
+    
     -- Dragonflight
     384317, -- Contract: Artisan's Consortium 1
     384320, -- Contract: Artisan's Consortium 2
