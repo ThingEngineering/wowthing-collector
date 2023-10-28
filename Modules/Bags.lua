@@ -29,6 +29,14 @@ function Module:OnEnable()
 
     self:RegisterBucketEvent({ 'BAG_UPDATE_DELAYED' }, 1, 'UpdateBags')
     self:RegisterBucketEvent({ 'ITEM_DATA_LOAD_RESULT' }, 2, 'UpdateRequested')
+    self:RegisterBucketEvent(
+        {
+            'ITEM_LOCKED',
+            'ITEM_UNLOCKED',
+        },
+        2,
+        'StartUpdateBagsTimer'
+    )
 end
 
 function Module:OnEnteringWorld()
@@ -58,14 +66,12 @@ end
 function Module:ITEM_LOCKED(_, bag, slot)
     if slot ~= nil then
         self.dirtyBags[bag] = true
-        self:StartUpdateBagsTimer()
     end
 end
 
 function Module:ITEM_UNLOCKED(_, bag, slot)
     if slot ~= nil then
         self.dirtyBags[bag] = true
-        self:StartUpdateBagsTimer()
     end
 end
 
