@@ -1,3 +1,11 @@
+v10.1.7.4
+---------
+- Updated quest scanning list.
+- Changed bag scanning to be nicer about chomping CPU, especially when
+  using the "sort my bags" button.
+- Changed transmog scanning to be nicer about chomping CPU.
+- Changed world quest scanning to be nicer about chomping CPU.
+
 v10.1.7.3
 ---------
 - Added world quest completion scanning.
