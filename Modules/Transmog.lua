@@ -13,6 +13,7 @@ function Module:OnEnable()
 
     self.transmogLocation = TransmogUtil.GetTransmogLocation('HEADSLOT', Enum.TransmogType.Appearance, Enum.TransmogModification.Main)
 
+    self.allAppearances = {}
     self.transmogSlots = {}
     for categoryID = 1, 29 do
         local slot = CollectionWardrobeUtil.GetSlotFromCategoryID(categoryID)
@@ -52,7 +53,7 @@ function Module:UpdateTransmog()
 
     Addon.charData.scanTimes["transmog"] = time()
     self.isScanning = true
-    self.scanQueue = {}
+
     self.transmog = {}
 
     -- Save current settings to reset later
@@ -71,64 +72,83 @@ function Module:UpdateTransmog()
     end
 
     -- Run this in a timer so that the filter changes take effect
-    C_Timer.After(0, function()
-        -- Manual checks
-        for _, manualTransmog in ipairs(self.db.manual) do
-            local have = C_TransmogCollection.PlayerHasTransmog(manualTransmog.itemId, manualTransmog.modifierId)
-            if have then
-                self.transmog[manualTransmog.appearanceId] = true
-
-                local sourceKey = string.format("%d_%d", manualTransmog.itemId, manualTransmog.modifierId)
-                WWTCSaved.transmogSourcesV2[sourceKey] = true
-            end
-        end
-
-        for categoryID, _ in pairs(self.transmogSlots) do
-            table.insert(self.scanQueue, categoryID)
-        end
-
-        self:ScanQueue()
-    end)
+    C_Timer.After(0, function() self:ScanInitialize() end)
 end
 
-function Module:ScanQueue()
-    local categoryID = tremove(self.scanQueue)
+function Module:ScanInitialize()
+    -- Manual checks for buggy appearances
+    for _, manualTransmog in ipairs(self.db.manual) do
+        local have = C_TransmogCollection.PlayerHasTransmog(manualTransmog.itemId, manualTransmog.modifierId)
+        if have then
+            self.transmog[manualTransmog.appearanceId] = true
 
-    local appearances = C_TransmogCollection_GetCategoryAppearances(categoryID, self.transmogLocation)
-    for _, appearance in pairs(appearances) do
-        if appearance.isCollected then
-            local visualId = appearance.visualID
-            self.transmog[visualId] = true
-
-            local sources = C_TransmogCollection_GetAppearanceSources(visualId, categoryID, self.transmogLocation)
-            for _, source in ipairs(sources) do
-                if source.isCollected then
-                    local sourceKey = string.format("%d_%d", source.itemID, source.itemModID)
-                    WWTCSaved.transmogSourcesV2[sourceKey] = true
-                end
-            end
+            local sourceKey = string.format("%d_%d", manualTransmog.itemId, manualTransmog.modifierId)
+            WWTCSaved.transmogSourcesV2[sourceKey] = true
         end
     end
 
-    -- Still categories to scan, schedule next
-    if #self.scanQueue > 0 then
-        C_Timer.After(0, function() self:ScanQueue() end)
-    -- All done
-    else
-        local keys = Addon:TableKeys(self.transmog)
-        table.sort(keys)
-        Addon.charData.transmog = table.concat(keys, ':')
+    -- Load all appearance categories into chunks of 100 appearances
+    self.allAppearances = { {} }
 
-        self.isScanning = false
-        self.transmog = {}
-
-        -- Reset settings
-        if self.isOpen == false then
-            C_TransmogCollection.SetCollectedShown(self.oldSettings.showCollected)
-            C_TransmogCollection.SetUncollectedShown(self.oldSettings.showUncollected)
-            for index = 1, 6 do
-                C_TransmogCollection.SetSourceTypeFilter(index, self.oldSettings.sourceTypes[index])
+    local workload = { }
+    for categoryID, _ in pairs(self.transmogSlots) do
+        table.insert(workload, function()
+            local appearances = C_TransmogCollection_GetCategoryAppearances(categoryID, self.transmogLocation)
+            local currentTable = self.allAppearances[#self.allAppearances]
+            for _, appearance in ipairs(appearances) do
+                table.insert(currentTable, appearance)
+                if #currentTable == 100 then
+                    currentTable = {}
+                    table.insert(self.allAppearances, currentTable)
+                end
             end
+        end)
+    end
+
+    Addon:BatchWork(workload, function() Module:ScanBegin() end)
+end
+
+function Module:ScanBegin()
+    local workload = {}
+    
+    -- Scan all appearances
+    for _, chunk in ipairs(self.allAppearances) do
+        table.insert(workload, function()
+            -- local startTime = debugprofilestop()
+            for _, appearance in ipairs(chunk) do
+                if appearance.isCollected then
+                    local visualId = appearance.visualID
+                    self.transmog[visualId] = true
+
+                    local sources = C_TransmogCollection_GetAppearanceSources(visualId)--, categoryID, self.transmogLocation)
+                    for _, source in ipairs(sources) do
+                        if source.isCollected then
+                            local sourceKey = string.format("%d_%d", source.itemID, source.itemModID)
+                            WWTCSaved.transmogSourcesV2[sourceKey] = true
+                        end
+                    end
+                end
+            end
+            -- print('chunk '..(debugprofilestop() - startTime))
+        end)
+    end
+
+    Addon:BatchWork(workload, function() Module:ScanEnd() end)
+end
+
+function Module:ScanEnd()
+    local keys = Addon:TableKeys(self.transmog)
+    Addon.charData.transmog = table.concat(keys, ':')
+
+    self.isScanning = false
+    self.transmog = {}
+
+    -- Reset settings
+    if self.isOpen == false then
+        C_TransmogCollection.SetCollectedShown(self.oldSettings.showCollected)
+        C_TransmogCollection.SetUncollectedShown(self.oldSettings.showUncollected)
+        for index = 1, 6 do
+            C_TransmogCollection.SetSourceTypeFilter(index, self.oldSettings.sourceTypes[index])
         end
     end
 end

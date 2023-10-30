@@ -202,7 +202,7 @@ function Addon:ParseItemLink(link, quality, count)
     local numModifiers = tonumber(parts[startModifiers])
     if numModifiers ~= nil then
         for i = startModifiers + 1, startModifiers + (numModifiers * 2), 2 do
-           item.modifiers[#item.modifiers + 1] = parts[i] .. '_' .. parts[i + 1]
+            item.modifiers[#item.modifiers + 1] = parts[i] .. '_' .. parts[i + 1]
         end
     end
 
@@ -225,4 +225,38 @@ function Addon:ParseItemLink(link, quality, count)
     self.parseItemLinkCache[link] = ret
 
     return table.concat({ count, ret }, ':')
+end
+
+-- https://www.wowinterface.com/forums/showthread.php?t=58916
+--  Budgets 50% of target or current FPS to perform a workload. 
+--  finished = start(workload, onFinish, onDelay)
+--  Arguments:
+--      workload        table       Stack (last in, first out) of functions to call.
+--      onFinish        function?   Optional callback when the table is empty.
+--      onDelay         function?   Optional callback each time work delays to the next frame.
+--  Returns:
+--      finished        boolean     True when finished without any delay; false otherwise.
+function Addon:BatchWork(workload, onFinish, onDelay)
+    local maxDuration = 500 / (tonumber(C_CVar.GetCVar("targetFPS")) or GetFrameRate())
+    local startTime = debugprofilestop()
+    local function continue()
+        local startTime = debugprofilestop()
+        local task = tremove(workload)
+        while (task) do
+            task()
+            if (debugprofilestop() - startTime > maxDuration) then
+                C_Timer.After(0, continue)
+                if (onDelay) then
+                    onDelay()
+                end
+                return false
+            end
+            task = tremove(workload)
+        end
+        if (onFinish) then
+            onFinish()
+        end
+        return true
+    end
+    return continue()
 end
