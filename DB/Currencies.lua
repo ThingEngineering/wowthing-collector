@@ -121,6 +121,19 @@ Module.db.currencies = {
     2533, -- Renascent Shadowflame
     2588, -- Riders of Azeroth Badge
     2594, -- Paracausal Flakes
+    2650, -- Emerald Dewdrop
+    2651, -- Seedbloom
+    2706, -- Whelpling's Dreaming Crests (capped?)
+    2707, -- Drake's Dreaming Crests (capped?)
+    2708, -- Wyrm's Dreaming Crests (capped?)
+    2709, -- Aspect's Dreaming Crests (capped?)
+    2715, -- Whelpling's Dreaming Crests (?)
+    2716, -- Drake's Dreaming Crests (?)
+    2717, -- Wyrm's Dreaming Crests (?)
+    2718, -- Aspect's Dreaming Crests (?)
+    2777, -- Dream Infusion
+    2796, -- Renascent Dream
+    2797, -- Trophy of Strife
 
     2264, -- Account HWM - Helm [DNT]
     2265, -- Account HWM - Neck [DNT]
@@ -144,6 +157,8 @@ Module.db.currencies = {
     2411, -- Wyrm Crest Fragment Tracker [DNT]
     2412, -- Aspect Crest Fragment Tracker [DNT]
     2413, -- 10.1 Professions - Personal Tracker - S2 Spark Drops (Hidden)
+    2774, -- 10.2 Professions - Personal Tracker - S3 Spark Drops (Hidden)
+    2780, -- Echoed Ephemera Tracker [DNT]
 
     -- The Waking Shores
     2042, 2044, 2154, -- Ruby Lifeshrine Loop
