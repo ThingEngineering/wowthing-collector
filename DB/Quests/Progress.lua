@@ -161,6 +161,7 @@ Module.db.progress = {
         72649, -- Sparks of Life: Thaldraszus
         74871, -- Sparks of Life: The Forbidden Reach
         75305, -- Sparks of Life: Zaralek Cavern
+        78097, -- Sparks of Life: Emerald Dream
     } },
     ["dfWorthyAllyDreamWardens"] = { "weekly", { 78444 } }, -- A Worthy Ally: Dream Wardens
     ["dfWorthyAllyLoammNiffen"] = { "weekly", { 75665 } }, -- A Worthy Ally: Loamm Niffen
