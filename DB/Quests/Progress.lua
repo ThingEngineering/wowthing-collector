@@ -162,7 +162,8 @@ Module.db.progress = {
         74871, -- Sparks of Life: The Forbidden Reach
         75305, -- Sparks of Life: Zaralek Cavern
     } },
-    ["dfWorthyAlly"] = { "weekly", { 75665 } }, -- A Worthy Ally: Loamm Niffen
+    ["dfWorthyAllyDreamWardens"] = { "weekly", { 78444 } }, -- A Worthy Ally: Dream Wardens
+    ["dfWorthyAllyLoammNiffen"] = { "weekly", { 75665 } }, -- A Worthy Ally: Loamm Niffen
     -- Dragonflight: Chores
     ["dfCommunityFeast"] = { "weekly", { 70893 } },
     ["dfDragonAllegiance"] = { "weekly", { 66419 } }, -- choose a dragon
