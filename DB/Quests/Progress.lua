@@ -124,6 +124,8 @@ Module.db.progress = {
         75861, -- Aiding the Accord: Suffusion Camp
         77254, -- Aiding the Accord: Time Rift
         77976, -- Aiding the Accord: Dreamsurge
+        78446, -- Aiding the Accord: Superbloom
+        78447, -- Aiding the Accord: Emerald Bounty
     } },
     ["dfCatchAileron"] = { "weekly", { 72826 } }, -- Catch and Release: Aileron Seamoth
     ["dfCatchCerulean"] = { "weekly", { 72825 } }, -- Catch and Release: Cerulean Spinefish
