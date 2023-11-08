@@ -53,4 +53,12 @@ Module.db.paragon = {
     2470, -- Death's Advance
     2472, -- The Archivists' Codex
     2478, -- The Enlightened
+
+    -- Dragon Isles
+    2503, -- Maruuk Centaur
+    2507, -- Dragonscale Expedition
+    2510, -- Valdrakken Accord
+    2511, -- Iskaara Tuskarr
+    2564, -- Loamm Niffen
+    2574, -- Dream Wardens
 }
