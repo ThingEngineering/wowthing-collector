@@ -1,3 +1,14 @@
+v10.2.0.1
+---------
+- Added Superbloom weekly quest.
+- Added new Aiding the Accord quests.
+- Added new reputation.
+- Added new currencies.
+- Added Dream Wardens contracts to auras.
+- Changed guild bank scanning to be nicer about chomping CPU.
+- Updated quest scanning list.
+- Updated TOC.
+
 v10.1.7.4
 ---------
 - Updated quest scanning list.
