@@ -1,3 +1,9 @@
+v10.2.0.2
+---------
+- Added new A Worthy Ally quest.
+- Added new Sparks of Life quest.
+- Fixed missing library reference.
+
 v10.2.0.1
 ---------
 - Added Superbloom weekly quest.
