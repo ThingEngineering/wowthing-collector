@@ -23,6 +23,9 @@ Module.db.auras = {
     409666, -- Contract: Loamm Niffen 1
     409665, -- Contract: Loamm Niffen 2
     409664, -- Contract: Loamm Niffen 3
+    425308, -- Contract: Dream Wardens 1
+    425306, -- Contract: Dream Wardens 2
+    425305, -- Contract: Dream Wardens 3
 }
 
 Module.db.gameTimeAuras = {
