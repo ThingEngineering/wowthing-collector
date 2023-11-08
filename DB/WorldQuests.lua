@@ -5,6 +5,7 @@ Module.db.expansions = {
     {
         id = 9,
         minimumLevel = 60,
+        -- UiMap
         zones = {
             2022, -- The Waking Shores
             2023, -- Ohn'ahran Plains
@@ -12,6 +13,7 @@ Module.db.expansions = {
             2025, -- Thaldraszus
             2133, -- Zaralek Cavern
             2151, -- The Forbidden Reach
+            2200, -- Emerald Dream
         },
     },
 }
