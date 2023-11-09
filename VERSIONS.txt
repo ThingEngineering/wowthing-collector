@@ -1,3 +1,9 @@
+v10.2.0.3
+---------
+- Added the Emerald Dream world quest unlock quest.
+- Renamed profession quest keys to match website update.
+- Updated quest scanning list.
+
 v10.2.0.2
 ---------
 - Added new A Worthy Ally quest.
