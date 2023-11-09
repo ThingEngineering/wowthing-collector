@@ -216,174 +216,196 @@ Module.db.progress = {
     ["dfSuperbloom"] = { "weekly", { 78319 } },
     -- Dragonflight: Professions
     ["dfProfessionMettle"] = { "weekly", { 70221 } },
-    -- Dragonflight: Crafting Professions
-    ["dfProfessionAlchemyCraft"] = { "weekly", {
-        70530, --
-        70531, --
-        70532, --
-        70533, --
-    } },
+    -- Dragonflight: Professions: Alchemy
     ["dfProfessionAlchemyDrop1"] = { "weekly", { 66373 } },
     ["dfProfessionAlchemyDrop2"] = { "weekly", { 66374 } },
     ["dfProfessionAlchemyDrop3"] = { "weekly", { 70504 } },
     ["dfProfessionAlchemyDrop4"] = { "weekly", { 70511 } },
     ["dfProfessionAlchemyDrop5"] = { "weekly", { 74935 } }, -- FR: Blazehoof Ashes
-    ["dfProfessionAlchemyGather"] = { "weekly", {
+    ["dfProfessionAlchemyProvide"] = { "weekly", {
+        70530, --
+        70531, --
+        70532, --
+        70533, --
+    } },
+    ["dfProfessionAlchemyTask"] = { "weekly", {
         66937, --
         66938, --
         66940, -- Elixir Experiment
         72427, -- Animated Infusion
         75363, -- [ZC] Deepflayer Dust
         75371, -- [ZC] Fascinating Fungi
+        77932, -- [ED] Warmth of Life
     } },
     ["dfProfessionAlchemyTreatise"] = { "weekly", { 74108 } },
-    ["dfProfessionBlacksmithingCraft"] = { "weekly", {
-        70211, -- Stomping Explorers
-        70233, -- Axe Shortage
-        70234, -- All This Hammering
-        70235, -- Repair Bill
-    } },
+    -- Dragonflight: Professions: Blacksmithing
     ["dfProfessionBlacksmithingDrop1"] = { "weekly", { 66381 } },
     ["dfProfessionBlacksmithingDrop2"] = { "weekly", { 66382 } },
     ["dfProfessionBlacksmithingDrop3"] = { "weekly", { 70512 } },
     ["dfProfessionBlacksmithingDrop4"] = { "weekly", { 70513 } },
     ["dfProfessionBlacksmithingDrop5"] = { "weekly", { 74931 } }, -- FR: Dense Seaforged Javelin
-    ["dfProfessionBlacksmithingGather"] = { "weekly", {
+    ["dfProfessionBlacksmithingProvide"] = { "weekly", {
+        70211, -- Stomping Explorers
+        70233, -- Axe Shortage
+        70234, -- All This Hammering
+        70235, -- Repair Bill
+    } },
+    ["dfProfessionBlacksmithingTask"] = { "weekly", {
         66517, -- A New Source of Weapons
         66897, -- Fuel for the Forge
         66941, -- Tremendous Tools
         72398, -- Rock and Stone
         75148, -- [ZC] Ancient Techniques
         75569, -- [ZC] Blacksmith, Black Dragon
+        77935, -- [ED] A-Sword-ed Needs
+        77936, -- [ED] A Warm Harvest
     } },
     ["dfProfessionBlacksmithingOrders"] = { "weekly", { 70589 } },
     ["dfProfessionBlacksmithingTreatise"] = { "weekly", { 74109 } },
-    ["dfProfessionEnchantingCraft"] = { "weekly", {
-        72155, --
-        72172, --
-        72173, --
-        72175, --
-    } },
+    -- Dragonflight: Professions: Enchanting
     ["dfProfessionEnchantingDrop1"] = { "weekly", { 66377 } },
     ["dfProfessionEnchantingDrop2"] = { "weekly", { 66378 } },
     ["dfProfessionEnchantingDrop3"] = { "weekly", { 70514 } },
     ["dfProfessionEnchantingDrop4"] = { "weekly", { 70515 } },
     ["dfProfessionEnchantingDrop5"] = { "weekly", { 74927 } }, -- FR: Speck of Arcane Awareness
-    ["dfProfessionEnchantingGather"] = { "weekly", {
+    ["dfProfessionEnchantingProvide"] = { "weekly", {
+        72155, --
+        72172, --
+        72173, --
+        72175, --
+    } },
+    ["dfProfessionEnchantingTask"] = { "weekly", {
         66884, --
         66900, --
         66935, --
         72423, --
         75150, -- [ZC] Incandescence
         75865, -- [ZC] Relic Rustler
+        77910, -- [ED] Enchanted Shrubbery
+        77937, -- [ED] Forbidden Sugar
     } },
     ["dfProfessionEnchantingTreatise"] = { "weekly", { 74110 } },
-    ["dfProfessionEngineeringCraft"] = { "weekly", {
-        70539, --
-        70540, --
-        70545, --
-        70557, --
-    } },
+    -- Dragonflight: Professions: Engineering
     ["dfProfessionEngineeringDrop1"] = { "weekly", { 66379 } },
     ["dfProfessionEngineeringDrop2"] = { "weekly", { 66380 } },
     ["dfProfessionEngineeringDrop3"] = { "weekly", { 70516 } },
     ["dfProfessionEngineeringDrop4"] = { "weekly", { 70517 } },
     ["dfProfessionEngineeringDrop5"] = { "weekly", { 74934 } }, -- FR: Everflowing Antifreeze
-    ["dfProfessionEngineeringGather"] = { "weekly", {
+    ["dfProfessionEngineeringOrders"] = { "weekly", { 70591 } },
+    ["dfProfessionEngineeringProvide"] = { "weekly", {
+        70539, --
+        70540, --
+        70545, --
+        70557, --
+    } },
+    ["dfProfessionEngineeringTask"] = { "weekly", {
         66890, --
         66891, -- Explosive Ash
         66942, -- Enemy Engineering
         72396, --
         75575, -- [ZC] Ballistae Bits
         75608, -- [ZC] Titan Trash or Titan Treasure?
+        77891, -- [ED] An Unlikely Engineer
+        77938, -- [ED] Fixing the Dream
     } },
-    ["dfProfessionEngineeringOrders"] = { "weekly", { 70591 } },
     ["dfProfessionEngineeringTreatise"] = { "weekly", { 74111 } },
-    ["dfProfessionInscriptionCraft"] = { "weekly", {
-        70558, --
-        70559, --
-        70560, --
-        70561, --
-    } },
+    -- Dragonflight: Professions: Inscription
     ["dfProfessionInscriptionDrop1"] = { "weekly", { 66375 } },
     ["dfProfessionInscriptionDrop2"] = { "weekly", { 66376 } },
     ["dfProfessionInscriptionDrop3"] = { "weekly", { 70518 } },
     ["dfProfessionInscriptionDrop4"] = { "weekly", { 70519 } },
     ["dfProfessionInscriptionDrop5"] = { "weekly", { 74932 } }, -- FR: Glimmering Rune of Arcantrix
-    ["dfProfessionInscriptionGather"] = { "weekly", {
+    ["dfProfessionInscriptionOrders"] = { "weekly", { 70592 } },
+    ["dfProfessionInscriptionProvide"] = { "weekly", {
+        70558, --
+        70559, --
+        70560, --
+        70561, --
+    } },
+    ["dfProfessionInscriptionTask"] = { "weekly", {
         66943, --
         66944, -- Peacock Pigments
         66945, --
         72438, -- Tarasek Intentions
         75149, -- [ZC] Obsidian Essays
         75573, -- [ZC] Proclamation Reclamation
+        77889, -- [ED] A Fiery Proposal
+        77914, -- [ED] Burning Runes
     } },
-    ["dfProfessionInscriptionOrders"] = { "weekly", { 70592 } },
     ["dfProfessionInscriptionTreatise"] = { "weekly", { 74105 } },
-    ["dfProfessionJewelcraftingCraft"] = { "weekly", {
-        70562, --
-        70563, --
-        70564, --
-        70565, --
-    } },
+    -- Dragonflight: Professions: Jewelcrafting
     ["dfProfessionJewelcraftingDrop1"] = { "weekly", { 66388 } },
     ["dfProfessionJewelcraftingDrop2"] = { "weekly", { 66389 } },
     ["dfProfessionJewelcraftingDrop3"] = { "weekly", { 70520 } },
     ["dfProfessionJewelcraftingDrop4"] = { "weekly", { 70521 } },
     ["dfProfessionJewelcraftingDrop5"] = { "weekly", { 74936 } }, -- FR: Conductive Ametrine Shard
-    ["dfProfessionJewelcraftingGather"] = { "weekly", {
+    ["dfProfessionJewelcraftingOrders"] = { "weekly", { 70593 } },
+    ["dfProfessionJewelcraftingProvide"] = { "weekly", {
+        70562, --
+        70563, --
+        70564, --
+        70565, --
+    } },
+    ["dfProfessionJewelcraftingTask"] = { "weekly", {
         66516, -- Mundane Gems, I Think Not!
         66949, --
         66950, --
         72428, --
         75362, -- [ZC] Cephalo-crystalization
         75602, -- [ZC] Chips off the Old Crystal Block
+        77892, -- [ED] Pearls of Great Value
+        77912, -- [ED] Unmodern Jewelry
     } },
-    ["dfProfessionJewelcraftingOrders"] = { "weekly", { 70593 } },
     ["dfProfessionJewelcraftingTreatise"] = { "weekly", { 74112 } },
-    ["dfProfessionLeatherworkingCraft"] = { "weekly", {
-        70567, -- When You Give Bakar a Bone
-        70568, -- Tipping the Scales
-        70569, -- For Trisket, a Task Kit
-        70571, -- Drums Here!
-    } },
+    -- Dragonflight: Professions: Leatherworking
     ["dfProfessionLeatherworkingDrop1"] = { "weekly", { 66384 } },
     ["dfProfessionLeatherworkingDrop2"] = { "weekly", { 66385 } },
     ["dfProfessionLeatherworkingDrop3"] = { "weekly", { 70522 } },
     ["dfProfessionLeatherworkingDrop4"] = { "weekly", { 70523 } },
     ["dfProfessionLeatherworkingDrop5"] = { "weekly", { 74928 } }, -- FR: Sylvern Alpha Claw
-    ["dfProfessionLeatherworkingGather"] = { "weekly", {
+    ["dfProfessionLeatherworkingProvide"] = { "weekly", {
+        70567, -- When You Give Bakar a Bone
+        70568, -- Tipping the Scales
+        70569, -- For Trisket, a Task Kit
+        70571, -- Drums Here!
+    } },
+    ["dfProfessionLeatherworkingTask"] = { "weekly", {
         66363, -- Basilisk Bucklers
         66364, -- To Fly a Kite
         66951, -- Population Control
         72407, -- Soaked in Success
         75354, -- [ZC] Mycelium Mastery
         75368, -- [ZC] Stones and Scales
+        77945, -- [ED] Boots on the Ground
+        77946, -- [ED] Fibrous Thread
     } },
     ["dfProfessionLeatherworkingOrders"] = { "weekly", { 70594 } },
     ["dfProfessionLeatherworkingTreatise"] = { "weekly", { 74113 } },
-    ["dfProfessionTailoringCraft"] = { "weekly", {
-        70572, --
-        70582, --
-        70586, -- Sew Many Cooks
-        70587, --
-    } },
+    -- Dragonflight: Professions: Tailoring
     ["dfProfessionTailoringDrop1"] = { "weekly", { 66386 } },
     ["dfProfessionTailoringDrop2"] = { "weekly", { 66387 } },
     ["dfProfessionTailoringDrop3"] = { "weekly", { 70524 } },
     ["dfProfessionTailoringDrop4"] = { "weekly", { 70525 } },
     ["dfProfessionTailoringDrop5"] = { "weekly", { 74929 } }, -- FR: Perfect Windfeather
-    ["dfProfessionTailoringGather"] = { "weekly", {
+    ["dfProfessionTailoringProvide"] = { "weekly", {
+        70572, --
+        70582, --
+        70586, -- Sew Many Cooks
+        70587, --
+    } },
+    ["dfProfessionTailoringTask"] = { "weekly", {
         66952, --
         66899, --
         66953, --
         72410, -- Pincers and Needles
         75407, -- [ZC] Silk Scavenging
         75600, -- [ZC] Silk's Silk
+        77947, -- [ED] Primalist Fashion
+        77949, -- [ED] Fashion Feathers
     } },
     ["dfProfessionTailoringOrders"] = { "weekly", { 70595 } },
     ["dfProfessionTailoringTreatise"] = { "weekly", { 74115 } },
-    -- Dragonflight: Gathering Professions
+    -- Dragonflight: Professions: Herbalism
     ["dfProfessionHerbalismDrop1"] = { "weekly", { 71857 } },
     ["dfProfessionHerbalismDrop2"] = { "weekly", { 71858 } },
     ["dfProfessionHerbalismDrop3"] = { "weekly", { 71859 } },
@@ -391,13 +413,14 @@ Module.db.progress = {
     ["dfProfessionHerbalismDrop5"] = { "weekly", { 71861 } },
     ["dfProfessionHerbalismDrop6"] = { "weekly", { 71864 } },
     ["dfProfessionHerbalismDrop7"] = { "weekly", { 74933 } }, -- FR: Undigested Hochenblume Petal
-    ["dfProfessionHerbalismGather"] = { "weekly", {
+    ["dfProfessionHerbalismProvide"] = { "weekly", {
         70613, -- Get Their Bark Before They Bite
         70614, -- Bubble Craze
         70615, -- The Case of the Missing Herbs
         70616, -- How Many??
     } },
     ["dfProfessionHerbalismTreatise"] = { "weekly", { 74107 } },
+    -- Dragonflight: Professions: Mining
     ["dfProfessionMiningDrop1"] = { "weekly", { 72160 } },
     ["dfProfessionMiningDrop2"] = { "weekly", { 72161 } },
     ["dfProfessionMiningDrop3"] = { "weekly", { 72162 } },
@@ -405,13 +428,14 @@ Module.db.progress = {
     ["dfProfessionMiningDrop5"] = { "weekly", { 72164 } },
     ["dfProfessionMiningDrop6"] = { "weekly", { 72165 } },
     ["dfProfessionMiningDrop7"] = { "weekly", { 74926 } }, -- FR: Impenetrable Elemental Core
-    ["dfProfessionMiningGather"] = { "weekly", {
+    ["dfProfessionMiningProvide"] = { "weekly", {
         70617, -- All Mine, Mine, Mine
         70618, -- The Call of the Forge
         72156, -- A Fiery Fight
         72157, -- The Weight of Earth
     } },
     ["dfProfessionMiningTreatise"] = { "weekly", { 74106 } },
+    -- Dragonflight: Professions: Skinning
     ["dfProfessionSkinningDrop1"] = { "weekly", { 70381 } },
     ["dfProfessionSkinningDrop2"] = { "weekly", { 70383 } },
     ["dfProfessionSkinningDrop3"] = { "weekly", { 70384 } },
@@ -419,20 +443,13 @@ Module.db.progress = {
     ["dfProfessionSkinningDrop5"] = { "weekly", { 70386 } },
     ["dfProfessionSkinningDrop6"] = { "weekly", { 70389 } },
     ["dfProfessionSkinningDrop7"] = { "weekly", { 74930 } }, -- FR: Kingly Sheepskin Pelt
-    ["dfProfessionSkinningGather"] = { "weekly", {
+    ["dfProfessionSkinningProvide"] = { "weekly", {
         70619, -- A Study of Leather
         70620, -- Scaling Up
         72158, -- A Dense Delivery
         72159, -- Scaling Down
     } },
     ["dfProfessionSkinningTreatise"] = { "weekly", { 74114 } },
-    -- Dragonflight: Secondary Professions
-    ["dfProfessionCookingCraft"] = { "weekly", {
-        75307, -- Road to Season City
-    } },
-    ["dfProfessionFishingCraft"] = { "weekly", {
-        75308, -- Scrybbil Engineering
-    }, },
     -- Dragonflight: Raids
     ["dfVault1Normal"] = { "once", { 71018 } },
     ["dfVault1Heroic"] = { "once", { 71019 } },
