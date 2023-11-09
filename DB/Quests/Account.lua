@@ -15,6 +15,7 @@ Module.db.account = {
     -- Dragonflight: Unlocks
     67030, -- Adventure Mode unlock?
     75658, -- Zaralek Cavern world quests
+    77572, -- Emerald Dream world quests
 
     -- Dragonflight: Drake Customization
     69161, -- Cliffside Wylderdrake: Armor
