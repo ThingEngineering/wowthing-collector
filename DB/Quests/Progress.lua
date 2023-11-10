@@ -163,7 +163,6 @@ Module.db.progress = {
         75305, -- Sparks of Life: Zaralek Cavern
         78097, -- Sparks of Life: Emerald Dream
     } },
-    ["dfWorthyAllyDreamWardens"] = { "weekly", { 78444 } }, -- A Worthy Ally: Dream Wardens
     ["dfWorthyAllyLoammNiffen"] = { "weekly", { 75665 } }, -- A Worthy Ally: Loamm Niffen
     -- Dragonflight: Chores
     ["dfCommunityFeast"] = { "weekly", { 70893 } },
@@ -213,7 +212,9 @@ Module.db.progress = {
     -- Dragonflight: 10.1.7
     ["dfDreamsurge"] = { "weekly", { 77251 } },
     -- Dragonflight: 10.2.0
-    ["dfSuperbloom"] = { "weekly", { 78319 } },
+    ["dfBloomingDreamseeds"] = { "weekly", { 78821 } }, -- Blooming Dreamseeds
+    ["dfSuperbloom"] = { "weekly", { 78319 } }, -- The Superbloom
+    ["dfWorthyAllyDreamWardens"] = { "weekly", { 78444 } }, -- A Worthy Ally: Dream Wardens
     -- Dragonflight: Professions
     ["dfProfessionMettle"] = { "weekly", { 70221 } },
     -- Dragonflight: Professions: Alchemy
