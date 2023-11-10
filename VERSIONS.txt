@@ -1,3 +1,7 @@
+v10.2.0.4
+---------
+- Added Blooming Dreadseeds weekly quest.
+
 v10.2.0.3
 ---------
 - Added the Emerald Dream world quest unlock quest.
