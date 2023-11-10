@@ -95,5 +95,8 @@ Module.db.worldBosses = {
     [69928] = { 109001, "Dragonflight World Bosses", "Liskanoth, The Futurebane" },
     [69929] = { 109001, "Dragonflight World Bosses", "Strunraan, The Sky's Misery" },
     [69930] = { 109001, "Dragonflight World Bosses", "Basrikron, The Shale Wing" },
+
     [74892] = { 109002, "Zaqali Elders", "The Zaqali Elders" },
+
+    [76367] = { 109003, "Aurostor", "Aurostor, The Hibernator" },
 }
