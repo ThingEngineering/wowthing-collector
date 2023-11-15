@@ -1,3 +1,7 @@
+v10.2.0.5
+---------
+- Added Shipments of Goods weekly quest(s?).
+
 v10.2.0.4
 ---------
 - Added Blooming Dreadseeds weekly quest.
