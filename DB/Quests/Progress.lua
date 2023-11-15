@@ -213,6 +213,8 @@ Module.db.progress = {
     ["dfDreamsurge"] = { "weekly", { 77251 } },
     -- Dragonflight: 10.2.0
     ["dfBloomingDreamseeds"] = { "weekly", { 78821 } }, -- Blooming Dreamseeds
+    ["dfGoodsShipments1"] = { "weekly", { 78427 } }, -- Great Crates!
+    ["dfGoodsShipments5"] = { "weekly", { 78428 } }, -- Crate of the Art
     ["dfSuperbloom"] = { "weekly", { 78319 } }, -- The Superbloom
     ["dfWorthyAllyDreamWardens"] = { "weekly", { 78444 } }, -- A Worthy Ally: Dream Wardens
     -- Dragonflight: Professions
