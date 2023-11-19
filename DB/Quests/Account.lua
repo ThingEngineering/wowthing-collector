@@ -116,6 +116,30 @@ Module.db.account = {
     78409, -- Flourishing Whimsydrake: Sunrise Scales
     78410, -- Flourishing Whimsydrake: Sunset Scales
     78404, -- Flourishing Whimsydrake: Underbite Snout
+    77131, -- Grotto Netherwing Drake: Armor
+    77150, -- Grotto Netherwing Drake: Barbed Tail
+    77147, -- Grotto Netherwing Drake: Black Scales
+    77133, -- Grotto Netherwing Drake: Chin Spike
+    77132, -- Grotto Netherwing Drake: Chin Tendrils
+    77130, -- Grotto Netherwing Drake: Cluster Spiked Back
+    77136, -- Grotto Netherwing Drake: Cluster Spiked Crest
+    77149, -- Grotto Netherwing Drake: Double Finned Tail
+    77145, -- Grotto Netherwing Drake: Finned Jaw
+    77135, -- Grotto Netherwing Drake: Head Spike
+    77141, -- Grotto Netherwing Drake: Helm
+    77143, -- Grotto Netherwing Drake: Long Horns
+    77140, -- Grotto Netherwing Drake: Outcast Pattern
+    77128, -- Grotto Netherwing Drake: Purple and Silver Armor
+    77142, -- Grotto Netherwing Drake: Short Horns
+    77134, -- Grotto Netherwing Drake: Single Horned Crest
+    77129, -- Grotto Netherwing Drake: Spiked Back
+    77144, -- Grotto Netherwing Drake: Spiked Jaw
+    77146, -- Grotto Netherwing Drake: Teal Scales
+    77138, -- Grotto Netherwing Drake: Tempestuous Pattern
+    77137, -- Grotto Netherwing Drake: Triple Spiked Crest
+    78878, -- Grotto Netherwing Drake: Violet Scales
+    77139, -- Grotto Netherwing Drake: Volatile Pattern
+    77148, -- Grotto Netherwing Drake: Yellow Scales
     69300, -- Highland Drake: Armor
     69318, -- Highland Drake: Black Hair
     69343, -- Highland Drake: Black Scales
