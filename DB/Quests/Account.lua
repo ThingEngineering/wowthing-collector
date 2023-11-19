@@ -80,7 +80,18 @@ Module.db.account = {
     69189, -- Cliffside Wylderdrake: White Hair
     69214, -- Cliffside Wylderdrake: White Scales
     69207, -- Cliffside Wylderdrake: Wide Stripes Pattern
-    69210, -- Cliffside Wylderdrake: Red Scales
+    78400, -- Flourishing Whimsydrake: Back Fins
+    78401, -- Flourishing Whimsydrake: Body Armor
+    78399, -- Flourishing Whimsydrake: Gold and Pink Armor
+    78402, -- Flourishing Whimsydrake: Helmet
+    78406, -- Flourishing Whimsydrake: Horns
+    78405, -- Flourishing Whimsydrake: Long Snout
+    78407, -- Flourishing Whimsydrake: Neck Fins
+    78408, -- Flourishing Whimsydrake: Night Scales
+    78403, -- Flourishing Whimsydrake: Ridged Brow
+    78409, -- Flourishing Whimsydrake: Sunrise Scales
+    78410, -- Flourishing Whimsydrake: Sunset Scales
+    78404, -- Flourishing Whimsydrake: Underbite Snout
     69300, -- Highland Drake: Armor
     69318, -- Highland Drake: Black Hair
     69343, -- Highland Drake: Black Scales
