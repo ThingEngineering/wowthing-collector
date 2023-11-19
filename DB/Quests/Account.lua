@@ -17,6 +17,30 @@ Module.db.account = {
     75658, -- Zaralek Cavern world quests
     77572, -- Emerald Dream world quests
 
+    -- Dragonflight: Class Customization
+    78518, -- Ashen Bristlebruin
+    78523, -- Auric Dreamstag
+    78514, -- Auroral Dreamtalon
+    78479, -- Azure Somnowl
+    78527, -- Blazing Somnowl
+    78512, -- Boreal Dreamtalon
+    78481, -- Dark Umbraclaw
+    78513, -- Dreamtalon Matriarch
+    78507, -- Evergreen Dreamsaber
+    78525, -- Fire Moonkin
+    78528, -- Hibernating Runebear
+    78503, -- Keen-Eyed Dreamsaber
+    78519, -- Loamy Umbraclaw
+    78522, -- Lush Dreamstag
+    78521, -- Moon-Blessed Dreamsaber
+    78516, -- Prismatic Whiskerfish
+    78511, -- Sable Dreamtalon
+    78448, -- Slumbering Somnowl
+    78524, -- Smoldering Dreamstag
+    78520, -- Snowy Umbraclaw
+    78515, -- Thriving Dreamtalon
+    78517, -- Verdant Bristlebruin
+
     -- Dragonflight: Drake Customization
     69161, -- Cliffside Wylderdrake: Armor
     69191, -- Cliffside Wylderdrake: Black Horns
