@@ -1,3 +1,8 @@
+v10.2.0.8
+---------
+- Added support for Heroic and Mythic 0 dungeon vaults.
+- Updated quest scanning list.
+
 v10.2.0.7
 ---------
 - Added Emerald Dream Druid customization quest IDs.
