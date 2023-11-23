@@ -35,13 +35,14 @@ function Module:UpdateVault()
     local activities = C_WeeklyRewards.GetActivities()
     for i = 1, #activities do
         -- [1]={
-        --      threshold=10,
         --      type=1,
         --      index=3,
+        --      activityTierID=0,
         --      progress=8,
-        --      level=0,
         --      rewards={
         --      },
+        --      threshold=10,
+        --      level=0,
         --      id=34
         -- },
         local activity = activities[i]
@@ -52,6 +53,7 @@ function Module:UpdateVault()
                 level = activity.level,
                 progress = activity.progress,
                 threshold = activity.threshold,
+                tier = activity.activityTierID or 0,
             }
         end
     end
