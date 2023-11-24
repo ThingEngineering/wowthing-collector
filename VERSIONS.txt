@@ -1,3 +1,7 @@
+v10.2.0.9
+---------
+- Updated dragonriding time currencies.
+
 v10.2.0.8
 ---------
 - Added support for Heroic and Mythic 0 dungeon vaults.
