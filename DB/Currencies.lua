@@ -161,61 +161,61 @@ Module.db.currencies = {
     2780, -- Echoed Ephemera Tracker [DNT]
 
     -- The Waking Shores
-    2042, 2044, 2154, -- Ruby Lifeshrine Loop
-    2046, 2047, 2181, -- Flashfrost Flyover
-    2048, 2049, 2176, -- Wild Preserve Slalom
-    2050, 2051, 2182, -- Wild Preserve Circuit
-    2054, 2055, 2178, -- Apex Canopy River Run
-    2052, 2053, 2177, -- Emberflow Flight
-    2056, 2057, 2179, -- Uktulut Coaster
-    2058, 2059, 2180, -- Wingrest Roundabout
+    2042, 2044, 2154, 2421, 2422, -- Ruby Lifeshrine Loop
+    2048, 2049, 2176, 2423, 2424, -- Wild Preserve Slalom
+    2052, 2053, 2177, 2425, 2426, -- Emberflow Flight
+    2054, 2055, 2178, 2427, 2428, -- Apex Canopy River Run
+    2056, 2057, 2179, 2429, 2430, -- Uktulut Coaster
+    2058, 2059, 2180, 2431, 2432, -- Wingrest Roundabout
+    2046, 2047, 2181, 2433, 2434, -- Flashfrost Flyover
+    2050, 2051, 2182, 2435, 2436, -- Wild Preserve Circuit
 
     -- Ohn'ahran Plains
-    2060, 2061, 2183, -- Sundapple Copse Circuit
-    2062, 2063, 2184, -- Fen Flythrough
-    2064, 2065, 2185, -- Ravine River Run
-    2066, 2067, 2186, -- Emerald Garden Ascent
-    2069, -- Maruukai Dash
-    2070, -- Mirror of the Sky Dash
-    2119, 2120, 2187, -- River Rapids Route
+    2060, 2061, 2183, 2437, 2439, -- Sundapple Copse Circuit
+    2062, 2063, 2184, 2440, 2441, -- Fen Flythrough
+    2064, 2065, 2185, 2442, 2443, -- Ravine River Run
+    2066, 2067, 2186, 2444, 2445, -- Emerald Garden Ascent
+    2069,             2446,       -- Maruukai Dash
+    2070,             2447,       -- Mirror of the Sky Dash
+    2119, 2120, 2187, 2448, 2449, -- River Rapids Route
 
     -- Azure Span
-    2074, 2075, 2188, -- The Azure Span Sprint
-    2076, 2077, 2189, -- The Azure Span Slalom
-    2078, 2079, 2190, -- The Vakthros Ascent
-    2083, 2084, 2191, -- Iskaara Tour
-    2085, 2086, 2192, -- Frostland Flyover
-    2089, 2090, 2193, -- Archive Ambit
+    2074, 2075, 2188, 2450, 2451, -- The Azure Span Sprint
+    2076, 2077, 2189, 2452, 2453, -- The Azure Span Slalom
+    2078, 2079, 2190, 2454, 2455, -- The Vakthros Ascent
+    2083, 2084, 2191, 2456, 2457, -- Iskaara Tour
+    2085, 2086, 2192, 2458, 2459, -- Frostland Flyover
+    2089, 2090, 2193, 2460, 2461, -- Archive Ambit
 
     -- Thaldraszus
-    2080, 2081, 2194, -- The Flowing Forest Flight
-    2092, 2093, 2195, -- Tyrhold Trial
-    2096, 2097, 2196, -- Cliffside Circuit
-    2098, 2099, 2197, -- Academy Ascent
-    2101, 2102, 2198, -- Garden Gallivant
-    2103, 2104, 2199, -- Caverns Criss-Cross
+    2080, 2081, 2194, 2462, 2463, -- The Flowing Forest Flight
+    2092, 2093, 2195, 2464, 2465, -- Tyrhold Trial
+    2096, 2097, 2196, 2466, 2467, -- Cliffside Circuit
+    2098, 2099, 2197, 2468, 2469, -- Academy Ascent
+    2101, 2102, 2198, 2470, 2471, -- Garden Gallivant
+    2103, 2104, 2199, 2472, 2473, -- Caverns Criss-Cross
 
     -- Forbidden Reach
-    2201, 2207, 2213, -- Stormsunder Crate Circuit
-    2202, 2208, 2214, -- Morqut Ascent
-    2203, 2209, 2215, -- Aerie Chasm Cruise
-    2204, 2210, 2216, -- Southern Reach Route
-    2205, 2211, 2217, -- Caldera Coaster
-    2206, 2212, 2218, -- Forbidden Reach Rush
+    2201, 2207, 2213, 2474, 2475, -- Stormsunder Crate Circuit
+    2202, 2208, 2214, 2476, 2477, -- Morqut Ascent
+    2203, 2209, 2215, 2478, 2479, -- Aerie Chasm Cruise
+    2204, 2210, 2216, 2480, 2481, -- Southern Reach Route
+    2205, 2211, 2217, 2482, 2483, -- Caldera Coaster
+    2206, 2212, 2218, 2484, 2485, -- Forbidden Reach Rush
 
     -- Zaralek Cavern
-    2246, 2252, 2258, -- Crystal Circuit
-    2247, 2253, 2259, -- Caldera Cruise
-    2248, 2254, 2260, -- Brimstone Scramble
-    2249, 2255, 2261, -- Shimmering Slalom
-    2250, 2256, 2262, -- Loamm Roamm
-    2251, 2257, 2263, -- Sulfur Sprint
+    2246, 2252, 2258, 2486, 2487, -- Crystal Circuit
+    2247, 2253, 2259, 2488, 2489, -- Caldera Cruise
+    2248, 2254, 2260, 2490, 2491, -- Brimstone Scramble
+    2249, 2255, 2261, 2492, 2493, -- Shimmering Slalom
+    2250, 2256, 2262, 2494, 2495, -- Loamm Roamm
+    2251, 2257, 2263, 2496, 2497, -- Sulfur Sprint
 
     -- Emerald Dream
-    2676, 2682, 2688, 2694, 2695, -- 01
-    2677, 2683, 2689, 2696, 2697, -- 02
-    2678, 2684, 2690, 2698, 2699, -- 03
-    2679, 2685, 2691, 2700, 2701, -- 04
-    2680, 2686, 2692, 2702, 2703, -- 05
-    2681, 2687, 2693, 2704, 2705, -- 06
+    2676, 2682, 2688, 2694, 2695, -- Ysera Invitational
+    2677, 2683, 2689, 2696, 2697, -- Smoldering Sprint
+    2678, 2684, 2690, 2698, 2699, -- Viridescent Venture
+    2679, 2685, 2691, 2700, 2701, -- Shoreline Switchback
+    2680, 2686, 2692, 2702, 2703, -- Canopy Concours
+    2681, 2687, 2693, 2704, 2705, -- Emerald Amble
 }
