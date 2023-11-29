@@ -83,6 +83,8 @@ function Module:UpdateQuests()
             prog.reset = weeklyReset
         elseif questData[1] == 'biweekly' then
             prog.reset = biweeklyReset
+        elseif questData[1] == 'daily' then
+            prog.reset = dailyReset
         end
 
         for _, questId in ipairs(questData[2]) do
