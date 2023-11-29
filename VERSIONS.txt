@@ -1,3 +1,7 @@
+v10.2.0.10
+----------
+- Added Skinning: Magma Cobra tracking quest.
+
 v10.2.0.9
 ---------
 - Updated dragonriding time currencies.
