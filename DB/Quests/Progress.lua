@@ -453,6 +453,7 @@ Module.db.progress = {
         72159, -- Scaling Down
     } },
     ["dfProfessionSkinningTreatise"] = { "weekly", { 74114 } },
+    ["dfProfessionSkinningMagmaCobra"] = { "daily", { 74235 } },
     -- Dragonflight: Raids
     ["dfVault1Normal"] = { "once", { 71018 } },
     ["dfVault1Heroic"] = { "once", { 71019 } },
