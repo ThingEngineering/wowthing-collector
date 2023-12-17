@@ -1,3 +1,9 @@
+v10.2.0.11
+----------
+- Added Battleground Blitz weekly quests (Gotta Go Fast/Gotta Go Faster).
+- Added Skinning: Verdant Gladewarden tracking quest.
+- Added a missing Alchemy weekly quest.
+
 v10.2.0.10
 ----------
 - Added Skinning: Magma Cobra tracking quest.
