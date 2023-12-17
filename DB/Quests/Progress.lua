@@ -28,6 +28,8 @@ Module.db.progress = {
     -- Weekly PvP
     ["pvpArenas"] = { "weekly", { 72169 } }, -- Proving in Arenas (Rated Arenas)
     ["pvpBattle"] = { "weekly", { 72166 } }, -- Proving in Battle (Random Battlegrounds)
+    ["pvpBlitz1"] = { "weekly", { 78128 } }, -- Gotta Go Fast
+    ["pvpBlitz3"] = { "weekly", { 78129 } }, -- Gotta Go Faster
     ["pvpBrawl"] = { "weekly", { 47148 } }, -- Something Different (Brawl)
     ["pvpOverwhelmingOdds"] = { "weekly", {
         71025, -- Against Overwhelming Odds [H]
