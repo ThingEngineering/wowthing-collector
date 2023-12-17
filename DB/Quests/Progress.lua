@@ -240,6 +240,7 @@ Module.db.progress = {
         72427, -- Animated Infusion
         75363, -- [ZC] Deepflayer Dust
         75371, -- [ZC] Fascinating Fungi
+        77918, -- [ED] Bubbling Discoveries
         77932, -- [ED] Warmth of Life
     } },
     ["dfProfessionAlchemyTreatise"] = { "weekly", { 74108 } },
