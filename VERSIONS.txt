@@ -1,3 +1,7 @@
+v10.2.0.12
+----------
+- Added You're a Mean One... daily quest.
+
 v10.2.0.11
 ----------
 - Added Battleground Blitz weekly quests (Gotta Go Fast/Gotta Go Faster).
