@@ -1,3 +1,8 @@
+v10.2.0.13
+----------
+- Added Horde version of You're a Mean One... daily quest.
+- Added Merry Supplies daily quests.
+
 v10.2.0.12
 ----------
 - Added You're a Mean One... daily quest.
