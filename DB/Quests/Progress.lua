@@ -3,7 +3,10 @@ local Module = LibStub('AceAddon-3.0'):GetAddon('WoWthing_Collector'):GetModule(
 
 Module.db.progress = {
     -- Holidays
-    ["meanOne"] = { "daily", { 7043 } }, -- You're a Mean One...
+    ["meanOne"] = { "daily", {
+        6983, -- [H] You're a Mean One...
+        7043, -- [A] You're a Mean One...
+    } },
 
     -- Weekly Holidays
     ["holidayArena"] = { "weekly", { 72720 } }, -- "The Arena Calls", Arena Skirmishes
