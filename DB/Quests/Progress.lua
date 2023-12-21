@@ -7,6 +7,10 @@ Module.db.progress = {
         6983, -- [H] You're a Mean One...
         7043, -- [A] You're a Mean One...
     } },
+    ["merryChildren"] = { "daily", { 39648 } }, -- Where Are the Children?
+    ["merryGrumplings"] = { "daily", { 39649 } }, -- Menacing Grumplings
+    ["merryGrumpus"] = { "daily", { 39651 } }, -- Grumpus
+    ["merryPresents"] = { "daily", { 39668 } }, -- What Horrible Presents!
 
     -- Weekly Holidays
     ["holidayArena"] = { "weekly", { 72720 } }, -- "The Arena Calls", Arena Skirmishes
