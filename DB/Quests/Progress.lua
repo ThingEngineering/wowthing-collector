@@ -2,6 +2,22 @@ local Module = LibStub('AceAddon-3.0'):GetAddon('WoWthing_Collector'):GetModule(
 
 
 Module.db.progress = {
+    -- Darkmoon Faire
+    ["dmfAlchemy"] = { "special", { 29506 } }, -- A Fizzy Fusion
+    ["dmfBlacksmithing"] = { "special", { 29508 } }, -- Baby Needs Two Pair of Shoes
+    ["dmfEnchanting"] = { "special", { 29510 } }, -- Putting Trash to Good Use
+    ["dmfEngineering"] = { "special", { 29511 } }, -- Talkin' Tonks
+    ["dmfHerbalism"] = { "special", { 29514 } }, -- Herbs for Healing
+    ["dmfInscription"] = { "special", { 29515 } }, -- Writing the Future
+    ["dmfJewelcrafting"] = { "special", { 29516 } }, -- Keeping the Faire Sparkling
+    ["dmfLeatherworking"] = { "special", { 29517 } }, -- Eyes on the Prizes
+    ["dmfMining"] = { "special", { 29518 } }, -- Rearm, Reuse, Recycle
+    ["dmfSkinning"] = { "special", { 29519 } }, -- Tan My Hide
+    ["dmfTailoring"] = { "special", { 29520 } }, -- Banners, Banners Everywhere!
+    ["dmfArchaeology"] = { "special", { 29507 } }, -- Fun for the Little Ones
+    ["dmfCooking"] = { "special", { 29509 } }, -- Putting the Crunch in the Frog
+    ["dmfFishing"] = { "special", { 29513 } }, -- Spoilin' for Salty Sea Dogs
+
     -- Holidays
     ["meanOne"] = { "daily", {
         6983, -- [H] You're a Mean One...
