@@ -1,3 +1,7 @@
+v10.2.0.14
+----------
+- Added Darkmoon Faire profession quests.
+
 v10.2.0.13
 ----------
 - Added Horde version of You're a Mean One... daily quest.
