@@ -1,3 +1,8 @@
+v10.2.5.1
+---------
+- Added The Big Dig: Traitor's Quest weekly quest.
+- Updated TOC for 10.2.5.
+
 v10.2.0.14
 ----------
 - Added Darkmoon Faire profession quests.
