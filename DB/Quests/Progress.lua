@@ -245,6 +245,8 @@ Module.db.progress = {
     ["dfGoodsShipments5"] = { "weekly", { 78428 } }, -- Crate of the Art
     ["dfSuperbloom"] = { "weekly", { 78319 } }, -- The Superbloom
     ["dfWorthyAllyDreamWardens"] = { "weekly", { 78444 } }, -- A Worthy Ally: Dream Wardens
+    -- Dragonflight: 10.2.5
+    ["dfBigDig"] = { "weekly", { 79226 } }, -- The Big Dig: Traitor's Rest
     -- Dragonflight: Professions
     ["dfProfessionMettle"] = { "weekly", { 70221 } },
     -- Dragonflight: Professions: Alchemy
