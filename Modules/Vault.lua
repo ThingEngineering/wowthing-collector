@@ -12,7 +12,7 @@ function Module:OnEnable()
             'UPDATE_INSTANCE_INFO',
             'WEEKLY_REWARDS_UPDATE',
         },
-        1,
+        2,
         'UpdateVault'
     )
 end
@@ -58,13 +58,12 @@ function Module:UpdateVault()
         end
     end
 
-    -- TODO rescan later?
-    -- if vault[1] and vault[1][3] and vault[1][3].progress > 0 then
-    --     local runHistory = C_MythicPlus.GetRunHistory(false, true)
-    --     if #runHistory < vault[1][3].progress then
-    --         dirtyMythicPlus = true
-    --     end
-    -- end
+    if vault[1] and vault[1][3] and vault[1][3].progress > 0 then
+        local runHistory = C_MythicPlus.GetRunHistory(false, true)
+        if #runHistory < vault[1][3].progress then
+            C_Timer.After(2, function() C_WeeklyRewards.OnUIInteract() end)
+        end
+    end
 
     Addon.charData.vault = vault
     Addon.charData.vaultHasRewards = C_WeeklyRewards.HasAvailableRewards()

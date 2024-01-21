@@ -7,6 +7,8 @@ function Module:OnEnable()
     Addon.charData.mythicPlusV2.seasons = Addon.charData.mythicPlusV2.seasons or {}
     Addon.charData.mythicPlusV2.weeks = Addon.charData.mythicPlusV2.weeks or {}
 
+    self:RegisterEvent('WEEKLY_REWARDS_UPDATE', 'UpdateMythicPlus')
+
     self:RegisterBucketEvent(
         {
             'BAG_UPDATE_DELAYED',
@@ -24,8 +26,8 @@ function Module:OnEnable()
             'CHALLENGE_MODE_MAPS_UPDATE',
             'CHALLENGE_MODE_MEMBER_INFO_UPDATED',
         },
-        5,
-        'UpdateMythicPlus'
+        1,
+        'UpdateMythicPlusData'
     )
 end
 
@@ -37,6 +39,11 @@ end
 function Module:UpdateKeystone()
     Addon.charData.keystoneInstance = C_MythicPlus.GetOwnedKeystoneChallengeMapID()
     Addon.charData.keystoneLevel = C_MythicPlus.GetOwnedKeystoneLevel()
+end
+
+function Module:UpdateMythicPlusData()
+    C_MythicPlus.RequestMapInfo()
+    C_WeeklyRewards.OnUIInteract()
 end
 
 -- Scan mythic plus dungeons
@@ -87,7 +94,16 @@ function Module:UpdateMythicPlus()
     Addon.charData.mythicDungeons = mythicDungeons
     Addon.charData.mythicPlusV2.weeks[weeklyReset] = week
 
+    if not rescan then
+        local vault = C_WeeklyRewards.GetActivities(Enum.WeeklyRewardChestThresholdType.Activities)
+        for _, tier in ipairs(vault or {}) do
+            if tier.index == 3 and tier.progress < tier.threshold and tier.progress ~= #week then
+                rescan = true
+            end
+        end
+    end
+
     if rescan then
-        C_Timer.After(5, function() self:UpdateMythicPlus() end)
+        C_Timer.After(2, function() self:UpdateMythicPlusData() end)
     end
 end
