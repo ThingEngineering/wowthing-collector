@@ -123,6 +123,7 @@ Module.db.currencies = {
     2594, -- Paracausal Flakes
     2650, -- Emerald Dewdrop
     2651, -- Seedbloom
+    2657, -- Mysterious Fragment
     2706, -- Whelpling's Dreaming Crests (capped?)
     2707, -- Drake's Dreaming Crests (capped?)
     2708, -- Wyrm's Dreaming Crests (capped?)
