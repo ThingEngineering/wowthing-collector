@@ -1,3 +1,9 @@
+v10.2.5.2
+---------
+- Add Mysterious Fragment currency ID.
+- Improve robustness of M+/Vault scanning.
+- Fix "table expected, got nil" error when scanning transmog.
+
 v10.2.5.1
 ---------
 - Added The Big Dig: Traitor's Quest weekly quest.
