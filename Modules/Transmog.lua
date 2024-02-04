@@ -120,8 +120,8 @@ function Module:ScanBegin()
                     local visualId = appearance.visualID
                     self.transmog[visualId] = true
 
-                    local sources = C_TransmogCollection_GetAppearanceSources(visualId)--, categoryID, self.transmogLocation)
-                    for _, source in ipairs(sources) do
+                    local sources = C_TransmogCollection_GetAppearanceSources(visualId) --, categoryID, self.transmogLocation)
+                    for _, source in ipairs(sources or {}) do
                         if source.isCollected then
                             local sourceKey = string.format("%d_%d", source.itemID, source.itemModID)
                             WWTCSaved.transmogSourcesV2[sourceKey] = true
