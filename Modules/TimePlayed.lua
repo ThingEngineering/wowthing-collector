@@ -7,7 +7,9 @@ do
     local originalDisplayTimePlayed = _G.ChatFrame_DisplayTimePlayed
     _G.ChatFrame_DisplayTimePlayed = function(...)
         if Module.requestingPlayedTime then
-            Module.requestingPlayedTime = false
+            C_Timer.After(0.2, function()
+                Module.requestingPlayedTime = false
+            end)
             return
         end
         return originalDisplayTimePlayed(...)
