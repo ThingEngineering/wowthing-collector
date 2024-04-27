@@ -159,9 +159,6 @@ Module.db.progress = {
         77976, -- Aiding the Accord: Dreamsurge
         78446, -- Aiding the Accord: Superbloom
         78447, -- Aiding the Accord: Emerald Bounty
-        80385, -- Last Hurrah: Dragon Isles
-        80386, -- Last Hurrah: Zaralek Caverns and Time Rifts
-        80388, -- Last Hurrah: Emerald Dream
     } },
     ["dfCatchAileron"] = { "weekly", { 72826 } }, -- Catch and Release: Aileron Seamoth
     ["dfCatchCerulean"] = { "weekly", { 72825 } }, -- Catch and Release: Cerulean Spinefish
@@ -190,6 +187,11 @@ Module.db.progress = {
         66867, -- Relic Recovery: Algeth'ar Academy
     } },
     ["dfFighting"] = { "weekly", { 76122 } }, -- Fighting is its Own Reward
+    ["dfLastHurrah"] = { "weekly", {
+        80385, -- Last Hurrah: Dragon Isles
+        80386, -- Last Hurrah: Zaralek Caverns and Time Rifts
+        80388, -- Last Hurrah: Emerald Dream
+    } },
     ["dfSparks"] = { "weekly", {
         72646, -- Sparks of Life: The Waking Shores
         72647, -- Sparks of Life: Ohn'ahran Plains
