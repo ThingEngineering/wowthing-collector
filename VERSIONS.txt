@@ -1,8 +1,14 @@
+v10.2.6.1
+---------
+- Added Dragonflight Season 4 currencies.
+- Added new Aiding the Accord (Last Hurrah) quests.
+- Updated TOC for 10.2.6.
+
 v10.2.5.2
 ---------
-- Add Mysterious Fragment currency ID.
-- Improve robustness of M+/Vault scanning.
-- Fix "table expected, got nil" error when scanning transmog.
+- Added Mysterious Fragment currency ID.
+- Improved robustness of M+/Vault scanning.
+- Fixed "table expected, got nil" error when scanning transmog.
 
 v10.2.5.1
 ---------
