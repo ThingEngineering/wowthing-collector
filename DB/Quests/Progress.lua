@@ -50,6 +50,11 @@ Module.db.progress = {
         55498, -- The Shimmering Crystal, WoD
         64710, -- Whispering Fel Crystal, Legion
     } },
+    ["holidayTimewalkingRaid"] = { "weekly", {
+        47523, -- Disturbance Detected: Black Temple
+        50316, -- Disturbance Detected: Ulduar
+        57637, -- Disturbance Detected: Firelands
+    } },
     ["holidayWorldQuests"] = { "weekly", { 72728 } }, -- "The World Awaits", World Quests
     -- Weekly PvP
     ["pvpArenas"] = { "weekly", { 72169 } }, -- Proving in Arenas (Rated Arenas)
