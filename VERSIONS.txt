@@ -1,3 +1,7 @@
+v10.2.6.2
+---------
+- Added Timewalking raid quests.
+
 v10.2.6.1
 ---------
 - Added Dragonflight Season 4 currencies.
@@ -6,7 +10,7 @@ v10.2.6.1
 
 v10.2.5.2
 ---------
-- Added Mysterious Fragment currency ID.
+- Added Mysterious Fragment currency.
 - Improved robustness of M+/Vault scanning.
 - Fixed "table expected, got nil" error when scanning transmog.
 
