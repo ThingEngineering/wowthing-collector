@@ -135,6 +135,11 @@ Module.db.currencies = {
     2777, -- Dream Infusion
     2796, -- Renascent Dream
     2797, -- Trophy of Strife
+    2806, -- Whelpling's Awakened Crest
+    2807, -- Drake's Awakened Crest
+    2809, -- Wyrm's Awakened Crest
+    2812, -- Aspect's Awakened Crest
+    2912, -- Renascent Awakening
 
     2264, -- Account HWM - Helm [DNT]
     2265, -- Account HWM - Neck [DNT]
@@ -160,6 +165,13 @@ Module.db.currencies = {
     2413, -- 10.1 Professions - Personal Tracker - S2 Spark Drops (Hidden)
     2774, -- 10.2 Professions - Personal Tracker - S3 Spark Drops (Hidden)
     2780, -- Echoed Ephemera Tracker [DNT]
+    2800, -- 10.2.6 Professions - Personal Tracker - S4 Spark Drops (Hidden)
+    2805, -- Whelpling's Awakened Crest (Hidden)
+    2808, -- Drake's Awakened Crest (Hidden)
+    2810, -- Wyrm's Awakened Crest (Hidden)
+    2811, -- Aspect's Awakened Crest (Hidden)
+    2878, -- 10.2 Professions - Personal Tracker - Legendary - Restored Leaf
+    3010, -- 10.2.6 Rewards - Personal Tracker - S4 Dinar Drops (Hidden)
 
     -- The Waking Shores
     2042, 2044, 2154, 2421, 2422, -- Ruby Lifeshrine Loop
