@@ -143,7 +143,7 @@ Module.db.progress = {
     ["dfAidingAccord"] = { "weekly", {
         70750, -- Aiding the Accord
         72068, -- Aiding the Accord: A Feast For All
-        72373, -- Aiding the Accord: A Hunt Is On
+        72373, -- Aiding the Accord: The Hunt Is On
         72374, -- Aiding the Accord: Dragonbane Keep
         72375, -- Aiding the Accord: The Isles Call
         75259, -- Aiding the Accord: Zskera Vaults
@@ -154,6 +154,9 @@ Module.db.progress = {
         77976, -- Aiding the Accord: Dreamsurge
         78446, -- Aiding the Accord: Superbloom
         78447, -- Aiding the Accord: Emerald Bounty
+        80385, -- Last Hurrah: Dragon Isles
+        80386, -- Last Hurrah: Zaralek Caverns and Time Rifts
+        80388, -- Last Hurrah: Emerald Dream
     } },
     ["dfCatchAileron"] = { "weekly", { 72826 } }, -- Catch and Release: Aileron Seamoth
     ["dfCatchCerulean"] = { "weekly", { 72825 } }, -- Catch and Release: Cerulean Spinefish
