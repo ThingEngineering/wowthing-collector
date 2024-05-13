@@ -81,6 +81,7 @@ function Addon:Cleanup()
             charData.balanceMythic15 = nil
             charData.balanceUnleashedMonstrosities = nil
             charData.biggerFishToFry = nil
+            charData.equipment = nil
             charData.hiddenDungeons = nil
             charData.hiddenKills = nil
             charData.hiddenWorldQuests = nil
