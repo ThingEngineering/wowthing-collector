@@ -22,22 +22,31 @@ function Module:OnEnable()
         end
     end
 
+    self:RegisterEvent('LOADING_SCREEN_DISABLED')
     self:RegisterEvent('TRANSMOGRIFY_OPEN')
     self:RegisterEvent('TRANSMOGRIFY_CLOSE')
-
-    self:RegisterBucketEvent(
-        {
-            'TRANSMOG_COLLECTION_SOURCE_ADDED',
-            'TRANSMOG_COLLECTION_SOURCE_REMOVED',
-            'TRANSMOG_COLLECTION_UPDATED',
-        },
-        2,
-        'UpdateTransmog'
-    )
 end
 
-function Module:OnEnteringWorld()
-    self:UpdateTransmog()
+-- function Module:OnEnteringWorld()
+--     self:UpdateTransmog()
+-- end
+
+function Module:LOADING_SCREEN_DISABLED()
+    self:UnregisterEvent('LOADING_SCREEN_DISABLED')
+
+    C_Timer.After(5, function()
+        self:UpdateTransmog()
+
+        self:RegisterBucketEvent(
+            {
+                'TRANSMOG_COLLECTION_SOURCE_ADDED',
+                'TRANSMOG_COLLECTION_SOURCE_REMOVED',
+                'TRANSMOG_COLLECTION_UPDATED',
+            },
+            2,
+            'UpdateTransmog'
+        )
+    end)
 end
 
 function Module:TRANSMOGRIFY_OPEN()
@@ -87,25 +96,29 @@ function Module:ScanInitialize()
         end
     end
 
-    -- Load all appearance categories into chunks of 100 appearances
-    self.allAppearances = { {} }
+    if #self.allAppearances == 0 then
+        -- Load all appearance categories into chunks of 100 appearances
+        self.allAppearances = { {} }
 
-    local workload = { }
-    for categoryID, _ in pairs(self.transmogSlots) do
-        table.insert(workload, function()
-            local appearances = C_TransmogCollection_GetCategoryAppearances(categoryID, self.transmogLocation)
-            local currentTable = self.allAppearances[#self.allAppearances]
-            for _, appearance in ipairs(appearances) do
-                table.insert(currentTable, appearance)
-                if #currentTable == 100 then
-                    currentTable = {}
-                    table.insert(self.allAppearances, currentTable)
+        local workload = { }
+        for categoryID, _ in pairs(self.transmogSlots) do
+            table.insert(workload, function()
+                local appearances = C_TransmogCollection_GetCategoryAppearances(categoryID, self.transmogLocation)
+                local currentTable = self.allAppearances[#self.allAppearances]
+                for _, appearance in ipairs(appearances) do
+                    table.insert(currentTable, appearance)
+                    if #currentTable == 100 then
+                        currentTable = {}
+                        table.insert(self.allAppearances, currentTable)
+                    end
                 end
-            end
-        end)
-    end
+            end)
+        end
 
-    Addon:BatchWork(workload, function() Module:ScanBegin() end)
+        Addon:BatchWork(workload, function() Module:ScanBegin() end)
+    else
+        Module:ScanBegin()
+    end
 end
 
 function Module:ScanBegin()
