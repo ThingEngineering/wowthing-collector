@@ -1,3 +1,9 @@
+v10.2.7.2
+---------
+- Added MoP Remix to auras.
+- Added MoP Remix currencies.
+- Changed how transmog scanning works to (hopefully) be less stressful on login.
+
 v10.2.7.1
 ---------
 - Changed equipment scanning to cover all slots instead of only profession equipment.
