@@ -133,6 +133,7 @@ Module.db.currencies = {
     2717, -- Wyrm's Dreaming Crests (?)
     2718, -- Aspect's Dreaming Crests (?)
     2777, -- Dream Infusion
+    2778, -- Bronze
     2796, -- Renascent Dream
     2797, -- Trophy of Strife
     2806, -- Whelpling's Awakened Crest
@@ -165,12 +166,39 @@ Module.db.currencies = {
     2413, -- 10.1 Professions - Personal Tracker - S2 Spark Drops (Hidden)
     2774, -- 10.2 Professions - Personal Tracker - S3 Spark Drops (Hidden)
     2780, -- Echoed Ephemera Tracker [DNT]
+    2784, -- 10.2 Legendary - Progressive Advance - Tracker
     2800, -- 10.2.6 Professions - Personal Tracker - S4 Spark Drops (Hidden)
     2805, -- Whelpling's Awakened Crest (Hidden)
     2808, -- Drake's Awakened Crest (Hidden)
     2810, -- Wyrm's Awakened Crest (Hidden)
     2811, -- Aspect's Awakened Crest (Hidden)
+    2853, -- 10.2.7 Timewalking Season - Artifact - Cloak - Primary
+    2854, -- 10.2.7 Timewalking Season - Artifact - Cloak - Stamina
+    2855, -- 10.2.7 Timewalking Season - Artifact - Cloak - Critical Strike
+    2856, -- 10.2.7 Timewalking Season - Artifact - Cloak - Haste
+    2857, -- 10.2.7 Timewalking Season - Artifact - Cloak - Leech
+    2858, -- 10.2.7 Timewalking Season - Artifact - Cloak - Mastery
+    2859, -- 10.2.7 Timewalking Season - Artifact - Cloak - Speed
+    2860, -- 10.2.7 Timewalking Season - Artifact - Cloak - Versatility
+    2861, -- 10.2.7 Timewalking Season - Artifact - Head - Aberration
+    2862, -- 10.2.7 Timewalking Season - Artifact - Head - Beast
+    2863, -- 10.2.7 Timewalking Season - Artifact - Head - Demon
+    2864, -- 10.2.7 Timewalking Season - Artifact - Head - Dragonkin
+    2865, -- 10.2.7 Timewalking Season - Artifact - Head - Elemental
+    2866, -- 10.2.7 Timewalking Season - Artifact - Head - Giant
+    2867, -- 10.2.7 Timewalking Season - Artifact - Head - Humanoid
+    2868, -- 10.2.7 Timewalking Season - Artifact - Head - Mechanical
+    2869, -- 10.2.7 Timewalking Season - Artifact - Head - Undead
+    2870, -- 10.2.7 Timewalking Season - Artifact - Waist - Physical
+    2871, -- 10.2.7 Timewalking Season - Artifact - Waist - Arcane
+    2872, -- 10.2.7 Timewalking Season - Artifact - Waist - Fire
+    2873, -- 10.2.7 Timewalking Season - Artifact - Waist - Frost
+    2874, -- 10.2.7 Timewalking Season - Artifact - Waist - Holy
+    2875, -- 10.2.7 Timewalking Season - Artifact - Waist - Shadow
+    2876, -- 10.2.7 Timewalking Season - Artifact - Waist - Nature
     2878, -- 10.2 Professions - Personal Tracker - Legendary - Restored Leaf
+    3000, -- 10.2.7 Timewalking Season - Random Gem Counter
+    3001, -- 10.2.7 Timewalking Season - Artifact - Cloak - Experience Gain
     3010, -- 10.2.6 Rewards - Personal Tracker - S4 Dinar Drops (Hidden)
 
     -- The Waking Shores
