@@ -96,29 +96,25 @@ function Module:ScanInitialize()
         end
     end
 
-    if #self.allAppearances == 0 then
-        -- Load all appearance categories into chunks of 100 appearances
-        self.allAppearances = { {} }
+    -- Load all appearance categories into chunks of 100 appearances
+    self.allAppearances = { {} }
 
-        local workload = { }
-        for categoryID, _ in pairs(self.transmogSlots) do
-            table.insert(workload, function()
-                local appearances = C_TransmogCollection_GetCategoryAppearances(categoryID, self.transmogLocation)
-                local currentTable = self.allAppearances[#self.allAppearances]
-                for _, appearance in ipairs(appearances) do
-                    table.insert(currentTable, appearance)
-                    if #currentTable == 100 then
-                        currentTable = {}
-                        table.insert(self.allAppearances, currentTable)
-                    end
+    local workload = { }
+    for categoryID, _ in pairs(self.transmogSlots) do
+        table.insert(workload, function()
+            local appearances = C_TransmogCollection_GetCategoryAppearances(categoryID, self.transmogLocation)
+            local currentTable = self.allAppearances[#self.allAppearances]
+            for _, appearance in ipairs(appearances) do
+                table.insert(currentTable, appearance)
+                if #currentTable == 100 then
+                    currentTable = {}
+                    table.insert(self.allAppearances, currentTable)
                 end
-            end)
-        end
-
-        Addon:BatchWork(workload, function() Module:ScanBegin() end)
-    else
-        Module:ScanBegin()
+            end
+        end)
     end
+
+    Addon:BatchWork(workload, function() Module:ScanBegin() end)
 end
 
 function Module:ScanBegin()
