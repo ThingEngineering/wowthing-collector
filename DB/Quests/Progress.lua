@@ -503,4 +503,16 @@ Module.db.progress = {
     ["dfAberrus1Normal"] = { "once", { 76083 } },
     ["dfAberrus1Heroic"] = { "once", { 76085 } },
     ["dfAberrus1Mythic"] = { "once", { 76086 } },
+
+    -- MoP: Remix
+    ["remixDungeon"] = { "daily", { 80446 } },
+    ["remixRaid"] = { "daily", { 80447 } },
+    ["remixScenario"] = { "daily", { 80448 } },
+    
+    ["remixCelestials"] = { "daily", { 33117 } },
+    ["remixGalleon"] = { "daily", { 32098 } },
+    ["remixNalak"] = { "daily", { 32518 } },
+    ["remixOondasta"] = { "daily", { 32519 } },
+    ["remixOrdos"] = { "daily", { 33118 } },
+    ["remixSha"] = { "daily", { 32099 } },
 }
