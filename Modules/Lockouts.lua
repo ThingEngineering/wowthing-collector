@@ -50,7 +50,9 @@ function Module:UpdateLockouts()
 
     local dailyReset = now + C_DateAndTime.GetSecondsUntilDailyReset()
     local weeklyReset = now + C_DateAndTime.GetSecondsUntilWeeklyReset()
+    
     local lockouts = {}
+    local instanceDone = {}
 
     -- Instances
     for i = 1, GetNumSavedInstances() do
@@ -102,21 +104,30 @@ function Module:UpdateLockouts()
     for _, instance in pairs(self.db.instances) do
         local availableAll, availablePlayer = IsLFGDungeonJoinable(instance.dungeonId)
         if availableAll then
+            local instanceName, typeId, subTypeId = GetLFGDungeonInfo(instance.dungeonId)
             local locked, _ = GetLFGDungeonRewards(instance.dungeonId)
-            if locked then
-                local instanceName, _ = GetLFGDungeonInfo(instance.dungeonId)
-                table.insert(lockouts, {
-                    id = 200000 + instance.dungeonId,
-                    name = instanceName,
-                    resetTime = dailyReset,
-                    bosses = {
-                        "1:"..instanceName,
-                    },
-                    difficulty = 1,
-                    defeatedBosses = 1,
-                    locked = true,
-                    maxBosses = 1,
+
+            if instance.progressKey then
+                table.insert(instanceDone, {
+                    key = instance.progressKey,
+                    locked = locked,
+                    resetTime = subTypeId == 3 and weeklyReset or dailyReset,
                 })
+            else
+                if locked then
+                    table.insert(lockouts, {
+                        id = 200000 + instance.dungeonId,
+                        name = instanceName,
+                        resetTime = dailyReset,
+                        bosses = {
+                            "1:"..instanceName,
+                        },
+                        difficulty = 1,
+                        defeatedBosses = 1,
+                        locked = true,
+                        maxBosses = 1,
+                    })
+                end
             end
         end
     end
@@ -148,5 +159,6 @@ function Module:UpdateLockouts()
         end
     end
 
+    Addon.charData.instanceDone = instanceDone
     Addon.charData.lockouts = lockouts
 end
