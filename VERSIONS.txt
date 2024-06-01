@@ -1,3 +1,10 @@
+v10.2.7.3
+---------
+- Added MoP Remix instances.
+- Added MoP Remix quests.
+- Added tracking of LFG daily/weekly bonuses.
+- Fixed transmog scanning only working once per session.
+
 v10.2.7.2
 ---------
 - Added MoP Remix to auras.
