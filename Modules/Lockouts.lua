@@ -104,14 +104,15 @@ function Module:UpdateLockouts()
     for _, instance in pairs(self.db.instances) do
         local availableAll, availablePlayer = IsLFGDungeonJoinable(instance.dungeonId)
         if availableAll then
-            local instanceName, typeId, subTypeId = GetLFGDungeonInfo(instance.dungeonId)
+            local instanceName, _ = GetLFGDungeonInfo(instance.dungeonId)
             local locked, _ = GetLFGDungeonRewards(instance.dungeonId)
 
             if instance.progressKey then
                 table.insert(instanceDone, {
                     key = instance.progressKey,
                     locked = locked,
-                    resetTime = subTypeId == 3 and weeklyReset or dailyReset,
+                    name = instanceName,
+                    resetTime = instance.weekly and weeklyReset or dailyReset,
                 })
             else
                 if locked then
