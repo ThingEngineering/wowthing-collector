@@ -28,11 +28,13 @@ function Module:UpdateEquipment()
                 local itemLink = GetInventoryItemLink('player', slot)
                 local itemQuality = GetInventoryItemQuality('player', slot)
                 local parsed = Addon:ParseItemLink(itemLink, itemQuality or -1, 1)
-                Addon.charData.equipmentV2["s"..slot] = parsed
+                Addon.charData.equipmentV2["s" .. slot] = parsed
             else
                 C_Item_RequestLoadItemDataByID(itemId)
                 rescan = true
             end
+        else
+            Addon.charData.equipmentV2["s" .. slot] = nil
         end
     end
 
