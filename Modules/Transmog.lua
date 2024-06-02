@@ -41,7 +41,7 @@ function Module:LOADING_SCREEN_DISABLED()
             {
                 'TRANSMOG_COLLECTION_SOURCE_ADDED',
                 'TRANSMOG_COLLECTION_SOURCE_REMOVED',
-                'TRANSMOG_COLLECTION_UPDATED',
+                -- 'TRANSMOG_COLLECTION_UPDATED',
             },
             2,
             'UpdateTransmog'
