@@ -33,13 +33,13 @@ Module.db.instances = {
         progressKey = 'remixHeroicScenario',
     }, -- Random Heroic Scenario
     {
-        dungeonId = 2597,
-        progressKey = 'remixMSV1',
-    }, -- Mogu'shan Vaults: The Vault of Mysteries
-    {
         dungeonId = 2598,
-        progressKey = 'remixMSV2',
+        progressKey = 'remixMSV1',
     }, -- Mogu'shan Vaults: Guardians of Mogu'shan
+    {
+        dungeonId = 2597,
+        progressKey = 'remixMSV2',
+    }, -- Mogu'shan Vaults: The Vault of Mysteries
     {
         dungeonId = 2599,
         progressKey = 'remixToES1',
