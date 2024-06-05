@@ -1,3 +1,7 @@
+v10.2.7.5
+---------
+- Fixed Mogu'shan Vaults LFR wings being swapped.
+
 v10.2.7.4
 ---------
 - Disabled TRANSMOG_COLLECTION_UPDATED event to try to reduce weird lockups with BetterWardrobe.
