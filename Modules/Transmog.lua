@@ -4,8 +4,9 @@ local Module = Addon:NewModule('Transmog')
 
 Module.db = {}
 
-local C_TransmogCollection_GetAppearanceSources = C_TransmogCollection.GetAppearanceSources
+local C_TransmogCollection_GetAllAppearanceSources = C_TransmogCollection.GetAllAppearanceSources
 local C_TransmogCollection_GetCategoryAppearances = C_TransmogCollection.GetCategoryAppearances
+local C_TransmogCollection_GetSourceInfo = C_TransmogCollection.GetSourceInfo
 
 function Module:OnEnable()
     self.isOpen = false
@@ -129,10 +130,11 @@ function Module:ScanBegin()
                     local visualId = appearance.visualID
                     self.transmog[visualId] = true
 
-                    local sources = C_TransmogCollection_GetAppearanceSources(visualId) --, categoryID, self.transmogLocation)
-                    for _, source in ipairs(sources or {}) do
-                        if source.isCollected then
-                            local sourceKey = string.format("%d_%d", source.itemID, source.itemModID)
+                    local sourceIds = C_TransmogCollection_GetAllAppearanceSources(visualId) -- itemModifiedAppearenceID[]
+                    for _, sourceId in ipairs(sourceIds or {}) do
+                        local sourceInfo = C_TransmogCollection_GetSourceInfo(sourceId)
+                        if sourceInfo.isCollected then
+                            local sourceKey = string.format("%d_%d", sourceInfo.itemID, sourceInfo.itemModID)
                             WWTCSaved.transmogSourcesV2[sourceKey] = true
                         end
                     end
