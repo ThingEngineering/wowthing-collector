@@ -1,3 +1,7 @@
+v10.2.7.6
+---------
+- Changed transmog scanning to catch more sources without having to log on to multiple characters.
+
 v10.2.7.5
 ---------
 - Fixed Mogu'shan Vaults LFR wings being swapped.
