@@ -503,8 +503,11 @@ Module.db.progress = {
     ["dfAberrus1Normal"] = { "once", { 76083 } },
     ["dfAberrus1Heroic"] = { "once", { 76085 } },
     ["dfAberrus1Mythic"] = { "once", { 76086 } },
+    ["dfAmirdrassil1Normal"] = { "once", { 78600 } },
+    ["dfAmirdrassil1Heroic"] = { "once", { 78601 } },
+    ["dfAmirdrassil1Mythic"] = { "once", { 78602 } },
 
-    -- MoP: Remix
+    -- Remix: Pandaria
     ["remixDungeon"] = { "daily", { 80446 } },
     ["remixRaid"] = { "daily", { 80447 } },
     ["remixScenario"] = { "daily", { 80448 } },
