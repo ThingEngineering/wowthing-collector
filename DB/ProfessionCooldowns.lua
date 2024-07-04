@@ -16,12 +16,17 @@ Module.db.cooldowns = {
         },
         -- Warlords of Draenor
         ['wodAlchemySecrets'] = { 175880 },
+        -- Mists of Pandaria
+        ['mopAlchemyLivingSteel'] = { 114780 },
     },
 
     -- Blacksmithing
     [164] = {
         -- Warlords of Draenor
         ['wodBlacksmithingSecrets'] = { 176090 },
+        -- Mists of Pandaria
+        ['mopBlacksmithingTrillium'] = { 143255 },
+        ['mopBlacksmithingLightning'] = { 138646 },
     },
 
     -- Enchanting
@@ -37,12 +42,16 @@ Module.db.cooldowns = {
         ['dfSuspiciouslyTicking'] = { 382354 },
         -- Warlords of Draenor
         ['wodEngineeringSecrets'] = { 176054 },
+        -- Mists of Pandaria
+        ['mopEngineeringPeculiar'] = { 139176 },
     },
 
     -- Inscription
     [773] = {
         -- Warlords of Draenor
         ['wodInscriptionSecrets'] = { 176045 },
+        -- Mists of Pandaria
+        ['mopInscriptionWisdom'] = { 112996 },
     },
 
     -- Jewelcrafting
@@ -56,12 +65,20 @@ Module.db.cooldowns = {
         ['dfTimewatchersPatience'] = { 374550 },
         -- Warlords of Draenor
         ['wodJewelcraftingSecrets'] = { 176087 },
+        -- Mists of Pandaria
+        ['mopJewelcraftingSerpents'] = { 140050 },
     },
 
     -- Leatherworking
     [165] = {
         -- Warlords of Draenor
         ['wodLeatherworkingSecrets'] = { 176089 },
+        -- Mists of Pandaria
+        ['mopLeatherworkingHardened'] = { 142976 },
+        ['mopLeatherworkingMagnificence'] = {
+            140040, -- Magnificence of Leather
+            140041, -- Magnificence of Scales
+        }
     },
 
     -- Tailoring
@@ -75,5 +92,8 @@ Module.db.cooldowns = {
         },
         -- Warlords of Draenor
         ['wodTailoringSecrets'] = { 176058 },
+        -- Mists of Pandaria
+        ['mopTailoringCelestial'] = { 143011 },
+        ['mopTailoringImperial'] = { 125557 },
     },
 }
