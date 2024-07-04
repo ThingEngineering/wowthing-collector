@@ -14,6 +14,32 @@ Module.db.cooldowns = {
             370715, -- Transmute: Order to Elements
             405847, -- Transmute: Dracothyst
         },
+        -- Warlords of Draenor
+        ['wodAlchemySecrets'] = { 175880 },
+    },
+
+    -- Blacksmithing
+    [164] = {
+        -- Warlords of Draenor
+        ['wodBlacksmithingSecrets'] = { 176090 },
+    },
+
+    -- Enchanting
+    [333] = {
+        -- Warlords of Draenor
+        ['wodEnchantingSecrets'] = { 177043 },
+    },
+
+    -- Engineering
+    [202] = {
+        -- Warlords of Draenor
+        ['wodEngineeringSecrets'] = { 176054 },
+    },
+
+    -- Inscription
+    [773] = {
+        -- Warlords of Draenor
+        ['wodInscriptionSecrets'] = { 176045 },
     },
 
     -- Jewelcrafting
@@ -25,6 +51,14 @@ Module.db.cooldowns = {
         ['dfKeepersGlory'] = { 374548 },
         ['dfQueensGift'] = { 374546 },
         ['dfTimewatchersPatience'] = { 374550 },
+        -- Warlords of Draenor
+        ['wodJewelcraftingSecrets'] = { 176087 },
+    },
+
+    -- Leatherworking
+    [165] = {
+        -- Warlords of Draenor
+        ['wodLeatherworkingSecrets'] = { 176089 },
     },
 
     -- Tailoring
@@ -36,5 +70,7 @@ Module.db.cooldowns = {
         ['dfChronocloth'] = {
             376557, -- Chronocloth Bolt
         },
+        -- Warlords of Draenor
+        ['wodTailoringSecrets'] = { 176058 },
     },
 }
