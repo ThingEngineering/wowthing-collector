@@ -32,6 +32,9 @@ Module.db.cooldowns = {
 
     -- Engineering
     [202] = {
+        -- Dragonflight
+        ['dfSuspiciouslySilent'] = { 382358 },
+        ['dfSuspiciouslyTicking'] = { 382354 },
         -- Warlords of Draenor
         ['wodEngineeringSecrets'] = { 176054 },
     },
