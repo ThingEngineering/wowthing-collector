@@ -16,6 +16,7 @@ Module.db.cooldowns = {
         },
         -- Warlords of Draenor
         ['wodAlchemySecrets'] = { 175880 },
+        ['wodAlchemyCatalyst'] = { 156587 },
         -- Mists of Pandaria
         ['mopAlchemyLivingSteel'] = { 114780 },
     },
@@ -24,6 +25,7 @@ Module.db.cooldowns = {
     [164] = {
         -- Warlords of Draenor
         ['wodBlacksmithingSecrets'] = { 176090 },
+        ['wodBlacksmithingTruesteel'] = { 171690 },
         -- Mists of Pandaria
         ['mopBlacksmithingTrillium'] = { 143255 },
         ['mopBlacksmithingLightning'] = { 138646 },
@@ -95,5 +97,11 @@ Module.db.cooldowns = {
         -- Mists of Pandaria
         ['mopTailoringCelestial'] = { 143011 },
         ['mopTailoringImperial'] = { 125557 },
+        -- Cataclysm
+        ['cataTailoringAzshara'] = { 75146 },
+        ['cataTailoringDeepholm'] = { 75142 },
+        ['cataTailoringHyjal'] = { 75144 },
+        ['cataTailoringRagnaros'] = { 75145 },
+        ['cataTailoringSkywall'] = { 75141 },
     },
 }
