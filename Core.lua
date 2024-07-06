@@ -23,7 +23,7 @@ local defaultWWTCSaved = {
     chars = {},
     guilds = {},
     heirloomsV2 = {},
-    quests = {},
+    questsV2 = {},
     toys = {},
     transmogSourcesV2 = {},
     worldQuestIds = {},
@@ -38,7 +38,7 @@ function Addon:OnInitialize()
     Addon:Cleanup()
 
     WWTCSaved.heirloomsV2 = WWTCSaved.heirloomsV2 or {}
-    WWTCSaved.quests = WWTCSaved.quests or {}
+    WWTCSaved.questsV2 = WWTCSaved.questsV2 or {}
     WWTCSaved.transmogSourcesV2 = WWTCSaved.transmogSourcesV2 or {}
     WWTCSaved.worldQuestIds = WWTCSaved.worldQuestIds or {}
 
@@ -68,6 +68,7 @@ end
 
 function Addon:Cleanup()
     WWTCSaved.heirlooms = nil
+    WWTCSaved.quests = nil
     WWTCSaved.transmogSources = nil
 
     -- Remove data for any characters not seen in the last 3 days

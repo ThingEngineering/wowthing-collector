@@ -38,13 +38,11 @@ function Module:UpdateQuests()
         biweeklyReset = weeklyReset
     end
 
-    local accountQuests = {}
     for _, questId in ipairs(self.db.account) do
         if C_QuestLog_IsQuestFlaggedCompleted(questId) then
-            table.insert(accountQuests, questId)
+            WWTCSaved.questsV2[questId] = 1
         end
     end
-    WWTCSaved.quests = accountQuests
 
     local dailyQuests = {}
     for _, autoQuestIds in pairs(self.db.auto) do
