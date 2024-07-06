@@ -1,3 +1,11 @@
+v10.2.7.7
+---------
+- Added various older profession cooldowns.
+- Added Amirdrassil raid skip quests.
+- Added wonky profession scanning for Pandaria Cooking Ways.
+- Fixed resetting account quests on every character.
+- Updated quest scanning list.
+
 v10.2.7.6
 ---------
 - Changed transmog scanning to catch more sources without having to log on to multiple characters.
