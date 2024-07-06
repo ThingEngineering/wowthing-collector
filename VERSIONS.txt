@@ -1,3 +1,7 @@
+v10.2.7.8
+---------
+- Updated quest scanning list.
+
 v10.2.7.7
 ---------
 - Added various older profession cooldowns.
