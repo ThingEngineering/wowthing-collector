@@ -2,6 +2,9 @@ local Module = LibStub('AceAddon-3.0'):GetAddon('WoWthing_Collector'):GetModule(
 
 
 Module.db.achievements = {
+    -- Cataclysm
+    19451, -- <DNT> Fandral's Flamescythe Acquisition
+    
     -- Warlords of Draenor
     9452, -- Trap Superstar
 
