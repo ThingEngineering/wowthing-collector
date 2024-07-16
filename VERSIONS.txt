@@ -1,3 +1,10 @@
+v10.2.7.9
+---------
+- Added Fandral's Flamescythe tracking achievement.
+- Added BfA/SL zones to world quest scanning.
+- Fixed resetting wonky profession data on each login.
+- Updated quest scanning list.
+
 v10.2.7.8
 ---------
 - Updated quest scanning list.
