@@ -16,6 +16,7 @@ Module.db.account = {
     67030, -- Adventure Mode unlock?
     75658, -- Zaralek Cavern world quests
     77572, -- Emerald Dream world quests
+    
     -- This data is overwritten by the *manual* tool, don't edit by hand
     46319, 62672, 62673, 62674, 62675, 62676, 62677, 62678, 64986, 64987, 65048, 65058,
     65059, 65061, 65062, 66720, 69161, 69162, 69163, 69164, 69165, 69166, 69167, 69168,
