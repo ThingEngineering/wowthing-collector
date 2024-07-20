@@ -9,20 +9,36 @@ local C_QuestLog_IsQuestFlaggedCompleted = C_QuestLog.IsQuestFlaggedCompleted
 function Module:OnEnable()
     self:RegisterBucketEvent(
         {
-            'LOOT_CLOSED', -- for tracking quests
+            'LOOT_CLOSED',      -- for tracking quests
             'QUEST_LOG_UPDATE', -- spammy quest log updates
-            'SHOW_LOOT_TOAST', -- for tracking quests
+            'SHOW_LOOT_TOAST',  -- for tracking quests
         },
-        1,
+        2,
         'UpdateQuests'
+    )
+    self:RegisterBucketEvent(
+        { 'QUEST_COMPLETE' },
+        5,
+        'UpdateCompletedQuests'
     )
 end
 
 function Module:OnEnteringWorld()
     self:UpdateQuests()
+    self:UpdateCompletedQuests()
+end
+
+function Module:UpdateCompletedQuests()
+    Addon.charData.scanTimes["completedQuests"] = time()
+
+    local completedQuestIds = C_QuestLog.GetAllCompletedQuestIDs()
+    Addon:DeltaEncode(completedQuestIds, function(output)
+        Addon.charData.completedQuestsSquish = output
+    end)
 end
 
 function Module:UpdateQuests()
+    Addon.charData.activeQuests = {}
     Addon.charData.dailyQuests = {}
     Addon.charData.otherQuests = {}
     Addon.charData.progressQuests = {}

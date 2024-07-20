@@ -87,6 +87,7 @@ function Addon:Cleanup()
             charData.hiddenKills = nil
             charData.hiddenWorldQuests = nil
             charData.mythicPlus = nil
+            charData.transmog = nil
             charData.weeklyQuests = nil
             charData.weeklyUghQuests = nil
 
@@ -261,4 +262,59 @@ function Addon:BatchWork(workload, onFinish, onDelay)
         return true
     end
     return continue()
+end
+
+-- Encode a sorted run of numbers into a moderately space-efficient format
+--   [questID1].[encoded deltas]|[questID2].[deltas]|...
+local CHAR_VALUES = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789`~!@#$%^&*()-_=+[{]};:,<.>/?'
+local VALUE_TO_CHAR = {}
+for index = 1, strlen(CHAR_VALUES) do
+    VALUE_TO_CHAR[index] = string.sub(CHAR_VALUES, index, index)
+end
+
+function Addon:DeltaEncode(ids, onFinish)
+    local count = #ids
+    local maxDiff = strlen(CHAR_VALUES)
+
+    local anyDiffed = false
+    local output = {}
+    local index = 1
+    local last = nil
+    local workload = {}
+
+    for i = 1, count, 1000 do
+        table.insert(workload, 1, function()
+            for j = i, min(i + 999, count) do
+                local questId = ids[j]
+                if last ~= nil then
+                    local diff = questId - last
+                    if diff <= maxDiff then
+                        if anyDiffed ~= true then
+                            anyDiffed = true
+                            output[index] = '.'
+                            index = index + 1
+                        end
+
+                        output[index] = VALUE_TO_CHAR[diff]
+                    else
+                        output[index] = '|'
+                        index = index + 1
+                        last = nil
+                    end
+                end
+
+                if last == nil then
+                    anyDiffed = false
+                    output[index] = questId
+                end
+
+                index = index + 1
+                last = questId
+            end
+        end)
+    end
+
+    Addon:BatchWork(workload, function()
+        onFinish(table.concat(output, ''))
+    end)
 end

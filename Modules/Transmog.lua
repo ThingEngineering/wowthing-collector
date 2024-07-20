@@ -148,11 +148,15 @@ function Module:ScanBegin()
 end
 
 function Module:ScanEnd()
-    local keys = Addon:TableKeys(self.transmog)
-    Addon.charData.transmog = table.concat(keys, ':')
+    local appearanceIds = Addon:TableKeys(self.transmog)
+    table.sort(appearanceIds)
 
     self.isScanning = false
     self.transmog = {}
+
+    Addon:DeltaEncode(appearanceIds, function(output)
+        Addon.charData.transmogSquish = output
+    end)
 
     -- Reset settings
     if self.isOpen == false then
