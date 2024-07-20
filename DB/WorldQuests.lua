@@ -2,6 +2,22 @@ local Module = LibStub('AceAddon-3.0'):GetAddon('WoWthing_Collector'):GetModule(
 
 -- zones are UiMap IDs
 Module.db.expansions = {
+    -- Legion
+    {
+        id = 6,
+        minimumLevel = 10,
+        zones = {
+            630, -- Azsuna
+            634, -- Stormheim
+            641, -- Val'sharah
+            646, -- Broken Shore
+            650, -- Highmountain
+            680, -- Suramar
+            830, -- Krokuun
+            882, -- Eredath
+            885, -- Antoran Wastes
+        },
+    },
     -- Battle for Azeroth
     {
         id = 7,
