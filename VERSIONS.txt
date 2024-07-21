@@ -1,3 +1,10 @@
+v10.2.7.10
+----------
+- Added Honor module.
+- Added Legion zones to world quest scanning.
+- Added completed quest ID scanning.
+- Greatly reduced the size of the SavedVariables file through ~magic~.
+
 v10.2.7.9
 ---------
 - Added Fandral's Flamescythe tracking achievement.
