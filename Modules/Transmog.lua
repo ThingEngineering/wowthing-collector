@@ -11,10 +11,11 @@ local C_TransmogCollection_GetSourceInfo = C_TransmogCollection.GetSourceInfo
 function Module:OnEnable()
     self.isOpen = false
     self.isScanning = false
-
+    self.allAppearances = {}
+    self.sources = {}
+    
     self.transmogLocation = TransmogUtil.GetTransmogLocation('HEADSLOT', Enum.TransmogType.Appearance, Enum.TransmogModification.Main)
 
-    self.allAppearances = {}
     self.transmogSlots = {}
     for categoryID = 1, 29 do
         local slot = CollectionWardrobeUtil.GetSlotFromCategoryID(categoryID)
@@ -34,6 +35,23 @@ end
 
 function Module:LOADING_SCREEN_DISABLED()
     self:UnregisterEvent('LOADING_SCREEN_DISABLED')
+
+    if WWTCSaved.transmogSourcesSquish ~= nil then
+        local workload = {}
+        
+        for modifier, squished in pairs(WWTCSaved.transmogSourcesSquish) do
+            tinsert(workload, function()
+                local itemIds = Addon:DeltaDecode(squished)
+                local temp = {}
+                for _, itemId in ipairs(itemIds) do
+                    temp[itemId] = true
+                end
+                self.sources[tonumber(strsub(modifier, 2))] = temp
+            end)
+        end
+
+        Addon:BatchWork(workload)
+    end
 
     C_Timer.After(5, function()
         self:UpdateTransmog()
@@ -92,8 +110,8 @@ function Module:ScanInitialize()
         if have then
             self.transmog[manualTransmog.appearanceId] = true
 
-            local sourceKey = string.format("%d_%d", manualTransmog.itemId, manualTransmog.modifierId)
-            WWTCSaved.transmogSourcesV2[sourceKey] = true
+            self.sources[manualTransmog.modifierId] = self.sources[manualTransmog.modifierId] or {}
+            self.sources[manualTransmog.modifierId][manualTransmog.itemId] = true
         end
     end
 
@@ -134,8 +152,8 @@ function Module:ScanBegin()
                     for _, sourceId in ipairs(sourceIds or {}) do
                         local sourceInfo = C_TransmogCollection_GetSourceInfo(sourceId)
                         if sourceInfo.isCollected then
-                            local sourceKey = string.format("%d_%d", sourceInfo.itemID, sourceInfo.itemModID)
-                            WWTCSaved.transmogSourcesV2[sourceKey] = true
+                            self.sources[sourceInfo.itemModID] = self.sources[sourceInfo.itemModID] or {}
+                            self.sources[sourceInfo.itemModID][sourceInfo.itemID] = true
                         end
                     end
                 end
@@ -157,6 +175,15 @@ function Module:ScanEnd()
     Addon:DeltaEncode(appearanceIds, function(output)
         Addon.charData.transmogSquish = output
     end)
+
+    WWTCSaved.transmogSourcesSquish = {}
+    for modifier, itemIdTable in pairs(self.sources) do
+        local itemIds = Addon:TableKeys(itemIdTable)
+        sort(itemIds)
+        Addon:DeltaEncode(itemIds, function(output)
+            WWTCSaved.transmogSourcesSquish['m' .. modifier] = output
+        end)
+    end
 
     -- Reset settings
     if self.isOpen == false then
