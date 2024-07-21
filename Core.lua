@@ -267,9 +267,12 @@ end
 -- Encode a sorted run of numbers into a moderately space-efficient format
 --   [questID1].[encoded deltas]|[questID2].[deltas]|...
 local CHAR_VALUES = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789`~!@#$%^&*()-_=+[{]};:,<.>/?'
+local CHAR_TO_VALUE = {}
 local VALUE_TO_CHAR = {}
 for index = 1, strlen(CHAR_VALUES) do
-    VALUE_TO_CHAR[index] = string.sub(CHAR_VALUES, index, index)
+    local char = strbyte(CHAR_VALUES, index)
+    CHAR_TO_VALUE[char] = index
+    VALUE_TO_CHAR[index] = strchar(char)
 end
 
 function Addon:DeltaEncode(ids, onFinish)
@@ -317,4 +320,34 @@ function Addon:DeltaEncode(ids, onFinish)
     Addon:BatchWork(workload, function()
         onFinish(table.concat(output, ''))
     end)
+end
+
+function Addon:DeltaDecode(squished)
+    local data = {}
+    local index = 1
+    -- local startTime = debugprofilestop()
+    
+    local parts = { strsplit('|', squished) }
+    for _, part in ipairs(parts) do
+        local deltaParts = { strsplit('.', part, 2) }
+
+        local id = tonumber(deltaParts[1])
+        data[index] = id
+        index = index + 1
+
+        local deltas = deltaParts[2]
+        if deltas ~= nil then
+            for i = 1, #deltas do
+                local byte = strbyte(deltas, i)
+                id = id + CHAR_TO_VALUE[byte]
+                data[index] = id
+                index = index + 1
+            end
+        end
+    end
+
+    -- local endTime = debugprofilestop()
+    -- print('DeltaDecode: '..#squished.. ' bytes in '..endTime - startTime..'ms')
+
+    return data
 end
