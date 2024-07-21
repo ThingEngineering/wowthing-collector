@@ -132,7 +132,7 @@ end
 
 function Addon:TableKeys(tbl)
     local keys = {}
-    for key in pairs(tbl) do
+    for key, value in pairs(tbl) do
         keys[#keys + 1] = key
     end
     return keys
