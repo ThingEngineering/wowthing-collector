@@ -26,6 +26,7 @@ Modules\Currencies.lua
 Modules\Equipment.lua
 Modules\Garrisons.lua
 Modules\Guild.lua
+Modules\Honor.lua
 Modules\Illusions.lua
 Modules\Location.lua
 Modules\Lockouts.lua
