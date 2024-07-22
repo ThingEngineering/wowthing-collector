@@ -5,6 +5,7 @@ local Module = Addon:NewModule('Transmog')
 Module.db = {}
 
 local C_TransmogCollection_GetAllAppearanceSources = C_TransmogCollection.GetAllAppearanceSources
+local C_TransmogCollection_GetAppearanceInfoBySource = C_TransmogCollection.GetAppearanceInfoBySource
 local C_TransmogCollection_GetCategoryAppearances = C_TransmogCollection.GetCategoryAppearances
 local C_TransmogCollection_GetSourceInfo = C_TransmogCollection.GetSourceInfo
 
@@ -13,6 +14,7 @@ function Module:OnEnable()
     self.isScanning = false
     self.allAppearances = {}
     self.sources = {}
+    self.transmog = {}
     
     self.transmogLocation = TransmogUtil.GetTransmogLocation('HEADSLOT', Enum.TransmogType.Appearance, Enum.TransmogModification.Main)
 
@@ -25,6 +27,8 @@ function Module:OnEnable()
     end
 
     self:RegisterEvent('LOADING_SCREEN_DISABLED')
+    self:RegisterEvent('TRANSMOG_COLLECTION_SOURCE_ADDED')
+    self:RegisterEvent('TRANSMOG_COLLECTION_SOURCE_REMOVED')
     self:RegisterEvent('TRANSMOGRIFY_OPEN')
     self:RegisterEvent('TRANSMOGRIFY_CLOSE')
 end
@@ -55,16 +59,6 @@ function Module:LOADING_SCREEN_DISABLED()
 
     C_Timer.After(5, function()
         self:UpdateTransmog()
-
-        self:RegisterBucketEvent(
-            {
-                'TRANSMOG_COLLECTION_SOURCE_ADDED',
-                'TRANSMOG_COLLECTION_SOURCE_REMOVED',
-                -- 'TRANSMOG_COLLECTION_UPDATED',
-            },
-            2,
-            'UpdateTransmog'
-        )
     end)
 end
 
@@ -74,6 +68,37 @@ end
 
 function Module:TRANSMOGRIFY_CLOSE()
     self.isOpen = false
+end
+
+function Module:TRANSMOG_COLLECTION_SOURCE_ADDED(_, sourceId)
+    local sourceInfo = C_TransmogCollection_GetSourceInfo(sourceId)
+    self.sources[sourceInfo.itemModID] = self.sources[sourceInfo.itemModID] or {}
+    self.sources[sourceInfo.itemModID][sourceInfo.itemID] = true
+
+    local info = C_TransmogCollection_GetAppearanceInfoBySource(sourceId)
+    if info ~= nil then
+        self.transmog[info.appearanceID] = true
+    end
+
+    -- print('Added item '..sourceInfo.itemID..'/'..sourceInfo.itemModID..' with appearance '..info.appearanceID)
+
+    self:UniqueTimer('SaveTransmog', 2, 'SaveTransmog')
+end
+
+function Module:TRANSMOG_COLLECTION_SOURCE_REMOVED(_, sourceId)
+    local sourceInfo = C_TransmogCollection_GetSourceInfo(sourceId)
+    self.sources[sourceInfo.itemModID] = self.sources[sourceInfo.itemModID] or {}
+    self.sources[sourceInfo.itemModID][sourceInfo.itemID] = nil
+
+    -- This appearance may be completely uncollected now, wipe it out if so
+    local info = C_TransmogCollection_GetAppearanceInfoBySource(sourceId)
+    if info ~= nil and info.appearanceIsCollected == false then
+        self.transmog[info.appearanceID] = nil
+    end
+
+    -- print('Removed item '..sourceInfo.itemID..'/'..sourceInfo.itemModID..' with appearance '..info.appearanceID)
+
+    self:UniqueTimer('SaveTransmog', 2, 'SaveTransmog')
 end
 
 function Module:UpdateTransmog()
@@ -166,11 +191,25 @@ function Module:ScanBegin()
 end
 
 function Module:ScanEnd()
+    self.isScanning = false
+
+    self:SaveTransmog()
+
+    -- Reset settings
+    if self.isOpen == false then
+        C_TransmogCollection.SetCollectedShown(self.oldSettings.showCollected)
+        C_TransmogCollection.SetUncollectedShown(self.oldSettings.showUncollected)
+        for index = 1, 6 do
+            C_TransmogCollection.SetSourceTypeFilter(index, self.oldSettings.sourceTypes[index])
+        end
+    end
+end
+
+function Module:SaveTransmog()
+    if self.isScanning then return end
+
     local appearanceIds = Addon:TableKeys(self.transmog)
     table.sort(appearanceIds)
-
-    self.isScanning = false
-    self.transmog = {}
 
     Addon:DeltaEncode(appearanceIds, function(output)
         Addon.charData.transmogSquish = output
@@ -183,14 +222,5 @@ function Module:ScanEnd()
         Addon:DeltaEncode(itemIds, function(output)
             WWTCSaved.transmogSourcesSquish['m' .. modifier] = output
         end)
-    end
-
-    -- Reset settings
-    if self.isOpen == false then
-        C_TransmogCollection.SetCollectedShown(self.oldSettings.showCollected)
-        C_TransmogCollection.SetUncollectedShown(self.oldSettings.showUncollected)
-        for index = 1, 6 do
-            C_TransmogCollection.SetSourceTypeFilter(index, self.oldSettings.sourceTypes[index])
-        end
     end
 end
