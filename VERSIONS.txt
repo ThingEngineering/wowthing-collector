@@ -1,3 +1,9 @@
+v10.2.7.11
+----------
+- Changed quest scanning to more consistently track completed quests.
+- Changed transmog scanning to handle the SOURCE_ADDED/SOURCE_REMOVED events properly instead
+  of forcing a full scan.
+
 v10.2.7.10
 ----------
 - Added Honor module.
