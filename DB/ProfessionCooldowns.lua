@@ -68,6 +68,14 @@ Module.db.cooldowns = {
         -- Warlords of Draenor
         ['wodJewelcraftingSecrets'] = { 176087 },
         -- Mists of Pandaria
+        ['mopJewelcraftingResearch'] = {
+            131691, -- Imperial Amethyst
+            131686, -- Primordial Ruby
+            131593, -- River's Heart
+            131695, -- Sun's Radiance
+            131690, -- Vermilion Onyx
+            131688, -- Wild Jade
+        },
         ['mopJewelcraftingSerpents'] = { 140050 },
     },
 
