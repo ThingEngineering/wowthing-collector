@@ -1,7 +1,7 @@
-## Interface: 100207
+## Interface: 110000
 ## Title: WoWthing Collector
 ## Notes: Collects data to sync with WoWthing.
-## Version: 10.2.7.11
+## Version: 11.0.0.1
 ## Author: Freddie
 ## IconTexture: Interface\Addons\WoWthing_Collector\icon.tga
 ## SavedVariables: WWTCSaved
