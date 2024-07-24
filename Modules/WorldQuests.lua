@@ -55,7 +55,8 @@ function Module:UpdateWorldQuests()
                                         expires = expires - mod
                                     end
 
-                                    local rewardCurrencyCount = GetNumQuestLogRewardCurrencies(quest.questId)
+                                    local questRewardCurrencies = C_QuestLog.GetQuestRewardCurrencies(quest.questId)
+                                    local rewardCurrencyCount = getn(questRewardCurrencies)
                                     local rewardItemCount = GetNumQuestLogRewards(quest.questId)
                                     local rewardMoney = GetQuestLogRewardMoney(quest.questId)
 
@@ -63,7 +64,7 @@ function Module:UpdateWorldQuests()
                                         local rewards = {}
 
                                         for i = 1, rewardCurrencyCount do
-                                            local _, _, quantity, currencyId = GetQuestLogRewardCurrencyInfo(i, quest.questId)
+                                            local quantity, currencyId = questRewardCurrencies[i].totalRewardAmount, questRewardCurrencies[i].currencyID
                                             tinsert(rewards, table.concat({
                                                 11, -- Currency
                                                 currencyId,
