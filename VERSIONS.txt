@@ -1,3 +1,14 @@
+v11.0.0.2
+---------
+- Added weekly vault reward scanning.
+- Changed guild scanning to more consistently track guild changes.
+
+v11.0.0.1
+---------
+- Added MoP jewelcrafting research cooldown.
+- Fixed world quest scanning error.
+- Updated TOC for 11.0.0.
+
 v10.2.7.11
 ----------
 - Changed quest scanning to more consistently track completed quests.
