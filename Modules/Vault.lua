@@ -40,6 +40,12 @@ function Module:UpdateVault()
         --      activityTierID=0,
         --      progress=8,
         --      rewards={
+        --          [1]={
+        --              id=193686,
+        --              type=1,
+        --              quantity=1,
+        --              itemDBID="0x123456",
+        --          },
         --      },
         --      threshold=10,
         --      level=0,
@@ -48,13 +54,22 @@ function Module:UpdateVault()
         local activity = activities[i]
         -- We only care about 1 (MythicPlus), 2 (RankedPvP), 3 (Raid)
         if activity.type >= 1 and activity.type <= 3 then
-            vault[activity.type] = vault[activity.type] or {}
-            vault[activity.type][activity.index] = {
+            local data = {
                 level = activity.level,
                 progress = activity.progress,
                 threshold = activity.threshold,
                 tier = activity.activityTierID or 0,
+                rewards = {},
             }
+
+            for _, reward in ipairs(activity.rewards) do
+                local itemLink = C_WeeklyRewards.GetItemHyperlink(reward.itemDBID)
+                local parsed = Addon:ParseItemLink(itemLink, -1, 1)
+                tinsert(data.rewards, parsed)
+            end
+
+            vault[activity.type] = vault[activity.type] or {}
+            vault[activity.type][activity.index] = data
         end
     end
 
