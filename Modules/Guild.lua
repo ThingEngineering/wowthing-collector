@@ -12,13 +12,13 @@ function Module:OnEnable()
 
     self:RegisterEvent('PLAYER_INTERACTION_MANAGER_FRAME_HIDE')
     self:RegisterEvent('PLAYER_INTERACTION_MANAGER_FRAME_SHOW')
-    self:RegisterEvent('PLAYER_GUILD_UPDATE')
+    self:RegisterBucketEvent({ 'PLAYER_GUILD_UPDATE' }, 2, 'PLAYER_GUILD_UPDATE')
 
     self:RegisterBucketEvent({ 'GUILDBANKBAGSLOTS_CHANGED' }, 2, 'UpdateGuildBank')
 end
 
 function Module:OnEnteringWorld()
-    self:UpdateGuild()
+    C_Timer.After(0, function() self:UpdateGuild() end)
 end
 
 function Module:PLAYER_INTERACTION_MANAGER_FRAME_HIDE(_, interactionType)
@@ -36,8 +36,8 @@ function Module:PLAYER_INTERACTION_MANAGER_FRAME_SHOW(_, interactionType)
     self.guild.copper = GetGuildBankMoney()
 end
 
-function Module:PLAYER_GUILD_UPDATE(_, unitTarget)
-    if unitTarget == 'player' then
+function Module:PLAYER_GUILD_UPDATE(unitTargets)
+    if unitTargets['player'] ~= nil then
         self:UpdateGuild()
     end
 end
@@ -46,6 +46,7 @@ function Module:UpdateGuild()
     -- Build a unique ID for this character's guild
     local guildName
     local gName, _, _, gRealm = GetGuildInfo("player")
+
     if gName then
         if gRealm == nil then
             gRealm = GetRealmName()
