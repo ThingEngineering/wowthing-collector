@@ -1,3 +1,7 @@
+v11.0.0.4
+---------
+- Fixed typo in event data.
+
 v11.0.0.3
 ---------
 - Added Radiant Echoes event quests.
