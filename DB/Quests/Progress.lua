@@ -522,5 +522,5 @@ Module.db.progress = {
     -- Radiant Echoes (TWW prepatch)
     ["radiantDragonblight"] = { "weekly", { 82689 } },
     ["radiantDustwallow"] = { "weekly", { 82676 } },
-    ["radiantSearing"] = { " weekly", { 78938 } },
+    ["radiantSearing"] = { "weekly", { 78938 } },
 }
