@@ -1,3 +1,7 @@
+v11.0.0.3
+---------
+- Added Radiant Echoes event quests.
+
 v11.0.0.2
 ---------
 - Added weekly vault reward scanning.
