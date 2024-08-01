@@ -1,3 +1,8 @@
+v11.0.0.5
+---------
+- Added account bank (warbank) scanning.
+- Added some TWW currencies.
+
 v11.0.0.4
 ---------
 - Fixed typo in event data.
