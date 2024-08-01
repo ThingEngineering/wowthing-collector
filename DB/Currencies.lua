@@ -259,4 +259,18 @@ Module.db.currencies = {
     2679, 2685, 2691, 2700, 2701, -- Shoreline Switchback
     2680, 2686, 2692, 2702, 2703, -- Canopy Concours
     2681, 2687, 2693, 2704, 2705, -- Emerald Amble
+
+    -- The War Within
+    2803, -- Undercoin
+    2815, -- Resonance Crystals
+    2914, -- Weathered Harbinger Crest
+    2915, -- Carved Harbinger Crest
+    2916, -- Runed Harbinger Crest
+    2917, -- Gilded Harbinger Crest
+    3008, -- Valorstones
+    3028, -- Restored Coffer Key
+    3055, -- Mereldar Derby Mark
+    3056, -- Kej
+    3089, -- Residual Memories
+    3093, -- Nerub-ar Finery
 }
