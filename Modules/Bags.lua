@@ -10,6 +10,9 @@ local C_Item_IsItemDataCachedByID = C_Item.IsItemDataCachedByID
 local C_Item_RequestLoadItemDataByID = C_Item.RequestLoadItemDataByID
 
 function Module:OnEnable()
+    WWTCSaved.warbank = WWTCSaved.warbank or {}
+    WWTCSaved.warbank.items = WWTCSaved.warbank.items or {}
+
     Addon.charData.bags = Addon.charData.bags or {}
     Addon.charData.items = Addon.charData.items or {}
 
@@ -54,9 +57,17 @@ end
 -- Mark bank and bank bags for scanning
 function Module:BANKFRAME_OPENED()
     self.isBankOpen = true
+    
     self.dirtyBags[Enum.BagIndex.Bank] = true
     self.dirtyBags[Enum.BagIndex.Reagentbank] = true
+    
+    -- Bank bags
     for i = Enum.BagIndex.BankBag_1, Enum.BagIndex.BankBag_7 do
+        self.dirtyBags[i] = true
+    end
+
+    -- Warband bank
+    for i = Enum.BagIndex.AccountBankTab_1, Enum.BagIndex.AccountBankTab_5 do
         self.dirtyBags[i] = true
     end
 
@@ -134,7 +145,8 @@ function Module:ScanBagQueue()
     local isBank = (
         bagId == Enum.BagIndex.Bank or
         bagId == Enum.BagIndex.Reagentbank or
-        (bagId >= Enum.BagIndex.BankBag_1 and bagId <= Enum.BagIndex.BankBag_7)
+        (bagId >= Enum.BagIndex.BankBag_1 and bagId <= Enum.BagIndex.BankBag_7) or
+        (bagId >= Enum.BagIndex.AccountBankTab_1 and bagId <= Enum.BagIndex.AccountBankTab_5)
     )
     local scan = true
 
@@ -153,19 +165,22 @@ function Module:ScanBagQueue()
     if scan then
         local now = time()
 
-        if isBank then
-            Addon.charData.scanTimes["bank"] = now
+        local bag
+        if bagId >= Enum.BagIndex.AccountBankTab_1 then
+            WWTCSaved.warbank.scannedAt = now
+
+            WWTCSaved.warbank.items["b"..bagId] = {}
+            bag = WWTCSaved.warbank.items["b"..bagId]
         else
-            Addon.charData.scanTimes["bags"] = now
-        end
+            Addon.charData.scanTimes[isBank and "bank" or "bags"] = now
 
-        Addon.charData.items["b"..bagId] = {}
-        local bag = Addon.charData.items["b"..bagId]
+            Addon.charData.items["b"..bagId] = {}
+            bag = Addon.charData.items["b"..bagId]
 
-        -- Update bag ID
-        if bagId >= 1 then
-            local bagItemID, _ = GetInventoryItemID('player', C_Container_ContainerIDToInventoryID(bagId))
-            Addon.charData.bags["b"..bagId] = bagItemID
+            if bagId >= 1 then
+                local bagItemID, _ = GetInventoryItemID('player', C_Container_ContainerIDToInventoryID(bagId))
+                Addon.charData.bags["b"..bagId] = bagItemID
+            end
         end
 
         local numSlots = C_Container_GetContainerNumSlots(bagId)
