@@ -1,3 +1,7 @@
+v11.0.0.6
+---------
+- Added Radiant Echoes first boss kill.
+
 v11.0.0.5
 ---------
 - Added account bank (warbank) scanning.
