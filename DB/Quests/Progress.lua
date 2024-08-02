@@ -520,8 +520,8 @@ Module.db.progress = {
     ["remixSha"] = { "daily", { 32099 } },
 
     -- Radiant Echoes (TWW prepatch)
-    ["radiantDragonblight"] = { "weekly", { 82689 } },
-    ["radiantDustwallow"] = { "weekly", { 82676 } },
-    ["radiantSearing"] = { "weekly", { 78938 } },
+    ["radiantDragonblight"] = { "daily", { 82689 } },
+    ["radiantDustwallow"] = { "daily", { 82676 } },
+    ["radiantSearing"] = { "daily", { 78938 } },
     ["radiantFirstKill"] = { "weekly", { 84083 } },
 }
