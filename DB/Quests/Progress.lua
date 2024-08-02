@@ -523,4 +523,5 @@ Module.db.progress = {
     ["radiantDragonblight"] = { "weekly", { 82689 } },
     ["radiantDustwallow"] = { "weekly", { 82676 } },
     ["radiantSearing"] = { "weekly", { 78938 } },
+    ["radiantFirstKill"] = { "weekly", { 84083 } },
 }
