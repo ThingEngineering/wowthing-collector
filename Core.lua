@@ -130,9 +130,11 @@ end
 -- Utils
 
 function Addon:TableKeys(tbl)
+    local index = 1
     local keys = {}
-    for key, value in pairs(tbl) do
-        keys[#keys + 1] = key
+    for key, _ in pairs(tbl) do
+        keys[index] = key
+        index = index + 1
     end
     return keys
 end
@@ -240,7 +242,7 @@ end
 --      finished        boolean     True when finished without any delay; false otherwise.
 function Addon:BatchWork(workload, onFinish, onDelay)
     local maxDuration = 500 / (tonumber(C_CVar.GetCVar("targetFPS")) or GetFrameRate())
-    local startTime = debugprofilestop()
+    -- local startTime = debugprofilestop()
     local function continue()
         local startTime = debugprofilestop()
         local task = tremove(workload)
@@ -279,19 +281,19 @@ function Addon:DeltaEncode(ids, onFinish)
     local maxDiff = strlen(CHAR_VALUES)
 
     local anyDiffed = false
-    local output = {}
     local index = 1
-    local last = nil
+    local lastId = nil
+    local output = {}
     local workload = {}
 
     for i = 1, count, 1000 do
-        table.insert(workload, 1, function()
+        tinsert(workload, 1, function()
             for j = i, min(i + 999, count) do
-                local questId = ids[j]
-                if last ~= nil then
-                    local diff = questId - last
+                local currentId = ids[j]
+                if lastId ~= nil then
+                    local diff = currentId - lastId
                     if diff <= maxDiff then
-                        if anyDiffed ~= true then
+                        if anyDiffed == false then
                             anyDiffed = true
                             output[index] = '.'
                             index = index + 1
@@ -301,24 +303,26 @@ function Addon:DeltaEncode(ids, onFinish)
                     else
                         output[index] = '|'
                         index = index + 1
-                        last = nil
+                        lastId = nil
                     end
                 end
 
-                if last == nil then
+                if lastId == nil then
                     anyDiffed = false
-                    output[index] = questId
+                    output[index] = currentId
                 end
 
                 index = index + 1
-                last = questId
+                lastId = currentId
             end
         end)
     end
 
-    Addon:BatchWork(workload, function()
+    tinsert(workload, 1, function()
         onFinish(table.concat(output, ''))
     end)
+
+    Addon:BatchWork(workload)
 end
 
 function Addon:DeltaDecode(squished)

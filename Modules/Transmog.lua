@@ -6,19 +6,23 @@ Module.db = {}
 
 local C_TransmogCollection_GetAllAppearanceSources = C_TransmogCollection.GetAllAppearanceSources
 local C_TransmogCollection_GetAppearanceInfoBySource = C_TransmogCollection.GetAppearanceInfoBySource
-local C_TransmogCollection_GetCategoryAppearances = C_TransmogCollection.GetCategoryAppearances
 local C_TransmogCollection_GetSourceInfo = C_TransmogCollection.GetSourceInfo
 
+local MAX_APPEARANCE_ID = 100000 -- actually 94162 currently
+
 function Module:OnEnable()
-    self.isOpen = false
     self.isScanning = false
-    self.allAppearances = {}
     self.sources = {}
     self.transmog = {}
-    
+    self.transmogSlots = {}
     self.transmogLocation = TransmogUtil.GetTransmogLocation('HEADSLOT', Enum.TransmogType.Appearance, Enum.TransmogModification.Main)
 
-    self.transmogSlots = {}
+    setmetatable(Module.sources, {
+        __index = function(t, k)
+            t[k] = {}
+            return t[k]
+        end })
+
     for categoryID = 1, 29 do
         local slot = CollectionWardrobeUtil.GetSlotFromCategoryID(categoryID)
         if slot ~= nil then
@@ -29,8 +33,6 @@ function Module:OnEnable()
     self:RegisterEvent('LOADING_SCREEN_DISABLED')
     self:RegisterEvent('TRANSMOG_COLLECTION_SOURCE_ADDED')
     self:RegisterEvent('TRANSMOG_COLLECTION_SOURCE_REMOVED')
-    self:RegisterEvent('TRANSMOGRIFY_OPEN')
-    self:RegisterEvent('TRANSMOGRIFY_CLOSE')
 end
 
 -- function Module:OnEnteringWorld()
@@ -40,8 +42,13 @@ end
 function Module:LOADING_SCREEN_DISABLED()
     self:UnregisterEvent('LOADING_SCREEN_DISABLED')
 
+    local workload = {
+        function()
+            C_Timer.After(5, function() self:UpdateTransmog() end)
+        end
+    }
+
     if WWTCSaved.transmogSourcesSquish ~= nil then
-        local workload = {}
         
         for modifier, squished in pairs(WWTCSaved.transmogSourcesSquish) do
             tinsert(workload, function()
@@ -53,26 +60,15 @@ function Module:LOADING_SCREEN_DISABLED()
                 self.sources[tonumber(strsub(modifier, 2))] = temp
             end)
         end
-
-        Addon:BatchWork(workload)
+    else
+        WWTCSaved.transmogSourcesSquish = {}
     end
 
-    C_Timer.After(5, function()
-        self:UpdateTransmog()
-    end)
-end
-
-function Module:TRANSMOGRIFY_OPEN()
-    self.isOpen = true
-end
-
-function Module:TRANSMOGRIFY_CLOSE()
-    self.isOpen = false
+    Addon:BatchWork(workload)
 end
 
 function Module:TRANSMOG_COLLECTION_SOURCE_ADDED(_, sourceId)
     local sourceInfo = C_TransmogCollection_GetSourceInfo(sourceId)
-    self.sources[sourceInfo.itemModID] = self.sources[sourceInfo.itemModID] or {}
     self.sources[sourceInfo.itemModID][sourceInfo.itemID] = true
 
     local info = C_TransmogCollection_GetAppearanceInfoBySource(sourceId)
@@ -87,7 +83,6 @@ end
 
 function Module:TRANSMOG_COLLECTION_SOURCE_REMOVED(_, sourceId)
     local sourceInfo = C_TransmogCollection_GetSourceInfo(sourceId)
-    self.sources[sourceInfo.itemModID] = self.sources[sourceInfo.itemModID] or {}
     self.sources[sourceInfo.itemModID][sourceInfo.itemID] = nil
 
     -- This appearance may be completely uncollected now, wipe it out if so
@@ -107,78 +102,32 @@ function Module:UpdateTransmog()
     Addon.charData.scanTimes["transmog"] = time()
     self.isScanning = true
 
-    self.transmog = {}
+    local sources = self.sources
+    local transmog = self.transmog
+    wipe(transmog)
 
-    -- Save current settings to reset later
-    self.oldSettings = {}
-    self.oldSettings.showCollected = C_TransmogCollection.GetCollectedShown()
-    self.oldSettings.showUncollected = C_TransmogCollection.GetUncollectedShown()
-
-    self.oldSettings.sourceTypes = {}
-    for index = 1, 6 do
-        self.oldSettings.sourceTypes[index] = C_TransmogCollection.IsSourceTypeFilterChecked(index)
-    end
-    
-    if self.isOpen == false then
-        C_TransmogCollection.SetAllCollectionTypeFilters(true)
-        C_TransmogCollection.SetAllSourceTypeFilters(true)
-    end
-
-    -- Run this in a timer so that the filter changes take effect
-    C_Timer.After(0, function() self:ScanInitialize() end)
-end
-
-function Module:ScanInitialize()
     -- Manual checks for buggy appearances
     for _, manualTransmog in ipairs(self.db.manual) do
         local have = C_TransmogCollection.PlayerHasTransmog(manualTransmog.itemId, manualTransmog.modifierId)
         if have then
-            self.transmog[manualTransmog.appearanceId] = true
-
-            self.sources[manualTransmog.modifierId] = self.sources[manualTransmog.modifierId] or {}
-            self.sources[manualTransmog.modifierId][manualTransmog.itemId] = true
+            transmog[manualTransmog.appearanceId] = true
+            sources[manualTransmog.modifierId][manualTransmog.itemId] = true
         end
     end
 
-    -- Load all appearance categories into chunks of 100 appearances
-    self.allAppearances = { {} }
-
-    local workload = { }
-    for categoryID, _ in pairs(self.transmogSlots) do
-        table.insert(workload, function()
-            local appearances = C_TransmogCollection_GetCategoryAppearances(categoryID, self.transmogLocation)
-            local currentTable = self.allAppearances[#self.allAppearances]
-            for _, appearance in ipairs(appearances) do
-                table.insert(currentTable, appearance)
-                if #currentTable == 100 then
-                    currentTable = {}
-                    table.insert(self.allAppearances, currentTable)
-                end
-            end
-        end)
-    end
-
-    Addon:BatchWork(workload, function() Module:ScanBegin() end)
-end
-
-function Module:ScanBegin()
     local workload = {}
-    
-    -- Scan all appearances
-    for _, chunk in ipairs(self.allAppearances) do
+    -- 200 is a completely arbitrary chunk size, idk
+    for chunkIndex = 1, MAX_APPEARANCE_ID, 200 do
         table.insert(workload, function()
             -- local startTime = debugprofilestop()
-            for _, appearance in ipairs(chunk) do
-                if appearance.isCollected then
-                    local visualId = appearance.visualID
-                    self.transmog[visualId] = true
-
-                    local sourceIds = C_TransmogCollection_GetAllAppearanceSources(visualId) -- itemModifiedAppearenceID[]
-                    for _, sourceId in ipairs(sourceIds or {}) do
+            for appearanceId = chunkIndex, chunkIndex + 199 do
+                local sourceIds = C_TransmogCollection_GetAllAppearanceSources(appearanceId)
+                if sourceIds then
+                    for _, sourceId in ipairs(sourceIds) do
                         local sourceInfo = C_TransmogCollection_GetSourceInfo(sourceId)
                         if sourceInfo.isCollected then
-                            self.sources[sourceInfo.itemModID] = self.sources[sourceInfo.itemModID] or {}
-                            self.sources[sourceInfo.itemModID][sourceInfo.itemID] = true
+                            transmog[sourceInfo.visualID] = true
+                            sources[sourceInfo.itemModID][sourceInfo.itemID] = true
                         end
                     end
                 end
@@ -194,15 +143,6 @@ function Module:ScanEnd()
     self.isScanning = false
 
     self:SaveTransmog()
-
-    -- Reset settings
-    if self.isOpen == false then
-        C_TransmogCollection.SetCollectedShown(self.oldSettings.showCollected)
-        C_TransmogCollection.SetUncollectedShown(self.oldSettings.showUncollected)
-        for index = 1, 6 do
-            C_TransmogCollection.SetSourceTypeFilter(index, self.oldSettings.sourceTypes[index])
-        end
-    end
 end
 
 function Module:SaveTransmog()
@@ -215,7 +155,7 @@ function Module:SaveTransmog()
         Addon.charData.transmogSquish = output
     end)
 
-    WWTCSaved.transmogSourcesSquish = {}
+    wipe(WWTCSaved.transmogSourcesSquish)
     for modifier, itemIdTable in pairs(self.sources) do
         local itemIds = Addon:TableKeys(itemIdTable)
         sort(itemIds)
