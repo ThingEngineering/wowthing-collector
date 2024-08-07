@@ -3,13 +3,19 @@ local Module = Addon:NewModule('XP')
 
 
 function Module:OnEnable()
+    self:RegisterBucketEvent({ 'DISABLE_XP_GAIN', 'ENABLE_XP_GAIN' }, 1, 'UpdateDisabled')
     self:RegisterBucketEvent({ 'PLAYER_UPDATE_RESTING', 'UPDATE_EXHAUSTION' }, 1, 'UpdateRested')
     self:RegisterBucketEvent({ 'PLAYER_XP_UPDATE' }, 1, 'UpdateXP')
 end
 
 function Module:OnEnteringWorld()
+    self:UpdateDisabled()
     self:UpdateRested()
     self:UpdateXP({ player = 1 })
+end
+
+function Module:UpdateDisabled()
+    Addon.charData.isXpDisabled = IsXPUserDisabled() == 1
 end
 
 function Module:UpdateRested()
