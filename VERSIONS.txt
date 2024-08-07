@@ -1,3 +1,9 @@
+v11.0.0.7
+---------
+- Added profession concentration currency IDs.
+- Added XP disabled/enabled scanning.
+- Changed transmog scanning to a much faster "just try every appearance ID" approach.
+
 v11.0.0.6
 ---------
 - Added Radiant Echoes first boss kill.
