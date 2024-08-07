@@ -273,4 +273,21 @@ Module.db.currencies = {
     3056, -- Kej
     3089, -- Residual Memories
     3093, -- Nerub-ar Finery
+
+    3013, -- Jewelcrafting Concentration
+    3040, -- Blacksmithing Concentration
+    3041, -- Tailoring Concentration
+    3042, -- Leatherworking Concentration
+    3043, -- Inscription Concentration
+    3044, -- Engineering Concentration
+    3045, -- Alchemy Concentration
+    3046, -- Enchanting Concentration
+    3047, -- Jewelcrafting Concentration
+    3048, -- Tailoring Concentration
+    3049, -- Leatherworking Concentration
+    3050, -- Blacksmithing Concentration
+    3051, -- Enchanting Concentration
+    3052, -- Engineering Concentration
+    3053, -- Inscription Concentration
+    3054, -- Alchemy Concentration
 }
