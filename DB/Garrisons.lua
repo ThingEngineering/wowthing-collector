@@ -5,12 +5,12 @@ Module.db.garrisons = {
     -- Warlords of Draenor
     {
         mustBeInGarrison = true,
-        type = Enum.GarrisonType.Type_6_0,
+        type = Enum.GarrisonType.Type_6_0_Garrison,
     },
     -- Legion
     {
         mustBeInGarrison = false,
-        type = Enum.GarrisonType.Type_7_0,
+        type = Enum.GarrisonType.Type_7_0_Garrison,
     }
 }
 
