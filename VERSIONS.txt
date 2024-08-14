@@ -1,3 +1,7 @@
+v11.0.2.1
+---------
+- Fixed garrison error spam, thanks ergh99 (#19).
+
 v11.0.0.7
 ---------
 - Added profession concentration currency IDs.
