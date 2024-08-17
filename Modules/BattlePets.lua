@@ -38,8 +38,8 @@ function Module:UpdateBattlePets()
     local pets = {}
     for petIndex = 1, numOwned do
         local guid, speciesId, owned, _, level = CPJ_GetPetInfoByIndex(petIndex)
-        local _, _, _, _, quality = CPJ_GetPetStats(guid)
         if guid ~= nil and owned then
+            local _, _, _, _, quality = CPJ_GetPetStats(guid)
             pets[Module:ParseGUID(guid)] = table.concat({
                 speciesId,
                 level,
