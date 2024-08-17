@@ -1,3 +1,8 @@
+v11.0.2.2
+---------
+- Added battle pet scanning.
+- Changed WoD garrison scanning to work from anywhere.
+
 v11.0.2.1
 ---------
 - Fixed garrison error spam, thanks ergh99 (#19).
