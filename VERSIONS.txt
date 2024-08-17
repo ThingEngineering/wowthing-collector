@@ -1,3 +1,7 @@
+v11.0.2.3
+---------
+- Fixed a battle pet scanning error.
+
 v11.0.2.2
 ---------
 - Added battle pet scanning.
