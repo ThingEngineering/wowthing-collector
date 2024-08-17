@@ -4,7 +4,7 @@ local Module = LibStub('AceAddon-3.0'):GetAddon('WoWthing_Collector'):GetModule(
 Module.db.garrisons = {
     -- Warlords of Draenor
     {
-        mustBeInGarrison = true,
+        mustBeInGarrison = false,
         type = Enum.GarrisonType.Type_6_0_Garrison,
     },
     -- Legion
