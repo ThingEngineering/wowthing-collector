@@ -17,6 +17,8 @@ Addon:SetDefaultModulePrototype(ModulePrototype)
 
 local LibRealmInfo = LibStub('LibRealmInfo17janekjl')
 
+local CT_After = C_Timer.After
+
 -- Default SavedVariables
 local defaultWWTCSaved = {
     version = 9158,
@@ -45,6 +47,8 @@ function Addon:OnInitialize()
     WWTCSaved.honorMax = WWTCSaved.honorMax or 0
 
     self.parseItemLinkCache = {}
+    self.working = false
+    self.workloads = {}
 
     -- Build a unique ID for this character
     -- id, name, nameForAPI, rules, locale, nil, region, timezone, connections, englishName, englishNameForAPI
@@ -240,27 +244,55 @@ end
 --      onDelay         function?   Optional callback each time work delays to the next frame.
 --  Returns:
 --      finished        boolean     True when finished without any delay; false otherwise.
-function Addon:BatchWork(workload, onFinish, onDelay)
-    local maxDuration = 500 / (tonumber(C_CVar.GetCVar("targetFPS")) or GetFrameRate())
+function Addon:QueueWorkload(workload, onFinish, onDelay)
+    tinsert(self.workloads, { workload = workload, onFinish = onFinish, onDelay = onDelay })
+    if self.working == false then
+        self.working = true
+        Addon:BatchWork()
+    end
+end
+
+function Addon:BatchWork()
+    local maxDuration = 250 / (tonumber(C_CVar.GetCVar("targetFPS")) or GetFrameRate())
     -- local startTime = debugprofilestop()
     local function continue()
         local startTime = debugprofilestop()
-        local task = tremove(workload)
-        while (task) do
+        while true do
+            local workloadData = tremove(self.workloads)
+            if workloadData == nil then
+                self.working = false
+                return true
+            end
+            
+            local task = tremove(workloadData.workload)
+            if task == nil then
+                self.working = false
+                return true
+            end
+
             task()
-            if (debugprofilestop() - startTime > maxDuration) then
-                C_Timer.After(0, continue)
-                if (onDelay) then
-                    onDelay()
+            
+            if #workloadData.workload > 0 then
+                tinsert(self.workloads, 1, workloadData)
+            else
+                if workloadData.onFinish then
+                    workloadData.onFinish()
+                end
+
+                if #self.workloads == 0 then
+                    self.working = false
+                    return true
+                end
+            end
+
+            if (debugprofilestop() - startTime) > maxDuration then
+                CT_After(0, continue)
+                if workloadData.onDelay then
+                    workloadData.onDelay()
                 end
                 return false
             end
-            task = tremove(workload)
         end
-        if (onFinish) then
-            onFinish()
-        end
-        return true
     end
     return continue()
 end
@@ -322,7 +354,7 @@ function Addon:DeltaEncode(ids, onFinish)
         onFinish(table.concat(output, ''))
     end)
 
-    Addon:BatchWork(workload)
+    Addon:QueueWorkload(workload)
 end
 
 function Addon:DeltaDecode(squished)

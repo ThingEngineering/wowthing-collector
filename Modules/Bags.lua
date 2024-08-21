@@ -125,102 +125,94 @@ function Module:UpdateBags()
     end
 
     self.isScanning = true
-    self.scanQueue = {}
+
+    local workload = {}
+
     for bagId, _ in pairs(self.dirtyBags) do
-        tinsert(self.scanQueue, bagId)
-        self.dirtyBags[bagId] = nil
-    end
+        tinsert(workload, function()
+            -- local startTime = debugprofilestop()
 
-    C_Timer.After(0, function() self:ScanBagQueue() end)
-end
-
-function Module:ScanBagQueue()
-    local bagId = tremove(self.scanQueue)
-    if bagId == nil then
-        self.isScanning = false
-        return
-    end
-
-    -- Short circuit if bank isn't open
-    local isBank = (
-        bagId == Enum.BagIndex.Bank or
-        bagId == Enum.BagIndex.Reagentbank or
-        (bagId >= Enum.BagIndex.BankBag_1 and bagId <= Enum.BagIndex.BankBag_7) or
-        (bagId >= Enum.BagIndex.AccountBankTab_1 and bagId <= Enum.BagIndex.AccountBankTab_5)
-    )
-    local scan = true
-
-    if isBank and not self.isBankOpen then
-        scan = false
-    end
-    -- Reagent bank is weird, make sure that the bank is open or it was actually updated
-    if bagId == Enum.BagIndex.Reagentbank then
-        if not (self.isBankOpen or self.wasReagentBankChanged) then
-            scan = false
-        end
-        self.wasReagentBankChanged = false
-    end
-
-    local requestedData = false
-    if scan then
-        local now = time()
-
-        local bag
-        if bagId >= Enum.BagIndex.AccountBankTab_1 then
-            WWTCSaved.warbank.scannedAt = now
-
-            WWTCSaved.warbank.items["b"..bagId] = {}
-            bag = WWTCSaved.warbank.items["b"..bagId]
-        else
-            Addon.charData.scanTimes[isBank and "bank" or "bags"] = now
-
-            Addon.charData.items["b"..bagId] = {}
-            bag = Addon.charData.items["b"..bagId]
-
-            if bagId >= 1 then
-                local bagItemID, _ = GetInventoryItemID('player', C_Container_ContainerIDToInventoryID(bagId))
-                Addon.charData.bags["b"..bagId] = bagItemID
+            -- Short circuit if bank isn't open
+            local isBank = (
+                bagId == Enum.BagIndex.Bank or
+                bagId == Enum.BagIndex.Reagentbank or
+                (bagId >= Enum.BagIndex.BankBag_1 and bagId <= Enum.BagIndex.BankBag_7) or
+                (bagId >= Enum.BagIndex.AccountBankTab_1 and bagId <= Enum.BagIndex.AccountBankTab_5)
+            )
+            if isBank and not self.isBankOpen then
+                return
             end
-        end
 
-        local numSlots = C_Container_GetContainerNumSlots(bagId)
-        if numSlots > 0 then
-            for slot = 1, numSlots do
-                -- This always works, even if the full item data isn't cached
-                local itemId = C_Container_GetContainerItemID(bagId, slot)
-                if itemId then
-                    if C_Item_IsItemDataCachedByID(itemId) then
-                        local itemInfo = C_Container_GetContainerItemInfo(bagId, slot)
-                        if itemInfo ~= nil and itemInfo.hyperlink ~= nil then
-                            local parsed = Addon:ParseItemLink(itemInfo.hyperlink, itemInfo.quality or -1, itemInfo.stackCount or 1)
-                            bag["s"..slot] = parsed
+            -- Reagent bank is weird, make sure that the bank is open or it was actually updated
+            if bagId == Enum.BagIndex.Reagentbank then
+                if not (self.isBankOpen or self.wasReagentBankChanged) then
+                    return
+                end
+                self.wasReagentBankChanged = false
+            end
+
+            local now = time()
+            local bag
+            local requestedData = false
+
+            if bagId >= Enum.BagIndex.AccountBankTab_1 then
+                WWTCSaved.warbank.scannedAt = now
+    
+                WWTCSaved.warbank.items["b"..bagId] = {}
+                bag = WWTCSaved.warbank.items["b"..bagId]
+            else
+                Addon.charData.scanTimes[isBank and "bank" or "bags"] = now
+    
+                Addon.charData.items["b"..bagId] = {}
+                bag = Addon.charData.items["b"..bagId]
+    
+                if bagId >= 1 then
+                    local bagItemID, _ = GetInventoryItemID('player', C_Container_ContainerIDToInventoryID(bagId))
+                    Addon.charData.bags["b"..bagId] = bagItemID
+                end
+            end
+    
+            local numSlots = C_Container_GetContainerNumSlots(bagId)
+            if numSlots > 0 then
+                for slot = 1, numSlots do
+                    -- This always works, even if the full item data isn't cached
+                    local itemId = C_Container_GetContainerItemID(bagId, slot)
+                    if itemId then
+                        if C_Item_IsItemDataCachedByID(itemId) then
+                            local itemInfo = C_Container_GetContainerItemInfo(bagId, slot)
+                            if itemInfo ~= nil and itemInfo.hyperlink ~= nil then
+                                local parsed = Addon:ParseItemLink(itemInfo.hyperlink, itemInfo.quality or -1, itemInfo.stackCount or 1)
+                                bag["s"..slot] = parsed
+                            end
+                        elseif self.requested[itemId] == nil then
+                            requestedData = true
+                            self.requested[itemId] = true
+                            C_Item_RequestLoadItemDataByID(itemId)
                         end
-                    elseif self.requested[itemId] == nil then
-                        requestedData = true
-                        self.requested[itemId] = true
-                        C_Item_RequestLoadItemDataByID(itemId)
                     end
                 end
             end
-        end
+
+            -- If we requested item data, come back and scan this bag again later
+            if requestedData then
+                self.dirtyBags[bagId] = true
+                self.isRequesting = true
+            end
+
+            -- print('bags '..(debugprofilestop() - startTime))
+        end)
+        self.dirtyBags[bagId] = nil
     end
 
-    -- If we requested item data, come back and scan this bag again later
-    if requestedData then
-        self.dirtyBags[bagId] = true
-        self.isRequesting = true
-    end
+    Addon:QueueWorkload(workload, function() Module:ScanEnd() end)
+end
 
-    -- If the scan queue still has bags, add a timer for the next one
-    if #self.scanQueue > 0 then
-        C_Timer.After(0, function() self:ScanBagQueue() end)
-    else
-        self.isScanning = false
+function Module:ScanEnd()
+    self.isScanning = false
 
-        -- Queue another scan if any bags are dirty
-        local bagKeys = Addon:TableKeys(self.dirtyBags)
-        if #bagKeys > 0 then
-            self:StartUpdateBagsTimer()
-        end
+    -- Queue another scan if any bags are dirty
+    local bagKeys = Addon:TableKeys(self.dirtyBags)
+    if #bagKeys > 0 then
+        self:StartUpdateBagsTimer()
     end
 end

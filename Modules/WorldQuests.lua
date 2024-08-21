@@ -110,5 +110,5 @@ function Module:UpdateWorldQuests()
         end
     end    
 
-    Addon:BatchWork(workload)
+    Addon:QueueWorkload(workload)
 end

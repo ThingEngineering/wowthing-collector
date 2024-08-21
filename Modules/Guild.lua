@@ -119,5 +119,5 @@ function Module:UpdateGuildBank()
         end)
     end
     
-    Addon:BatchWork(workload)
+    Addon:QueueWorkload(workload)
 end

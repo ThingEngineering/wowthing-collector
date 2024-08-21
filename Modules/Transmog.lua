@@ -49,7 +49,6 @@ function Module:LOADING_SCREEN_DISABLED()
     }
 
     if WWTCSaved.transmogSourcesSquish ~= nil then
-        
         for modifier, squished in pairs(WWTCSaved.transmogSourcesSquish) do
             tinsert(workload, function()
                 local itemIds = Addon:DeltaDecode(squished)
@@ -64,7 +63,7 @@ function Module:LOADING_SCREEN_DISABLED()
         WWTCSaved.transmogSourcesSquish = {}
     end
 
-    Addon:BatchWork(workload)
+    Addon:QueueWorkload(workload)
 end
 
 function Module:TRANSMOG_COLLECTION_SOURCE_ADDED(_, sourceId)
@@ -117,10 +116,10 @@ function Module:UpdateTransmog()
 
     local workload = {}
     -- 200 is a completely arbitrary chunk size, idk
-    for chunkIndex = 1, MAX_APPEARANCE_ID, 200 do
+    for chunkIndex = 1, MAX_APPEARANCE_ID, 100 do
         table.insert(workload, function()
             -- local startTime = debugprofilestop()
-            for appearanceId = chunkIndex, chunkIndex + 199 do
+            for appearanceId = chunkIndex, chunkIndex + 99 do
                 local sourceIds = C_TransmogCollection_GetAllAppearanceSources(appearanceId)
                 if sourceIds then
                     for _, sourceId in ipairs(sourceIds) do
@@ -132,11 +131,11 @@ function Module:UpdateTransmog()
                     end
                 end
             end
-            -- print('chunk '..(debugprofilestop() - startTime))
+            -- print('transmog '..(debugprofilestop() - startTime))
         end)
     end
 
-    Addon:BatchWork(workload, function() Module:ScanEnd() end)
+    Addon:QueueWorkload(workload, function() Module:ScanEnd() end)
 end
 
 function Module:ScanEnd()
