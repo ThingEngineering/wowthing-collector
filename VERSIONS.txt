@@ -1,3 +1,7 @@
+v11.0.2.4
+---------
+- Changed scanning to be less aggressive in general.
+
 v11.0.2.3
 ---------
 - Fixed a battle pet scanning error.
