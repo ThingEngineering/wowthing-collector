@@ -1,3 +1,7 @@
+v11.0.2.5
+---------
+- Changed transmog scanning to hopefully resolve loading weirdness.
+
 v11.0.2.4
 ---------
 - Changed scanning to be less aggressive in general.
