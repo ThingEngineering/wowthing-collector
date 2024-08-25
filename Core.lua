@@ -73,7 +73,8 @@ function Addon:Cleanup()
     WWTCSaved.quests = nil
     WWTCSaved.transmogSources = nil
     WWTCSaved.transmogSourcesV2 = nil
-
+    WWTCSaved.transmogSourcesSquish = nil
+    
     -- Remove data for any characters not seen in the last 3 days
     local old = time() - (3 * 24 * 60 * 60)
     for charName, charData in pairs(WWTCSaved.chars) do
