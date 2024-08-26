@@ -1,3 +1,7 @@
+v11.0.2.6
+---------
+- Fixed error after logging out before the first transmog scan completes.
+
 v11.0.2.5
 ---------
 - Changed transmog scanning to hopefully resolve loading weirdness.
