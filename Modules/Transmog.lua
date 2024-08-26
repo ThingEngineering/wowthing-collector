@@ -93,9 +93,9 @@ function Module:UpdateTransmog()
     if self.isScanning then return end
 
     local now = time()
-    -- Don't scan if it's been less than 30 minutes since the last one
+    -- Don't scan if it's been less than an hour since the last one
     local lastScan = Addon.charData.scanTimes["transmog"]
-    if lastScan ~= nil and (now - lastScan) < 1800 then return end
+    if lastScan ~= nil and (now - lastScan) < 3600 then return end
 
     Addon.charData.scanTimes["transmog"] = now
     self.isScanning = true
