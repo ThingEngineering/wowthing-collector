@@ -45,6 +45,10 @@ function Module:LOADING_SCREEN_DISABLED()
     }
 
     if WWTCSaved.transmogSourcesSquishV2 ~= nil then
+        if type(WWTCSaved.transmogSourcesSquishV2) ~= 'string' then
+            WWTCSaved.transmogSourcesSquishV2 = ''
+        end
+
         local modifiedAppearanceIds = Addon:DeltaDecode(WWTCSaved.transmogSourcesSquishV2)
         local temp = {}
         for _, modifiedApperanceId in ipairs(modifiedAppearanceIds) do
@@ -52,7 +56,7 @@ function Module:LOADING_SCREEN_DISABLED()
         end
         self.modifiedAppearances = temp
     else
-        WWTCSaved.transmogSourcesSquishV2 = {}
+        WWTCSaved.transmogSourcesSquishV2 = ''
     end
 
     Addon:QueueWorkload(workload)
