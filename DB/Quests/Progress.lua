@@ -508,14 +508,16 @@ Module.db.progress = {
     ["dfAmirdrassil1Mythic"] = { "once", { 78602 } },
 
     -- The War Within
-    ["twwDungeonAra"] = { "weekly", { 83465 } },
-    ["twwDungeonCinderbrew"] = { "weekly", { 83436 } },
-    ["twwDungeonCity"] = { "weekly", { 83469 } },
-    ["twwDungeonDarkflame"] = { "weekly", { 83443 } },
-    ["twwDungeonDawnbreaker"] = { "weekly", { 83459 } },
-    ["twwDungeonPriory"] = { "weekly", { 83458 } },
-    ["twwDungeonRookery"] = { "weekly", { 83432 } },
-    ["twwDungeonStonevault"] = { "weekly", { 83457 } },
+    ["twwDungeon"] = { "weekly", {
+        83465, -- Ara-Kara, City of Echoes
+        83436, -- Cinderbrew Meadery
+        83469, -- City of Threads
+        83443, -- Darkflame Cleft
+        83458, -- Priory of the Sacred Flame
+        83459, -- The Dawnbreaker
+        83432, -- The Rookery
+        83457, -- The Stonevault
+    } },
 
     ["twwWorldsoul"] = { "weekly", {
         82511, -- Worldsoul: Awakening Machine
