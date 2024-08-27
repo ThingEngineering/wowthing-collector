@@ -507,17 +507,15 @@ Module.db.progress = {
     ["dfAmirdrassil1Heroic"] = { "once", { 78601 } },
     ["dfAmirdrassil1Mythic"] = { "once", { 78602 } },
 
-    -- Remix: Pandaria
-    ["remixDungeon"] = { "daily", { 80446 } },
-    ["remixRaid"] = { "daily", { 80447 } },
-    ["remixScenario"] = { "daily", { 80448 } },
-    
-    ["remixCelestials"] = { "daily", { 33117 } },
-    ["remixGalleon"] = { "daily", { 32098 } },
-    ["remixNalak"] = { "daily", { 32518 } },
-    ["remixOondasta"] = { "daily", { 32519 } },
-    ["remixOrdos"] = { "daily", { 33118 } },
-    ["remixSha"] = { "daily", { 32099 } },
+    -- The War Within
+    ["twwDungeonAra"] = { "weekly", { 83465 } },
+    ["twwDungeonCinderbrew"] = { "weekly", { 83436 } },
+    ["twwDungeonCity"] = { "weekly", { 83469 } },
+    ["twwDungeonDarkflame"] = { "weekly", { 83443 } },
+    ["twwDungeonDawnbreaker"] = { "weekly", { 83459 } },
+    ["twwDungeonPriory"] = { "weekly", { 83458 } },
+    ["twwDungeonRookery"] = { "weekly", { 83432 } },
+    ["twwDungeonStonevault"] = { "weekly", { 83457 } },
 
     -- Radiant Echoes (TWW prepatch)
     ["radiantDragonblight"] = { "daily", { 82689 } },
