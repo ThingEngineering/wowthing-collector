@@ -1,3 +1,8 @@
+v11.0.2.7
+---------
+- Added TWW weekly dungeon quests.
+- Added TWW weekly worldsoul quests.
+
 v11.0.2.6
 ---------
 - Fixed error after logging out before the first transmog scan completes.
