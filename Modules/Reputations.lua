@@ -19,8 +19,15 @@ function Module:UpdateReputations()
     Addon.charData.reputations = {}
     
     for _, factionID in ipairs(self.db.reputations) do
-        local _, _, _, _, _, barValue = GetFactionInfoByID(factionID)
-        Addon.charData.reputations[factionID] = barValue
+        local renownData = C_MajorFactions.GetMajorFactionRenownInfo(factionID)
+        if renownData ~= nil then
+            Addon.charData.reputations[factionID] = (renownData.renownLevel * renownData.renownLevelThreshold) + renownData.renownReputationEarned
+        else
+            local factionData = C_Reputation.GetFactionDataByID(factionID)
+            if factionData ~= nil then
+                Addon.charData.reputations[factionID] = factionData.currentStanding
+            end
+        end
     end
 
     for _, friendshipID in ipairs(self.db.friendships) do
