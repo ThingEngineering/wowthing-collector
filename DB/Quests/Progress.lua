@@ -508,6 +508,19 @@ Module.db.progress = {
     ["dfAmirdrassil1Mythic"] = { "once", { 78602 } },
 
     -- The War Within
+    ["twwAwakeningTheMachine"] = { "weekly", { 83333 } },
+    ["twwSpreadingTheLight"] = { "weekly", { 76586 } },
+    ["twwTheaterTroupe"] = { "weekly", { 83240 } },
+    ["twwSpiderPact"] = { "weekly", {
+        80544, -- The Weaver
+        80545, -- The General
+        80546, -- The Vizier
+    }},
+    ["twwSpiderWeekly"] = { "weekly", {
+        80670, -- Eyes of the Weaver
+        80671, -- Blade of the General
+        80672, -- Hand of the Vizier
+    }},
     ["twwDungeon"] = { "weekly", {
         83465, -- Ara-Kara, City of Echoes
         83436, -- Cinderbrew Meadery
@@ -518,7 +531,16 @@ Module.db.progress = {
         83432, -- The Rookery
         83457, -- The Stonevault
     } },
-
+    ["twwSpecialAssignment"] = { "weekly", {
+        82414, -- Special Assignment: A Pound of Cure
+        82531, -- Special Assignment: Bombs From Behind
+        82355, -- Special Assignment: Cinderbee Surge
+        82852, -- Special Assignment: Lynx Rescue
+        82787, -- Special Assignment: Rise of the Colossals
+        81691, -- Special Assignment: Shadows Below
+        81649, -- Special Assignment: Titanic Resurgence
+        83229, -- Special Assignment: When the Deeps Stir
+    }, true },
     ["twwWorldsoul"] = { "weekly", {
         82511, -- Worldsoul: Awakening Machine
         82453, -- Worldsoul: Encore!

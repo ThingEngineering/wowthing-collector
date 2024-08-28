@@ -82,12 +82,14 @@ function Module:UpdateQuests()
 
     local progressQuests = {}
     for questKey, questData in pairs(self.db.progress) do
+        local index = 0
         local prog = {
             reset = 0,
             status = 0,
             objectives = {}
         }
 
+        -- { weekly/biweekly/daily, { ids }, multi? }
         if questData[1] == 'weekly' then
             prog.reset = weeklyReset
         elseif questData[1] == 'biweekly' then
@@ -109,7 +111,6 @@ function Module:UpdateQuests()
                 prog.id = questId
                 prog.name = QuestUtils_GetQuestName(questId)
                 prog.status = 2
-                break
 
             -- Quest is in progress, check progress
             elseif C_QuestLog.IsOnQuest(questId) then
@@ -161,22 +162,39 @@ function Module:UpdateQuests()
 
                         C_QuestLog.SetSelectedQuest(oldQuestId)
                     end
+                end
+            end
+
+            if prog.status > 0 then
+                local actualKey = questKey
+                if questData[3] == true then
+                    index = index + 1
+                    actualKey = questKey..index
+                end
+
+                table.insert(progressQuests, table.concat({
+                    actualKey,
+                    prog.id,
+                    prog.name,
+                    prog.status,
+                    prog.reset,
+                    table.concat(prog.objectives, '_'),
+                }, '|'))
+
+                -- If it's not a multi-select we can bail now
+                if questData[3] ~= true then
                     break
                 end
             end
-        end
 
-        if prog.status > 0 then
-            table.insert(progressQuests, table.concat({
-                questKey,
-                prog.id,
-                prog.name,
-                prog.status,
-                prog.reset,
-                table.concat(prog.objectives, '_'),
-            }, '|'))
+            prog = {
+                reset = prog.reset,
+                status = 0,
+                objectives = {},
+            }
         end
     end
+    
     Addon.charData.progressQuests = progressQuests
 
     C_Timer.After(0, function() Module:UpdateCompletedQuests() end)
