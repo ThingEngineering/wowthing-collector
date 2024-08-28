@@ -3,6 +3,7 @@ local Module = LibStub('AceAddon-3.0'):GetAddon('WoWthing_Collector'):GetModule(
 
 Module.db.reputations = {
     --1492, -- Emperor Shaohao
+    2600, -- The Severed Threads
 }
 
 Module.db.friendships = {
@@ -61,4 +62,10 @@ Module.db.paragon = {
     2511, -- Iskaara Tuskarr
     2564, -- Loamm Niffen
     2574, -- Dream Wardens
+
+    -- The War Within
+    2570, -- Hallowfall Arathi
+    2590, -- Council of Dornogal
+    2594, -- Assembly of the Deeps
+    2600, -- The Severed Threads
 }
