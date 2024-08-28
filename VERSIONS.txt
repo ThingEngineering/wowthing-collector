@@ -1,3 +1,9 @@
+v11.0.2.8
+---------
+- Added even more TWW weekly quests.
+- Changed transmog scanning to only do one full scan per day.
+- Changed transmog scanning to track last full scan by account instead of by character.
+
 v11.0.2.7
 ---------
 - Added TWW weekly dungeon quests.
