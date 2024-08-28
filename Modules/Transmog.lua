@@ -93,9 +93,10 @@ function Module:UpdateTransmog()
     if self.isScanning then return end
 
     local now = time()
-    -- Don't scan if it's been less than an hour since the last one
+    -- Don't do a full scan if it's been less than 24 hours since the last one, it's a bit laggy on my
+    -- machine but apparently the worst thing ever for other people
     local lastScan = WWTCSaved.scanTimes['transmog']
-    if lastScan ~= nil and (now - lastScan) < 3600 then return end
+    if lastScan ~= nil and (now - lastScan) < 86400 then return end
 
     Addon.charData.scanTimes["transmog"] = now
     self.isScanning = true
@@ -103,15 +104,6 @@ function Module:UpdateTransmog()
     local modifiedAppearances = self.modifiedAppearances
     local transmog = self.transmog
     wipe(transmog)
-
-    -- Manual checks for buggy appearances
-    -- for _, manualTransmog in ipairs(self.db.manual) do
-    --     local have = C_TransmogCollection.PlayerHasTransmog(manualTransmog.itemId, manualTransmog.modifierId)
-    --     if have then
-    --         transmog[manualTransmog.appearanceId] = true
-    --         sources[manualTransmog.modifierId][manualTransmog.itemId] = true
-    --     end
-    -- end
 
     local workload = {}
     for chunkIndex = 1, MAX_APPEARANCE_ID, CHUNK_SIZE do
