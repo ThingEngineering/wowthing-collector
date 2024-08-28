@@ -26,6 +26,7 @@ local defaultWWTCSaved = {
     guilds = {},
     heirloomsV2 = {},
     questsV2 = {},
+    scanTimes = {},
     toys = {},
     worldQuestIds = {},
 }
@@ -40,6 +41,7 @@ function Addon:OnInitialize()
 
     WWTCSaved.heirloomsV2 = WWTCSaved.heirloomsV2 or {}
     WWTCSaved.questsV2 = WWTCSaved.questsV2 or {}
+    WWTCSaved.scanTimes = WWTCSaved.scanTimes or {}
     WWTCSaved.worldQuestIds = WWTCSaved.worldQuestIds or {}
 
     WWTCSaved.honorCurrent = WWTCSaved.honorCurrent or 0

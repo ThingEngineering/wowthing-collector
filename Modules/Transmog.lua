@@ -94,7 +94,7 @@ function Module:UpdateTransmog()
 
     local now = time()
     -- Don't scan if it's been less than an hour since the last one
-    local lastScan = Addon.charData.scanTimes["transmog"]
+    local lastScan = WWTCSaved.scanTimes['transmog']
     if lastScan ~= nil and (now - lastScan) < 3600 then return end
 
     Addon.charData.scanTimes["transmog"] = now
@@ -162,6 +162,7 @@ function Module:SaveTransmog()
     table.sort(modifiedAppearanceIds)
 
     Addon:DeltaEncode(modifiedAppearanceIds, function(output)
+        WWTCSaved.scanTimes['transmog'] = time()
         WWTCSaved.transmogSourcesSquishV2 = output
     end)
 end
