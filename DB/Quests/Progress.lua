@@ -509,8 +509,6 @@ Module.db.progress = {
 
     -- The War Within
     ["twwAwakeningTheMachine"] = { "weekly", { 83333 } },
-    ["twwSpreadingTheLight"] = { "weekly", { 76586 } },
-    ["twwTheaterTroupe"] = { "weekly", { 83240 } },
     ["twwSpiderPact"] = { "weekly", {
         80544, -- The Weaver
         80545, -- The General
@@ -521,6 +519,12 @@ Module.db.progress = {
         80671, -- Blade of the General
         80672, -- Hand of the Vizier
     }},
+    ["twwSpreadingTheLight"] = { "weekly", { 76586 } },
+    ["twwTheaterTroupe"] = { "weekly", { 83240 } },
+    ["twwDelveKey1"] = { "weekly", { 84736 } },
+    ["twwDelveKey2"] = { "weekly", { 84737 } },
+    ["twwDelveKey3"] = { "weekly", { 84738 } },
+    ["twwDelveKey4"] = { "weekly", { 84739 } },
     ["twwDungeon"] = { "weekly", {
         83465, -- Ara-Kara, City of Echoes
         83436, -- Cinderbrew Meadery
