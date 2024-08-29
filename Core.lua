@@ -248,6 +248,14 @@ end
 --  Returns:
 --      finished        boolean     True when finished without any delay; false otherwise.
 function Addon:QueueWorkload(workload, onFinish, onDelay)
+    -- If there's no workload provided we don't even need to queue
+    if #workload == 0 then
+        if onFinish then
+            onFinish()
+        end
+        return
+    end
+
     tinsert(self.workloads, { workload = workload, onFinish = onFinish, onDelay = onDelay })
     if self.working == false then
         self.working = true
