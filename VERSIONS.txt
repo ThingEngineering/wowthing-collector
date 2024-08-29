@@ -1,3 +1,9 @@
+v11.0.2.9
+---------
+- Added TWW profession quests.
+- Added TWW reputations.
+- Fixed manual reputation scanning throwing an error.
+
 v11.0.2.8
 ---------
 - Added even more TWW weekly quests.
