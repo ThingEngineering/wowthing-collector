@@ -620,6 +620,12 @@ Module.db.progress = {
     ["twwProfessionJewelcraftingOrders"] = { "weekly", { 84130 } },
     ["twwProfessionJewelcraftingTreatise"] = { "weekly", { 83731 } },
 
+    -- The War Within: Professions: Leatherworking
+    ["twwProfessionLeatherworkingDrop1"] = { "weekly", { 83268 } }, -- Stone-Leather Swatch
+    ["twwProfessionLeatherworkingDrop2"] = { "weekly", { 83267 } }, -- Sturdy Nerubian Carapace
+    ["twwProfessionLeatherworkingOrders"] = { "weekly", { 84131 } },
+    ["twwProfessionLeatherworkingTreatise"] = { "weekly", { 83732 } },
+
     -- The War Within: Professions: Tailoring
     ["twwProfessionTailoringDrop1"] = { "weekly", { 83270 } }, -- Chitin Needle
     ["twwProfessionTailoringDrop2"] = { "weekly", { 83269 } }, -- Spool of Webweave
