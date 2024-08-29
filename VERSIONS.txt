@@ -1,3 +1,9 @@
+v11.0.2.10
+----------
+- Added TWW leatherworking quests, oops.
+- Added TWW profession traits.
+- Fixed bag scanning getting stuck (#23).
+
 v11.0.2.9
 ---------
 - Added TWW profession quests.
