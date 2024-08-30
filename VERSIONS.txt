@@ -1,3 +1,9 @@
+v11.0.2.11
+----------
+- Added TWW weekly delve key quests.
+- Changed transmog scanning to only do one full scan per client build.
+- Changed transmog scanning to use a much more efficient "is this source collected?" check.
+
 v11.0.2.10
 ----------
 - Added TWW leatherworking quests, oops.
