@@ -6,8 +6,7 @@ Module.db = {}
 
 local CTC_GetAllAppearanceSources = C_TransmogCollection.GetAllAppearanceSources
 local CTC_GetAppearanceInfoBySource = C_TransmogCollection.GetAppearanceInfoBySource
-local CTC_GetAppearanceSourceInfo = C_TransmogCollection.GetAppearanceSourceInfo
--- local CTC_GetSourceInfo = C_TransmogCollection.GetSourceInfo
+local CTC_PlayerKnowsSource = C_TransmogCollection.PlayerKnowsSource
 
 local MAX_APPEARANCE_ID = 100000 -- actually 94162 currently
 local CHUNK_SIZE = 20
@@ -92,30 +91,30 @@ end
 function Module:UpdateTransmog()
     if self.isScanning then return end
 
-    local now = time()
-    -- Don't do a full scan if it's been less than 24 hours since the last one, it's a bit laggy on my
-    -- machine but apparently the worst thing ever for other people
-    local lastScan = WWTCSaved.scanTimes['transmog']
-    if lastScan ~= nil and (now - lastScan) < 86400 then return end
+    -- Only do a full scan once per client build
+    local _, currentBuild = GetBuildInfo()
+    if currentBuild == WWTCSaved.transmogScanBuild then return end
 
-    Addon.charData.scanTimes["transmog"] = now
+    print('|cFF00FFFFWoWthing_Collector|r Scanning all available transmog for build #'..currentBuild)
+
+    Addon.charData.scanTimes["transmog"] = time()
     self.isScanning = true
 
     local modifiedAppearances = self.modifiedAppearances
     local transmog = self.transmog
     wipe(transmog)
 
+    -- local startTime = debugprofilestop()
     local workload = {}
     for chunkIndex = 1, MAX_APPEARANCE_ID, CHUNK_SIZE do
         table.insert(workload, function()
             -- local startTime = debugprofilestop()
             for appearanceId = chunkIndex, chunkIndex + CHUNK_SIZE - 1 do
-                -- local sigh = C_TransmogCollection.GetAppearanceSourceInfo(sourceId)
                 local sourceIds = CTC_GetAllAppearanceSources(appearanceId)
                 if sourceIds then
                     for _, sourceId in ipairs(sourceIds) do
                         if modifiedAppearances[sourceId] ~= true then
-                            local _, _, _, _, isCollected = CTC_GetAppearanceSourceInfo(sourceId)
+                            local isCollected = CTC_PlayerKnowsSource(sourceId)
                             if isCollected then
                                 modifiedAppearances[sourceId] = true
                                 transmog[appearanceId] = true
@@ -130,7 +129,11 @@ function Module:UpdateTransmog()
         end)
     end
 
-    Addon:QueueWorkload(workload, function() Module:ScanEnd() end)
+    Addon:QueueWorkload(workload, function()
+        Module:ScanEnd()
+        WWTCSaved.transmogScanBuild = currentBuild
+        -- print(debugprofilestop() - startTime)
+    end)
 end
 
 function Module:ScanEnd()
