@@ -176,6 +176,8 @@ function Module:ScanEnd()
     local _, currentBuild = GetBuildInfo()
     WWTCSaved.transmogScanBuild = currentBuild
 
+    print('|cFF00FFFFWoWthing_Collector|r Scan complete')
+
     self:SaveTransmog()
 end
 
@@ -197,6 +199,4 @@ function Module:SaveTransmog()
         WWTCSaved.scanTimes['transmog'] = time()
         WWTCSaved.transmogSourcesSquishV2 = output
     end)
-
-    print('|cFF00FFFFWoWthing_Collector|r Scan complete - '..#appearanceIds..' appearances / '..#modifiedAppearanceIds..' sources')
 end
