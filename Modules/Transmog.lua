@@ -44,7 +44,7 @@ function Module:LOADING_SCREEN_DISABLED()
         end
     }
 
-    if WWTCSaved.transmogSourcesSquishV2 ~= nil and WWTCSaved.fix_11_0_2_11 then
+    if WWTCSaved.transmogSourcesSquishV2 ~= nil and WWTCSaved.fix_11_0_2_11_v2 then
         if type(WWTCSaved.transmogSourcesSquishV2) ~= 'string' then
             WWTCSaved.transmogSourcesSquishV2 = ''
         end
@@ -57,7 +57,8 @@ function Module:LOADING_SCREEN_DISABLED()
         self.modifiedAppearances = temp
     else
         WWTCSaved.transmogSourcesSquishV2 = ''
-        WWTCSaved.fix_11_0_2_11 = true
+        WWTCSaved.fix_11_0_2_11_v2 = true
+        WWTCSaved.transmogScanBuild = nil
     end
 
     Addon:QueueWorkload(workload)
