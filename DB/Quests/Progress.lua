@@ -643,6 +643,13 @@ Module.db.progress = {
     ["twwProfessionHerbalismDrop4"] = { "weekly", { 81419 } }, -- Deepgrove Rose Petal
     ["twwProfessionHerbalismDrop5"] = { "weekly", { 81420 } }, -- Deepgrove Rose Petal
     ["twwProfessionHerbalismDrop6"] = { "weekly", { 81421 } }, -- Deepgrove Rose
+    ["twwProfessionHerbalismTask"] = { "weekly", {
+        82970, -- A Bloom and A Blossom
+        82962, -- A Handful of Luredrops
+        82965, -- Light and Shadow
+        82958, -- Little Blessings
+        82916, -- When Fungi Bloom
+    } },
     ["twwProfessionHerbalismTreatise"] = { "weekly", { 83729 } },
 
     -- The War Within: Professions: Mining
@@ -652,6 +659,13 @@ Module.db.progress = {
     ["twwProfessionMiningDrop4"] = { "weekly", { 83051 } }, -- Slab of Slate
     ["twwProfessionMiningDrop5"] = { "weekly", { 83050 } }, -- Slab of Slate
     ["twwProfessionMiningDrop6"] = { "weekly", { 83049 } }, -- Erosion Polished Slate
+    ["twwProfessionMiningTask"] = { "weekly", {
+        83103, -- Acquiring Aqirite
+        83102, -- Bismuth is Business
+        83104, -- Identifying Ironclaw
+        83106, -- Null Pebble Excavation
+        83106, -- Rush-order Requisition
+} },
     ["twwProfessionMiningTreatise"] = { "weekly", { 83733 } },
 
     -- The War Within: Professions: Skinning
@@ -661,6 +675,13 @@ Module.db.progress = {
     ["twwProfessionSkinningDrop4"] = { "weekly", { 81462 } }, -- Toughened Tempest Pelt
     ["twwProfessionSkinningDrop5"] = { "weekly", { 81463 } }, -- Toughened Tempest Pelt
     ["twwProfessionSkinningDrop6"] = { "weekly", { 81464 } }, -- Abyssal Fur
+    ["twwProfessionSkinningTask"] = { "weekly", {
+        83097, -- Cinder and Storm 
+        83100, -- Cracking the Shell 
+        82993, -- From Shadows 
+        83098, -- Snap and Crackle 
+        82992, -- Stormcharged Goods
+} },
     ["twwProfessionSkinningTreatise"] = { "weekly", { 83734 } },
 
     -- Radiant Echoes (TWW prepatch)
