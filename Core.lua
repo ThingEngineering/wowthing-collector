@@ -297,7 +297,7 @@ function Addon:BatchWork()
             end
 
             if (debugprofilestop() - startTime) > maxDuration then
-                CT_After(0, continue)
+                CT_After(0.05, continue)
                 if workloadData.onDelay then
                     workloadData.onDelay()
                 end
