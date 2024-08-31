@@ -145,62 +145,13 @@ Module.db.progress = {
     ["slSepulcher1Mythic"] = { "once", { 65762 } },
 
     -- Dragonflight
-    ["dfAidingAccord"] = { "weekly", {
-        70750, -- Aiding the Accord
-        72068, -- Aiding the Accord: A Feast For All
-        72373, -- Aiding the Accord: The Hunt Is On
-        72374, -- Aiding the Accord: Dragonbane Keep
-        72375, -- Aiding the Accord: The Isles Call
-        75259, -- Aiding the Accord: Zskera Vaults
-        75859, -- Aiding the Accord: Sniffenseeking
-        75860, -- Aiding the Accord: Researchers Under Fire
-        75861, -- Aiding the Accord: Suffusion Camp
-        77254, -- Aiding the Accord: Time Rift
-        77976, -- Aiding the Accord: Dreamsurge
-        78446, -- Aiding the Accord: Superbloom
-        78447, -- Aiding the Accord: Emerald Bounty
-    } },
     ["dfCatchAileron"] = { "weekly", { 72826 } }, -- Catch and Release: Aileron Seamoth
     ["dfCatchCerulean"] = { "weekly", { 72825 } }, -- Catch and Release: Cerulean Spinefish
     ["dfCatchIslefin"] = { "weekly", { 72823 } }, -- Catch and Release: Islefin Dorado
     ["dfCatchScalebelly"] = { "weekly", { 72828 } }, -- Catch and Release: Scalebelly Mackerel
     ["dfCatchTemporal"] = { "weekly", { 72824 } }, -- Catch and Release: Temporal Dragonhead
     ["dfCatchThousandbite"] = { "weekly", { 72827 } }, -- Catch and Release: Thousandbite Piranha
-    ["dfDungeonPreserving"] = { "weekly", {
-        66868, -- Preserving the Past: Legacy of Tyr
-        66869, -- Preserving the Past: Court of Stars (?)
-        66870, -- Preserving the Past: Ruby Life Pools
-        66871, -- Preserving the Past: The Nokhud Offensive
-        66872, -- Preserving the Past: Brackenhide Hollow (?)
-        66873, -- Preserving the Past: The Azure Vault (?)
-        66874, -- Preserving the Past: Halls of Infusion
-        66875, -- Preserving the Past: Algeth'ar Academy
-    } },
-    ["dfDungeonRelic"] = { "weekly", {
-        66860, -- Relic Recovery: Legacy of Tyr
-        66861, -- Relic Recovery: Court of Stars (?)
-        66862, -- Relic Recovery: Ruby Life Pools
-        66863, -- Relic Recovery: The Nokhud Offensive (?)
-        66864, -- Relic Recovery: Brackenhide Hollow
-        66865, -- Relic Recovery: The Azure Vault
-        66866, -- Relic Recovery: Halls of Infusion
-        66867, -- Relic Recovery: Algeth'ar Academy
-    } },
     ["dfFighting"] = { "weekly", { 76122 } }, -- Fighting is its Own Reward
-    ["dfLastHurrah"] = { "weekly", {
-        80385, -- Last Hurrah: Dragon Isles
-        80386, -- Last Hurrah: Zaralek Caverns and Time Rifts
-        80388, -- Last Hurrah: Emerald Dream
-    } },
-    ["dfSparks"] = { "weekly", {
-        72646, -- Sparks of Life: The Waking Shores
-        72647, -- Sparks of Life: Ohn'ahran Plains
-        72648, -- Sparks of Life: Azure Span
-        72649, -- Sparks of Life: Thaldraszus
-        74871, -- Sparks of Life: The Forbidden Reach
-        75305, -- Sparks of Life: Zaralek Cavern
-        78097, -- Sparks of Life: Emerald Dream
-    } },
     ["dfWorthyAllyLoammNiffen"] = { "weekly", { 75665 } }, -- A Worthy Ally: Loamm Niffen
     -- Dragonflight: Chores
     ["dfCommunityFeast"] = { "weekly", { 70893 } },
@@ -665,7 +616,7 @@ Module.db.progress = {
         83104, -- Identifying Ironclaw
         83106, -- Null Pebble Excavation
         83106, -- Rush-order Requisition
-} },
+    } },
     ["twwProfessionMiningTreatise"] = { "weekly", { 83733 } },
 
     -- The War Within: Professions: Skinning
@@ -681,12 +632,6 @@ Module.db.progress = {
         82993, -- From Shadows 
         83098, -- Snap and Crackle 
         82992, -- Stormcharged Goods
-} },
+    } },
     ["twwProfessionSkinningTreatise"] = { "weekly", { 83734 } },
-
-    -- Radiant Echoes (TWW prepatch)
-    ["radiantDragonblight"] = { "daily", { 82689 } },
-    ["radiantDustwallow"] = { "daily", { 82676 } },
-    ["radiantSearing"] = { "daily", { 78938 } },
-    ["radiantFirstKill"] = { "weekly", { 84083 } },
 }
