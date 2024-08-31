@@ -56,14 +56,17 @@ function Addon:OnInitialize()
     -- id, name, nameForAPI, rules, locale, nil, region, timezone, connections, englishName, englishNameForAPI
     local _, realm, _, _, _, _, region, _, _, realmEnglish = LibRealmInfo:GetRealmInfoByUnit("player")
     self.regionName = region or GetCurrentRegion()
-    self.charName = self.regionName .. "/" .. (realmEnglish or realm)  .. "/" .. UnitName("player")
+    self.charName = UnitGUID('player')
     self.charClassID = select(3, UnitClass("player"))
 
     -- Set up character data table
     self.charData = WWTCSaved.chars[self.charName] or {}
+    self.charData.name = self.regionName .. "/" .. (realmEnglish or realm)  .. "/" .. UnitName("player")
     self.charData.scanTimes = self.charData.scanTimes or {}
 
     WWTCSaved.chars[self.charName] = self.charData
+
+    WWTCSaved.chars[self.charData.name] = nil
 
     self:RegisterEvent('PLAYER_ENTERING_WORLD')
     self:RegisterEvent('PLAYER_LOGOUT')
