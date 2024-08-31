@@ -39,6 +39,8 @@ Module.db.cooldowns = {
 
     -- Engineering
     [202] = {
+        -- The War Within
+        ['twwInvent'] = { 447312 },
         -- Dragonflight
         ['dfSuspiciouslySilent'] = { 382358 },
         ['dfSuspiciouslyTicking'] = { 382354 },
