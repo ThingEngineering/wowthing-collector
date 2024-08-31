@@ -1,3 +1,11 @@
+v11.0.2.15
+----------
+- Added TWW quest Rollin' Down in the Deeps.
+- Added TWW quest Sparks of War.
+- Added TWW gathering task quests.
+- Added TWW engineering "Invent" cooldown.
+- Removed a bunch of dead quests.
+
 v11.0.2.14
 ----------
 - Fixed the "Scan complete" message every time you learn an appearance.
