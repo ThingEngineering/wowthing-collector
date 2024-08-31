@@ -40,6 +40,7 @@ Module.db.cooldowns = {
     -- Engineering
     [202] = {
         -- The War Within
+        ['twwBoxOBooms'] = { 447374 },
         ['twwInvent'] = { 447312 },
         -- Dragonflight
         ['dfSuspiciouslySilent'] = { 382358 },
@@ -60,6 +61,12 @@ Module.db.cooldowns = {
 
     -- Jewelcrafting
     [755] = {
+        -- The War Within
+        ['twwAlgariAmberPrism'] = { 435337 },
+        ['twwAlgariEmeraldPrism'] = { 435338 },
+        ['twwAlgariOnyxPrism'] = { 435369 },
+        ['twwAlgariRubyPrism'] = { 435339 },
+        ['twwAlgariSapphirePrism'] = { 435370 },
         -- Dragonflight
         ['dfDreamersVision'] = { 374547 },
         ['dfEarthwardensPrize'] = { 374549 },
@@ -95,13 +102,12 @@ Module.db.cooldowns = {
 
     -- Tailoring
     [197] = {
-         -- Dragonflight
-        ['dfAzureweave'] = {
-            376556, -- Azureweave Bolt
-        },
-        ['dfChronocloth'] = {
-            376557, -- Chronocloth Bolt
-        },
+         -- The War Within
+         ['twwDawnweave'] = { 446928 },
+         ['twwDuskweave'] = { 446927 },
+          -- Dragonflight
+        ['dfAzureweave'] = { 376556 },
+        ['dfChronocloth'] = { 376557 },
         -- Warlords of Draenor
         ['wodTailoringSecrets'] = { 176058 },
         -- Mists of Pandaria
