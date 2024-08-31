@@ -460,6 +460,13 @@ Module.db.progress = {
 
     -- The War Within
     ["twwAwakeningTheMachine"] = { "weekly", { 83333 } },
+    ["twwRollinDown"] = { "weekly", { 82946 } }, -- Rollin' Down in the Deeps
+    ["twwSparks"] = { "weekly", {
+        81793, -- Sparks of War: Isle of Dorn
+        81794, -- Sparks of War: The Ringing Deeps
+        81795, -- Sparks of War: Hallowfall
+        81796, -- Sparks of War: Azj-Kahet
+    } },
     ["twwSpiderPact"] = { "weekly", {
         80544, -- The Weaver
         80545, -- The General
