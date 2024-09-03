@@ -4,6 +4,8 @@ local Module = LibStub('AceAddon-3.0'):GetAddon('WoWthing_Collector'):GetModule(
 Module.db.cooldowns = {
     -- Alchemy
     [171] = {
+        -- The War Within
+        ['twwAlchemyMeticulous'] = { 430345 },
         -- Dragonflight
         ['dfTransmute'] = {
             370707, -- Transmute: Awakened Fire
@@ -102,10 +104,10 @@ Module.db.cooldowns = {
 
     -- Tailoring
     [197] = {
-         -- The War Within
-         ['twwDawnweave'] = { 446928 },
-         ['twwDuskweave'] = { 446927 },
-          -- Dragonflight
+        -- The War Within
+        ['twwDawnweave'] = { 446928 },
+        ['twwDuskweave'] = { 446927 },
+        -- Dragonflight
         ['dfAzureweave'] = { 376556 },
         ['dfChronocloth'] = { 376557 },
         -- Warlords of Draenor
