@@ -274,6 +274,17 @@ Module.db.currencies = {
     3089, -- Residual Memories
     3093, -- Nerub-ar Finery
 
+    2785, -- Alchemy Knowledge
+    2786, -- Blacksmithing Knowledge
+    2787, -- Enchanting Knowledge
+    2788, -- Engineering Knowledge
+    2789, -- Herbalism Knowledge
+    2790, -- Inscription Knowledge
+    2791, -- Jewelcrafting Knowledge
+    2792, -- Leatherworking Knowledge
+    2793, -- Mining Knowledge
+    2794, -- Skinning Knowledge
+    2795, -- Tailoring Knowledge
     3013, -- Jewelcrafting Concentration
     3040, -- Blacksmithing Concentration
     3041, -- Tailoring Concentration
