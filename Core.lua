@@ -17,6 +17,7 @@ Addon:SetDefaultModulePrototype(ModulePrototype)
 
 local LibRealmInfo = LibStub('LibRealmInfo17janekjl')
 
+local CI_GetDetailedItemLevelInfo = C_Item.GetDetailedItemLevelInfo
 local CT_After = C_Timer.After
 
 -- Default SavedVariables
@@ -229,7 +230,7 @@ function Addon:ParseItemLink(link, quality, count)
         end
     end
 
-    local effectiveILvl, _, _ = GetDetailedItemLevelInfo(link)
+    local effectiveILvl, _, _ = CI_GetDetailedItemLevelInfo(link)
     item.itemLevel = effectiveILvl
 
     -- count:id:context:enchant:ilvl:quality:suffix:bonusIDs:gems
