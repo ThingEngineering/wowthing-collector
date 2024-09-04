@@ -149,6 +149,15 @@ function Addon:TableKeys(tbl)
     return keys
 end
 
+function Addon:PlayerGuidToId(guid)
+    local parts = strsplittable('-', guid, 3)
+    if #parts == 3 then
+        return parts[3]
+    else
+        return guid
+    end
+end
+
 function Addon:ParseItemLink(link, quality, count)
     local cached = self.parseItemLinkCache[link]
     if cached ~= nil then
