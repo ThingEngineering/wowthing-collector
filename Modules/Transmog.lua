@@ -100,7 +100,6 @@ function Module:UpdateTransmog()
 
     print('|cFF00FFFFWoWthing_Collector|r Scanning all available transmog for build #'..currentBuild..'...')
 
-    Addon.charData.scanTimes["transmog"] = time()
     self.isScanning = true
 
     -- local startTime = debugprofilestop()
@@ -199,4 +198,6 @@ function Module:SaveTransmog()
         WWTCSaved.scanTimes['transmog'] = time()
         WWTCSaved.transmogSourcesSquishV2 = output
     end)
+
+    Addon.charData.scanTimes["transmog"] = time()
 end
