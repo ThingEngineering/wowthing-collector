@@ -2,7 +2,8 @@ local Module = LibStub('AceAddon-3.0'):GetAddon('WoWthing_Collector'):GetModule(
 
 
 Module.db.auras = {
-    71041, -- Dugeon Deserter
+    26013, -- Deserter
+    71041, -- Dungeon Deserter
     418563, -- WoW's 19th Anniversary
 
     -- Dragonflight
