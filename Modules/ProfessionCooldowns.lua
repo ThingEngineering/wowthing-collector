@@ -28,14 +28,23 @@ function Module:UpdateCooldowns()
     local profInfo = C_TradeSkillUI.GetBaseProfessionInfo()
     if profInfo == nil or profInfo.isPrimaryProfession == false then return end
 
-    local cooldowns = self.db.cooldowns[profInfo.professionID]
-    if cooldowns == nil then return end
+    local professionCooldowns = self.db.cooldowns[profInfo.professionID]
+    if professionCooldowns == nil then return end
 
-    for key, spellIds in pairs(cooldowns) do
+    local untilDailyReset = C_DateAndTime.GetSecondsUntilDailyReset()
+
+    for key, cooldownData in pairs(professionCooldowns) do
+        local spellIds, reallyDaily = unpack(cooldownData)
         for _, spellId in ipairs(spellIds) do
             local recipeInfo = C_TradeSkillUI_GetRecipeInfo(spellId)
             if recipeInfo ~= nil and recipeInfo.learned == true then
                 local remainingSeconds, _, currentValue, maxValue = C_TradeSkillUI_GetRecipeCooldown(spellId)
+                
+                -- Many "resets daily" cooldowns claim to reset at midnight, override that
+                if reallyDaily and remainingSeconds > 0 then
+                    remainingSeconds = untilDailyReset
+                end
+                
                 local nextAvailable = 0
                 if remainingSeconds ~= nil and remainingSeconds > 0 then
                     nextAvailable = math.floor(now + remainingSeconds + 0.5) -- round() hack
