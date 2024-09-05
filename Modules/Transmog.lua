@@ -188,7 +188,6 @@ function Module:SaveTransmog()
     table.sort(modifiedAppearanceIds)
 
     Addon:DeltaEncode(modifiedAppearanceIds, function(output)
-        WWTCSaved.scanTimes['transmog'] = time()
         WWTCSaved.transmogSourcesSquishV2 = output
     end)
 
