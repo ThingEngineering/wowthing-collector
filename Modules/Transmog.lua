@@ -94,12 +94,6 @@ end
 function Module:UpdateTransmog()
     if self.isScanning then return end
 
-    -- Only do a full scan once per client build
-    local _, currentBuild = GetBuildInfo()
-    if currentBuild == WWTCSaved.transmogScanBuild then return end
-
-    print('|cFF00FFFFWoWthing_Collector|r Scanning all available transmog for build #'..currentBuild..'...')
-
     self.isScanning = true
 
     -- local startTime = debugprofilestop()
@@ -175,11 +169,6 @@ end
 
 function Module:ScanEnd()
     self.isScanning = false
-
-    local _, currentBuild = GetBuildInfo()
-    WWTCSaved.transmogScanBuild = currentBuild
-
-    print('|cFF00FFFFWoWthing_Collector|r Scan complete')
 
     self:SaveTransmog()
 end
