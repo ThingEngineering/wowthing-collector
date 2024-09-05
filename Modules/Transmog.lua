@@ -7,9 +7,9 @@ Module.db = {}
 local CTC_GetAllAppearanceSources = C_TransmogCollection.GetAllAppearanceSources
 local CTC_GetAppearanceInfoBySource = C_TransmogCollection.GetAppearanceInfoBySource
 local CTC_GetAppearanceSourceInfo = C_TransmogCollection.GetAppearanceSourceInfo
--- local CTC_PlayerKnowsSource = C_TransmogCollection.PlayerKnowsSource
+local CTC_PlayerHasTransmogItemModifiedAppearance = C_TransmogCollection.PlayerHasTransmogItemModifiedAppearance
 
-local MAX_APPEARANCE_ID = 100000 -- actually 94162 currently
+local MAX_APPEARANCE_ID = 100000 -- 94162
 local CHUNK_SIZE = 50
 
 function Module:OnEnable()
@@ -148,9 +148,13 @@ function Module:ScanSources()
             for i = chunkIndex, min(sourceToAppearanceSize, chunkIndex + CHUNK_SIZE - 1) do
                 local sourceId, appearanceId = unpack(sourceToAppearance[i])
                 if modifiedAppearances[sourceId] ~= true then
-                    -- This is much faster but also lies, awesome
+                    -- This is accurate and _slow_ (35-45s scan)
+                    -- local _, _, _, _, isCollected = CTC_GetAppearanceSourceInfo(sourceId)
+                    -- This is very very wrong but it is fast I guess
                     -- local isCollected = CTC_PlayerKnowsSource(sourceId)
-                    local _, _, _, _, isCollected = CTC_GetAppearanceSourceInfo(sourceId)
+                    -- This is accurate and fast! (1.5s complete scan)
+                    local isCollected = CTC_PlayerHasTransmogItemModifiedAppearance(sourceId)
+
                     if isCollected then
                         modifiedAppearances[sourceId] = true
                         transmog[appearanceId] = true
