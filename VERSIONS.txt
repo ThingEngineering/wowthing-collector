@@ -1,3 +1,12 @@
+v11.0.2.18
+----------
+- Added an override for daily reset profession cooldowns, the game still says they reset
+  at midnight until you re-log.
+- Added TWW Spreading the Light tracking quests.
+- Added TWW blacksmithing Everburning Ignition cooldown.
+- Added TWW race time currencies (thanks Sahasrahla).
+- Added DMF item turn-in tracking (thanks Sahasrahla).
+
 v11.0.2.17
 ----------
 - Added transferable currency scanning.
