@@ -25,6 +25,8 @@ Module.db.cooldowns = {
 
     -- Blacksmithing
     [164] = {
+        -- The War Within
+        ['twwBlacksmithingEverburning'] = { { 453727 } },
         -- Warlords of Draenor
         ['wodBlacksmithingSecrets'] = { { 176090 }, true },
         ['wodBlacksmithingTruesteel'] = { { 171690 } },
