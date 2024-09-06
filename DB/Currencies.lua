@@ -260,6 +260,38 @@ Module.db.currencies = {
     2680, 2686, 2692, 2702, 2703, -- Canopy Concours
     2681, 2687, 2693, 2704, 2705, -- Emerald Amble
 
+    -- Isle of Dorn
+    2923, 2929, 2935, -- Dornogal Drift
+    2924, 2930, 2936, -- Storm's Watch Survey
+    2925, 2931, 2937, -- Basin Bypass
+    2926, 2932, 2938, -- The Wold Ways
+    2927, 2933, 2939, -- Thunderhead Trail
+    2928, 2934, 2940, -- Orecreg's Doglegs
+
+    -- The Ringing Deeps
+    2941, 2947, 2953, -- Earthenworks Weave
+    2942, 2948, 2954, -- Ringing Deeps Ramble
+    2943, 2949, 2955, -- Chittering Concourse
+    2944, 2950, 2956, -- Cataract River Cruise
+    2945, 2951, 2957, -- Taelloch Twist
+    2946, 2952, 2958, -- Opportunity Point Amble
+
+    -- Hallowfall
+    2959, 2965, 2971, -- Dunelle's Detour
+    2960, 2966, 2972, -- Tenir's Traversal
+    2961, 2967, 2973, -- Light's Redoubt Descent
+    2962, 2968, 2974, -- Stillstone Slalom
+    2963, 2969, 2975, -- Mereldar Meander
+    2964, 2970, 2976, -- Velhan's Venture
+
+    -- Azj-Kahet
+    2977, 2983, 2989, -- City of Threads Twist
+    2978, 2984, 2990, -- Maddening Deep Dip
+    2979, 2985, 2991, -- The Weaver's Wing
+    2980, 2986, 2992, -- Rak-Ahat Rush
+    2981, 2987, 2993, -- Pit Plunge
+    2982, 2988, 2994, -- Siegehold Scuttle
+
     -- The War Within
     2803, -- Undercoin
     2815, -- Resonance Crystals
