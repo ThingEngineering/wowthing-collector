@@ -86,7 +86,7 @@ Module.db.cooldowns = {
             131695, -- Sun's Radiance
             131690, -- Vermilion Onyx
             131688, -- Wild Jade
-        } },
+        }, true },
         ['mopJewelcraftingSerpents'] = { { 140050 } },
     },
 
@@ -95,11 +95,11 @@ Module.db.cooldowns = {
         -- Warlords of Draenor
         ['wodLeatherworkingSecrets'] = { { 176089 }, true },
         -- Mists of Pandaria
-        ['mopLeatherworkingHardened'] = { { 142976 } },
+        ['mopLeatherworkingHardened'] = { { 142976 }, true },
         ['mopLeatherworkingMagnificence'] = { {
             140040, -- Magnificence of Leather
             140041, -- Magnificence of Scales
-        } },
+        }, true },
     },
 
     -- Tailoring
