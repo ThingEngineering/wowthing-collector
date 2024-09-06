@@ -484,13 +484,60 @@ Module.db.progress = {
         80544, -- The Weaver
         80545, -- The General
         80546, -- The Vizier
-    }},
+    } },
     ["twwSpiderWeekly"] = { "weekly", {
         80670, -- Eyes of the Weaver
         80671, -- Blade of the General
         80672, -- Hand of the Vizier
-    }},
+    } },
     ["twwSpreadingTheLight"] = { "weekly", { 76586 } },
+    ["twwSpreadingBleak"] = { "weekly", { 79471 } }, -- Bleak Sand
+    ["twwSpreadingDuskrise"] = { "weekly", { 79469 } }, -- Lurking Below
+    ["twwSpreadingFaded"] = { "weekly", { 79470 } }, -- Water of War
+    ["twwSpreadingFungal"] = { "weekly", { 78590 } }, -- Cutting Edge
+    ["twwSpreadingLights"] = { "weekly", { 79329 } }, -- Glowing Harvest
+    ["twwSpreadingStillstone"] = { "weekly", { 79380 } }, -- Bog Beast Banishment
+    ["twwSpreadingTorchlight"] = { "weekly", { 78657 } }, -- The Midnight Sentry
+    ["twwSpreadingWhirring"] = { "weekly", { 76338 } }, -- A Better Cabbage Smacker
+    ["twwSpreadingAtticaFlame"] = { "weekly", { 78472 } },
+    ["twwSpreadingAtticaQuest"] = { "weekly", {
+        76169, -- Glow in the Dark
+        81632, -- Lizard Looters
+    } },
+    ["twwSpreadingAuebryFlame"] = { "weekly", { 76599 } },
+    ["twwSpreadingAuebryQuest"] = { "weekly", {
+        79158, -- Seeds of Salvation
+        76599, -- Tater Trawl
+    } },
+    ["twwSpreadingChefFlame"] = { "weekly", { 78466 } },
+    ["twwSpreadingChefQuest"] = { "weekly", {
+        76394, -- Shadows of Flavor
+        78933, -- The Sweet Eclipse
+    } },
+    ["twwSpreadingCrabFlame"] = { "weekly", { 80005 } },
+    ["twwSpreadingCrabQuest"] = { "weekly", {
+        80004, -- Crab Grab
+    } },
+    ["twwSpreadingErolFlame"] = { "weekly", { 79383 } },
+    ["twwSpreadingErolQuest"] = { "weekly", {
+        79173, -- Supply the Effort
+        79216, -- Web of Manipulation
+    } },
+    ["twwSpreadingSeraphineFlame"] = { "weekly", { 78458 } },
+    ["twwSpreadingSeraphineQuest"] = { "weekly", {
+        78972, -- Harvest Havoc
+        78915, -- Squashing The Threat
+    } },
+    ["twwSpreadingTaerryFlame"] = { "weekly", { 79295 } },
+    ["twwSpreadingTaerryQuest"] = { "weekly", {
+        78656, -- Hose It Down
+        79346, -- Chew on That
+    } },
+    ["twwSpreadingYorvasFlame"] = { "weekly", { 79295 } },
+    ["twwSpreadingYorvasQuest"] = { "weekly", {
+        76997, -- Lost in Shadows
+        81574, -- Sporadic Growth
+    } },
     ["twwTheaterTroupe"] = { "weekly", { 83240 } },
     ["twwDelveKey1"] = { "weekly", { 84736 } },
     ["twwDelveKey2"] = { "weekly", { 84737 } },
