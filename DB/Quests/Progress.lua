@@ -18,6 +18,19 @@ Module.db.progress = {
     ["dmfCooking"] = { "special", { 29509 } }, -- Putting the Crunch in the Frog
     ["dmfFishing"] = { "special", { 29513 } }, -- Spoilin' for Salty Sea Dogs
 
+    ["dmfCrystal"] = { "special", { 29443 } }, -- A Curious Crystal
+    ["dmfEgg"] = { "special", { 29444 } }, -- An Exotic Egg
+    ["dmfGrimoire"] = { "special", { 29445 } }, -- An Intriguing Grimoire
+    ["dmfWeapon"] = { "special", { 29446 } }, -- A Wondrous Weapon
+    ["dmfStrategist"] = { "special", { 29451 } }, -- The Master Strategist
+    ["dmfBanner"] = { "special", { 29456 } }, -- A Captured Banner
+    ["dmfInsignia"] = { "special", { 29457 } }, -- The Enemy's Insignia
+    ["dmfJournal"] = { "special", { 29458 } }, -- The Captured Journal
+    ["dmfDivination"] = { "special", { 29464 } }, -- Tools of Divination
+    ["dmfDenmother"] = { "special", { 33354 } }, -- Den Mother's Demise
+
+    ["dmfStrength"] = { "special", { 29433 } }, -- Test Your Strength
+
     -- Holidays
     ["meanOne"] = { "daily", {
         6983, -- [H] You're a Mean One...
