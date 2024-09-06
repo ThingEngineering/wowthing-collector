@@ -41,7 +41,7 @@ function Module:UpdateCooldowns()
                 local remainingSeconds, _, currentValue, maxValue = C_TradeSkillUI_GetRecipeCooldown(spellId)
                 
                 -- Many "resets daily" cooldowns claim to reset at midnight, override that
-                if reallyDaily and remainingSeconds > 0 then
+                if reallyDaily and (remainingSeconds or 0) > 0 then
                     remainingSeconds = untilDailyReset
                 end
                 
