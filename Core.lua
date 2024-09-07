@@ -139,6 +139,9 @@ function Addon:PLAYER_MONEY()
 end
 
 -- Utils
+function Addon:Round(n)
+    return math.floor(n + 0.5)
+end
 
 function Addon:TableKeys(tbl)
     local index = 1

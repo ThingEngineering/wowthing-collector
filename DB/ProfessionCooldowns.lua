@@ -17,7 +17,7 @@ Module.db.cooldowns = {
             405847, -- Transmute: Dracothyst
         } },
         -- Warlords of Draenor
-        ['wodAlchemySecrets'] = { { 175880 }, true },
+        ['wodAlchemySecrets'] = { { 175880 }, 'daily' },
         ['wodAlchemyCatalyst'] = { { 156587 } },
         -- Mists of Pandaria
         ['mopAlchemyLivingSteel'] = { { 114780 } },
@@ -28,7 +28,7 @@ Module.db.cooldowns = {
         -- The War Within
         ['twwBlacksmithingEverburning'] = { { 453727 } },
         -- Warlords of Draenor
-        ['wodBlacksmithingSecrets'] = { { 176090 }, true },
+        ['wodBlacksmithingSecrets'] = { { 176090 }, 'daily' },
         ['wodBlacksmithingTruesteel'] = { { 171690 } },
         -- Mists of Pandaria
         ['mopBlacksmithingTrillium'] = { { 143255 } },
@@ -38,7 +38,7 @@ Module.db.cooldowns = {
     -- Enchanting
     [333] = {
         -- Warlords of Draenor
-        ['wodEnchantingSecrets'] = { { 177043 }, true },
+        ['wodEnchantingSecrets'] = { { 177043 }, 'daily' },
     },
 
     -- Engineering
@@ -50,15 +50,23 @@ Module.db.cooldowns = {
         ['dfSuspiciouslySilent'] = { { 382358 } },
         ['dfSuspiciouslyTicking'] = { { 382354 } },
         -- Warlords of Draenor
-        ['wodEngineeringSecrets'] = { { 176054 }, true },
+        ['wodEngineeringSecrets'] = { { 176054 }, 'daily' },
         -- Mists of Pandaria
         ['mopEngineeringPeculiar'] = { { 139176 } },
+    },
+
+    -- Herbalism
+    [182] = {
+        -- The War Within
+        ['twwHerbalismOverload'] = { { 423395 }, 'spell' },
+        -- Dragonflight
+        ['dfHerbalismOverload'] = { { 390392 }, 'spell' },
     },
 
     -- Inscription
     [773] = {
         -- Warlords of Draenor
-        ['wodInscriptionSecrets'] = { { 176045 }, true },
+        ['wodInscriptionSecrets'] = { { 176045 }, 'daily' },
         -- Mists of Pandaria
         ['mopInscriptionWisdom'] = { { 112996 } },
     },
@@ -79,7 +87,7 @@ Module.db.cooldowns = {
         ['dfQueensGift'] = { { 374546 } },
         ['dfTimewatchersPatience'] = { { 374550 } },
         -- Warlords of Draenor
-        ['wodJewelcraftingSecrets'] = { { 176087 }, true },
+        ['wodJewelcraftingSecrets'] = { { 176087 }, 'daily' },
         -- Mists of Pandaria
         ['mopJewelcraftingResearch'] = { {
             131691, -- Imperial Amethyst
@@ -88,20 +96,28 @@ Module.db.cooldowns = {
             131695, -- Sun's Radiance
             131690, -- Vermilion Onyx
             131688, -- Wild Jade
-        }, true },
+        }, 'daily' },
         ['mopJewelcraftingSerpents'] = { { 140050 } },
     },
 
     -- Leatherworking
     [165] = {
         -- Warlords of Draenor
-        ['wodLeatherworkingSecrets'] = { { 176089 }, true },
+        ['wodLeatherworkingSecrets'] = { { 176089 }, 'daily' },
         -- Mists of Pandaria
-        ['mopLeatherworkingHardened'] = { { 142976 }, true },
+        ['mopLeatherworkingHardened'] = { { 142976 }, 'daily' },
         ['mopLeatherworkingMagnificence'] = { {
             140040, -- Magnificence of Leather
             140041, -- Magnificence of Scales
-        }, true },
+        }, 'daily' },
+    },
+
+    -- Mining
+    [186] = {
+        -- The War Within
+        ['twwMiningOverload'] = { { 423394 }, 'spell' },
+        -- Dragonflight
+        ['dfMiningOverload'] = { { 388213 }, 'spell' },
     },
 
     -- Tailoring
@@ -113,7 +129,7 @@ Module.db.cooldowns = {
         ['dfAzureweave'] = { { 376556 } },
         ['dfChronocloth'] = { { 376557 } },
         -- Warlords of Draenor
-        ['wodTailoringSecrets'] = { { 176058 }, true },
+        ['wodTailoringSecrets'] = { { 176058 }, 'daily' },
         -- Mists of Pandaria
         ['mopTailoringCelestial'] = { { 143011 } },
         ['mopTailoringImperial'] = { { 125557 } },
