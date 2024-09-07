@@ -98,8 +98,10 @@ function Module:UpdateQuests()
             prog.reset = dailyReset
         end
 
+        local isWorldQuest = questData[1] == 'wq'
+
         for _, questId in ipairs(questData[2]) do
-            if questData[1] == 'wq' and prog.reset == 0 then
+            if isWorldQuest and prog.reset == 0 then
                 local timeLeft = C_TaskQuest.GetQuestTimeLeftSeconds(questId)
                 if timeLeft ~= nil then
                     prog.reset = now + timeLeft
@@ -113,7 +115,7 @@ function Module:UpdateQuests()
                 prog.status = 2
 
             -- Quest is in progress, check progress
-            elseif C_QuestLog.IsOnQuest(questId) then
+            elseif isWorldQuest or C_QuestLog.IsOnQuest(questId) then
                 local objectives = C_QuestLog.GetQuestObjectives(questId)
                 if objectives ~= nil then
                     prog.id = questId
