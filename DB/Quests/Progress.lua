@@ -100,7 +100,7 @@ Module.db.progress = {
     ["legHellfire1Mythic"] = { "once", { 39501 } },
     ["legHellfire2Mythic"] = { "once", { 39505 } },
     -- Legion: Misc
-    ["legionWitheredTraining"] = { "wq", { 43943 } },
+    ["legionWitheredTraining"] = { "worldQuest", { 43943 } },
     -- Legion: Raids
     ["legEmerald1Normal"] = { "once", { 44283 } },
     ["legEmerald1Heroic"] = { "once", { 44284 } },
@@ -490,7 +490,7 @@ Module.db.progress = {
         80671, -- Blade of the General
         80672, -- Hand of the Vizier
     } },
-    ["twwSpreadingTheLight"] = { "weekly", { 76586 } },
+    ["twwSpreadingTheLight"] = { "worldQuest", { 76586 } },
     ["twwSpreadingBleak"] = { "weekly", { 79471 } }, -- Bleak Sand
     ["twwSpreadingDuskrise"] = { "weekly", { 79469 } }, -- Lurking Below
     ["twwSpreadingFaded"] = { "weekly", { 79470 } }, -- Water of War

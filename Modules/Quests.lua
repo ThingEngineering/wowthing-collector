@@ -6,6 +6,8 @@ Module.db = {}
 
 local C_QuestLog_IsQuestFlaggedCompleted = C_QuestLog.IsQuestFlaggedCompleted
 
+local HALF_WEEK = 3.5 * 24 * 60 * 60
+
 function Module:OnEnable()
     self:RegisterBucketEvent(
         {
@@ -44,7 +46,7 @@ function Module:UpdateQuests()
     local dailyReset = now + C_DateAndTime.GetSecondsUntilDailyReset()
     local weeklyReset = now + C_DateAndTime.GetSecondsUntilWeeklyReset()
 
-    local biweeklyReset = weeklyReset - (3.5 * 24 * 60 * 60)
+    local biweeklyReset = weeklyReset - HALF_WEEK
     if biweeklyReset < now then
         biweeklyReset = weeklyReset
     end
@@ -98,7 +100,7 @@ function Module:UpdateQuests()
             prog.reset = dailyReset
         end
 
-        local isWorldQuest = questData[1] == 'wq'
+        local isWorldQuest = questData[1] == 'worldQuest'
 
         for _, questId in ipairs(questData[2]) do
             if isWorldQuest and prog.reset == 0 then
