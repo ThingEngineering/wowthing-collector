@@ -4,7 +4,9 @@ local Module = Addon:NewModule('Quests')
 
 Module.db = {}
 
-local C_QuestLog_IsQuestFlaggedCompleted = C_QuestLog.IsQuestFlaggedCompleted
+local CQL_GetQuestObjectives = C_QuestLog.GetQuestObjectives
+local CQL_IsOnQuest = C_QuestLog.IsOnQuest
+local CQL_IsQuestFlaggedCompleted = C_QuestLog.IsQuestFlaggedCompleted
 
 local HALF_WEEK = 3.5 * 24 * 60 * 60
 
@@ -52,7 +54,7 @@ function Module:UpdateQuests()
     end
 
     for _, questId in ipairs(self.db.account) do
-        if C_QuestLog_IsQuestFlaggedCompleted(questId) then
+        if CQL_IsQuestFlaggedCompleted(questId) then
             WWTCSaved.questsV2[questId] = 1
         end
     end
@@ -60,14 +62,14 @@ function Module:UpdateQuests()
     local dailyQuests = {}
     for _, autoQuestIds in pairs(self.db.auto) do
         for _, questId in ipairs(autoQuestIds) do
-            if C_QuestLog_IsQuestFlaggedCompleted(questId) then
+            if CQL_IsQuestFlaggedCompleted(questId) then
                 table.insert(dailyQuests, questId)
             end
         end
     end
 
     for questId, _ in pairs(WWTCSaved.worldQuestIds or {}) do
-        if C_QuestLog_IsQuestFlaggedCompleted(questId) then
+        if CQL_IsQuestFlaggedCompleted(questId) then
             table.insert(dailyQuests, questId)
         end
     end
@@ -76,7 +78,7 @@ function Module:UpdateQuests()
 
     local otherQuests = {}
     for _, questId in ipairs(self.db.tracking) do
-        if C_QuestLog_IsQuestFlaggedCompleted(questId) then
+        if CQL_IsQuestFlaggedCompleted(questId) then
             table.insert(otherQuests, questId)
         end
     end
@@ -111,14 +113,14 @@ function Module:UpdateQuests()
             end
 
             -- Quest is completed
-            if C_QuestLog_IsQuestFlaggedCompleted(questId) then
+            if CQL_IsQuestFlaggedCompleted(questId) then
                 prog.id = questId
                 prog.name = QuestUtils_GetQuestName(questId)
                 prog.status = 2
 
             -- Quest is in progress, check progress
-            elseif isWorldQuest or C_QuestLog.IsOnQuest(questId) then
-                local objectives = C_QuestLog.GetQuestObjectives(questId)
+            elseif isWorldQuest or CQL_IsOnQuest(questId) then
+                local objectives = CQL_GetQuestObjectives(questId)
                 if objectives ~= nil then
                     prog.id = questId
                     prog.name = QuestUtils_GetQuestName(questId)
