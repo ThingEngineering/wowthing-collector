@@ -1,3 +1,9 @@
+v11.0.2.19
+----------
+- Added herbalism/mining overload cooldowns.
+- Changed Spreading the Light to a world quest.
+- Fixed quest progress scanning for world quests.
+
 v11.0.2.18
 ----------
 - Added an override for daily reset profession cooldowns, the game still says they reset
