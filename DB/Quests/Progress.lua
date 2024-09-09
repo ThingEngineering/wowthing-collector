@@ -70,8 +70,8 @@ Module.db.progress = {
     } },
     ["holidayWorldQuests"] = { "weekly", { 72728 } }, -- "The World Awaits", World Quests
     -- Weekly PvP
-    ["pvpArenas"] = { "weekly", { 72169 } }, -- Proving in Arenas (Rated Arenas)
-    ["pvpBattle"] = { "weekly", { 72166 } }, -- Proving in Battle (Random Battlegrounds)
+    ["pvpArenas"] = { "weekly", { 80188 } }, -- Preserving in Arenas (Rated Arenas)
+    ["pvpBattle"] = { "weekly", { 80184 } }, -- Preserving in Battle (Random Battlegrounds)
     ["pvpBlitz1"] = { "weekly", { 78128 } }, -- Gotta Go Fast
     ["pvpBlitz3"] = { "weekly", { 78129 } }, -- Gotta Go Faster
     ["pvpBrawl"] = { "weekly", { 47148 } }, -- Something Different (Brawl)
@@ -79,10 +79,10 @@ Module.db.progress = {
         71025, -- Against Overwhelming Odds [H]
         71026, -- Against Overwhelming Odds [A]
     } },
-    ["pvpSkirmishes"] = { "weekly", { 72168 } }, -- Proving in Skirmishes (Arena Skirmishes)
-    ["pvpSolo"] = { "weekly", { 72171 } }, -- Proving Solo (Solo Shuffle)
-    ["pvpTeamwork"] = { "weekly", { 72170 } }, -- Proving Teamwork (Rated Battlegrounds)
-    ["pvpWar"] = { "weekly", { 72167 } }, -- Proving in War (Epic Battlegrounds)
+    ["pvpSkirmishes"] = { "weekly", { 80187 } }, -- Proving in Skirmishes (Arena Skirmishes)
+    ["pvpSolo"] = { "weekly", { 80185 } }, -- Preserving Solo (Solo Shuffle)
+    ["pvpTeamwork"] = { "weekly", { 80189 } }, -- Preserving Teamwork (Rated Battlegrounds)
+    ["pvpWar"] = { "weekly", { 80186 } }, -- Preserving in War (Epic Battlegrounds)
     -- Warlords of Draenor
     ["invasionBoss"] = { "weekly", { 38276 } },
     ["invasionBronze"] = { "weekly", { 37638 } },
