@@ -317,6 +317,7 @@ Module.db.currencies = {
     2793, -- Mining Knowledge
     2794, -- Skinning Knowledge
     2795, -- Tailoring Knowledge
+    2813, -- Harmonized Silk
     3013, -- Jewelcrafting Concentration
     3040, -- Blacksmithing Concentration
     3041, -- Tailoring Concentration
