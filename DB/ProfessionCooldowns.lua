@@ -6,6 +6,21 @@ Module.db.cooldowns = {
     [171] = {
         -- The War Within
         ['twwAlchemyMeticulous'] = { { 430345 } },
+        ['twwAlchemyGleamingGlory'] = { { 430624 } },
+        ['twwAlchemyTransmute'] = { {
+            449938, -- Gleaming Chaos
+            430618, -- Mercurial Blessings
+            449573, -- Mercurial Coalescence
+            449571, -- Mercurial Herbs
+            430619, -- Mercurial Storms
+            430622, -- Ominous Call
+            449574, -- Ominous Coalescence
+            430623, -- Ominous Gloom
+            449572, -- Ominous Herbs
+            449575, -- Volatile Coalescence
+            430621, -- Volatile Stone
+            430620, -- Volatile Weaving
+        } },
         -- Dragonflight
         ['dfTransmute'] = { {
             370707, -- Transmute: Awakened Fire
