@@ -99,4 +99,10 @@ Module.db.worldBosses = {
     [74892] = { 109002, "Zaqali Elders", "The Zaqali Elders" },
 
     [76367] = { 109003, "Aurostor", "Aurostor, The Hibernator" },
+
+    -- The War Within
+    [81624] = { 110001, "War Within World Bosses", "Orta, the Broken Mountain" },
+    [81630] = { 110001, "War Within World Bosses", "Kordac, the Dormant Protector" },
+    [81653] = { 110001, "War Within World Bosses", "Shurrai, Atrocity of the Undersea" },
+    [82653] = { 110001, "War Within World Bosses", "Aggregation of Horrors" },
 }
