@@ -7,6 +7,7 @@ Module.db = {}
 local CQL_GetQuestObjectives = C_QuestLog.GetQuestObjectives
 local CQL_IsOnQuest = C_QuestLog.IsOnQuest
 local CQL_IsQuestFlaggedCompleted = C_QuestLog.IsQuestFlaggedCompleted
+local CTQ_GetQuestTimeLeftSeconds = C_TaskQuest.GetQuestTimeLeftSeconds
 
 local HALF_WEEK = 3.5 * 24 * 60 * 60
 
@@ -94,7 +95,7 @@ function Module:UpdateQuests()
         }
 
         -- { weekly/biweekly/daily, { ids }, multi? }
-        if questData[1] == 'weekly' then
+        if questData[1] == 'weekly' or questData[1] == 'weeklyWorldQuest' then
             prog.reset = weeklyReset
         elseif questData[1] == 'biweekly' then
             prog.reset = biweeklyReset
@@ -102,11 +103,11 @@ function Module:UpdateQuests()
             prog.reset = dailyReset
         end
 
-        local isWorldQuest = questData[1] == 'worldQuest'
+        local isWorldQuest = questData[1] == 'weeklyWorldQuest'
 
         for _, questId in ipairs(questData[2]) do
             if isWorldQuest and prog.reset == 0 then
-                local timeLeft = C_TaskQuest.GetQuestTimeLeftSeconds(questId)
+                local timeLeft = CTQ_GetQuestTimeLeftSeconds(questId)
                 if timeLeft ~= nil then
                     prog.reset = now + timeLeft
                 end
