@@ -319,6 +319,7 @@ Module.db.currencies = {
     2795, -- Tailoring Knowledge
     2813, -- Harmonized Silk
     3013, -- Jewelcrafting Concentration
+    3023, -- 11.0 Professions - Personal Tracker - S1 Spark Drops (Hidden)
     3040, -- Blacksmithing Concentration
     3041, -- Tailoring Concentration
     3042, -- Leatherworking Concentration
