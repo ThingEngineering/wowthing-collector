@@ -1,3 +1,9 @@
+v11.0.2.21
+----------
+- Added TWW alchemy transmute cooldowns.
+- Added TWW missing "worldsoul" weekly quests.
+- Added TWW season 1 spark tracking currency.
+
 v11.0.2.20
 ----------
 - Added Harmonized Silk (TWW catalyst charges) to currency scanning.
