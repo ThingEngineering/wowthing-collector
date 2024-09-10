@@ -563,11 +563,13 @@ Module.db.progress = {
         81649, -- Special Assignment: Titanic Resurgence
         83229, -- Special Assignment: When the Deeps Stir
     }, true },
-    ["twwWorldsoul"] = { "weekly", {
+    ["twwEmissary"] = { "weekly", {
+        82678, -- Archives: The First Disc
+        82708, -- Delves: Nerubian Menace
         82511, -- Worldsoul: Awakening Machine
         82453, -- Worldsoul: Encore!
+        82516, -- Worldsoul: Forging a Pact
         82458, -- Worldsoul: Renown
-        82516, -- Worldsoul: Severed Threads Pact
         82482, -- Worldsoul: Snuffling
         82483, -- Worldsoul: Spreading the Light
         82512, -- Worldsoul: World Boss
