@@ -52,8 +52,9 @@ function Module:UpdateVault()
         --      id=34
         -- },
         local activity = activities[i]
-        -- We only care about 1 (MythicPlus), 2 (RankedPvP), 3 (Raid)
-        if activity.type >= 1 and activity.type <= 3 then
+        -- We only care about 1 (Activity), 3 (Raid), 6 (World)
+        if activity.type == 1 or activity.type == 3 or activity.type == 6 then
+            local key = 't'..activity.type
             local data = {
                 level = activity.level,
                 progress = activity.progress,
@@ -68,14 +69,14 @@ function Module:UpdateVault()
                 tinsert(data.rewards, parsed)
             end
 
-            vault[activity.type] = vault[activity.type] or {}
-            vault[activity.type][activity.index] = data
+            vault[key] = vault[key] or {}
+            vault[key][activity.index] = data
         end
     end
 
-    if vault[1] and vault[1][3] and vault[1][3].progress > 0 then
+    if vault['t1'] and vault['t1'][3] and vault['t1'][3].progress > 0 then
         local runHistory = C_MythicPlus.GetRunHistory(false, true)
-        if #runHistory < vault[1][3].progress then
+        if #runHistory < vault['t1'][3].progress then
             C_Timer.After(2, function() C_WeeklyRewards.OnUIInteract() end)
         end
     end
