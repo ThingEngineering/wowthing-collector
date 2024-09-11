@@ -104,6 +104,10 @@ function Addon:Cleanup()
             if type(charData.illusions) == 'table' then
                 charData.illusions = nil
             end
+
+            if charData.vault and (charData.vault[1] or charData.vault[2] or charData.vault[3]) then
+                charData.vault = {}
+            end
         end
     end
 end
