@@ -1,3 +1,7 @@
+v11.0.2.23
+----------
+- Updated more weekly quest IDs.
+
 v11.0.2.22
 ----------
 - Added world vault scanning.
