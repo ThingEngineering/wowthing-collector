@@ -42,17 +42,18 @@ Module.db.progress = {
     ["merryPresents"] = { "daily", { 39668 } }, -- What Horrible Presents!
 
     -- Weekly Holidays
-    ["holidayArena"] = { "weekly", { 72720 } }, -- "The Arena Calls", Arena Skirmishes
-    ["holidayBattlegrounds"] = { "weekly", { 72723 } }, -- "A Call to Battle", Battlegrounds
-    ["holidayDungeons"] = { "weekly", { 72722 } }, -- "Emissary of War", Mythic Dungeons
-    ["holidayPetPvp"] = { "weekly", { 72721 } }, -- "The Very Best", PvP Pet Battles
+    ["holidayArena"] = { "weekly", { 83358 } }, -- "The Arena Calls", Arena Skirmishes
+    ["holidayBattlegrounds"] = { "weekly", { 83345 } }, -- "A Call to Battle", Battlegrounds
+    ["holidayDelves"] = { "weekly", { 84776 } }, -- "A Call to Delves", Delves
+    ["holidayDungeons"] = { "weekly", { 83347 } }, -- "Emissary of War", Mythic Dungeons
+    ["holidayPetPvp"] = { "weekly", { 83357 } }, -- "The Very Best", PvP Pet Battles
     ["holidayTimewalking"] = { "weekly", {
         72719, -- "A Fel Path Through Time", Legion Timewalking
-        72724, -- "A Savage Path Through Time", WoD Timewalking
-        72725, -- "A Shrouded Path Through Time", MoP Timewalking
-        72726, -- "A Frozen Path Through Time", Wrath Timewalking
+        83364, -- "A Savage Path Through Time", WoD Timewalking
+        83362, -- "A Shrouded Path Through Time", MoP Timewalking
+        83365, -- "A Frozen Path Through Time", Wrath Timewalking
         72727, -- "A Burning Path Through Time", TBC Timewalking
-        72810, -- "A Shattered Path Through Time", Cata Timewalking [Heroic]
+        83359, -- "A Shattered Path Through Time", Cata Timewalking [Heroic]
     } },
     ["holidayTimewalkingItem"] = { "weekly", {
         40168, -- The Swirling Vial, TBC
@@ -68,7 +69,7 @@ Module.db.progress = {
         50316, -- Disturbance Detected: Ulduar
         57637, -- Disturbance Detected: Firelands
     } },
-    ["holidayWorldQuests"] = { "weekly", { 72728 } }, -- "The World Awaits", World Quests
+    ["holidayWorldQuests"] = { "weekly", { 83366 } }, -- "The World Awaits", World Quests
     -- Weekly PvP
     ["pvpArenas"] = { "weekly", { 80188 } }, -- Preserving in Arenas (Rated Arenas)
     ["pvpBattle"] = { "weekly", { 80184 } }, -- Preserving in Battle (Random Battlegrounds)
