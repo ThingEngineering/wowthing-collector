@@ -1,7 +1,13 @@
+v11.0.2.22
+----------
+- Added world vault scanning.
+- Added Special Assignment unlock quests.
+- Fixed vault scanning breaking uploads.
+
 v11.0.2.21
 ----------
+- Added missing "worldsoul" (emissary) weekly quests.
 - Added TWW alchemy transmute cooldowns.
-- Added TWW missing "worldsoul" weekly quests.
 - Added TWW season 1 spark tracking currency.
 
 v11.0.2.20
