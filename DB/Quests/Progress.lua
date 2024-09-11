@@ -553,15 +553,23 @@ Module.db.progress = {
         83432, -- The Rookery
         83457, -- The Stonevault
     } },
-    ["twwSpecialAssignment"] = { "weekly", {
+    ["twwSpecialAssignment"] = { "weeklyWorldQuest", {
         82414, -- Special Assignment: A Pound of Cure
+        82159, -- ^ unlock
         82531, -- Special Assignment: Bombs From Behind
+        82161, -- ^ unlock
         82355, -- Special Assignment: Cinderbee Surge
+        82146, -- ^ unlock
         82852, -- Special Assignment: Lynx Rescue
+        82158, -- ^ unlock
         82787, -- Special Assignment: Rise of the Colossals
+        82157, -- ^ unlock
         81691, -- Special Assignment: Shadows Below
+        82155, -- ^ unlock
         81649, -- Special Assignment: Titanic Resurgence
+        83069, -- ^ unlock
         83229, -- Special Assignment: When the Deeps Stir
+        82156, -- ^ unlock
     }, true },
     ["twwEmissary"] = { "weekly", {
         82678, -- Archives: The First Disc
