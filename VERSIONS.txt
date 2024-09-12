@@ -1,3 +1,9 @@
+v11.0.2.24
+----------
+- Added TWW zones to world quest scanning.
+- Fixed Aggregation of Horrors tracking quest.
+- Fixed scanning for weird unlockable world quests (Special Assignments).
+
 v11.0.2.23
 ----------
 - Updated more weekly quest IDs.
