@@ -120,54 +120,34 @@ function Module:UpdateQuests()
                 prog.status = 2
 
             -- Quest is in progress, check progress
-            elseif isWorldQuest or CQL_IsOnQuest(questId) then
+            elseif CQL_IsOnQuest(questId) then
                 local objectives = CQL_GetQuestObjectives(questId)
                 if objectives ~= nil then
-                    prog.id = questId
-                    prog.name = QuestUtils_GetQuestName(questId)
-                    prog.status = 1
+                    self:AddData(prog, questId, objectives)
+                end
+            elseif isWorldQuest then
+                local altId = self.db.progressUnlock[questId]
+                local timeLeft = CTQ_GetQuestTimeLeftSeconds(questId)
 
-                    for _, objective in ipairs(objectives) do
-                        if objective ~= nil then
-                            local objectiveData = {
-                                ['type'] = objective.type,
-                                ['text'] = gsub(
-                                    objective.text,
-                                    "%|A:Professions%-Icon%-Quality%-Tier(%d)%-Small:18:18:0:2%|a",
-                                    "[[tier%1]]"
-                                ),
-                            }
+                if timeLeft == nil and altId ~= nil then
+                    timeLeft = CTQ_GetQuestTimeLeftSeconds(altId)
+                end
 
-                            if objective.type == 'progressbar' then
-                                objectiveData.have = GetQuestProgressBarPercent(questId)
-                                objectiveData.need = 100
-                            else
-                                objectiveData.have = objective.numFulfilled
-                                objectiveData.need = objective.numRequired
-                            end
+                if timeLeft ~= nil then
+                    prog.reset = now + timeLeft
 
-                            table.insert(prog.objectives, table.concat({
-                                objectiveData.type,
-                                objectiveData.text,
-                                objectiveData.have,
-                                objectiveData.need,
-                            }, ';'))
-                        end
+                    local objectives
+
+                    -- If the unlock quest hasn't been completed we want to use
+                    -- the objectives from that instead
+                    if altId ~= nil and not CQL_IsQuestFlaggedCompleted(altId) then
+                        objectives = CQL_GetQuestObjectives(altId)
+                    else
+                        objectives = CQL_GetQuestObjectives(questId)
                     end
-
-                    -- Backup plan for weird quests like Timewalking item turnins
-                    if #prog.objectives == 0 then
-                        local oldQuestId = C_QuestLog.GetSelectedQuest()
-                        C_QuestLog.SetSelectedQuest(questId)
-
-                        table.insert(prog.objectives, table.concat({
-                            'object',
-                            GetQuestLogCompletionText() or '',
-                            1,
-                            1,
-                        }, ';'))
-
-                        C_QuestLog.SetSelectedQuest(oldQuestId)
+    
+                    if objectives ~= nil then
+                        self:AddData(prog, questId, objectives)
                     end
                 end
             end
@@ -205,4 +185,53 @@ function Module:UpdateQuests()
     Addon.charData.progressQuests = progressQuests
 
     C_Timer.After(0, function() Module:UpdateCompletedQuests() end)
+end
+
+function Module:AddData(prog, questId, objectives)
+    prog.id = questId
+    prog.name = QuestUtils_GetQuestName(questId)
+    prog.status = 1
+
+    for _, objective in ipairs(objectives) do
+        if objective ~= nil and objective.type ~= nil then
+            local objectiveData = {
+                ['type'] = objective.type,
+                ['text'] = gsub(
+                    objective.text,
+                    "%|A:Professions%-Icon%-Quality%-Tier(%d)%-Small:18:18:0:2%|a",
+                    "[[tier%1]]"
+                ),
+            }
+
+            if objective.type == 'progressbar' then
+                objectiveData.have = GetQuestProgressBarPercent(questId)
+                objectiveData.need = 100
+            else
+                objectiveData.have = objective.numFulfilled
+                objectiveData.need = objective.numRequired
+            end
+
+            table.insert(prog.objectives, table.concat({
+                objectiveData.type,
+                objectiveData.text,
+                objectiveData.have,
+                objectiveData.need,
+            }, ';'))
+        end
+    end
+
+    -- Backup plan for weird quests like Timewalking item turnins
+    if #prog.objectives == 0 then
+        local oldQuestId = C_QuestLog.GetSelectedQuest()
+        C_QuestLog.SetSelectedQuest(questId)
+
+        table.insert(prog.objectives, table.concat({
+            'object',
+            GetQuestLogCompletionText() or '',
+            1,
+            1,
+        }, ';'))
+
+        C_QuestLog.SetSelectedQuest(oldQuestId)
+    end
 end

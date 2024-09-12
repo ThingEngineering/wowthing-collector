@@ -556,21 +556,13 @@ Module.db.progress = {
     } },
     ["twwSpecialAssignment"] = { "weeklyWorldQuest", {
         82414, -- Special Assignment: A Pound of Cure
-        82159, -- ^ unlock
         82531, -- Special Assignment: Bombs From Behind
-        82161, -- ^ unlock
         82355, -- Special Assignment: Cinderbee Surge
-        82146, -- ^ unlock
         82852, -- Special Assignment: Lynx Rescue
-        82158, -- ^ unlock
         82787, -- Special Assignment: Rise of the Colossals
-        82157, -- ^ unlock
         81691, -- Special Assignment: Shadows Below
-        82155, -- ^ unlock
         81649, -- Special Assignment: Titanic Resurgence
-        83069, -- ^ unlock
         83229, -- Special Assignment: When the Deeps Stir
-        82156, -- ^ unlock
     }, true },
     ["twwEmissary"] = { "weekly", {
         82678, -- Archives: The First Disc
@@ -712,4 +704,15 @@ Module.db.progress = {
         82992, -- Stormcharged Goods
     } },
     ["twwProfessionSkinningTreatise"] = { "weekly", { 83734 } },
+}
+
+Module.db.progressUnlock = {
+    [82414] = 82159, -- Special Assignment: A Pound of Cure
+    [82531] = 82161, -- Special Assignment: Bombs From Behind
+    [82355] = 82146, -- Special Assignment: Cinderbee Surge
+    [82852] = 82158, -- Special Assignment: Lynx Rescue
+    [82787] = 82157, -- Special Assignment: Rise of the Colossals
+    [81691] = 82155, -- Special Assignment: Shadows Below
+    [81649] = 83069, -- Special Assignment: Titanic Resurgence
+    [83229] = 82156, -- Special Assignment: When the Deeps Stir
 }
