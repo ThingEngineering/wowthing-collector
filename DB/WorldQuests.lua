@@ -59,4 +59,19 @@ Module.db.expansions = {
             2200, -- Emerald Dream
         },
     },
+    -- The War Within
+    {
+        id = 10,
+        minimumLevel = 70,
+        -- UiMap
+        zones = {
+            2213, -- The City of Threads
+            2214, -- The Ringing Deeps
+            2215, -- Hallowfall
+            2116, -- The City of Threads - Lower
+            2248, -- Isle of Dorn
+            2255, -- Azj-Kahet
+            2339, -- Dornogal
+        },
+    },
 }
