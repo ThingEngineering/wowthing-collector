@@ -104,5 +104,5 @@ Module.db.worldBosses = {
     [81624] = { 110001, "War Within World Bosses", "Orta, the Broken Mountain" },
     [81630] = { 110001, "War Within World Bosses", "Kordac, the Dormant Protector" },
     [81653] = { 110001, "War Within World Bosses", "Shurrai, Atrocity of the Undersea" },
-    [82653] = { 110001, "War Within World Bosses", "Aggregation of Horrors" },
+    [83466] = { 110001, "War Within World Bosses", "Aggregation of Horrors" },
 }
