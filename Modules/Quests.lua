@@ -10,6 +10,7 @@ local CQL_IsQuestFlaggedCompleted = C_QuestLog.IsQuestFlaggedCompleted
 local CTQ_GetQuestTimeLeftSeconds = C_TaskQuest.GetQuestTimeLeftSeconds
 
 local HALF_WEEK = 3.5 * 24 * 60 * 60
+local OPTIONAL_OBJECTIVE = OPTIONAL_QUEST_OBJECTIVE_DESCRIPTION:gsub('%%s', '.+'):gsub('([%(%)])', '%%%1')
 
 function Module:OnEnable()
     self:RegisterBucketEvent(
@@ -193,7 +194,10 @@ function Module:AddData(prog, questId, objectives)
     prog.status = 1
 
     for _, objective in ipairs(objectives) do
-        if objective ~= nil and objective.type ~= nil then
+        if objective ~= nil and
+            objective.type ~= nil and
+            not string.match(objective.text, OPTIONAL_OBJECTIVE)
+        then
             local objectiveData = {
                 ['type'] = objective.type,
                 ['text'] = gsub(
