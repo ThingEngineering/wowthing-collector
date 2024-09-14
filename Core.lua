@@ -123,6 +123,7 @@ end
 function Addon:PLAYER_ENTERING_WORLD()
     self:UpdateLastSeen()
 
+    self:ACCOUNT_MONEY()
     self:PLAYER_MONEY()
 
     for _, module in Addon:IterateModules() do
