@@ -10,7 +10,6 @@ local C_Item_IsItemDataCachedByID = C_Item.IsItemDataCachedByID
 local C_Item_RequestLoadItemDataByID = C_Item.RequestLoadItemDataByID
 
 function Module:OnEnable()
-    WWTCSaved.warbank = WWTCSaved.warbank or {}
     WWTCSaved.warbank.items = WWTCSaved.warbank.items or {}
 
     Addon.charData.bags = Addon.charData.bags or {}

@@ -29,6 +29,7 @@ local defaultWWTCSaved = {
     questsV2 = {},
     scanTimes = {},
     toys = {},
+    warbank = {},
     worldQuestIds = {},
 }
 
@@ -43,6 +44,7 @@ function Addon:OnInitialize()
     WWTCSaved.heirloomsV2 = WWTCSaved.heirloomsV2 or {}
     WWTCSaved.questsV2 = WWTCSaved.questsV2 or {}
     WWTCSaved.scanTimes = WWTCSaved.scanTimes or {}
+    WWTCSaved.warbank = WWTCSaved.warbank or {}
     WWTCSaved.worldQuestIds = WWTCSaved.worldQuestIds or {}
 
     WWTCSaved.honorCurrent = WWTCSaved.honorCurrent or 0
@@ -71,6 +73,8 @@ function Addon:OnInitialize()
 
     self:RegisterEvent('PLAYER_ENTERING_WORLD')
     self:RegisterEvent('PLAYER_LOGOUT')
+
+    self:RegisterEvent('ACCOUNT_MONEY')
     self:RegisterEvent('PLAYER_MONEY')
 end
 
@@ -135,6 +139,13 @@ function Addon:PLAYER_LOGOUT()
         if module.OnLogout ~= nil then
             module:OnLogout()
         end
+    end
+end
+
+function Addon:ACCOUNT_MONEY()
+    if C_PlayerInfo.HasAccountInventoryLock() then
+        WWTCSaved.scanTimes['warbankGold'] = time()
+        WWTCSaved.warbank.copper = C_Bank.FetchDepositedMoney(Enum.BankType.Account)
     end
 end
 
