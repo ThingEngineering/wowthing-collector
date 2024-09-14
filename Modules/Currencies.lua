@@ -63,7 +63,7 @@ function Module:UpdateTransferCurrencies()
         end
     end
 
-    WWTCSaved.scanTimes.transferCUrrencies = time()
+    WWTCSaved.scanTimes.transferCurrencies = time()
 end
 
 function Module:UpdateCurrencies()
