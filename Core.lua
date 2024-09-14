@@ -144,7 +144,7 @@ end
 
 function Addon:ACCOUNT_MONEY()
     if C_PlayerInfo.HasAccountInventoryLock() then
-        WWTCSaved.scanTimes['warbankGold'] = time()
+        WWTCSaved.scanTimes.warbankGold = time()
         WWTCSaved.warbank.copper = C_Bank.FetchDepositedMoney(Enum.BankType.Account)
     end
 end

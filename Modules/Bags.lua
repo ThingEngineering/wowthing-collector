@@ -66,8 +66,10 @@ function Module:BANKFRAME_OPENED()
     end
 
     -- Warband bank
-    for i = Enum.BagIndex.AccountBankTab_1, Enum.BagIndex.AccountBankTab_5 do
-        self.dirtyBags[i] = true
+    if C_PlayerInfo.HasAccountInventoryLock() then
+        for i = Enum.BagIndex.AccountBankTab_1, Enum.BagIndex.AccountBankTab_5 do
+            self.dirtyBags[i] = true
+        end
     end
 
     self:StartUpdateBagsTimer()
