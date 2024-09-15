@@ -94,6 +94,9 @@ end
 function Module:UpdateTransmog()
     if self.isScanning then return end
 
+    local lastScan = Addon.charData.scanTimes.transmog or 0
+    if (time() - lastScan) < 43200 then return end
+
     self.isScanning = true
 
     -- local startTime = debugprofilestop()
@@ -191,5 +194,5 @@ function Module:SaveTransmog()
         WWTCSaved.transmogSourcesSquishV2 = output
     end)
 
-    Addon.charData.scanTimes["transmog"] = time()
+    Addon.charData.scanTimes.transmog = time()
 end
