@@ -1,3 +1,10 @@
+v11.0.2.25
+----------
+- Added account bank (warbank) gold scanning.
+- Added TWW enchanting tasks.
+- Fixed scanning account bank items when the current character does not have
+  the lock.
+
 v11.0.2.24
 ----------
 - Added TWW zones to world quest scanning.
