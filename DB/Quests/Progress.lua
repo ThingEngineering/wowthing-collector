@@ -625,6 +625,10 @@ Module.db.progress = {
     ["twwProfessionEnchantingDrop6"] = { "weekly", { 84293 } }, -- Fleeting Arcane Manifestation
     ["twwProfessionEnchantingDrop7"] = { "weekly", { 84294 } }, -- Fleeting Arcane Manifestation
     ["twwProfessionEnchantingDrop8"] = { "weekly", { 84295 } }, -- Gleaming Telluric Crystal
+    ["twwProfessionEnchantingTask"] = { "weekly", {
+        84084, -- Just a Pinch
+        84085, -- The Power of Potential
+    } },
     ["twwProfessionEnchantingTreatise"] = { "weekly", { 83727 } },
 
     -- The War Within: Professions: Engineering
