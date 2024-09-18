@@ -1,3 +1,8 @@
+v11.0.2.26
+----------
+- Fixed Special Assignment: Titanic Resurgence not tracking correctly.
+- Updated quest ID for A Burning Path Through Time.
+
 v11.0.2.25
 ----------
 - Added account bank (warbank) gold scanning.
