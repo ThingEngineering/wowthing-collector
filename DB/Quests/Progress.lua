@@ -52,7 +52,7 @@ Module.db.progress = {
         83364, -- "A Savage Path Through Time", WoD Timewalking
         83362, -- "A Shrouded Path Through Time", MoP Timewalking
         83365, -- "A Frozen Path Through Time", Wrath Timewalking
-        72727, -- "A Burning Path Through Time", TBC Timewalking
+        83363, -- "A Burning Path Through Time", TBC Timewalking
         83359, -- "A Shattered Path Through Time", Cata Timewalking [Heroic]
     } },
     ["holidayTimewalkingItem"] = { "weekly", {
