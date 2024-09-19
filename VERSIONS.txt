@@ -1,3 +1,8 @@
+v11.0.2.27
+----------
+- Added another Chef Dinaire weekly quest.
+- Added Scalefang skinning tracking quest.
+
 v11.0.2.26
 ----------
 - Fixed Special Assignment: Titanic Resurgence not tracking correctly.
