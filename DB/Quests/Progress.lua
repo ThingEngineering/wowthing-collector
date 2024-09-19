@@ -512,6 +512,7 @@ Module.db.progress = {
     } },
     ["twwSpreadingChefFlame"] = { "weekly", { 78466 } },
     ["twwSpreadingChefQuest"] = { "weekly", {
+        80562, -- Blossoming Delight
         76394, -- Shadows of Flavor
         78933, -- The Sweet Eclipse
     } },
