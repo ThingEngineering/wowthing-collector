@@ -711,6 +711,7 @@ Module.db.progress = {
         82992, -- Stormcharged Goods
     } },
     ["twwProfessionSkinningTreatise"] = { "weekly", { 83734 } },
+    ["twwProfessionSkinningScalefang"] = { "daily", { 84259 } },
 }
 
 Module.db.progressUnlock = {
