@@ -1,3 +1,9 @@
+v11.0.2.28
+----------
+- Added patron order scanning.
+- Fixed the reset of wonky character vault data.
+- Scalefang is actually named Slatefang.
+
 v11.0.2.27
 ----------
 - Added another Chef Dinaire weekly quest.
