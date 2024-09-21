@@ -109,7 +109,11 @@ function Addon:Cleanup()
                 charData.illusions = nil
             end
 
-            if charData.vault and (charData.vault[1] or charData.vault[2] or charData.vault[3]) then
+            if charData.vault ~= nil and
+                (charData.vault[1] ~= nil or
+                charData.vault[2] ~= nil or
+                charData.vault[3] ~= nil)
+            then
                 charData.vault = {}
             end
         end
