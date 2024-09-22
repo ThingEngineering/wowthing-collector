@@ -1,3 +1,9 @@
+v11.0.2.29
+----------
+- Fixed equipped items not updating after applying an enchant.
+- Fixed equipped items not updating after socketing a gem.
+- Improved patron order scanning.
+
 v11.0.2.28
 ----------
 - Added patron order scanning.
