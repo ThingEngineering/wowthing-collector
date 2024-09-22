@@ -5,6 +5,9 @@ local Module = Addon:NewModule('ProfessionOrders')
 function Module:OnEnable()
     Addon.charData.patronOrders = Addon.charData.patronOrders or {}
 
+    self.isRequesting = false
+
+    self:RegisterEvent('CRAFTINGORDERS_UPDATE_ORDER_COUNT')
     self:RegisterEvent('TRADE_SKILL_SHOW')
     self:RegisterBucketEvent(
         {
@@ -19,7 +22,19 @@ function Module:OnEnteringWorld()
     self:UpdateOrders()
 end
 
+function Module:CRAFTINGORDERS_UPDATE_ORDER_COUNT(_, orderType)
+    if orderType == Enum.CraftingOrderType.Npc then
+        self:RequestOrders()
+    end
+end
+
 function Module:TRADE_SKILL_SHOW()
+    self:RequestOrders()
+end
+
+function Module:RequestOrders()
+    if self.isRequesting then return end
+
     local professionInfo = C_TradeSkillUI.GetBaseProfessionInfo()
     if professionInfo == nil or
         professionInfo.professionID == 0 or
@@ -29,10 +44,12 @@ function Module:TRADE_SKILL_SHOW()
     end
 
     -- Ask for patron orders after a slight delay (0 results sometimes otherwise)
+    self.isRequesting = true
+
     local request = {
         orderType = Enum.CraftingOrderType.Npc,
         searchFavorites = false,
-        initialNonPublicSearch = false,
+        initialNonPublicSearch = true,
         primarySort = {
             sortType = Enum.CraftingOrderSortType.ItemName,
             reversed = false,
@@ -46,6 +63,7 @@ function Module:TRADE_SKILL_SHOW()
         profession = professionInfo.profession,
         callback = C_FunctionContainers.CreateCallback(function(result, ...)
             if result == Enum.CraftingOrderResult.Ok then
+                self.isRequesting = false
                 self:UpdatePatronOrders()
             end
         end),
