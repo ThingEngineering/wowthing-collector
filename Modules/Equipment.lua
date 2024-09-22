@@ -7,6 +7,7 @@ local C_Item_RequestLoadItemDataByID = C_Item.RequestLoadItemDataByID
 
 function Module:OnEnable()
     self:RegisterBucketEvent({
+        'ENCHANT_SPELL_COMPLETED',
         'PLAYER_EQUIPMENT_CHANGED',
         'PROFESSION_EQUIPMENT_CHANGED',
     }, 2, 'UpdateEquipment')
