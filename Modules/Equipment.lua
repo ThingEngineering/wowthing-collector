@@ -10,6 +10,7 @@ function Module:OnEnable()
         'ENCHANT_SPELL_COMPLETED',
         'PLAYER_EQUIPMENT_CHANGED',
         'PROFESSION_EQUIPMENT_CHANGED',
+        'SOCKET_INFO_SUCCESS',
     }, 2, 'UpdateEquipment')
 end
 
