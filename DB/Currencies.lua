@@ -335,4 +335,15 @@ Module.db.currencies = {
     3052, -- Engineering Concentration
     3053, -- Inscription Concentration
     3054, -- Alchemy Concentration
+    3057, -- Alchemy Catchup?
+    3058, -- Blacksmithing Catchup?
+    3059, -- Enchanting Catchup?
+    3060, -- Engineering Catchup?
+    3061, -- Herbalism Catchup?
+    3062, -- Inscription Catchup?
+    3063, -- Jewelcrafting Catchup?
+    3064, -- Leatherworking Catchup?
+    3065, -- Mining Catchup?
+    3066, -- Skinning Catchup?
+    3067, -- Tailoring Catchup?
 }
