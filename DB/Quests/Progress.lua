@@ -631,6 +631,7 @@ Module.db.progress = {
     ["twwProfessionEnchantingTask"] = { "weekly", {
         84084, -- Just a Pinch
         84085, -- The Power of Potential
+        84086, -- A Rare Necessity
     } },
     ["twwProfessionEnchantingTreatise"] = { "weekly", { 83727 } },
 
