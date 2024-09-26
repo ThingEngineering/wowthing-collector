@@ -37,6 +37,8 @@ function Module:RequestOrders()
 
     local professionInfo = C_TradeSkillUI.GetBaseProfessionInfo()
     if professionInfo == nil or
+        professionInfo.profession == nil or
+        professionInfo.professionID == nil or
         professionInfo.professionID == 0 or
         not C_TradeSkillUI.IsNearProfessionSpellFocus(professionInfo.profession)
     then
