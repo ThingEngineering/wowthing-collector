@@ -1,3 +1,9 @@
+v11.0.2.30
+----------
+- Added another TWW enchanting task quest.
+- Added more TWW tracking currencies.
+- Fixed work order error when using Mechagon crafting table (GH27).
+
 v11.0.2.29
 ----------
 - Fixed equipped items not updating after applying an enchant.
