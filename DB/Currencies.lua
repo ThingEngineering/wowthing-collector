@@ -303,6 +303,7 @@ Module.db.currencies = {
     3028, -- Restored Coffer Key
     3055, -- Mereldar Derby Mark
     3056, -- Kej
+    3068, -- Delver's Journey
     3089, -- Residual Memories
     3093, -- Nerub-ar Finery
 
@@ -335,15 +336,27 @@ Module.db.currencies = {
     3052, -- Engineering Concentration
     3053, -- Inscription Concentration
     3054, -- Alchemy Concentration
-    3057, -- Alchemy Catchup?
-    3058, -- Blacksmithing Catchup?
-    3059, -- Enchanting Catchup?
-    3060, -- Engineering Catchup?
-    3061, -- Herbalism Catchup?
-    3062, -- Inscription Catchup?
-    3063, -- Jewelcrafting Catchup?
-    3064, -- Leatherworking Catchup?
-    3065, -- Mining Catchup?
-    3066, -- Skinning Catchup?
-    3067, -- Tailoring Catchup?
+    3057, -- 11.0 Professions - Tracker - Weekly Alchemy Knowledge
+    3058, -- ^ Blacksmithing
+    3059, -- ^ Enchanting
+    3060, -- ^ Engineering
+    3061, -- ^ Herbalism
+    3062, -- ^ Inscription
+    3063, -- ^ Jewelcrafting
+    3064, -- ^ Leatherworking
+    3065, -- ^ Mining
+    3066, -- ^ Skinning
+    3067, -- ^ Tailoring
+    3073, -- 11.0 Professions - Tracker - Insc Book - Tailoring Knowledge
+    3074, -- ^ Skinning
+    3075, -- ^ Mining
+    3076, -- ^ Leatherworking
+    3077, -- ^ Jewelcrafting
+    3078, -- ^ Inscription
+    3079, -- ^ Herbalism
+    3080, -- ^ Engineering
+    3081, -- ^ Enchanting
+    3082, -- ^ Blacksmithing
+    3083, -- ^ Alchemy	
+    3084, -- ^ Inscription 2?
 }
