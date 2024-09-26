@@ -160,7 +160,7 @@ function Module:UpdateQuests()
                     actualKey = questKey..index
                 end
 
-                table.insert(progressQuests, table.concat({
+                tinsert(progressQuests, table.concat({
                     actualKey,
                     prog.id,
                     prog.name,
@@ -215,7 +215,7 @@ function Module:AddData(prog, questId, objectives)
                 objectiveData.need = objective.numRequired
             end
 
-            table.insert(prog.objectives, table.concat({
+            tinsert(prog.objectives, table.concat({
                 objectiveData.type,
                 objectiveData.text,
                 objectiveData.have,
@@ -229,7 +229,7 @@ function Module:AddData(prog, questId, objectives)
         local oldQuestId = C_QuestLog.GetSelectedQuest()
         C_QuestLog.SetSelectedQuest(questId)
 
-        table.insert(prog.objectives, table.concat({
+        tinsert(prog.objectives, table.concat({
             'object',
             GetQuestLogCompletionText() or '',
             1,
