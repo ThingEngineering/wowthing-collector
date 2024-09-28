@@ -508,7 +508,7 @@ Module.db.progress = {
     ["twwSpreadingAuebryFlame"] = { "weekly", { 76599 } },
     ["twwSpreadingAuebryQuest"] = { "weekly", {
         79158, -- Seeds of Salvation
-        76599, -- Tater Trawl
+        76733, -- Tater Trawl
     } },
     ["twwSpreadingChefFlame"] = { "weekly", { 78466 } },
     ["twwSpreadingChefQuest"] = { "weekly", {
@@ -535,7 +535,7 @@ Module.db.progress = {
         78656, -- Hose It Down
         79346, -- Chew on That
     } },
-    ["twwSpreadingYorvasFlame"] = { "weekly", { 79295 } },
+    ["twwSpreadingYorvasFlame"] = { "weekly", { 78452 } },
     ["twwSpreadingYorvasQuest"] = { "weekly", {
         76997, -- Lost in Shadows
         81574, -- Sporadic Growth
