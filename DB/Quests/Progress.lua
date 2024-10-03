@@ -567,9 +567,21 @@ Module.db.progress = {
         81650, -- Special Assignment: Titanic Resurgence #3
         83229, -- Special Assignment: When the Deeps Stir
     }, true },
-    ["twwEmissary"] = { "weekly", {
+    ["twwEmissaryArchives"] = { "weekly", {
         82678, -- Archives: The First Disc
+        82679, -- Archives: Seeking History
+    } },
+    ["twwEmissaryDelves"] = { "weekly", {
+        82746, -- Delves: Breaking Tough to Loot Stuff
+        82707, -- Delves: Earthen Defense
+        82710, -- Delves: Empire-ical Exploration
+        82706, -- Delves: Khaz Algar Research
+        82711, -- Delves: Lost and Found
         82708, -- Delves: Nerubian Menace
+        82709, -- Delves: Percussive Archaeology
+        82712, -- Delves: Trouble Up and Down Khaz Algar
+    } },
+    ["twwEmissaryWorldsoul"] = { "weekly", {
         82511, -- Worldsoul: Awakening Machine
         82453, -- Worldsoul: Encore!
         82516, -- Worldsoul: Forging a Pact
