@@ -1,3 +1,10 @@
+v11.0.2.31
+----------
+- Added missing Archives/Delves quests.
+- Added Delves: Season 1 reputation.
+- Fixed Spreading the Light sub-quests.
+- Split Emissary quests into 3 groups (Archives/Delves/Worldsoul).
+
 v11.0.2.30
 ----------
 - Added another TWW enchanting task quest.
