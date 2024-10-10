@@ -45,6 +45,15 @@ Module.db.auras = {
     454940, -- Contract: The Severed Threads 1
     454941, -- Contract: The Severed Threads 2
     454942, -- Contract: The Severed Threads 3
+
+    460285, -- Delver's Bounty Tier 1
+    460823, -- Delver's Bounty Tier 2
+    460824, -- Delver's Bounty Tier 3
+    460825, -- Delver's Bounty Tier 4
+    460826, -- Delver's Bounty Tier 5
+    460829, -- Delver's Bounty Tier 6
+    460830, -- Delver's Bounty Tier 7
+    460831, -- Delver's Bounty Tier 8
 }
 
 Module.db.gameTimeAuras = {
