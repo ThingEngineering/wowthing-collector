@@ -5,7 +5,7 @@ local Module = Addon:NewModule('ProfessionOrders')
 function Module:OnEnable()
     Addon.charData.patronOrders = Addon.charData.patronOrders or {}
 
-    self.isRequesting = false
+    self.requestStarted = nil
 
     self:RegisterEvent('CRAFTINGORDERS_UPDATE_ORDER_COUNT')
     self:RegisterEvent('TRADE_SKILL_SHOW')
@@ -14,7 +14,10 @@ function Module:OnEnable()
             'CRAFTINGORDERS_FULFILL_ORDER_RESPONSE',
         },
         1,
-        'UpdateOrders'
+        function()
+            self:UpdateOrders()
+            self:RequestOrders()
+        end
     )
 end
 
@@ -33,7 +36,7 @@ function Module:TRADE_SKILL_SHOW()
 end
 
 function Module:RequestOrders()
-    if self.isRequesting then return end
+    if self.requestStarted ~= nil then return end
 
     local professionInfo = C_TradeSkillUI.GetBaseProfessionInfo()
     if professionInfo == nil or
@@ -46,18 +49,19 @@ function Module:RequestOrders()
     end
 
     -- Ask for patron orders after a slight delay (0 results sometimes otherwise)
-    self.isRequesting = true
+    local now = time()
+    self.requestStarted = now
 
     local request = {
         orderType = Enum.CraftingOrderType.Npc,
         searchFavorites = false,
         initialNonPublicSearch = true,
         primarySort = {
-            sortType = Enum.CraftingOrderSortType.ItemName,
+            sortType = Enum.CraftingOrderSortType.TimeRemaining,
             reversed = false,
         },
         secondarySort = {
-            sortType = Enum.CraftingOrderSortType.MaxTip,
+            sortType = Enum.CraftingOrderSortType.TimeRemaining,
             reversed = false,
         },
         forCrafter = true,
@@ -65,12 +69,19 @@ function Module:RequestOrders()
         profession = professionInfo.profession,
         callback = C_FunctionContainers.CreateCallback(function(result, ...)
             if result == Enum.CraftingOrderResult.Ok then
-                self.isRequesting = false
+                self.requestStarted = nil
                 self:UpdatePatronOrders()
             end
         end),
     }
     C_Timer.After(1, function() C_CraftingOrders.RequestCrafterOrders(request) end)
+
+    -- Reset if nothing happened after 4 seconds
+    C_Timer.After(4, function()
+        if self.requestStarted == now then
+            self.requestStarted = nil
+        end
+    end)
 end
 
 function Module:UpdateOrders()
@@ -146,59 +157,3 @@ function Module:UpdatePatronOrders()
     Addon.charData.scanTimes['patronOrders'] = time()
     Addon.charData.patronOrders[professionInfo.professionID] = patronOrders
 end
-
--- [2]={
---     orderState=2,
---     orderType=3,
---     npcOrderRewards={
---       [1]={
---         count=1,
---         itemLink="|cffffffff|Hitem:225670::::::::80:73:::::::::|h[Apprentice's Crafting License]|h|r"
---       },
---       [2]={
---         count=1,
---         itemLink="|cffffffff|Hitem:228727::::::::80:73:::::::::|h[]|h|r"
---       }
---     },
---     npcCustomerCreatureID=217091,
---     expirationTime=1727276400,
---     consortiumCut=43744,
---     npcTreasureID=128322,
---     skillLineAbilityID=50978,
---     customerNotes="",
---     crafterGuid="Player-76-09ED68C8",
---     reagents={
---       [1]={
---         slotIndex=3,
---         reagent={
---           quantity=1,
---           itemID=211296,
---           dataSlotIndex=3
---         },
---         source=1,
---         isBasicReagent=false
---       },
---       [2]={
---         slotIndex=7,
---         reagent={
---           quantity=6,
---           itemID=222424,
---           dataSlotIndex=7
---         },
---         source=0,
---         isBasicReagent=true
---       }
---     },
---     isFulfillable=false,
---     customerName="Vokgret",
---     orderID=98981691,
---     crafterName="Yaken",
---     npcCraftingOrderSetID=31,
---     reagentState=1,
---     minQuality=4,
---     itemID=222437,
---     isRecraft=false,
---     claimEndTime=0,
---     tipAmount=874884,
---     spellID=450228
--- }
