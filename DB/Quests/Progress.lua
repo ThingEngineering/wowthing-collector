@@ -507,6 +507,7 @@ Module.db.progress = {
     } },
     ["twwSpreadingAuebryFlame"] = { "weekly", { 76599 } },
     ["twwSpreadingAuebryQuest"] = { "weekly", {
+        76600, -- Right Between the Gyro-Optics
         79158, -- Seeds of Salvation
         76733, -- Tater Trawl
     } },
