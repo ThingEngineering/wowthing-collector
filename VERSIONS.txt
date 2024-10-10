@@ -1,3 +1,10 @@
+v11.0.2.32
+----------
+- Added Delver's Bounty auras.
+- Added another Spreading the Light sub-quest.
+- Fixed mining "Rush-order Requisition" quest ID.
+- Improved patron order scanning consistency.
+
 v11.0.2.31
 ----------
 - Added missing Archives/Delves quests.
