@@ -701,11 +701,11 @@ Module.db.progress = {
     ["twwProfessionMiningDrop5"] = { "weekly", { 83050 } }, -- Slab of Slate
     ["twwProfessionMiningDrop6"] = { "weekly", { 83049 } }, -- Erosion Polished Slate
     ["twwProfessionMiningTask"] = { "weekly", {
-        83103, -- Acquiring Aqirite
         83102, -- Bismuth is Business
+        83103, -- Acquiring Aqirite
         83104, -- Identifying Ironclaw
+        83105, -- Rush-order Requisition
         83106, -- Null Pebble Excavation
-        83106, -- Rush-order Requisition
     } },
     ["twwProfessionMiningTreatise"] = { "weekly", { 83733 } },
 
