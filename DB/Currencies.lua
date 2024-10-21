@@ -21,6 +21,11 @@ Module.db.currencies = {
     416, -- Mark of the World Tree
     515, -- Darkmoon Prize Ticket
     1379, -- Trial of Style Token
+    3100, -- Bronze Celebration Token
+    3102, -- Bronze Celebration Token [Hidden]
+    3144, -- 11.0.5 20th Anniversary - Tracker
+    3145, -- 11.0.5 20th Anniversary - Tracker
+    3146, -- 11.0.5 20th Anniversary - Tracker
 
     -- Cataclysm
     361, -- Illustrious Jewelcrafter's Token
