@@ -43,7 +43,7 @@ function Module:UpdateBattlePets()
             pets[Module:ParseGUID(guid)] = table.concat({
                 speciesId,
                 level,
-                quality,
+                quality - 1, -- GetPetStats returns 1 higher than expected, weird
             }, ':')
         end
     end
