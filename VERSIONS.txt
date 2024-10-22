@@ -1,3 +1,9 @@
+v11.0.2.33
+----------
+- Added Anniversary currencies.
+- Added Delve level tracking on completion.
+- Fixed battle pet quality being 1 tier higher than it should be.
+
 v11.0.2.32
 ----------
 - Added Delver's Bounty auras.
