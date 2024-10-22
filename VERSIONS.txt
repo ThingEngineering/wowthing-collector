@@ -1,3 +1,7 @@
+v11.0.2.34
+----------
+- Fixed random chat window spam, oops.
+
 v11.0.2.33
 ----------
 - Added Anniversary currencies.
