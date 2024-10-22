@@ -11,13 +11,10 @@ end
 function Module:UpdateScenario()
     local scenarioInfo = C_ScenarioInfo.GetScenarioInfo()
     local widgetInfo = C_UIWidgetManager.GetScenarioHeaderDelvesWidgetVisualizationInfo(6183)
-    print('hello')
     if scenarioInfo == nil or widgetInfo == nil then return end
 
     local weeklyReset = time() + C_DateAndTime.GetSecondsUntilWeeklyReset()
     Addon.charData.delves[weeklyReset] = Addon.charData.delves[weeklyReset] or {}
-
-    print('reset is '..weeklyReset)
 
     tinsert(Addon.charData.delves[weeklyReset], table.concat({
         scenarioInfo.scenarioID,
