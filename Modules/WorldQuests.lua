@@ -42,9 +42,10 @@ function Module:UpdateWorldQuests()
                     if quests ~= nil then
                         for _, quest in pairs(quests) do
                             if quest.mapID == zoneId then
-                                local timeRemaining = C_TaskQuest_GetQuestTimeLeftSeconds(quest.questId)
+                                local questId = quest.questID
+                                local timeRemaining = C_TaskQuest_GetQuestTimeLeftSeconds(questId)
                                 if timeRemaining ~= nil and timeRemaining > 0 then
-                                    WWTCSaved.worldQuestIds[quest.questId] = true
+                                    WWTCSaved.worldQuestIds[questId] = true
 
                                     local expires = now + timeRemaining
                                     -- Clamp to the nearest 30 minutes
@@ -55,9 +56,9 @@ function Module:UpdateWorldQuests()
                                         expires = expires - mod
                                     end
 
-                                    local rewardCurrencies = C_QuestLog.GetQuestRewardCurrencies(quest.questId)
-                                    local rewardItemCount = GetNumQuestLogRewards(quest.questId)
-                                    local rewardMoney = GetQuestLogRewardMoney(quest.questId)
+                                    local rewardCurrencies = C_QuestLog.GetQuestRewardCurrencies(questId)
+                                    local rewardItemCount = GetNumQuestLogRewards(questId)
+                                    local rewardMoney = GetQuestLogRewardMoney(questId)
 
                                     if #rewardCurrencies > 0 or rewardItemCount > 0 or rewardMoney > 0 then
                                         local rewards = {}
@@ -71,7 +72,7 @@ function Module:UpdateWorldQuests()
                                         end
 
                                         for i = 1, rewardItemCount do
-                                            local _, _, quantity, _, _, itemId, _ = GetQuestLogRewardInfo(i, quest.questId)
+                                            local _, _, quantity, _, _, itemId, _ = GetQuestLogRewardInfo(i, questId)
                                             tinsert(rewards, table.concat({
                                                 9, -- Item
                                                 itemId,
@@ -87,8 +88,8 @@ function Module:UpdateWorldQuests()
                                             }, '-'))
                                         end
 
-                                        questMap[quest.questId] = table.concat({
-                                            quest.questId,
+                                        questMap[questId] = table.concat({
+                                            questId,
                                             expires,
                                             string.format('%.1f', quest.x * 100),
                                             string.format('%.1f', quest.y * 100),
