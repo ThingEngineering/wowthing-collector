@@ -60,5 +60,6 @@ Module.db.gameTimeAuras = {
     -- Events
     423860, -- Knowledge of Timeways
     423861, -- Mastery of Timeways
+    455050, -- Blessings of the Bronze Dragonflight
     465631, -- Blessings of the Bronze Dragonflight
 }
