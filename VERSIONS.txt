@@ -1,3 +1,8 @@
+v11.0.5.2
+---------
+- Added the other Blessings of the Bronze Dragonflight buff aura.
+- Added Classic Timewalking quests.
+
 v11.0.5.1
 ---------
 - Added Blessings of the Bronze Dragonflight buff aura.
