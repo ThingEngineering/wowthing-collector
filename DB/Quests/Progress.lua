@@ -48,12 +48,13 @@ Module.db.progress = {
     ["holidayDungeons"] = { "weekly", { 83347 } }, -- "Emissary of War", Mythic Dungeons
     ["holidayPetPvp"] = { "weekly", { 83357 } }, -- "The Very Best", PvP Pet Battles
     ["holidayTimewalking"] = { "weekly", {
-        72719, -- "A Fel Path Through Time", Legion Timewalking
-        83364, -- "A Savage Path Through Time", WoD Timewalking
-        83362, -- "A Shrouded Path Through Time", MoP Timewalking
-        83365, -- "A Frozen Path Through Time", Wrath Timewalking
-        83363, -- "A Burning Path Through Time", TBC Timewalking
-        83359, -- "A Shattered Path Through Time", Cata Timewalking [Heroic]
+        72719, -- A Fel Path Through Time, Legion
+        83274, -- An Original Path Through Time, Classic
+        83364, -- A Savage Path Through Time, WoD
+        83362, -- A Shrouded Path Through Time, MoP
+        83365, -- A Frozen Path Through Time, Wrath
+        83363, -- A Burning Path Through Time, TBC
+        83359, -- A Shattered Path Through Time, Cata
     } },
     ["holidayTimewalkingItem"] = { "weekly", {
         40168, -- The Swirling Vial, TBC
@@ -63,11 +64,13 @@ Module.db.progress = {
         45563, -- The Shrouded Coin, MoP
         55498, -- The Shimmering Crystal, WoD
         64710, -- Whispering Fel Crystal, Legion
+        83285, -- The Ancient Scroll, Classic
     } },
     ["holidayTimewalkingRaid"] = { "weekly", {
         47523, -- Disturbance Detected: Black Temple
         50316, -- Disturbance Detected: Ulduar
         57637, -- Disturbance Detected: Firelands
+        82817, -- Disturbance Detected: Blackrock Depths
     } },
     ["holidayWorldQuests"] = { "weekly", { 83366 } }, -- "The World Awaits", World Quests
     -- Weekly PvP
