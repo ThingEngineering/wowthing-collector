@@ -32,21 +32,38 @@ Module.db.progress = {
     ["dmfStrength"] = { "special", { 29433 } }, -- Test Your Strength
 
     -- Holidays
-    ["meanOne"] = { "daily", {
-        6983, -- [H] You're a Mean One...
-        7043, -- [A] You're a Mean One...
+    ["hallowsBreak"] = { "daily", {
+        29371, -- A Time to Lose [A]
+        29377, -- A Time to Break Down [H]
     } },
+    ["hallowsBuild"] = { "daily", {
+        29075, -- A Time to Gain [A]
+        29376, -- A Time to Build Up [H]
+    } },
+    ["hallowsCleanUp"] = { "daily", {
+        29144, -- Clean Up in Stormwind [A]
+        29375, -- Clean Up in Undercity [H]
+    } },
+    ["hallowsStinkBombs"] = { "daily", {
+        29054, -- Stink Bombs Away! [A]
+        29374, -- Stink Bombs Away! [H]
+    } },
+    ["hallowsTree"] = { "daily", { 43162 } }, -- Under the Crooked Tree
     ["merryChildren"] = { "daily", { 39648 } }, -- Where Are the Children?
     ["merryGrumplings"] = { "daily", { 39649 } }, -- Menacing Grumplings
     ["merryGrumpus"] = { "daily", { 39651 } }, -- Grumpus
+    ["merryMeanOne"] = { "daily", {
+        6983, -- [H] You're a Mean One...
+        7043, -- [A] You're a Mean One...
+    } },
     ["merryPresents"] = { "daily", { 39668 } }, -- What Horrible Presents!
 
     -- Weekly Holidays
-    ["holidayArena"] = { "weekly", { 83358 } }, -- "The Arena Calls", Arena Skirmishes
-    ["holidayBattlegrounds"] = { "weekly", { 83345 } }, -- "A Call to Battle", Battlegrounds
-    ["holidayDelves"] = { "weekly", { 84776 } }, -- "A Call to Delves", Delves
-    ["holidayDungeons"] = { "weekly", { 83347 } }, -- "Emissary of War", Mythic Dungeons
-    ["holidayPetPvp"] = { "weekly", { 83357 } }, -- "The Very Best", PvP Pet Battles
+    ["holidayArena"] = { "weekly", { 83358 } }, -- The Arena Calls [Skirmishes]
+    ["holidayBattlegrounds"] = { "weekly", { 83345 } }, -- A Call to Battle
+    ["holidayDelves"] = { "weekly", { 84776 } }, -- A Call to Delves
+    ["holidayDungeons"] = { "weekly", { 83347 } }, -- Emissary of War
+    ["holidayPetPvp"] = { "weekly", { 83357 } }, -- The Very Best
     ["holidayTimewalking"] = { "weekly", {
         72719, -- A Fel Path Through Time, Legion
         83274, -- An Original Path Through Time, Classic
@@ -59,8 +76,8 @@ Module.db.progress = {
     ["holidayTimewalkingItem"] = { "weekly", {
         40168, -- The Swirling Vial, TBC
         40173, -- The Unstable Prism, Wrath
-        40786, -- The Smoldering Ember, Cata [Horde]
-        40787, -- The Smoldering Ember, Cata [Alliance]
+        40786, -- The Smoldering Ember, Cata [H]
+        40787, -- The Smoldering Ember, Cata [A]
         45563, -- The Shrouded Coin, MoP
         55498, -- The Shimmering Crystal, WoD
         64710, -- Whispering Fel Crystal, Legion
@@ -72,7 +89,7 @@ Module.db.progress = {
         57637, -- Disturbance Detected: Firelands
         82817, -- Disturbance Detected: Blackrock Depths
     } },
-    ["holidayWorldQuests"] = { "weekly", { 83366 } }, -- "The World Awaits", World Quests
+    ["holidayWorldQuests"] = { "weekly", { 83366 } }, -- The World Awaits
     
     -- Anniversary
     ["anniversaryCelebrate"] = { "daily", { 84616 } }, -- Celebrate Good Fun!
