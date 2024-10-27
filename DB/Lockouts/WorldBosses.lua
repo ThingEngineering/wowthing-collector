@@ -7,7 +7,9 @@ Module.db.worldBosses = {
     [47461] = { 100001, "Lord Kazzak", "Lord Kazzak", true },
     [47462] = { 100002, "Azuregos", "Azuregos", true },
     [47463] = { 100003, "Dragon of Nightmare", "Dragon of Nightmare", true },
-    [60214] = { 100017, "Doomwalker", "Doomwalker", true },
+    [60214] = { 100004, "Doomwalker", "Doomwalker", true },
+    [84256] = { 100005, "Archavon the Stone Watcher", "Archavon the Stone Watcher", true },
+    [84282] = { 100006, "Sha of Anger", "Sha of Anger", true },
 
     -- Mists of Pandaria
     [32099] = { 104001, "Sha of Anger", "Sha of Anger" },
