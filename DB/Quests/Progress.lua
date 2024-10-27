@@ -73,6 +73,21 @@ Module.db.progress = {
         82817, -- Disturbance Detected: Blackrock Depths
     } },
     ["holidayWorldQuests"] = { "weekly", { 83366 } }, -- "The World Awaits", World Quests
+    
+    -- Anniversary
+    ["anniversaryCelebrate"] = { "daily", { 84616 } }, -- Celebrate Good Fun!
+    ["anniversaryChromie"] = { "weekly", { 82783 } }, -- Chromie's Codex
+    ["anniversaryGatecrashers"] = { "weekly", { 60215 } }, -- Timely Gate Crashers
+    ["anniversaryOriginals"] = { "weekly", {
+        47253, -- The Originals [A]
+        47254, -- The Originals [H]
+    } },
+    ["anniversaryReflect"] = { "daily", {
+        43323, -- A Time to Reflect [A]
+        43461, -- A Time to Reflect [H]
+    } },
+    ["anniversarySoldier"] = { "weekly", { 57300 } }, -- Soldier of Time
+    
     -- Weekly PvP
     ["pvpArenas"] = { "weekly", { 80188 } }, -- Preserving in Arenas (Rated Arenas)
     ["pvpBattle"] = { "weekly", { 80184 } }, -- Preserving in Battle (Random Battlegrounds)
