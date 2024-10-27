@@ -59,6 +59,8 @@ Module.db.auras = {
 
 Module.db.gameTimeAuras = {
     24705, -- Grim Visage
+    29175, -- Ribbon Dance
+    42138, -- Brewfest Enthusiast
     46668, -- WHEE!
     95987, -- Unburdened
     289982, -- Draught of Ten Lands
