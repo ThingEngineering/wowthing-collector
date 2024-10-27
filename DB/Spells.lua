@@ -4,6 +4,7 @@ local Module = LibStub('AceAddon-3.0'):GetAddon('WoWthing_Collector'):GetModule(
 Module.db.auras = {
     26013, -- Deserter
     71041, -- Dungeon Deserter
+    136583, -- Darkmoon Top Hat
     418563, -- WoW's 19th Anniversary
 
     -- Dragonflight
@@ -57,7 +58,10 @@ Module.db.auras = {
 }
 
 Module.db.gameTimeAuras = {
-    -- Events
+    24705, -- Grim Visage
+    46668, -- WHEE!
+    95987, -- Unburdened
+    289982, -- Draught of Ten Lands
     423860, -- Knowledge of Timeways
     423861, -- Mastery of Timeways
     455050, -- Blessings of the Bronze Dragonflight
