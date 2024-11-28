@@ -4,12 +4,14 @@ local Module = Addon:NewModule('BattlePets')
 
 local CPJ_GetPetInfoByIndex = C_PetJournal.GetPetInfoByIndex
 local CPJ_GetPetInfoByPetID = C_PetJournal.GetPetInfoByPetID
+local CPJ_GetPetLoadOutInfo = C_PetJournal.GetPetLoadOutInfo
 local CPJ_GetPetStats = C_PetJournal.GetPetStats
 
 function Module:OnEnable()
     WWTCSaved.battlePets = WWTCSaved.battlePets or {}
 
     self:RegisterEvent('NEW_PET_ADDED')
+    self:RegisterEvent('PET_BATTLE_LEVEL_CHANGED')
     self:RegisterEvent('PET_JOURNAL_PET_DELETED')
 end
 
@@ -27,6 +29,19 @@ end
 
 function Module:PET_JOURNAL_PET_DELETED(_, guid)
     WWTCSaved.battlePets[Module:ParseGUID(guid)] = nil
+end
+
+function Module:PET_BATTLE_LEVEL_CHANGED(_, owner, petIndex, newLevel)
+    if owner == 1 then
+        local guid, _ = CPJ_GetPetLoadOutInfo(petIndex)
+        if guid ~= nil then
+            local speciesId, _, level = CPJ_GetPetInfoByPetID(guid)
+            WWTCSaved.battlePets[Module:ParseGUID(guid)] = table.concat({
+                speciesId,
+                level,
+            }, ':')
+        end
+    end
 end
 
 function Module:UpdateBattlePets()
