@@ -1,4 +1,4 @@
-local Addon = LibStub("AceAddon-3.0"):NewAddon("WoWthing_Collector", "AceEvent-3.0")
+local Addon = LibStub("AceAddon-3.0"):NewAddon("WoWthing_Collector", "AceConsole-3.0", "AceEvent-3.0")
 Addon:SetDefaultModuleLibraries("AceBucket-3.0", "AceEvent-3.0", "AceTimer-3.0")
 
 local ModulePrototype = {
@@ -71,6 +71,8 @@ function Addon:OnInitialize()
 
     WWTCSaved.chars[self.charData.name] = nil
 
+    self:RegisterChatCommand('wwtc', 'SlashCommand')
+
     self:RegisterEvent('PLAYER_ENTERING_WORLD')
     self:RegisterEvent('PLAYER_LOGOUT')
 
@@ -117,6 +119,16 @@ function Addon:Cleanup()
                 charData.vault = {}
             end
         end
+    end
+end
+
+function Addon:SlashCommand(command)
+    if command == 'transmog' then
+        print('Running full transmog scan')
+        self.charData.scanTimes.transmog = 0
+        
+        local transmogModule = self:GetModule('Transmog')
+        transmogModule:UpdateTransmog(true)
     end
 end
 
