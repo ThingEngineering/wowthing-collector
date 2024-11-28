@@ -9,9 +9,18 @@ Module.db.reputations = {
 
 Module.db.friendships = {
     -- Battle for Azeroth
+    2233, -- Dino Training - Pterrodax
+    2370, -- Dino Training - Direhorn
+    2375, -- Hunter Akana
+    2376, -- Farseer Ori
+    2377, -- Bladesman Inowari
+    2388, -- Poen Gillbrack
+    2389, -- Neri Sharpfin
+    2390, -- Vim Brineheart
     2396, -- Honeyback Drone
     2397, -- Honeyback Hivemother
     2398, -- Honeyback Harvester
+    2427, -- Aqir Hatchling
 
     -- Shadowlands
     2463, -- Marasmius
