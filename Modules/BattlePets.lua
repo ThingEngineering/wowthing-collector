@@ -35,11 +35,13 @@ function Module:PET_BATTLE_LEVEL_CHANGED(_, owner, petIndex, newLevel)
     if owner == 1 then
         local guid, _ = CPJ_GetPetLoadOutInfo(petIndex)
         if guid ~= nil then
-            local speciesId, _, level = CPJ_GetPetInfoByPetID(guid)
-            WWTCSaved.battlePets[Module:ParseGUID(guid)] = table.concat({
-                speciesId,
-                level,
-            }, ':')
+            C_Timer.After(2, function()
+                local speciesId, _, level = CPJ_GetPetInfoByPetID(guid)
+                WWTCSaved.battlePets[Module:ParseGUID(guid)] = table.concat({
+                    speciesId,
+                    level,
+                }, ':')
+            end)
         end
     end
 end
