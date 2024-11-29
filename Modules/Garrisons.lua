@@ -45,9 +45,16 @@ function Module:UpdateGarrisons()
 end
 
 function Module:ScanGarrison(garrisonData)
+    -- Shadowlands are annoying
+    local findType = garrisonData.type
+    if garrisonData.type == Enum.GarrisonType.Type_9_0_Garrison then
+        local covenantId = C_Covenants.GetActiveCovenantID() or 0
+        findType = findType + (covenantId * 1000000)
+    end
+
     local garrison
     for _, charGarrison in ipairs(Addon.charData.garrisons) do
-        if charGarrison.type == garrisonData.type then
+        if charGarrison.type == findType then
             garrison = charGarrison
             break
         end
@@ -55,7 +62,7 @@ function Module:ScanGarrison(garrisonData)
 
     if garrison == nil then
         garrison = {
-            type = garrisonData.type
+            type = findType
         }
         Addon.charData.garrisons[#Addon.charData.garrisons + 1] = garrison
     end
@@ -67,7 +74,6 @@ function Module:ScanGarrison(garrisonData)
 
     garrison.buildings = {}
     local buildings = C_Garrison.GetBuildings(garrisonData.type) or {}
-
     for _, building in ipairs(buildings) do
         -- id, name, textureKit, icon, description, rank, currencyID, currencyQty, goldQty,
         -- buildTime, needsPlan, isPrebuilt, possSpecs, upgrades, canUpgrade, isMaxLevel, hasFollowerSlot
@@ -79,6 +85,23 @@ function Module:ScanGarrison(garrisonData)
             name = name,
             rank = rank,
         })
+    end
+
+    garrison.followers = {}
+    for _, followerType in ipairs(garrisonData.followerTypes) do
+        local followers = C_Garrison.GetFollowers(followerType) or {}
+        for _, follower in ipairs(followers) do
+            -- DevTools_Dump(follower)
+            tinsert(garrison.followers, table.concat({
+                follower.garrFollowerID or 0,
+                follower.quality,
+                follower.level,
+                follower.xp or 0,
+                follower.levelXP or 0,
+                follower.iLevel or 0,
+                follower.name,
+            }, ':'))
+        end
     end
 
     local treeIds = C_Garrison.GetTalentTreeIDsByClassID(garrisonData.type, Addon.charClassID)
