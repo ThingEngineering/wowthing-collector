@@ -68,6 +68,10 @@ function Addon:OnInitialize()
     self.charData.name = self.regionName .. "/" .. (realmEnglish or realm)  .. "/" .. UnitName("player")
     self.charData.scanTimes = self.charData.scanTimes or {}
 
+    local now = time()
+    self.charData.dailyReset = now + C_DateAndTime.GetSecondsUntilDailyReset()
+    self.charData.weeklyReset = now + C_DateAndTime.GetSecondsUntilWeeklyReset()
+
     WWTCSaved.chars[self.charName] = self.charData
 
     WWTCSaved.chars[self.charData.name] = nil
