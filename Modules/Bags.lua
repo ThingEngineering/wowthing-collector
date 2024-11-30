@@ -66,7 +66,7 @@ function Module:BANKFRAME_OPENED()
     end
 
     -- Warband bank
-    if C_PlayerInfo.HasAccountInventoryLock() then
+    if Addon.hasAccountLock then
         for i = Enum.BagIndex.AccountBankTab_1, Enum.BagIndex.AccountBankTab_5 do
             self.dirtyBags[i] = true
         end

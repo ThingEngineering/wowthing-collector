@@ -51,6 +51,7 @@ function Addon:OnInitialize()
     WWTCSaved.honorLevel = WWTCSaved.honorLevel or 0
     WWTCSaved.honorMax = WWTCSaved.honorMax or 0
 
+    self.hasAccountLock = C_PlayerInfo.HasAccountInventoryLock()
     self.parseItemLinkCache = {}
     self.working = false
     self.workloads = {}
@@ -160,7 +161,7 @@ function Addon:PLAYER_LOGOUT()
 end
 
 function Addon:ACCOUNT_MONEY()
-    if C_PlayerInfo.HasAccountInventoryLock() then
+    if self.hasAccountLock then
         WWTCSaved.scanTimes.warbankGold = time()
         WWTCSaved.warbank.copper = C_Bank.FetchDepositedMoney(Enum.BankType.Account)
     end
