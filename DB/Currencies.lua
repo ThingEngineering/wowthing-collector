@@ -310,6 +310,7 @@ Module.db.currencies = {
     3056, -- Kej
     3068, -- Delver's Journey
     3089, -- Residual Memories
+    3090, -- Flame-Blessed Iron
     3093, -- Nerub-ar Finery
 
     2785, -- Alchemy Knowledge
