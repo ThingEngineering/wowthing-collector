@@ -1,3 +1,13 @@
+v11.0.7.1
+---------
+- Added some missing BfA reputations.
+- Added "/wwtc transmog" to force a full transmog scan.
+- Added garrison follower scanning.
+- Added Flame-Blessed Iron currency.
+- Added Waygate Travel debuff.
+- Fixed battle pet data not updating when leveling.
+- Updated TOC for 11.0.7.
+
 v11.0.5.3
 ---------
 - Added more XP buff auras.
