@@ -51,7 +51,7 @@ function Addon:OnInitialize()
     WWTCSaved.honorLevel = WWTCSaved.honorLevel or 0
     WWTCSaved.honorMax = WWTCSaved.honorMax or 0
 
-    self.hasAccountLock = C_PlayerInfo.HasAccountInventoryLock()
+    self.hasAccountLock = false
     self.parseItemLinkCache = {}
     self.working = false
     self.workloads = {}
@@ -142,10 +142,13 @@ function Addon:UpdateLastSeen()
 end
 
 function Addon:PLAYER_ENTERING_WORLD()
+    self.hasAccountLock = C_PlayerInfo.HasAccountInventoryLock()
     self:UpdateLastSeen()
 
-    self:ACCOUNT_MONEY()
-    self:PLAYER_MONEY()
+    C_Timer.After(2, function()
+        self:ACCOUNT_MONEY()
+        self:PLAYER_MONEY()
+    end)
 
     for _, module in Addon:IterateModules() do
         if module.OnEnteringWorld ~= nil then
