@@ -111,6 +111,10 @@ function Addon:Cleanup()
             charData.transmog = nil
             charData.weeklyQuests = nil
             charData.weeklyUghQuests = nil
+            
+            charData.activeQuests = nil
+            charData.dailyQuests = nil
+            charData.otherQuests = nil
 
             if type(charData.illusions) == 'table' then
                 charData.illusions = nil

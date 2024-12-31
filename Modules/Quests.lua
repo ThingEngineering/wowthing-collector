@@ -4,6 +4,8 @@ local Module = Addon:NewModule('Quests')
 
 Module.db = {}
 
+local CQL_GetInfo = C_QuestLog.GetInfo
+local CQL_GetNumQuestLogEntries = C_QuestLog.GetNumQuestLogEntries
 local CQL_GetQuestObjectives = C_QuestLog.GetQuestObjectives
 local CQL_IsOnQuest = C_QuestLog.IsOnQuest
 local CQL_IsQuestFlaggedCompleted = C_QuestLog.IsQuestFlaggedCompleted
@@ -13,6 +15,8 @@ local HALF_WEEK = 3.5 * 24 * 60 * 60
 local OPTIONAL_OBJECTIVE = OPTIONAL_QUEST_OBJECTIVE_DESCRIPTION:gsub('%%s', '.+'):gsub('([%(%)])', '%%%1')
 
 function Module:OnEnable()
+    Addon.charData.progressQuests = Addon.charData.progressQuests or {}
+
     self:RegisterBucketEvent(
         {
             'QUEST_LOG_UPDATE', -- spammy quest log updates
@@ -39,10 +43,7 @@ function Module:UpdateCompletedQuests()
 end
 
 function Module:UpdateQuests()
-    Addon.charData.activeQuests = {}
-    Addon.charData.dailyQuests = {}
-    Addon.charData.otherQuests = {}
-    Addon.charData.progressQuests = {}
+    wipe(Addon.charData.progressQuests)
 
     local now = time()
     Addon.charData.scanTimes["quests"] = now
@@ -61,32 +62,35 @@ function Module:UpdateQuests()
         end
     end
 
-    local dailyQuests = {}
-    for _, autoQuestIds in pairs(self.db.auto) do
-        for _, questId in ipairs(autoQuestIds) do
-            if CQL_IsQuestFlaggedCompleted(questId) then
-                table.insert(dailyQuests, questId)
+    local progressQuests = Addon.charData.progressQuests
+
+    local questCount = CQL_GetNumQuestLogEntries()
+    for i = 1, questCount do
+        local info = CQL_GetInfo(i)
+        if info ~= nil and info.questID > 0 then
+            local prog = {
+                id = info.questID,
+                name = QuestUtils_GetQuestName(info.questID),
+                status = 1,
+                objectives = {},
+            }
+
+            local objectives = CQL_GetQuestObjectives(info.questID)
+            if objectives ~= nil then
+                self:AddData(prog, info.questID, objectives)
             end
+
+            tinsert(progressQuests, table.concat({
+                'q'..prog.id,
+                prog.id,
+                prog.name,
+                prog.status,
+                0,
+                table.concat(prog.objectives, '_'),
+            }, '|'))
         end
     end
 
-    for questId, _ in pairs(WWTCSaved.worldQuestIds or {}) do
-        if CQL_IsQuestFlaggedCompleted(questId) then
-            table.insert(dailyQuests, questId)
-        end
-    end
-
-    Addon.charData.dailyQuests = dailyQuests
-
-    local otherQuests = {}
-    for _, questId in ipairs(self.db.tracking) do
-        if CQL_IsQuestFlaggedCompleted(questId) then
-            table.insert(otherQuests, questId)
-        end
-    end
-    Addon.charData.otherQuests = otherQuests
-
-    local progressQuests = {}
     for questKey, questData in pairs(self.db.progress) do
         local index = 0
         local prog = {
@@ -182,8 +186,6 @@ function Module:UpdateQuests()
             }
         end
     end
-    
-    Addon.charData.progressQuests = progressQuests
 
     C_Timer.After(0, function() Module:UpdateCompletedQuests() end)
 end
