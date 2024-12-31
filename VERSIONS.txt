@@ -1,3 +1,9 @@
+v11.0.7.2
+---------
+- Added scanning of all active quests.
+- Fixed inconsistent warbank gold scanning.
+- Removed a bunch of unused quest IDs.
+
 v11.0.7.1
 ---------
 - Added some missing BfA reputations.
