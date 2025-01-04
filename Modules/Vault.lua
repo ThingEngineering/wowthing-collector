@@ -21,10 +21,6 @@ function Module:OnEnteringWorld()
     self:UpdateVault()
 end
 
-function Module:OnLogout()
-    self:UpdateVault()
-end
-
 function Module:UpdateVault()
     local now = time()
     
@@ -82,5 +78,6 @@ function Module:UpdateVault()
     end
 
     Addon.charData.vault = vault
-    Addon.charData.vaultHasRewards = C_WeeklyRewards.HasAvailableRewards()
+    Addon.charData.vaultAvailableRewards = C_WeeklyRewards.HasAvailableRewards()
+    Addon.charData.vaultGeneratedRewards = C_WeeklyRewards.HasGeneratedRewards()
 end
