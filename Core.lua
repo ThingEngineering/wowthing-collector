@@ -109,6 +109,7 @@ function Addon:Cleanup()
             charData.hiddenWorldQuests = nil
             charData.mythicPlus = nil
             charData.transmog = nil
+            charData.transmogSquish = nil
             charData.weeklyQuests = nil
             charData.weeklyUghQuests = nil
             

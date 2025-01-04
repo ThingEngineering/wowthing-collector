@@ -44,6 +44,10 @@ function Module:LOADING_SCREEN_DISABLED()
         end
     }
 
+    if WWTCSaved.transmogIdsSquish ~= nil then
+        self.transmog = Addon:DeltaDecode(WWTCSaved.transmogIdsSquish)
+    end
+
     if WWTCSaved.transmogSourcesSquishV2 ~= nil and WWTCSaved.fix_11_0_2_11_v2 then
         if type(WWTCSaved.transmogSourcesSquishV2) ~= 'string' then
             WWTCSaved.transmogSourcesSquishV2 = ''
@@ -134,7 +138,6 @@ function Module:ScanSources(beMouthy)
     local modifiedAppearances = self.modifiedAppearances
     local sourceToAppearance = self.sourceToAppearance
     local transmog = self.transmog
-    wipe(transmog)
 
     local sourceToAppearanceSize = #sourceToAppearance
     for chunkIndex = 1, sourceToAppearanceSize, CHUNK_SIZE do
@@ -178,11 +181,10 @@ function Module:SaveTransmog(beMouthy)
     if self.isScanning then return end
 
     local appearanceIds = Addon:TableKeys(self.transmog)
-    wipe(self.transmog)
     table.sort(appearanceIds)
 
     Addon:DeltaEncode(appearanceIds, function(output)
-        Addon.charData.transmogSquish = output
+        WWTCSaved.transmogIdsSquish = output
     end)
 
     local modifiedAppearanceIds = Addon:TableKeys(self.modifiedAppearances)
