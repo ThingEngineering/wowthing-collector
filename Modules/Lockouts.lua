@@ -4,6 +4,7 @@ local Module = Addon:NewModule('Lockouts')
 
 Module.db = {}
 
+local CEJ_GetInstanceForGameMap = C_EncounterJournal.GetInstanceForGameMap
 local C_QuestLog_IsQuestFlaggedCompleted = C_QuestLog.IsQuestFlaggedCompleted
 
 function Module:OnEnable()
@@ -57,7 +58,7 @@ function Module:UpdateLockouts()
     -- Instances
     for i = 1, GetNumSavedInstances() do
         local instanceName, _, instanceReset, instanceDifficulty, locked, _, _,
-            _, _, _, maxBosses, defeatedBosses = GetSavedInstanceInfo(i)
+            _, _, _, maxBosses, defeatedBosses, _, instanceId = GetSavedInstanceInfo(i)
 
         if instanceReset > 0 then
             instanceReset = now + instanceReset
@@ -77,7 +78,7 @@ function Module:UpdateLockouts()
         end
 
         table.insert(lockouts, {
-            id = self.instanceNameToId[instanceName],
+            id = CEJ_GetInstanceForGameMap(instanceId) or self.instanceNameToId[instanceName] or 0,
             name = instanceName,
             resetTime = instanceReset,
             bosses = bosses,
