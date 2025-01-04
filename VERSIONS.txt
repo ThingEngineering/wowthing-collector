@@ -1,3 +1,8 @@
+v11.0.7.3
+---------
+- Fixed available vault scanning.
+- Fixed inconsistent lockout scanning in non-English locales.
+
 v11.0.7.2
 ---------
 - Added scanning of all active quests.
