@@ -761,6 +761,13 @@ Module.db.progress = {
     } },
     ["twwProfessionSkinningTreatise"] = { "weekly", { 83734 } },
     ["twwProfessionSkinningSlatefang"] = { "daily", { 84259 } },
+    -- The War Within: Raids
+    ["twwPalace1Normal"] = { "once", { 82629 } },
+    ["twwPalace1Heroic"] = { "once", { 82638 } },
+    ["twwPalace1Mythic"] = { "once", { 82639 } },
+--    ["twwUndermine1Normal"] = { "once", { 76083 } },
+--    ["twwUndermine1Heroic"] = { "once", { 76085 } },
+--    ["twwUndermine1Mythic"] = { "once", { 76086 } },
 }
 
 Module.db.progressUnlock = {
