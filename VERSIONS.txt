@@ -1,3 +1,8 @@
+v11.0.7.4
+---------
+- Added Nerub'ar Palace raid skip quests.
+- Changed transmog scanning to only save data once instead of per character.
+
 v11.0.7.3
 ---------
 - Fixed available vault scanning.
