@@ -15,7 +15,6 @@ libs\AceConsole-3.0\AceConsole-3.0.xml
 libs\AceEvent-3.0\AceEvent-3.0.xml
 libs\AceHook-3.0\AceHook-3.0.xml
 libs\AceTimer-3.0\AceTimer-3.0.xml
-libs\LibRealmInfo17janekjl\LibRealmInfo17janekjl.lua
 
 Core.lua
 

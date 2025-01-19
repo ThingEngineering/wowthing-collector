@@ -15,8 +15,6 @@ local ModulePrototype = {
 }
 Addon:SetDefaultModulePrototype(ModulePrototype)
 
-local LibRealmInfo = LibStub('LibRealmInfo17janekjl')
-
 local CI_GetDetailedItemLevelInfo = C_Item.GetDetailedItemLevelInfo
 local CT_After = C_Timer.After
 
@@ -56,16 +54,12 @@ function Addon:OnInitialize()
     self.working = false
     self.workloads = {}
 
-    -- Build a unique ID for this character
-    -- id, name, nameForAPI, rules, locale, nil, region, timezone, connections, englishName, englishNameForAPI
-    local _, realm, _, _, _, _, region, _, _, realmEnglish = LibRealmInfo:GetRealmInfoByUnit("player")
-    self.regionName = region or GetCurrentRegion()
+    self.regionName = GetCurrentRegion()
     self.charName = UnitGUID('player')
     self.charClassID = select(3, UnitClass("player"))
 
     -- Set up character data table
     self.charData = WWTCSaved.chars[self.charName] or {}
-    self.charData.name = self.regionName .. "/" .. (realmEnglish or realm)  .. "/" .. UnitName("player")
     self.charData.scanTimes = self.charData.scanTimes or {}
 
     local now = time()
@@ -73,8 +67,6 @@ function Addon:OnInitialize()
     self.charData.weeklyReset = now + C_DateAndTime.GetSecondsUntilWeeklyReset()
 
     WWTCSaved.chars[self.charName] = self.charData
-
-    WWTCSaved.chars[self.charData.name] = nil
 
     self:RegisterChatCommand('wwtc', 'SlashCommand')
 
@@ -108,6 +100,7 @@ function Addon:Cleanup()
             charData.hiddenKills = nil
             charData.hiddenWorldQuests = nil
             charData.mythicPlus = nil
+            charData.name = nil
             charData.transmog = nil
             charData.transmogSquish = nil
             charData.weeklyQuests = nil
