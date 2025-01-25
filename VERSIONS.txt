@@ -1,3 +1,9 @@
+v11.0.7.5
+---------
+- Added Timeways II aura spells.
+- Updated Timewalking quests.
+- Removed LibRealmInfo.
+
 v11.0.7.4
 ---------
 - Added Nerub'ar Palace raid skip quests.
