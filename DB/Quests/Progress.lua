@@ -65,13 +65,20 @@ Module.db.progress = {
     ["holidayDungeons"] = { "weekly", { 83347 } }, -- Emissary of War
     ["holidayPetPvp"] = { "weekly", { 83357 } }, -- The Very Best
     ["holidayTimewalking"] = { "weekly", {
-        72719, -- A Fel Path Through Time, Legion
-        83274, -- An Original Path Through Time, Classic
-        83364, -- A Savage Path Through Time, WoD
-        83362, -- A Shrouded Path Through Time, MoP
-        83365, -- A Frozen Path Through Time, Wrath
-        83363, -- A Burning Path Through Time, TBC
-        83359, -- A Shattered Path Through Time, Cata
+        85947, -- An Original Journey Through Time [Classic max]
+        83274, -- An Original Path Through Time [Classic max]
+        85948, -- A Burning Journey Through Time [TBC not max]
+        83363, -- A Burning Path Through Time [TBC max]
+        85949, -- A Frozen Journey Through Time [Wrath not max]
+        83365, -- A Frozen Path Through Time [Wrath max]
+        86556, -- A Shattered Journey Through Time [Cata not max]
+        83359, -- A Shattered Path Through Time [Cata max]
+        86560, -- A Shrouded Journey Through Time [MoP not max]
+        83362, -- A Shrouded Path Through Time [MoP max]
+        86563, -- A Savage Journey Through Time [WoD not max]
+        83364, -- A Savage Path Through Time [WoD max]
+        86564, -- A Fel Journey Through Time [Legion not max]
+        83360, -- A Fel Path Through Time [Legion max]
     } },
     ["holidayTimewalkingItem"] = { "weekly", {
         40168, -- The Swirling Vial, TBC
