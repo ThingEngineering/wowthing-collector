@@ -65,7 +65,7 @@ Module.db.progress = {
     ["holidayDungeons"] = { "weekly", { 83347 } }, -- Emissary of War
     ["holidayPetPvp"] = { "weekly", { 83357 } }, -- The Very Best
     ["holidayTimewalking"] = { "weekly", {
-        85947, -- An Original Journey Through Time [Classic max]
+        85947, -- An Original Journey Through Time [Classic not max]
         83274, -- An Original Path Through Time [Classic max]
         85948, -- A Burning Journey Through Time [TBC not max]
         83363, -- A Burning Path Through Time [TBC max]

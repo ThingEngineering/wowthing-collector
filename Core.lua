@@ -99,6 +99,7 @@ function Addon:Cleanup()
             charData.hiddenDungeons = nil
             charData.hiddenKills = nil
             charData.hiddenWorldQuests = nil
+            charData.illusions = nil
             charData.mythicPlus = nil
             charData.name = nil
             charData.transmog = nil
@@ -109,10 +110,6 @@ function Addon:Cleanup()
             charData.activeQuests = nil
             charData.dailyQuests = nil
             charData.otherQuests = nil
-
-            if type(charData.illusions) == 'table' then
-                charData.illusions = nil
-            end
 
             if charData.vault ~= nil and
                 (charData.vault[1] ~= nil or

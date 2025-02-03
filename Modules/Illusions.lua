@@ -1,12 +1,19 @@
 local Addon = LibStub('AceAddon-3.0'):GetAddon('WoWthing_Collector')
 local Module = Addon:NewModule('Illusions')
 
+local CT_GetIllusions = C_TransmogCollection.GetIllusions
 
 function Module:OnEnable()
+    WWTCSaved.illusions = WWTCSaved.illusions or {}
+    
+    self.illusionHash = {}
+    for _, illusionId in ipairs(WWTCSaved.illusions) do
+        self.illusionHash[illusionId] = true
+    end
+
     self:RegisterBucketEvent(
         {
             'TRANSMOG_COLLECTION_SOURCE_ADDED',
-            'TRANSMOG_COLLECTION_SOURCE_REMOVED',
             'TRANSMOG_COLLECTION_UPDATED',
         },
         2,
@@ -21,14 +28,12 @@ end
 function Module:UpdateIllusions()
     Addon.charData.scanTimes["illusions"] = time()
 
-    local illusions = {}
-    local illusionData = C_TransmogCollection.GetIllusions()
+    local illusionData = CT_GetIllusions()
     for _, illusion in ipairs(illusionData) do
         if illusion.isCollected then
-            table.insert(illusions, illusion.sourceID)
+            self.illusionHash[illusion.sourceID] = true
         end
     end
 
-    table.sort(illusions)
-    Addon.charData.illusions = table.concat(illusions, ':')
+    WWTCSaved.illusions = Addon:TableKeys(self.illusionHash)
 end
