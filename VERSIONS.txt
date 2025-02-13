@@ -1,3 +1,7 @@
+v11.0.7.6
+---------
+- Moved illusion data from character to account.
+
 v11.0.7.5
 ---------
 - Added Timeways II aura spells.
