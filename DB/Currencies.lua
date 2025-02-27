@@ -308,10 +308,24 @@ Module.db.currencies = {
     3028, -- Restored Coffer Key
     3055, -- Mereldar Derby Mark
     3056, -- Kej
-    3068, -- Delver's Journey
+    3068, -- Delver's Journey [S1]
     3089, -- Residual Memories
     3090, -- Flame-Blessed Iron
     3093, -- Nerub-ar Finery
+    3107, -- Weathered Undermine Crest
+    3108, -- Carved Undermine Crest
+    3109, -- Runed Undermine Crest
+    3110, -- Gilded Undermine Crest
+    3116, -- Essence of Kaja'mite
+    3131, -- Delver's Journey [S2]
+    3136, -- Gallagio Loyalty Rewards Club
+    3216, -- Bounty's Remnants
+    3218, -- Empty Kaja'Cola Can
+    3220, -- Vintage Kaja'Cola Can
+    3226, -- Market Research
+    3253, -- 11.1 Delves - Bountiful Tracker - Progress Cap - Mislaid
+    3279, -- 11.1 Raid Renown - Gallagio - Raid Buff Acct Tracker
+    3280, -- 11.1 Raid Renown - Gallagio - Speed Buff Acct Tracker
 
     2785, -- Alchemy Knowledge
     2786, -- Blacksmithing Knowledge
