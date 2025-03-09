@@ -522,6 +522,7 @@ Module.db.progress = {
         81794, -- Sparks of War: The Ringing Deeps
         81795, -- Sparks of War: Hallowfall
         81796, -- Sparks of War: Azj-Kahet
+        86853, -- Sparks of War: Undermine
     } },
     ["twwSpiderPact"] = { "weekly", {
         80544, -- The Weaver
