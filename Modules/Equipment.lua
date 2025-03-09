@@ -2,10 +2,14 @@ local Addon = LibStub('AceAddon-3.0'):GetAddon('WoWthing_Collector')
 local Module = Addon:NewModule('ProfessionEquipment')
 
 
-local C_Item_IsItemDataCachedByID = C_Item.IsItemDataCachedByID
-local C_Item_RequestLoadItemDataByID = C_Item.RequestLoadItemDataByID
+local CI_IsItemDataCachedByID = C_Item.IsItemDataCachedByID
+local CI_RequestLoadItemDataByID = C_Item.RequestLoadItemDataByID
+local CIU_GetHighWatermarkForSlot = C_ItemUpgrade.GetHighWatermarkForSlot
 
 function Module:OnEnable()
+    Addon.charData.equipmentV2 = Addon.charData.equipmentV2 or {}
+    Addon.charData.highestItemLevel = Addon.charData.highestItemLevel or {}
+
     self:RegisterBucketEvent({
         'ENCHANT_SPELL_COMPLETED',
         'PLAYER_EQUIPMENT_CHANGED',
@@ -19,24 +23,35 @@ function Module:OnEnteringWorld()
 end
 
 function Module:UpdateEquipment()
-    Addon.charData.equipmentV2 = {}
+    WWTCSaved.scanTimes.equipment = time()
+
+    local equipmentV2 = Addon.charData.equipmentV2
+    local highestItemLevel = Addon.charData.highestItemLevel
+    wipe(equipmentV2)
+    wipe(highestItemLevel)
+
+    -- Enum.ItemRedundancySlot
+    for slot = 0, 16 do
+        local characterHigh = CIU_GetHighWatermarkForSlot(slot)
+        tinsert(highestItemLevel, table.concat({
+            slot,
+            characterHigh or 0
+        }, ':'))
+    end
 
     local rescan = false
-
     for slot = 1, 30 do
         local itemId = GetInventoryItemID('player', slot)
         if itemId ~= nil then
-            if C_Item_IsItemDataCachedByID(itemId) then
+            if CI_IsItemDataCachedByID(itemId) then
                 local itemLink = GetInventoryItemLink('player', slot)
                 local itemQuality = GetInventoryItemQuality('player', slot)
-                local parsed = Addon:ParseItemLink(itemLink, itemQuality or -1, 1)
-                Addon.charData.equipmentV2["s" .. slot] = parsed
+                local parsed = Addon:ParseItemLink(itemLink, itemQuality or -1, 1, 1)
+                equipmentV2["s" .. slot] = parsed
             else
-                C_Item_RequestLoadItemDataByID(itemId)
+                CI_RequestLoadItemDataByID(itemId)
                 rescan = true
             end
-        else
-            Addon.charData.equipmentV2["s" .. slot] = nil
         end
     end
 
