@@ -182,7 +182,12 @@ function Module:UpdateBags()
                         if C_Item_IsItemDataCachedByID(itemId) then
                             local itemInfo = C_Container_GetContainerItemInfo(bagId, slot)
                             if itemInfo ~= nil and itemInfo.hyperlink ~= nil then
-                                local parsed = Addon:ParseItemLink(itemInfo.hyperlink, itemInfo.quality or -1, itemInfo.stackCount or 1)
+                                local parsed = Addon:ParseItemLink(
+                                    itemInfo.hyperlink,
+                                    itemInfo.quality or -1,
+                                    itemInfo.stackCount or 1,
+                                    itemInfo.isBound and 1 or 0
+                                )
                                 bag["s"..slot] = parsed
                             end
                         elseif self.requested[itemId] == nil then

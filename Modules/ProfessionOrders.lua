@@ -125,7 +125,7 @@ function Module:UpdatePatronOrders()
     for _, order in ipairs(orders) do
         local rewards = {}
         for _, reward in ipairs(order.npcOrderRewards or {}) do
-            local parsed = Addon:ParseItemLink(reward.itemLink, -1, reward.count)
+            local parsed = Addon:ParseItemLink(reward.itemLink, -1, reward.count, 0)
             tinsert(rewards, parsed)
         end
 

@@ -16,6 +16,7 @@ local ModulePrototype = {
 Addon:SetDefaultModulePrototype(ModulePrototype)
 
 local CI_GetDetailedItemLevelInfo = C_Item.GetDetailedItemLevelInfo
+local CI_GetItemInfo = C_Item.GetItemInfo
 local CT_After = C_Timer.After
 
 -- Default SavedVariables
@@ -197,7 +198,7 @@ function Addon:PlayerGuidToId(guid)
     end
 end
 
-function Addon:ParseItemLink(link, quality, count)
+function Addon:ParseItemLink(link, quality, count, bound)
     local cached = self.parseItemLinkCache[link]
     if cached ~= nil then
         return table.concat({ count, cached }, ':')
@@ -215,12 +216,13 @@ function Addon:ParseItemLink(link, quality, count)
     end
 
     local item = {
+        bindType = 0,
         count = count,
         itemID = tonumber(parts[2]),
+        quality = quality,
         bonusIDs = {},
         gems = {},
         modifiers = {},
-        quality = quality,
     }
 
     if quality < 0 then
@@ -268,10 +270,11 @@ function Addon:ParseItemLink(link, quality, count)
         end
     end
 
-    local effectiveILvl, _, _ = CI_GetDetailedItemLevelInfo(link)
-    item.itemLevel = effectiveILvl
+    local _, _, _, itemLevel, _, _, _, _, _, _, _, _, _, bindType = CI_GetItemInfo(link)
+    item.itemLevel = itemLevel
+    item.bindType = bindType
 
-    -- count:id:context:enchant:ilvl:quality:suffix:bonusIDs:gems
+    -- count:id:context:enchant:ilvl:quality:suffix:bonusIDs:gems:modifiers:bound:bindType
     local ret = table.concat({
         item.itemID,
         item.context or 0,
@@ -282,6 +285,8 @@ function Addon:ParseItemLink(link, quality, count)
         table.concat(item.bonusIDs, ','),
         table.concat(item.gems, ','),
         table.concat(item.modifiers, ','),
+        bound,
+        item.bindType or 0,
     }, ':')
 
     self.parseItemLinkCache[link] = ret

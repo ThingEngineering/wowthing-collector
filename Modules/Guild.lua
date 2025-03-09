@@ -111,7 +111,7 @@ function Module:UpdateGuildBank()
                         }, ':')
                     else
                         local _, itemCount, _, _, itemQuality = GetGuildBankItemInfo(tabIndex, slotIndex)
-                        local parsed = Addon:ParseItemLink(link, itemQuality or -1, itemCount or 1)
+                        local parsed = Addon:ParseItemLink(link, itemQuality or -1, itemCount or 1, 0)
                         tab["s" .. slotIndex] = parsed
                     end
                 end

@@ -61,7 +61,7 @@ function Module:UpdateVault()
 
             for _, reward in ipairs(activity.rewards) do
                 local itemLink = C_WeeklyRewards.GetItemHyperlink(reward.itemDBID)
-                local parsed = Addon:ParseItemLink(itemLink, -1, 1)
+                local parsed = Addon:ParseItemLink(itemLink, -1, 1, 0)
                 tinsert(data.rewards, parsed)
             end
 
