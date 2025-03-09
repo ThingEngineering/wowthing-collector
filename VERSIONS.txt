@@ -1,3 +1,12 @@
+v11.1.0.2
+---------
+- Added Sparks of War: Undermine quest.
+- Added Cartels of Undermine contract auras.
+- Added S2 Delver's Bounty aura.
+- Added S2 spark tracking currency.
+- Added bind state/type to item scanning.
+- Added high watermarks to item scanning.
+
 v11.1.0.1
 ---------
 - Added new currencies.
