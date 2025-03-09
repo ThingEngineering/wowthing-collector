@@ -47,6 +47,9 @@ Module.db.auras = {
     454940, -- Contract: The Severed Threads 1
     454941, -- Contract: The Severed Threads 2
     454942, -- Contract: The Severed Threads 3
+    471131, -- Contract: The Cartels of Undermine 1
+    471128, -- Contract: The Cartels of Undermine 2
+    471130, -- Contract: The Cartels of Undermine 3
 
     473218, -- Delver's Bounty
 }
