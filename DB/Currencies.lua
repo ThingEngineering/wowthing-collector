@@ -379,4 +379,5 @@ Module.db.currencies = {
     3082, -- ^ Blacksmithing
     3083, -- ^ Alchemy	
     3084, -- ^ Inscription 2?
+    3132, -- 11.1 Professions - Personal Tracker - S2 Spark Drops (Hidden)
 }
