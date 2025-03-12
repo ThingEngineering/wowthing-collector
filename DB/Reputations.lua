@@ -5,6 +5,7 @@ Module.db.reputations = {
     --1492, -- Emperor Shaohao
     2600, -- The Severed Threads
     2644, -- Delves: Season 1
+    2683, -- Delves: Season 2
 }
 
 Module.db.friendships = {
