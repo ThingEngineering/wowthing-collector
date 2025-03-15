@@ -270,8 +270,9 @@ function Addon:ParseItemLink(link, quality, count, bound)
         end
     end
 
-    local _, _, _, itemLevel, _, _, _, _, _, _, _, _, _, bindType = CI_GetItemInfo(link)
-    item.itemLevel = itemLevel
+    local effectiveILvl, _, _ = CI_GetDetailedItemLevelInfo(link)
+    local _, _, _, _, _, _, _, _, _, _, _, _, _, bindType = CI_GetItemInfo(link)
+    item.itemLevel = effectiveILvl
     item.bindType = bindType
 
     -- count:id:context:enchant:ilvl:quality:suffix:bonusIDs:gems:modifiers:bound:bindType
