@@ -9,12 +9,13 @@ local CTC_GetAppearanceInfoBySource = C_TransmogCollection.GetAppearanceInfoBySo
 local CTC_GetAppearanceSourceInfo = C_TransmogCollection.GetAppearanceSourceInfo
 local CTC_PlayerHasTransmogItemModifiedAppearance = C_TransmogCollection.PlayerHasTransmogItemModifiedAppearance
 
-local MAX_APPEARANCE_ID = 100000 -- 94162
+local MAX_APPEARANCE_ID = 120000 -- 116145
 local CHUNK_SIZE = 50
 
 function Module:OnEnable()
     self.isScanning = false
     self.modifiedAppearances = {}
+    self.sourceToAppearance = {}
     self.transmog = {}
     self.transmogSlots = {}
     self.transmogLocation = TransmogUtil.GetTransmogLocation('HEADSLOT', Enum.TransmogType.Appearance, Enum.TransmogModification.Main)
@@ -105,9 +106,9 @@ function Module:UpdateTransmog(beMouthy)
     -- local startTime = debugprofilestop()
     local workload = {}
 
-    local sourceToAppearance = {}
-    self.sourceToAppearance = sourceToAppearance
     local sourceIndex = 1
+    local sourceToAppearance = self.sourceToAppearance
+    wipe(sourceToAppearance)
 
     for chunkIndex = 1, MAX_APPEARANCE_ID, CHUNK_SIZE do
         table.insert(workload, function()
@@ -135,9 +136,15 @@ function Module:ScanSources(beMouthy)
     -- local startTime = debugprofilestop()
     local workload = {}
 
-    local modifiedAppearances = self.modifiedAppearances
     local sourceToAppearance = self.sourceToAppearance
+    local modifiedAppearances = self.modifiedAppearances
     local transmog = self.transmog
+
+    -- wipe the data if they're doing a manual scan
+    if beMouthy then
+        wipe(modifiedAppearances)
+        wipe(transmog)
+    end
 
     local sourceToAppearanceSize = #sourceToAppearance
     for chunkIndex = 1, sourceToAppearanceSize, CHUNK_SIZE do
