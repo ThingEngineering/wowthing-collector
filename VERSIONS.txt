@@ -1,3 +1,7 @@
+v11.1.0.4
+---------
+- Fixed some newer transmog IDs not being scanned correctly.
+
 v11.1.0.3
 ---------
 - Added S2 Delves progress reputation.
