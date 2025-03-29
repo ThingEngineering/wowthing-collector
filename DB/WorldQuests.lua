@@ -72,6 +72,8 @@ Module.db.expansions = {
             2248, -- Isle of Dorn
             2255, -- Azj-Kahet
             2339, -- Dornogal
+            2369, -- Siren Isle
+            2346, -- Undermine
         },
     },
 }
