@@ -12,10 +12,11 @@ function Module:OnEnable()
         {
             'LFG_UPDATE_RANDOM_INFO',
             'LOOT_CLOSED',
+            'QUEST_LOG_UPDATE',
             'SHOW_LOOT_TOAST',
             'UPDATE_INSTANCE_INFO',
         },
-        1,
+        2,
         'UpdateLockouts'
     )
 
