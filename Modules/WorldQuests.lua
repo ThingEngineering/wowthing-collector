@@ -4,8 +4,8 @@ local Module = Addon:NewModule('WorldQuests')
 
 Module.db = {}
 
-local C_TaskQuest_GetQuestsForPlayerByMapID = C_TaskQuest.GetQuestsForPlayerByMapID
-local C_TaskQuest_GetQuestTimeLeftSeconds = C_TaskQuest.GetQuestTimeLeftSeconds
+local CTQ_GetQuestTimeLeftSeconds = C_TaskQuest.GetQuestTimeLeftSeconds
+local CTQ_GetQuestsOnMap = C_TaskQuest.GetQuestsOnMap
 
 function Module:OnEnable()
     Addon.charData.worldQuests = Addon.charData.worldQuests or {}
@@ -38,12 +38,12 @@ function Module:UpdateWorldQuests()
                         end
                     end
 
-                    local quests = C_TaskQuest_GetQuestsForPlayerByMapID(zoneId)
+                    local quests = CTQ_GetQuestsOnMap(zoneId)
                     if quests ~= nil then
                         for _, quest in pairs(quests) do
                             if quest.mapID == zoneId then
                                 local questId = quest.questID
-                                local timeRemaining = C_TaskQuest_GetQuestTimeLeftSeconds(questId)
+                                local timeRemaining = CTQ_GetQuestTimeLeftSeconds(questId)
                                 if timeRemaining ~= nil and timeRemaining > 0 then
                                     WWTCSaved.worldQuestIds[questId] = true
 
