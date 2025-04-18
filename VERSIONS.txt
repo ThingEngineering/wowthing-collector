@@ -1,3 +1,8 @@
+v11.1.0.6
+---------
+- Added a bunch of missing zones to world quest scanning.
+- Fixed using a deprecated addon API function.
+
 v11.1.0.5
 ---------
 - Added weekly delve gilded chest scanning.
