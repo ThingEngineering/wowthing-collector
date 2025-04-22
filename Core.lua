@@ -204,9 +204,11 @@ function Addon:ParseItemLink(link, quality, count, bound)
         return table.concat({ count, cached }, ':')
     end
 
-    local parts = { strsplit(":", link) }
+    -- |cnIQ4:|Hitem:blah
+    local pipeParts = { strsplit("|", link) }
+    local parts = { strsplit(":", pipeParts[3]) }
 
-    if string.find(parts[1], '\|Hbattlepet') then
+    if string.find(parts[1], 'Hbattlepet') then
         return table.concat({
             'pet',
             parts[2], -- speciesID
