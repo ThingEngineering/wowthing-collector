@@ -4,11 +4,21 @@ local Module = Addon:NewModule('Spells', 'AceHook-3.0')
 
 Module.db = {}
 
-local C_UnitAuras_GetPlayerAuraBySpellID = C_UnitAuras.GetPlayerAuraBySpellID
+local CUA_GetPlayerAuraBySpellID = C_UnitAuras.GetPlayerAuraBySpellID
+local IsSpellKnown = IsSpellKnown
 
 function Module:OnEnable()
-    self:RegisterBucketEvent({ 'LEARNED_SPELL_IN_TAB' }, 1, 'UpdateSpells')
-    self:RegisterBucketEvent({ 'UNIT_AURA' }, 1, 'UNIT_AURA')
+    Addon.charData.knownSpells = Addon.charData.knownSpells or {}
+
+    self:RegisterBucketEvent(
+        {
+            'LEARNED_SPELL_IN_SKILL_LINE',
+            'SPELLS_CHANGED',
+        },
+        2,
+        'UpdateSpells'
+    )
+    self:RegisterBucketEvent({ 'UNIT_AURA' }, 2, 'UNIT_AURA')
 end
 
 function Module:OnEnteringWorld()
@@ -29,7 +39,7 @@ function Module:UpdateAuras()
     local auras = {}
     
     for _, spellId in ipairs(self.db.auras) do
-        local auraInfo = C_UnitAuras_GetPlayerAuraBySpellID(spellId)
+        local auraInfo = CUA_GetPlayerAuraBySpellID(spellId)
         if auraInfo ~= nil then
             local expire = 0
             if auraInfo.expirationTime > 0 then
@@ -46,7 +56,7 @@ function Module:UpdateAuras()
 
     -- Auras that only tick down while online, save remaining duration instead
     for _, spellId in ipairs(self.db.gameTimeAuras) do
-        local auraInfo = C_UnitAuras_GetPlayerAuraBySpellID(spellId)
+        local auraInfo = CUA_GetPlayerAuraBySpellID(spellId)
         if auraInfo ~= nil then
             local duration = math.floor(auraInfo.expirationTime - uptime)
 
@@ -63,6 +73,9 @@ function Module:UpdateAuras()
 end
 
 function Module:UpdateSpells()
+    local knownSpells = Addon.charData.knownSpells
+    wipe(knownSpells)
+
     -- Master Riding
     if IsSpellKnown(90265) then
         Addon.charData.mountSkill = 5
@@ -78,5 +91,11 @@ function Module:UpdateSpells()
     -- Apprentice Riding
     elseif IsSpellKnown(33388) then
         Addon.charData.mountSkill = 1
+    end
+
+    for _, spellId in ipairs(self.db.known) do
+        if IsSpellKnown(spellId) then
+            tinsert(knownSpells, spellId)
+        end
     end
 end
