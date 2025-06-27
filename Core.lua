@@ -86,6 +86,14 @@ function Addon:Cleanup()
     WWTCSaved.transmogSourcesV2 = nil
     WWTCSaved.transmogSourcesSquish = nil
     
+    -- Remove old guild data with region string
+    for guildName, _ in pairs(WWTCSaved.guilds) do
+        local prefix = strsplit('/', guildName)
+        if #prefix == 2 then
+            WWTCSaved.guilds[guildName] = nil
+        end
+    end
+
     -- Remove data for any characters not seen in the last 3 days
     local old = time() - (3 * 24 * 60 * 60)
     for charName, charData in pairs(WWTCSaved.chars) do
