@@ -4,12 +4,19 @@ local Module = Addon:NewModule('Spells', 'AceHook-3.0')
 
 Module.db = {}
 
+local AURA_TYPES = { 'HELPFUL', 'HARMFUL' }
+
+local CUA_GetAuraDataByIndex = C_UnitAuras.GetAuraDataByIndex
 local CUA_GetPlayerAuraBySpellID = C_UnitAuras.GetPlayerAuraBySpellID
 local IsSpellKnown = IsSpellKnown
 
 function Module:OnEnable()
     Addon.charData.knownSpells = Addon.charData.knownSpells or {}
 
+    self.inCombat = false
+
+    self:RegisterEvent('PLAYER_ENTER_COMBAT')
+    self:RegisterEvent('PLAYER_LEAVE_COMBAT')
     self:RegisterBucketEvent(
         {
             'LEARNED_SPELL_IN_SKILL_LINE',
@@ -26,8 +33,16 @@ function Module:OnEnteringWorld()
     self:UpdateSpells()
 end
 
+function Module:PLAYER_ENTER_COMBAT()
+    self.inCombat = true
+end
+
+function Module:PLAYER_LEAVE_COMBAT()
+    self.inCombat = false
+end
+
 function Module:UNIT_AURA(targets)
-    if targets.player then
+    if self.inCombat == false and targets.player then
         self:UpdateAuras()
     end
 end
@@ -38,31 +53,21 @@ function Module:UpdateAuras()
     
     local auras = {}
     
-    for _, spellId in ipairs(self.db.auras) do
-        local auraInfo = CUA_GetPlayerAuraBySpellID(spellId)
-        if auraInfo ~= nil then
-            local expire = 0
+    for _, auraType in ipairs(AURA_TYPES) do
+        for i = 1, 50 do
+            local auraInfo = CUA_GetAuraDataByIndex('PLAYER', i, auraType)
+            if auraInfo == nil then break end
+
+            local duration = 0
+            local expiresAt = 0
             if auraInfo.expirationTime > 0 then
-                expire = math.floor(now + (auraInfo.expirationTime - uptime))
+                duration = math.floor(auraInfo.expirationTime - uptime)
+                expiresAt = math.floor(now + (auraInfo.expirationTime - uptime))
             end
 
             table.insert(auras, table.concat({
-                spellId,
-                expire,
-                auraInfo.applications,
-            }, ':'))
-        end
-    end
-
-    -- Auras that only tick down while online, save remaining duration instead
-    for _, spellId in ipairs(self.db.gameTimeAuras) do
-        local auraInfo = CUA_GetPlayerAuraBySpellID(spellId)
-        if auraInfo ~= nil then
-            local duration = math.floor(auraInfo.expirationTime - uptime)
-
-            table.insert(auras, table.concat({
-                spellId,
-                0,
+                auraInfo.spellId,
+                expiresAt,
                 auraInfo.applications,
                 duration,
             }, ':'))
