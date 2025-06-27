@@ -61,6 +61,7 @@ function Addon:OnInitialize()
 
     -- Set up character data table
     self.charData = WWTCSaved.chars[self.charName] or {}
+    self.charData.name = UnitName('player')
     self.charData.scanTimes = self.charData.scanTimes or {}
 
     local now = time()
