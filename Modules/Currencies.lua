@@ -50,7 +50,6 @@ function Module:GetCurrencyData()
                     if CCI_IsAccountTransferableCurrency(currencyID) then
                         self.accountWide[currencyID] = true
                     end
-
                 end
                 -- print('currencies '..(debugprofilestop() - startTime))
             end)
