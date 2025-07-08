@@ -7,6 +7,10 @@ Module.db = {}
 local CEJ_GetInstanceForGameMap = C_EncounterJournal.GetInstanceForGameMap
 local C_QuestLog_IsQuestFlaggedCompleted = C_QuestLog.IsQuestFlaggedCompleted
 
+local INSTANCE_OVERRIDE = {
+    [1861] = 1031, -- Uldir
+}
+
 function Module:OnEnable()
     self:RegisterBucketEvent(
         {
@@ -78,8 +82,12 @@ function Module:UpdateLockouts()
             name, _, dead = GetSavedInstanceEncounterInfo(i, j)
         end
 
+        local journalInstanceId = INSTANCE_OVERRIDE[instanceId] or
+            CEJ_GetInstanceForGameMap(instanceId) or
+            self.instanceNameToId[instanceName] or 0
+
         table.insert(lockouts, {
-            id = CEJ_GetInstanceForGameMap(instanceId) or self.instanceNameToId[instanceName] or 0,
+            id = journalInstanceId,
             name = instanceName,
             resetTime = instanceReset,
             bosses = bosses,
