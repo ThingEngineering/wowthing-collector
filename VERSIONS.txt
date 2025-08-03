@@ -1,3 +1,7 @@
+v11.1.7.4
+---------
+- Added Delver's mount customizations to account quest IDs.
+
 v11.1.7.3
 ---------
 - Added lockout ID override for broken WoW data (Uldir).
