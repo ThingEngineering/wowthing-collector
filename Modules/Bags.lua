@@ -13,12 +13,12 @@ function Module:OnEnable()
     WWTCSaved.warbank.items = WWTCSaved.warbank.items or {}
 
     Addon.charData.bags = Addon.charData.bags or {}
+    Addon.charData.bank = Addon.charData.bank or {}
     Addon.charData.items = Addon.charData.items or {}
 
     self.isBankOpen = false
     self.isRequesting = false
     self.isScanning = false
-    self.wasReagentBankChanged = false
     self.dirtyBags = {}
     self.requested = {}
 
@@ -27,7 +27,6 @@ function Module:OnEnable()
     self:RegisterEvent('BANKFRAME_OPENED')
     self:RegisterEvent('ITEM_LOCKED')
     self:RegisterEvent('ITEM_UNLOCKED')
-    self:RegisterEvent('PLAYERREAGENTBANKSLOTS_CHANGED')
 
     self:RegisterBucketEvent({ 'BAG_UPDATE_DELAYED' }, 1, 'UpdateBags')
     self:RegisterBucketEvent({ 'ITEM_DATA_LOAD_RESULT' }, 2, 'UpdateRequested')
@@ -57,15 +56,12 @@ end
 function Module:BANKFRAME_OPENED()
     self.isBankOpen = true
     
-    self.dirtyBags[Enum.BagIndex.Bank] = true
-    self.dirtyBags[Enum.BagIndex.Reagentbank] = true
-    
-    -- Bank bags
-    for i = Enum.BagIndex.BankBag_1, Enum.BagIndex.BankBag_7 do
+    -- Bank tabs
+    for i = Enum.BagIndex.CharacterBankTab_1, Enum.BagIndex.CharacterBankTab_6 do
         self.dirtyBags[i] = true
     end
 
-    -- Warband bank
+    -- Warbank tabs
     if Addon.hasAccountLock then
         for i = Enum.BagIndex.AccountBankTab_1, Enum.BagIndex.AccountBankTab_5 do
             self.dirtyBags[i] = true
@@ -85,13 +81,6 @@ function Module:ITEM_UNLOCKED(_, bag, slot)
     if slot ~= nil then
         self.dirtyBags[bag] = true
     end
-end
-
-function Module:PLAYERREAGENTBANKSLOTS_CHANGED()
-    self.wasReagentBankChanged = true
-    self.dirtyBags[Enum.BagIndex.Reagentbank] = true
-
-    self:StartUpdateBagsTimer()
 end
 
 function Module:SetPlayerBagsDirty()
@@ -135,30 +124,20 @@ function Module:UpdateBags()
 
             -- Short circuit if bank isn't open
             local isBank = (
-                bagId == Enum.BagIndex.Bank or
-                bagId == Enum.BagIndex.Reagentbank or
-                (bagId >= Enum.BagIndex.BankBag_1 and bagId <= Enum.BagIndex.BankBag_7) or
+                (bagId >= Enum.BagIndex.CharacterBankTab_1 and bagId <= Enum.BagIndex.CharacterBankTab_6) or
                 (bagId >= Enum.BagIndex.AccountBankTab_1 and bagId <= Enum.BagIndex.AccountBankTab_5)
             )
             if isBank and not self.isBankOpen then
                 return
             end
 
-            -- Reagent bank is weird, make sure that the bank is open or it was actually updated
-            if bagId == Enum.BagIndex.Reagentbank then
-                if not (self.isBankOpen or self.wasReagentBankChanged) then
-                    return
-                end
-                self.wasReagentBankChanged = false
-            end
-
             local now = time()
             local bag
             local requestedData = false
 
-            if bagId >= Enum.BagIndex.AccountBankTab_1 then
+            if bagId >= Enum.BagIndex.AccountBankTab_1 and bagId <= Enum.BagIndex.AccountBankTab_5 then
                 WWTCSaved.warbank.scannedAt = now
-    
+
                 WWTCSaved.warbank.items["b"..bagId] = {}
                 bag = WWTCSaved.warbank.items["b"..bagId]
             else
@@ -167,7 +146,7 @@ function Module:UpdateBags()
                 Addon.charData.items["b"..bagId] = {}
                 bag = Addon.charData.items["b"..bagId]
     
-                if bagId >= 1 then
+                if bagId >= Enum.BagIndex.Bag_1 and bagId <= Enum.BagIndex.ReagentBag then
                     local bagItemID, _ = GetInventoryItemID('player', C_Container_ContainerIDToInventoryID(bagId))
                     Addon.charData.bags["b"..bagId] = bagItemID
                 end
