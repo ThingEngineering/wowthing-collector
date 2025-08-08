@@ -1,3 +1,7 @@
+v11.2.0.2
+---------
+- Added new zones to world quest scanning.
+
 v11.2.0.1
 ---------
 - Fixed various bank-related errors.
