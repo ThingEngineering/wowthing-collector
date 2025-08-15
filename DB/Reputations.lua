@@ -6,6 +6,7 @@ Module.db.reputations = {
     2600, -- The Severed Threads
     2644, -- Delves: Season 1
     2683, -- Delves: Season 2
+    2722, -- Delves: Season 3
 }
 
 Module.db.friendships = {
