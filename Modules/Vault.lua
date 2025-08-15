@@ -59,6 +59,14 @@ function Module:UpdateVault()
                 rewards = {},
             }
 
+            local itemLink, upgradeItemLink = C_WeeklyRewards.GetExampleRewardItemHyperlinks(activity.id)
+            if itemLink ~= nil then
+                data.itemLevel = C_Item.GetDetailedItemLevelInfo(itemLink)
+            end
+            if upgradeItemLink ~= nil then
+                data.upgradeItemLevel = C_Item.GetDetailedItemLevelInfo(upgradeItemLink)
+            end
+
             for _, reward in ipairs(activity.rewards) do
                 local itemLink = C_WeeklyRewards.GetItemHyperlink(reward.itemDBID)
                 local parsed = Addon:ParseItemLink(itemLink, -1, 1, 0)
