@@ -1,3 +1,8 @@
+v11.2.0.3
+---------
+- Added item levels to vault scanning.
+- Added S3 Delves progress reputation.
+
 v11.2.0.2
 ---------
 - Added new zones to world quest scanning.
