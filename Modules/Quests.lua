@@ -64,6 +64,31 @@ function Module:UpdateQuests()
 
     local progressQuests = Addon.charData.progressQuests
 
+    for _, questId in ipairs(self.db.manualCheck) do
+        if CQL_IsQuestFlaggedCompleted(questId) == false then
+            local objectives = CQL_GetQuestObjectives(questId)
+            if objectives ~= nil then
+                local prog = {
+                    id = questId,
+                    name = QuestUtils_GetQuestName(questId),
+                    status = 1,
+                    objectives = {},
+                }
+                self:AddData(prog, questId, objectives)
+
+                tinsert(progressQuests, table.concat({
+                    'q'..prog.id,
+                    prog.id,
+                    prog.name,
+                    prog.status,
+                    0,
+                    table.concat(prog.objectives, '_'),
+                }, '|'))
+            end
+        end
+    end
+
+
     local questCount = CQL_GetNumQuestLogEntries()
     for i = 1, questCount do
         local info = CQL_GetInfo(i)

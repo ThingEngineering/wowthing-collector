@@ -1,6 +1,11 @@
 local Module = LibStub('AceAddon-3.0'):GetAddon('WoWthing_Collector'):GetModule('Quests')
 
 
+-- Annoying quests that don't show up in quest log OR as POIs
+Module.db.manualCheck = {
+    85460, -- Ecological Succession
+}
+
 Module.db.progress = {
     -- Darkmoon Faire
     ["dmfAlchemy"] = { "special", { 29506 } }, -- A Fizzy Fusion
@@ -585,10 +590,6 @@ Module.db.progress = {
         81574, -- Sporadic Growth
     } },
     ["twwTheaterTroupe"] = { "weekly", { 83240 } },
-    ["twwDelveKey1"] = { "weekly", { 84736 } },
-    ["twwDelveKey2"] = { "weekly", { 84737 } },
-    ["twwDelveKey3"] = { "weekly", { 84738 } },
-    ["twwDelveKey4"] = { "weekly", { 84739 } },
     ["twwDungeon"] = { "weekly", {
         83465, -- Ara-Kara, City of Echoes
         83436, -- Cinderbrew Meadery
@@ -611,57 +612,6 @@ Module.db.progress = {
         81650, -- Special Assignment: Titanic Resurgence #3
         83229, -- Special Assignment: When the Deeps Stir
     }, true },
-    ["twwEmissaryArchives"] = { "weekly", {
-        82678, -- Archives: The First Disc
-        82679, -- Archives: Seeking History
-    } },
-    ["twwEmissaryDelves"] = { "weekly", {
-        82746, -- Delves: Breaking Tough to Loot Stuff
-        82707, -- Delves: Earthen Defense
-        82710, -- Delves: Empire-ical Exploration
-        82706, -- Delves: Khaz Algar Research
-        82711, -- Delves: Lost and Found
-        82708, -- Delves: Nerubian Menace
-        82709, -- Delves: Percussive Archaeology
-        82712, -- Delves: Trouble Up and Down Khaz Algar
-    } },
-    ["twwEmissaryWorldsoul"] = { "weekly", {
-        82511, -- Worldsoul: Awakening Machine
-        82453, -- Worldsoul: Encore!
-        82516, -- Worldsoul: Forging a Pact
-        82458, -- Worldsoul: Renown
-        82482, -- Worldsoul: Snuffling
-        82483, -- Worldsoul: Spreading the Light
-        82512, -- Worldsoul: World Boss
-        82452, -- Worldsoul: World Quests
-        82491, -- Worldsoul: Ara-Kara, City of Echoes [N]
-        82494, -- Worldsoul: Ara-Kara, City of Echoes [H]
-        82502, -- Worldsoul: Ara-Kara, City of Echoes [M]
-        82485, -- Worldsoul: Cinderbrew Meadery [N]
-        82495, -- Worldsoul: Cinderbrew Meadery [H]
-        82503, -- Worldsoul: Cinderbrew Meadery [M]
-        82492, -- Worldsoul: City of Threads [N]
-        82496, -- Worldsoul: City of Threads [H]
-        82504, -- Worldsoul: City of Threads [M]
-        82488, -- Worldsoul: Darkflame Cleft [N]
-        82498, -- Worldsoul: Darkflame Cleft [H]
-        82506, -- Worldsoul: Darkflame Cleft [M]
-        82490, -- Worldsoul: Priory of the Sacred Flame [N]
-        82499, -- Worldsoul: Priory of the Sacred Flame [H]
-        82507, -- Worldsoul: Priory of the Sacred Flame [M]
-        82489, -- Worldsoul: The Dawnbreaker [N]
-        82493, -- Worldsoul: The Dawnbreaker [H]
-        82501, -- Worldsoul: The Dawnbreaker [M]
-        82486, -- Worldsoul: The Rookery [N]
-        82500, -- Worldsoul: The Rookery [H]
-        82508, -- Worldsoul: The Rookery [M]
-        82487, -- Worldsoul: The Stonevault [N]
-        82497, -- Worldsoul: The Stonevault [H]
-        82505, -- Worldsoul: The Stonevault [M]
-        82509, -- Worldsoul: Nerub-ar Palace [LFR]
-        82659, -- Worldsoul: Nerub-ar Palace [N]
-        82510, -- Worldsoul: Nerub-ar Palace [H]
-    } },
 
     -- The War Within: Professions: Alchemy
     ["twwProfessionAlchemyDrop1"] = { "weekly", { 83253 } }, -- Alchemical Sediment
