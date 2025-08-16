@@ -18,7 +18,9 @@ function Module:OnEnable()
 end
 
 function Module:OnEnteringWorld()
-    self:UpdateVault()
+    C_Timer.After(2, function()
+        C_WeeklyRewards.OnUIInteract()
+    end)
 end
 
 function Module:UpdateVault()
@@ -59,12 +61,30 @@ function Module:UpdateVault()
                 rewards = {},
             }
 
-            local itemLink, upgradeItemLink = C_WeeklyRewards.GetExampleRewardItemHyperlinks(activity.id)
-            if itemLink ~= nil then
-                data.itemLevel = C_Item.GetDetailedItemLevelInfo(itemLink)
-            end
-            if upgradeItemLink ~= nil then
-                data.upgradeItemLevel = C_Item.GetDetailedItemLevelInfo(upgradeItemLink)
+            if data.progress >= data.threshold then
+                local itemLink, upgradeItemLink = C_WeeklyRewards.GetExampleRewardItemHyperlinks(activity.id)
+
+                if itemLink ~= nil or upgradeItemLink ~= nil then
+                    if itemLink ~= nil then
+                        data.itemLevel = C_Item.GetDetailedItemLevelInfo(itemLink)
+                    end
+                    if upgradeItemLink ~= nil then
+                        data.upgradeItemLevel = C_Item.GetDetailedItemLevelInfo(upgradeItemLink)
+                    end
+
+                    -- item data probably isn't loaded, try again in a bit
+                    if data.itemLevel == nil and data.upgradeItemLevel == nil then
+                        if itemLink ~= nil and data.itemLevel == nil then
+                            C_Item.RequestLoadItemDataByID(itemLink)
+                        end
+                        if upgradeItemLink ~= nil and data.upgradeItemLevel == nil then
+                            C_Item.RequestLoadItemDataByID(upgradeItemLink)
+                        end
+
+                        C_MythicPlus.RequestMapInfo()
+                        self:UniqueTimer('UpdateVault', 2, 'UpdateVault')
+                    end
+                end
             end
 
             for _, reward in ipairs(activity.rewards) do
