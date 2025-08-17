@@ -1,3 +1,7 @@
+v11.2.0.6
+---------
+- Added a bunch of missing TWW paragon reputations.
+
 v11.2.0.5
 ---------
 - Added manual scanning of weird event quests.
@@ -6,7 +10,7 @@ v11.2.0.5
 v11.2.0.4
 ---------
 - Added more Delver's mount customizations to account quest IDs.
-- Make vault item levels more consistent.
+- Fixed vault item levels only working occasionally.
 
 v11.2.0.3
 ---------
