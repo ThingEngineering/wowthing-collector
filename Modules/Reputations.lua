@@ -8,6 +8,7 @@ local CGI_GetFriendshipReputation = C_GossipInfo.GetFriendshipReputation
 local CMF_GetMajorFactionRenownInfo = C_MajorFactions.GetMajorFactionRenownInfo
 local CR_GetFactionDataByID = C_Reputation.GetFactionDataByID
 local CR_GetFactionParagonInfo = C_Reputation.GetFactionParagonInfo
+local CR_IsFactionParagon = C_Reputation.IsFactionParagon
 
 function Module:OnEnable()
     self:RegisterBucketEvent('UPDATE_FACTION', 1, 'UpdateReputations')
@@ -39,7 +40,7 @@ function Module:UpdateReputations()
     end
 
     for i, factionID in ipairs(self.db.paragon) do
-        if C_Reputation.IsFactionParagon(factionID) then 
+        if CR_IsFactionParagon(factionID) then 
             local currentValue, threshold, _, hasRewardPending = CR_GetFactionParagonInfo(factionID)
             -- value:max:hasReward
             paragons[factionID] = table.concat({
