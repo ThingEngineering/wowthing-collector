@@ -14,6 +14,7 @@ function Module:OnEnable()
 
     Addon.charData.bags = Addon.charData.bags or {}
     Addon.charData.bank = Addon.charData.bank or {}
+    Addon.charData.bankTabs = 0
     Addon.charData.items = Addon.charData.items or {}
 
     self.isBankOpen = false
@@ -23,6 +24,7 @@ function Module:OnEnable()
     self.requested = {}
 
     self:RegisterEvent('BAG_UPDATE')
+    self:RegisterEvent('BANK_TABS_CHANGED')
     self:RegisterEvent('BANKFRAME_CLOSED')
     self:RegisterEvent('BANKFRAME_OPENED')
     self:RegisterEvent('ITEM_LOCKED')
@@ -41,11 +43,20 @@ function Module:OnEnable()
 end
 
 function Module:OnEnteringWorld()
-    C_Timer.After(5, function() self:SetPlayerBagsDirty() end)
+    C_Timer.After(5, function()
+        self:SetPlayerBagsDirty()
+        self:UpdateBankTabs()
+    end)
 end
 
 function Module:BAG_UPDATE(_, bagId)
     self.dirtyBags[bagId] = true
+end
+
+function Module:BANK_TABS_CHANGED(_, bankType)
+    if bankType == Enum.BankType.Character then
+        self:UpdateBankTabs()
+    end
 end
 
 function Module:BANKFRAME_CLOSED()
@@ -200,4 +211,8 @@ function Module:ScanEnd()
     if #bagKeys > 0 then
         self:StartUpdateBagsTimer()
     end
+end
+
+function Module:UpdateBankTabs()
+    Addon.charData.bankTabs = C_Bank.FetchNumPurchasedBankTabs(Enum.BankType.Character)
 end
