@@ -1,3 +1,11 @@
+v11.2.0.7
+---------
+- Added character bank tab scanning.
+- Added brewfest steins to manual appearance list.
+- Changed max appearance ID to cover newer items.
+- Fixed overwriting valid garrison talent data with nothing.
+- Removed a bunch of old progress quest data.
+
 v11.2.0.6
 ---------
 - Added a bunch of missing TWW paragon reputations.
