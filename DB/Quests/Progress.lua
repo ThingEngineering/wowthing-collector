@@ -520,19 +520,12 @@ Module.db.progress = {
     ["dfAmirdrassil1Mythic"] = { "once", { 78602 } },
 
     -- The War Within
-    ["twwAwakeningTheMachine"] = { "weekly", { 83333 } },
-    ["twwRollinDown"] = { "weekly", { 82946 } }, -- Rollin' Down in the Deeps
     ["twwSparks"] = { "weekly", {
         81793, -- Sparks of War: Isle of Dorn
         81794, -- Sparks of War: The Ringing Deeps
         81795, -- Sparks of War: Hallowfall
         81796, -- Sparks of War: Azj-Kahet
         86853, -- Sparks of War: Undermine
-    } },
-    ["twwSpiderPact"] = { "weekly", {
-        80544, -- The Weaver
-        80545, -- The General
-        80546, -- The Vizier
     } },
     ["twwSpiderWeekly"] = { "weekly", {
         80670, -- Eyes of the Weaver
@@ -589,17 +582,6 @@ Module.db.progress = {
         76997, -- Lost in Shadows
         81574, -- Sporadic Growth
     } },
-    ["twwTheaterTroupe"] = { "weekly", { 83240 } },
-    ["twwDungeon"] = { "weekly", {
-        83465, -- Ara-Kara, City of Echoes
-        83436, -- Cinderbrew Meadery
-        83469, -- City of Threads
-        83443, -- Darkflame Cleft
-        83458, -- Priory of the Sacred Flame
-        83459, -- The Dawnbreaker
-        83432, -- The Rookery
-        83457, -- The Stonevault
-    } },
     ["twwSpecialAssignment"] = { "weeklyWorldQuest", {
         82414, -- Special Assignment: A Pound of Cure
         82531, -- Special Assignment: Bombs From Behind
@@ -613,111 +595,6 @@ Module.db.progress = {
         83229, -- Special Assignment: When the Deeps Stir
     }, true },
 
-    -- The War Within: Professions: Alchemy
-    ["twwProfessionAlchemyDrop1"] = { "weekly", { 83253 } }, -- Alchemical Sediment
-    ["twwProfessionAlchemyDrop2"] = { "weekly", { 83255 } }, -- Deepstone Crucible
-    ["twwProfessionAlchemyOrders"] = { "weekly", { 84133 } },
-    ["twwProfessionAlchemyTreatise"] = { "weekly", { 83725 } },
-
-    -- The War Within: Professions: Blacksmithing
-    ["twwProfessionBlacksmithingDrop1"] = { "weekly", { 83257 } }, -- Coreway Billet
-    ["twwProfessionBlacksmithingDrop2"] = { "weekly", { 83256 } }, -- Dense Bladestone
-    ["twwProfessionBlacksmithingOrders"] = { "weekly", { 84127 } },
-    ["twwProfessionBlacksmithingTreatise"] = { "weekly", { 83726 } },
-
-    -- The War Within: Professions: Enchanting
-    ["twwProfessionEnchantingDrop1"] = { "weekly", { 83259 } }, -- Crystalline Repository
-    ["twwProfessionEnchantingDrop2"] = { "weekly", { 83258 } }, -- Powdered Fulgurance
-    ["twwProfessionEnchantingDrop3"] = { "weekly", { 84290 } }, -- Fleeting Arcane Manifestation
-    ["twwProfessionEnchantingDrop4"] = { "weekly", { 84291 } }, -- Fleeting Arcane Manifestation
-    ["twwProfessionEnchantingDrop5"] = { "weekly", { 84292 } }, -- Fleeting Arcane Manifestation
-    ["twwProfessionEnchantingDrop6"] = { "weekly", { 84293 } }, -- Fleeting Arcane Manifestation
-    ["twwProfessionEnchantingDrop7"] = { "weekly", { 84294 } }, -- Fleeting Arcane Manifestation
-    ["twwProfessionEnchantingDrop8"] = { "weekly", { 84295 } }, -- Gleaming Telluric Crystal
-    ["twwProfessionEnchantingTask"] = { "weekly", {
-        84084, -- Just a Pinch
-        84085, -- The Power of Potential
-        84086, -- A Rare Necessity
-    } },
-    ["twwProfessionEnchantingTreatise"] = { "weekly", { 83727 } },
-
-    -- The War Within: Professions: Engineering
-    ["twwProfessionEngineeringDrop1"] = { "weekly", { 83261 } }, -- Earthen Induction Coil
-    ["twwProfessionEngineeringDrop2"] = { "weekly", { 83260 } }, -- Rust-Locked Mechanism
-    ["twwProfessionEngineeringOrders"] = { "weekly", { 84128 } },
-    ["twwProfessionEngineeringTreatise"] = { "weekly", { 83728 } },
-
-    -- The War Within: Professions: Inscription
-    ["twwProfessionInscriptionDrop1"] = { "weekly", { 83264 } }, -- Striated Inkstone
-    ["twwProfessionInscriptionDrop2"] = { "weekly", { 83262 } }, -- Wax-Sealed Records
-    ["twwProfessionInscriptionOrders"] = { "weekly", { 84129 } },
-    ["twwProfessionInscriptionTreatise"] = { "weekly", { 83730 } },
-
-    -- The War Within: Professions: Jewelcrafting
-    ["twwProfessionJewelcraftingDrop1"] = { "weekly", { 83266 } }, -- Deepstone Fragment
-    ["twwProfessionJewelcraftingDrop2"] = { "weekly", { 83265 } }, -- Diaphanous Gem Shards
-    ["twwProfessionJewelcraftingOrders"] = { "weekly", { 84130 } },
-    ["twwProfessionJewelcraftingTreatise"] = { "weekly", { 83731 } },
-
-    -- The War Within: Professions: Leatherworking
-    ["twwProfessionLeatherworkingDrop1"] = { "weekly", { 83268 } }, -- Stone-Leather Swatch
-    ["twwProfessionLeatherworkingDrop2"] = { "weekly", { 83267 } }, -- Sturdy Nerubian Carapace
-    ["twwProfessionLeatherworkingOrders"] = { "weekly", { 84131 } },
-    ["twwProfessionLeatherworkingTreatise"] = { "weekly", { 83732 } },
-
-    -- The War Within: Professions: Tailoring
-    ["twwProfessionTailoringDrop1"] = { "weekly", { 83270 } }, -- Chitin Needle
-    ["twwProfessionTailoringDrop2"] = { "weekly", { 83269 } }, -- Spool of Webweave
-    ["twwProfessionTailoringOrders"] = { "weekly", { 84132 } },
-    ["twwProfessionTailoringTreatise"] = { "weekly", { 83735 } },
-
-    -- The War Within: Professions: Herbalism
-    ["twwProfessionHerbalismDrop1"] = { "weekly", { 81416 } }, -- Deepgrove Rose Petal
-    ["twwProfessionHerbalismDrop2"] = { "weekly", { 81417 } }, -- Deepgrove Rose Petal
-    ["twwProfessionHerbalismDrop3"] = { "weekly", { 81418 } }, -- Deepgrove Rose Petal
-    ["twwProfessionHerbalismDrop4"] = { "weekly", { 81419 } }, -- Deepgrove Rose Petal
-    ["twwProfessionHerbalismDrop5"] = { "weekly", { 81420 } }, -- Deepgrove Rose Petal
-    ["twwProfessionHerbalismDrop6"] = { "weekly", { 81421 } }, -- Deepgrove Rose
-    ["twwProfessionHerbalismTask"] = { "weekly", {
-        82970, -- A Bloom and A Blossom
-        82962, -- A Handful of Luredrops
-        82965, -- Light and Shadow
-        82958, -- Little Blessings
-        82916, -- When Fungi Bloom
-    } },
-    ["twwProfessionHerbalismTreatise"] = { "weekly", { 83729 } },
-
-    -- The War Within: Professions: Mining
-    ["twwProfessionMiningDrop1"] = { "weekly", { 83054 } }, -- Slab of Slate
-    ["twwProfessionMiningDrop2"] = { "weekly", { 83053 } }, -- Slab of Slate
-    ["twwProfessionMiningDrop3"] = { "weekly", { 83052 } }, -- Slab of Slate
-    ["twwProfessionMiningDrop4"] = { "weekly", { 83051 } }, -- Slab of Slate
-    ["twwProfessionMiningDrop5"] = { "weekly", { 83050 } }, -- Slab of Slate
-    ["twwProfessionMiningDrop6"] = { "weekly", { 83049 } }, -- Erosion Polished Slate
-    ["twwProfessionMiningTask"] = { "weekly", {
-        83102, -- Bismuth is Business
-        83103, -- Acquiring Aqirite
-        83104, -- Identifying Ironclaw
-        83105, -- Rush-order Requisition
-        83106, -- Null Pebble Excavation
-    } },
-    ["twwProfessionMiningTreatise"] = { "weekly", { 83733 } },
-
-    -- The War Within: Professions: Skinning
-    ["twwProfessionSkinningDrop1"] = { "weekly", { 81459 } }, -- Toughened Tempest Pelt
-    ["twwProfessionSkinningDrop2"] = { "weekly", { 81460 } }, -- Toughened Tempest Pelt
-    ["twwProfessionSkinningDrop3"] = { "weekly", { 81461 } }, -- Toughened Tempest Pelt
-    ["twwProfessionSkinningDrop4"] = { "weekly", { 81462 } }, -- Toughened Tempest Pelt
-    ["twwProfessionSkinningDrop5"] = { "weekly", { 81463 } }, -- Toughened Tempest Pelt
-    ["twwProfessionSkinningDrop6"] = { "weekly", { 81464 } }, -- Abyssal Fur
-    ["twwProfessionSkinningTask"] = { "weekly", {
-        83097, -- Cinder and Storm 
-        83100, -- Cracking the Shell 
-        82993, -- From Shadows 
-        83098, -- Snap and Crackle 
-        82992, -- Stormcharged Goods
-    } },
-    ["twwProfessionSkinningTreatise"] = { "weekly", { 83734 } },
     ["twwProfessionSkinningSlatefang"] = { "daily", { 84259 } },
     -- The War Within: Raids
     ["twwPalace1Normal"] = { "once", { 82629 } },
