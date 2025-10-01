@@ -1,6 +1,7 @@
 local Module = LibStub('AceAddon-3.0'):GetAddon('WoWthing_Collector'):GetModule('Transmog')
 
 
+-- Weird jank that doesn't scan properly
 Module.db.manual = {
     -- Miner's Revenge
     {
@@ -26,4 +27,11 @@ Module.db.manual = {
         itemId = 118080,
         modifierId = 0,
     },
+    -- Brewfest steins
+    { appearanceId = 40287, itemId = 169448, modifierId = 0 },
+    { appearanceId = 40287, itemId = 169450, modifierId = 0 },
+    { appearanceId = 40287, itemId = 169452, modifierId = 0 },
+    { appearanceId = 40287, itemId = 169453, modifierId = 0 },
+    { appearanceId = 40287, itemId = 169454, modifierId = 0 },
+    { appearanceId = 40287, itemId = 169455, modifierId = 0 },
 }
