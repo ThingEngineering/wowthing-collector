@@ -135,5 +135,7 @@ function Module:ScanGarrisonTree(treeId)
         }, ':'))
     end
 
-    Addon.charData.garrisonTrees[treeId] = talents
+    if #talents > 0 or Addon.charData.garrisonTrees[treeId] == nil then
+        Addon.charData.garrisonTrees[treeId] = talents
+    end
 end
