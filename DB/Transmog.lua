@@ -3,35 +3,14 @@ local Module = LibStub('AceAddon-3.0'):GetAddon('WoWthing_Collector'):GetModule(
 
 -- Weird jank that doesn't scan properly
 Module.db.manual = {
-    -- Miner's Revenge
-    {
-        appearanceId = 224,
-        itemId = 1893,
-        modifierId = 0,
-    },
-    -- Cold Iron Pick
-    {
-        appearanceId = 224,
-        itemId = 1959,
-        modifierId = 0,
-    },
-    -- The Emperor's New Cape
-    {
-        appearanceId = 2352,
-        itemId = 11930,
-        modifierId = 0,
-    },
-    -- Admiral Taylor's Greatsword
-    {
-        appearanceId = 22283,
-        itemId = 118080,
-        modifierId = 0,
-    },
-    -- Brewfest steins
-    { appearanceId = 40287, itemId = 169448, modifierId = 0 },
-    { appearanceId = 40287, itemId = 169450, modifierId = 0 },
-    { appearanceId = 40287, itemId = 169452, modifierId = 0 },
-    { appearanceId = 40287, itemId = 169453, modifierId = 0 },
-    { appearanceId = 40287, itemId = 169454, modifierId = 0 },
-    { appearanceId = 40287, itemId = 169455, modifierId = 0 },
+    473, -- Miner's Revenge [1893]
+    511, -- Cold Iron Pick [1959]
+    4326, -- The Emperor's New Cape [11930]
+    66418, -- Admiral Taylor's Greatsword [118080]
+    105140, -- Brewfest Stein [169448]
+    105141, -- Brewfest Stein [169450]
+    105142, -- Brewfest Stein [169452]
+    105143, -- Brewfest Stein [169453]
+    105144, -- Brewfest Stein [169454]
+    105145, -- Brewfest Stein [169455]
 }

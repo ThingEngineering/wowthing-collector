@@ -7,6 +7,7 @@ Module.db = {}
 local CTC_GetAllAppearanceSources = C_TransmogCollection.GetAllAppearanceSources
 local CTC_GetAppearanceInfoBySource = C_TransmogCollection.GetAppearanceInfoBySource
 local CTC_GetAppearanceSourceInfo = C_TransmogCollection.GetAppearanceSourceInfo
+local CTC_GetSourceInfo = C_TransmogCollection.GetSourceInfo
 local CTC_PlayerHasTransmogItemModifiedAppearance = C_TransmogCollection.PlayerHasTransmogItemModifiedAppearance
 
 local MAX_APPEARANCE_ID = 130000 -- 121732
@@ -154,6 +155,18 @@ function Module:ScanSources(beMouthy)
     if beMouthy then
         wipe(modifiedAppearances)
         wipe(transmog)
+    end
+    
+    -- Manual checks for buggy appearances
+    for _, sourceId in ipairs(self.db.manual) do
+        local have = CTC_PlayerHasTransmogItemModifiedAppearance(sourceId)
+        if have then
+            local info = CTC_GetSourceInfo(sourceId)
+            if info ~= nil then
+                modifiedAppearances[sourceId] = true
+                transmog[info.visualID] = true
+            end
+        end
     end
 
     local sourceToAppearanceSize = #sourceToAppearance
