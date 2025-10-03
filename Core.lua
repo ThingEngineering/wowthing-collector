@@ -33,6 +33,8 @@ local defaultWWTCSaved = {
 }
 
 function Addon:OnInitialize()
+    if self:DisableOnWeirdRealms() then return end
+
     -- Initialize saved variables to default if required
     if WWTCSaved == nil or WWTCSaved.version < defaultWWTCSaved.version then
         WWTCSaved = defaultWWTCSaved
@@ -132,9 +134,37 @@ function Addon:Cleanup()
     end
 end
 
+function Addon:DisableOnWeirdRealms()
+    local uhoh = false
+
+    if IsPublicTestClient() or IsOnTournamentRealm() then
+        uhoh = true
+    end
+
+    -- AllTheThings app.IgnoreDataCaching
+    local realmName = GetRealmName()
+    if realmName ~= nil and (
+        realmName:find("Mythic Dungeons") or
+        realmName:find("Arena Champions") or
+        realmName:find("US") or
+        realmName:find("AU") or
+        realmName:find("EU")
+    ) then
+        uhoh = true
+    end
+
+    if uhoh then
+        print('WoWthing_Collector does not like this realm, disabling')
+        self:Disable()
+        return true
+    end
+    
+    return false
+end
+
 function Addon:SlashCommand(command)
     if command == 'transmog' then
-        print('Running full transmog scan')
+        print('WoWthing_Collector: running full transmog scan...')
         self.charData.scanTimes.transmog = 0
         
         local transmogModule = self:GetModule('Transmog')
@@ -147,6 +177,8 @@ function Addon:UpdateLastSeen()
 end
 
 function Addon:PLAYER_ENTERING_WORLD()
+    if self:DisableOnWeirdRealms() then return end
+
     self.hasAccountLock = C_PlayerInfo.HasAccountInventoryLock()
     self:UpdateLastSeen()
 
