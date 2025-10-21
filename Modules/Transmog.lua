@@ -14,11 +14,6 @@ local MAX_APPEARANCE_ID = 130000 -- 121732
 local CHUNK_SIZE = 50
 
 function Module:OnEnable()
-    if IsPublicTestClient() or IsOnTournamentRealm() then
-        Module:Disable()
-        return
-    end
-
     self.isScanning = false
     self.modifiedAppearances = {}
     self.sourceToAppearance = {}
@@ -43,11 +38,6 @@ end
 -- end
 
 function Module:LOADING_SCREEN_DISABLED()
-    if IsPublicTestClient() or IsOnTournamentRealm() then
-        Module:Disable()
-        return
-    end
-
     self:UnregisterEvent('LOADING_SCREEN_DISABLED')
 
     local workload = {
@@ -227,6 +217,6 @@ function Module:SaveTransmog(beMouthy)
     Addon.charData.scanTimes.transmog = time()
 
     if beMouthy == true then
-        print('Found '..#appearanceIds..' appearance IDs and '..#modifiedAppearanceIds..' sources')
+        print('WoWthing_Collector: found '..#appearanceIds..' appearance IDs and '..#modifiedAppearanceIds..' sources')
     end
 end
