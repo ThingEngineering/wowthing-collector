@@ -1,3 +1,7 @@
+v11.2.5.1
+---------
+- Updated TOC for 11.2.5.
+
 v11.2.0.8
 ---------
 - Added more weird realms to the bad realm check.
