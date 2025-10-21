@@ -31,7 +31,7 @@ end
 
 function Module:ScanData()
     self:UpdateCurrencies()
-    self:RequestOrUpdateTransferCurrencies()
+    -- self:RequestOrUpdateTransferCurrencies()
 end
 
 function Module:GetCurrencyData()
