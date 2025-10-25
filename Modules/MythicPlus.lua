@@ -2,6 +2,21 @@ local Addon = LibStub('AceAddon-3.0'):GetAddon('WoWthing_Collector')
 local Module = Addon:NewModule('MythicPlus')
 
 
+local ACTIVITY_ID_TO_CHALLENGE_MAP_ID = {
+    [1782] = 197, -- Eye of Azshara
+    [1783] = 200, -- Halls of Valor
+    [1785] = 206, -- Neltharion's Lair
+    [1786] = 239, -- Seat of the Triumvirate
+    [1787] = 208, -- Maw of Souls
+    [1788] = 198, -- Darkheart Thicket
+    [1789] = 210, -- Court of Stars
+    [1790] = 199, -- Black Rook Hold
+    [1791] = 209, -- Arcway
+    [1793] = 234, -- Upper Kara
+    [1794] = 227, -- Lower Kara
+    [1795] = 207, -- Vault of the Wardens
+}
+
 function Module:OnEnable()
     Addon.charData.mythicPlusV2 = Addon.charData.mythicPlusV2 or {}
     Addon.charData.mythicPlusV2.seasons = Addon.charData.mythicPlusV2.seasons or {}
@@ -37,8 +52,20 @@ function Module:OnEnteringWorld()
 end
 
 function Module:UpdateKeystone()
-    Addon.charData.keystoneInstance = C_MythicPlus.GetOwnedKeystoneChallengeMapID()
-    Addon.charData.keystoneLevel = C_MythicPlus.GetOwnedKeystoneLevel()
+    local keystoneInstance = C_MythicPlus.GetOwnedKeystoneChallengeMapID()
+    local keystoneLevel = C_MythicPlus.GetOwnedKeystoneLevel()
+
+    -- try TW key if we didn't find a normal one
+    if keystoneInstance == nil and keystoneLevel == nil then
+        local activityId, groupId, level = C_LFGList.GetOwnedKeystoneActivityAndGroupAndLevel(true)
+        if activityId ~= nil and level ~= nil then
+            keystoneInstance = ACTIVITY_ID_TO_CHALLENGE_MAP_ID[activityId]
+            keystoneLevel = level
+        end
+    end
+
+    Addon.charData.keystoneInstance = keystoneInstance
+    Addon.charData.keystoneLevel = keystoneLevel
 end
 
 function Module:UpdateMythicPlusData()
