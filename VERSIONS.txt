@@ -1,3 +1,8 @@
+v11.2.5.4
+---------
+- Added remix M+ keystone scanning.
+- Fixed currency transfer scanning when transferring all to one character.
+
 v11.2.5.3
 ---------
 - Added remix Limits Unbound scanning.
