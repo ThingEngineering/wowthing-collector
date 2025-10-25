@@ -89,6 +89,8 @@ function Module:UpdateTransferCurrencies()
                 Addon:PlayerGuidToId(characterData.characterGUID) .. ':' .. (characterData.quantity or 0)
             )
         end
+
+        if #currency == 0 then tinsert(currency, '') end
     end
 
     WWTCSaved.scanTimes.transferCurrencies = time()
