@@ -78,19 +78,31 @@ function Module:UpdateTransferCurrencies()
     wipe(currencies)
 
     for currencyId, _ in pairs(self.accountWide) do
-        local currency = {}
-        currencies[currencyId] = currency
-
         local characterDatas = CCI_FetchCurrencyDataFromAccountCharacters(currencyId)
-        -- { characterGUID, characterName, currencyID, fullCharacterName, quantity }
-        for _, characterData in ipairs(characterDatas or {}) do
-            tinsert(
-                currency,
-                Addon:PlayerGuidToId(characterData.characterGUID) .. ':' .. (characterData.quantity or 0)
-            )
-        end
+        if characterDatas ~= nil then
+            local seenCharacter = false
+            local currency = {}
+            currencies[currencyId] = currency
 
-        if #currency == 0 then tinsert(currency, '') end
+            -- { characterGUID, characterName, currencyID, fullCharacterName, quantity }
+            for _, characterData in ipairs(characterDatas) do
+                seenCharacter = seenCharacter or (characterData.characterGUID == Addon.charName)
+                tinsert(
+                    currency,
+                    Addon:PlayerGuidToId(characterData.characterGUID) .. ':' .. (characterData.quantity or 0)
+                )
+            end
+
+            if seenCharacter == false then
+                local currencyInfo = CCI_GetCurrencyInfo(currencyId)
+                if currencyInfo ~= nil then
+                    tinsert(
+                        currency,
+                        Addon:PlayerGuidToId(Addon.charName) .. ':' .. currencyInfo.quantity
+                    )
+                end
+            end
+        end
     end
 
     WWTCSaved.scanTimes.transferCurrencies = time()
