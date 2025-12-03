@@ -4,8 +4,8 @@ local Module = Addon:NewModule('TimePlayed', 'AceHook-3.0')
 
 -- Hook the time played message so that we don't print it to chat every time
 do
-    local originalDisplayTimePlayed = _G.ChatFrame_DisplayTimePlayed
-    _G.ChatFrame_DisplayTimePlayed = function(...)
+    local originalDisplayTimePlayed = _G.ChatFrameUtil.DisplayTimePlayed
+    _G.ChatFrameUtil.DisplayTimePlayed = function(...)
         if Module.requestingPlayedTime then
             C_Timer.After(0.2, function()
                 Module.requestingPlayedTime = false
