@@ -1,3 +1,8 @@
+v11.2.7.1
+---------
+- Fixed played time spam.
+- Updated TOC for 11.2.7.
+
 v11.2.5.5
 ---------
 - Fixed more currency transfer scanning bugs.
