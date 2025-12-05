@@ -1,3 +1,7 @@
+v11.2.7.2
+---------
+- Added decor scanning.
+
 v11.2.7.1
 ---------
 - Fixed played time spam.
