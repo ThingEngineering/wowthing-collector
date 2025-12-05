@@ -24,6 +24,7 @@ Modules\BattlePets.lua
 Modules\CharacterMisc.lua
 Modules\Covenants.lua
 Modules\Currencies.lua
+Modules\Decor.lua
 Modules\Delves.lua
 Modules\Equipment.lua
 Modules\Garrisons.lua
