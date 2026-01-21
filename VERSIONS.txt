@@ -1,3 +1,8 @@
+v12.0.0.2
+---------
+- Fixed profession cooldown scanning errors.
+- Fixed spell scanning errors.
+
 v12.0.0.1
 ---------
 - Fixed decor scanning errors.
