@@ -15,6 +15,7 @@ function Module:OnEnable()
 
     self.inCombat = false
 
+    self:RegisterEvent('PLAYER_IN_COMBAT_CHANGED')
     self:RegisterEvent('PLAYER_ENTER_COMBAT')
     self:RegisterEvent('PLAYER_LEAVE_COMBAT')
     self:RegisterBucketEvent(
@@ -31,6 +32,10 @@ end
 function Module:OnEnteringWorld()
     self:UpdateAuras()
     self:UpdateSpells()
+end
+
+function Module:PLAYER_IN_COMBAT_CHANGED(_, newValue)
+    self.inCombat = newValue
 end
 
 function Module:PLAYER_ENTER_COMBAT()
@@ -58,19 +63,21 @@ function Module:UpdateAuras()
             local auraInfo = CUA_GetAuraDataByIndex('PLAYER', i, auraType)
             if auraInfo == nil then break end
 
-            local duration = 0
-            local expiresAt = 0
-            if auraInfo.expirationTime > 0 then
-                duration = math.floor(auraInfo.expirationTime - uptime)
-                expiresAt = math.floor(now + (auraInfo.expirationTime - uptime))
-            end
+            if canaccesstable(auraInfo) then
+                local duration = 0
+                local expiresAt = 0
+                if auraInfo.expirationTime > 0 then
+                    duration = math.floor(auraInfo.expirationTime - uptime)
+                    expiresAt = math.floor(now + (auraInfo.expirationTime - uptime))
+                end
 
-            table.insert(auras, table.concat({
-                auraInfo.spellId,
-                expiresAt,
-                auraInfo.applications,
-                duration,
-            }, ':'))
+                table.insert(auras, table.concat({
+                    auraInfo.spellId,
+                    expiresAt,
+                    auraInfo.applications,
+                    duration,
+                }, ':'))
+            end
         end
     end
 

@@ -11,6 +11,11 @@ local C_TradeSkillUI_GetRecipeInfo = C_TradeSkillUI.GetRecipeInfo
 function Module:OnEnable()
     Addon.charData.professionCooldowns = Addon.charData.professionCooldowns or {}
 
+    self.inCombat = false
+
+    self:RegisterEvent('PLAYER_IN_COMBAT_CHANGED')
+    self:RegisterEvent('PLAYER_ENTER_COMBAT')
+    self:RegisterEvent('PLAYER_LEAVE_COMBAT')
     self:RegisterBucketEvent({ 'SPELL_UPDATE_COOLDOWN' }, 2, 'UpdateSpells')
     self:RegisterBucketEvent(
         {
@@ -22,7 +27,21 @@ function Module:OnEnable()
     )
 end
 
+function Module:PLAYER_IN_COMBAT_CHANGED(_, newValue)
+    self.inCombat = newValue
+end
+
+function Module:PLAYER_ENTER_COMBAT()
+    self.inCombat = true
+end
+
+function Module:PLAYER_LEAVE_COMBAT()
+    self.inCombat = false
+end
+
 function Module:UpdateSpells()
+    if self.inCombat then return end
+
     local now = time()
     Addon.charData.scanTimes['professionCooldowns'] = now
 
@@ -39,7 +58,7 @@ function Module:UpdateSpells()
                 local spellIds, cooldownType = unpack(cooldownData)
                 if cooldownType == 'spell' then
                     local cooldownInfo = CS_GetSpellCooldown(spellIds[1])
-                    if cooldownInfo ~= nil then
+                    if cooldownInfo ~= nil and canaccesstable(cooldownInfo) and canaccessvalue(cooldownInfo.duration) then
                         local currentValue = 0
                         local maxValue = 1
                         local nextAvailable = 0
@@ -65,6 +84,8 @@ function Module:UpdateSpells()
 end
 
 function Module:UpdateCooldowns()
+    if self.inCombat then return end
+
     -- professionID = id, profession = enum
     local profInfo = C_TradeSkillUI.GetBaseProfessionInfo()
     if profInfo == nil or profInfo.isPrimaryProfession == false then return end
