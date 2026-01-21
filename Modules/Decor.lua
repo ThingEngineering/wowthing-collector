@@ -28,7 +28,7 @@ function Module:LOADING_SCREEN_DISABLED()
     catalogSearcher:SetCollected(true)
     catalogSearcher:SetCustomizableOnly(false)
     catalogSearcher:SetFirstAcquisitionBonusOnly(false)
-    catalogSearcher:SetIncludeMarketEntries(true)
+    -- catalogSearcher:SetIncludeMarketEntries(true)
     catalogSearcher:SetUncollected(true)
 
     self.catalogSearcher = catalogSearcher
@@ -54,7 +54,8 @@ function Module:OnEntryResultsUpdated()
     for _, entry in ipairs(entries) do
         local entryInfo = C_HousingCatalog.GetCatalogEntryInfo(entry)
         if entryInfo ~= nil then
-            decor[entryInfo.entryID.recordID] = entryInfo.numStored..';'..entryInfo.numPlaced
+            local available = (entryInfo.quantity or 0) + (entryInfo.remainingRedeemable or 0)
+            decor[entryInfo.entryID.recordID] = available..';'..entryInfo.numPlaced
         end
     end
 
