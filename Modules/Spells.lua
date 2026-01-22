@@ -63,7 +63,7 @@ function Module:UpdateAuras()
             local auraInfo = CUA_GetAuraDataByIndex('PLAYER', i, auraType)
             if auraInfo == nil then break end
 
-            if canaccesstable(auraInfo) then
+            if canaccesstable(auraInfo) and canaccessvalue(auraInfo.expirationTime) then
                 local duration = 0
                 local expiresAt = 0
                 if auraInfo.expirationTime > 0 then
