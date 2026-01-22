@@ -132,8 +132,8 @@ function Module:UpdatePatronOrders()
         local reagents = {}
         for _, reagent in ipairs(order.reagents or {}) do
             tinsert(reagents, table.concat({
-                reagent.reagent.quantity,
-                reagent.reagent.itemID,
+                reagent.reagentInfo.quantity,
+                reagent.reagentInfo.reagent.itemID,
             }, ':'))
         end
 
