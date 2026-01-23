@@ -16,20 +16,25 @@ function Module:UpdateAchievements()
     Addon.charData.scanTimes['achievements'] = time()
 
     local achievements = {}
-    for _, achievementId in ipairs(self.db.achievements) do
+    for _, achievement in ipairs(self.db.achievements) do
+        local achievementId, alwaysSaveCriteria = unpack(achievement)
         local criteria = {}
         local earnedByCharacter = select(13, GetAchievementInfo(achievementId))
+
         -- This is nil if the achievement doesn't exist somehow
         if earnedByCharacter ~= nil then
-            if not earnedByCharacter then
+            if alwaysSaveCriteria or not earnedByCharacter then
                 local numCriteria = self.db.criteria[achievementId] or GetAchievementNumCriteria(achievementId)
                 for i = 1, numCriteria do
-                    local success, _, _, _, quantity = pcall(GetAchievementCriteriaInfo, achievementId, i, true)
+                    -- offset by 1 due to pcall result
+                    local success, _, _, _, quantity, _, characterName = pcall(GetAchievementCriteriaInfo, achievementId, i, true)
                     if success == false then
                         criteria = {}
                         break
                     end
-                    table.insert(criteria, quantity)
+                    
+                    -- characterName will be nil if the criteria is lying about being complete
+                    table.insert(criteria, characterName == nil and 0 or quantity)
                 end
             end
 
