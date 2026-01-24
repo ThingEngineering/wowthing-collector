@@ -1,3 +1,7 @@
+v12.0.0.5
+---------
+- Change item scanning to use a method that actually returns correct item levels.
+
 v12.0.0.4
 ---------
 - Added Tower Overwhelming to achievement scanning.
