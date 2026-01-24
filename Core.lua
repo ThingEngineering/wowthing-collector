@@ -15,9 +15,12 @@ local ModulePrototype = {
 }
 Addon:SetDefaultModulePrototype(ModulePrototype)
 
+local mfloor = math.floor
+local CCU_EvaluateGameCurve = C_CurveUtil.EvaluateGameCurve
 local CI_GetDetailedItemLevelInfo = C_Item.GetDetailedItemLevelInfo
 local CI_GetItemInfo = C_Item.GetItemInfo
 local CT_After = C_Timer.After
+local CTI_GetHyperlink = C_TooltipInfo.GetHyperlink
 
 -- Default SavedVariables
 local defaultWWTCSaved = {
@@ -217,7 +220,7 @@ end
 
 -- Utils
 function Addon:Round(n)
-    return math.floor(n + 0.5)
+    return mfloor(n + 0.5)
 end
 
 function Addon:TableKeys(tbl)
@@ -262,6 +265,7 @@ function Addon:ParseItemLink(link, quality, count, bound)
         bindType = 0,
         count = count,
         itemID = tonumber(parts[2]),
+        itemLevel = 0,
         quality = quality,
         bonusIDs = {},
         gems = {},
@@ -313,10 +317,23 @@ function Addon:ParseItemLink(link, quality, count, bound)
         end
     end
 
-    local effectiveILvl, _, _ = CI_GetDetailedItemLevelInfo(link)
-    local _, _, _, _, _, _, _, _, _, _, _, _, _, bindType = CI_GetItemInfo(link)
-    item.itemLevel = effectiveILvl
-    item.bindType = bindType
+    -- local _, _, _, _, _, _, _, _, _, _, _, _, _, bindType = CI_GetItemInfo(link)
+    -- local effectiveItemLevel, _, _ = CI_GetDetailedItemLevelInfo(link)
+
+    -- item.bindType = bindType
+    -- item.itemLevel = effectiveItemLevel
+
+    -- workaround for ^ randomly returning pre-squish item levels
+    local tooltipData = CTI_GetHyperlink(link)
+    if tooltipData ~= nil and tooltipData.lines ~= nil then
+        for _, lineData in ipairs(tooltipData.lines) do
+            if lineData.type == Enum.TooltipDataType.ItemBinding then
+                item.bindType = lineData.bonding
+            elseif lineData.type == Enum.TooltipDataLineType.ItemLevel then
+                item.itemLevel = lineData.itemLevel
+            end
+        end
+    end
 
     -- count:id:context:enchant:ilvl:quality:suffix:bonusIDs:gems:modifiers:bound:bindType
     local ret = table.concat({
