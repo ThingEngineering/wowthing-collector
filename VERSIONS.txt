@@ -1,3 +1,8 @@
+v12.0.0.6
+---------
+- Added Find Lumber to spell scanning.
+- Fixed spell scanning using an old function.
+
 v12.0.0.5
 ---------
 - Change item scanning to use a method that actually returns correct item levels.
