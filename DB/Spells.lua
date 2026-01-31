@@ -29,4 +29,6 @@ Module.db.known = {
     211004, -- Spider
     277784, -- Wicker Mongrel
     277778, -- Zandalari Tendonripper
+    -- Lumberjacking
+    1256697, -- Find Lumber
 }
