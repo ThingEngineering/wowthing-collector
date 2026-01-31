@@ -8,7 +8,7 @@ local AURA_TYPES = { 'HELPFUL', 'HARMFUL' }
 
 local CUA_GetAuraDataByIndex = C_UnitAuras.GetAuraDataByIndex
 local CUA_GetPlayerAuraBySpellID = C_UnitAuras.GetPlayerAuraBySpellID
-local IsSpellKnown = IsSpellKnown
+local CSB_IsSpellKnown = C_SpellBook.IsSpellKnown
 
 function Module:OnEnable()
     Addon.charData.knownSpells = Addon.charData.knownSpells or {}
@@ -89,24 +89,24 @@ function Module:UpdateSpells()
     wipe(knownSpells)
 
     -- Master Riding
-    if IsSpellKnown(90265) then
+    if CSB_IsSpellKnown(90265) then
         Addon.charData.mountSkill = 5
     -- Artisan Riding (DEPRECATED but still gives 280%)
-    elseif IsSpellKnown(34091) then
+    elseif CSB_IsSpellKnown(34091) then
         Addon.charData.mountSkill = 4
     -- Expert Riding
-    elseif IsSpellKnown(34090) then
+    elseif CSB_IsSpellKnown(34090) then
         Addon.charData.mountSkill = 3
     -- Journeyman Riding
-    elseif IsSpellKnown(33391) then
+    elseif CSB_IsSpellKnown(33391) then
         Addon.charData.mountSkill = 2
     -- Apprentice Riding
-    elseif IsSpellKnown(33388) then
+    elseif CSB_IsSpellKnown(33388) then
         Addon.charData.mountSkill = 1
     end
 
     for _, spellId in ipairs(self.db.known) do
-        if IsSpellKnown(spellId) then
+        if CSB_IsSpellKnown(spellId) then
             tinsert(knownSpells, spellId)
         end
     end
