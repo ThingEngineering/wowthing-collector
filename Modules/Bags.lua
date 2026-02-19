@@ -185,6 +185,8 @@ function Module:UpdateBags()
                             self.requested[itemId] = true
                             C_Item_RequestLoadItemDataByID(itemId)
                         end
+                    else
+                        bag["s"..slot] = nil
                     end
                 end
             end
