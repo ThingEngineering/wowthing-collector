@@ -89,7 +89,7 @@ function Module:NEIGHBORHOOD_INITIATIVE_UPDATED()
             tinsert(WWTCSaved.houses, "")
         end
 
-        if self.scanningHouse ~= self.originalHouse then
+        if self.originalHouse ~= nil and self.scanningHouse ~= self.originalHouse then
             C_NeighborhoodInitiative.SetViewingNeighborhood(self.originalHouse)
         end
     end
