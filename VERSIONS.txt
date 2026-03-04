@@ -1,3 +1,8 @@
+v12.0.0.7
+---------
+- Added housing endeavor scanning.
+- Fixed profession order scanning errors.
+
 v12.0.0.6
 ---------
 - Added Find Lumber to spell scanning.
