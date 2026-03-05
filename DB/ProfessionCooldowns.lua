@@ -72,6 +72,8 @@ Module.db.cooldowns = {
 
     -- Herbalism
     [182] = {
+        -- Midnight
+        ['midHerbalismOverload'] = { { 1223014 }, 'spell '},
         -- The War Within
         ['twwHerbalismOverload'] = { { 423395 }, 'spell' },
         -- Dragonflight
@@ -129,6 +131,8 @@ Module.db.cooldowns = {
 
     -- Mining
     [186] = {
+        -- Midnight
+        ['midMiningOverload'] = { { 1225392 }, 'spell '},
         -- The War Within
         ['twwMiningOverload'] = { { 423394 }, 'spell' },
         -- Dragonflight
