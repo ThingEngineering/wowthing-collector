@@ -1,3 +1,9 @@
+v12.0.0.8
+---------
+- Added Midnight herbalism/mining overload cooldowns.
+- Added Midnight profession trait scanning.
+- Fixed housing errors when houses are missing.
+
 v12.0.0.7
 ---------
 - Added housing endeavor scanning.
