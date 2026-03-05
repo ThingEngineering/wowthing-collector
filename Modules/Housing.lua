@@ -57,6 +57,8 @@ function Module:NEIGHBORHOOD_INITIATIVE_UPDATED()
     if info.neighborhoodGUID ~= self.scanningHouse then return end
 
     local house = self.houses[info.neighborhoodGUID]
+    if house == nil then return end
+    
     tinsert(WWTCSaved.houses, table.concat({
         info.neighborhoodGUID,
         house.neighborhoodName,
