@@ -4,6 +4,14 @@ local Module = LibStub('AceAddon-3.0'):GetAddon('WoWthing_Collector'):GetModule(
 Module.db.cooldowns = {
     -- Alchemy
     [171] = {
+        -- Midnight
+        ['midAlchemyWondrous'] = { { 1230856 } },
+        ['midAlchemyTransmute'] = { {
+            1230890, -- Transmute: Mote of Light
+            1230889, -- Transmute: Mote of Primal Energy
+            1230888, -- Transmute: Mote of Pure Void
+            1230887, -- Transmute: Mote of Wild Magic
+        } },
         -- The War Within
         ['twwAlchemyMeticulous'] = { { 430345 } },
         ['twwAlchemyGleamingGlory'] = { { 430624 } },
