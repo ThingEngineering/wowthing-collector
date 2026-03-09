@@ -3,10 +3,14 @@ local Module = LibStub('AceAddon-3.0'):GetAddon('WoWthing_Collector'):GetModule(
 
 Module.db.reputations = {
     --1492, -- Emperor Shaohao
+    -- The War Within
     2600, -- The Severed Threads
     2644, -- Delves: Season 1
     2683, -- Delves: Season 2
     2722, -- Delves: Season 3
+    -- Midnight
+    2742, -- Delves: Season 1
+    2764, -- Prey: Season 1
 }
 
 Module.db.friendships = {
