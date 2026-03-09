@@ -1,3 +1,9 @@
+v12.0.0.9
+---------
+- Added Midnight zones to world quest scanning.
+- Added Midnight seasonal reputations that don't show up via API.
+- Added some Midnight profession cooldowns.
+
 v12.0.0.8
 ---------
 - Added Midnight herbalism/mining overload cooldowns.
