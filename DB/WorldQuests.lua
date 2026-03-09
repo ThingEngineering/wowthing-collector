@@ -92,4 +92,17 @@ Module.db.expansions = {
             2472, -- Tazavesh
         },
     },
+    -- Midnight
+    {
+        id = 11,
+        minimumLevel = 80,
+        zones = {
+            2393, -- Silvermoon City
+            2395, -- Eversong Woods
+            2405, -- Voidstorm
+            2413, -- Harandar
+            2437, -- Zul'Aman
+            2444, -- Slayer's Rise
+        }
+    }
 }
