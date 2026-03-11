@@ -149,6 +149,9 @@ Module.db.cooldowns = {
 
     -- Tailoring
     [197] = {
+        -- Midnight
+        ['midArcanoweave'] = { { 1227926 } },
+        ['midSunfire'] = { { 1228060 } },
         -- The War Within
         ['twwDawnweave'] = { { 446928 } },
         ['twwDuskweave'] = { { 446927 } },
