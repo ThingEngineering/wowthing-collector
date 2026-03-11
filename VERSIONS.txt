@@ -1,3 +1,8 @@
+v12.0.0.10
+----------
+- Added Midnight tailoring cooldowns.
+- Added POI scanning for world quests.
+
 v12.0.0.9
 ---------
 - Added Midnight zones to world quest scanning.
