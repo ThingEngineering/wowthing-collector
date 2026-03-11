@@ -106,3 +106,15 @@ Module.db.expansions = {
         }
     }
 }
+
+-- AreaPOI ID -> unlock quest ID
+Module.db.poiToQuest = {
+    [8611] = 94865, -- Special Assignment: What Remains of a Temple Broken
+    [8612] = 94866, -- Special Assignment: Ours Once More!
+    [8523] = 94390, -- Special Assignment: A Hunter's Regret
+    [8695] = 95435, -- Special Assignment: Shade and Claw
+    [8471] = 92848, -- Special Assignment: The Grand Magister's Drink
+    [8524] = 94391, -- Special Assignment: Push Back the Light
+    [8588] = 94795, -- Special Assignment: Agents of the Shield
+    [8585] = 94743, -- Special Assignment: Precision Excision
+}

@@ -4,10 +4,15 @@ local Module = Addon:NewModule('WorldQuests')
 
 Module.db = {}
 
+local CAPI_GetAreaPOIForMap = C_AreaPoiInfo.GetAreaPOIForMap
+local CAPI_GetAreaPOIInfo = C_AreaPoiInfo.GetAreaPOIInfo
+local CAPI_GetAreaPOISecondsLeft = C_AreaPoiInfo.GetAreaPOISecondsLeft
 local CDAT_GetSecondsUntilWeeklyReset = C_DateAndTime.GetSecondsUntilWeeklyReset
 local CQIS_GetQuestClassification = C_QuestInfoSystem.GetQuestClassification
 local CTQ_GetQuestTimeLeftSeconds = C_TaskQuest.GetQuestTimeLeftSeconds
 local CTQ_GetQuestsOnMap = C_TaskQuest.GetQuestsOnMap
+local CUIWM_GetAllWidgetsBySetID = C_UIWidgetManager.GetAllWidgetsBySetID
+local CUIWM_GetItemDisplayVisualizationInfo = C_UIWidgetManager.GetItemDisplayVisualizationInfo
 
 function Module:OnEnable()
     Addon.charData.worldQuests = Addon.charData.worldQuests or {}
@@ -115,10 +120,54 @@ function Module:UpdateWorldQuests()
                         end
                         Addon.charData.worldQuests[expansion.id][zoneId] = zoneQuests
                     end
+
+                    local poiIds = CAPI_GetAreaPOIForMap(zoneId)
+                    for _, poiId in ipairs(poiIds or {}) do
+                        local poiData = Module:ScanPoi(now, zoneId, poiId)
+                        if poiData ~= nil then
+                            tinsert(Addon.charData.worldQuests[expansion.id][zoneId], poiData)
+                        end
+                    end
                 end)
             end
         end
     end    
 
     Addon:QueueWorkload(workload)
+end
+
+function Module:ScanPoi(now, uiMapId, poiId)
+    local questId = self.db.poiToQuest[poiId]
+    if questId == nil then return end
+
+    local poiInfo = CAPI_GetAreaPOIInfo(uiMapId, poiId)
+    if poiInfo == nil then return end
+
+    -- Special Assignment POIs don't use POI time left, cool cool
+    local secondsLeft = CAPI_GetAreaPOISecondsLeft(poiId) or CTQ_GetQuestTimeLeftSeconds(questId)
+    if secondsLeft == nil then return end
+
+    -- rewards are annoying
+    local rewards = {}
+    local widgetInfos = CUIWM_GetAllWidgetsBySetID(poiInfo.tooltipWidgetSet)
+    for _, widgetInfo in ipairs(widgetInfos) do
+        if widgetInfo.widgetType == Enum.UIWidgetVisualizationType.ItemDisplay then
+            local visInfo = CUIWM_GetItemDisplayVisualizationInfo(widgetInfo.widgetID)
+            if visInfo ~= nil then
+                tinsert(rewards, table.concat({
+                    9, -- Item
+                    visInfo.itemInfo.itemID,
+                    1,
+                }, '-'))
+            end
+        end
+    end
+
+    return table.concat({
+        questId,
+        now + secondsLeft,
+        string.format('%.1f', poiInfo.position.x * 100),
+        string.format('%.1f', poiInfo.position.y * 100),
+        table.concat(rewards, '|')
+    }, ':')
 end
