@@ -1,3 +1,8 @@
+v12.0.0.11
+----------
+- Added find fish to spell scanning.
+- Added hunter pet taming to spell scanning.
+
 v12.0.0.10
 ----------
 - Added Midnight tailoring cooldowns.
