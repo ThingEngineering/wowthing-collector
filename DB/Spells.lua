@@ -2,8 +2,17 @@ local Module = LibStub('AceAddon-3.0'):GetAddon('WoWthing_Collector'):GetModule(
 
 
 Module.db.known = {
+    -- Gathering
+    43308, --   Find Fish
+    1256697, -- Find Lumber
+    
+    -- Hunter
+    138430, -- Tame Direhorns
+    242155, -- Tame Feathermanes
+    205154, -- Tame Mechanicals
+    
     -- Mage: Polymorph
-     61305, -- Black Cat
+    61305, --  Black Cat
     277792, -- Bumblebee
     277787, -- Direhorn
     391622, -- Duck
@@ -12,14 +21,16 @@ Module.db.known = {
     460392, -- Mosswool
     161372, -- Peacock
     161355, -- Penguin
-     28272, -- Pig
+    28272, --  Pig
     161353, -- Polar Bear Cub
     126819, -- Porcupine
-     61721, -- Rabbit
-     61780, -- Turkey
-     28271, -- Turtle
-    -- Rogue
+    61721, --  Rabbit
+    61780, --  Turkey
+    28271, --  Turtle
+    
+     -- Rogue
     210108, -- Detection
+    
     -- Shaman: Hex
     211015, -- Cockroach
     210873, -- Compy
@@ -29,6 +40,4 @@ Module.db.known = {
     211004, -- Spider
     277784, -- Wicker Mongrel
     277778, -- Zandalari Tendonripper
-    -- Lumberjacking
-    1256697, -- Find Lumber
 }
