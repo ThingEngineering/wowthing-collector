@@ -20,7 +20,14 @@ function Module:OnEnable()
     self.currencies = {}
     self.waiting = false
 
-    self:RegisterBucketEvent({ 'CURRENCY_DISPLAY_UPDATE' }, 2, 'UpdateCurrencies')
+    self:RegisterBucketEvent(
+        {
+            'CURRENCY_DISPLAY_UPDATE',
+            'TRADE_SKILL_CLOSE', -- concentration is annoying
+        },
+        2,
+        'UpdateCurrencies'
+    )
     self:RegisterEvent('ACCOUNT_CHARACTER_CURRENCY_DATA_RECEIVED', 'UpdateTransferCurrencies')
     self:RegisterEvent('CURRENCY_TRANSFER_LOG_UPDATE', 'RequestOrUpdateTransferCurrencies')
 end
