@@ -1,3 +1,9 @@
+v12.0.0.13
+----------
+- Changed currency scanning to also occur after closing a profession
+  window, concentration is annoying.
+- Fixed Bouquet of Herbs spell ID.
+
 v12.0.0.12
 ----------
 - Added Bouquet of Herbs alchemy cooldown.
