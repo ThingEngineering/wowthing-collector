@@ -5,6 +5,7 @@ Module.db.cooldowns = {
     -- Alchemy
     [171] = {
         -- Midnight
+        ['midAlchemyBouquet'] = { { 1248784 } },
         ['midAlchemyWondrous'] = { { 1230856 } },
         ['midAlchemyTransmute'] = { {
             1230890, -- Transmute: Mote of Light
