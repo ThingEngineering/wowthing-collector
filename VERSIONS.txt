@@ -1,3 +1,9 @@
+v12.0.0.14
+----------
+- Added vault activity scanning (delve/prey/etc levels).
+- Fixed gilded crest currency ID.
+- Removed delve scanning on completion.
+
 v12.0.0.13
 ----------
 - Changed currency scanning to also occur after closing a profession
