@@ -16,9 +16,6 @@ local ModulePrototype = {
 Addon:SetDefaultModulePrototype(ModulePrototype)
 
 local mfloor = math.floor
-local CCU_EvaluateGameCurve = C_CurveUtil.EvaluateGameCurve
-local CI_GetDetailedItemLevelInfo = C_Item.GetDetailedItemLevelInfo
-local CI_GetItemInfo = C_Item.GetItemInfo
 local CT_After = C_Timer.After
 local CTI_GetHyperlink = C_TooltipInfo.GetHyperlink
 
@@ -110,6 +107,7 @@ function Addon:Cleanup()
             charData.balanceMythic15 = nil
             charData.balanceUnleashedMonstrosities = nil
             charData.biggerFishToFry = nil
+            charData.delves = nil
             charData.equipment = nil
             charData.hiddenDungeons = nil
             charData.hiddenKills = nil
