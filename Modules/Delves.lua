@@ -16,7 +16,7 @@ end
 
 function Module:CURRENCY_DISPLAY_UPDATE(_, currencyId)
     -- Gilded Undermine Crest
-    if currencyId == 3110 then
+    if currencyId == 3290 then
         C_Timer.After(2, function() self:UpdateGilded() end)
     end
 end
