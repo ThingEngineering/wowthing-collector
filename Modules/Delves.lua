@@ -22,9 +22,9 @@ function Module:CURRENCY_DISPLAY_UPDATE(_, currencyId)
 end
 
 function Module:UpdateGilded()
-    local visInfo = CUIWM_GetSpellDisplayVisualizationInfo(6659)
+    local visInfo = CUIWM_GetSpellDisplayVisualizationInfo(7591)
     if visInfo ~= nil and visInfo.spellInfo ~= nil and visInfo.spellInfo.tooltip ~= nil then
-        local gilded = strmatch(visInfo.spellInfo.tooltip, '(%d)/3') or '0'
+        local gilded = strmatch(visInfo.spellInfo.tooltip, '(%d)/4') or '0'
         Addon.charData.delvesGilded = tonumber(gilded)
     end
 end
