@@ -108,4 +108,10 @@ Module.db.worldBosses = {
     [81653] = { 110001, "War Within World Bosses", "Shurrai, Atrocity of the Undersea" },
     [83466] = { 110001, "War Within World Bosses", "Aggregation of Horrors" },
     [85089] = { 110002, "Undermine World Boss", "The Gobfather" },
+
+    -- Midnight
+    [92034] = { 111001, "Midnight World Bosses", "Thorm'belan" },
+    [92123] = { 111001, "Midnight World Bosses", "Cragpine" },
+    [92560] = { 111001, "Midnight World Bosses", "Lu'ashal" },
+    [92636] = { 111001, "Midnight World Bosses", "Predaxas" },
 }
