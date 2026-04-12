@@ -1,7 +1,7 @@
 ## Interface: 120000, 120001
 ## Title: WoWthing Collector
 ## Notes: Collects data to sync with WoWthing.
-## Version: 12.0.0.15
+## Version: 12.0.0.16
 ## Author: Freddie
 ## Category: Other
 ## IconTexture: Interface\Addons\WoWthing_Collector\icon.tga
