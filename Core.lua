@@ -325,7 +325,7 @@ function Addon:ParseItemLink(link, quality, count, bound)
     local tooltipData = CTI_GetHyperlink(link)
     if tooltipData ~= nil and tooltipData.lines ~= nil then
         for _, lineData in ipairs(tooltipData.lines) do
-            if lineData.type == Enum.TooltipDataType.ItemBinding then
+            if lineData.type == Enum.TooltipDataLineType.ItemBinding then
                 item.bindType = lineData.bonding
             elseif lineData.type == Enum.TooltipDataLineType.ItemLevel then
                 item.itemLevel = lineData.itemLevel
