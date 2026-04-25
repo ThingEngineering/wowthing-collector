@@ -115,6 +115,7 @@ function Addon:Cleanup()
             charData.illusions = nil
             charData.mythicPlus = nil
             charData.name = nil
+            charData.reputations = nil
             charData.transmog = nil
             charData.transmogSquish = nil
             charData.weeklyQuests = nil
