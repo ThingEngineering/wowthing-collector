@@ -10,7 +10,7 @@ local CTC_GetAppearanceSourceInfo = C_TransmogCollection.GetAppearanceSourceInfo
 local CTC_GetSourceInfo = C_TransmogCollection.GetSourceInfo
 local CTC_PlayerHasTransmogItemModifiedAppearance = C_TransmogCollection.PlayerHasTransmogItemModifiedAppearance
 
-local MAX_APPEARANCE_ID = 130000 -- 121732
+local MAX_APPEARANCE_ID = 140000 -- 130443
 local CHUNK_SIZE = 50
 
 function Module:OnEnable()
