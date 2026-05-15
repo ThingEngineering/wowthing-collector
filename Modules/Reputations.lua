@@ -103,39 +103,40 @@ function Module:UpdateReputations()
     for chunkIndex = 1, #self.factionIds, SCAN_CHUNK_SIZE do
         tinsert(workload, function()
             -- local startTime = debugprofilestop()
-            for factionIndex = chunkIndex, chunkIndex + SCAN_CHUNK_SIZE - 1 do
+            for factionIndex = chunkIndex, math.min(#self.factionIds, chunkIndex + SCAN_CHUNK_SIZE - 1) do
                 local factionID = self.factionIds[factionIndex]
-                if factionID ~= nil then
-                    local factionType, isAccountWide, isParagon = unpack(self.factions[factionID])
-                    local repValue = -1
+                local factionType, isAccountWide, isParagon = unpack(self.factions[factionID])
+                local repValue = -1
 
-                    if factionType == TYPE_REPUTATION then
-                        local factionInfo = CR_GetFactionDataByID(factionID)
-                        if factionInfo ~= nil then
-                            repValue = factionInfo.currentStanding
-                        end
-                    elseif factionType == TYPE_MAJOR then
-                        local renownInfo = CMF_GetMajorFactionRenownInfo(factionID)
-                        if renownInfo ~= nil then
-                            repValue = (renownInfo.renownLevel * renownInfo.renownLevelThreshold) + renownInfo.renownReputationEarned
-                        end
-                    elseif factionType == TYPE_FRIEND then
-                        local friendshipInfo = CGI_GetFriendshipReputation(factionID)
-                        if friendshipInfo ~= nil then
-                            repValue = friendshipInfo.standing
-                        end
+                if factionType == TYPE_REPUTATION then
+                    local factionInfo = CR_GetFactionDataByID(factionID)
+                    if factionInfo ~= nil then
+                        repValue = factionInfo.currentStanding
+                    end
+                elseif factionType == TYPE_MAJOR then
+                    local renownInfo = CMF_GetMajorFactionRenownInfo(factionID)
+                    if renownInfo ~= nil then
+                        repValue = (renownInfo.renownLevel * renownInfo.renownLevelThreshold) + renownInfo.renownReputationEarned
+                    end
+                elseif factionType == TYPE_FRIEND then
+                    local friendshipInfo = CGI_GetFriendshipReputation(factionID)
+                    if friendshipInfo ~= nil then
+                        repValue = friendshipInfo.standing
+                    end
+                end
+
+                if repValue ~= nil and repValue ~= -1 then
+                    local repString = table.concat({ factionID, repValue }, ':')
+                    if isAccountWide then
+                        tinsert(accountReputations, repString)
+                    else
+                        tinsert(charReputations, repString)
                     end
 
-                    if repValue ~= nil and repValue ~= -1 then
-                        local repString = table.concat({ factionID, repValue }, ':')
-                        if isAccountWide then
-                            tinsert(accountReputations, repString)
-                        else
-                            tinsert(charReputations, repString)
-                        end
-
-                        if isParagon then
-                            local currentValue, threshold, _, hasRewardPending = CR_GetFactionParagonInfo(factionID)
+                    if isParagon then
+                        -- returns nonsense data like -42000 for opposite faction
+                        local currentValue, threshold, _, hasRewardPending = CR_GetFactionParagonInfo(factionID)
+                        if currentValue >= 0 then
                             -- value:max:hasReward
                             local paragonString = table.concat({
                                 currentValue or 0,
