@@ -5,6 +5,7 @@ local Module = Addon:NewModule('ProfessionOrders')
 function Module:OnEnable()
     Addon.charData.patronOrders = Addon.charData.patronOrders or {}
 
+    self.orderCount = 0
     self.requestStarted = nil
 
     self:RegisterEvent('CRAFTINGORDERS_UPDATE_ORDER_COUNT')
@@ -25,13 +26,15 @@ function Module:OnEnteringWorld()
     self:UpdateOrders()
 end
 
-function Module:CRAFTINGORDERS_UPDATE_ORDER_COUNT(_, orderType)
-    if orderType == Enum.CraftingOrderType.Npc then
+function Module:CRAFTINGORDERS_UPDATE_ORDER_COUNT(_, orderType, orderCount)
+    if orderType == Enum.CraftingOrderType.Npc and orderCount ~= self.orderCount then
+        self.orderCount = orderCount
         self:RequestOrders()
     end
 end
 
 function Module:TRADE_SKILL_SHOW()
+    self.orderCount = 0
     self:RequestOrders()
 end
 
