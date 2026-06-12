@@ -42,6 +42,7 @@ function Addon:OnInitialize()
 
     Addon:Cleanup()
 
+    WWTCSaved.delves = WWTCSaved.delves or {}
     WWTCSaved.heirloomsV2 = WWTCSaved.heirloomsV2 or {}
     WWTCSaved.questsV2 = WWTCSaved.questsV2 or {}
     WWTCSaved.scanTimes = WWTCSaved.scanTimes or {}
