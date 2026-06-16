@@ -1,3 +1,7 @@
+v12.0.5.3
+---------
+- Added delve (bountiful/story) scanning.
+
 v12.0.5.2
 ---------
 - Fixed transmog scanning not seeing many newer appearances.
