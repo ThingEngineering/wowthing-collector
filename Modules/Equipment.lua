@@ -39,10 +39,12 @@ function Module:UpdateEquipment()
         }, ':'))
     end
 
+    local foundAnyItemId = false
     local rescan = false
     for slot = 1, 30 do
         local itemId = GetInventoryItemID('player', slot)
         if itemId ~= nil then
+            foundAnyItemId = true
             if CI_IsItemDataCachedByID(itemId) then
                 local itemLink = GetInventoryItemLink('player', slot)
                 local itemQuality = GetInventoryItemQuality('player', slot)
@@ -53,6 +55,11 @@ function Module:UpdateEquipment()
                 rescan = true
             end
         end
+    end
+
+    -- 12.0.7 thinks ever item is nil on login, awesome
+    if foundAnyItemId == false then
+        rescan = true
     end
 
     if rescan then
