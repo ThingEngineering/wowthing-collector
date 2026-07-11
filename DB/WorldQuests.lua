@@ -103,6 +103,8 @@ Module.db.expansions = {
             2413, -- Harandar
             2437, -- Zul'Aman
             2444, -- Slayer's Rise
+            2599, -- Val
+            2600, -- Naigtal
         }
     }
 }
