@@ -50,14 +50,8 @@ function Module:UpdateWorldQuests()
                         for _, quest in pairs(quests) do
                             if quest.mapID == zoneId then
                                 local questId = quest.questID
-                                
                                 local timeRemaining = CTQ_GetQuestTimeLeftSeconds(questId)
-                                -- some world quests don't have time remaining for whatever reason
-                                if timeRemaining == nil and
-                                    CQIS_GetQuestClassification(questId) == Enum.QuestClassification.WorldQuest then
-                                    timeRemaining = CDAT_GetSecondsUntilWeeklyReset()
-                                end
-
+                                
                                 if timeRemaining ~= nil and timeRemaining > 0 then
                                     WWTCSaved.worldQuestIds[questId] = true
 
