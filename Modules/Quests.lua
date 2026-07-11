@@ -158,15 +158,17 @@ function Module:AddData(prog, questId, objectives)
     -- Backup plan for weird quests like Timewalking item turnins
     if #prog.objectives == 0 then
         local oldQuestId = C_QuestLog.GetSelectedQuest()
-        C_QuestLog.SetSelectedQuest(questId)
+        if oldQuestId ~= questId then
+            C_QuestLog.SetSelectedQuest(questId)
 
-        tinsert(prog.objectives, table.concat({
-            'object',
-            GetQuestLogCompletionText() or '',
-            1,
-            1,
-        }, ';'))
+            tinsert(prog.objectives, table.concat({
+                'object',
+                GetQuestLogCompletionText() or '',
+                1,
+                1,
+            }, ';'))
 
-        C_QuestLog.SetSelectedQuest(oldQuestId)
+            C_QuestLog.SetSelectedQuest(oldQuestId)
+        end
     end
 end
