@@ -7,15 +7,15 @@ Module.db = {}
 local CQL_GetInfo = C_QuestLog.GetInfo
 local CQL_GetNumQuestLogEntries = C_QuestLog.GetNumQuestLogEntries
 local CQL_GetQuestObjectives = C_QuestLog.GetQuestObjectives
-local CQL_IsOnQuest = C_QuestLog.IsOnQuest
 local CQL_IsQuestFlaggedCompleted = C_QuestLog.IsQuestFlaggedCompleted
-local CTQ_GetQuestTimeLeftSeconds = C_TaskQuest.GetQuestTimeLeftSeconds
 
 local HALF_WEEK = 3.5 * 24 * 60 * 60
 local OPTIONAL_OBJECTIVE = OPTIONAL_QUEST_OBJECTIVE_DESCRIPTION:gsub('%%s', '.+'):gsub('([%(%)])', '%%%1')
 
 function Module:OnEnable()
     Addon.charData.progressQuests = Addon.charData.progressQuests or {}
+
+    self.active = true
 
     self:RegisterBucketEvent(
         {
@@ -25,12 +25,31 @@ function Module:OnEnable()
             'SHOW_LOOT_TOAST',  -- tracking quests
         },
         2,
-        'UpdateQuests'
+        'StartUpdateQuestsTimer'
     )
+
+    self:RegisterEvent('GOSSIP_SHOW', 'StopScanning')
+    self:RegisterEvent('QUEST_DETAIL', 'StopScanning')
+
+    self:RegisterEvent('GOSSIP_CLOSED', 'StartScanning')
+    self:RegisterEvent('QUEST_ACCEPTED', 'StartScanning')
+    self:RegisterEvent('QUEST_FINISHED', 'StartScanning')
 end
 
 function Module:OnEnteringWorld()
-    self:UpdateQuests()
+    self:StartUpdateQuestsTimer()
+end
+
+function Module:StartScanning()
+    self.active = true
+end
+
+function Module:StopScanning()
+    self.active = false
+end
+
+function Module:StartUpdateQuestsTimer()
+    self:UniqueTimer('UpdateQuests', 2, 'UpdateQuests')
 end
 
 function Module:UpdateCompletedQuests()
@@ -43,6 +62,11 @@ function Module:UpdateCompletedQuests()
 end
 
 function Module:UpdateQuests()
+    if self.active == false then
+        self:StartUpdateQuestsTimer()
+        return
+    end
+
     wipe(Addon.charData.progressQuests)
 
     local now = time()
@@ -87,7 +111,6 @@ function Module:UpdateQuests()
             end
         end
     end
-
 
     local questCount = CQL_GetNumQuestLogEntries()
     for i = 1, questCount do
