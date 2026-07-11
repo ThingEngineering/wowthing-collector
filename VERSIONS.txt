@@ -1,3 +1,9 @@
+v12.0.7.2
+---------
+- Added Nal/Vaigtal to world quest scanning.
+- Made various changes to quest scanning to try to work around whatever Blizzard broke
+  this time (the long delays when accepting quests).
+
 v12.0.7.1
 ---------
 - Added workaround for new bug where every item slot claims to be empty on login.
