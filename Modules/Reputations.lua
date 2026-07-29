@@ -136,7 +136,7 @@ function Module:UpdateReputations()
                     if isParagon then
                         -- returns nonsense data like -42000 for opposite faction
                         local currentValue, threshold, _, hasRewardPending = CR_GetFactionParagonInfo(factionID)
-                        if currentValue >= 0 then
+                        if currentValue ~= nil and currentValue >= 0 then
                             -- value:max:hasReward
                             local paragonString = table.concat({
                                 currentValue or 0,
