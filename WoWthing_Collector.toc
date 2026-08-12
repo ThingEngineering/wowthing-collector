@@ -1,7 +1,7 @@
-## Interface: 120007
+## Interface: 120100
 ## Title: WoWthing Collector
 ## Notes: Collects data to sync with WoWthing.
-## Version: 12.0.7.2
+## Version: 12.1.0.1
 ## Author: Freddie
 ## Category: Other
 ## IconTexture: Interface\Addons\WoWthing_Collector\icon.tga
@@ -22,6 +22,7 @@ Core.lua
 Modules\Achievements.lua
 Modules\Bags.lua
 Modules\BattlePets.lua
+Modules\BlackMarket.lua
 Modules\CharacterMisc.lua
 Modules\Covenants.lua
 Modules\Currencies.lua

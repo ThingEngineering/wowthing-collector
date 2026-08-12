@@ -11,6 +11,7 @@ local CUA_GetPlayerAuraBySpellID = C_UnitAuras.GetPlayerAuraBySpellID
 local CSB_IsSpellKnown = C_SpellBook.IsSpellKnown
 
 function Module:OnEnable()
+    Addon.charData.aurasV2 = Addon.charData.aurasV2 or {}
     Addon.charData.knownSpells = Addon.charData.knownSpells or {}
 
     self.inCombat = false
@@ -53,11 +54,14 @@ function Module:UNIT_AURA(targets)
 end
 
 function Module:UpdateAuras()
+    if Addon.restrictedState then return end
+
     local now = time()
     local uptime = GetTime() -- Blizzard why
-    
-    local auras = {}
-    
+
+    local auras = Addon.charData.aurasV2
+    wipe(auras)
+
     for _, auraType in ipairs(AURA_TYPES) do
         for i = 1, 50 do
             local auraInfo = CUA_GetAuraDataByIndex('PLAYER', i, auraType)
@@ -80,8 +84,6 @@ function Module:UpdateAuras()
             end
         end
     end
-
-    Addon.charData.aurasV2 = auras
 end
 
 function Module:UpdateSpells()

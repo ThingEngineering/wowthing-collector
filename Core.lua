@@ -55,6 +55,7 @@ function Addon:OnInitialize()
 
     self.hasAccountLock = false
     self.parseItemLinkCache = {}
+    self.restrictedState = false
     self.working = false
     self.workloads = {}
 
@@ -77,6 +78,7 @@ function Addon:OnInitialize()
 
     self:RegisterEvent('PLAYER_ENTERING_WORLD')
     self:RegisterEvent('PLAYER_LOGOUT')
+    self:RegisterEvent('ADDON_RESTRICTION_STATE_CHANGED')
 
     self:RegisterEvent('ACCOUNT_MONEY')
     self:RegisterEvent('PLAYER_MONEY')
@@ -204,6 +206,14 @@ function Addon:PLAYER_LOGOUT()
         if module.OnLogout ~= nil then
             module:OnLogout()
         end
+    end
+end
+
+function Addon:ADDON_RESTRICTION_STATE_CHANGED(_, _, state)
+    if state == Enum.AddOnRestrictionState.Inactive then
+        self.restrictedState = false
+    else
+        self.restrictedState = true
     end
 end
 
