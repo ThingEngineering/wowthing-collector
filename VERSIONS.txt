@@ -1,3 +1,10 @@
+v12.1.0.1
+---------
+- Added black market auction house scanning.
+- Fixed aura scanning error.
+- Fixed paragon reputation error.
+- Updated TOC for 12.1.0.
+
 v12.0.7.2
 ---------
 - Added Nal/Vaigtal to world quest scanning.
