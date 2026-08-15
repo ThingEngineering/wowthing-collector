@@ -12,9 +12,6 @@ function Module:OnEnable()
     Addon.charData.aurasV2 = Addon.charData.aurasV2 or {}
     Addon.charData.knownSpells = Addon.charData.knownSpells or {}
 
-    self:RegisterEvent('PLAYER_IN_COMBAT_CHANGED')
-    self:RegisterEvent('PLAYER_ENTER_COMBAT')
-    self:RegisterEvent('PLAYER_LEAVE_COMBAT')
     self:RegisterBucketEvent(
         {
             'LEARNED_SPELL_IN_SKILL_LINE',
