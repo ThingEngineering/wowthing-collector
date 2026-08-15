@@ -1,3 +1,8 @@
+v12.1.0.2
+---------
+- Added The Coiled Isle/Vaults of Atal'Utek to world quest scanning.
+- Changed aura scanning to maybe avoid the hot mess that is the 12.1 aura changes 😤
+
 v12.1.0.1
 ---------
 - Added black market auction house scanning.
