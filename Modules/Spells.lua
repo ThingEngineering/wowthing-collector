@@ -4,17 +4,13 @@ local Module = Addon:NewModule('Spells', 'AceHook-3.0')
 
 Module.db = {}
 
-local AURA_TYPES = { 'HELPFUL', 'HARMFUL' }
-
-local CUA_GetAuraDataByIndex = C_UnitAuras.GetAuraDataByIndex
-local CUA_GetPlayerAuraBySpellID = C_UnitAuras.GetPlayerAuraBySpellID
+local CUA_GetUnitAuras = C_UnitAuras.GetUnitAuras
+local CS_ShouldAurasBeSecret = C_Secrets.ShouldAurasBeSecret
 local CSB_IsSpellKnown = C_SpellBook.IsSpellKnown
 
 function Module:OnEnable()
     Addon.charData.aurasV2 = Addon.charData.aurasV2 or {}
     Addon.charData.knownSpells = Addon.charData.knownSpells or {}
-
-    self.inCombat = false
 
     self:RegisterEvent('PLAYER_IN_COMBAT_CHANGED')
     self:RegisterEvent('PLAYER_ENTER_COMBAT')
@@ -35,26 +31,18 @@ function Module:OnEnteringWorld()
     self:UpdateSpells()
 end
 
-function Module:PLAYER_IN_COMBAT_CHANGED(_, newValue)
-    self.inCombat = newValue
-end
-
-function Module:PLAYER_ENTER_COMBAT()
-    self.inCombat = true
-end
-
-function Module:PLAYER_LEAVE_COMBAT()
-    self.inCombat = false
-end
-
-function Module:UNIT_AURA(targets)
-    if self.inCombat == false and targets.player then
+function Module:UNIT_AURA(unitTargets)
+    if unitTargets.player then
         self:UpdateAuras()
     end
 end
 
+-- The secrets system sucks asssssss
 function Module:UpdateAuras()
-    if Addon.restrictedState then return end
+    if CS_ShouldAurasBeSecret() then return end
+
+    local buffAuras = CUA_GetUnitAuras('player', 'HELPFUL') or {}
+    local debuffAuras = CUA_GetUnitAuras('player', 'HARMFUL') or {}
 
     local now = time()
     local uptime = GetTime() -- Blizzard why
@@ -62,11 +50,8 @@ function Module:UpdateAuras()
     local auras = Addon.charData.aurasV2
     wipe(auras)
 
-    for _, auraType in ipairs(AURA_TYPES) do
-        for i = 1, 50 do
-            local auraInfo = CUA_GetAuraDataByIndex('PLAYER', i, auraType)
-            if auraInfo == nil then break end
-
+    for _, unitAuras in ipairs({ buffAuras, debuffAuras }) do
+        for _, auraInfo in ipairs(unitAuras) do
             if canaccesstable(auraInfo) and canaccessvalue(auraInfo.expirationTime) then
                 local duration = 0
                 local expiresAt = 0
