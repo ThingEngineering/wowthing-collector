@@ -1,3 +1,7 @@
+v12.1.0.3
+---------
+- Fixed initialization error. Don't publish while angry.
+
 v12.1.0.2
 ---------
 - Added The Coiled Isle/Vaults of Atal'Utek to world quest scanning.
