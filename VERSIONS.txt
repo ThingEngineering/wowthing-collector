@@ -1,3 +1,7 @@
+v12.1.0.4
+---------
+- Added The Coiled Isle delves to delve scanning.
+
 v12.1.0.3
 ---------
 - Fixed initialization error. Don't publish while angry.
