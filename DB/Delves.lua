@@ -1,6 +1,7 @@
 local Module = LibStub('AceAddon-3.0'):GetAddon('WoWthing_Collector'):GetModule('Delves')
 
 
+-- AreaPoi -> PlayerCondition -> 
 Module.db.zones = {
     -- Silvermoon City
     {
@@ -47,5 +48,13 @@ Module.db.zones = {
             { active = 8444, inactive = 8443, quest = 91188 }, -- Atal'Aman
             { active = 8442, inactive = 8441, quest = 91190 }, -- Twilight Crypts
         },
+    },
+    -- The Coiled Isle
+    {
+        uiMapId = 2512,
+        pois = {
+            { active = 8763, inactive = 8764, quest = 95715 }, -- Gnarldor Isle
+            { active = 8760, inactive = 8761, quest = 95716 }, -- The Ring of Glory
+        }
     },
 }
