@@ -1,3 +1,7 @@
+v12.1.0.5
+---------
+- Disable pre-Midnight world quest scanning to see if that helps with quest lag.
+
 v12.1.0.4
 ---------
 - Added The Coiled Isle delves to delve scanning.
