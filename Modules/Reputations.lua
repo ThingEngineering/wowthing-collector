@@ -127,8 +127,12 @@ function Module:UpdateReputations()
 
                 if repValue ~= nil and repValue ~= -1 then
                     local repString = table.concat({ factionID, repValue }, ':')
+
                     if isAccountWide then
-                        tinsert(accountReputations, repString)
+                        local requiredFaction = self.db.factionSpecific[factionID]
+                        if requiredFaction == nil or requiredFaction == Addon.charFaction then
+                            tinsert(accountReputations, repString)
+                        end
                     else
                         tinsert(charReputations, repString)
                     end

@@ -60,8 +60,9 @@ function Addon:OnInitialize()
     self.workloads = {}
 
     self.regionName = GetCurrentRegion()
+    self.charFaction = select(1, UnitFactionGroup('player'))
     self.charName = UnitGUID('player')
-    self.charClassID = select(3, UnitClass("player"))
+    self.charClassID = select(3, UnitClass('player'))
 
     -- Set up character data table
     self.charData = WWTCSaved.chars[self.charName] or {}
