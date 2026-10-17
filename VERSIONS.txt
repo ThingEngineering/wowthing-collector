@@ -1,3 +1,9 @@
+v12.1.5.1
+---------
+- Added Barbaric Iron Hauberk to wonky profession list.
+- Fixed handling of account-wide faction-specific reputations (Nazjatar bodyguards).
+- Updated TOC for 12.1.5.
+
 v12.1.0.5
 ---------
 - Disable pre-Midnight world quest scanning to see if that helps with quest lag.

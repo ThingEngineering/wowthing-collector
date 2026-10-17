@@ -1,7 +1,7 @@
-## Interface: 120100
+## Interface: 120105
 ## Title: WoWthing Collector
 ## Notes: Collects data to sync with WoWthing.
-## Version: 12.1.0.5
+## Version: 12.1.5.1
 ## Author: Freddie
 ## Category: Other
 ## IconTexture: Interface\Addons\WoWthing_Collector\icon.tga
@@ -57,6 +57,7 @@ DB\Delves.lua
 DB\Garrisons.lua
 DB\ProfessionCooldowns.lua
 DB\ProfessionTraits.lua
+DB\Reputations.lua
 DB\Spells.lua
 DB\Transmog.lua
 DB\WorldQuests.lua

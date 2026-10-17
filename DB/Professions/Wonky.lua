@@ -53,4 +53,9 @@ Module.db.wonkyProfessions = {
         126654, -- Four Senses Brew
         126655, -- Banana Infused Rum
     },
+
+    -- Not sure this one is broken for blacksmithing
+    [2477] = { -- Classic Blacksmithing
+        280671, -- Barbaric Iron Hauberk
+    }
 }
