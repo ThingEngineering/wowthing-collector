@@ -128,16 +128,19 @@ function Module:UpdateReputations()
                 if repValue ~= nil and repValue ~= -1 then
                     local repString = table.concat({ factionID, repValue }, ':')
 
+                    local doParagon = false
                     if isAccountWide then
                         local requiredFaction = self.db.factionSpecific[factionID]
                         if requiredFaction == nil or requiredFaction == Addon.charFaction then
                             tinsert(accountReputations, repString)
+                            doParagon = true
                         end
                     else
                         tinsert(charReputations, repString)
+                        doParagon = true
                     end
 
-                    if isParagon then
+                    if isParagon and doParagon then
                         -- returns nonsense data like -42000 for opposite faction
                         local currentValue, threshold, _, hasRewardPending = CR_GetFactionParagonInfo(factionID)
                         if currentValue ~= nil and currentValue >= 0 then
