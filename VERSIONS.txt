@@ -1,3 +1,8 @@
+v12.1.5.2
+---------
+- Fixed some more account-wide faction-specific reputations (BfA).
+- Fixed account-wide faction-specific paragons.
+
 v12.1.5.1
 ---------
 - Added Barbaric Iron Hauberk to wonky profession list.
