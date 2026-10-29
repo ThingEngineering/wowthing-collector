@@ -15,7 +15,7 @@ local ModulePrototype = {
 }
 Addon:SetDefaultModulePrototype(ModulePrototype)
 
-local mfloor = math.floor
+local mceil, mfloor = math.ceil, math.floor
 local CT_After = C_Timer.After
 local CTI_GetHyperlink = C_TooltipInfo.GetHyperlink
 
@@ -230,8 +230,16 @@ function Addon:PLAYER_MONEY()
 end
 
 -- Utils
-function Addon:Round(n)
-    return mfloor(n + 0.5)
+function Addon:Round(num)
+    return mfloor(num + 0.5)
+end
+
+function Addon:RoundToNearest(num, n)
+    return mfloor((num / n) + 0.5) * n
+end
+
+function Addon:RoundUpToNearest(num, n)
+    return mceil(num / n) * n
 end
 
 function Addon:TableKeys(tbl)
