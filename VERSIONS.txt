@@ -1,3 +1,7 @@
+v12.1.5.4
+---------
+- Added covenant callings scanning.
+
 v12.1.5.3
 ---------
 - Added EmissaryQuests module for Legion/BfA emissaries.
