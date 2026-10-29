@@ -1,3 +1,7 @@
+v12.1.5.5
+---------
+- Fixed error when a calling/emissary quest had nil time remaining.
+
 v12.1.5.4
 ---------
 - Added covenant callings scanning.
