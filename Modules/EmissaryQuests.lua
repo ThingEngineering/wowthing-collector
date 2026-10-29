@@ -52,6 +52,8 @@ end
 
 function Module:ProcessBounty(expansionQuests, bounty)
     local timeRemaining = CTQ_GetQuestTimeLeftSeconds(bounty.questID)
+    if timeRemaining == nil then return end
+    
     local questReset = Addon:RoundToNearest(time() + timeRemaining, 60)
     local questString = (self.db.questMap[bounty.questID] or bounty.questID) .. ':' .. questReset
 
