@@ -70,7 +70,8 @@ function Module:ScanGarrison(garrisonData)
     garrison.scannedAt = time()
 
     local level, _ = C_Garrison.GetGarrisonInfo(garrisonData.type)
-    garrison.level = level
+    garrison.level = level or 0
+    if garrison.level == 0 then return end
 
     garrison.buildings = {}
     local buildings = C_Garrison.GetBuildings(garrisonData.type) or {}
