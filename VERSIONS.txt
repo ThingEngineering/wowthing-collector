@@ -1,3 +1,9 @@
+v12.1.5.6
+---------
+- Added Traveler's Log scanning.
+- Changed decor scanning to just brute force check every possible ID.
+- Fixed garrison level 0 not saving correctly.
+
 v12.1.5.5
 ---------
 - Fixed error when a calling/emissary quest had nil time remaining.
