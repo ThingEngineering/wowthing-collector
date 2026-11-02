@@ -48,6 +48,7 @@ Modules\Reputations.lua
 Modules\Spells.lua
 Modules\TimePlayed.lua
 Modules\Transmog.lua
+Modules\TravelersLog.lua
 Modules\Vault.lua
 Modules\WorldQuests.lua
 Modules\XP.lua
