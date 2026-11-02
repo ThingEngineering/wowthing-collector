@@ -2,65 +2,61 @@ local Addon = LibStub('AceAddon-3.0'):GetAddon('WoWthing_Collector')
 local Module = Addon:NewModule('Decor')
 
 
-local MAX_DECOR_ID = 20000 -- 17740
+local CHC_GetCatalogEntryInfoByRecordID = C_HousingCatalog.GetCatalogEntryInfoByRecordID
+local EntryType_Decor = Enum.HousingCatalogEntryType.Decor
+local EntryType_Room = Enum.HousingCatalogEntryType.Room
+
+local MAX_DECOR_IDS = {
+    [EntryType_Decor] = 40000,
+    [EntryType_Room] = 1000,
+}
+
+local CHUNK_SIZE = 100
 
 function Module:OnEnable()
     WWTCSaved.decor = WWTCSaved.decor or {}
 
+    self.decor = {}
     self.searching = false
 
-    self:RegisterEvent('LOADING_SCREEN_DISABLED')
-    self:RegisterEvent('HOUSING_STORAGE_UPDATED', 'UpdateDecor')
-    self:RegisterEvent('HOUSING_STORAGE_ENTRY_UPDATED')
-end
-
-function Module:LOADING_SCREEN_DISABLED()
-    self:UnregisterEvent('LOADING_SCREEN_DISABLED')
-
-    local catalogSearcher = C_HousingCatalog.CreateCatalogSearcher()
-
-    catalogSearcher:SetResultsUpdatedCallback(function() self:OnEntryResultsUpdated() end)
-
-    catalogSearcher:SetEditorModeContext(Enum.HouseEditorMode.BasicDecor)
-	catalogSearcher:SetAllowedIndoors(true)
-	catalogSearcher:SetAllowedOutdoors(true)
-    catalogSearcher:SetAutoUpdateOnParamChanges(false)
-    catalogSearcher:SetCollected(true)
-    catalogSearcher:SetCustomizableOnly(false)
-    catalogSearcher:SetFirstAcquisitionBonusOnly(false)
-    -- catalogSearcher:SetIncludeMarketEntries(true)
-    catalogSearcher:SetUncollected(true)
-
-    self.catalogSearcher = catalogSearcher
-end
-
-function Module:HOUSING_STORAGE_ENTRY_UPDATED(_, entryId)
-    -- TODO: this should probably do something other than a full rescan
-    self:UpdateDecor()
+    self:RegisterBucketEvent(
+        { 'HOUSING_STORAGE_UPDATED', 'HOUSING_STORAGE_ENTRY_UPDATED' },
+        5,
+        'UpdateDecor'
+    )
 end
 
 function Module:UpdateDecor()
-    if not self.searching then
-        self.searching = true
-        self.catalogSearcher:RunSearch()
-    end
-end
+    if self.searching then return end
 
-function Module:OnEntryResultsUpdated()
+    self.searching = true
+    
     local decor = WWTCSaved.decor
+    local workload = {}
+    for entryType, maxId in pairs(MAX_DECOR_IDS) do
+        for chunkIndex = 1, maxId, CHUNK_SIZE do
+            tinsert(workload, function()
+                -- local startTime = debugprofilestop()
+                for recordID = chunkIndex, chunkIndex + CHUNK_SIZE - 1 do
+                    local entryInfo = CHC_GetCatalogEntryInfoByRecordID(entryType, recordID)
+                    if entryInfo ~= nil then
+                        local available = (entryInfo.totalNumStored or 0) + (entryInfo.remainingRedeemable or 0)
+                        local dataString = available..';'..entryInfo.totalNumPlaced
 
-    -- { recordID, subtypeIdentifier, entrySubtype, entryType }[]
-    local entries = self.catalogSearcher:GetCatalogSearchResults()
-    for _, entry in ipairs(entries) do
-        local entryInfo = C_HousingCatalog.GetCatalogEntryInfo(entry)
-        if entryInfo ~= nil then
-            local available = (entryInfo.quantity or 0) + (entryInfo.remainingRedeemable or 0)
-            decor[entryInfo.entryID.recordID] = available..';'..entryInfo.numPlaced
+                        if entryType == EntryType_Room then
+                            decor[1000000 + recordID] = dataString
+                        else
+                            decor[recordID] = dataString
+                        end
+                    end
+                end
+                -- print('decor '..entryType..' '..chunkIndex..' '..(debugprofilestop() - startTime))
+            end)
         end
     end
 
-    -- print('Found '..#decor..' decors')
-
-    self.searching = false
-    WWTCSaved.scanTimes.decor = time()
+    Addon:QueueWorkload(workload, function()
+        self.searching = false
+        WWTCSaved.scanTimes.decor = time()
+    end)
 end
